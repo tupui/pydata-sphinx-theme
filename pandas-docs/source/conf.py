@@ -19,6 +19,7 @@ import importlib
 from sphinx.ext.autosummary import _import_by_name
 import warnings
 
+import sphinx_bootstrap_theme
 
 try:
     raw_input          # Python 2
@@ -38,6 +39,7 @@ sys.setrecursionlimit(5000)
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 # sys.path.append(os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../sphinxext'))
+sys.path.append(os.path.abspath('ext'))
 
 sys.path.extend([
 
@@ -176,7 +178,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'nature_with_gtoc'
+html_theme = 'bootstrap'
 
 # The style sheet to use for HTML and HTML Help pages. A file of that name
 # must exist either in Sphinx' static/ path, or in one of the custom paths
@@ -186,10 +188,23 @@ html_theme = 'nature_with_gtoc'
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-# html_theme_options = {}
+html_theme_options = {
+    'bootswatch_theme': "yeti",
+    'globaltoc_depth': 3,
+    'navbar_sidebarrel': False,
+    'source_link_position': "footer",
+    'navbar_pagenav': False,
+    'navbar_links': [
+        ("Install", "install"),
+        ("User guide", "userguide"),
+        ("API Reference", "api"),
+        ("Contribute", "contributing"),
+        ("Community", "overview"),
+        ("News", "whatsnew")
+    ],}
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ['themes']
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -221,7 +236,12 @@ html_static_path = ['_static']
 # html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-# html_sidebars = {}
+html_sidebars = {'contributing': ['localtoc.html'],
+                 'install': ['localtoc.html'],
+                 'userguidedis': ['localtoc.html'],
+                 'community': ['localtoc.html'],
+                 'index': ['localtoc.html'],
+                 '**': ['globaltoc.html']}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
