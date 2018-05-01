@@ -190,10 +190,11 @@ html_theme = 'bootstrap'
 # documentation.
 html_theme_options = {
     'bootswatch_theme': "yeti",
-    'globaltoc_depth': 3,
+    'globaltoc_depth': 1,
     'navbar_sidebarrel': False,
     'source_link_position': "footer",
     'navbar_pagenav': False,
+    'globaltoc_includehidden': "false",
     'navbar_links': [
         ("Install", "install"),
         ("User guide", "userguide"),
@@ -201,14 +202,15 @@ html_theme_options = {
         ("Contribute", "contributing"),
         ("Community", "overview"),
         ("News", "whatsnew")
-    ],}
+    ],
+    'bootstrap_version': "3"}
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-# html_title = None
+html_title = "Pandas"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 # html_short_title = None
@@ -236,12 +238,7 @@ html_static_path = ['_static']
 # html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-html_sidebars = {'contributing': ['localtoc.html'],
-                 'install': ['localtoc.html'],
-                 'userguidedis': ['localtoc.html'],
-                 'community': ['localtoc.html'],
-                 'index': ['localtoc.html'],
-                 '**': ['globaltoc.html']}
+html_sidebars = {'**': ['localtoc.html', 'searchbox.html']}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
