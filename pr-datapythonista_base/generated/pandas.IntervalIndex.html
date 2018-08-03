@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pandas.IntervalIndex &#8212; pandas 0.23.3 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pandas_styles.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.IntervalIndex.closed" href="pandas.IntervalIndex.closed.html" />
+    <link rel="prev" title="pandas.CategoricalIndex.ordered" href="pandas.CategoricalIndex.ordered.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../getting_started/index.html">Getting started</a></li>
+                <li><a href="../user_guide/index.html">User guide</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../community.html">Community</a></li>
+                <li><a href="../donate.html">Donate</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.IntervalIndex</a><ul>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-intervalindex">
+<h1>pandas.IntervalIndex<a class="headerlink" href="#pandas-intervalindex" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pandas.IntervalIndex">
+<em class="property">class </em><code class="descclassname">pandas.</code><code class="descname">IntervalIndex</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.3/pandas/core/indexes/interval.py#L135-L1422"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.IntervalIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Immutable Index implementing an ordered, sliceable set. IntervalIndex
+represents an Index of Interval objects that are all closed on the same
+side.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.20.0.</span></p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The indexing behaviors are provisional and may change in
+a future version of pandas.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array-like (1-dimensional)</p>
+<blockquote>
+<div><p>Array-like containing Interval objects from which to build the
+IntervalIndex</p>
+</div></blockquote>
+<p><strong>closed</strong> : {‘left’, ‘right’, ‘both’, ‘neither’}, default ‘right’</p>
+<blockquote>
+<div><p>Whether the intervals are closed on the left-side, right-side, both or
+neither.</p>
+</div></blockquote>
+<p><strong>name</strong> : object, optional</p>
+<blockquote>
+<div><p>Name to be stored in the index.</p>
+</div></blockquote>
+<p><strong>copy</strong> : boolean, default False</p>
+<blockquote>
+<div><p>Copy the meta-data</p>
+</div></blockquote>
+<p><strong>dtype</strong> : dtype or None, default None</p>
+<blockquote class="last">
+<div><p>If None, dtype will be inferred</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.23.0.</span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index</span></code></a></dt>
+<dd>The base pandas Index type</dd>
+<dt><a class="reference internal" href="pandas.Interval.html#pandas.Interval" title="pandas.Interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Interval</span></code></a></dt>
+<dd>A bounded slice-like interval; the elements of an IntervalIndex</dd>
+<dt><a class="reference internal" href="pandas.interval_range.html#pandas.interval_range" title="pandas.interval_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interval_range</span></code></a></dt>
+<dd>Function to create a fixed frequency IntervalIndex</dd>
+</dl>
+<p class="last"><a class="reference internal" href="pandas.cut.html#pandas.cut" title="pandas.cut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cut</span></code></a>, <a class="reference internal" href="pandas.qcut.html#pandas.qcut" title="pandas.qcut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qcut</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>See the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/advanced.html#intervalindex">user guide</a>
+for more.</p>
+<p class="rubric">Examples</p>
+<p>A new <code class="docutils literal notranslate"><span class="pre">IntervalIndex</span></code> is typically constructed using
+<a class="reference internal" href="pandas.interval_range.html#pandas.interval_range" title="pandas.interval_range"><code class="xref py py-func docutils literal notranslate"><span class="pre">interval_range()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">interval_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">IntervalIndex([(0, 1], (1, 2], (2, 3], (3, 4], (4, 5]]</span>
+<span class="go">              closed=&#39;right&#39;, dtype=&#39;interval[int64]&#39;)</span>
+</pre></div>
+</div>
+<p>It may also be constructed using one of the constructor
+methods: <a class="reference internal" href="pandas.IntervalIndex.from_arrays.html#pandas.IntervalIndex.from_arrays" title="pandas.IntervalIndex.from_arrays"><code class="xref py py-meth docutils literal notranslate"><span class="pre">IntervalIndex.from_arrays()</span></code></a>,
+<a class="reference internal" href="pandas.IntervalIndex.from_breaks.html#pandas.IntervalIndex.from_breaks" title="pandas.IntervalIndex.from_breaks"><code class="xref py py-meth docutils literal notranslate"><span class="pre">IntervalIndex.from_breaks()</span></code></a>, and <a class="reference internal" href="pandas.IntervalIndex.from_tuples.html#pandas.IntervalIndex.from_tuples" title="pandas.IntervalIndex.from_tuples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">IntervalIndex.from_tuples()</span></code></a>.</p>
+<p>See further examples in the doc strings of <code class="docutils literal notranslate"><span class="pre">interval_range</span></code> and the
+mentioned constructor methods.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="pandas.IntervalIndex.closed.html#pandas.IntervalIndex.closed" title="pandas.IntervalIndex.closed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">closed</span></code></a></td>
+<td>Whether the intervals are closed on the left-side, right-side, both or neither</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="pandas.IntervalIndex.is_non_overlapping_monotonic.html#pandas.IntervalIndex.is_non_overlapping_monotonic" title="pandas.IntervalIndex.is_non_overlapping_monotonic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_non_overlapping_monotonic</span></code></a></td>
+<td>Return True if the IntervalIndex is non-overlapping (no Intervals share points) and is either monotonic increasing or monotonic decreasing, else False</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="pandas.IntervalIndex.left.html#pandas.IntervalIndex.left" title="pandas.IntervalIndex.left"><code class="xref py py-obj docutils literal notranslate"><span class="pre">left</span></code></a></td>
+<td>Return the left endpoints of each Interval in the IntervalIndex as an Index</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="pandas.IntervalIndex.length.html#pandas.IntervalIndex.length" title="pandas.IntervalIndex.length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">length</span></code></a></td>
+<td>Return an Index with entries denoting the length of each Interval in the IntervalIndex</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="pandas.IntervalIndex.mid.html#pandas.IntervalIndex.mid" title="pandas.IntervalIndex.mid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mid</span></code></a></td>
+<td>Return the midpoint of each Interval in the IntervalIndex as an Index</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="pandas.IntervalIndex.right.html#pandas.IntervalIndex.right" title="pandas.IntervalIndex.right"><code class="xref py py-obj docutils literal notranslate"><span class="pre">right</span></code></a></td>
+<td>Return the right endpoints of each Interval in the IntervalIndex as an Index</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="pandas.IntervalIndex.values.html#pandas.IntervalIndex.values" title="pandas.IntervalIndex.values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">values</span></code></a></td>
+<td>Return the IntervalIndex’s data as a numpy array of Interval objects (with dtype=’object’)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="pandas.IntervalIndex.contains.html#pandas.IntervalIndex.contains" title="pandas.IntervalIndex.contains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contains</span></code></a>(key)</td>
+<td>Return a boolean indicating if the key is IN the index</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="pandas.IntervalIndex.from_arrays.html#pandas.IntervalIndex.from_arrays" title="pandas.IntervalIndex.from_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_arrays</span></code></a>(left,&nbsp;right[,&nbsp;closed,&nbsp;name,&nbsp;…])</td>
+<td>Construct from two arrays defining the left and right bounds.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="pandas.IntervalIndex.from_breaks.html#pandas.IntervalIndex.from_breaks" title="pandas.IntervalIndex.from_breaks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_breaks</span></code></a>(breaks[,&nbsp;closed,&nbsp;name,&nbsp;copy,&nbsp;dtype])</td>
+<td>Construct an IntervalIndex from an array of splits</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="pandas.IntervalIndex.from_tuples.html#pandas.IntervalIndex.from_tuples" title="pandas.IntervalIndex.from_tuples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_tuples</span></code></a>(data[,&nbsp;closed,&nbsp;name,&nbsp;copy,&nbsp;dtype])</td>
+<td>Construct an IntervalIndex from a list/array of tuples</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="pandas.IntervalIndex.get_indexer.html#pandas.IntervalIndex.get_indexer" title="pandas.IntervalIndex.get_indexer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_indexer</span></code></a>(target[,&nbsp;method,&nbsp;limit,&nbsp;tolerance])</td>
+<td>Compute indexer and mask for new index given the current index.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="pandas.IntervalIndex.get_loc.html#pandas.IntervalIndex.get_loc" title="pandas.IntervalIndex.get_loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_loc</span></code></a>(key[,&nbsp;method])</td>
+<td>Get integer location, slice or boolean mask for requested label.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.IntervalIndex.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

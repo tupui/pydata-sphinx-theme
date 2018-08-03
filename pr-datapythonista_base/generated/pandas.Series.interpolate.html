@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pandas.Series.interpolate &#8212; pandas 0.23.3 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pandas_styles.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.Series.isin" href="pandas.Series.isin.html" />
+    <link rel="prev" title="pandas.Series.infer_objects" href="pandas.Series.infer_objects.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../getting_started/index.html">Getting started</a></li>
+                <li><a href="../user_guide/index.html">User guide</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../community.html">Community</a></li>
+                <li><a href="../donate.html">Donate</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.Series.interpolate</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-series-interpolate">
+<h1>pandas.Series.interpolate<a class="headerlink" href="#pandas-series-interpolate" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.Series.interpolate">
+<code class="descclassname">Series.</code><code class="descname">interpolate</code><span class="sig-paren">(</span><em>method='linear'</em>, <em>axis=0</em>, <em>limit=None</em>, <em>inplace=False</em>, <em>limit_direction='forward'</em>, <em>limit_area=None</em>, <em>downcast=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.3/pandas/core/generic.py#L5980-L6044"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.interpolate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate values according to different methods.</p>
+<p>Please note that only <code class="docutils literal notranslate"><span class="pre">method='linear'</span></code> is supported for
+DataFrames/Series with a MultiIndex.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>method</strong> : {‘linear’, ‘time’, ‘index’, ‘values’, ‘nearest’, ‘zero’,</p>
+<blockquote>
+<div><blockquote>
+<div><p>‘slinear’, ‘quadratic’, ‘cubic’, ‘barycentric’, ‘krogh’,
+‘polynomial’, ‘spline’, ‘piecewise_polynomial’,
+‘from_derivatives’, ‘pchip’, ‘akima’}</p>
+</div></blockquote>
+<ul class="simple">
+<li>‘linear’: ignore the index and treat the values as equally
+spaced. This is the only method supported on MultiIndexes.
+default</li>
+<li>‘time’: interpolation works on daily and higher resolution
+data to interpolate given length of interval</li>
+<li>‘index’, ‘values’: use the actual numerical values of the index</li>
+<li>‘nearest’, ‘zero’, ‘slinear’, ‘quadratic’, ‘cubic’,
+‘barycentric’, ‘polynomial’ is passed to
+<code class="docutils literal notranslate"><span class="pre">scipy.interpolate.interp1d</span></code>. Both ‘polynomial’ and ‘spline’
+require that you also specify an <cite>order</cite> (int),
+e.g. df.interpolate(method=’polynomial’, order=4).
+These use the actual numerical values of the index.</li>
+<li>‘krogh’, ‘piecewise_polynomial’, ‘spline’, ‘pchip’ and ‘akima’
+are all wrappers around the scipy interpolation methods of
+similar names. These use the actual numerical values of the
+index. For more information on their behavior, see the
+<a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/interpolate.html#univariate-interpolation">scipy documentation</a>
+and <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/tutorial/interpolate.html">tutorial documentation</a></li>
+<li>‘from_derivatives’ refers to BPoly.from_derivatives which
+replaces ‘piecewise_polynomial’ interpolation method in
+scipy 0.18</li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.18.1: </span>Added support for the ‘akima’ method
+Added interpolate method ‘from_derivatives’ which replaces
+‘piecewise_polynomial’ in scipy 0.18; backwards-compatible with
+scipy &lt; 0.18</p>
+</div>
+</div></blockquote>
+<p><strong>axis</strong> : {0, 1}, default 0</p>
+<blockquote>
+<div><ul class="simple">
+<li>0: fill column-by-column</li>
+<li>1: fill row-by-row</li>
+</ul>
+</div></blockquote>
+<p><strong>limit</strong> : int, default None.</p>
+<blockquote>
+<div><p>Maximum number of consecutive NaNs to fill. Must be greater than 0.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt><strong>limit_direction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘forward’, ‘backward’, ‘both’}, default ‘forward’</span></dt>
+<dd></dd>
+</dl>
+<p><strong>limit_area</strong> : {‘inside’, ‘outside’}, default None</p>
+<blockquote>
+<div><ul class="simple">
+<li>None: (default) no fill restriction</li>
+<li>‘inside’ Only fill NaNs surrounded by valid values (interpolate).</li>
+<li>‘outside’ Only fill NaNs outside valid values (extrapolate).</li>
+</ul>
+<p>If limit is specified, consecutive NaNs will be filled in this
+direction.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.21.0.</span></p>
+</div>
+</div></blockquote>
+<p><strong>inplace</strong> : bool, default False</p>
+<blockquote>
+<div><p>Update the NDFrame in place if possible.</p>
+</div></blockquote>
+<p><strong>downcast</strong> : optional, ‘infer’ or None, defaults to None</p>
+<blockquote>
+<div><p>Downcast dtypes if possible.</p>
+</div></blockquote>
+<dl class="docutils">
+<dt><strong>kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">keyword arguments to pass on to the interpolating function.</span></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>Series or DataFrame of same shape interpolated at the NaNs</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="pandas.Series.reindex.html#pandas.Series.reindex" title="pandas.Series.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reindex</span></code></a>, <a class="reference internal" href="pandas.Series.replace.html#pandas.Series.replace" title="pandas.Series.replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace</span></code></a>, <a class="reference internal" href="pandas.Series.fillna.html#pandas.Series.fillna" title="pandas.Series.fillna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fillna</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Filling in NaNs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">interpolate</span><span class="p">()</span>
+<span class="go">0    0</span>
+<span class="go">1    1</span>
+<span class="go">2    2</span>
+<span class="go">3    3</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.Series.interpolate.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

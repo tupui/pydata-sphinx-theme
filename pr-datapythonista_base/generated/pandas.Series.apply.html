@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pandas.Series.apply &#8212; pandas 0.23.3 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pandas_styles.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.Series.argmax" href="pandas.Series.argmax.html" />
+    <link rel="prev" title="pandas.Series.append" href="pandas.Series.append.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../getting_started/index.html">Getting started</a></li>
+                <li><a href="../user_guide/index.html">User guide</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../community.html">Community</a></li>
+                <li><a href="../donate.html">Donate</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.Series.apply</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-series-apply">
+<h1>pandas.Series.apply<a class="headerlink" href="#pandas-series-apply" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.Series.apply">
+<code class="descclassname">Series.</code><code class="descname">apply</code><span class="sig-paren">(</span><em>func</em>, <em>convert_dtype=True</em>, <em>args=()</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.3/pandas/core/series.py#L3069-L3201"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invoke function on values of Series. Can be ufunc (a NumPy function
+that applies to the entire Series) or a Python function that only works
+on single values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
+<dd></dd>
+</dl>
+<p><strong>convert_dtype</strong> : boolean, default True</p>
+<blockquote>
+<div><p>Try to find better dtype for elementwise function results. If
+False, leave as dtype=object</p>
+</div></blockquote>
+<p><strong>args</strong> : tuple</p>
+<blockquote>
+<div><p>Positional arguments to pass to function in addition to the value</p>
+</div></blockquote>
+<dl class="docutils">
+<dt><strong>Additional keyword arguments will be passed as keywords to the function</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series or DataFrame if func returns a Series</span></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.Series.map.html#pandas.Series.map" title="pandas.Series.map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.map</span></code></a></dt>
+<dd>For element-wise operations</dd>
+<dt><a class="reference internal" href="pandas.Series.agg.html#pandas.Series.agg" title="pandas.Series.agg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.agg</span></code></a></dt>
+<dd>only perform aggregating type operations</dd>
+<dt><a class="reference internal" href="pandas.Series.transform.html#pandas.Series.transform" title="pandas.Series.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.transform</span></code></a></dt>
+<dd>only perform transformating type operations</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Create a series with typical summer temperatures for each city.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;London&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;New York&#39;</span><span class="p">,</span><span class="s1">&#39;Helsinki&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">series</span>
+<span class="go">London      20</span>
+<span class="go">New York    21</span>
+<span class="go">Helsinki    12</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Square the values by defining a function and passing it as an
+argument to <code class="docutils literal notranslate"><span class="pre">apply()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+<span class="go">London      400</span>
+<span class="go">New York    441</span>
+<span class="go">Helsinki    144</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Square the values by passing an anonymous function as an
+argument to <code class="docutils literal notranslate"><span class="pre">apply()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">London      400</span>
+<span class="go">New York    441</span>
+<span class="go">Helsinki    144</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Define a custom function that needs additional positional
+arguments and pass these additional arguments using the
+<code class="docutils literal notranslate"><span class="pre">args</span></code> keyword.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">subtract_custom_value</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">custom_value</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span><span class="o">-</span><span class="n">custom_value</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">subtract_custom_value</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,))</span>
+<span class="go">London      15</span>
+<span class="go">New York    16</span>
+<span class="go">Helsinki     7</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Define a custom function that takes keyword arguments
+and pass these arguments to <code class="docutils literal notranslate"><span class="pre">apply</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">add_custom_values</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">x</span><span class="o">+=</span><span class="n">kwargs</span><span class="p">[</span><span class="n">month</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">add_custom_values</span><span class="p">,</span> <span class="n">june</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">july</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">august</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="go">London      95</span>
+<span class="go">New York    96</span>
+<span class="go">Helsinki    87</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Use a function from the Numpy library.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">series</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">)</span>
+<span class="go">London      2.995732</span>
+<span class="go">New York    3.044522</span>
+<span class="go">Helsinki    2.484907</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.Series.apply.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

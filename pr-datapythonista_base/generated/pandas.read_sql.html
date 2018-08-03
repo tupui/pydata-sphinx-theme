@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pandas.read_sql &#8212; pandas 0.23.3 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pandas_styles.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.read_gbq" href="pandas.read_gbq.html" />
+    <link rel="prev" title="pandas.read_sql_query" href="pandas.read_sql_query.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../getting_started/index.html">Getting started</a></li>
+                <li><a href="../user_guide/index.html">User guide</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../community.html">Community</a></li>
+                <li><a href="../donate.html">Donate</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.read_sql</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-read-sql">
+<h1>pandas.read_sql<a class="headerlink" href="#pandas-read-sql" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pandas.read_sql">
+<code class="descclassname">pandas.</code><code class="descname">read_sql</code><span class="sig-paren">(</span><em>sql</em>, <em>con</em>, <em>index_col=None</em>, <em>coerce_float=True</em>, <em>params=None</em>, <em>parse_dates=None</em>, <em>columns=None</em>, <em>chunksize=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.3/pandas/io/sql.py#L317-L397"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.read_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read SQL query or database table into a DataFrame.</p>
+<p>This function is a convenience wrapper around <code class="docutils literal notranslate"><span class="pre">read_sql_table</span></code> and
+<code class="docutils literal notranslate"><span class="pre">read_sql_query</span></code> (for backward compatibility). It will delegate
+to the specific function depending on the provided input. A SQL query
+will be routed to <code class="docutils literal notranslate"><span class="pre">read_sql_query</span></code>, while a database table name will
+be routed to <code class="docutils literal notranslate"><span class="pre">read_sql_table</span></code>. Note that the delegated function might
+have more specific notes about their functionality not listed here.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sql</strong> : string or SQLAlchemy Selectable (select or text object)</p>
+<blockquote>
+<div><p>SQL query to be executed or a table name.</p>
+</div></blockquote>
+<p><strong>con</strong> : SQLAlchemy connectable (engine/connection) or database string URI</p>
+<blockquote>
+<div><p>or DBAPI2 connection (fallback mode)</p>
+<p>Using SQLAlchemy makes it possible to use any DB supported by that
+library. If a DBAPI2 object, only sqlite3 is supported.</p>
+</div></blockquote>
+<p><strong>index_col</strong> : string or list of strings, optional, default: None</p>
+<blockquote>
+<div><p>Column(s) to set as index(MultiIndex).</p>
+</div></blockquote>
+<p><strong>coerce_float</strong> : boolean, default True</p>
+<blockquote>
+<div><p>Attempts to convert values of non-string, non-numeric objects (like
+decimal.Decimal) to floating point, useful for SQL result sets.</p>
+</div></blockquote>
+<p><strong>params</strong> : list, tuple or dict, optional, default: None</p>
+<blockquote>
+<div><p>List of parameters to pass to execute method.  The syntax used
+to pass parameters is database driver dependent. Check your
+database driver documentation for which of the five syntax styles,
+described in PEP 249’s paramstyle, is supported.
+Eg. for psycopg2, uses %(name)s so use params={‘name’ : ‘value’}</p>
+</div></blockquote>
+<p><strong>parse_dates</strong> : list or dict, default: None</p>
+<blockquote>
+<div><ul class="simple">
+<li>List of column names to parse as dates.</li>
+<li>Dict of <code class="docutils literal notranslate"><span class="pre">{column_name:</span> <span class="pre">format</span> <span class="pre">string}</span></code> where format string is
+strftime compatible in case of parsing string times, or is one of
+(D, s, ns, ms, us) in case of parsing integer timestamps.</li>
+<li>Dict of <code class="docutils literal notranslate"><span class="pre">{column_name:</span> <span class="pre">arg</span> <span class="pre">dict}</span></code>, where the arg dict corresponds
+to the keyword arguments of <a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.to_datetime()</span></code></a>
+Especially useful with databases without native Datetime support,
+such as SQLite.</li>
+</ul>
+</div></blockquote>
+<p><strong>columns</strong> : list, default: None</p>
+<blockquote>
+<div><p>List of column names to select from SQL table (only used when reading
+a table).</p>
+</div></blockquote>
+<p><strong>chunksize</strong> : int, default None</p>
+<blockquote>
+<div><p>If specified, return an iterator where <cite>chunksize</cite> is the
+number of rows to include in each chunk.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>DataFrame</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_table</span></code></a></dt>
+<dd>Read SQL database table into a DataFrame.</dd>
+<dt><a class="reference internal" href="pandas.read_sql_query.html#pandas.read_sql_query" title="pandas.read_sql_query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_query</span></code></a></dt>
+<dd>Read SQL query into a DataFrame.</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.read_sql.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

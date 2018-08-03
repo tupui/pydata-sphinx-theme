@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pandas.core.groupby.GroupBy.apply &#8212; pandas 0.23.3 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pandas_styles.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.core.groupby.GroupBy.aggregate" href="pandas.core.groupby.GroupBy.aggregate.html" />
+    <link rel="prev" title="pandas.Grouper" href="pandas.Grouper.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../getting_started/index.html">Getting started</a></li>
+                <li><a href="../user_guide/index.html">User guide</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../community.html">Community</a></li>
+                <li><a href="../donate.html">Donate</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.core.groupby.GroupBy.apply</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-core-groupby-groupby-apply">
+<h1>pandas.core.groupby.GroupBy.apply<a class="headerlink" href="#pandas-core-groupby-groupby-apply" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.core.groupby.GroupBy.apply">
+<code class="descclassname">GroupBy.</code><code class="descname">apply</code><span class="sig-paren">(</span><em>func</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.3/pandas/core/groupby/groupby.py#L892-L932"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.core.groupby.GroupBy.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply function <code class="docutils literal notranslate"><span class="pre">func</span></code>  group-wise and combine the results together.</p>
+<p>The function passed to <code class="docutils literal notranslate"><span class="pre">apply</span></code> must take a dataframe as its first
+argument and return a dataframe, a series or a scalar. <code class="docutils literal notranslate"><span class="pre">apply</span></code> will
+then take care of combining the results back together into a single
+dataframe or series. <code class="docutils literal notranslate"><span class="pre">apply</span></code> is therefore a highly flexible
+grouping method.</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">apply</span></code> is a very flexible method, its downside is that
+using it can be quite a bit slower than using more specific methods.
+Pandas offers a wide range of method that will be much faster
+than using <code class="docutils literal notranslate"><span class="pre">apply</span></code> for their specific purposes, so try to use them
+before reaching for <code class="docutils literal notranslate"><span class="pre">apply</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>func</strong> : function</p>
+<blockquote>
+<div><p>A callable that takes a dataframe as its first argument, and
+returns a dataframe, a series or a scalar. In addition the
+callable may take positional and keyword arguments</p>
+</div></blockquote>
+<p><strong>args, kwargs</strong> : tuple and dict</p>
+<blockquote>
+<div><p>Optional positional and keyword arguments to pass to <code class="docutils literal notranslate"><span class="pre">func</span></code></p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>applied</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series or DataFrame</span></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="pandas.core.groupby.GroupBy.pipe.html#pandas.core.groupby.GroupBy.pipe" title="pandas.core.groupby.GroupBy.pipe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pipe</span></code></a></dt>
+<dd>Apply function to the full GroupBy object instead of to each group.</dd>
+</dl>
+<p class="last"><a class="reference internal" href="pandas.core.groupby.GroupBy.aggregate.html#pandas.core.groupby.GroupBy.aggregate" title="pandas.core.groupby.GroupBy.aggregate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aggregate</span></code></a>, <a class="reference internal" href="pandas.core.groupby.GroupBy.transform.html#pandas.core.groupby.GroupBy.transform" title="pandas.core.groupby.GroupBy.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>In the current implementation <code class="docutils literal notranslate"><span class="pre">apply</span></code> calls func twice on the
+first group to decide whether it can take a fast or slow code
+path. This can lead to unexpected behavior if func has
+side-effects, as they will take effect twice for the first
+group.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="s1">&#39;a a b&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>From <code class="docutils literal notranslate"><span class="pre">df</span></code> above we can see that <code class="docutils literal notranslate"><span class="pre">g</span></code> has two groups, <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>.
+Calling <code class="docutils literal notranslate"><span class="pre">apply</span></code> in various ways, we can get different grouping results:</p>
+<p>Example 1: below the function passed to <code class="docutils literal notranslate"><span class="pre">apply</span></code> takes a dataframe as
+its argument and returns a dataframe. <code class="docutils literal notranslate"><span class="pre">apply</span></code> combines the result for
+each group together into a new dataframe:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="go">          B    C</span>
+<span class="go">0  0.333333  0.4</span>
+<span class="go">1  0.666667  0.6</span>
+<span class="go">2  1.000000  1.0</span>
+</pre></div>
+</div>
+<p>Example 2: The function passed to <code class="docutils literal notranslate"><span class="pre">apply</span></code> takes a dataframe as
+its argument and returns a series.  <code class="docutils literal notranslate"><span class="pre">apply</span></code> combines the result for
+each group together into a new dataframe:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="go">   B  C</span>
+<span class="go">A</span>
+<span class="go">a  1  2</span>
+<span class="go">b  0  0</span>
+</pre></div>
+</div>
+<p>Example 3: The function passed to <code class="docutils literal notranslate"><span class="pre">apply</span></code> takes a dataframe as
+its argument and returns a scalar. <code class="docutils literal notranslate"><span class="pre">apply</span></code> combines the result for
+each group together into a series, including setting the index as
+appropriate:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">C</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="go">A</span>
+<span class="go">a    5</span>
+<span class="go">b    2</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.core.groupby.GroupBy.apply.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.6.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
