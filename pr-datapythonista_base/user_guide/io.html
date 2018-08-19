@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>IO Tools (Text, CSV, HDF5, …) &#8212; pandas 0.23.3 documentation</title>
+    <title>IO Tools (Text, CSV, HDF5, …) &#8212; pandas 0.23.4 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pandas_styles.css" type="text/css" />
@@ -38,7 +38,7 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.3</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -2331,7 +2331,7 @@ value will be an iterable object of type <code class="docutils literal notransla
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [177]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s1">&#39;tmp.sv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="gp">In [178]: </span><span class="n">reader</span>
-<span class="gh">Out[178]: </span><span class="go">&lt;pandas.io.parsers.TextFileReader at 0x7f32a7b369e8&gt;</span>
+<span class="gh">Out[178]: </span><span class="go">&lt;pandas.io.parsers.TextFileReader at 0x7f231f6ac748&gt;</span>
 
 <span class="gp">In [179]: </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
@@ -2971,11 +2971,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [238]: </span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">jsonfloats</span><span class="p">)</span>
-<span class="go">11.2 ms +- 274 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">10.7 ms +- 361 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [239]: </span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">jsonfloats</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">7.89 ms +- 173 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">7.48 ms +- 35.8 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <p>The speedup is less noticeable for smaller datasets:</p>
@@ -2983,11 +2983,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [241]: </span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">jsonfloats</span><span class="p">)</span>
-<span class="go">7.48 ms +- 639 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">6.7 ms +- 69.9 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [242]: </span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">jsonfloats</span><span class="p">,</span> <span class="n">numpy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">5.9 ms +- 91.9 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">5.81 ms +- 15.5 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -3094,7 +3094,7 @@ using Hadoop or Spark.</p>
 <span class="gp">In [252]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">jsonl</span><span class="p">),</span> <span class="n">lines</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [253]: </span><span class="n">reader</span>
-<span class="gh">Out[253]: </span><span class="go">&lt;pandas.io.json.json.JsonReader at 0x7f32a6fd5470&gt;</span>
+<span class="gh">Out[253]: </span><span class="go">&lt;pandas.io.json.json.JsonReader at 0x7f23211b8940&gt;</span>
 
 <span class="gp">In [254]: </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
