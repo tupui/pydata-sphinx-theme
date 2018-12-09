@@ -79,7 +79,7 @@ def add_dependencies(pandas_path):
     """
     Adding the new theme to the dependencies.
     """
-    fname = os.path.join('ci', 'environment-dev.yaml')
+    fname = 'environment.yml'
     with open(os.path.join(pandas_path, fname), 'a') as f:
         f.write('  - sphinx_bootstrap_theme\n')
 
