@@ -157,6 +157,8 @@ def update_conf(pandas_path):
             elif line == "    app.add_directive('autosummary', PandasAutosummary)\n":
                 line += "    app.add_stylesheet('css/pandas_styles.css')\n"
                 line += "    app.add_stylesheet('css/carousel.css')\n"
+            elif line == 'header = """\\\n':
+                line += ':tocdepth: 2\n\n'
             content.append(line)
 
     with open(os.path.join(pandas_path, fname), 'w') as f:
