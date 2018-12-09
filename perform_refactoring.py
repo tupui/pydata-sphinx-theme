@@ -155,7 +155,8 @@ def update_conf(pandas_path):
                 line += "    'user_guide/index': [],\n"
                 line += '}\n'
             elif line == "    app.add_directive('autosummary', PandasAutosummary)\n":
-                line += "    app.add_stylesheet('pandas_styles.css')\n"
+                line += "    app.add_stylesheet('css/pandas_styles.css')\n"
+                line += "    app.add_stylesheet('css/carousel.css')\n"
             content.append(line)
 
     with open(os.path.join(pandas_path, fname), 'w') as f:
