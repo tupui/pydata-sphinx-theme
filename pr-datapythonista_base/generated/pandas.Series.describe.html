@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pandas.Series.describe &#8212; pandas 0.23.4 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/carousel.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.Series.diff" href="pandas.Series.diff.html" />
+    <link rel="prev" title="pandas.Series.cumsum" href="pandas.Series.cumsum.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../getting_started/index.html">Getting started</a></li>
+                <li><a href="../user_guide/index.html">User guide</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../community.html">Community</a></li>
+                <li><a href="../donate.html">Donate</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.Series.describe</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-series-describe">
+<h1>pandas.Series.describe<a class="headerlink" href="#pandas-series-describe" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.Series.describe">
+<code class="descclassname">Series.</code><code class="descname">describe</code><span class="sig-paren">(</span><em>percentiles=None</em>, <em>include=None</em>, <em>exclude=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L8266-L8587"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates descriptive statistics that summarize the central tendency,
+dispersion and shape of a dataset’s distribution, excluding
+<code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p>
+<p>Analyzes both numeric and object series, as well
+as <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> column sets of mixed data types. The output
+will vary depending on what is provided. Refer to the notes
+below for more detail.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>percentiles</strong> : list-like of numbers, optional</p>
+<blockquote>
+<div><p>The percentiles to include in the output. All should
+fall between 0 and 1. The default is
+<code class="docutils literal notranslate"><span class="pre">[.25,</span> <span class="pre">.5,</span> <span class="pre">.75]</span></code>, which returns the 25th, 50th, and
+75th percentiles.</p>
+</div></blockquote>
+<p><strong>include</strong> : ‘all’, list-like of dtypes or None (default), optional</p>
+<blockquote>
+<div><p>A white list of data types to include in the result. Ignored
+for <code class="docutils literal notranslate"><span class="pre">Series</span></code>. Here are the options:</p>
+<ul class="simple">
+<li>‘all’ : All columns of the input will be included in the output.</li>
+<li>A list-like of dtypes : Limits the results to the
+provided data types.
+To limit the result to numeric types submit
+<code class="docutils literal notranslate"><span class="pre">numpy.number</span></code>. To limit it instead to object columns submit
+the <code class="docutils literal notranslate"><span class="pre">numpy.object</span></code> data type. Strings
+can also be used in the style of
+<code class="docutils literal notranslate"><span class="pre">select_dtypes</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">df.describe(include=['O'])</span></code>). To
+select pandas categorical columns, use <code class="docutils literal notranslate"><span class="pre">'category'</span></code></li>
+<li>None (default) : The result will include all numeric columns.</li>
+</ul>
+</div></blockquote>
+<p><strong>exclude</strong> : list-like of dtypes or None (default), optional,</p>
+<blockquote>
+<div><p>A black list of data types to omit from the result. Ignored
+for <code class="docutils literal notranslate"><span class="pre">Series</span></code>. Here are the options:</p>
+<ul class="simple">
+<li>A list-like of dtypes : Excludes the provided data types
+from the result. To exclude numeric types submit
+<code class="docutils literal notranslate"><span class="pre">numpy.number</span></code>. To exclude object columns submit the data
+type <code class="docutils literal notranslate"><span class="pre">numpy.object</span></code>. Strings can also be used in the style of
+<code class="docutils literal notranslate"><span class="pre">select_dtypes</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">df.describe(include=['O'])</span></code>). To
+exclude pandas categorical columns, use <code class="docutils literal notranslate"><span class="pre">'category'</span></code></li>
+<li>None (default) : The result will exclude nothing.</li>
+</ul>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>summary:  Series/DataFrame of summary statistics</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="pandas.DataFrame.count.html#pandas.DataFrame.count" title="pandas.DataFrame.count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.count</span></code></a>, <a class="reference internal" href="pandas.DataFrame.max.html#pandas.DataFrame.max" title="pandas.DataFrame.max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.max</span></code></a>, <a class="reference internal" href="pandas.DataFrame.min.html#pandas.DataFrame.min" title="pandas.DataFrame.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.min</span></code></a>, <a class="reference internal" href="pandas.DataFrame.mean.html#pandas.DataFrame.mean" title="pandas.DataFrame.mean"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.mean</span></code></a>, <a class="reference internal" href="pandas.DataFrame.std.html#pandas.DataFrame.std" title="pandas.DataFrame.std"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.std</span></code></a>, <a class="reference internal" href="pandas.DataFrame.select_dtypes.html#pandas.DataFrame.select_dtypes" title="pandas.DataFrame.select_dtypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.select_dtypes</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>For numeric data, the result’s index will include <code class="docutils literal notranslate"><span class="pre">count</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">std</span></code>, <code class="docutils literal notranslate"><span class="pre">min</span></code>, <code class="docutils literal notranslate"><span class="pre">max</span></code> as well as lower, <code class="docutils literal notranslate"><span class="pre">50</span></code> and
+upper percentiles. By default the lower percentile is <code class="docutils literal notranslate"><span class="pre">25</span></code> and the
+upper percentile is <code class="docutils literal notranslate"><span class="pre">75</span></code>. The <code class="docutils literal notranslate"><span class="pre">50</span></code> percentile is the
+same as the median.</p>
+<p>For object data (e.g. strings or timestamps), the result’s index
+will include <code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">unique</span></code>, <code class="docutils literal notranslate"><span class="pre">top</span></code>, and <code class="docutils literal notranslate"><span class="pre">freq</span></code>. The <code class="docutils literal notranslate"><span class="pre">top</span></code>
+is the most common value. The <code class="docutils literal notranslate"><span class="pre">freq</span></code> is the most common value’s
+frequency. Timestamps also include the <code class="docutils literal notranslate"><span class="pre">first</span></code> and <code class="docutils literal notranslate"><span class="pre">last</span></code> items.</p>
+<p>If multiple object values have the highest count, then the
+<code class="docutils literal notranslate"><span class="pre">count</span></code> and <code class="docutils literal notranslate"><span class="pre">top</span></code> results will be arbitrarily chosen from
+among those with the highest count.</p>
+<p>For mixed data types provided via a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, the default is to
+return only an analysis of numeric columns. If the dataframe consists
+only of object and categorical data without any numeric columns, the
+default is to return an analysis of both the object and categorical
+columns. If <code class="docutils literal notranslate"><span class="pre">include='all'</span></code> is provided as an option, the result
+will include a union of attributes of each type.</p>
+<p>The <cite>include</cite> and <cite>exclude</cite> parameters can be used to limit
+which columns in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> are analyzed for the output.
+The parameters are ignored when analyzing a <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<p class="rubric">Examples</p>
+<p>Describing a numeric <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="go">count    3.0</span>
+<span class="go">mean     2.0</span>
+<span class="go">std      1.0</span>
+<span class="go">min      1.0</span>
+<span class="go">25%      1.5</span>
+<span class="go">50%      2.0</span>
+<span class="go">75%      2.5</span>
+<span class="go">max      3.0</span>
+</pre></div>
+</div>
+<p>Describing a categorical <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="go">count     4</span>
+<span class="go">unique    3</span>
+<span class="go">top       a</span>
+<span class="go">freq      2</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>Describing a timestamp <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span>
+<span class="gp">... </span>  <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s2">&quot;2000-01-01&quot;</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s2">&quot;2010-01-01&quot;</span><span class="p">),</span>
+<span class="gp">... </span>  <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s2">&quot;2010-01-01&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="go">count                       3</span>
+<span class="go">unique                      2</span>
+<span class="go">top       2010-01-01 00:00:00</span>
+<span class="go">freq                        2</span>
+<span class="go">first     2000-01-01 00:00:00</span>
+<span class="go">last      2010-01-01 00:00:00</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>Describing a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. By default only numeric fields
+are returned.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="s1">&#39;numeric&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="s1">&#39;categorical&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">])</span>
+<span class="gp">... </span>                  <span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="go">       numeric</span>
+<span class="go">count      3.0</span>
+<span class="go">mean       2.0</span>
+<span class="go">std        1.0</span>
+<span class="go">min        1.0</span>
+<span class="go">25%        1.5</span>
+<span class="go">50%        2.0</span>
+<span class="go">75%        2.5</span>
+<span class="go">max        3.0</span>
+</pre></div>
+</div>
+<p>Describing all columns of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> regardless of data type.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="go">        categorical  numeric object</span>
+<span class="go">count            3      3.0      3</span>
+<span class="go">unique           3      NaN      3</span>
+<span class="go">top              f      NaN      c</span>
+<span class="go">freq             1      NaN      1</span>
+<span class="go">mean           NaN      2.0    NaN</span>
+<span class="go">std            NaN      1.0    NaN</span>
+<span class="go">min            NaN      1.0    NaN</span>
+<span class="go">25%            NaN      1.5    NaN</span>
+<span class="go">50%            NaN      2.0    NaN</span>
+<span class="go">75%            NaN      2.5    NaN</span>
+<span class="go">max            NaN      3.0    NaN</span>
+</pre></div>
+</div>
+<p>Describing a column from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> by accessing it as
+an attribute.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">numeric</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="go">count    3.0</span>
+<span class="go">mean     2.0</span>
+<span class="go">std      1.0</span>
+<span class="go">min      1.0</span>
+<span class="go">25%      1.5</span>
+<span class="go">50%      2.0</span>
+<span class="go">75%      2.5</span>
+<span class="go">max      3.0</span>
+<span class="go">Name: numeric, dtype: float64</span>
+</pre></div>
+</div>
+<p>Including only numeric columns in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> description.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
+<span class="go">       numeric</span>
+<span class="go">count      3.0</span>
+<span class="go">mean       2.0</span>
+<span class="go">std        1.0</span>
+<span class="go">min        1.0</span>
+<span class="go">25%        1.5</span>
+<span class="go">50%        2.0</span>
+<span class="go">75%        2.5</span>
+<span class="go">max        3.0</span>
+</pre></div>
+</div>
+<p>Including only string columns in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> description.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
+<span class="go">       object</span>
+<span class="go">count       3</span>
+<span class="go">unique      3</span>
+<span class="go">top         c</span>
+<span class="go">freq        1</span>
+</pre></div>
+</div>
+<p>Including only categorical columns from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> description.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">])</span>
+<span class="go">       categorical</span>
+<span class="go">count            3</span>
+<span class="go">unique           3</span>
+<span class="go">top              f</span>
+<span class="go">freq             1</span>
+</pre></div>
+</div>
+<p>Excluding numeric columns from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> description.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span>
+<span class="go">       categorical object</span>
+<span class="go">count            3      3</span>
+<span class="go">unique           3      3</span>
+<span class="go">top              f      c</span>
+<span class="go">freq             1      1</span>
+</pre></div>
+</div>
+<p>Excluding object columns from a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> description.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span>
+<span class="go">        categorical  numeric</span>
+<span class="go">count            3      3.0</span>
+<span class="go">unique           3      NaN</span>
+<span class="go">top              f      NaN</span>
+<span class="go">freq             1      NaN</span>
+<span class="go">mean           NaN      2.0</span>
+<span class="go">std            NaN      1.0</span>
+<span class="go">min            NaN      1.0</span>
+<span class="go">25%            NaN      1.5</span>
+<span class="go">50%            NaN      2.0</span>
+<span class="go">75%            NaN      2.5</span>
+<span class="go">max            NaN      3.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.Series.describe.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

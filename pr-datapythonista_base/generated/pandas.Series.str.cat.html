@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>pandas.Series.str.cat &#8212; pandas 0.23.4 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/carousel.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.Series.str.center" href="pandas.Series.str.center.html" />
+    <link rel="prev" title="pandas.Series.str.capitalize" href="pandas.Series.str.capitalize.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../getting_started/index.html">Getting started</a></li>
+                <li><a href="../user_guide/index.html">User guide</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../community.html">Community</a></li>
+                <li><a href="../donate.html">Donate</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.Series.str.cat</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-series-str-cat">
+<h1>pandas.Series.str.cat<a class="headerlink" href="#pandas-series-str-cat" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.Series.str.cat">
+<code class="descclassname">Series.str.</code><code class="descname">cat</code><span class="sig-paren">(</span><em>others=None</em>, <em>sep=None</em>, <em>na_rep=None</em>, <em>join=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/strings.py#L2129-L2326"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.str.cat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concatenate strings in the Series/Index with given separator.</p>
+<p>If <cite>others</cite> is specified, this function concatenates the Series/Index
+and elements of <cite>others</cite> element-wise.
+If <cite>others</cite> is not passed, then all values in the Series/Index are
+concatenated into a single string with a given <cite>sep</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>others</strong> : Series, Index, DataFrame, np.ndarrary or list-like</p>
+<blockquote>
+<div><p>Series, Index, DataFrame, np.ndarray (one- or two-dimensional) and
+other list-likes of strings must have the same length as the
+calling Series/Index, with the exception of indexed objects (i.e.
+Series/Index/DataFrame) if <cite>join</cite> is not None.</p>
+<p>If others is a list-like that contains a combination of Series,
+np.ndarray (1-dim) or list-like, then all elements will be unpacked
+and must satisfy the above criteria individually.</p>
+<p>If others is None, the method returns the concatenation of all
+strings in the calling Series/Index.</p>
+</div></blockquote>
+<p><strong>sep</strong> : string or None, default None</p>
+<blockquote>
+<div><p>If None, concatenates without any separator.</p>
+</div></blockquote>
+<p><strong>na_rep</strong> : string or None, default None</p>
+<blockquote>
+<div><p>Representation that is inserted for all missing values:</p>
+<ul class="simple">
+<li>If <cite>na_rep</cite> is None, and <cite>others</cite> is None, missing values in the
+Series/Index are omitted from the result.</li>
+<li>If <cite>na_rep</cite> is None, and <cite>others</cite> is not None, a row containing a
+missing value in any of the columns (before concatenation) will
+have a missing value in the result.</li>
+</ul>
+</div></blockquote>
+<p><strong>join</strong> : {‘left’, ‘right’, ‘outer’, ‘inner’}, default None</p>
+<blockquote>
+<div><p>Determines the join-style between the calling Series/Index and any
+Series/Index/DataFrame in <cite>others</cite> (objects without an index need
+to match the length of the calling Series/Index). If None,
+alignment is disabled, but this option will be removed in a future
+version of pandas and replaced with a default of <cite>‘left’</cite>. To
+disable alignment, use <cite>.values</cite> on any Series/Index/DataFrame in
+<cite>others</cite>.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.23.0.</span></p>
+</div>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>concat</strong> : str or Series/Index of objects</p>
+<blockquote class="last">
+<div><p>If <cite>others</cite> is None, <cite>str</cite> is returned, otherwise a <cite>Series/Index</cite>
+(same type as caller) of objects is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.Series.str.split.html#pandas.Series.str.split" title="pandas.Series.str.split"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split</span></code></a></dt>
+<dd>Split each string in the Series/Index</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>When not passing <cite>others</cite>, all values are concatenated into a single
+string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<span class="go">&#39;a b d&#39;</span>
+</pre></div>
+</div>
+<p>By default, NA values in the Series are ignored. Using <cite>na_rep</cite>, they
+can be given a representation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
+<span class="go">&#39;a b ? d&#39;</span>
+</pre></div>
+</div>
+<p>If <cite>others</cite> is specified, corresponding values are concatenated with
+the separator. Result will be a Series of strings.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="go">0    a,A</span>
+<span class="go">1    b,B</span>
+<span class="go">2    NaN</span>
+<span class="go">3    d,D</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>Missing values will remain missing in the result, but can again be
+represented using <cite>na_rep</cite></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">0    a,A</span>
+<span class="go">1    b,B</span>
+<span class="go">2    -,C</span>
+<span class="go">3    d,D</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>If <cite>sep</cite> is not specified, the values are concatenated without
+separation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">0    aA</span>
+<span class="go">1    bB</span>
+<span class="go">2    -C</span>
+<span class="go">3    dD</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>Series with different indexes can be aligned before concatenation. The
+<cite>join</cite>-keyword works as in other methods.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">0    ad</span>
+<span class="go">1    ba</span>
+<span class="go">2    -e</span>
+<span class="go">3    dc</span>
+<span class="go">dtype: object</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">0    aa</span>
+<span class="go">1    b-</span>
+<span class="go">2    -c</span>
+<span class="go">3    dd</span>
+<span class="go">dtype: object</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">0    aa</span>
+<span class="go">1    b-</span>
+<span class="go">2    -c</span>
+<span class="go">3    dd</span>
+<span class="go">4    -e</span>
+<span class="go">dtype: object</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">0    aa</span>
+<span class="go">2    -c</span>
+<span class="go">3    dd</span>
+<span class="go">dtype: object</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="go">3    dd</span>
+<span class="go">0    aa</span>
+<span class="go">4    -e</span>
+<span class="go">2    -c</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<p>For more examples, see <a class="reference internal" href="../user_guide/text.html#text-concatenate"><span class="std std-ref">here</span></a>.</p>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.Series.str.cat.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
