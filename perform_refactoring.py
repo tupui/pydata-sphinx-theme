@@ -198,21 +198,6 @@ def copy_new_files(pandas_path):
             print('git add {}'.format(os.path.join(target_dir, fname)))
 
 
-def add_header_to_api(pandas_path):
-    """
-    Add the `{header}` context to the api.rst page.
-    """
-    api_path = os.path.join('doc', 'source', 'api.rst')
-
-    with open(os.path.join(pandas_path, api_path)) as f:
-        api_content = f.read()
-
-    with open(os.path.join(pandas_path, api_path), 'w') as f:
-        f.write('{{ header }}\n\n' + api_content)
-
-    print('git add {}'.format(api_path))
-
-
 def clean_refactoring(pandas_path, structure):
     with open(os.path.join(pandas_path, 'perform_refactoring.py')) as f:
         script_content = f.read()
@@ -224,6 +209,7 @@ def clean_refactoring(pandas_path, structure):
     source_dir = os.path.join(pandas_path, 'doc', 'source')
     to_delete += [os.path.join(source_dir, d) for d in structure.keys()]
     to_delete += glob.glob(os.path.join(source_dir, '_static', '*.html'))
+    to_delete += glob.glob(os.path.join(source_dir, '_static', 'img'))
     to_delete += [os.path.join(source_dir, f) for f in ('index.rst',
                                                         'styled.xlsx',
                                                         'savefig',
@@ -261,7 +247,6 @@ def main(pandas_path):
     update_conf(pandas_path)
     remove_old_theme(pandas_path)
     copy_new_files(pandas_path)
-    add_header_to_api(pandas_path)
 
 
 if __name__ == '__main__':
