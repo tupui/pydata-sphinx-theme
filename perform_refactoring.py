@@ -198,6 +198,21 @@ def copy_new_files(pandas_path):
             print('git add {}'.format(os.path.join(target_dir, fname)))
 
 
+def add_header_to_api(pandas_path):
+    """
+    Add the `{header}` context to the api.rst page.
+    """
+    api_path = os.path.join('doc', 'source', 'api.rst')
+
+    with open(os.path.join(pandas_path, api_path)) as f:
+        api_content = f.read()
+
+    with open(os.path.join(pandas_path, api_path), 'w') as f:
+        f.write('{{ header }}\n\n' + api_content)
+
+    print('git add {}'.format(api_path))
+
+
 def clean_refactoring(pandas_path, structure):
     with open(os.path.join(pandas_path, 'perform_refactoring.py')) as f:
         script_content = f.read()
@@ -231,7 +246,7 @@ def clean_refactoring(pandas_path, structure):
             shutil.rmtree(fname)
 
     os.system('git checkout {}'.format(
-        os.path.join(pandas_path, 'ci', 'environment-dev.yaml')))
+        os.path.join(pandas_path, 'environment.yml')))
     os.system('git checkout -- {}'.format(
         os.path.join(pandas_path, 'doc')))
 
@@ -246,6 +261,7 @@ def main(pandas_path):
     update_conf(pandas_path)
     remove_old_theme(pandas_path)
     copy_new_files(pandas_path)
+    add_header_to_api(pandas_path)
 
 
 if __name__ == '__main__':

@@ -19,7 +19,7 @@ We will start by loading some data about animals from a CSV file:
 
    import pandas
 
-   animals = pandas.read_csv('data/animals.csv')
+   animals = pandas.read_csv('../data/animals.csv')
 
 This will save in the variable `animals` a table (in the pandas terminology
 a :class:`DataFrame`) with the contents of the CSV file.
@@ -38,12 +38,14 @@ was compressed with zip, and available in a website, we could load it by
 simply using:
 
 .. ipython:: python
+   :verbatim:
 
    animals = pandas.read_csv('https://pandas.pydata.org/docs/data/animals.csv.zip')
 
 To load from a different format, like JSON, the syntax is very similar:
 
 .. ipython:: python
+   :verbatim:
 
    countries = pandas.read_json('data/countries.json', orient='records')
 
