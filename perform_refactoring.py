@@ -120,14 +120,14 @@ def update_conf(pandas_path):
                 line += "    'navbar_sidebarrel': False,  # no prev/next links\n"
                 line += "    'source_link_position': 'footer',\n"
                 line += "    'navbar_class': 'navbar navbar-inverse',  # black navbar\n"
-                line += "    'navbar_links': [\n"
-                line += "        ('Install', 'install'),\n"
-                line += "        ('Getting started', 'getting_started/index'),\n"
-                line += "        ('User guide', 'user_guide/index'),\n"
-                line += "        ('API', 'api'),\n"
-                line += "        ('Community', 'community'),\n"
-                line += "        ('Donate', 'donate'),\n"
-                line += '    ],\n'
+                #line += "    'navbar_links': [\n"
+                #line += "        ('Install', 'install'),\n"
+                #line += "        ('Getting started', 'getting_started/index'),\n"
+                #line += "        ('User guide', 'user_guide/index'),\n"
+                #line += "        ('API', 'api'),\n"
+                #line += "        ('Community', 'community'),\n"
+                #line += "        ('Donate', 'donate'),\n"
+                #line += '    ],\n'
                 line += '}\n'
             elif line == "html_theme_path = ['themes']\n":
                 line = 'html_theme_path = '
