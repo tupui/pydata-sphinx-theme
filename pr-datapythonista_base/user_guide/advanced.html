@@ -45,13 +45,6 @@
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
             
-                <li><a href="../install.html">Install</a></li>
-                <li><a href="../getting_started/index.html">Getting started</a></li>
-                <li><a href="index.html">User guide</a></li>
-                <li><a href="../api.html">API</a></li>
-                <li><a href="../community.html">Community</a></li>
-                <li><a href="../donate.html">Donate</a></li>
-            
             
               
               
@@ -121,8 +114,8 @@ non-trivial applications to illustrate how it aids in structuring data for
 analysis.</p>
 <p>See the <a class="reference internal" href="../getting_started/cookbook.html#cookbook-multi-index"><span class="std std-ref">cookbook</span></a> for some advanced strategies.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.24.0: </span><a class="reference internal" href="../generated/pandas.MultiIndex.labels.html#pandas.MultiIndex.labels" title="pandas.MultiIndex.labels"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.labels</span></code></a> has been renamed to <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.codes</span></code>
-and <a class="reference internal" href="../generated/pandas.MultiIndex.set_labels.html#pandas.MultiIndex.set_labels" title="pandas.MultiIndex.set_labels"><code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.set_labels</span></code></a> to <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.set_codes</span></code>.</p>
+<p><span class="versionmodified">Changed in version 0.24.0: </span><code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.labels</span></code> has been renamed to <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.codes</span></code>
+and <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.set_labels</span></code> to <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.set_codes</span></code>.</p>
 </div>
 <div class="section" id="creating-a-multiindex-hierarchical-index-object">
 <h3>Creating a MultiIndex (hierarchical index) object<a class="headerlink" href="#creating-a-multiindex-hierarchical-index-object" title="Permalink to this headline">¶</a></h3>
@@ -1242,50 +1235,50 @@ they need to be sorted. As with any index, you can use <a class="reference inter
 
 <span class="gp">In [97]: </span><span class="n">s</span>
 <span class="gh">Out[97]: </span><span class="go"></span>
-<span class="go">qux  two    0.206053</span>
-<span class="go">bar  one   -0.251905</span>
-<span class="go">foo  one   -2.213588</span>
-<span class="go">bar  two    1.063327</span>
+<span class="go">bar  one    0.206053</span>
+<span class="go">qux  one   -0.251905</span>
+<span class="go">bar  two   -2.213588</span>
+<span class="go">foo  one    1.063327</span>
 <span class="go">baz  two    1.266143</span>
 <span class="go">foo  two    0.299368</span>
-<span class="go">baz  one   -0.863838</span>
-<span class="go">qux  one    0.408204</span>
+<span class="go">qux  two   -0.863838</span>
+<span class="go">baz  one    0.408204</span>
 <span class="go">Length: 8, dtype: float64</span>
 
 <span class="gp">In [98]: </span><span class="n">s</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 <span class="go">                                                                                                                                                                                                            Out[98]: </span>
-<span class="go">bar  one   -0.251905</span>
-<span class="go">     two    1.063327</span>
-<span class="go">baz  one   -0.863838</span>
+<span class="go">bar  one    0.206053</span>
+<span class="go">     two   -2.213588</span>
+<span class="go">baz  one    0.408204</span>
 <span class="go">     two    1.266143</span>
-<span class="go">foo  one   -2.213588</span>
+<span class="go">foo  one    1.063327</span>
 <span class="go">     two    0.299368</span>
-<span class="go">qux  one    0.408204</span>
-<span class="go">     two    0.206053</span>
+<span class="go">qux  one   -0.251905</span>
+<span class="go">     two   -0.863838</span>
 <span class="go">Length: 8, dtype: float64</span>
 
 <span class="gp">In [99]: </span><span class="n">s</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                        Out[99]: </span>
-<span class="go">bar  one   -0.251905</span>
-<span class="go">     two    1.063327</span>
-<span class="go">baz  one   -0.863838</span>
+<span class="go">bar  one    0.206053</span>
+<span class="go">     two   -2.213588</span>
+<span class="go">baz  one    0.408204</span>
 <span class="go">     two    1.266143</span>
-<span class="go">foo  one   -2.213588</span>
+<span class="go">foo  one    1.063327</span>
 <span class="go">     two    0.299368</span>
-<span class="go">qux  one    0.408204</span>
-<span class="go">     two    0.206053</span>
+<span class="go">qux  one   -0.251905</span>
+<span class="go">     two   -0.863838</span>
 <span class="go">Length: 8, dtype: float64</span>
 
 <span class="gp">In [100]: </span><span class="n">s</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Out[100]: </span>
-<span class="go">bar  one   -0.251905</span>
-<span class="go">baz  one   -0.863838</span>
-<span class="go">foo  one   -2.213588</span>
-<span class="go">qux  one    0.408204</span>
-<span class="go">bar  two    1.063327</span>
+<span class="go">bar  one    0.206053</span>
+<span class="go">baz  one    0.408204</span>
+<span class="go">foo  one    1.063327</span>
+<span class="go">qux  one   -0.251905</span>
+<span class="go">bar  two   -2.213588</span>
 <span class="go">baz  two    1.266143</span>
 <span class="go">foo  two    0.299368</span>
-<span class="go">qux  two    0.206053</span>
+<span class="go">qux  two   -0.863838</span>
 <span class="go">Length: 8, dtype: float64</span>
 </pre></div>
 </div>
@@ -1296,27 +1289,27 @@ are named.</p>
 <span class="gp">In [102]: </span><span class="n">s</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;L1&#39;</span><span class="p">)</span>
 <span class="gh">Out[102]: </span><span class="go"></span>
 <span class="go">L1   L2 </span>
-<span class="go">bar  one   -0.251905</span>
-<span class="go">     two    1.063327</span>
-<span class="go">baz  one   -0.863838</span>
+<span class="go">bar  one    0.206053</span>
+<span class="go">     two   -2.213588</span>
+<span class="go">baz  one    0.408204</span>
 <span class="go">     two    1.266143</span>
-<span class="go">foo  one   -2.213588</span>
+<span class="go">foo  one    1.063327</span>
 <span class="go">     two    0.299368</span>
-<span class="go">qux  one    0.408204</span>
-<span class="go">     two    0.206053</span>
+<span class="go">qux  one   -0.251905</span>
+<span class="go">     two   -0.863838</span>
 <span class="go">Length: 8, dtype: float64</span>
 
 <span class="gp">In [103]: </span><span class="n">s</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;L2&#39;</span><span class="p">)</span>
 <span class="go">                                                                                                                                                                                                                      Out[103]: </span>
 <span class="go">L1   L2 </span>
-<span class="go">bar  one   -0.251905</span>
-<span class="go">baz  one   -0.863838</span>
-<span class="go">foo  one   -2.213588</span>
-<span class="go">qux  one    0.408204</span>
-<span class="go">bar  two    1.063327</span>
+<span class="go">bar  one    0.206053</span>
+<span class="go">baz  one    0.408204</span>
+<span class="go">foo  one    1.063327</span>
+<span class="go">qux  one   -0.251905</span>
+<span class="go">bar  two   -2.213588</span>
 <span class="go">baz  two    1.266143</span>
 <span class="go">foo  two    0.299368</span>
-<span class="go">qux  two    0.206053</span>
+<span class="go">qux  two   -0.863838</span>
 <span class="go">Length: 8, dtype: float64</span>
 </pre></div>
 </div>
