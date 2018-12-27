@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
@@ -2289,7 +2290,7 @@ value will be an iterable object of type <code class="docutils literal notransla
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [182]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.sv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
 <span class="gp">In [183]: </span><span class="n">reader</span>
-<span class="gh">Out[183]: </span><span class="go">&lt;pandas.io.parsers.TextFileReader at 0x7fa474a87b70&gt;</span>
+<span class="gh">Out[183]: </span><span class="go">&lt;pandas.io.parsers.TextFileReader at 0x7feae9072588&gt;</span>
 
 <span class="gp">In [184]: </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
@@ -2930,11 +2931,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [243]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats)
-<span class="go">9.84 ms +- 93.6 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">21 ms +- 104 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [244]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats, numpy=True)
-<span class="go">6.87 ms +- 106 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">14.2 ms +- 95.8 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <p>The speedup is less noticeable for smaller datasets:</p>
@@ -2942,11 +2943,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [246]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats)
-<span class="go">6.05 ms +- 55.8 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">12.8 ms +- 223 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [247]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats, numpy=True)
-<span class="go">5.64 ms +- 222 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">11.2 ms +- 233 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -3049,7 +3050,7 @@ using Hadoop or Spark.</p>
 <span class="gp">In [257]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">jsonl</span><span class="p">),</span> <span class="n">lines</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="gp">In [258]: </span><span class="n">reader</span>
-<span class="gh">Out[258]: </span><span class="go">&lt;pandas.io.json.json.JsonReader at 0x7fa4749992b0&gt;</span>
+<span class="gh">Out[258]: </span><span class="go">&lt;pandas.io.json.json.JsonReader at 0x7feae8f227b8&gt;</span>
 
 <span class="gp">In [259]: </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
@@ -7109,38 +7110,38 @@ and data values from the values and assembles them into a <code class="docutils 
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load values and column names for all datasets from corresponding nodes and</span>
 <span class="c1"># insert them into one data.frame object.</span>
 
-<span class="kn">library</span><span class="p">(</span>rhdf5<span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">rhdf5</span><span class="p">)</span>
 
-loadhdf5data <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>h5File<span class="p">)</span> <span class="p">{</span>
+<span class="n">loadhdf5data</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">h5File</span><span class="p">)</span> <span class="p">{</span>
 
-listing <span class="o">&lt;-</span> h5ls<span class="p">(</span>h5File<span class="p">)</span>
+<span class="n">listing</span> <span class="o">&lt;-</span> <span class="nf">h5ls</span><span class="p">(</span><span class="n">h5File</span><span class="p">)</span>
 <span class="c1"># Find all data nodes, values are stored in *_values and corresponding column</span>
 <span class="c1"># titles in *_items</span>
-data_nodes <span class="o">&lt;-</span> <span class="kp">grep</span><span class="p">(</span><span class="s">&quot;_values&quot;</span><span class="p">,</span> listing<span class="o">$</span>name<span class="p">)</span>
-name_nodes <span class="o">&lt;-</span> <span class="kp">grep</span><span class="p">(</span><span class="s">&quot;_items&quot;</span><span class="p">,</span> listing<span class="o">$</span>name<span class="p">)</span>
-data_paths <span class="o">=</span> <span class="kp">paste</span><span class="p">(</span>listing<span class="o">$</span>group<span class="p">[</span>data_nodes<span class="p">],</span> listing<span class="o">$</span>name<span class="p">[</span>data_nodes<span class="p">],</span> sep <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">)</span>
-name_paths <span class="o">=</span> <span class="kp">paste</span><span class="p">(</span>listing<span class="o">$</span>group<span class="p">[</span>name_nodes<span class="p">],</span> listing<span class="o">$</span>name<span class="p">[</span>name_nodes<span class="p">],</span> sep <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">)</span>
-columns <span class="o">=</span> <span class="kt">list</span><span class="p">()</span>
-<span class="kr">for</span> <span class="p">(</span>idx <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span>data_paths<span class="p">))</span> <span class="p">{</span>
+<span class="n">data_nodes</span> <span class="o">&lt;-</span> <span class="nf">grep</span><span class="p">(</span><span class="s">&quot;_values&quot;</span><span class="p">,</span> <span class="n">listing</span><span class="o">$</span><span class="n">name</span><span class="p">)</span>
+<span class="n">name_nodes</span> <span class="o">&lt;-</span> <span class="nf">grep</span><span class="p">(</span><span class="s">&quot;_items&quot;</span><span class="p">,</span> <span class="n">listing</span><span class="o">$</span><span class="n">name</span><span class="p">)</span>
+<span class="n">data_paths</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span><span class="n">listing</span><span class="o">$</span><span class="n">group[data_nodes]</span><span class="p">,</span> <span class="n">listing</span><span class="o">$</span><span class="n">name[data_nodes]</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="n">name_paths</span> <span class="o">=</span> <span class="nf">paste</span><span class="p">(</span><span class="n">listing</span><span class="o">$</span><span class="n">group[name_nodes]</span><span class="p">,</span> <span class="n">listing</span><span class="o">$</span><span class="n">name[name_nodes]</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">idx</span> <span class="n">in</span> <span class="nf">seq</span><span class="p">(</span><span class="n">data_paths</span><span class="p">))</span> <span class="p">{</span>
   <span class="c1"># NOTE: matrices returned by h5read have to be transposed to obtain</span>
   <span class="c1"># required Fortran order!</span>
-  data <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span><span class="kp">t</span><span class="p">(</span>h5read<span class="p">(</span>h5File<span class="p">,</span> data_paths<span class="p">[</span>idx<span class="p">])))</span>
-  names <span class="o">&lt;-</span> <span class="kp">t</span><span class="p">(</span>h5read<span class="p">(</span>h5File<span class="p">,</span> name_paths<span class="p">[</span>idx<span class="p">]))</span>
-  entry <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>data<span class="p">)</span>
-  <span class="kp">colnames</span><span class="p">(</span>entry<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">names</span>
-  columns <span class="o">&lt;-</span> <span class="kp">append</span><span class="p">(</span>columns<span class="p">,</span> entry<span class="p">)</span>
+  <span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="nf">h5read</span><span class="p">(</span><span class="n">h5File</span><span class="p">,</span> <span class="n">data_paths[idx]</span><span class="p">)))</span>
+  <span class="n">names</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="nf">h5read</span><span class="p">(</span><span class="n">h5File</span><span class="p">,</span> <span class="n">name_paths[idx]</span><span class="p">))</span>
+  <span class="n">entry</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="nf">colnames</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">names</span>
+  <span class="n">columns</span> <span class="o">&lt;-</span> <span class="nf">append</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
 <span class="p">}</span>
 
-data <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>columns<span class="p">)</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
 
-<span class="kr">return</span><span class="p">(</span>data<span class="p">)</span>
+<span class="nf">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Now you can import the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> into R:</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> data <span class="o">=</span> loadhdf5data<span class="p">(</span><span class="s">&quot;transfer.hdf5&quot;</span><span class="p">)</span>
-<span class="o">&gt;</span> <span class="kp">head</span><span class="p">(</span>data<span class="p">)</span>
-         first    second <span class="kp">class</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">data</span> <span class="o">=</span> <span class="nf">loadhdf5data</span><span class="p">(</span><span class="s">&quot;transfer.hdf5&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+         <span class="n">first</span>    <span class="n">second</span> <span class="n">class</span>
 <span class="m">1</span> <span class="m">0.4170220047</span> <span class="m">0.3266449</span>     <span class="m">0</span>
 <span class="m">2</span> <span class="m">0.7203244934</span> <span class="m">0.5270581</span>     <span class="m">0</span>
 <span class="m">3</span> <span class="m">0.0001143748</span> <span class="m">0.8859421</span>     <span class="m">1</span>
