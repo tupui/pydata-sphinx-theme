@@ -1,0 +1,274 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+
+        
+        
+          <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
+            <ul class="section-nav">
+<li class="toc-entry toc-h1"><a class="reference internal" href="#">pandas.DataFrame.stack</a></li>
+</ul>
+
+          </nav>
+        
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-stack">
+<h1>pandas.DataFrame.stack<a class="headerlink" href="#pandas-dataframe-stack" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.stack">
+<code class="descclassname">DataFrame.</code><code class="descname">stack</code><span class="sig-paren">(</span><em>level=-1</em>, <em>dropna=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L5761-L5929"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stack the prescribed level(s) from columns to index.</p>
+<p>Return a reshaped DataFrame or Series having a multi-level
+index with one or more new inner-most levels compared to the current
+DataFrame. The new inner-most levels are created by pivoting the
+columns of the current dataframe:</p>
+<blockquote>
+<div><ul class="simple">
+<li>if the columns have a single level, the output is a Series;</li>
+<li>if the columns have multiple levels, the new index
+level(s) is (are) taken from the prescribed level(s) and
+the output is a DataFrame.</li>
+</ul>
+</div></blockquote>
+<p>The new index levels are sorted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>level</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, str, list, default -1</span></dt>
+<dd><p class="first last">Level(s) to stack from the column axis onto the index
+axis, defined as one index or label, or a list of indices
+or labels.</p>
+</dd>
+<dt><strong>dropna</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
+<dd><p class="first last">Whether to drop rows in the resulting Frame/Series with
+missing values. Stacking a column level onto the index
+axis can create combinations of index and column values
+that are missing from the original dataframe. See Examples
+section.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>DataFrame or Series</strong></dt>
+<dd><p class="first last">Stacked dataframe or series.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.DataFrame.unstack.html#pandas.DataFrame.unstack" title="pandas.DataFrame.unstack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.unstack</span></code></a></dt>
+<dd>Unstack prescribed level(s) from index axis onto column axis.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pivot</span></code></a></dt>
+<dd>Reshape dataframe from long format to wide format.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.pivot_table.html#pandas.DataFrame.pivot_table" title="pandas.DataFrame.pivot_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pivot_table</span></code></a></dt>
+<dd>Create a spreadsheet-style pivot table as a DataFrame.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The function is named by analogy with a collection of books
+being re-organised from being side by side on a horizontal
+position (the columns of the dataframe) to being stacked
+vertically on top of of each other (in the index of the
+dataframe).</p>
+<p class="rubric">Examples</p>
+<p><strong>Single level columns</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_single_level_cols</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span>
+<span class="gp">... </span>                                    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Stacking a dataframe with a single level column axis returns a Series:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_single_level_cols</span>
+<span class="go">     weight height</span>
+<span class="go">cat       0      1</span>
+<span class="go">dog       2      3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_single_level_cols</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="go">cat  weight    0</span>
+<span class="go">     height    1</span>
+<span class="go">dog  weight    2</span>
+<span class="go">     height    3</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p><strong>Multi level columns: simple case</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">multicol1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;kg&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                                       <span class="p">(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;pounds&#39;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span>
+<span class="gp">... </span>                                    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="n">columns</span><span class="o">=</span><span class="n">multicol1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Stacking a dataframe with a multi-level column axis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols1</span>
+<span class="go">     weight</span>
+<span class="go">         kg    pounds</span>
+<span class="go">cat       1        2</span>
+<span class="go">dog       2        4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols1</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="go">            weight</span>
+<span class="go">cat kg           1</span>
+<span class="go">    pounds       2</span>
+<span class="go">dog kg           2</span>
+<span class="go">    pounds       4</span>
+</pre></div>
+</div>
+<p><strong>Missing values</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">multicol2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;kg&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                                       <span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]],</span>
+<span class="gp">... </span>                                    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="n">columns</span><span class="o">=</span><span class="n">multicol2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is common to have missing values when stacking a dataframe
+with multi-level columns, as the stacked dataframe typically
+has more values than the original dataframe. Missing values
+are filled with NaNs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols2</span>
+<span class="go">    weight height</span>
+<span class="go">        kg      m</span>
+<span class="go">cat    1.0    2.0</span>
+<span class="go">dog    3.0    4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols2</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="go">        height  weight</span>
+<span class="go">cat kg     NaN     1.0</span>
+<span class="go">    m      2.0     NaN</span>
+<span class="go">dog kg     NaN     3.0</span>
+<span class="go">    m      4.0     NaN</span>
+</pre></div>
+</div>
+<p><strong>Prescribing the level(s) to be stacked</strong></p>
+<p>The first parameter controls which level or levels are stacked:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols2</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">             kg    m</span>
+<span class="go">cat height  NaN  2.0</span>
+<span class="go">    weight  1.0  NaN</span>
+<span class="go">dog height  NaN  4.0</span>
+<span class="go">    weight  3.0  NaN</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols2</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="go">cat  height  m     2.0</span>
+<span class="go">     weight  kg    1.0</span>
+<span class="go">dog  height  m     4.0</span>
+<span class="go">     weight  kg    3.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p><strong>Dropping missing values</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="kc">None</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]],</span>
+<span class="gp">... </span>                                    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                    <span class="n">columns</span><span class="o">=</span><span class="n">multicol2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that rows where all values are missing are dropped by
+default but this behaviour can be controlled via the dropna
+keyword parameter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols3</span>
+<span class="go">    weight height</span>
+<span class="go">        kg      m</span>
+<span class="go">cat    NaN    1.0</span>
+<span class="go">dog    2.0    3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols3</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">        height  weight</span>
+<span class="go">cat kg     NaN     NaN</span>
+<span class="go">    m      1.0     NaN</span>
+<span class="go">dog kg     NaN     2.0</span>
+<span class="go">    m      3.0     NaN</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_multi_level_cols3</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">        height  weight</span>
+<span class="go">cat m      1.0     NaN</span>
+<span class="go">dog kg     NaN     2.0</span>
+<span class="go">    m      3.0     NaN</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

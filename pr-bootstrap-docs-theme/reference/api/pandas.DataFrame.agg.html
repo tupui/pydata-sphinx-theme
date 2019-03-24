@@ -1,0 +1,217 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+
+        
+        
+          <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
+            <ul class="section-nav">
+<li class="toc-entry toc-h1"><a class="reference internal" href="#">pandas.DataFrame.agg</a></li>
+</ul>
+
+          </nav>
+        
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-agg">
+<h1>pandas.DataFrame.agg<a class="headerlink" href="#pandas-dataframe-agg" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.agg">
+<code class="descclassname">DataFrame.</code><code class="descname">agg</code><span class="sig-paren">(</span><em>func</em>, <em>axis=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L6274-L6289"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.agg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate using one or more operations over the specified axis.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 0.20.0.</span></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function, str, list or dict</span></dt>
+<dd><p class="first">Function to use for aggregating the data. If a function, must either
+work when passed a DataFrame or when passed to DataFrame.apply.</p>
+<p>Accepted combinations are:</p>
+<ul class="last simple">
+<li>function</li>
+<li>string function name</li>
+<li>list of functions and/or function names, e.g. <code class="docutils literal notranslate"><span class="pre">[np.sum,</span> <span class="pre">'mean']</span></code></li>
+<li>dict of axis labels -&gt; functions, function names or list of such.</li>
+</ul>
+</dd>
+<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{0 or ‘index’, 1 or ‘columns’}, default 0</span></dt>
+<dd><p class="first last">If 0 or ‘index’: apply function to each column.
+If 1 or ‘columns’: apply function to each row.</p>
+</dd>
+<dt><strong>*args</strong></dt>
+<dd><p class="first last">Positional arguments to pass to <cite>func</cite>.</p>
+</dd>
+<dt><strong>**kwargs</strong></dt>
+<dd><p class="first last">Keyword arguments to pass to <cite>func</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>DataFrame, Series or scalar</strong></dt>
+<dd><p class="first last">if DataFrame.agg is called with a single function, returns a Series
+if DataFrame.agg is called with several functions, returns a DataFrame
+if Series.agg is called with single function, returns a scalar
+if Series.agg is called with several functions, returns a Series</p>
+</dd>
+<dt><strong>The aggregation operations are always performed over an axis, either the</strong></dt>
+<dd></dd>
+<dt><strong>index (default) or the column axis. This behavior is different from</strong></dt>
+<dd></dd>
+<dt><strong>`numpy` aggregation functions (`mean`, `median`, `prod`, `sum`, `std`,</strong></dt>
+<dd></dd>
+<dt><strong>`var`), where the default is to compute the aggregation of the flattened</strong></dt>
+<dd></dd>
+<dt><strong>array, e.g., ``numpy.mean(arr_2d)`` as opposed to ``numpy.mean(arr_2d,</strong></dt>
+<dd></dd>
+<dt><strong>axis=0)``.</strong></dt>
+<dd></dd>
+<dt><strong>`agg` is an alias for `aggregate`. Use the alias.</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.apply</span></code></a></dt>
+<dd>Perform any type of operations.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.transform</span></code></a></dt>
+<dd>Perform transformation type operations.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.groupby.GroupBy</span></code></dt>
+<dd>Perform operations over groups.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.resample.Resampler</span></code></dt>
+<dd>Perform operations over resampled bins.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.window.Rolling</span></code></dt>
+<dd>Perform operations over rolling window.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.window.Expanding</span></code></dt>
+<dd>Perform operations over expanding window.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.window.EWM</span></code></dt>
+<dd>Perform operation over exponential weighted window.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p><cite>agg</cite> is an alias for <cite>aggregate</cite>. Use the alias.</p>
+<p>A passed user-defined-function will be passed a Series for evaluation.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]],</span>
+<span class="gp">... </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Aggregate these functions over the rows.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">])</span>
+<span class="go">        A     B     C</span>
+<span class="go">sum  12.0  15.0  18.0</span>
+<span class="go">min   1.0   2.0   3.0</span>
+</pre></div>
+</div>
+<p>Different aggregations per column.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;A&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]})</span>
+<span class="go">        A    B</span>
+<span class="go">max   NaN  8.0</span>
+<span class="go">min   1.0  2.0</span>
+<span class="go">sum  12.0  NaN</span>
+</pre></div>
+</div>
+<p>Aggregate over the columns.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+<span class="go">0    2.0</span>
+<span class="go">1    5.0</span>
+<span class="go">2    8.0</span>
+<span class="go">3    NaN</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

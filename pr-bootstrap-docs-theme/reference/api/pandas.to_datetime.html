@@ -1,0 +1,293 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+
+        
+        
+          <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
+            <ul class="section-nav">
+<li class="toc-entry toc-h1"><a class="reference internal" href="#">pandas.to_datetime</a></li>
+</ul>
+
+          </nav>
+        
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-to-datetime">
+<h1>pandas.to_datetime<a class="headerlink" href="#pandas-to-datetime" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pandas.to_datetime">
+<code class="descclassname">pandas.</code><code class="descname">to_datetime</code><span class="sig-paren">(</span><em>arg</em>, <em>errors='raise'</em>, <em>dayfirst=False</em>, <em>yearfirst=False</em>, <em>utc=None</em>, <em>box=True</em>, <em>format=None</em>, <em>exact=True</em>, <em>unit=None</em>, <em>infer_datetime_format=False</em>, <em>origin='unix'</em>, <em>cache=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/tools/datetimes.py#L401-L613"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.to_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert argument to datetime.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>arg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">integer, float, string, datetime, list, tuple, 1-d array, Series</span></dt>
+<dd><div class="first last versionadded">
+<p><span class="versionmodified">New in version 0.18.1: </span>or DataFrame/dict-like</p>
+</div>
+</dd>
+<dt><strong>errors</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘ignore’, ‘raise’, ‘coerce’}, default ‘raise’</span></dt>
+<dd><ul class="first last simple">
+<li>If ‘raise’, then invalid parsing will raise an exception</li>
+<li>If ‘coerce’, then invalid parsing will be set as NaT</li>
+<li>If ‘ignore’, then invalid parsing will return the input</li>
+</ul>
+</dd>
+<dt><strong>dayfirst</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default False</span></dt>
+<dd><p class="first last">Specify a date parse order if <cite>arg</cite> is str or its list-likes.
+If True, parses dates with the day first, eg 10/11/12 is parsed as
+2012-11-10.
+Warning: dayfirst=True is not strict, but will prefer to parse
+with day first (this is a known bug, based on dateutil behavior).</p>
+</dd>
+<dt><strong>yearfirst</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default False</span></dt>
+<dd><p class="first">Specify a date parse order if <cite>arg</cite> is str or its list-likes.</p>
+<ul class="simple">
+<li>If True parses dates with the year first, eg 10/11/12 is parsed as
+2010-11-12.</li>
+<li>If both dayfirst and yearfirst are True, yearfirst is preceded (same
+as dateutil).</li>
+</ul>
+<p>Warning: yearfirst=True is not strict, but will prefer to parse
+with year first (this is a known bug, based on dateutil behavior).</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.16.1.</span></p>
+</div>
+</dd>
+<dt><strong>utc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default None</span></dt>
+<dd><p class="first last">Return UTC DatetimeIndex if True (converting any tz-aware
+datetime.datetime objects as well).</p>
+</dd>
+<dt><strong>box</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default True</span></dt>
+<dd><ul class="first last simple">
+<li>If True returns a DatetimeIndex or Index-like object</li>
+<li>If False returns ndarray of values.</li>
+</ul>
+</dd>
+<dt><strong>format</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, default None</span></dt>
+<dd><p class="first last">strftime to parse time, eg “%d/%m/%Y”, note that “%f” will parse
+all the way up to nanoseconds.</p>
+</dd>
+<dt><strong>exact</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, True by default</span></dt>
+<dd><ul class="first last simple">
+<li>If True, require an exact format match.</li>
+<li>If False, allow the format to match anywhere in the target string.</li>
+</ul>
+</dd>
+<dt><strong>unit</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, default ‘ns’</span></dt>
+<dd><p class="first last">unit of the arg (D,s,ms,us,ns) denote the unit, which is an
+integer or float number. This will be based off the origin.
+Example, with unit=’ms’ and origin=’unix’ (the default), this
+would calculate the number of milliseconds to the unix epoch start.</p>
+</dd>
+<dt><strong>infer_datetime_format</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default False</span></dt>
+<dd><p class="first last">If True and no <cite>format</cite> is given, attempt to infer the format of the
+datetime strings, and if it can be inferred, switch to a faster
+method of parsing them. In some cases this can increase the parsing
+speed by ~5-10x.</p>
+</dd>
+<dt><strong>origin</strong> <span class="classifier-delimiter">:</span> <span class="classifier">scalar, default is ‘unix’</span></dt>
+<dd><p class="first">Define the reference date. The numeric values would be parsed as number
+of units (defined by <cite>unit</cite>) since this reference date.</p>
+<ul class="simple">
+<li>If ‘unix’ (or POSIX) time; origin is set to 1970-01-01.</li>
+<li>If ‘julian’, unit must be ‘D’, and origin is set to beginning of
+Julian Calendar. Julian day number 0 is assigned to the day starting
+at noon on January 1, 4713 BC.</li>
+<li>If Timestamp convertible, origin is set to Timestamp identified by
+origin.</li>
+</ul>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.20.0.</span></p>
+</div>
+</dd>
+<dt><strong>cache</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default False</span></dt>
+<dd><p class="first">If True, use a cache of unique, converted dates to apply the datetime
+conversion. May produce significant speed-up when parsing duplicate
+date strings, especially ones with timezone offsets.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.23.0.</span></p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ret</strong> <span class="classifier-delimiter">:</span> <span class="classifier">datetime if parsing succeeded.</span></dt>
+<dd><p class="first">Return type depends on input:</p>
+<ul class="simple">
+<li>list-like: DatetimeIndex</li>
+<li>Series: Series of datetime64 dtype</li>
+<li>scalar: Timestamp</li>
+</ul>
+<p class="last">In case when it is not possible to return designated types (e.g. when
+any element of input is before Timestamp.min or after Timestamp.max)
+return will have datetime.datetime type (or corresponding
+array/Series).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.astype</span></code></a></dt>
+<dd>Cast argument to a specified dtype.</dd>
+<dt><a class="reference internal" href="pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.to_timedelta</span></code></a></dt>
+<dd>Convert argument to timedelta.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Assembling a datetime from multiple columns of a DataFrame. The keys can be
+common abbreviations like [‘year’, ‘month’, ‘day’, ‘minute’, ‘second’,
+‘ms’, ‘us’, ‘ns’]) or plurals of the same</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2016</span><span class="p">],</span>
+<span class="go">                       &#39;month&#39;: [2, 3],</span>
+<span class="go">                       &#39;day&#39;: [4, 5]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="go">0   2015-02-04</span>
+<span class="go">1   2016-03-05</span>
+<span class="go">dtype: datetime64[ns]</span>
+</pre></div>
+</div>
+<p>If a date does not meet the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#timeseries-timestamp-limits">timestamp limitations</a>, passing errors=’ignore’
+will return the original input instead of raising any exception.</p>
+<p>Passing errors=’coerce’ will force an out-of-bounds date to NaT,
+in addition to forcing non-dates (or non-parseable dates) to NaT.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;13000101&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="go">datetime.datetime(1300, 1, 1, 0, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;13000101&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="go">NaT</span>
+</pre></div>
+</div>
+<p>Passing infer_datetime_format=True can often-times speedup a parsing
+if its not an ISO8601 format exactly, but in a regular format.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;3/11/2000&#39;</span><span class="p">,</span> <span class="s1">&#39;3/12/2000&#39;</span><span class="p">,</span> <span class="s1">&#39;3/13/2000&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="go">0    3/11/2000</span>
+<span class="go">1    3/12/2000</span>
+<span class="go">2    3/13/2000</span>
+<span class="go">3    3/11/2000</span>
+<span class="go">4    3/12/2000</span>
+<span class="go">dtype: object</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">%</span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">100 loops, best of 3: 10.4 ms per loop</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="o">%</span><span class="n">timeit</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">1 loop, best of 3: 471 ms per loop</span>
+</pre></div>
+</div>
+<p>Using a unix epoch time</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="mi">1490195805</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-03-22 15:16:45&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="mi">1490195805433502912</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;ns&#39;</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-03-22 15:16:45.433502912&#39;)</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For float arg, precision rounding might happen. To prevent
+unexpected behavior use a fixed-width exact type.</p>
+</div>
+<p>Using a non-unix epoch origin</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span>
+<span class="go">                   origin=pd.Timestamp(&#39;1960-01-01&#39;))</span>
+<span class="go">0    1960-01-02</span>
+<span class="go">1    1960-01-03</span>
+<span class="go">2    1960-01-04</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,220 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+
+        
+        
+          <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
+            <ul class="section-nav">
+<li class="toc-entry toc-h1"><a class="reference internal" href="#">pandas.DataFrame.pivot</a></li>
+</ul>
+
+          </nav>
+        
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-pivot">
+<h1>pandas.DataFrame.pivot<a class="headerlink" href="#pandas-dataframe-pivot" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.pivot">
+<code class="descclassname">DataFrame.</code><code class="descname">pivot</code><span class="sig-paren">(</span><em>index=None</em>, <em>columns=None</em>, <em>values=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L5624-L5628"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.pivot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return reshaped DataFrame organized by given index / column values.</p>
+<p>Reshape data (produce a “pivot” table) based on column values. Uses
+unique values from specified <cite>index</cite> / <cite>columns</cite> to form axes of the
+resulting DataFrame. This function does not support data
+aggregation, multiple values will result in a MultiIndex in the
+columns. See the <a class="reference internal" href="../../user_guide/reshaping.html#reshaping"><span class="std std-ref">User Guide</span></a> for more on reshaping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string or object, optional</span></dt>
+<dd><p class="first last">Column to use to make new frame’s index. If None, uses
+existing index.</p>
+</dd>
+<dt><strong>columns</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string or object</span></dt>
+<dd><p class="first last">Column to use to make new frame’s columns.</p>
+</dd>
+<dt><strong>values</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, object or a list of the previous, optional</span></dt>
+<dd><p class="first">Column(s) to use for populating new frame’s values. If not
+specified, all remaining columns will be used and the result will
+have hierarchically indexed columns.</p>
+<div class="last versionchanged">
+<p><span class="versionmodified">Changed in version 0.23.0: </span>Also accept list of column names.</p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>DataFrame</strong></dt>
+<dd><p class="first last">Returns reshaped DataFrame.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ValueError:</strong></dt>
+<dd><p class="first last">When there are any <cite>index</cite>, <cite>columns</cite> combinations with multiple
+values. <cite>DataFrame.pivot_table</cite> when you need to aggregate.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.DataFrame.pivot_table.html#pandas.DataFrame.pivot_table" title="pandas.DataFrame.pivot_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pivot_table</span></code></a></dt>
+<dd>Generalization of pivot that can handle duplicate values for one index/column pair.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.unstack.html#pandas.DataFrame.unstack" title="pandas.DataFrame.unstack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.unstack</span></code></a></dt>
+<dd>Pivot based on the index values instead of a column.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>For finer-tuned control, see hierarchical indexing documentation along
+with the related stack/unstack methods.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="s1">&#39;two&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;zoo&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;t&#39;</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">    foo   bar  baz  zoo</span>
+<span class="go">0   one   A    1    x</span>
+<span class="go">1   one   B    2    y</span>
+<span class="go">2   one   C    3    z</span>
+<span class="go">3   two   A    4    q</span>
+<span class="go">4   two   B    5    w</span>
+<span class="go">5   two   C    6    t</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;baz&#39;</span><span class="p">)</span>
+<span class="go">bar  A   B   C</span>
+<span class="go">foo</span>
+<span class="go">one  1   2   3</span>
+<span class="go">two  4   5   6</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)[</span><span class="s1">&#39;baz&#39;</span><span class="p">]</span>
+<span class="go">bar  A   B   C</span>
+<span class="go">foo</span>
+<span class="go">one  1   2   3</span>
+<span class="go">two  4   5   6</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;zoo&#39;</span><span class="p">])</span>
+<span class="go">      baz       zoo</span>
+<span class="go">bar   A  B  C   A  B  C</span>
+<span class="go">foo</span>
+<span class="go">one   1  2  3   x  y  z</span>
+<span class="go">two   4  5  6   q  w  t</span>
+</pre></div>
+</div>
+<p>A ValueError is raised if there are any duplicates.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   foo bar  baz</span>
+<span class="go">0  one   A    1</span>
+<span class="go">1  one   A    2</span>
+<span class="go">2  two   B    3</span>
+<span class="go">3  two   C    4</span>
+</pre></div>
+</div>
+<p>Notice that the first two rows are the same for our <cite>index</cite>
+and <cite>columns</cite> arguments.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;baz&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+   <span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Index contains duplicate entries, cannot reshape</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

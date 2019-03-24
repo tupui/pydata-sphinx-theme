@@ -1,0 +1,270 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+
+        
+        
+          <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
+            <ul class="section-nav">
+<li class="toc-entry toc-h1"><a class="reference internal" href="#">pandas.DataFrame.merge</a></li>
+</ul>
+
+          </nav>
+        
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-merge">
+<h1>pandas.DataFrame.merge<a class="headerlink" href="#pandas-dataframe-merge" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.merge">
+<code class="descclassname">DataFrame.</code><code class="descname">merge</code><span class="sig-paren">(</span><em>right</em>, <em>how='inner'</em>, <em>on=None</em>, <em>left_on=None</em>, <em>right_on=None</em>, <em>left_index=False</em>, <em>right_index=False</em>, <em>sort=False</em>, <em>suffixes=('_x'</em>, <em>'_y')</em>, <em>copy=True</em>, <em>indicator=False</em>, <em>validate=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L6858-L6868"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge DataFrame or named Series objects with a database-style join.</p>
+<p>The join is done on columns or indexes. If joining columns on
+columns, the DataFrame indexes <em>will be ignored</em>. Otherwise if joining indexes
+on indexes or indexes on a column or columns, the index will be passed on.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>right</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame or named Series</span></dt>
+<dd><p class="first last">Object to merge with.</p>
+</dd>
+<dt><strong>how</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘left’, ‘right’, ‘outer’, ‘inner’}, default ‘inner’</span></dt>
+<dd><p class="first">Type of merge to be performed.</p>
+<ul class="last simple">
+<li>left: use only keys from left frame, similar to a SQL left outer join;
+preserve key order.</li>
+<li>right: use only keys from right frame, similar to a SQL right outer join;
+preserve key order.</li>
+<li>outer: use union of keys from both frames, similar to a SQL full outer
+join; sort keys lexicographically.</li>
+<li>inner: use intersection of keys from both frames, similar to a SQL inner
+join; preserve the order of the left keys.</li>
+</ul>
+</dd>
+<dt><strong>on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label or list</span></dt>
+<dd><p class="first last">Column or index level names to join on. These must be found in both
+DataFrames. If <cite>on</cite> is None and not merging on indexes then this defaults
+to the intersection of the columns in both DataFrames.</p>
+</dd>
+<dt><strong>left_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label or list, or array-like</span></dt>
+<dd><p class="first last">Column or index level names to join on in the left DataFrame. Can also
+be an array or list of arrays of the length of the left DataFrame.
+These arrays are treated as if they are columns.</p>
+</dd>
+<dt><strong>right_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label or list, or array-like</span></dt>
+<dd><p class="first last">Column or index level names to join on in the right DataFrame. Can also
+be an array or list of arrays of the length of the right DataFrame.
+These arrays are treated as if they are columns.</p>
+</dd>
+<dt><strong>left_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
+<dd><p class="first last">Use the index from the left DataFrame as the join key(s). If it is a
+MultiIndex, the number of keys in the other DataFrame (either the index
+or a number of columns) must match the number of levels.</p>
+</dd>
+<dt><strong>right_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
+<dd><p class="first last">Use the index from the right DataFrame as the join key. Same caveats as
+left_index.</p>
+</dd>
+<dt><strong>sort</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
+<dd><p class="first last">Sort the join keys lexicographically in the result DataFrame. If False,
+the order of the join keys depends on the join type (how keyword).</p>
+</dd>
+<dt><strong>suffixes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple of (str, str), default (‘_x’, ‘_y’)</span></dt>
+<dd><p class="first last">Suffix to apply to overlapping column names in the left and right
+side, respectively. To raise an exception on overlapping columns use
+(False, False).</p>
+</dd>
+<dt><strong>copy</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
+<dd><p class="first last">If False, avoid copy if possible.</p>
+</dd>
+<dt><strong>indicator</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool or str, default False</span></dt>
+<dd><p class="first last">If True, adds a column to output DataFrame called “_merge” with
+information on the source of each row.
+If string, column with information on source of each row will be added to
+output DataFrame, and column will be named value of string.
+Information column is Categorical-type and takes on a value of “left_only”
+for observations whose merge key only appears in ‘left’ DataFrame,
+“right_only” for observations whose merge key only appears in ‘right’
+DataFrame, and “both” if the observation’s merge key is found in both.</p>
+</dd>
+<dt><strong>validate</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first">If specified, checks if merge is of specified type.</p>
+<ul class="simple">
+<li>“one_to_one” or “1:1”: check if merge keys are unique in both
+left and right datasets.</li>
+<li>“one_to_many” or “1:m”: check if merge keys are unique in left
+dataset.</li>
+<li>“many_to_one” or “m:1”: check if merge keys are unique in right
+dataset.</li>
+<li>“many_to_many” or “m:m”: allowed, but does not result in checks.</li>
+</ul>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.21.0.</span></p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>DataFrame</strong></dt>
+<dd><p class="first last">A DataFrame of the two merged objects.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.merge_ordered.html#pandas.merge_ordered" title="pandas.merge_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_ordered</span></code></a></dt>
+<dd>Merge with optional filling/interpolation.</dd>
+<dt><a class="reference internal" href="pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a></dt>
+<dd>Merge on nearest keys.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.join.html#pandas.DataFrame.join" title="pandas.DataFrame.join"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.join</span></code></a></dt>
+<dd>Similar method using indices.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Support for specifying index levels as the <cite>on</cite>, <cite>left_on</cite>, and
+<cite>right_on</cite> parameters was added in version 0.23.0
+Support for merging named Series objects was added in version 0.24.0</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;lkey&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;rkey&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span>
+<span class="go">    lkey value</span>
+<span class="go">0   foo      1</span>
+<span class="go">1   bar      2</span>
+<span class="go">2   baz      3</span>
+<span class="go">3   foo      5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
+<span class="go">    rkey value</span>
+<span class="go">0   foo      5</span>
+<span class="go">1   bar      6</span>
+<span class="go">2   baz      7</span>
+<span class="go">3   foo      8</span>
+</pre></div>
+</div>
+<p>Merge df1 and df2 on the lkey and rkey columns. The value columns have
+the default suffixes, _x and _y, appended.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;lkey&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;rkey&#39;</span><span class="p">)</span>
+<span class="go">  lkey  value_x rkey  value_y</span>
+<span class="go">0  foo        1  foo        5</span>
+<span class="go">1  foo        1  foo        8</span>
+<span class="go">2  foo        5  foo        5</span>
+<span class="go">3  foo        5  foo        8</span>
+<span class="go">4  bar        2  bar        6</span>
+<span class="go">5  baz        3  baz        7</span>
+</pre></div>
+</div>
+<p>Merge DataFrames df1 and df2 with specified left and right suffixes
+appended to any overlapping columns.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;lkey&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;rkey&#39;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;_left&#39;</span><span class="p">,</span> <span class="s1">&#39;_right&#39;</span><span class="p">))</span>
+<span class="go">  lkey  value_left rkey  value_right</span>
+<span class="go">0  foo           1  foo            5</span>
+<span class="go">1  foo           1  foo            8</span>
+<span class="go">2  foo           5  foo            5</span>
+<span class="go">3  foo           5  foo            8</span>
+<span class="go">4  bar           2  bar            6</span>
+<span class="go">5  baz           3  baz            7</span>
+</pre></div>
+</div>
+<p>Merge DataFrames df1 and df2, but raise an exception if the DataFrames have
+any overlapping columns.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;lkey&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;rkey&#39;</span><span class="p">,</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">columns overlap but no suffix specified:</span>
+<span class="go">    Index([&#39;value&#39;], dtype=&#39;object&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

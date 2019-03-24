@@ -1,0 +1,238 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+
+        
+        
+          <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
+            <ul class="section-nav">
+<li class="toc-entry toc-h1"><a class="reference internal" href="#">pandas.DataFrame.tz_localize</a></li>
+</ul>
+
+          </nav>
+        
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-tz-localize">
+<h1>pandas.DataFrame.tz_localize<a class="headerlink" href="#pandas-dataframe-tz-localize" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.tz_localize">
+<code class="descclassname">DataFrame.</code><code class="descname">tz_localize</code><span class="sig-paren">(</span><em>tz</em>, <em>axis=0</em>, <em>level=None</em>, <em>copy=True</em>, <em>ambiguous='raise'</em>, <em>nonexistent='raise'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L9249-L9411"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.tz_localize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Localize tz-naive index of a Series or DataFrame to target time zone.</p>
+<p>This operation localizes the Index. To localize the values in a
+timezone-naive Series, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.dt.tz_localize()</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>tz</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string or pytz.timezone object</span></dt>
+<dd></dd>
+<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">the axis to localize</span></dt>
+<dd></dd>
+<dt><strong>level</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, str, default None</span></dt>
+<dd><p class="first last">If axis ia a MultiIndex, localize a specific level. Otherwise
+must be None</p>
+</dd>
+<dt><strong>copy</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default True</span></dt>
+<dd><p class="first last">Also make a copy of the underlying data</p>
+</dd>
+<dt><strong>ambiguous</strong> <span class="classifier-delimiter">:</span> <span class="classifier">‘infer’, bool-ndarray, ‘NaT’, default ‘raise’</span></dt>
+<dd><p class="first">When clocks moved backward due to DST, ambiguous times may arise.
+For example in Central European Time (UTC+01), when going from
+03:00 DST to 02:00 non-DST, 02:30:00 local time occurs both at
+00:30:00 UTC and at 01:30:00 UTC. In such a situation, the
+<cite>ambiguous</cite> parameter dictates how ambiguous times should be
+handled.</p>
+<ul class="last simple">
+<li>‘infer’ will attempt to infer fall dst-transition hours based on
+order</li>
+<li>bool-ndarray where True signifies a DST time, False designates
+a non-DST time (note that this flag is only applicable for
+ambiguous times)</li>
+<li>‘NaT’ will return NaT where there are ambiguous times</li>
+<li>‘raise’ will raise an AmbiguousTimeError if there are ambiguous
+times</li>
+</ul>
+</dd>
+<dt><strong>nonexistent</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default ‘raise’</span></dt>
+<dd><p class="first">A nonexistent time does not exist in a particular timezone
+where clocks moved forward due to DST. Valid valuse are:</p>
+<ul class="simple">
+<li>‘shift_forward’ will shift the nonexistent time forward to the
+closest existing time</li>
+<li>‘shift_backward’ will shift the nonexistent time backward to the
+closest existing time</li>
+<li>‘NaT’ will return NaT where there are nonexistent times</li>
+<li>timedelta objects will shift nonexistent times by the timedelta</li>
+<li>‘raise’ will raise an NonExistentTimeError if there are
+nonexistent times</li>
+</ul>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.24.0.</span></p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>Series or DataFrame</strong></dt>
+<dd><p class="first last">Same type as the input.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>TypeError</strong></dt>
+<dd><p class="first last">If the TimeSeries is tz-aware and tz is not None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<p>Localize local times:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-09-15 01:30:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;CET&#39;</span><span class="p">)</span>
+<span class="go">2018-09-15 01:30:00+02:00    1</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Be careful with DST changes. When there is sequential data, pandas
+can infer the DST time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 01:30:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:00:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:30:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:00:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:30:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 03:00:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 03:30:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;CET&#39;</span><span class="p">,</span> <span class="n">ambiguous</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">)</span>
+<span class="go">2018-10-28 01:30:00+02:00    0</span>
+<span class="go">2018-10-28 02:00:00+02:00    1</span>
+<span class="go">2018-10-28 02:30:00+02:00    2</span>
+<span class="go">2018-10-28 02:00:00+01:00    3</span>
+<span class="go">2018-10-28 02:30:00+01:00    4</span>
+<span class="go">2018-10-28 03:00:00+01:00    5</span>
+<span class="go">2018-10-28 03:30:00+01:00    6</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>In some cases, inferring the DST is impossible. In such cases, you can
+pass an ndarray to the ambiguous parameter to set the DST explicitly</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 01:20:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:36:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 03:46:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;CET&#39;</span><span class="p">,</span> <span class="n">ambiguous</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]))</span>
+<span class="go">2018-10-28 01:20:00+02:00    0</span>
+<span class="go">2018-10-28 02:36:00+02:00    1</span>
+<span class="go">2018-10-28 03:46:00+01:00    2</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>If the DST transition causes nonexistent times, you can shift these
+dates forward or backwards with a timedelta object or <cite>‘shift_forward’</cite>
+or <cite>‘shift_backwards’</cite>.
+&gt;&gt;&gt; s = pd.Series(range(2), index=pd.DatetimeIndex([
+… ‘2015-03-29 02:30:00’,
+… ‘2015-03-29 03:30:00’]))
+&gt;&gt;&gt; s.tz_localize(‘Europe/Warsaw’, nonexistent=’shift_forward’)
+2015-03-29 03:00:00+02:00    0
+2015-03-29 03:30:00+02:00    1
+dtype: int64
+&gt;&gt;&gt; s.tz_localize(‘Europe/Warsaw’, nonexistent=’shift_backward’)
+2015-03-29 01:59:59.999999999+01:00    0
+2015-03-29 03:30:00+02:00              1
+dtype: int64
+&gt;&gt;&gt; s.tz_localize(‘Europe/Warsaw’, nonexistent=pd.Timedelta(‘1H’))
+2015-03-29 03:30:00+02:00    0
+2015-03-29 03:30:00+02:00    1
+dtype: int64</p>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>
