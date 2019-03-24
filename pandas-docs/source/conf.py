@@ -23,6 +23,170 @@ from numpydoc.docscrape_sphinx import SphinxDocString
 
 logger = logging.getLogger(__name__)
 
+# -----------------------------------------------------------------------------
+# IPython monkeypath
+
+import warnings
+from IPython.sphinxext.ipython_directive import block_parser
+
+
+def run(self):
+    debug = False
+
+    #TODO, any reason block_parser can't be a method of embeddable shell
+    # then we wouldn't have to carry these around
+    rgxin, rgxout, promptin, promptout = self.setup()
+
+    options = self.options
+    self.shell.is_suppress = 'suppress' in options
+    self.shell.is_doctest = 'doctest' in options
+    self.shell.is_verbatim = True  # 'verbatim' in options
+    self.shell.is_okexcept = 'okexcept' in options
+    self.shell.is_okwarning = 'okwarning' in options
+
+    # handle pure python code
+    if 'python' in self.arguments:
+        content = self.content
+        self.content = self.shell.process_pure_python(content)
+
+    # parts consists of all text within the ipython-block.
+    # Each part is an input/output block.
+    parts = '\n'.join(self.content).split('\n\n')
+
+    lines = ['.. code-block:: ipython', '']
+    figures = []
+
+    for part in parts:
+        block = block_parser(part, rgxin, rgxout, promptin, promptout)
+        if len(block):
+            rows, figure = self.shell.process_block(block)
+            for row in rows:
+                lines.extend(['   {0}'.format(line)
+                                for line in row.split('\n')])
+
+            if figure is not None:
+                figures.append(figure)
+        else:
+            message = 'Code input with no code at {}, line {}'\
+                        .format(
+                            self.state.document.current_source,
+                            self.state.document.current_line)
+            if self.shell.warning_is_error:
+                raise RuntimeError(message)
+            else:
+                warnings.warn(message)
+
+    for figure in figures:
+        lines.append('')
+        lines.extend(figure.split('\n'))
+        lines.append('')
+
+    if len(lines) > 2:
+        if debug:
+            print('\n'.join(lines))
+        else:
+            # This has to do with input, not output. But if we comment
+            # these lines out, then no IPython code will appear in the
+            # final output.
+            self.state_machine.insert_input(
+                lines, self.state_machine.input_lines.source(0))
+
+    # cleanup
+    self.teardown()
+
+    return []
+
+
+import IPython.sphinxext.ipython_directive
+IPython.sphinxext.ipython_directive.IPythonDirective.run = run
+
+
+# -----------------------------------------------------------------------------
+# Sphinx monkeypatch
+
+from sphinx.environment.adapters.toctree import process_only_nodes
+from docutils import nodes
+from sphinx import addnodes
+
+
+def get_toc_for(self, docname, builder):
+    # type: (str, Builder) -> nodes.Node
+    """Return a TOC nodetree -- for use on the same page only!"""
+    tocdepth = self.env.metadata[docname].get('tocdepth', 0)
+    try:
+        toc = self.env.tocs[docname].deepcopy()
+        self._toctree_prune(toc, 2, tocdepth)
+    except KeyError:
+        # the document does not exist anymore: return a dummy node that
+        # renders to nothing
+        return nodes.paragraph()
+    process_only_nodes(toc, builder.tags)
+    for node in toc.traverse(nodes.reference):
+        node['refuri'] = node['anchorname'] or '#'
+
+    # tag toc with attributes
+    toc.attributes['classes'].append('section-nav')
+
+    def tag_childs(bullet_list, level):
+        for sub in bullet_list.children:
+            if getattr(sub, 'tagname', '') == 'list_item':
+                sub.attributes['classes'].extend(['toc-entry', 'toc-h{}'.format(level)])
+                for sub2 in sub.children:
+                    if getattr(sub2, 'tagname', '') == 'bullet_list':
+                        tag_childs(sub2, level + 1)
+
+    tag_childs(toc, 1)
+
+    return toc
+
+def get_toctree_for(self, docname, builder, collapse, **kwds):
+    # type: (str, Builder, bool, Any) -> nodes.Element
+    """Return the global TOC nodetree."""
+    doctree = self.env.get_doctree(self.env.config.master_doc)
+    toctrees = []  # type: List[nodes.Element]
+    if 'includehidden' not in kwds:
+        kwds['includehidden'] = True
+    if 'maxdepth' not in kwds:
+        kwds['maxdepth'] = 0
+    kwds['collapse'] = collapse
+    mindepth = kwds.pop('mindepth', False)
+    for toctreenode in doctree.traverse(addnodes.toctree):
+        toctree = self.resolve(docname, builder, toctreenode, prune=True, **kwds)
+        if toctree:
+            toctrees.append(toctree)
+    if not toctrees:
+        return None
+    result = toctrees[0]
+    for toctree in toctrees[1:]:
+        result.extend(toctree.children)
+    if mindepth and docname not in ('index', 'genindex', 'search'):
+        #import pdb; pdb.set_trace()
+        result = get_current_section_toctree(result)
+    return result
+
+
+def get_current_section_toctree(toctree):
+    actual_toctree = toctree[0]
+    for subtoc in actual_toctree.children:
+        if 'current' in subtoc.attributes['classes']:
+            newtoc = subtoc.children[1]
+            break
+    else:
+        newtoc = actual_toctree
+    toctree[0] = newtoc
+    toctree[0].attributes['classes'].extend(['nav', 'bd-sidenav', 'active'])
+    #import pdb; pdb.set_trace()
+    return toctree
+
+
+import sphinx.environment.adapters.toctree
+sphinx.environment.adapters.toctree.TocTree.get_toc_for = get_toc_for
+sphinx.environment.adapters.toctree.TocTree.get_toctree_for = get_toctree_for
+
+
+# -----------------------------------------------------------------------------
+
+
 # https://github.com/sphinx-doc/sphinx/pull/2325/files
 # Workaround for sphinx-build recursion limit overflow:
 # pickle.dump(doctree, f, pickle.HIGHEST_PROTOCOL)
@@ -192,7 +356,7 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'nature_with_gtoc'
+html_theme = 'bootstrap_docs_theme'
 
 # The style sheet to use for HTML and HTML Help pages. A file of that name
 # must exist either in Sphinx' static/ path, or in one of the custom paths
@@ -205,7 +369,7 @@ html_theme = 'nature_with_gtoc'
 # html_theme_options = {}
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ['themes']
+html_theme_path = ['_themes']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
