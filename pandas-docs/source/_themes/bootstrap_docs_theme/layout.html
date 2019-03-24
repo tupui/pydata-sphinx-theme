@@ -11,15 +11,20 @@
 
     <div class="container-fluid">
       <div class="row flex-xl-nowrap">
+
+        {% if not pagename == 'index' %}
         <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
           {%- include "docs-sidebar.html" %}
         </div>
+        {% endif %}
 
+        {% if not pagename.endswith('index') and not '/api/' in pagename %}
         {# { if (eq .Page.Params.toc true) } #}
           <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
             {{ toc }}
           </nav>
         {# { end } #}
+        {% endif %}
 
         
         <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">

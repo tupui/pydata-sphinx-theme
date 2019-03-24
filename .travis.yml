@@ -16,23 +16,16 @@ install:
   - export PATH="$HOME/miniconda/bin:$PATH"
   - conda config --set always_yes yes --set changeps1 no
   - conda update conda
+  - conda config --add channels conda-forge
   
   # Install pandas + some optional dependencies
-  - conda install pandas matplotlib seaborn jinja2 ipython sphinx ipykernel jinja2
-  - conda install -c conda-forge nbsphinx
+  - conda install pandas matplotlib ipython sphinx ipykernel jinja2 numpydoc nbconvert nbsphinx jupyter_client gitpython
 
   # install doctr
   - conda install -c conda-forge doctr
 
 script:
   - set -e
-
-  # If the changes are made in doc/ instead of pandas-doc/ and there is a refactoring script
-  # move it to the standard structure of the build (using doc/ and script makes changes easier
-  # to apply in the main pandas doc when we're done with the refactoring
-  - test -e doc && test ! -e pandas-doc && mv doc pandas-doc
-  - test -r perform_refactoring.py && python perform_refactoring.py
-
   - cd pandas-docs
   - python make.py html
   - cd ..

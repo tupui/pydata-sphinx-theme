@@ -175,6 +175,18 @@ def get_current_section_toctree(toctree):
         newtoc = actual_toctree
     toctree[0] = newtoc
     toctree[0].attributes['classes'].extend(['nav', 'bd-sidenav', 'active'])
+
+    def tag_current(toctree):
+        if not hasattr(toctree, 'children'):
+            return
+        for sub in toctree.children:
+            attrs = getattr(sub, 'attributes', None)
+            if attrs and 'current' in attrs['classes']:
+                sub.attributes['classes'].extend(['active'])
+            tag_current(sub)
+
+    tag_current(toctree)
+
     #import pdb; pdb.set_trace()
     return toctree
 
