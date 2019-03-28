@@ -1,0 +1,416 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pandas.DataFrame.reindex_like &mdash; pandas 0.24.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.rename" href="pandas.DataFrame.rename.html" />
+    <link rel="prev" title="pandas.DataFrame.reindex_axis" href="pandas.DataFrame.reindex_axis.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pandas
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.24.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#constructor">Constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#attributes-and-underlying-data">Attributes and underlying data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#conversion">Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#indexing-iteration">Indexing, iteration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#binary-operator-functions">Binary operator functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#function-application-groupby-window">Function application, GroupBy &amp; Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#computations-descriptive-stats">Computations / Descriptive Stats</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../frame.html#reindexing-selection-label-manipulation">Reindexing / Selection / Label manipulation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.add_prefix.html">pandas.DataFrame.add_prefix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.add_suffix.html">pandas.DataFrame.add_suffix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.align.html">pandas.DataFrame.align</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.at_time.html">pandas.DataFrame.at_time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.between_time.html">pandas.DataFrame.between_time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.drop.html">pandas.DataFrame.drop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.drop_duplicates.html">pandas.DataFrame.drop_duplicates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.duplicated.html">pandas.DataFrame.duplicated</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.equals.html">pandas.DataFrame.equals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.filter.html">pandas.DataFrame.filter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.first.html">pandas.DataFrame.first</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.head.html">pandas.DataFrame.head</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.idxmax.html">pandas.DataFrame.idxmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.idxmin.html">pandas.DataFrame.idxmin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.last.html">pandas.DataFrame.last</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.reindex.html">pandas.DataFrame.reindex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.reindex_axis.html">pandas.DataFrame.reindex_axis</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pandas.DataFrame.reindex_like</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.rename.html">pandas.DataFrame.rename</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.rename_axis.html">pandas.DataFrame.rename_axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.reset_index.html">pandas.DataFrame.reset_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.sample.html">pandas.DataFrame.sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.select.html">pandas.DataFrame.select</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.set_axis.html">pandas.DataFrame.set_axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.set_index.html">pandas.DataFrame.set_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.tail.html">pandas.DataFrame.tail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.take.html">pandas.DataFrame.take</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.truncate.html">pandas.DataFrame.truncate</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#missing-data-handling">Missing data handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#reshaping-sorting-transposing">Reshaping, sorting, transposing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#combining-joining-merging">Combining / joining / merging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#time-series-related">Time series-related</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#plotting">Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#serialization-io-conversion">Serialization / IO / Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#sparse">Sparse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pandas</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="../frame.html">DataFrame</a> &raquo;</li>
+        
+          <li><a href="pandas.DataFrame.html">pandas.DataFrame</a> &raquo;</li>
+        
+      <li>pandas.DataFrame.reindex_like</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/api/pandas.DataFrame.reindex_like.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="pandas-dataframe-reindex-like">
+<h1>pandas.DataFrame.reindex_like<a class="headerlink" href="#pandas-dataframe-reindex-like" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.reindex_like">
+<code class="descclassname">DataFrame.</code><code class="descname">reindex_like</code><span class="sig-paren">(</span><em>other</em>, <em>method=None</em>, <em>copy=True</em>, <em>limit=None</em>, <em>tolerance=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L3657-L3757"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reindex_like" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an object with matching indices as other object.</p>
+<p>Conform the object to the same index on all axes. Optional
+filling logic, placing NaN in locations having no value
+in the previous index. A new object is produced unless the
+new index is equivalent to the current one and copy=False.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>other</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Object of the same data type</span></dt>
+<dd><p class="first last">Its row and column indices are used to define the new indices
+of this object.</p>
+</dd>
+<dt><strong>method</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{None, ‘backfill’/’bfill’, ‘pad’/’ffill’, ‘nearest’}</span></dt>
+<dd><p class="first">Method to use for filling holes in reindexed DataFrame.
+Please note: this is only applicable to DataFrames/Series with a
+monotonically increasing/decreasing index.</p>
+<ul class="last simple">
+<li>None (default): don’t fill gaps</li>
+<li>pad / ffill: propagate last valid observation forward to next
+valid</li>
+<li>backfill / bfill: use next valid observation to fill gap</li>
+<li>nearest: use nearest valid observations to fill gap</li>
+</ul>
+</dd>
+<dt><strong>copy</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
+<dd><p class="first last">Return a new object, even if the passed indexes are the same.</p>
+</dd>
+<dt><strong>limit</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default None</span></dt>
+<dd><p class="first last">Maximum number of consecutive labels to fill for inexact matches.</p>
+</dd>
+<dt><strong>tolerance</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first">Maximum distance between original and new labels for inexact
+matches. The values of the index at the matching locations most
+satisfy the equation <code class="docutils literal notranslate"><span class="pre">abs(index[indexer]</span> <span class="pre">-</span> <span class="pre">target)</span> <span class="pre">&lt;=</span> <span class="pre">tolerance</span></code>.</p>
+<p>Tolerance may be a scalar value, which applies the same tolerance
+to all values, or list-like, which applies variable tolerance per
+element. List-like includes list, tuple, array, Series, and must be
+the same size as the index and its dtype must exactly match the
+index’s type.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.21.0: </span>(list-like tolerance)</p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>Series or DataFrame</strong></dt>
+<dd><p class="first last">Same type as caller, but with changed indices on each axis.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.DataFrame.set_index.html#pandas.DataFrame.set_index" title="pandas.DataFrame.set_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.set_index</span></code></a></dt>
+<dd>Set row labels.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reset_index.html#pandas.DataFrame.reset_index" title="pandas.DataFrame.reset_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reset_index</span></code></a></dt>
+<dd>Remove row labels or move them to new columns.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reindex.html#pandas.DataFrame.reindex" title="pandas.DataFrame.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reindex</span></code></a></dt>
+<dd>Change to new indices or expand indices.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Same as calling
+<code class="docutils literal notranslate"><span class="pre">.reindex(index=other.index,</span> <span class="pre">columns=other.columns,...)</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mf">24.3</span><span class="p">,</span> <span class="mf">75.7</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mf">87.8</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mf">71.6</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp_celsius&#39;</span><span class="p">,</span> <span class="s1">&#39;temp_fahrenheit&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2014-02-12&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2014-02-15&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span>
+<span class="go">            temp_celsius  temp_fahrenheit windspeed</span>
+<span class="go">2014-02-12          24.3             75.7      high</span>
+<span class="go">2014-02-13          31.0             87.8      high</span>
+<span class="go">2014-02-14          22.0             71.6    medium</span>
+<span class="go">2014-02-15          35.0             95.0    medium</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">28</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mf">35.1</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp_celsius&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2014-02-12&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-02-13&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="s1">&#39;2014-02-15&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
+<span class="go">            temp_celsius windspeed</span>
+<span class="go">2014-02-12          28.0       low</span>
+<span class="go">2014-02-13          30.0       low</span>
+<span class="go">2014-02-15          35.1    medium</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex_like</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+<span class="go">            temp_celsius  temp_fahrenheit windspeed</span>
+<span class="go">2014-02-12          28.0              NaN       low</span>
+<span class="go">2014-02-13          30.0              NaN       low</span>
+<span class="go">2014-02-14           NaN              NaN       NaN</span>
+<span class="go">2014-02-15          35.1              NaN    medium</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pandas.DataFrame.rename.html" class="btn btn-neutral float-right" title="pandas.DataFrame.rename" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pandas.DataFrame.reindex_axis.html" class="btn btn-neutral float-left" title="pandas.DataFrame.reindex_axis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

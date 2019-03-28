@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pandas.DataFrame.sum &mdash; pandas 0.24.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.swapaxes" href="pandas.DataFrame.swapaxes.html" />
+    <link rel="prev" title="pandas.DataFrame.subtract" href="pandas.DataFrame.subtract.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pandas
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.24.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#constructor">Constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#attributes-and-underlying-data">Attributes and underlying data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#conversion">Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#indexing-iteration">Indexing, iteration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#binary-operator-functions">Binary operator functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#function-application-groupby-window">Function application, GroupBy &amp; Window</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../frame.html#computations-descriptive-stats">Computations / Descriptive Stats</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.abs.html">pandas.DataFrame.abs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.all.html">pandas.DataFrame.all</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.any.html">pandas.DataFrame.any</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.clip.html">pandas.DataFrame.clip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.clip_lower.html">pandas.DataFrame.clip_lower</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.clip_upper.html">pandas.DataFrame.clip_upper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.compound.html">pandas.DataFrame.compound</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.corr.html">pandas.DataFrame.corr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.corrwith.html">pandas.DataFrame.corrwith</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.count.html">pandas.DataFrame.count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.cov.html">pandas.DataFrame.cov</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.cummax.html">pandas.DataFrame.cummax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.cummin.html">pandas.DataFrame.cummin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.cumprod.html">pandas.DataFrame.cumprod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.cumsum.html">pandas.DataFrame.cumsum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.describe.html">pandas.DataFrame.describe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.diff.html">pandas.DataFrame.diff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.eval.html">pandas.DataFrame.eval</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.kurt.html">pandas.DataFrame.kurt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.kurtosis.html">pandas.DataFrame.kurtosis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.mad.html">pandas.DataFrame.mad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.max.html">pandas.DataFrame.max</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.mean.html">pandas.DataFrame.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.median.html">pandas.DataFrame.median</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.min.html">pandas.DataFrame.min</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.mode.html">pandas.DataFrame.mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.pct_change.html">pandas.DataFrame.pct_change</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.prod.html">pandas.DataFrame.prod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.product.html">pandas.DataFrame.product</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.quantile.html">pandas.DataFrame.quantile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.rank.html">pandas.DataFrame.rank</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.round.html">pandas.DataFrame.round</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.sem.html">pandas.DataFrame.sem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.skew.html">pandas.DataFrame.skew</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pandas.DataFrame.sum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.std.html">pandas.DataFrame.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.var.html">pandas.DataFrame.var</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.nunique.html">pandas.DataFrame.nunique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#reindexing-selection-label-manipulation">Reindexing / Selection / Label manipulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#missing-data-handling">Missing data handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#reshaping-sorting-transposing">Reshaping, sorting, transposing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#combining-joining-merging">Combining / joining / merging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#time-series-related">Time series-related</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#plotting">Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#serialization-io-conversion">Serialization / IO / Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#sparse">Sparse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pandas</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="../frame.html">DataFrame</a> &raquo;</li>
+        
+          <li><a href="pandas.DataFrame.html">pandas.DataFrame</a> &raquo;</li>
+        
+      <li>pandas.DataFrame.sum</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/api/pandas.DataFrame.sum.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="pandas-dataframe-sum">
+<h1>pandas.DataFrame.sum<a class="headerlink" href="#pandas-dataframe-sum" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.sum">
+<code class="descclassname">DataFrame.</code><code class="descname">sum</code><span class="sig-paren">(</span><em>axis=None</em>, <em>skipna=None</em>, <em>level=None</em>, <em>numeric_only=None</em>, <em>min_count=0</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L10910-L10931"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the sum of the values for the requested axis.</p>
+<blockquote>
+<div>This is equivalent to the method <code class="docutils literal notranslate"><span class="pre">numpy.sum</span></code>.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{index (0), columns (1)}</span></dt>
+<dd><p class="first last">Axis for the function to be applied on.</p>
+</dd>
+<dt><strong>skipna</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
+<dd><p class="first last">Exclude NA/null values when computing the result.</p>
+</dd>
+<dt><strong>level</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or level name, default None</span></dt>
+<dd><p class="first last">If the axis is a MultiIndex (hierarchical), count along a
+particular level, collapsing into a Series.</p>
+</dd>
+<dt><strong>numeric_only</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default None</span></dt>
+<dd><p class="first last">Include only float, int, boolean columns. If None, will attempt to use
+everything, then use only numeric data. Not implemented for Series.</p>
+</dd>
+<dt><strong>min_count</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default 0</span></dt>
+<dd><p class="first">The required number of valid values to perform the operation. If fewer than
+<code class="docutils literal notranslate"><span class="pre">min_count</span></code> non-NA values are present the result will be NA.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.22.0: </span>Added with the default being 0. This means the sum of an all-NA
+or empty Series is 0, and the product of an all-NA or empty
+Series is 1.</p>
+</div>
+</dd>
+<dt><strong>**kwargs</strong></dt>
+<dd><p class="first last">Additional keyword arguments to be passed to the function.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>sum</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series or DataFrame (if level specified)</span></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sum</span></code></dt>
+<dd>Return the sum.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.min</span></code></dt>
+<dd>Return the minimum.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.max</span></code></dt>
+<dd>Return the maximum.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.idxmin</span></code></dt>
+<dd>Return the index of the minimum.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.idxmax</span></code></dt>
+<dd>Return the index of the maximum.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.min.html#pandas.DataFrame.min" title="pandas.DataFrame.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.min</span></code></a></dt>
+<dd>Return the sum over the requested axis.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.min.html#pandas.DataFrame.min" title="pandas.DataFrame.min"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.min</span></code></a></dt>
+<dd>Return the minimum over the requested axis.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.max.html#pandas.DataFrame.max" title="pandas.DataFrame.max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.max</span></code></a></dt>
+<dd>Return the maximum over the requested axis.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.idxmin.html#pandas.DataFrame.idxmin" title="pandas.DataFrame.idxmin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.idxmin</span></code></a></dt>
+<dd>Return the index of the minimum over the requested axis.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.idxmax.html#pandas.DataFrame.idxmax" title="pandas.DataFrame.idxmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.idxmax</span></code></a></dt>
+<dd>Return the index of the maximum over the requested axis.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;warm&#39;</span><span class="p">,</span> <span class="s1">&#39;warm&#39;</span><span class="p">,</span> <span class="s1">&#39;cold&#39;</span><span class="p">,</span> <span class="s1">&#39;cold&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;falcon&#39;</span><span class="p">,</span> <span class="s1">&#39;fish&#39;</span><span class="p">,</span> <span class="s1">&#39;spider&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blooded&#39;</span><span class="p">,</span> <span class="s1">&#39;animal&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;legs&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">blooded  animal</span>
+<span class="go">warm     dog       4</span>
+<span class="go">         falcon    2</span>
+<span class="go">cold     fish      0</span>
+<span class="go">         spider    8</span>
+<span class="go">Name: legs, dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">14</span>
+</pre></div>
+</div>
+<p>Sum using level names, as well as indices.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;blooded&#39;</span><span class="p">)</span>
+<span class="go">blooded</span>
+<span class="go">warm    6</span>
+<span class="go">cold    8</span>
+<span class="go">Name: legs, dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">blooded</span>
+<span class="go">warm    6</span>
+<span class="go">cold    8</span>
+<span class="go">Name: legs, dtype: int64</span>
+</pre></div>
+</div>
+<p>By default, the sum of an empty or all-NA Series is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>  <span class="c1"># min_count=0 is the default</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<p>This can be controlled with the <code class="docutils literal notranslate"><span class="pre">min_count</span></code> parameter. For example, if
+you’d like the sum of an empty series to be NaN, pass <code class="docutils literal notranslate"><span class="pre">min_count=1</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">nan</span>
+</pre></div>
+</div>
+<p>Thanks to the <code class="docutils literal notranslate"><span class="pre">skipna</span></code> parameter, <code class="docutils literal notranslate"><span class="pre">min_count</span></code> handles all-NA and
+empty series identically.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">nan</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pandas.DataFrame.swapaxes.html" class="btn btn-neutral float-right" title="pandas.DataFrame.swapaxes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pandas.DataFrame.subtract.html" class="btn btn-neutral float-left" title="pandas.DataFrame.subtract" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

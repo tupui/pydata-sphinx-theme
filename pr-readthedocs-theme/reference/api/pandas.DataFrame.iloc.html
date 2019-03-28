@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pandas.DataFrame.iloc &mdash; pandas 0.24.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.index" href="pandas.DataFrame.index.html" />
+    <link rel="prev" title="pandas.DataFrame.iat" href="pandas.DataFrame.iat.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pandas
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.24.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#constructor">Constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#attributes-and-underlying-data">Attributes and underlying data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#conversion">Conversion</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../frame.html#indexing-iteration">Indexing, iteration</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.head.html">pandas.DataFrame.head</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.at.html">pandas.DataFrame.at</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.iat.html">pandas.DataFrame.iat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.loc.html">pandas.DataFrame.loc</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pandas.DataFrame.iloc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.insert.html">pandas.DataFrame.insert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.__iter__.html">pandas.DataFrame.__iter__</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.items.html">pandas.DataFrame.items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.keys.html">pandas.DataFrame.keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.iteritems.html">pandas.DataFrame.iteritems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.iterrows.html">pandas.DataFrame.iterrows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.itertuples.html">pandas.DataFrame.itertuples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.lookup.html">pandas.DataFrame.lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.pop.html">pandas.DataFrame.pop</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.tail.html">pandas.DataFrame.tail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.xs.html">pandas.DataFrame.xs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.get.html">pandas.DataFrame.get</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.isin.html">pandas.DataFrame.isin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.where.html">pandas.DataFrame.where</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.mask.html">pandas.DataFrame.mask</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.query.html">pandas.DataFrame.query</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#binary-operator-functions">Binary operator functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#function-application-groupby-window">Function application, GroupBy &amp; Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#computations-descriptive-stats">Computations / Descriptive Stats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#reindexing-selection-label-manipulation">Reindexing / Selection / Label manipulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#missing-data-handling">Missing data handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#reshaping-sorting-transposing">Reshaping, sorting, transposing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#combining-joining-merging">Combining / joining / merging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#time-series-related">Time series-related</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#plotting">Plotting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#serialization-io-conversion">Serialization / IO / Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#sparse">Sparse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pandas</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="../frame.html">DataFrame</a> &raquo;</li>
+        
+          <li><a href="pandas.DataFrame.html">pandas.DataFrame</a> &raquo;</li>
+        
+      <li>pandas.DataFrame.iloc</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/api/pandas.DataFrame.iloc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="pandas-dataframe-iloc">
+<h1>pandas.DataFrame.iloc<a class="headerlink" href="#pandas-dataframe-iloc" title="Permalink to this headline">¶</a></h1>
+<dl class="attribute">
+<dt id="pandas.DataFrame.iloc">
+<code class="descclassname">DataFrame.</code><code class="descname">iloc</code><a class="headerlink" href="#pandas.DataFrame.iloc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purely integer-location based indexing for selection by position.</p>
+<p><code class="docutils literal notranslate"><span class="pre">.iloc[]</span></code> is primarily integer position based (from <code class="docutils literal notranslate"><span class="pre">0</span></code> to
+<code class="docutils literal notranslate"><span class="pre">length-1</span></code> of the axis), but may also be used with a boolean
+array.</p>
+<p>Allowed inputs are:</p>
+<ul class="simple">
+<li>An integer, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code>.</li>
+<li>A list or array of integers, e.g. <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code>.</li>
+<li>A slice object with ints, e.g. <code class="docutils literal notranslate"><span class="pre">1:7</span></code>.</li>
+<li>A boolean array.</li>
+<li>A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series, DataFrame
+or Panel) and that returns valid output for indexing (one of the above).
+This is useful in method chains, when you don’t have a reference to the
+calling object, but would like to base your selection on some value.</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">.iloc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if a requested indexer is
+out-of-bounds, except <em>slice</em> indexers which allow out-of-bounds
+indexing (this conforms with python/numpy <em>slice</em> semantics).</p>
+<p>See more at ref:<cite>Selection by Position &lt;indexing.integer&gt;</cite>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.DataFrame.iat.html#pandas.DataFrame.iat" title="pandas.DataFrame.iat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.iat</span></code></a></dt>
+<dd>Fast integer location scalar accessor.</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.loc</span></code></a></dt>
+<dd>Purely label-location based indexer for selection by label.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.iloc</span></code></dt>
+<dd>Purely integer-location based indexing for selection by position.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mydict</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+<span class="gp">... </span>          <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">},</span>
+<span class="gp">... </span>          <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4000</span> <span class="p">}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mydict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">      a     b     c     d</span>
+<span class="go">0     1     2     3     4</span>
+<span class="go">1   100   200   300   400</span>
+<span class="go">2  1000  2000  3000  4000</span>
+</pre></div>
+</div>
+<p><strong>Indexing just the rows</strong></p>
+<p>With a scalar integer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">&lt;class &#39;pandas.core.series.Series&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">a    1</span>
+<span class="go">b    2</span>
+<span class="go">c    3</span>
+<span class="go">d    4</span>
+<span class="go">Name: 0, dtype: int64</span>
+</pre></div>
+</div>
+<p>With a list of integers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">   a  b  c  d</span>
+<span class="go">0  1  2  3  4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="go">     a    b    c    d</span>
+<span class="go">0    1    2    3    4</span>
+<span class="go">1  100  200  300  400</span>
+</pre></div>
+</div>
+<p>With a <cite>slice</cite> object.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">      a     b     c     d</span>
+<span class="go">0     1     2     3     4</span>
+<span class="go">1   100   200   300   400</span>
+<span class="go">2  1000  2000  3000  4000</span>
+</pre></div>
+</div>
+<p>With a boolean mask the same length as the index.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]]</span>
+<span class="go">      a     b     c     d</span>
+<span class="go">0     1     2     3     4</span>
+<span class="go">2  1000  2000  3000  4000</span>
+</pre></div>
+</div>
+<p>With a callable, useful in method chains. The <cite>x</cite> passed
+to the <code class="docutils literal notranslate"><span class="pre">lambda</span></code> is the DataFrame being sliced. This selects
+the rows whose index label even.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">index</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="go">      a     b     c     d</span>
+<span class="go">0     1     2     3     4</span>
+<span class="go">2  1000  2000  3000  4000</span>
+</pre></div>
+</div>
+<p><strong>Indexing both axes</strong></p>
+<p>You can mix the indexer types for the index and columns. Use <code class="docutils literal notranslate"><span class="pre">:</span></code> to
+select the entire axis.</p>
+<p>With scalar integers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>With lists of integers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+<span class="go">      b     d</span>
+<span class="go">0     2     4</span>
+<span class="go">2  2000  4000</span>
+</pre></div>
+</div>
+<p>With <cite>slice</cite> objects.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="go">      a     b     c</span>
+<span class="go">1   100   200   300</span>
+<span class="go">2  1000  2000  3000</span>
+</pre></div>
+</div>
+<p>With a boolean array whose length matches the columns.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]]</span>
+<span class="go">      a     c</span>
+<span class="go">0     1     3</span>
+<span class="go">1   100   300</span>
+<span class="go">2  1000  3000</span>
+</pre></div>
+</div>
+<p>With a callable function that expects the Series or DataFrame.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="go">      a     c</span>
+<span class="go">0     1     3</span>
+<span class="go">1   100   300</span>
+<span class="go">2  1000  3000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pandas.DataFrame.index.html" class="btn btn-neutral float-right" title="pandas.DataFrame.index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pandas.DataFrame.iat.html" class="btn btn-neutral float-left" title="pandas.DataFrame.iat" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

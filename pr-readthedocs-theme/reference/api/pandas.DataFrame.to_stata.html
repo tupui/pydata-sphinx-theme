@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pandas.DataFrame.to_stata &mdash; pandas 0.24.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.to_string" href="pandas.DataFrame.to_string.html" />
+    <link rel="prev" title="pandas.DataFrame.to_sparse" href="pandas.DataFrame.to_sparse.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pandas
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.24.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#constructor">Constructor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#attributes-and-underlying-data">Attributes and underlying data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#conversion">Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#indexing-iteration">Indexing, iteration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#binary-operator-functions">Binary operator functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#function-application-groupby-window">Function application, GroupBy &amp; Window</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#computations-descriptive-stats">Computations / Descriptive Stats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#reindexing-selection-label-manipulation">Reindexing / Selection / Label manipulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#missing-data-handling">Missing data handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#reshaping-sorting-transposing">Reshaping, sorting, transposing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#combining-joining-merging">Combining / joining / merging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#time-series-related">Time series-related</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#plotting">Plotting</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../frame.html#serialization-io-conversion">Serialization / IO / Conversion</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.from_csv.html">pandas.DataFrame.from_csv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.from_dict.html">pandas.DataFrame.from_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.from_items.html">pandas.DataFrame.from_items</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.from_records.html">pandas.DataFrame.from_records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.info.html">pandas.DataFrame.info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_parquet.html">pandas.DataFrame.to_parquet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_pickle.html">pandas.DataFrame.to_pickle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_csv.html">pandas.DataFrame.to_csv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_hdf.html">pandas.DataFrame.to_hdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_sql.html">pandas.DataFrame.to_sql</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_dict.html">pandas.DataFrame.to_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_excel.html">pandas.DataFrame.to_excel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_json.html">pandas.DataFrame.to_json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_html.html">pandas.DataFrame.to_html</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_feather.html">pandas.DataFrame.to_feather</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_latex.html">pandas.DataFrame.to_latex</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pandas.DataFrame.to_stata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_msgpack.html">pandas.DataFrame.to_msgpack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_gbq.html">pandas.DataFrame.to_gbq</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_records.html">pandas.DataFrame.to_records</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_sparse.html">pandas.DataFrame.to_sparse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_dense.html">pandas.DataFrame.to_dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_string.html">pandas.DataFrame.to_string</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.to_clipboard.html">pandas.DataFrame.to_clipboard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.DataFrame.style.html">pandas.DataFrame.style</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../frame.html#sparse">Sparse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pandas</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="../frame.html">DataFrame</a> &raquo;</li>
+        
+          <li><a href="pandas.DataFrame.html">pandas.DataFrame</a> &raquo;</li>
+        
+      <li>pandas.DataFrame.to_stata</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/api/pandas.DataFrame.to_stata.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="pandas-dataframe-to-stata">
+<h1>pandas.DataFrame.to_stata<a class="headerlink" href="#pandas-dataframe-to-stata" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.to_stata">
+<code class="descclassname">DataFrame.</code><code class="descname">to_stata</code><span class="sig-paren">(</span><em>fname</em>, <em>convert_dates=None</em>, <em>write_index=True</em>, <em>encoding='latin-1'</em>, <em>byteorder=None</em>, <em>time_stamp=None</em>, <em>data_label=None</em>, <em>variable_labels=None</em>, <em>version=114</em>, <em>convert_strl=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L2016-L2117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_stata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export DataFrame object to Stata dta format.</p>
+<p>Writes the DataFrame to a Stata dataset file.
+“dta” files contain a Stata dataset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fname</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, buffer or path object</span></dt>
+<dd><p class="first last">String, path object (pathlib.Path or py._path.local.LocalPath) or
+object implementing a binary write() function. If using a buffer
+then the buffer will not be automatically closed after the file
+data has been written.</p>
+</dd>
+<dt><strong>convert_dates</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary mapping columns containing datetime types to stata
+internal format to use when writing the dates. Options are ‘tc’,
+‘td’, ‘tm’, ‘tw’, ‘th’, ‘tq’, ‘ty’. Column can be either an integer
+or a name. Datetime columns that do not have a conversion type
+specified will be converted to ‘tc’. Raises NotImplementedError if
+a datetime column has timezone information.</p>
+</dd>
+<dt><strong>write_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Write the index to Stata dataset.</p>
+</dd>
+<dt><strong>encoding</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Default is latin-1. Unicode is not supported.</p>
+</dd>
+<dt><strong>byteorder</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Can be “&gt;”, “&lt;”, “little”, or “big”. default is <cite>sys.byteorder</cite>.</p>
+</dd>
+<dt><strong>time_stamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">datetime</span></dt>
+<dd><p class="first last">A datetime to use as file creation date.  Default is the current
+time.</p>
+</dd>
+<dt><strong>data_label</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">A label for the data set.  Must be 80 characters or smaller.</p>
+</dd>
+<dt><strong>variable_labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first">Dictionary containing columns as keys and variable labels as
+values. Each label must be 80 characters or smaller.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.19.0.</span></p>
+</div>
+</dd>
+<dt><strong>version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{114, 117}, default 114</span></dt>
+<dd><p class="first">Version to use in the output dta file.  Version 114 can be used
+read by Stata 10 and later.  Version 117 can be read by Stata 13
+or later. Version 114 limits string variables to 244 characters or
+fewer while 117 allows strings with lengths up to 2,000,000
+characters.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.23.0.</span></p>
+</div>
+</dd>
+<dt><strong>convert_strl</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list, optional</span></dt>
+<dd><p class="first">List of column names to convert to string columns to Stata StrL
+format. Only available if version is 117.  Storing strings in the
+StrL format can produce smaller dta files if strings have more than
+8 characters and values are repeated.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.23.0.</span></p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>NotImplementedError</strong></dt>
+<dd><ul class="first last simple">
+<li>If datetimes contain timezone information</li>
+<li>Column dtype is not representable in Stata</li>
+</ul>
+</dd>
+<dt><strong>ValueError</strong></dt>
+<dd><ul class="first simple">
+<li>Columns listed in convert_dates are neither datetime64[ns]
+or datetime.datetime</li>
+<li>Column listed in convert_dates is not in DataFrame</li>
+<li>Categorical label contains more than 32,000 characters</li>
+</ul>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.19.0.</span></p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="pandas.read_stata.html#pandas.read_stata" title="pandas.read_stata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_stata</span></code></a></dt>
+<dd>Import Stata data files.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.stata.StataWriter</span></code></dt>
+<dd>Low-level writer for Stata data files.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.stata.StataWriter117</span></code></dt>
+<dd>Low-level writer for version 117 files.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;animal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;falcon&#39;</span><span class="p">,</span> <span class="s1">&#39;parrot&#39;</span><span class="p">,</span> <span class="s1">&#39;falcon&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                              <span class="s1">&#39;parrot&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">350</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">361</span><span class="p">,</span> <span class="mi">15</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_stata</span><span class="p">(</span><span class="s1">&#39;animals.dta&#39;</span><span class="p">)</span>  <span class="c1"># doctest: +SKIP</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pandas.DataFrame.to_string.html" class="btn btn-neutral float-right" title="pandas.DataFrame.to_string" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pandas.DataFrame.to_sparse.html" class="btn btn-neutral float-left" title="pandas.DataFrame.to_sparse" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

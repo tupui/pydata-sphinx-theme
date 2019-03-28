@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pandas.qcut &mdash; pandas 0.24.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.merge" href="pandas.merge.html" />
+    <link rel="prev" title="pandas.cut" href="pandas.cut.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pandas
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.24.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../general_functions.html">General functions</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../general_functions.html#data-manipulations">Data manipulations</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pandas.melt.html">pandas.melt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.pivot.html">pandas.pivot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.pivot_table.html">pandas.pivot_table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.crosstab.html">pandas.crosstab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.cut.html">pandas.cut</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pandas.qcut</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.merge.html">pandas.merge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.merge_ordered.html">pandas.merge_ordered</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.merge_asof.html">pandas.merge_asof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.concat.html">pandas.concat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.get_dummies.html">pandas.get_dummies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.factorize.html">pandas.factorize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.unique.html">pandas.unique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pandas.wide_to_long.html">pandas.wide_to_long</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-missing-data">Top-level missing data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-conversions">Top-level conversions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-dealing-with-datetimelike">Top-level dealing with datetimelike</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-dealing-with-intervals">Top-level dealing with intervals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-evaluation">Top-level evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#hashing">Hashing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pandas</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="../general_functions.html">General functions</a> &raquo;</li>
+        
+      <li>pandas.qcut</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reference/api/pandas.qcut.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="pandas-qcut">
+<h1>pandas.qcut<a class="headerlink" href="#pandas-qcut" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pandas.qcut">
+<code class="descclassname">pandas.</code><code class="descname">qcut</code><span class="sig-paren">(</span><em>x</em>, <em>q</em>, <em>labels=None</em>, <em>retbins=False</em>, <em>precision=3</em>, <em>duplicates='raise'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/reshape/tile.py#L247-L316"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.qcut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Quantile-based discretization function. Discretize variable into
+equal-sized buckets based on rank or based on sample quantiles. For example
+1000 values for 10 quantiles would produce a Categorical object indicating
+quantile membership for each data point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray or Series</span></dt>
+<dd></dd>
+<dt><strong>q</strong> <span class="classifier-delimiter">:</span> <span class="classifier">integer or array of quantiles</span></dt>
+<dd><p class="first last">Number of quantiles. 10 for deciles, 4 for quartiles, etc. Alternately
+array of quantiles, e.g. [0, .25, .5, .75, 1.] for quartiles</p>
+</dd>
+<dt><strong>labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array or boolean, default None</span></dt>
+<dd><p class="first last">Used as labels for the resulting bins. Must be of the same length as
+the resulting bins. If False, return only integer indicators of the
+bins.</p>
+</dd>
+<dt><strong>retbins</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">Whether to return the (bins, labels) or not. Can be useful if bins
+is given as a scalar.</p>
+</dd>
+<dt><strong>precision</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">The precision at which to store and display the bins labels</p>
+</dd>
+<dt><strong>duplicates</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{default ‘raise’, ‘drop’}, optional</span></dt>
+<dd><p class="first">If bin edges are not unique, raise ValueError or drop non-uniques.</p>
+<div class="last versionadded">
+<p><span class="versionmodified">New in version 0.20.0.</span></p>
+</div>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Categorical or Series or array of integers if labels is False</span></dt>
+<dd><p class="first last">The return type (Categorical or Series) depends on the input: a Series
+of type category if input is a Series else Categorical. Bins are
+represented as categories when categorical data is returned.</p>
+</dd>
+<dt><strong>bins</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray of floats</span></dt>
+<dd><p class="first last">Returned only if <cite>retbins</cite> is True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Out of bounds values will be NA in the resulting Categorical object</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># doctest: +ELLIPSIS</span>
+<span class="go">[(-0.001, 1.0], (-0.001, 1.0], (1.0, 2.0], (2.0, 3.0], (3.0, 4.0]]</span>
+<span class="go">Categories (4, interval[float64]): [(-0.001, 1.0] &lt; (1.0, 2.0] ...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;good&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s2">&quot;bad&quot;</span><span class="p">])</span>
+<span class="gp">... </span><span class="c1"># doctest: +SKIP</span>
+<span class="go">[good, good, medium, bad, bad]</span>
+<span class="go">Categories (3, object): [good &lt; medium &lt; bad]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([0, 0, 1, 2, 3])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pandas.merge.html" class="btn btn-neutral float-right" title="pandas.merge" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pandas.cut.html" class="btn btn-neutral float-left" title="pandas.cut" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
