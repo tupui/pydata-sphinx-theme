@@ -1,20 +1,6 @@
-.. currentmodule:: pandas
-
-.. ipython:: python
-   :suppress:
-
-   import numpy as np
-   np.set_printoptions(precision=4, suppress=True)
-   import pandas as pd
-   pd.set_option('display.precision', 4, 'display.max_columns', 8)
-   pd.options.display.max_rows = 15
-
-   import matplotlib
-   # matplotlib.style.use('default')
-   import matplotlib.pyplot as plt
-   plt.close('all')
-
 .. _dsintro:
+
+{{ header }}
 
 ************************
 Intro to Data Structures
@@ -51,9 +37,9 @@ labels are collectively referred to as the **index**. The basic method to create
 
 Here, ``data`` can be many different things:
 
- - a Python dict
- - an ndarray
- - a scalar value (like 5)
+* a Python dict
+* an ndarray
+* a scalar value (like 5)
 
 The passed **index** is a list of axis labels. Thus, this separates into a few
 cases depending on what **data is**:
@@ -85,7 +71,7 @@ Series can be instantiated from dicts:
 
 .. ipython:: python
 
-   d = {'b' : 1, 'a' : 0, 'c' : 2}
+   d = {'b': 1, 'a': 0, 'c': 2}
    pd.Series(d)
 
 .. note::
@@ -106,7 +92,7 @@ index will be pulled out.
 
 .. ipython:: python
 
-   d = {'a' : 0., 'b' : 1., 'c' : 2.}
+   d = {'a': 0., 'b': 1., 'c': 2.}
    pd.Series(d)
    pd.Series(d, index=['b', 'c', 'd', 'a'])
 
@@ -129,7 +115,7 @@ Series is ndarray-like
 ``Series`` acts very similarly to a ``ndarray``, and is a valid argument to most NumPy functions.
 However, operations such as slicing will also slice the index.
 
-.. ipython :: python
+.. ipython:: python
 
     s[0]
     s[:3]
@@ -137,7 +123,47 @@ However, operations such as slicing will also slice the index.
     s[[4, 3, 1]]
     np.exp(s)
 
-We will address array-based indexing in a separate :ref:`section <indexing>`.
+.. note::
+
+   We will address array-based indexing like ``s[[4, 3, 1]]``
+   in :ref:`section <indexing>`.
+
+Like a NumPy array, a pandas Series has a :attr:`~Series.dtype`.
+
+.. ipython:: python
+
+   s.dtype
+
+This is often a NumPy dtype. However, pandas and 3rd-party libraries
+extend NumPy's type system in a few places, in which case the dtype would
+be a :class:`~pandas.api.extensions.ExtensionDtype`. Some examples within
+pandas are :ref:`categorical` and :ref:`integer_na`. See :ref:`basics.dtypes`
+for more.
+
+If you need the actual array backing a ``Series``, use :attr:`Series.array`.
+
+.. ipython:: python
+
+   s.array
+
+Accessing the array can be useful when you need to do some operation without the
+index (to disable :ref:`automatic alignment <dsintro.alignment>`, for example).
+
+:attr:`Series.array` will always be an :class:`~pandas.api.extensions.ExtensionArray`.
+Briefly, an ExtensionArray is a thin wrapper around one or more *concrete* arrays like a
+:class:`numpy.ndarray`. Pandas knows how to take an ``ExtensionArray`` and
+store it in a ``Series`` or a column of a ``DataFrame``.
+See :ref:`basics.dtypes` for more.
+
+While Series is ndarray-like, if you need an *actual* ndarray, then use
+:meth:`Series.to_numpy`.
+
+.. ipython:: python
+
+   s.to_numpy()
+
+Even if the Series is backed by a :class:`~pandas.api.extensions.ExtensionArray`,
+:meth:`Series.to_numpy` will return a NumPy ndarray.
 
 Series is dict-like
 ~~~~~~~~~~~~~~~~~~~
@@ -145,7 +171,7 @@ Series is dict-like
 A Series is like a fixed-size dict in that you can get and set values by index
 label:
 
-.. ipython :: python
+.. ipython:: python
 
     s['a']
     s['e'] = 12.
@@ -246,12 +272,12 @@ potentially different types. You can think of it like a spreadsheet or SQL
 table, or a dict of Series objects. It is generally the most commonly used
 pandas object. Like Series, DataFrame accepts many different kinds of input:
 
- - Dict of 1D ndarrays, lists, dicts, or Series
- - 2-D numpy.ndarray
- - `Structured or record
-   <http://docs.scipy.org/doc/numpy/user/basics.rec.html>`__ ndarray
- - A ``Series``
- - Another ``DataFrame``
+* Dict of 1D ndarrays, lists, dicts, or Series
+* 2-D numpy.ndarray
+* `Structured or record
+  <https://docs.scipy.org/doc/numpy/user/basics.rec.html>`__ ndarray
+* A ``Series``
+* Another ``DataFrame``
 
 Along with the data, you can optionally pass **index** (row labels) and
 **columns** (column labels) arguments. If you pass an index and / or columns,
@@ -282,8 +308,8 @@ keys.
 
 .. ipython:: python
 
-    d = {'one' : pd.Series([1., 2., 3.], index=['a', 'b', 'c']),
-         'two' : pd.Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
+    d = {'one': pd.Series([1., 2., 3.], index=['a', 'b', 'c']),
+         'two': pd.Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
     df = pd.DataFrame(d)
     df
 
@@ -312,8 +338,8 @@ result will be ``range(n)``, where ``n`` is the array length.
 
 .. ipython:: python
 
-   d = {'one' : [1., 2., 3., 4.],
-        'two' : [4., 3., 2., 1.]}
+   d = {'one': [1., 2., 3., 4.],
+        'two': [4., 3., 2., 1.]}
    pd.DataFrame(d)
    pd.DataFrame(d, index=['a', 'b', 'c', 'd'])
 
@@ -324,8 +350,8 @@ This case is handled identically to a dict of arrays.
 
 .. ipython:: python
 
-   data = np.zeros((2,), dtype=[('A', 'i4'),('B', 'f4'),('C', 'a10')])
-   data[:] = [(1,2.,'Hello'), (2,3.,"World")]
+   data = np.zeros((2, ), dtype=[('A', 'i4'), ('B', 'f4'), ('C', 'a10')])
+   data[:] = [(1, 2., 'Hello'), (2, 3., "World")]
 
    pd.DataFrame(data)
    pd.DataFrame(data, index=['first', 'second'])
@@ -353,7 +379,7 @@ From a list of dicts
 From a dict of tuples
 ~~~~~~~~~~~~~~~~~~~~~
 
-You can automatically create a multi-indexed frame by passing a tuples
+You can automatically create a MultiIndexed frame by passing a tuples
 dictionary.
 
 .. ipython:: python
@@ -476,7 +502,7 @@ Assigning New Columns in Method Chains
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Inspired by `dplyr's
-<http://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html#mutate>`__
+<https://dplyr.tidyverse.org/reference/mutate.html>`__
 ``mutate`` verb, DataFrame has an :meth:`~pandas.DataFrame.assign`
 method that allows you to easily create new columns that are potentially
 derived from existing columns.
@@ -485,8 +511,7 @@ derived from existing columns.
 
    iris = pd.read_csv('data/iris.data')
    iris.head()
-
-   (iris.assign(sepal_ratio = iris['SepalWidth'] / iris['SepalLength'])
+   (iris.assign(sepal_ratio=iris['SepalWidth'] / iris['SepalLength'])
         .head())
 
 In the example above, we inserted a precomputed value. We can also pass in
@@ -494,8 +519,7 @@ a function of one argument to be evaluated on the DataFrame being assigned to.
 
 .. ipython:: python
 
-   iris.assign(sepal_ratio = lambda x: (x['SepalWidth'] /
-                                        x['SepalLength'])).head()
+   iris.assign(sepal_ratio=lambda x: (x['SepalWidth'] / x['SepalLength'])).head()
 
 ``assign`` **always** returns a copy of the data, leaving the original
 DataFrame untouched.
@@ -510,8 +534,8 @@ greater than 5, calculate the ratio, and plot:
 
    @savefig basics_assign.png
    (iris.query('SepalLength > 5')
-        .assign(SepalRatio = lambda x: x.SepalWidth / x.SepalLength,
-                PetalRatio = lambda x: x.PetalWidth / x.PetalLength)
+        .assign(SepalRatio=lambda x: x.SepalWidth / x.SepalLength,
+                PetalRatio=lambda x: x.PetalWidth / x.PetalLength)
         .plot(kind='scatter', x='SepalRatio', y='PetalRatio'))
 
 Since a function is passed in, the function is computed on the DataFrame
@@ -532,6 +556,15 @@ Starting with Python 3.6 the order of ``**kwargs`` is preserved. This allows
 for *dependent* assignment, where an expression later in ``**kwargs`` can refer
 to a column created earlier in the same :meth:`~DataFrame.assign`.
 
+.. ipython:: python
+
+   dfa = pd.DataFrame({"A": [1, 2, 3],
+                       "B": [4, 5, 6]})
+   dfa.assign(C=lambda x: x['A'] + x['B'],
+              D=lambda x: x['A'] + x['C'])
+
+In the second expression, ``x['C']`` will refer to the newly created column,
+that's equal to ``dfa['A'] + dfa['B']``.
 
 To write code compatible with all versions of Python, split the assignment in two.
 
@@ -543,27 +576,26 @@ To write code compatible with all versions of Python, split the assignment in tw
 
 .. warning::
 
-   Dependent assignment maybe subtly change the behavior of your code between
+   Dependent assignment may subtly change the behavior of your code between
    Python 3.6 and older versions of Python.
 
-   If you wish write code that supports versions of python before and after 3.6,
+   If you wish to write code that supports versions of python before and after 3.6,
    you'll need to take care when passing ``assign`` expressions that
 
-   * Updating an existing column
-   * Referring to the newly updated column in the same ``assign``
+   * Update an existing column
+   * Refer to the newly updated column in the same ``assign``
 
    For example, we'll update column "A" and then refer to it when creating "B".
 
    .. code-block:: python
 
       >>> dependent = pd.DataFrame({"A": [1, 1, 1]})
-      >>> dependent.assign(A=lambda x: x["A"] + 1,
-                           B=lambda x: x["A"] + 2)
+      >>> dependent.assign(A=lambda x: x["A"] + 1, B=lambda x: x["A"] + 2)
 
    For Python 3.5 and earlier the expression creating ``B`` refers to the
    "old" value of ``A``, ``[1, 1, 1]``. The output is then
 
-   .. code-block:: python
+   .. code-block:: console
 
          A  B
       0  2  3
@@ -573,7 +605,7 @@ To write code compatible with all versions of Python, split the assignment in tw
    For Python 3.6 and later, the expression creating ``A`` refers to the
    "new" value of ``A``, ``[2, 2, 2]``, which results in
 
-   .. code-block:: python
+   .. code-block:: console
 
          A  B
       0  2  4
@@ -609,6 +641,8 @@ slicing, see the :ref:`section on indexing <indexing>`. We will address the
 fundamentals of reindexing / conforming to new sets of labels in the
 :ref:`section on reindexing <basics.reindexing>`.
 
+.. _dsintro.alignment:
+
 Data alignment and arithmetic
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -631,8 +665,8 @@ row-wise. For example:
 
    df - df.iloc[0]
 
-In the special case of working with time series data, and the DataFrame index
-also contains dates, the broadcasting will be column-wise:
+In the special case of working with time series data, if the DataFrame index
+contains dates, the broadcasting will be column-wise:
 
 .. ipython:: python
    :okwarning:
@@ -673,8 +707,8 @@ Boolean operators work as well:
 
 .. ipython:: python
 
-   df1 = pd.DataFrame({'a' : [1, 0, 1], 'b' : [0, 1, 1] }, dtype=bool)
-   df2 = pd.DataFrame({'a' : [0, 1, 1], 'b' : [1, 1, 0] }, dtype=bool)
+   df1 = pd.DataFrame({'a': [1, 0, 1], 'b': [0, 1, 1]}, dtype=bool)
+   df2 = pd.DataFrame({'a': [0, 1, 1], 'b': [1, 1, 0]}, dtype=bool)
    df1 & df2
    df1 | df2
    df1 ^ df2
@@ -714,7 +748,7 @@ Similarly, the dot method on Series implements dot product:
 
 .. ipython:: python
 
-   s1 = pd.Series(np.arange(5,10))
+   s1 = pd.Series(np.arange(5, 10))
    s1.dot(s1)
 
 DataFrame is not intended to be a drop-in replacement for ndarray as its
@@ -745,7 +779,7 @@ R package):
    :okwarning:
 
    # restore GlobalPrintConfig
-   pd.reset_option('^display\.')
+   pd.reset_option(r'^display\.')
 
 However, using ``to_string`` will return a string representation of the
 DataFrame in tabular form, though it won't always fit the console width:
@@ -766,7 +800,7 @@ option:
 
 .. ipython:: python
 
-   pd.set_option('display.width', 40) # default is 80
+   pd.set_option('display.width', 40)  # default is 80
 
    pd.DataFrame(np.random.randn(3, 12))
 
@@ -774,14 +808,14 @@ You can adjust the max width of the individual columns by setting ``display.max_
 
 .. ipython:: python
 
-   datafile={'filename': ['filename_01','filename_02'],
-             'path': ["media/user_name/storage/folder_01/filename_01",
-                      "media/user_name/storage/folder_02/filename_02"]}
+   datafile = {'filename': ['filename_01', 'filename_02'],
+               'path': ["media/user_name/storage/folder_01/filename_01",
+                        "media/user_name/storage/folder_02/filename_02"]}
 
-   pd.set_option('display.max_colwidth',30)
+   pd.set_option('display.max_colwidth', 30)
    pd.DataFrame(datafile)
 
-   pd.set_option('display.max_colwidth',100)
+   pd.set_option('display.max_colwidth', 100)
    pd.DataFrame(datafile)
 
 .. ipython:: python
@@ -801,240 +835,15 @@ accessed like an attribute:
 
 .. ipython:: python
 
-   df = pd.DataFrame({'foo1' : np.random.randn(5),
-                      'foo2' : np.random.randn(5)})
+   df = pd.DataFrame({'foo1': np.random.randn(5),
+                      'foo2': np.random.randn(5)})
    df
    df.foo1
 
-The columns are also connected to the `IPython <http://ipython.org>`__
+The columns are also connected to the `IPython <https://ipython.org>`__
 completion mechanism so they can be tab-completed:
 
 .. code-block:: ipython
 
-    In [5]: df.fo<TAB>
+    In [5]: df.fo<TAB>  # noqa: E225, E999
     df.foo1  df.foo2
-
-.. _basics.panel:
-
-Panel
------
-
-.. warning::
-
-    In 0.20.0, ``Panel`` is deprecated and will be removed in
-    a future version. See the section :ref:`Deprecate Panel <dsintro.deprecate_panel>`.
-
-Panel is a somewhat less-used, but still important container for 3-dimensional
-data. The term `panel data <http://en.wikipedia.org/wiki/Panel_data>`__ is
-derived from econometrics and is partially responsible for the name pandas:
-pan(el)-da(ta)-s. The names for the 3 axes are intended to give some semantic
-meaning to describing operations involving panel data and, in particular,
-econometric analysis of panel data. However, for the strict purposes of slicing
-and dicing a collection of DataFrame objects, you may find the axis names
-slightly arbitrary:
-
-  - **items**: axis 0, each item corresponds to a DataFrame contained inside
-  - **major_axis**: axis 1, it is the **index** (rows) of each of the
-    DataFrames
-  - **minor_axis**: axis 2, it is the **columns** of each of the DataFrames
-
-Construction of Panels works about like you would expect:
-
-From 3D ndarray with optional axis labels
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. ipython:: python
-   :okwarning:
-
-   wp = pd.Panel(np.random.randn(2, 5, 4), items=['Item1', 'Item2'],
-                 major_axis=pd.date_range('1/1/2000', periods=5),
-                 minor_axis=['A', 'B', 'C', 'D'])
-   wp
-
-
-From dict of DataFrame objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. ipython:: python
-   :okwarning:
-
-   data = {'Item1' : pd.DataFrame(np.random.randn(4, 3)),
-           'Item2' : pd.DataFrame(np.random.randn(4, 2))}
-   pd.Panel(data)
-
-Note that the values in the dict need only be **convertible to
-DataFrame**. Thus, they can be any of the other valid inputs to DataFrame as
-per above.
-
-One helpful factory method is ``Panel.from_dict``, which takes a
-dictionary of DataFrames as above, and the following named parameters:
-
-.. csv-table::
-   :header: "Parameter", "Default", "Description"
-   :widths: 10, 10, 40
-
-   intersect, ``False``, drops elements whose indices do not align
-   orient, ``items``, use ``minor`` to use DataFrames' columns as panel items
-
-For example, compare to the construction above:
-
-.. ipython:: python
-   :okwarning:
-
-   pd.Panel.from_dict(data, orient='minor')
-
-Orient is especially useful for mixed-type DataFrames. If you pass a dict of
-DataFrame objects with mixed-type columns, all of the data will get upcasted to
-``dtype=object`` unless you pass ``orient='minor'``:
-
-.. ipython:: python
-   :okwarning:
-
-   df = pd.DataFrame({'a': ['foo', 'bar', 'baz'],
-                      'b': np.random.randn(3)})
-   df
-   data = {'item1': df, 'item2': df}
-   panel = pd.Panel.from_dict(data, orient='minor')
-   panel['a']
-   panel['b']
-   panel['b'].dtypes
-
-.. note::
-
-   Panel, being less commonly used than Series and DataFrame,
-   has been slightly neglected feature-wise. A number of methods and options
-   available in DataFrame are not available in Panel.
-
-.. _dsintro.to_panel:
-
-From DataFrame using ``to_panel`` method
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-``to_panel`` converts a DataFrame with a two-level index to a Panel.
-
-.. ipython:: python
-   :okwarning:
-
-   midx = pd.MultiIndex(levels=[['one', 'two'], ['x','y']], labels=[[1,1,0,0],[1,0,1,0]])
-   df = pd.DataFrame({'A' : [1, 2, 3, 4], 'B': [5, 6, 7, 8]}, index=midx)
-   df.to_panel()
-
-.. _dsintro.panel_item_selection:
-
-Item selection / addition / deletion
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Similar to DataFrame functioning as a dict of Series, Panel is like a dict
-of DataFrames:
-
-.. ipython:: python
-
-   wp['Item1']
-   wp['Item3'] = wp['Item1'] / wp['Item2']
-
-The API for insertion and deletion is the same as for DataFrame. And as with
-DataFrame, if the item is a valid Python identifier, you can access it as an
-attribute and tab-complete it in IPython.
-
-Transposing
-~~~~~~~~~~~
-
-A Panel can be rearranged using its ``transpose`` method (which does not make a
-copy by default unless the data are heterogeneous):
-
-.. ipython:: python
-   :okwarning:
-
-   wp.transpose(2, 0, 1)
-
-Indexing / Selection
-~~~~~~~~~~~~~~~~~~~~
-
-.. csv-table::
-    :header: "Operation", "Syntax", "Result"
-    :widths: 30, 20, 10
-
-    Select item, ``wp[item]``, DataFrame
-    Get slice at major_axis label, ``wp.major_xs(val)``, DataFrame
-    Get slice at minor_axis label, ``wp.minor_xs(val)``, DataFrame
-
-For example, using the earlier example data, we could do:
-
-.. ipython:: python
-
-    wp['Item1']
-    wp.major_xs(wp.major_axis[2])
-    wp.minor_axis
-    wp.minor_xs('C')
-
-Squeezing
-~~~~~~~~~
-
-Another way to change the dimensionality of an object is to ``squeeze`` a 1-len
-object, similar to ``wp['Item1']``.
-
-.. ipython:: python
-   :okwarning:
-
-   wp.reindex(items=['Item1']).squeeze()
-   wp.reindex(items=['Item1'], minor=['B']).squeeze()
-
-
-Conversion to DataFrame
-~~~~~~~~~~~~~~~~~~~~~~~
-
-A Panel can be represented in 2D form as a hierarchically indexed
-DataFrame. See the section :ref:`hierarchical indexing <advanced.hierarchical>`
-for more on this. To convert a Panel to a DataFrame, use the ``to_frame``
-method:
-
-.. ipython:: python
-   :okwarning:
-
-   panel = pd.Panel(np.random.randn(3, 5, 4), items=['one', 'two', 'three'],
-                    major_axis=pd.date_range('1/1/2000', periods=5),
-                    minor_axis=['a', 'b', 'c', 'd'])
-   panel.to_frame()
-
-
-.. _dsintro.deprecate_panel:
-
-Deprecate Panel
----------------
-
-Over the last few years, pandas has increased in both breadth and depth, with new features,
-datatype support, and manipulation routines. As a result, supporting efficient indexing and functional
-routines for ``Series``, ``DataFrame`` and ``Panel`` has contributed to an increasingly fragmented and
-difficult-to-understand codebase.
-
-The 3-D structure of a ``Panel`` is much less common for many types of data analysis,
-than the 1-D of the ``Series`` or the 2-D of the ``DataFrame``. Going forward it makes sense for
-pandas to focus on these areas exclusively.
-
-Oftentimes, one can simply use a MultiIndex ``DataFrame`` for easily working with higher dimensional data.
-
-In addition, the ``xarray`` package was built from the ground up, specifically in order to
-support the multi-dimensional analysis that is one of ``Panel`` s main usecases.
-`Here is a link to the xarray panel-transition documentation <http://xarray.pydata.org/en/stable/pandas.html#panel-transition>`__.
-
-.. ipython:: python
-   :okwarning:
-
-   p = tm.makePanel()
-   p
-
-Convert to a MultiIndex DataFrame.
-
-.. ipython:: python
-   :okwarning:
-
-   p.to_frame()
-
-Alternatively, one can convert to an xarray ``DataArray``.
-
-.. ipython:: python
-   :okwarning:
-
-   p.to_xarray()
-
-You can see the full-documentation for the `xarray package <http://xarray.pydata.org/en/stable/>`__.
