@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.to_numeric &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.to_numeric &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,22 +91,29 @@
 <h1>pandas.to_numeric<a class="headerlink" href="#pandas-to-numeric" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.to_numeric">
-<code class="descclassname">pandas.</code><code class="descname">to_numeric</code><span class="sig-paren">(</span><em>arg</em>, <em>errors='raise'</em>, <em>downcast=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/tools/numeric.py#L15-L177"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.to_numeric" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">to_numeric</code><span class="sig-paren">(</span><em class="sig-param">arg</em>, <em class="sig-param">errors='raise'</em>, <em class="sig-param">downcast=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/tools/numeric.py#L19-L196"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.to_numeric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert argument to a numeric type.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>arg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list, tuple, 1-d array, or Series</span></dt>
-<dd></dd>
+<p>The default return dtype is <cite>float64</cite> or <cite>int64</cite>
+depending on the data supplied. Use the <cite>downcast</cite> parameter
+to obtain other dtypes.</p>
+<p>Please note that precision loss may occur if really large numbers
+are passed in. Due to the internal limitations of <cite>ndarray</cite>, if
+numbers smaller than <cite>-9223372036854775808</cite> (np.iinfo(np.int64).min)
+or larger than <cite>18446744073709551615</cite> (np.iinfo(np.uint64).max) are
+passed in, it is very likely they will be converted to float so that
+they can stored in an <cite>ndarray</cite>. These warnings apply similarly to
+<cite>Series</cite> since it internally leverages <cite>ndarray</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>arg</strong><span class="classifier">scalar, list, tuple, 1-d array, or Series</span></dt><dd></dd>
 </dl>
 <p><strong>errors</strong> : {‘ignore’, ‘raise’, ‘coerce’}, default ‘raise’</p>
 <blockquote>
 <div><ul class="simple">
-<li>If ‘raise’, then invalid parsing will raise an exception</li>
-<li>If ‘coerce’, then invalid parsing will be set as NaN</li>
-<li>If ‘ignore’, then invalid parsing will return the input</li>
+<li><p>If ‘raise’, then invalid parsing will raise an exception</p></li>
+<li><p>If ‘coerce’, then invalid parsing will be set as NaN</p></li>
+<li><p>If ‘ignore’, then invalid parsing will return the input</p></li>
 </ul>
 </div></blockquote>
 <p><strong>downcast</strong> : {‘integer’, ‘signed’, ‘unsigned’, ‘float’} , default None</p>
@@ -112,9 +123,9 @@ numerical dtype (or if the data was numeric to begin with),
 downcast that resulting data to the smallest numerical dtype
 possible according to the following rules:</p>
 <ul class="simple">
-<li>‘integer’ or ‘signed’: smallest signed int dtype (min.: np.int8)</li>
-<li>‘unsigned’: smallest unsigned int dtype (min.: np.uint8)</li>
-<li>‘float’: smallest float dtype (min.: np.float32)</li>
+<li><p>‘integer’ or ‘signed’: smallest signed int dtype (min.: np.int8)</p></li>
+<li><p>‘unsigned’: smallest unsigned int dtype (min.: np.uint8)</p></li>
+<li><p>‘float’: smallest float dtype (min.: np.float32)</p></li>
 </ul>
 <p>As this behaviour is separate from the core conversion to
 numeric values, any errors raised during the downcasting
@@ -125,36 +136,33 @@ the dtype it is to be cast to, so if none of the dtypes
 checked satisfy that specification, no downcasting will be
 performed on the data.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ret</strong> : numeric if parsing succeeded.</p>
-<blockquote class="last">
-<div><p>Return type depends on input.  Series if Series, otherwise ndarray</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ret</strong> : numeric if parsing succeeded.</p>
+<blockquote>
+<div><p>Return type depends on input.  Series if Series, otherwise ndarray.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.astype</span></code></a></dt>
-<dd>Cast argument to a specified dtype.</dd>
-<dt><a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.to_datetime</span></code></a></dt>
-<dd>Convert argument to datetime.</dd>
-<dt><a class="reference internal" href="pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.to_timedelta</span></code></a></dt>
-<dd>Convert argument to timedelta.</dd>
-<dt><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html#numpy.ndarray.astype" title="(in NumPy v1.15)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray.astype</span></code></a></dt>
-<dd>Cast a numpy array to a specified type.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.astype</span></code></a></dt><dd><p>Cast argument to a specified dtype.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_datetime</span></code></a></dt><dd><p>Convert argument to datetime.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_timedelta</span></code></a></dt><dd><p>Convert argument to timedelta.</p>
+</dd>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html#numpy.ndarray.astype" title="(in NumPy v1.17)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.ndarray.astype</span></code></a></dt><dd><p>Cast a numpy array to a specified type.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
 <p>Take separate series and convert to numeric, coercing when told to</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="go">0    1.0</span>
 <span class="go">1    2.0</span>
@@ -209,7 +217,7 @@ performed on the data.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Comparison with R / R libraries &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>Comparison with R / R libraries &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -40,11 +40,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -95,11 +99,11 @@ was started to provide a more detailed look at the <a class="reference external"
 party libraries as they relate to <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. In comparisons with R and CRAN
 libraries, we care about the following things:</p>
 <ul class="simple">
-<li><strong>Functionality / flexibility</strong>: what can/cannot be done with each tool</li>
-<li><strong>Performance</strong>: how fast are operations. Hard numbers/benchmarks are
-preferable</li>
-<li><strong>Ease-of-use</strong>: Is one tool easier/harder to use (you may have to be
-the judge of this, given side-by-side code comparisons)</li>
+<li><p><strong>Functionality / flexibility</strong>: what can/cannot be done with each tool</p></li>
+<li><p><strong>Performance</strong>: how fast are operations. Hard numbers/benchmarks are
+preferable</p></li>
+<li><p><strong>Ease-of-use</strong>: Is one tool easier/harder to use (you may have to be
+the judge of this, given side-by-side code comparisons)</p></li>
 </ul>
 <p>This page is also here to offer a bit of a translation guide for users of these
 R packages.</p>
@@ -113,138 +117,137 @@ operations using <a class="reference external" href="http://cran.r-project.org/w
 pandas equivalents.</p>
 <div class="section" id="querying-filtering-sampling">
 <h3>Querying, Filtering, Sampling<a class="headerlink" href="#querying-filtering-sampling" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="43%" />
-<col width="57%" />
+<col style="width: 43%" />
+<col style="width: 57%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">dim(df)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dim(df)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">head(df)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.head()</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">head(df)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.head()</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">slice(df,</span> <span class="pre">1:10)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.iloc[:9]</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">slice(df,</span> <span class="pre">1:10)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.iloc[:9]</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">filter(df,</span> <span class="pre">col1</span> <span class="pre">==</span> <span class="pre">1,</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.query('col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1')</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">filter(df,</span> <span class="pre">col1</span> <span class="pre">==</span> <span class="pre">1,</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.query('col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1')</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">df[df$col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">df$col2</span> <span class="pre">==</span> <span class="pre">1,]</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[(df.col1</span> <span class="pre">==</span> <span class="pre">1)</span> <span class="pre">&amp;</span> <span class="pre">(df.col2</span> <span class="pre">==</span> <span class="pre">1)]</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df[df$col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">df$col2</span> <span class="pre">==</span> <span class="pre">1,]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[(df.col1</span> <span class="pre">==</span> <span class="pre">1)</span> <span class="pre">&amp;</span> <span class="pre">(df.col2</span> <span class="pre">==</span> <span class="pre">1)]</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']]</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']]</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1:col3)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.loc[:,</span> <span class="pre">'col1':'col3']</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1:col3)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[:,</span> <span class="pre">'col1':'col3']</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">-(col1:col3))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.drop(cols_to_drop,</span> <span class="pre">axis=1)</span></code> but see <a class="footnote-reference" href="#select-range" id="id1">[1]</a></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">-(col1:col3))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.drop(cols_to_drop,</span> <span class="pre">axis=1)</span></code> but see <a class="footnote-reference brackets" href="#select-range" id="id1">1</a></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[['col1']].drop_duplicates()</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[['col1']].drop_duplicates()</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1,</span> <span class="pre">col2))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']].drop_duplicates()</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1,</span> <span class="pre">col2))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']].drop_duplicates()</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">sample_n(df,</span> <span class="pre">10)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sample(n=10)</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sample_n(df,</span> <span class="pre">10)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sample(n=10)</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">sample_frac(df,</span> <span class="pre">0.01)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sample(frac=0.01)</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sample_frac(df,</span> <span class="pre">0.01)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sample(frac=0.01)</span></code></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="select-range" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>R’s shorthand for a subrange of columns
+<dl class="footnote brackets">
+<dt class="label" id="select-range"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>R’s shorthand for a subrange of columns
 (<code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1:col3)</span></code>) can be approached
 cleanly in pandas, if you have the list of columns,
 for example <code class="docutils literal notranslate"><span class="pre">df[cols[1:3]]</span></code> or
 <code class="docutils literal notranslate"><span class="pre">df.drop(cols[1:3])</span></code>, but doing this by column
-name is a bit messy.</td></tr>
-</tbody>
-</table>
+name is a bit messy.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="sorting">
 <h3>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sort_values(['col1',</span> <span class="pre">'col2'])</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sort_values(['col1',</span> <span class="pre">'col2'])</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">desc(col1))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sort_values('col1',</span> <span class="pre">ascending=False)</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">desc(col1))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sort_values('col1',</span> <span class="pre">ascending=False)</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="transforming">
 <h3>Transforming<a class="headerlink" href="#transforming" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="45%" />
-<col width="55%" />
+<col style="width: 45%" />
+<col style="width: 55%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})['col_one']</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})['col_one']</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">rename(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rename(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mutate(df,</span> <span class="pre">c=a-b)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.assign(c=df.a-df.b)</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mutate(df,</span> <span class="pre">c=a-b)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.assign(c=df.a-df.b)</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="grouping-and-summarizing">
 <h3>Grouping and Summarizing<a class="headerlink" href="#grouping-and-summarizing" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="51%" />
-<col width="49%" />
+<col style="width: 51%" />
+<col style="width: 49%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">summary(df)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">summary(df)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">&lt;-</span> <span class="pre">group_by(df,</span> <span class="pre">col1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">=</span> <span class="pre">df.groupby('col1')</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">&lt;-</span> <span class="pre">group_by(df,</span> <span class="pre">col1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">=</span> <span class="pre">df.groupby('col1')</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">avg=mean(col1,</span> <span class="pre">na.rm=TRUE))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').agg({'col1':</span> <span class="pre">'mean'})</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">avg=mean(col1,</span> <span class="pre">na.rm=TRUE))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').agg({'col1':</span> <span class="pre">'mean'})</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">total=sum(col1))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').sum()</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">total=sum(col1))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').sum()</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -265,37 +268,35 @@ name is a bit messy.</td></tr>
 </pre></div>
 </div>
 <p>Selecting multiple columns by name in <code class="docutils literal notranslate"><span class="pre">pandas</span></code> is straightforward</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [1]: df = pd.DataFrame(np.random.randn(10, 3), columns=list('abc'))
 
-<span class="gp">In [2]: </span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]]</span>
-<span class="gh">Out[2]: </span><span class="go"></span>
-<span class="go">          a         c</span>
-<span class="go">0  0.469112 -1.509059</span>
-<span class="go">1 -1.135632 -0.173215</span>
-<span class="go">2  0.119209 -0.861849</span>
-<span class="go">3 -2.104569  1.071804</span>
-<span class="go">4  0.721555 -1.039575</span>
-<span class="go">5  0.271860  0.567020</span>
-<span class="go">6  0.276232 -0.673690</span>
-<span class="go">7  0.113648  0.524988</span>
-<span class="go">8  0.404705 -1.715002</span>
-<span class="go">9 -1.039268 -1.157892</span>
+In [2]: df[['a', 'c']]
+Out[2]: 
+          a         c
+0  0.469112 -1.509059
+1 -1.135632 -0.173215
+2  0.119209 -0.861849
+3 -2.104569  1.071804
+4  0.721555 -1.039575
+5  0.271860  0.567020
+6  0.276232 -0.673690
+7  0.113648  0.524988
+8  0.404705 -1.715002
+9 -1.039268 -1.157892
 
-<span class="gp">In [3]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]]</span>
-<span class="go">                                                                                                                                                                                                                                                           Out[3]: </span>
-<span class="go">          a         c</span>
-<span class="go">0  0.469112 -1.509059</span>
-<span class="go">1 -1.135632 -0.173215</span>
-<span class="go">2  0.119209 -0.861849</span>
-<span class="go">3 -2.104569  1.071804</span>
-<span class="go">4  0.721555 -1.039575</span>
-<span class="go">5  0.271860  0.567020</span>
-<span class="go">6  0.276232 -0.673690</span>
-<span class="go">7  0.113648  0.524988</span>
-<span class="go">8  0.404705 -1.715002</span>
-<span class="go">9 -1.039268 -1.157892</span>
-</pre></div>
-</div>
+In [3]: df.loc[:, ['a', 'c']]
+Out[3]: 
+          a         c
+0  0.469112 -1.509059
+1 -1.135632 -0.173215
+2  0.119209 -0.861849
+3 -2.104569  1.071804
+4  0.721555 -1.039575
+5  0.271860  0.567020
+6  0.276232 -0.673690
+7  0.113648  0.524988
+8  0.404705 -1.715002
+9 -1.039268 -1.157892</pre>
 <p>Selecting multiple noncontiguous columns by integer location can be achieved
 with a combination of the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> indexer attribute and <code class="docutils literal notranslate"><span class="pre">numpy.r_</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">named</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcdefg&#39;</span><span class="p">)</span>
@@ -308,22 +309,18 @@ with a combination of the <code class="docutils literal notranslate"><span class
 
 <span class="gp">In [8]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">24</span><span class="p">:</span><span class="mi">30</span><span class="p">]]</span>
 <span class="gh">Out[8]: </span><span class="go"></span>
-<span class="go">           a         b         c    ...           27        28        29</span>
-<span class="go">0  -1.344312  0.844885  1.075770    ...     0.813850  0.132003 -0.827317</span>
-<span class="go">1  -0.076467 -1.187678  1.130127    ...     0.149748 -0.732339  0.687738</span>
-<span class="go">2   0.176444  0.403310 -0.154951    ...    -0.493662  0.600178  0.274230</span>
-<span class="go">3   0.132885 -0.023688  2.410179    ...     0.109121  1.126203 -0.977349</span>
-<span class="go">4   1.474071 -0.064034 -1.282782    ...    -0.858447  0.306996 -0.028665</span>
-<span class="go">5   0.384316  1.574159  1.588931    ...    -0.368204 -1.144073  0.861209</span>
-<span class="go">6   0.800193  0.782098 -1.069094    ...     0.563700  0.967661 -1.057909</span>
-<span class="go">..       ...       ...       ...    ...          ...       ...       ...</span>
-<span class="go">23  1.534417 -1.374226 -0.367477    ...     0.052372  1.166439  0.407281</span>
-<span class="go">24  0.859275 -0.995910  0.261263    ...     0.890673 -1.949397 -0.003437</span>
-<span class="go">25  1.492125 -0.068190  0.681456    ...     0.428572  0.880609  0.487645</span>
-<span class="go">26  0.725238  0.624607 -0.141185    ...     1.008500  1.424017  0.717110</span>
-<span class="go">27  1.262419  1.950057  0.301038    ...     1.007824  2.826008  1.458383</span>
-<span class="go">28 -1.585746 -0.899734  0.921494    ...     0.577223 -1.088417  0.326687</span>
-<span class="go">29 -0.986248  0.169729 -1.158091    ...    -2.013086 -1.602549  0.333109</span>
+<span class="go">           a         b         c  ...        27        28        29</span>
+<span class="go">0  -1.344312  0.844885  1.075770  ...  0.813850  0.132003 -0.827317</span>
+<span class="go">1  -0.076467 -1.187678  1.130127  ...  0.149748 -0.732339  0.687738</span>
+<span class="go">2   0.176444  0.403310 -0.154951  ... -0.493662  0.600178  0.274230</span>
+<span class="go">3   0.132885 -0.023688  2.410179  ...  0.109121  1.126203 -0.977349</span>
+<span class="go">4   1.474071 -0.064034 -1.282782  ... -0.858447  0.306996 -0.028665</span>
+<span class="go">..       ...       ...       ...  ...       ...       ...       ...</span>
+<span class="go">25  1.492125 -0.068190  0.681456  ...  0.428572  0.880609  0.487645</span>
+<span class="go">26  0.725238  0.624607 -0.141185  ...  1.008500  1.424017  0.717110</span>
+<span class="go">27  1.262419  1.950057  0.301038  ...  1.007824  2.826008  1.458383</span>
+<span class="go">28 -1.585746 -0.899734  0.921494  ...  0.577223 -1.088417  0.326687</span>
+<span class="go">29 -0.986248  0.169729 -1.158091  ... -2.013086 -1.602549  0.333109</span>
 
 <span class="go">[30 rows x 16 columns]</span>
 </pre></div>
@@ -447,42 +444,40 @@ column’s values are less than another column’s values:</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, there are a few ways to perform subsetting. You can use
 <a class="reference internal" href="../generated/pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">query()</span></code></a> or pass an expression as if it were an
 index/slice as well as standard boolean indexing:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
+<pre class="literal-block">In [18]: df = pd.DataFrame({'a': np.random.randn(10), 'b': np.random.randn(10)})
 
-<span class="gp">In [19]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;a &lt;= b&#39;</span><span class="p">)</span>
-<span class="gh">Out[19]: </span><span class="go"></span>
-<span class="go">          a         b</span>
-<span class="go">1  0.174950  0.552887</span>
-<span class="go">2 -0.023167  0.148084</span>
-<span class="go">3 -0.495291 -0.300218</span>
-<span class="go">4 -0.860736  0.197378</span>
-<span class="go">5 -1.134146  1.720780</span>
-<span class="go">7 -0.290098  0.083515</span>
-<span class="go">8  0.238636  0.946550</span>
+In [19]: df.query('a &lt;= b')
+Out[19]: 
+          a         b
+1  0.174950  0.552887
+2 -0.023167  0.148084
+3 -0.495291 -0.300218
+4 -0.860736  0.197378
+5 -1.134146  1.720780
+7 -0.290098  0.083515
+8  0.238636  0.946550
 
-<span class="gp">In [20]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">df</span><span class="o">.</span><span class="n">b</span><span class="p">]</span>
-<span class="go">                                                                                                                                                                                          Out[20]: </span>
-<span class="go">          a         b</span>
-<span class="go">1  0.174950  0.552887</span>
-<span class="go">2 -0.023167  0.148084</span>
-<span class="go">3 -0.495291 -0.300218</span>
-<span class="go">4 -0.860736  0.197378</span>
-<span class="go">5 -1.134146  1.720780</span>
-<span class="go">7 -0.290098  0.083515</span>
-<span class="go">8  0.238636  0.946550</span>
+In [20]: df[df.a &lt;= df.b]
+Out[20]: 
+          a         b
+1  0.174950  0.552887
+2 -0.023167  0.148084
+3 -0.495291 -0.300218
+4 -0.860736  0.197378
+5 -1.134146  1.720780
+7 -0.290098  0.083515
+8  0.238636  0.946550
 
-<span class="gp">In [21]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">df</span><span class="o">.</span><span class="n">b</span><span class="p">]</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                    Out[21]: </span>
-<span class="go">          a         b</span>
-<span class="go">1  0.174950  0.552887</span>
-<span class="go">2 -0.023167  0.148084</span>
-<span class="go">3 -0.495291 -0.300218</span>
-<span class="go">4 -0.860736  0.197378</span>
-<span class="go">5 -1.134146  1.720780</span>
-<span class="go">7 -0.290098  0.083515</span>
-<span class="go">8  0.238636  0.946550</span>
-</pre></div>
-</div>
+In [21]: df.loc[df.a &lt;= df.b]
+Out[21]: 
+          a         b
+1  0.174950  0.552887
+2 -0.023167  0.148084
+3 -0.495291 -0.300218
+4 -0.860736  0.197378
+5 -1.134146  1.720780
+7 -0.290098  0.083515
+8  0.238636  0.946550</pre>
 <p>For more details and examples see <a class="reference internal" href="../user_guide/indexing.html#indexing-query"><span class="std std-ref">the query documentation</span></a>.</p>
 </div>
 <div class="section" id="with">
@@ -496,37 +491,35 @@ index/slice as well as standard boolean indexing:</p>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas</span></code> the equivalent expression, using the
 <a class="reference internal" href="../generated/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval()</span></code></a> method, would be:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
+<pre class="literal-block">In [22]: df = pd.DataFrame({'a': np.random.randn(10), 'b': np.random.randn(10)})
 
-<span class="gp">In [23]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;a + b&#39;</span><span class="p">)</span>
-<span class="gh">Out[23]: </span><span class="go"></span>
-<span class="go">0   -0.091430</span>
-<span class="go">1   -2.483890</span>
-<span class="go">2   -0.252728</span>
-<span class="go">3   -0.626444</span>
-<span class="go">4   -0.261740</span>
-<span class="go">5    2.149503</span>
-<span class="go">6   -0.332214</span>
-<span class="go">7    0.799331</span>
-<span class="go">8   -2.377245</span>
-<span class="go">9    2.104677</span>
-<span class="go">dtype: float64</span>
+In [23]: df.eval('a + b')
+Out[23]: 
+0   -0.091430
+1   -2.483890
+2   -0.252728
+3   -0.626444
+4   -0.261740
+5    2.149503
+6   -0.332214
+7    0.799331
+8   -2.377245
+9    2.104677
+dtype: float64
 
-<span class="gp">In [24]: </span><span class="n">df</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">b</span>  <span class="c1"># same as the previous expression</span>
-<span class="go">                                                                                                                                                                     Out[24]: </span>
-<span class="go">0   -0.091430</span>
-<span class="go">1   -2.483890</span>
-<span class="go">2   -0.252728</span>
-<span class="go">3   -0.626444</span>
-<span class="go">4   -0.261740</span>
-<span class="go">5    2.149503</span>
-<span class="go">6   -0.332214</span>
-<span class="go">7    0.799331</span>
-<span class="go">8   -2.377245</span>
-<span class="go">9    2.104677</span>
-<span class="go">dtype: float64</span>
-</pre></div>
-</div>
+In [24]: df.a + df.b  # same as the previous expression
+Out[24]: 
+0   -0.091430
+1   -2.483890
+2   -0.252728
+3   -0.626444
+4   -0.261740
+5    2.149503
+6   -0.332214
+7    0.799331
+8   -2.377245
+9    2.104677
+dtype: float64</pre>
 <p>In certain cases <a class="reference internal" href="../generated/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval()</span></code></a> will be much faster than
 evaluation in pure Python. For more details and examples see <a class="reference internal" href="../user_guide/enhancingperf.html#enhancingperf-eval"><span class="std std-ref">the eval
 documentation</span></a>.</p>
@@ -538,25 +531,25 @@ documentation</span></a>.</p>
 analysis. The functions revolve around three data structures in R, <code class="docutils literal notranslate"><span class="pre">a</span></code>
 for <code class="docutils literal notranslate"><span class="pre">arrays</span></code>, <code class="docutils literal notranslate"><span class="pre">l</span></code> for <code class="docutils literal notranslate"><span class="pre">lists</span></code>, and <code class="docutils literal notranslate"><span class="pre">d</span></code> for <code class="docutils literal notranslate"><span class="pre">data.frame</span></code>. The
 table below shows how these data structures could be mapped in Python.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="28%" />
-<col width="72%" />
+<col style="width: 28%" />
+<col style="width: 72%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">Python</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>Python</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>array</td>
-<td>list</td>
+<tbody>
+<tr class="row-even"><td><p>array</p></td>
+<td><p>list</p></td>
 </tr>
-<tr class="row-odd"><td>lists</td>
-<td>dictionary or list of objects</td>
+<tr class="row-odd"><td><p>lists</p></td>
+<td><p>dictionary or list of objects</p></td>
 </tr>
-<tr class="row-even"><td>data.frame</td>
-<td>dataframe</td>
+<tr class="row-even"><td><p>data.frame</p></td>
+<td><p>dataframe</p></td>
 </tr>
 </tbody>
 </table>
@@ -631,11 +624,7 @@ melt it into a data.frame:</p>
 <span class="go">2   0  0  2   3.0</span>
 <span class="go">3   0  0  3   4.0</span>
 <span class="go">4   0  1  0   5.0</span>
-<span class="go">5   0  1  1   6.0</span>
-<span class="go">6   0  1  2   7.0</span>
 <span class="go">.. .. .. ..   ...</span>
-<span class="go">17  1  1  1  18.0</span>
-<span class="go">18  1  1  2  19.0</span>
 <span class="go">19  1  1  3  20.0</span>
 <span class="go">20  1  2  0  21.0</span>
 <span class="go">21  1  2  1  22.0</span>
@@ -685,30 +674,28 @@ reshape the data.frame:</p>
 </pre></div>
 </div>
 <p>In Python, the <a class="reference internal" href="../generated/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">melt()</span></code></a> method is the R equivalent:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">cheese</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;first&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;Mary&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;last&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;Bo&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">150</span><span class="p">]})</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [32]: cheese = pd.DataFrame({'first': ['John', 'Mary'],
+   ....:                        'last': ['Doe', 'Bo'],
+   ....:                        'height': [5.5, 6.0],
+   ....:                        'weight': [130, 150]})
+   ....: 
 
-<span class="gp">In [33]: </span><span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">cheese</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">])</span>
-<span class="gh">Out[33]: </span><span class="go"></span>
-<span class="go">  first last variable  value</span>
-<span class="go">0  John  Doe   height    5.5</span>
-<span class="go">1  Mary   Bo   height    6.0</span>
-<span class="go">2  John  Doe   weight  130.0</span>
-<span class="go">3  Mary   Bo   weight  150.0</span>
+In [33]: pd.melt(cheese, id_vars=['first', 'last'])
+Out[33]: 
+  first last variable  value
+0  John  Doe   height    5.5
+1  Mary   Bo   height    6.0
+2  John  Doe   weight  130.0
+3  Mary   Bo   weight  150.0
 
-<span class="gp">In [34]: </span><span class="n">cheese</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>  <span class="c1"># alternative way</span>
-<span class="go">                                                                                                                                                           Out[34]: </span>
-<span class="go">first  last        </span>
-<span class="go">John   Doe   height      5.5</span>
-<span class="go">             weight    130.0</span>
-<span class="go">Mary   Bo    height      6.0</span>
-<span class="go">             weight    150.0</span>
-<span class="go">dtype: float64</span>
-</pre></div>
-</div>
+In [34]: cheese.set_index(['first', 'last']).stack()  # alternative way
+Out[34]: 
+first  last        
+John   Doe   height      5.5
+             weight    130.0
+Mary   Bo    height      6.0
+             weight    150.0
+dtype: float64</pre>
 <p>For more details and examples see <a class="reference internal" href="../user_guide/reshaping.html#reshaping-melt"><span class="std std-ref">the reshaping documentation</span></a>.</p>
 </div>
 <div class="section" id="cast">
@@ -808,29 +795,27 @@ using <a class="reference internal" href="../generated/pandas.pivot_table.html#p
 </pre></div>
 </div>
 <p>In pandas this is accomplished with <code class="docutils literal notranslate"><span class="pre">pd.cut</span></code> and <code class="docutils literal notranslate"><span class="pre">astype(&quot;category&quot;)</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
-<span class="gh">Out[41]: </span><span class="go"></span>
-<span class="go">0    (0.995, 2.667]</span>
-<span class="go">1    (0.995, 2.667]</span>
-<span class="go">2    (2.667, 4.333]</span>
-<span class="go">3    (2.667, 4.333]</span>
-<span class="go">4      (4.333, 6.0]</span>
-<span class="go">5      (4.333, 6.0]</span>
-<span class="go">dtype: category</span>
-<span class="go">Categories (3, interval[float64]): [(0.995, 2.667] &lt; (2.667, 4.333] &lt; (4.333, 6.0]]</span>
+<pre class="literal-block">In [41]: pd.cut(pd.Series([1, 2, 3, 4, 5, 6]), 3)
+Out[41]: 
+0    (0.995, 2.667]
+1    (0.995, 2.667]
+2    (2.667, 4.333]
+3    (2.667, 4.333]
+4      (4.333, 6.0]
+5      (4.333, 6.0]
+dtype: category
+Categories (3, interval[float64]): [(0.995, 2.667] &lt; (2.667, 4.333] &lt; (4.333, 6.0]]
 
-<span class="gp">In [42]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                      Out[42]: </span>
-<span class="go">0    1</span>
-<span class="go">1    2</span>
-<span class="go">2    3</span>
-<span class="go">3    2</span>
-<span class="go">4    2</span>
-<span class="go">5    3</span>
-<span class="go">dtype: category</span>
-<span class="go">Categories (3, int64): [1, 2, 3]</span>
-</pre></div>
-</div>
+In [42]: pd.Series([1, 2, 3, 2, 2, 3]).astype(&quot;category&quot;)
+Out[42]: 
+0    1
+1    2
+2    3
+3    2
+4    2
+5    3
+dtype: category
+Categories (3, int64): [1, 2, 3]</pre>
 <p>For more details and examples see <a class="reference internal" href="../user_guide/categorical.html#categorical"><span class="std std-ref">categorical introduction</span></a> and the
 <a class="reference internal" href="../api.html#api-categorical"><span class="std std-ref">API documentation</span></a>. There is also a documentation regarding the
 <a class="reference internal" href="../user_guide/categorical.html#categorical-rfactor"><span class="std std-ref">differences to R’s factor</span></a>.</p>
@@ -858,7 +843,7 @@ using <a class="reference internal" href="../generated/pandas.pivot_table.html#p
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.all &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.all &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,73 +91,79 @@
 <h1>pandas.DataFrame.all<a class="headerlink" href="#pandas-dataframe-all" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.all">
-<code class="descclassname">DataFrame.</code><code class="descname">all</code><span class="sig-paren">(</span><em>axis=0</em>, <em>bool_only=None</em>, <em>skipna=True</em>, <em>level=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L9675-L9688"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.all" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">all</code><span class="sig-paren">(</span><em class="sig-param">axis=0</em>, <em class="sig-param">bool_only=None</em>, <em class="sig-param">skipna=True</em>, <em class="sig-param">level=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L11701-L11726"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whether all elements are True, potentially over an axis.</p>
-<p>Returns True if all elements within a series or along a Dataframe
-axis are non-zero, not-empty or not-False.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’, None}, default 0</p>
+<p>Returns True unless there at least one element within a series or
+along a Dataframe axis that is False or equivalent (e.g. zero or
+empty).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’, None}, default 0</p>
 <blockquote>
 <div><p>Indicate which axis or axes should be reduced.</p>
 <ul class="simple">
-<li>0 / ‘index’ : reduce the index, return a Series whose index is the
-original column labels.</li>
-<li>1 / ‘columns’ : reduce the columns, return a Series whose index is the
-original index.</li>
-<li>None : reduce all axes, return a scalar.</li>
+<li><p>0 / ‘index’ : reduce the index, return a Series whose index is the
+original column labels.</p></li>
+<li><p>1 / ‘columns’ : reduce the columns, return a Series whose index is the
+original index.</p></li>
+<li><p>None : reduce all axes, return a scalar.</p></li>
 </ul>
 </div></blockquote>
-<p><strong>skipna</strong> : boolean, default True</p>
+<p><strong>bool_only</strong> : bool, default None</p>
 <blockquote>
-<div><p>Exclude NA/null values. If an entire row/column is NA, the result
-will be NA.</p>
+<div><p>Include only boolean columns. If None, will attempt to use everything,
+then use only boolean data. Not implemented for Series.</p>
+</div></blockquote>
+<p><strong>skipna</strong> : bool, default True</p>
+<blockquote>
+<div><p>Exclude NA/null values. If the entire row/column is NA and skipna is
+True, then the result will be True, as for an empty row/column.
+If skipna is False, then NA are treated as True, because these are not
+equal to zero.</p>
 </div></blockquote>
 <p><strong>level</strong> : int or level name, default None</p>
 <blockquote>
 <div><p>If the axis is a MultiIndex (hierarchical), count along a
 particular level, collapsing into a Series.</p>
 </div></blockquote>
-<p><strong>bool_only</strong> : boolean, default None</p>
-<blockquote>
-<div><p>Include only boolean columns. If None, will attempt to use everything,
-then use only boolean data. Not implemented for Series.</p>
-</div></blockquote>
 <p><strong>**kwargs</strong> : any, default None</p>
 <blockquote>
 <div><p>Additional keywords have no effect but might be accepted for
 compatibility with NumPy.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>all</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series or DataFrame (if level specified)</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Series or DataFrame</strong></p>
+<blockquote>
+<div><p>If level is specified, then, DataFrame is returned; otherwise, Series
+is returned.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.Series.all.html#pandas.Series.all" title="pandas.Series.all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.Series.all</span></code></a></dt>
-<dd>Return True if all elements are True</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.any.html#pandas.DataFrame.any" title="pandas.DataFrame.any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.any</span></code></a></dt>
-<dd>Return True if one (or more) elements are True</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Series.all.html#pandas.Series.all" title="pandas.Series.all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.all</span></code></a></dt><dd><p>Return True if all elements are True.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.any.html#pandas.DataFrame.any" title="pandas.DataFrame.any"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.any</span></code></a></dt><dd><p>Return True if one (or more) elements are True.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
-<p>Series</p>
+<p><strong>Series</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 <span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
-<p>DataFrames</p>
+<p><strong>DataFrames</strong></p>
 <p>Create a dataframe from a dictionary.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
@@ -205,7 +215,7 @@ compatibility with NumPy.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

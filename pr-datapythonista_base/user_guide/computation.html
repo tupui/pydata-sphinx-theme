@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Computational tools &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>Computational tools &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -40,11 +40,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -142,14 +146,14 @@ the percent change).</p>
 <span class="gp">In [6]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
 
 <span class="gp">In [7]: </span><span class="n">s1</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-<span class="gh">Out[7]: </span><span class="go">0.0006801088174311123</span>
+<span class="gh">Out[7]: </span><span class="go">0.000680108817431082</span>
 </pre></div>
 </div>
 <p>Analogously, <a class="reference internal" href="../generated/pandas.DataFrame.cov.html#pandas.DataFrame.cov" title="pandas.DataFrame.cov"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.cov()</span></code></a> to compute pairwise covariances among the
 series in the DataFrame, also excluding NA/null values.</p>
 <div class="admonition note" id="computation-covariance-caveats">
-<p class="first admonition-title">Note</p>
-<p class="last">Assuming the missing data are missing at random this results in an estimate
+<p class="admonition-title">Note</p>
+<p>Assuming the missing data are missing at random this results in an estimate
 for the covariance matrix which is unbiased. However, for many applications
 this estimate may not be acceptable because the estimated covariance matrix
 is not guaranteed to be positive semi-definite. This could lead to
@@ -177,128 +181,122 @@ for more details.</p>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame.cov</span></code> also supports an optional <code class="docutils literal notranslate"><span class="pre">min_periods</span></code> keyword that
 specifies the required minimum number of observations for each column pair
 in order to have a valid result.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [10]: frame = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
 
-<span class="gp">In [11]: </span><span class="n">frame</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [11]: frame.loc[frame.index[:5], 'a'] = np.nan
 
-<span class="gp">In [12]: </span><span class="n">frame</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [12]: frame.loc[frame.index[5:10], 'b'] = np.nan
 
-<span class="gp">In [13]: </span><span class="n">frame</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
-<span class="gh">Out[13]: </span><span class="go"></span>
-<span class="go">          a         b         c</span>
-<span class="go">a  1.123670 -0.412851  0.018169</span>
-<span class="go">b -0.412851  1.154141  0.305260</span>
-<span class="go">c  0.018169  0.305260  1.301149</span>
+In [13]: frame.cov()
+Out[13]: 
+          a         b         c
+a  1.123670 -0.412851  0.018169
+b -0.412851  1.154141  0.305260
+c  0.018169  0.305260  1.301149
 
-<span class="go">[3 rows x 3 columns]</span>
+[3 rows x 3 columns]
 
-<span class="gp">In [14]: </span><span class="n">frame</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                Out[14]: </span>
-<span class="go">          a         b         c</span>
-<span class="go">a  1.123670       NaN  0.018169</span>
-<span class="go">b       NaN  1.154141  0.305260</span>
-<span class="go">c  0.018169  0.305260  1.301149</span>
+In [14]: frame.cov(min_periods=12)
+Out[14]: 
+          a         b         c
+a  1.123670       NaN  0.018169
+b       NaN  1.154141  0.305260
+c  0.018169  0.305260  1.301149
 
-<span class="go">[3 rows x 3 columns]</span>
-</pre></div>
-</div>
+[3 rows x 3 columns]</pre>
 </div>
 <div class="section" id="correlation">
 <span id="computation-correlation"></span><h3>Correlation<a class="headerlink" href="#correlation" title="Permalink to this headline">¶</a></h3>
 <p>Correlation may be computed using the <a class="reference internal" href="../generated/pandas.DataFrame.corr.html#pandas.DataFrame.corr" title="pandas.DataFrame.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corr()</span></code></a> method.
 Using the <code class="docutils literal notranslate"><span class="pre">method</span></code> parameter, several methods for computing correlations are
 provided:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col style="width: 20%" />
+<col style="width: 80%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method name</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method name</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">pearson</span> <span class="pre">(default)</span></code></td>
-<td>Standard correlation coefficient</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pearson</span> <span class="pre">(default)</span></code></p></td>
+<td><p>Standard correlation coefficient</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">kendall</span></code></td>
-<td>Kendall Tau correlation coefficient</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kendall</span></code></p></td>
+<td><p>Kendall Tau correlation coefficient</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">spearman</span></code></td>
-<td>Spearman rank correlation coefficient</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">spearman</span></code></p></td>
+<td><p>Spearman rank correlation coefficient</p></td>
 </tr>
 </tbody>
 </table>
 <p>All of these are currently computed using pairwise complete observations.
 Wikipedia has articles covering the above correlation coefficients:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearson correlation coefficient</a></li>
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient">Kendall rank correlation coefficient</a></li>
-<li><a class="reference external" href="https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient">Spearman’s rank correlation coefficient</a></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearson correlation coefficient</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient">Kendall rank correlation coefficient</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient">Spearman’s rank correlation coefficient</a></p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Please see the <a class="reference internal" href="#computation-covariance-caveats"><span class="std std-ref">caveats</span></a> associated
+<p class="admonition-title">Note</p>
+<p>Please see the <a class="reference internal" href="#computation-covariance-caveats"><span class="std std-ref">caveats</span></a> associated
 with this method of calculating correlation matrices in the
 <a class="reference internal" href="#computation-covariance"><span class="std std-ref">covariance section</span></a>.</p>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-<span class="gp">   ....: </span>                     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [15]: frame = pd.DataFrame(np.random.randn(1000, 5),
+   ....:                      columns=['a', 'b', 'c', 'd', 'e'])
+   ....: 
 
-<span class="gp">In [16]: </span><span class="n">frame</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [16]: frame.iloc[::2] = np.nan
 
-<span class="go"># Series with Series</span>
-<span class="gp">In [17]: </span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
-<span class="gh">Out[17]: </span><span class="go">0.013479040400098802</span>
+# Series with Series
+In [17]: frame['a'].corr(frame['b'])
+Out[17]: 0.013479040400098794
 
-<span class="gp">In [18]: </span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
-<span class="go">                              Out[18]: -0.007289885159540637</span>
+In [18]: frame['a'].corr(frame['b'], method='spearman')
+Out[18]: -0.007289885159540637
 
-<span class="go"># Pairwise correlation of DataFrame columns</span>
-<span class="gp">In [19]: </span><span class="n">frame</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-<span class="go">                                                             Out[19]: </span>
-<span class="go">          a         b         c         d         e</span>
-<span class="go">a  1.000000  0.013479 -0.049269 -0.042239 -0.028525</span>
-<span class="go">b  0.013479  1.000000 -0.020433 -0.011139  0.005654</span>
-<span class="go">c -0.049269 -0.020433  1.000000  0.018587 -0.054269</span>
-<span class="go">d -0.042239 -0.011139  0.018587  1.000000 -0.017060</span>
-<span class="go">e -0.028525  0.005654 -0.054269 -0.017060  1.000000</span>
+# Pairwise correlation of DataFrame columns
+In [19]: frame.corr()
+Out[19]: 
+          a         b         c         d         e
+a  1.000000  0.013479 -0.049269 -0.042239 -0.028525
+b  0.013479  1.000000 -0.020433 -0.011139  0.005654
+c -0.049269 -0.020433  1.000000  0.018587 -0.054269
+d -0.042239 -0.011139  0.018587  1.000000 -0.017060
+e -0.028525  0.005654 -0.054269 -0.017060  1.000000
 
-<span class="go">[5 rows x 5 columns]</span>
-</pre></div>
-</div>
+[5 rows x 5 columns]</pre>
 <p>Note that non-numeric columns will be automatically excluded from the
 correlation calculation.</p>
 <p>Like <code class="docutils literal notranslate"><span class="pre">cov</span></code>, <code class="docutils literal notranslate"><span class="pre">corr</span></code> also supports the optional <code class="docutils literal notranslate"><span class="pre">min_periods</span></code> keyword:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [20]: frame = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
 
-<span class="gp">In [21]: </span><span class="n">frame</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [21]: frame.loc[frame.index[:5], 'a'] = np.nan
 
-<span class="gp">In [22]: </span><span class="n">frame</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">frame</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [22]: frame.loc[frame.index[5:10], 'b'] = np.nan
 
-<span class="gp">In [23]: </span><span class="n">frame</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-<span class="gh">Out[23]: </span><span class="go"></span>
-<span class="go">          a         b         c</span>
-<span class="go">a  1.000000 -0.121111  0.069544</span>
-<span class="go">b -0.121111  1.000000  0.051742</span>
-<span class="go">c  0.069544  0.051742  1.000000</span>
+In [23]: frame.corr()
+Out[23]: 
+          a         b         c
+a  1.000000 -0.121111  0.069544
+b -0.121111  1.000000  0.051742
+c  0.069544  0.051742  1.000000
 
-<span class="go">[3 rows x 3 columns]</span>
+[3 rows x 3 columns]
 
-<span class="gp">In [24]: </span><span class="n">frame</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                Out[24]: </span>
-<span class="go">          a         b         c</span>
-<span class="go">a  1.000000       NaN  0.069544</span>
-<span class="go">b       NaN  1.000000  0.051742</span>
-<span class="go">c  0.069544  0.051742  1.000000</span>
+In [24]: frame.corr(min_periods=12)
+Out[24]: 
+          a         b         c
+a  1.000000       NaN  0.069544
+b       NaN  1.000000  0.051742
+c  0.069544  0.051742  1.000000
 
-<span class="go">[3 rows x 3 columns]</span>
-</pre></div>
-</div>
+[3 rows x 3 columns]</pre>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.24.0.</span></p>
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">method</span></code> argument can also be a callable for a generic correlation
 calculation. In this case, it should be a single function
@@ -311,57 +309,42 @@ compute the correlation based on histogram intersection:</p>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [26]: </span><span class="n">frame</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">histogram_intersection</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">26</span><span class="o">-</span><span class="mi">0</span><span class="n">fcb9656e3cd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">frame</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">histogram_intersection</span><span class="p">)</span>
+<span class="gh">Out[26]: </span><span class="go"></span>
+<span class="go">          a          b          c</span>
+<span class="go">a  1.000000  -6.404882  -2.058431</span>
+<span class="go">b -6.404882   1.000000 -19.255743</span>
+<span class="go">c -2.058431 -19.255743   1.000000</span>
 
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">corr</span><span class="nt">(self, method, min_periods)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6513</span>                 <span class="n">min_periods</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">   </span><span class="mi">6514</span>             <span class="n">mat</span> <span class="o">=</span> <span class="n">_ensure_float64</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-<span class="ne">-&gt; </span><span class="mi">6515</span>             <span class="n">corrf</span> <span class="o">=</span> <span class="n">nanops</span><span class="o">.</span><span class="n">get_corr_func</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6516</span>             <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6517</span>             <span class="n">correl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">K</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/nanops.py</span> in <span class="ni">get_corr_func</span><span class="nt">(method)</span>
-<span class="g g-Whitespace">    </span><span class="mi">784</span>         <span class="s1">&#39;spearman&#39;</span><span class="p">:</span> <span class="n">_spearman</span>
-<span class="g g-Whitespace">    </span><span class="mi">785</span>     <span class="p">}</span>
-<span class="ne">--&gt; </span><span class="mi">786</span>     <span class="k">return</span> <span class="n">_cor_methods</span><span class="p">[</span><span class="n">method</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span> 
-<span class="g g-Whitespace">    </span><span class="mi">788</span> 
-
-<span class="ne">KeyError</span>: &lt;function histogram_intersection at 0x7feaee27fbf8&gt;
+<span class="go">[3 rows x 3 columns]</span>
 </pre></div>
 </div>
 <p>A related method <a class="reference internal" href="../generated/pandas.DataFrame.corrwith.html#pandas.DataFrame.corrwith" title="pandas.DataFrame.corrwith"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corrwith()</span></code></a> is implemented on DataFrame to
 compute the correlation between like-labeled Series contained in different
 DataFrame objects.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">]</span>
+<pre class="literal-block">In [27]: index = ['a', 'b', 'c', 'd', 'e']
 
-<span class="gp">In [28]: </span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="s1">&#39;four&#39;</span><span class="p">]</span>
+In [28]: columns = ['one', 'two', 'three', 'four']
 
-<span class="gp">In [29]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+In [29]: df1 = pd.DataFrame(np.random.randn(5, 4), index=index, columns=columns)
 
-<span class="gp">In [30]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+In [30]: df2 = pd.DataFrame(np.random.randn(4, 4), index=index[:4], columns=columns)
 
-<span class="gp">In [31]: </span><span class="n">df1</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
-<span class="gh">Out[31]: </span><span class="go"></span>
-<span class="go">one     -0.125501</span>
-<span class="go">two     -0.493244</span>
-<span class="go">three    0.344056</span>
-<span class="go">four     0.004183</span>
-<span class="go">Length: 4, dtype: float64</span>
+In [31]: df1.corrwith(df2)
+Out[31]: 
+one     -0.125501
+two     -0.493244
+three    0.344056
+four     0.004183
+Length: 4, dtype: float64
 
-<span class="gp">In [32]: </span><span class="n">df2</span><span class="o">.</span><span class="n">corrwith</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">                                                                                                            Out[32]: </span>
-<span class="go">a   -0.675817</span>
-<span class="go">b    0.458296</span>
-<span class="go">c    0.190809</span>
-<span class="go">d   -0.186275</span>
-<span class="go">e         NaN</span>
-<span class="go">Length: 5, dtype: float64</span>
-</pre></div>
-</div>
+In [32]: df2.corrwith(df1, axis=1)
+Out[32]: 
+a   -0.675817
+b    0.458296
+c    0.190809
+d   -0.186275
+e         NaN
+Length: 5, dtype: float64</pre>
 </div>
 <div class="section" id="data-ranking">
 <span id="computation-ranking"></span><h3>Data ranking<a class="headerlink" href="#data-ranking" title="Permalink to this headline">¶</a></h3>
@@ -384,53 +367,51 @@ assigned the mean of the ranks (by default) for the group:</p>
 <p><a class="reference internal" href="../generated/pandas.DataFrame.rank.html#pandas.DataFrame.rank" title="pandas.DataFrame.rank"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rank()</span></code></a> is also a DataFrame method and can rank either the rows
 (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>) or the columns (<code class="docutils literal notranslate"><span class="pre">axis=1</span></code>). <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values are excluded from the
 ranking.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<pre class="literal-block">In [36]: df = pd.DataFrame(np.random.np.random.randn(10, 6))
 
-<span class="gp">In [37]: </span><span class="n">df</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">2</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># some ties</span>
+In [37]: df[4] = df[2][:5]  # some ties
 
-<span class="gp">In [38]: </span><span class="n">df</span>
-<span class="gh">Out[38]: </span><span class="go"></span>
-<span class="go">          0         1         2         3         4         5</span>
-<span class="go">0 -0.904948 -1.163537 -1.457187  0.135463 -1.457187  0.294650</span>
-<span class="go">1 -0.976288 -0.244652 -0.748406 -0.999601 -0.748406 -0.800809</span>
-<span class="go">2  0.401965  1.460840  1.256057  1.308127  1.256057  0.876004</span>
-<span class="go">3  0.205954  0.369552 -0.669304  0.038378 -0.669304  1.140296</span>
-<span class="go">4 -0.477586 -0.730705 -1.129149 -0.601463 -1.129149 -0.211196</span>
-<span class="go">5 -1.092970 -0.689246  0.908114  0.204848       NaN  0.463347</span>
-<span class="go">6  0.376892  0.959292  0.095572 -0.593740       NaN -0.069180</span>
-<span class="go">7 -1.002601  1.957794 -0.120708  0.094214       NaN -1.467422</span>
-<span class="go">8 -0.547231  0.664402 -0.519424 -0.073254       NaN -1.263544</span>
-<span class="go">9 -0.250277 -0.237428 -1.056443  0.419477       NaN  1.375064</span>
+In [38]: df
+Out[38]: 
+          0         1         2         3         4         5
+0 -0.904948 -1.163537 -1.457187  0.135463 -1.457187  0.294650
+1 -0.976288 -0.244652 -0.748406 -0.999601 -0.748406 -0.800809
+2  0.401965  1.460840  1.256057  1.308127  1.256057  0.876004
+3  0.205954  0.369552 -0.669304  0.038378 -0.669304  1.140296
+4 -0.477586 -0.730705 -1.129149 -0.601463 -1.129149 -0.211196
+5 -1.092970 -0.689246  0.908114  0.204848       NaN  0.463347
+6  0.376892  0.959292  0.095572 -0.593740       NaN -0.069180
+7 -1.002601  1.957794 -0.120708  0.094214       NaN -1.467422
+8 -0.547231  0.664402 -0.519424 -0.073254       NaN -1.263544
+9 -0.250277 -0.237428 -1.056443  0.419477       NaN  1.375064
 
-<span class="go">[10 rows x 6 columns]</span>
+[10 rows x 6 columns]
 
-<span class="gp">In [39]: </span><span class="n">df</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Out[39]: </span>
-<span class="go">     0    1    2    3    4    5</span>
-<span class="go">0  4.0  3.0  1.5  5.0  1.5  6.0</span>
-<span class="go">1  2.0  6.0  4.5  1.0  4.5  3.0</span>
-<span class="go">2  1.0  6.0  3.5  5.0  3.5  2.0</span>
-<span class="go">3  4.0  5.0  1.5  3.0  1.5  6.0</span>
-<span class="go">4  5.0  3.0  1.5  4.0  1.5  6.0</span>
-<span class="go">5  1.0  2.0  5.0  3.0  NaN  4.0</span>
-<span class="go">6  4.0  5.0  3.0  1.0  NaN  2.0</span>
-<span class="go">7  2.0  5.0  3.0  4.0  NaN  1.0</span>
-<span class="go">8  2.0  5.0  3.0  4.0  NaN  1.0</span>
-<span class="go">9  2.0  3.0  1.0  4.0  NaN  5.0</span>
+In [39]: df.rank(1)
+Out[39]: 
+     0    1    2    3    4    5
+0  4.0  3.0  1.5  5.0  1.5  6.0
+1  2.0  6.0  4.5  1.0  4.5  3.0
+2  1.0  6.0  3.5  5.0  3.5  2.0
+3  4.0  5.0  1.5  3.0  1.5  6.0
+4  5.0  3.0  1.5  4.0  1.5  6.0
+5  1.0  2.0  5.0  3.0  NaN  4.0
+6  4.0  5.0  3.0  1.0  NaN  2.0
+7  2.0  5.0  3.0  4.0  NaN  1.0
+8  2.0  5.0  3.0  4.0  NaN  1.0
+9  2.0  3.0  1.0  4.0  NaN  5.0
 
-<span class="go">[10 rows x 6 columns]</span>
-</pre></div>
-</div>
+[10 rows x 6 columns]</pre>
 <p><code class="docutils literal notranslate"><span class="pre">rank</span></code> optionally takes a parameter <code class="docutils literal notranslate"><span class="pre">ascending</span></code> which by default is true;
 when false, data is reverse-ranked, with larger values assigned a smaller rank.</p>
 <p><code class="docutils literal notranslate"><span class="pre">rank</span></code> supports different tie-breaking methods, specified with the <code class="docutils literal notranslate"><span class="pre">method</span></code>
 parameter:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">average</span></code> : average rank of tied group</li>
-<li><code class="docutils literal notranslate"><span class="pre">min</span></code> : lowest rank in the group</li>
-<li><code class="docutils literal notranslate"><span class="pre">max</span></code> : highest rank in the group</li>
-<li><code class="docutils literal notranslate"><span class="pre">first</span></code> : ranks assigned in the order they appear in the array</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">average</span></code> : average rank of tied group</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min</span></code> : lowest rank in the group</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max</span></code> : highest rank in the group</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">first</span></code> : ranks assigned in the order they appear in the array</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -445,8 +426,8 @@ and kurtosis.</p>
 functions can be used directly from DataFrameGroupBy objects,
 see the <a class="reference internal" href="groupby.html#groupby-transform-window-resample"><span class="std std-ref">groupby docs</span></a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The API for window statistics is quite similar to the way one works with <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> objects, see the documentation <a class="reference internal" href="groupby.html#groupby"><span class="std std-ref">here</span></a>.</p>
+<p class="admonition-title">Note</p>
+<p>The API for window statistics is quite similar to the way one works with <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> objects, see the documentation <a class="reference internal" href="groupby.html#groupby"><span class="std std-ref">here</span></a>.</p>
 </div>
 <p>We work with <code class="docutils literal notranslate"><span class="pre">rolling</span></code>, <code class="docutils literal notranslate"><span class="pre">expanding</span></code> and <code class="docutils literal notranslate"><span class="pre">exponentially</span> <span class="pre">weighted</span></code> data through the corresponding
 objects, <code class="xref py py-class docutils literal notranslate"><span class="pre">Rolling</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Expanding</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">EWM</span></code>.</p>
@@ -463,11 +444,7 @@ objects, <code class="xref py py-class docutils literal notranslate"><span class
 <span class="go">2000-01-03    -0.818003</span>
 <span class="go">2000-01-04    -0.659244</span>
 <span class="go">2000-01-05    -1.942133</span>
-<span class="go">2000-01-06    -1.869391</span>
-<span class="go">2000-01-07     0.563674</span>
 <span class="go">                ...    </span>
-<span class="go">2002-09-20   -68.233054</span>
-<span class="go">2002-09-21   -66.765687</span>
 <span class="go">2002-09-22   -67.457323</span>
 <span class="go">2002-09-23   -69.253182</span>
 <span class="go">2002-09-24   -70.296818</span>
@@ -492,10 +469,10 @@ objects, <code class="xref py py-class docutils literal notranslate"><span class
 <p>Generally these methods all have the same interface. They all
 accept the following arguments:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">window</span></code>: size of moving window</li>
-<li><code class="docutils literal notranslate"><span class="pre">min_periods</span></code>: threshold of non-null data points to require (otherwise
-result is NA)</li>
-<li><code class="docutils literal notranslate"><span class="pre">center</span></code>: boolean, whether to set the labels at the center (default is False)</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">window</span></code>: size of moving window</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_periods</span></code>: threshold of non-null data points to require (otherwise
+result is NA)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">center</span></code>: boolean, whether to set the labels at the center (default is False)</p></li>
 </ul>
 <p>We can then call methods on these <code class="docutils literal notranslate"><span class="pre">rolling</span></code> objects. These return like-indexed objects:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -505,11 +482,7 @@ result is NA)</li>
 <span class="go">2000-01-03          NaN</span>
 <span class="go">2000-01-04          NaN</span>
 <span class="go">2000-01-05          NaN</span>
-<span class="go">2000-01-06          NaN</span>
-<span class="go">2000-01-07          NaN</span>
 <span class="go">                ...    </span>
-<span class="go">2002-09-20   -62.694135</span>
-<span class="go">2002-09-21   -62.812190</span>
 <span class="go">2002-09-22   -62.914971</span>
 <span class="go">2002-09-23   -63.061867</span>
 <span class="go">2002-09-24   -63.213876</span>
@@ -518,13 +491,11 @@ result is NA)</li>
 <span class="go">Freq: D, Length: 1000, dtype: float64</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="gh">Out[46]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaecd72d68&gt;</span>
+<pre class="literal-block">In [46]: s.plot(style='k--')
+Out[46]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6fee256748&gt;
 
-<span class="gp">In [47]: </span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="go">                                                                   Out[47]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaecd72d68&gt;</span>
-</pre></div>
-</div>
+In [47]: r.mean().plot(style='k')
+Out[47]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6fee256748&gt;</pre>
 <img alt="../_images/rolling_mean_ex.png" src="../_images/rolling_mean_ex.png" />
 <p>They can also be applied to DataFrame objects. This is really just syntactic
 sugar for applying the moving window operator to all of the DataFrame’s columns:</p>
@@ -537,10 +508,10 @@ sugar for applying the moving window operator to all of the DataFrame’s column
 
 <span class="gp">In [50]: </span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gh">Out[50]: </span><span class="go"></span>
-<span class="go">array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7feaec6c6320&gt;,</span>
-<span class="go">       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7feaec6f7400&gt;,</span>
-<span class="go">       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7feaec6a0518&gt;,</span>
-<span class="go">       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7feaec649630&gt;],</span>
+<span class="go">array([&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f6fedafb9e8&gt;,</span>
+<span class="go">       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f6fedac6780&gt;,</span>
+<span class="go">       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f6feda78748&gt;,</span>
+<span class="go">       &lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f6feda2a710&gt;],</span>
 <span class="go">      dtype=object)</span>
 </pre></div>
 </div>
@@ -548,58 +519,58 @@ sugar for applying the moving window operator to all of the DataFrame’s column
 <div class="section" id="method-summary">
 <span id="stats-summary"></span><h3>Method Summary<a class="headerlink" href="#method-summary" title="Permalink to this headline">¶</a></h3>
 <p>We provide a number of common statistical functions:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col style="width: 20%" />
+<col style="width: 80%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.count.html#pandas.core.window.Rolling.count" title="pandas.core.window.Rolling.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code></a></td>
-<td>Number of non-null observations</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.count.html#pandas.core.window.Rolling.count" title="pandas.core.window.Rolling.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code></a></p></td>
+<td><p>Number of non-null observations</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.sum.html#pandas.core.window.Rolling.sum" title="pandas.core.window.Rolling.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></a></td>
-<td>Sum of values</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.sum.html#pandas.core.window.Rolling.sum" title="pandas.core.window.Rolling.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></a></p></td>
+<td><p>Sum of values</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.mean.html#pandas.core.window.Rolling.mean" title="pandas.core.window.Rolling.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></td>
-<td>Mean of values</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.mean.html#pandas.core.window.Rolling.mean" title="pandas.core.window.Rolling.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></p></td>
+<td><p>Mean of values</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.median.html#pandas.core.window.Rolling.median" title="pandas.core.window.Rolling.median"><code class="xref py py-meth docutils literal notranslate"><span class="pre">median()</span></code></a></td>
-<td>Arithmetic median of values</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.median.html#pandas.core.window.Rolling.median" title="pandas.core.window.Rolling.median"><code class="xref py py-meth docutils literal notranslate"><span class="pre">median()</span></code></a></p></td>
+<td><p>Arithmetic median of values</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.min.html#pandas.core.window.Rolling.min" title="pandas.core.window.Rolling.min"><code class="xref py py-meth docutils literal notranslate"><span class="pre">min()</span></code></a></td>
-<td>Minimum</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.min.html#pandas.core.window.Rolling.min" title="pandas.core.window.Rolling.min"><code class="xref py py-meth docutils literal notranslate"><span class="pre">min()</span></code></a></p></td>
+<td><p>Minimum</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.max.html#pandas.core.window.Rolling.max" title="pandas.core.window.Rolling.max"><code class="xref py py-meth docutils literal notranslate"><span class="pre">max()</span></code></a></td>
-<td>Maximum</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.max.html#pandas.core.window.Rolling.max" title="pandas.core.window.Rolling.max"><code class="xref py py-meth docutils literal notranslate"><span class="pre">max()</span></code></a></p></td>
+<td><p>Maximum</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.std.html#pandas.core.window.Rolling.std" title="pandas.core.window.Rolling.std"><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></a></td>
-<td>Bessel-corrected sample standard deviation</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.std.html#pandas.core.window.Rolling.std" title="pandas.core.window.Rolling.std"><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></a></p></td>
+<td><p>Bessel-corrected sample standard deviation</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.var.html#pandas.core.window.Rolling.var" title="pandas.core.window.Rolling.var"><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></a></td>
-<td>Unbiased variance</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.var.html#pandas.core.window.Rolling.var" title="pandas.core.window.Rolling.var"><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></a></p></td>
+<td><p>Unbiased variance</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.skew.html#pandas.core.window.Rolling.skew" title="pandas.core.window.Rolling.skew"><code class="xref py py-meth docutils literal notranslate"><span class="pre">skew()</span></code></a></td>
-<td>Sample skewness (3rd moment)</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.skew.html#pandas.core.window.Rolling.skew" title="pandas.core.window.Rolling.skew"><code class="xref py py-meth docutils literal notranslate"><span class="pre">skew()</span></code></a></p></td>
+<td><p>Sample skewness (3rd moment)</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.kurt.html#pandas.core.window.Rolling.kurt" title="pandas.core.window.Rolling.kurt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">kurt()</span></code></a></td>
-<td>Sample kurtosis (4th moment)</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.kurt.html#pandas.core.window.Rolling.kurt" title="pandas.core.window.Rolling.kurt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">kurt()</span></code></a></p></td>
+<td><p>Sample kurtosis (4th moment)</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.quantile.html#pandas.core.window.Rolling.quantile" title="pandas.core.window.Rolling.quantile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">quantile()</span></code></a></td>
-<td>Sample quantile (value at %)</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.quantile.html#pandas.core.window.Rolling.quantile" title="pandas.core.window.Rolling.quantile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">quantile()</span></code></a></p></td>
+<td><p>Sample quantile (value at %)</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.apply.html#pandas.core.window.Rolling.apply" title="pandas.core.window.Rolling.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a></td>
-<td>Generic apply</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.apply.html#pandas.core.window.Rolling.apply" title="pandas.core.window.Rolling.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a></p></td>
+<td><p>Generic apply</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.cov.html#pandas.core.window.Rolling.cov" title="pandas.core.window.Rolling.cov"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cov()</span></code></a></td>
-<td>Unbiased covariance (binary)</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.cov.html#pandas.core.window.Rolling.cov" title="pandas.core.window.Rolling.cov"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cov()</span></code></a></p></td>
+<td><p>Unbiased covariance (binary)</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Rolling.corr.html#pandas.core.window.Rolling.corr" title="pandas.core.window.Rolling.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corr()</span></code></a></td>
-<td>Correlation (binary)</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Rolling.corr.html#pandas.core.window.Rolling.corr" title="pandas.core.window.Rolling.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corr()</span></code></a></p></td>
+<td><p>Correlation (binary)</p></td>
 </tr>
 </tbody>
 </table>
@@ -612,7 +583,7 @@ compute the mean absolute deviation on a rolling basis:</p>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [52]: </span><span class="n">s</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mad</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="gh">Out[52]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaec4dd7b8&gt;</span>
+<span class="gh">Out[52]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6feda40c88&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/rolling_apply_ex.png" src="../_images/rolling_apply_ex.png" />
@@ -621,42 +592,42 @@ compute the mean absolute deviation on a rolling basis:</p>
 <span id="stats-rolling-window"></span><h3>Rolling Windows<a class="headerlink" href="#rolling-windows" title="Permalink to this headline">¶</a></h3>
 <p>Passing <code class="docutils literal notranslate"><span class="pre">win_type</span></code> to <code class="docutils literal notranslate"><span class="pre">.rolling</span></code> generates a generic rolling window computation, that is weighted according the <code class="docutils literal notranslate"><span class="pre">win_type</span></code>.
 The following methods are available:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col style="width: 20%" />
+<col style="width: 80%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Window.sum.html#pandas.core.window.Window.sum" title="pandas.core.window.Window.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></a></td>
-<td>Sum of values</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Window.sum.html#pandas.core.window.Window.sum" title="pandas.core.window.Window.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></a></p></td>
+<td><p>Sum of values</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Window.mean.html#pandas.core.window.Window.mean" title="pandas.core.window.Window.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></td>
-<td>Mean of values</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Window.mean.html#pandas.core.window.Window.mean" title="pandas.core.window.Window.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></p></td>
+<td><p>Mean of values</p></td>
 </tr>
 </tbody>
 </table>
 <p>The weights used in the window are specified by the <code class="docutils literal notranslate"><span class="pre">win_type</span></code> keyword.
 The list of recognized types are the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html#window-functions">scipy.signal window functions</a>:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">boxcar</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">triang</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">blackman</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">hamming</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">bartlett</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">parzen</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">bohman</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">blackmanharris</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">nuttall</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">barthann</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">kaiser</span></code> (needs beta)</li>
-<li><code class="docutils literal notranslate"><span class="pre">gaussian</span></code> (needs std)</li>
-<li><code class="docutils literal notranslate"><span class="pre">general_gaussian</span></code> (needs power, width)</li>
-<li><code class="docutils literal notranslate"><span class="pre">slepian</span></code> (needs width).</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boxcar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">triang</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blackman</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hamming</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bartlett</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parzen</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bohman</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blackmanharris</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nuttall</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">barthann</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kaiser</span></code> (needs beta)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gaussian</span></code> (needs std)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">general_gaussian</span></code> (needs power, width)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slepian</span></code> (needs width).</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
 <span class="gp">   ....: </span>                <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
@@ -678,35 +649,33 @@ The list of recognized types are the <a class="reference external" href="https:/
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">boxcar</span></code> window is equivalent to <a class="reference internal" href="../generated/pandas.core.window.Rolling.mean.html#pandas.core.window.Rolling.mean" title="pandas.core.window.Rolling.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="n">ser</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s1">&#39;boxcar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="gh">Out[55]: </span><span class="go"></span>
-<span class="go">2000-01-01         NaN</span>
-<span class="go">2000-01-02         NaN</span>
-<span class="go">2000-01-03         NaN</span>
-<span class="go">2000-01-04         NaN</span>
-<span class="go">2000-01-05   -0.841164</span>
-<span class="go">2000-01-06   -0.779948</span>
-<span class="go">2000-01-07   -0.565487</span>
-<span class="go">2000-01-08   -0.502815</span>
-<span class="go">2000-01-09   -0.553755</span>
-<span class="go">2000-01-10   -0.472211</span>
-<span class="go">Freq: D, Length: 10, dtype: float64</span>
+<pre class="literal-block">In [55]: ser.rolling(window=5, win_type='boxcar').mean()
+Out[55]: 
+2000-01-01         NaN
+2000-01-02         NaN
+2000-01-03         NaN
+2000-01-04         NaN
+2000-01-05   -0.841164
+2000-01-06   -0.779948
+2000-01-07   -0.565487
+2000-01-08   -0.502815
+2000-01-09   -0.553755
+2000-01-10   -0.472211
+Freq: D, Length: 10, dtype: float64
 
-<span class="gp">In [56]: </span><span class="n">ser</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                                    Out[56]: </span>
-<span class="go">2000-01-01         NaN</span>
-<span class="go">2000-01-02         NaN</span>
-<span class="go">2000-01-03         NaN</span>
-<span class="go">2000-01-04         NaN</span>
-<span class="go">2000-01-05   -0.841164</span>
-<span class="go">2000-01-06   -0.779948</span>
-<span class="go">2000-01-07   -0.565487</span>
-<span class="go">2000-01-08   -0.502815</span>
-<span class="go">2000-01-09   -0.553755</span>
-<span class="go">2000-01-10   -0.472211</span>
-<span class="go">Freq: D, Length: 10, dtype: float64</span>
-</pre></div>
-</div>
+In [56]: ser.rolling(window=5).mean()
+Out[56]: 
+2000-01-01         NaN
+2000-01-02         NaN
+2000-01-03         NaN
+2000-01-04         NaN
+2000-01-05   -0.841164
+2000-01-06   -0.779948
+2000-01-07   -0.565487
+2000-01-08   -0.502815
+2000-01-09   -0.553755
+2000-01-10   -0.472211
+Freq: D, Length: 10, dtype: float64</pre>
 <p>For some windowing functions, additional parameters must be specified:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">ser</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">std</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="gh">Out[57]: </span><span class="go"></span>
@@ -724,13 +693,13 @@ The list of recognized types are the <a class="reference external" href="https:/
 </pre></div>
 </div>
 <div class="admonition note" id="stats-moments-normalization">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>For <code class="docutils literal notranslate"><span class="pre">.sum()</span></code> with a <code class="docutils literal notranslate"><span class="pre">win_type</span></code>, there is no normalization done to the
 weights for the window. Passing custom weights of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">1]</span></code> will yield a different
 result than passing weights of <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">2]</span></code>, for example. When passing a
 <code class="docutils literal notranslate"><span class="pre">win_type</span></code> instead of explicitly specifying the weights, the weights are
 already normalized so that the largest weight is 1.</p>
-<p class="last">In contrast, the nature of the <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> calculation is
+<p>In contrast, the nature of the <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> calculation is
 such that the weights are normalized with respect to each other. Weights
 of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">1]</span></code> and <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">2]</span></code> yield the same result.</p>
 </div>
@@ -738,7 +707,7 @@ of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span
 <div class="section" id="time-aware-rolling">
 <span id="stats-moments-ts"></span><h3>Time-aware Rolling<a class="headerlink" href="#time-aware-rolling" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 <p>New in version 0.19.0 are the ability to pass an offset (or convertible) to a <code class="docutils literal notranslate"><span class="pre">.rolling()</span></code> method and have it produce
 variable sized windows based on the passed time window. For each time point, this includes all preceding values occurring
@@ -763,29 +732,27 @@ within the indicated time delta.</p>
 </pre></div>
 </div>
 <p>This is a regular frequency index. Using an integer window parameter works to roll along the window frequency.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="n">dft</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="gh">Out[60]: </span><span class="go"></span>
-<span class="go">                       B</span>
-<span class="go">2013-01-01 09:00:00  NaN</span>
-<span class="go">2013-01-01 09:00:01  1.0</span>
-<span class="go">2013-01-01 09:00:02  3.0</span>
-<span class="go">2013-01-01 09:00:03  NaN</span>
-<span class="go">2013-01-01 09:00:04  NaN</span>
+<pre class="literal-block">In [60]: dft.rolling(2).sum()
+Out[60]: 
+                       B
+2013-01-01 09:00:00  NaN
+2013-01-01 09:00:01  1.0
+2013-01-01 09:00:02  3.0
+2013-01-01 09:00:03  NaN
+2013-01-01 09:00:04  NaN
 
-<span class="go">[5 rows x 1 columns]</span>
+[5 rows x 1 columns]
 
-<span class="gp">In [61]: </span><span class="n">dft</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                      Out[61]: </span>
-<span class="go">                       B</span>
-<span class="go">2013-01-01 09:00:00  0.0</span>
-<span class="go">2013-01-01 09:00:01  1.0</span>
-<span class="go">2013-01-01 09:00:02  3.0</span>
-<span class="go">2013-01-01 09:00:03  2.0</span>
-<span class="go">2013-01-01 09:00:04  4.0</span>
+In [61]: dft.rolling(2, min_periods=1).sum()
+Out[61]: 
+                       B
+2013-01-01 09:00:00  0.0
+2013-01-01 09:00:01  1.0
+2013-01-01 09:00:02  3.0
+2013-01-01 09:00:03  2.0
+2013-01-01 09:00:04  4.0
 
-<span class="go">[5 rows x 1 columns]</span>
-</pre></div>
-</div>
+[5 rows x 1 columns]</pre>
 <p>Specifying an offset allows a more intuitive specification of the rolling frequency.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">dft</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="gh">Out[62]: </span><span class="go"></span>
@@ -800,40 +767,38 @@ within the indicated time delta.</p>
 </pre></div>
 </div>
 <p>Using a non-regular, but still monotonic index, rolling with an integer window does not impart any special calculation.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="n">dft</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">]},</span>
-<span class="gp">   ....: </span>                   <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:00&#39;</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                   <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:02&#39;</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                   <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:03&#39;</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                   <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:05&#39;</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                   <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:06&#39;</span><span class="p">)],</span>
-<span class="gp">   ....: </span>                                  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">))</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [63]: dft = pd.DataFrame({'B': [0, 1, 2, np.nan, 4]},
+   ....:                    index=pd.Index([pd.Timestamp('20130101 09:00:00'),
+   ....:                                    pd.Timestamp('20130101 09:00:02'),
+   ....:                                    pd.Timestamp('20130101 09:00:03'),
+   ....:                                    pd.Timestamp('20130101 09:00:05'),
+   ....:                                    pd.Timestamp('20130101 09:00:06')],
+   ....:                                   name='foo'))
+   ....: 
 
-<span class="gp">In [64]: </span><span class="n">dft</span>
-<span class="gh">Out[64]: </span><span class="go"></span>
-<span class="go">                       B</span>
-<span class="go">foo                     </span>
-<span class="go">2013-01-01 09:00:00  0.0</span>
-<span class="go">2013-01-01 09:00:02  1.0</span>
-<span class="go">2013-01-01 09:00:03  2.0</span>
-<span class="go">2013-01-01 09:00:05  NaN</span>
-<span class="go">2013-01-01 09:00:06  4.0</span>
+In [64]: dft
+Out[64]: 
+                       B
+foo                     
+2013-01-01 09:00:00  0.0
+2013-01-01 09:00:02  1.0
+2013-01-01 09:00:03  2.0
+2013-01-01 09:00:05  NaN
+2013-01-01 09:00:06  4.0
 
-<span class="go">[5 rows x 1 columns]</span>
+[5 rows x 1 columns]
 
-<span class="gp">In [65]: </span><span class="n">dft</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                               Out[65]: </span>
-<span class="go">                       B</span>
-<span class="go">foo                     </span>
-<span class="go">2013-01-01 09:00:00  NaN</span>
-<span class="go">2013-01-01 09:00:02  1.0</span>
-<span class="go">2013-01-01 09:00:03  3.0</span>
-<span class="go">2013-01-01 09:00:05  NaN</span>
-<span class="go">2013-01-01 09:00:06  NaN</span>
+In [65]: dft.rolling(2).sum()
+Out[65]: 
+                       B
+foo                     
+2013-01-01 09:00:00  NaN
+2013-01-01 09:00:02  1.0
+2013-01-01 09:00:03  3.0
+2013-01-01 09:00:05  NaN
+2013-01-01 09:00:06  NaN
 
-<span class="go">[5 rows x 1 columns]</span>
-</pre></div>
-</div>
+[5 rows x 1 columns]</pre>
 <p>Using the time-specification generates variable windows for this sparse data.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">dft</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="gh">Out[66]: </span><span class="go"></span>
@@ -850,67 +815,65 @@ within the indicated time delta.</p>
 </div>
 <p>Furthermore, we now allow an optional <code class="docutils literal notranslate"><span class="pre">on</span></code> parameter to specify a column (rather than the
 default of the index) in a DataFrame.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">dft</span> <span class="o">=</span> <span class="n">dft</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<pre class="literal-block">In [67]: dft = dft.reset_index()
 
-<span class="gp">In [68]: </span><span class="n">dft</span>
-<span class="gh">Out[68]: </span><span class="go"></span>
-<span class="go">                  foo    B</span>
-<span class="go">0 2013-01-01 09:00:00  0.0</span>
-<span class="go">1 2013-01-01 09:00:02  1.0</span>
-<span class="go">2 2013-01-01 09:00:03  2.0</span>
-<span class="go">3 2013-01-01 09:00:05  NaN</span>
-<span class="go">4 2013-01-01 09:00:06  4.0</span>
+In [68]: dft
+Out[68]: 
+                  foo    B
+0 2013-01-01 09:00:00  0.0
+1 2013-01-01 09:00:02  1.0
+2 2013-01-01 09:00:03  2.0
+3 2013-01-01 09:00:05  NaN
+4 2013-01-01 09:00:06  4.0
 
-<span class="go">[5 rows x 2 columns]</span>
+[5 rows x 2 columns]
 
-<span class="gp">In [69]: </span><span class="n">dft</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                  Out[69]: </span>
-<span class="go">                  foo    B</span>
-<span class="go">0 2013-01-01 09:00:00  0.0</span>
-<span class="go">1 2013-01-01 09:00:02  1.0</span>
-<span class="go">2 2013-01-01 09:00:03  3.0</span>
-<span class="go">3 2013-01-01 09:00:05  NaN</span>
-<span class="go">4 2013-01-01 09:00:06  4.0</span>
+In [69]: dft.rolling('2s', on='foo').sum()
+Out[69]: 
+                  foo    B
+0 2013-01-01 09:00:00  0.0
+1 2013-01-01 09:00:02  1.0
+2 2013-01-01 09:00:03  3.0
+3 2013-01-01 09:00:05  NaN
+4 2013-01-01 09:00:06  4.0
 
-<span class="go">[5 rows x 2 columns]</span>
-</pre></div>
-</div>
+[5 rows x 2 columns]</pre>
 </div>
 <div class="section" id="rolling-window-endpoints">
 <span id="stats-rolling-window-endpoints"></span><h3>Rolling Window Endpoints<a class="headerlink" href="#rolling-window-endpoints" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <p>The inclusion of the interval endpoints in rolling window calculations can be specified with the <code class="docutils literal notranslate"><span class="pre">closed</span></code>
 parameter:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="25%" />
-<col width="38%" />
-<col width="38%" />
+<col style="width: 25%" />
+<col style="width: 38%" />
+<col style="width: 38%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head"><code class="docutils literal notranslate"><span class="pre">closed</span></code></th>
-<th class="head">Description</th>
-<th class="head">Default for</th>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">closed</span></code></p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Default for</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">right</span></code></td>
-<td>close right endpoint</td>
-<td>time-based windows</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">right</span></code></p></td>
+<td><p>close right endpoint</p></td>
+<td><p>time-based windows</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">left</span></code></td>
-<td>close left endpoint</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">left</span></code></p></td>
+<td><p>close left endpoint</p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">both</span></code></td>
-<td>close both endpoints</td>
-<td>fixed windows</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">both</span></code></p></td>
+<td><p>close both endpoints</p></td>
+<td><p>fixed windows</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">neither</span></code></td>
-<td>open endpoints</td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">neither</span></code></p></td>
+<td><p>open endpoints</p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -966,35 +929,33 @@ will have the shape of a regular frequency between the min and the max of the or
 <h3>Centering Windows<a class="headerlink" href="#centering-windows" title="Permalink to this headline">¶</a></h3>
 <p>By default the labels are set to the right edge of the window, but a
 <code class="docutils literal notranslate"><span class="pre">center</span></code> keyword is available so the labels can be set at the center.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">ser</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="gh">Out[76]: </span><span class="go"></span>
-<span class="go">2000-01-01         NaN</span>
-<span class="go">2000-01-02         NaN</span>
-<span class="go">2000-01-03         NaN</span>
-<span class="go">2000-01-04         NaN</span>
-<span class="go">2000-01-05   -0.841164</span>
-<span class="go">2000-01-06   -0.779948</span>
-<span class="go">2000-01-07   -0.565487</span>
-<span class="go">2000-01-08   -0.502815</span>
-<span class="go">2000-01-09   -0.553755</span>
-<span class="go">2000-01-10   -0.472211</span>
-<span class="go">Freq: D, Length: 10, dtype: float64</span>
+<pre class="literal-block">In [76]: ser.rolling(window=5).mean()
+Out[76]: 
+2000-01-01         NaN
+2000-01-02         NaN
+2000-01-03         NaN
+2000-01-04         NaN
+2000-01-05   -0.841164
+2000-01-06   -0.779948
+2000-01-07   -0.565487
+2000-01-08   -0.502815
+2000-01-09   -0.553755
+2000-01-10   -0.472211
+Freq: D, Length: 10, dtype: float64
 
-<span class="gp">In [77]: </span><span class="n">ser</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                                    Out[77]: </span>
-<span class="go">2000-01-01         NaN</span>
-<span class="go">2000-01-02         NaN</span>
-<span class="go">2000-01-03   -0.841164</span>
-<span class="go">2000-01-04   -0.779948</span>
-<span class="go">2000-01-05   -0.565487</span>
-<span class="go">2000-01-06   -0.502815</span>
-<span class="go">2000-01-07   -0.553755</span>
-<span class="go">2000-01-08   -0.472211</span>
-<span class="go">2000-01-09         NaN</span>
-<span class="go">2000-01-10         NaN</span>
-<span class="go">Freq: D, Length: 10, dtype: float64</span>
-</pre></div>
-</div>
+In [77]: ser.rolling(window=5, center=True).mean()
+Out[77]: 
+2000-01-01         NaN
+2000-01-02         NaN
+2000-01-03   -0.841164
+2000-01-04   -0.779948
+2000-01-05   -0.565487
+2000-01-06   -0.502815
+2000-01-07   -0.553755
+2000-01-08   -0.472211
+2000-01-09         NaN
+2000-01-10         NaN
+Freq: D, Length: 10, dtype: float64</pre>
 </div>
 <div class="section" id="binary-window-functions">
 <span id="stats-moments-binary"></span><h3>Binary Window Functions<a class="headerlink" href="#binary-window-functions" title="Permalink to this headline">¶</a></h3>
@@ -1002,13 +963,13 @@ will have the shape of a regular frequency between the min and the max of the or
 two <code class="docutils literal notranslate"><span class="pre">Series</span></code> or any combination of <code class="docutils literal notranslate"><span class="pre">DataFrame/Series</span></code> or
 <code class="docutils literal notranslate"><span class="pre">DataFrame/DataFrame</span></code>. Here is the behavior in each case:</p>
 <ul class="simple">
-<li>two <code class="docutils literal notranslate"><span class="pre">Series</span></code>: compute the statistic for the pairing.</li>
-<li><code class="docutils literal notranslate"><span class="pre">DataFrame/Series</span></code>: compute the statistics for each column of the DataFrame
-with the passed Series, thus returning a DataFrame.</li>
-<li><code class="docutils literal notranslate"><span class="pre">DataFrame/DataFrame</span></code>: by default compute the statistic for matching column
+<li><p>two <code class="docutils literal notranslate"><span class="pre">Series</span></code>: compute the statistic for the pairing.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame/Series</span></code>: compute the statistics for each column of the DataFrame
+with the passed Series, thus returning a DataFrame.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame/DataFrame</span></code>: by default compute the statistic for matching column
 names, returning a DataFrame. If the keyword argument <code class="docutils literal notranslate"><span class="pre">pairwise=True</span></code> is
 passed then computes the statistic for each pair of columns, returning a
-<code class="docutils literal notranslate"><span class="pre">MultiIndexed</span> <span class="pre">DataFrame</span></code> whose <code class="docutils literal notranslate"><span class="pre">index</span></code> are the dates in question (see <a class="reference internal" href="#stats-moments-corr-pairwise"><span class="std std-ref">the next section</span></a>).</li>
+<code class="docutils literal notranslate"><span class="pre">MultiIndexed</span> <span class="pre">DataFrame</span></code> whose <code class="docutils literal notranslate"><span class="pre">index</span></code> are the dates in question (see <a class="reference internal" href="#stats-moments-corr-pairwise"><span class="std std-ref">the next section</span></a>).</p></li>
 </ul>
 <p>For example:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [78]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
@@ -1028,11 +989,7 @@ passed then computes the statistic for each pair of columns, returning a
 <span class="go">2000-01-03       NaN  NaN       NaN       NaN</span>
 <span class="go">2000-01-04       NaN  NaN       NaN       NaN</span>
 <span class="go">2000-01-05  0.768775  1.0 -0.977990  0.800252</span>
-<span class="go">2000-01-06  0.744106  1.0 -0.967912  0.830021</span>
-<span class="go">2000-01-07  0.683257  1.0 -0.928969  0.384916</span>
 <span class="go">...              ...  ...       ...       ...</span>
-<span class="go">2000-01-14 -0.392318  1.0  0.570240 -0.591056</span>
-<span class="go">2000-01-15  0.017217  1.0  0.649900 -0.896258</span>
 <span class="go">2000-01-16  0.691078  1.0  0.807450 -0.939302</span>
 <span class="go">2000-01-17  0.274506  1.0  0.582601 -0.902954</span>
 <span class="go">2000-01-18  0.330459  1.0  0.515707 -0.545268</span>
@@ -1046,8 +1003,8 @@ passed then computes the statistic for each pair of columns, returning a
 <div class="section" id="computing-rolling-pairwise-covariances-and-correlations">
 <span id="stats-moments-corr-pairwise"></span><h3>Computing rolling pairwise covariances and correlations<a class="headerlink" href="#computing-rolling-pairwise-covariances-and-correlations" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Prior to version 0.20.0 if <code class="docutils literal notranslate"><span class="pre">pairwise=True</span></code> was passed, a <code class="docutils literal notranslate"><span class="pre">Panel</span></code> would be returned.
+<p class="admonition-title">Warning</p>
+<p>Prior to version 0.20.0 if <code class="docutils literal notranslate"><span class="pre">pairwise=True</span></code> was passed, a <code class="docutils literal notranslate"><span class="pre">Panel</span></code> would be returned.
 This will now return a 2-level MultiIndexed DataFrame, see the whatsnew <a class="reference internal" href="../release/whatsnew/v0.20.0.html#whatsnew-0200-api-breaking-rolling-pairwise"><span class="std std-ref">here</span></a>.</p>
 </div>
 <p>In financial data analysis and other fields it’s common to compute covariance
@@ -1058,8 +1015,8 @@ done by passing the <code class="docutils literal notranslate"><span class="pre"
 question. In the case of a single DataFrame argument the <code class="docutils literal notranslate"><span class="pre">pairwise</span></code> argument
 can even be omitted:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Missing values are ignored and each entry is computed using the pairwise
+<p class="admonition-title">Note</p>
+<p>Missing values are ignored and each entry is computed using the pairwise
 complete observations.  Please see the <a class="reference internal" href="#computation-covariance"><span class="std std-ref">covariance section</span></a> for <a class="reference internal" href="#computation-covariance-caveats"><span class="std std-ref">caveats</span></a> associated with this method of
 calculating covariance and correlation matrices.</p>
 </div>
@@ -1099,12 +1056,8 @@ calculating covariance and correlation matrices.</p>
 <span class="go">           C  0.744551  0.177725  1.000000 -0.712051</span>
 <span class="go">           D -0.769767 -0.240802 -0.712051  1.000000</span>
 <span class="go">2002-09-23 A  1.000000  0.134723  0.743113 -0.758758</span>
-<span class="go">           B  0.134723  1.000000  0.124683 -0.209934</span>
-<span class="go">           C  0.743113  0.124683  1.000000 -0.719088</span>
 <span class="go">...                ...       ...       ...       ...</span>
-<span class="go">2002-09-25 B  0.075157  1.000000  0.064399 -0.164179</span>
-<span class="go">           C  0.731888  0.064399  1.000000 -0.704686</span>
-<span class="go">           D -0.739160 -0.164179 -0.704686  1.000000</span>
+<span class="go">2002-09-25 D -0.739160 -0.164179 -0.704686  1.000000</span>
 <span class="go">2002-09-26 A  1.000000  0.087756  0.727792 -0.736562</span>
 <span class="go">           B  0.087756  1.000000  0.079913 -0.179477</span>
 <span class="go">           C  0.727792  0.079913  1.000000 -0.692303</span>
@@ -1116,7 +1069,7 @@ calculating covariance and correlation matrices.</p>
 <p>You can efficiently retrieve the time series of correlations between two
 columns by reshaping and indexing:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [86]: </span><span class="n">correls</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">)[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="gh">Out[86]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaec1c86a0&gt;</span>
+<span class="gh">Out[86]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6fed9270b8&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/rolling_corr_pairwise_ex.png" src="../_images/rolling_corr_pairwise_ex.png" />
@@ -1140,68 +1093,54 @@ perform multiple computations on the data. These operations are similar to the <
 </div>
 <p>We can aggregate by passing a function to the entire DataFrame, or select a
 Series (or multiple Series) via standard <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="n">r</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
-<span class="gh">Out[90]: </span><span class="go"></span>
-<span class="go">                   A          B         C</span>
-<span class="go">2000-01-01 -0.289838  -0.370545 -1.284206</span>
-<span class="go">2000-01-02 -0.216612  -1.675528 -1.169415</span>
-<span class="go">2000-01-03  1.154661  -1.634017 -1.566620</span>
-<span class="go">2000-01-04  2.969393  -4.003274 -1.816179</span>
-<span class="go">2000-01-05  4.690630  -4.682017 -2.717209</span>
-<span class="go">2000-01-06  3.880630  -4.447700 -1.078947</span>
-<span class="go">2000-01-07  4.001957  -2.884072 -3.116903</span>
-<span class="go">...              ...        ...       ...</span>
-<span class="go">2002-09-20  2.652493 -10.528875  9.867805</span>
-<span class="go">2002-09-21  0.844497  -9.280944  9.522649</span>
-<span class="go">2002-09-22  2.860036  -9.270337  6.415245</span>
-<span class="go">2002-09-23  3.510163  -8.151439  5.177219</span>
-<span class="go">2002-09-24  6.524983 -10.168078  5.792639</span>
-<span class="go">2002-09-25  6.409626  -9.956226  5.704050</span>
-<span class="go">2002-09-26  5.093787  -7.074515  6.905823</span>
+<pre class="literal-block">In [90]: r.aggregate(np.sum)
+Out[90]: 
+                   A          B         C
+2000-01-01 -0.289838  -0.370545 -1.284206
+2000-01-02 -0.216612  -1.675528 -1.169415
+2000-01-03  1.154661  -1.634017 -1.566620
+2000-01-04  2.969393  -4.003274 -1.816179
+2000-01-05  4.690630  -4.682017 -2.717209
+...              ...        ...       ...
+2002-09-22  2.860036  -9.270337  6.415245
+2002-09-23  3.510163  -8.151439  5.177219
+2002-09-24  6.524983 -10.168078  5.792639
+2002-09-25  6.409626  -9.956226  5.704050
+2002-09-26  5.093787  -7.074515  6.905823
 
-<span class="go">[1000 rows x 3 columns]</span>
+[1000 rows x 3 columns]
 
-<span class="gp">In [91]: </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Out[91]: </span>
-<span class="go">2000-01-01   -0.289838</span>
-<span class="go">2000-01-02   -0.216612</span>
-<span class="go">2000-01-03    1.154661</span>
-<span class="go">2000-01-04    2.969393</span>
-<span class="go">2000-01-05    4.690630</span>
-<span class="go">2000-01-06    3.880630</span>
-<span class="go">2000-01-07    4.001957</span>
-<span class="go">                ...   </span>
-<span class="go">2002-09-20    2.652493</span>
-<span class="go">2002-09-21    0.844497</span>
-<span class="go">2002-09-22    2.860036</span>
-<span class="go">2002-09-23    3.510163</span>
-<span class="go">2002-09-24    6.524983</span>
-<span class="go">2002-09-25    6.409626</span>
-<span class="go">2002-09-26    5.093787</span>
-<span class="go">Freq: D, Name: A, Length: 1000, dtype: float64</span>
+In [91]: r['A'].aggregate(np.sum)
+Out[91]: 
+2000-01-01   -0.289838
+2000-01-02   -0.216612
+2000-01-03    1.154661
+2000-01-04    2.969393
+2000-01-05    4.690630
+                ...   
+2002-09-22    2.860036
+2002-09-23    3.510163
+2002-09-24    6.524983
+2002-09-25    6.409626
+2002-09-26    5.093787
+Freq: D, Name: A, Length: 1000, dtype: float64
 
-<span class="gp">In [92]: </span><span class="n">r</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Out[92]: </span>
-<span class="go">                   A          B</span>
-<span class="go">2000-01-01 -0.289838  -0.370545</span>
-<span class="go">2000-01-02 -0.216612  -1.675528</span>
-<span class="go">2000-01-03  1.154661  -1.634017</span>
-<span class="go">2000-01-04  2.969393  -4.003274</span>
-<span class="go">2000-01-05  4.690630  -4.682017</span>
-<span class="go">2000-01-06  3.880630  -4.447700</span>
-<span class="go">2000-01-07  4.001957  -2.884072</span>
-<span class="go">...              ...        ...</span>
-<span class="go">2002-09-20  2.652493 -10.528875</span>
-<span class="go">2002-09-21  0.844497  -9.280944</span>
-<span class="go">2002-09-22  2.860036  -9.270337</span>
-<span class="go">2002-09-23  3.510163  -8.151439</span>
-<span class="go">2002-09-24  6.524983 -10.168078</span>
-<span class="go">2002-09-25  6.409626  -9.956226</span>
-<span class="go">2002-09-26  5.093787  -7.074515</span>
+In [92]: r[['A', 'B']].aggregate(np.sum)
+Out[92]: 
+                   A          B
+2000-01-01 -0.289838  -0.370545
+2000-01-02 -0.216612  -1.675528
+2000-01-03  1.154661  -1.634017
+2000-01-04  2.969393  -4.003274
+2000-01-05  4.690630  -4.682017
+...              ...        ...
+2002-09-22  2.860036  -9.270337
+2002-09-23  3.510163  -8.151439
+2002-09-24  6.524983 -10.168078
+2002-09-25  6.409626  -9.956226
+2002-09-26  5.093787  -7.074515
 
-<span class="go">[1000 rows x 2 columns]</span>
-</pre></div>
-</div>
+[1000 rows x 2 columns]</pre>
 <p>As you can see, the result of the aggregation will have the selected columns, or all
 columns if none are selected.</p>
 <div class="section" id="applying-multiple-functions">
@@ -1216,11 +1155,7 @@ aggregation with, outputting a DataFrame:</p>
 <span class="go">2000-01-03  1.154661  0.384887  0.873311</span>
 <span class="go">2000-01-04  2.969393  0.742348  1.009734</span>
 <span class="go">2000-01-05  4.690630  0.938126  0.977914</span>
-<span class="go">2000-01-06  3.880630  0.646772  1.128883</span>
-<span class="go">2000-01-07  4.001957  0.571708  1.049487</span>
 <span class="go">...              ...       ...       ...</span>
-<span class="go">2002-09-20  2.652493  0.044208  1.164919</span>
-<span class="go">2002-09-21  0.844497  0.014075  1.148231</span>
 <span class="go">2002-09-22  2.860036  0.047667  1.132051</span>
 <span class="go">2002-09-23  3.510163  0.058503  1.134296</span>
 <span class="go">2002-09-24  6.524983  0.108750  1.144204</span>
@@ -1234,23 +1169,19 @@ aggregation with, outputting a DataFrame:</p>
 column, which produces an aggregated result with a hierarchical index:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [94]: </span><span class="n">r</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">])</span>
 <span class="gh">Out[94]: </span><span class="go"></span>
-<span class="go">                   A              ...            C          </span>
-<span class="go">                 sum      mean    ...          sum      mean</span>
-<span class="go">2000-01-01 -0.289838 -0.289838    ...    -1.284206 -1.284206</span>
-<span class="go">2000-01-02 -0.216612 -0.108306    ...    -1.169415 -0.584708</span>
-<span class="go">2000-01-03  1.154661  0.384887    ...    -1.566620 -0.522207</span>
-<span class="go">2000-01-04  2.969393  0.742348    ...    -1.816179 -0.454045</span>
-<span class="go">2000-01-05  4.690630  0.938126    ...    -2.717209 -0.543442</span>
-<span class="go">2000-01-06  3.880630  0.646772    ...    -1.078947 -0.179825</span>
-<span class="go">2000-01-07  4.001957  0.571708    ...    -3.116903 -0.445272</span>
-<span class="go">...              ...       ...    ...          ...       ...</span>
-<span class="go">2002-09-20  2.652493  0.044208    ...     9.867805  0.164463</span>
-<span class="go">2002-09-21  0.844497  0.014075    ...     9.522649  0.158711</span>
-<span class="go">2002-09-22  2.860036  0.047667    ...     6.415245  0.106921</span>
-<span class="go">2002-09-23  3.510163  0.058503    ...     5.177219  0.086287</span>
-<span class="go">2002-09-24  6.524983  0.108750    ...     5.792639  0.096544</span>
-<span class="go">2002-09-25  6.409626  0.106827    ...     5.704050  0.095068</span>
-<span class="go">2002-09-26  5.093787  0.084896    ...     6.905823  0.115097</span>
+<span class="go">                   A                    B                   C          </span>
+<span class="go">                 sum      mean        sum      mean       sum      mean</span>
+<span class="go">2000-01-01 -0.289838 -0.289838  -0.370545 -0.370545 -1.284206 -1.284206</span>
+<span class="go">2000-01-02 -0.216612 -0.108306  -1.675528 -0.837764 -1.169415 -0.584708</span>
+<span class="go">2000-01-03  1.154661  0.384887  -1.634017 -0.544672 -1.566620 -0.522207</span>
+<span class="go">2000-01-04  2.969393  0.742348  -4.003274 -1.000819 -1.816179 -0.454045</span>
+<span class="go">2000-01-05  4.690630  0.938126  -4.682017 -0.936403 -2.717209 -0.543442</span>
+<span class="go">...              ...       ...        ...       ...       ...       ...</span>
+<span class="go">2002-09-22  2.860036  0.047667  -9.270337 -0.154506  6.415245  0.106921</span>
+<span class="go">2002-09-23  3.510163  0.058503  -8.151439 -0.135857  5.177219  0.086287</span>
+<span class="go">2002-09-24  6.524983  0.108750 -10.168078 -0.169468  5.792639  0.096544</span>
+<span class="go">2002-09-25  6.409626  0.106827  -9.956226 -0.165937  5.704050  0.095068</span>
+<span class="go">2002-09-26  5.093787  0.084896  -7.074515 -0.117909  6.905823  0.115097</span>
 
 <span class="go">[1000 rows x 6 columns]</span>
 </pre></div>
@@ -1270,11 +1201,7 @@ columns of a <code class="docutils literal notranslate"><span class="pre">DataFr
 <span class="go">2000-01-03  1.154661  0.689929</span>
 <span class="go">2000-01-04  2.969393  1.072199</span>
 <span class="go">2000-01-05  4.690630  0.939657</span>
-<span class="go">2000-01-06  3.880630  0.966848</span>
-<span class="go">2000-01-07  4.001957  1.240137</span>
 <span class="go">...              ...       ...</span>
-<span class="go">2002-09-20  2.652493  1.114814</span>
-<span class="go">2002-09-21  0.844497  1.113220</span>
 <span class="go">2002-09-22  2.860036  1.113208</span>
 <span class="go">2002-09-23  3.510163  1.132381</span>
 <span class="go">2002-09-24  6.524983  1.080963</span>
@@ -1294,11 +1221,7 @@ must be implemented on the windowed object</p>
 <span class="go">2000-01-03  1.154661  0.689929</span>
 <span class="go">2000-01-04  2.969393  1.072199</span>
 <span class="go">2000-01-05  4.690630  0.939657</span>
-<span class="go">2000-01-06  3.880630  0.966848</span>
-<span class="go">2000-01-07  4.001957  1.240137</span>
 <span class="go">...              ...       ...</span>
-<span class="go">2002-09-20  2.652493  1.114814</span>
-<span class="go">2002-09-21  0.844497  1.113220</span>
 <span class="go">2002-09-22  2.860036  1.113208</span>
 <span class="go">2002-09-23  3.510163  1.132381</span>
 <span class="go">2002-09-24  6.524983  1.080963</span>
@@ -1318,11 +1241,7 @@ must be implemented on the windowed object</p>
 <span class="go">2000-01-03  1.154661  0.873311 -0.544672  0.689929</span>
 <span class="go">2000-01-04  2.969393  1.009734 -1.000819  1.072199</span>
 <span class="go">2000-01-05  4.690630  0.977914 -0.936403  0.939657</span>
-<span class="go">2000-01-06  3.880630  1.128883 -0.741283  0.966848</span>
-<span class="go">2000-01-07  4.001957  1.049487 -0.412010  1.240137</span>
 <span class="go">...              ...       ...       ...       ...</span>
-<span class="go">2002-09-20  2.652493  1.164919 -0.175481  1.114814</span>
-<span class="go">2002-09-21  0.844497  1.148231 -0.154682  1.113220</span>
 <span class="go">2002-09-22  2.860036  1.132051 -0.154506  1.113208</span>
 <span class="go">2002-09-23  3.510163  1.134296 -0.135857  1.132381</span>
 <span class="go">2002-09-24  6.524983  1.144204 -0.169468  1.080963</span>
@@ -1343,84 +1262,82 @@ point in time.</p>
 returning an <code class="xref py py-class docutils literal notranslate"><span class="pre">Expanding</span></code> object.</p>
 <p>As these calculations are a special case of rolling statistics,
 they are implemented in pandas such that the following two calls are equivalent:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [98]: </span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="gh">Out[98]: </span><span class="go"></span>
-<span class="go">                   A         B         C         D</span>
-<span class="go">2000-01-01  0.314226 -0.001675  0.071823  0.892566</span>
-<span class="go">2000-01-02  0.654522 -0.171495  0.179278  0.853361</span>
-<span class="go">2000-01-03  0.708733 -0.064489 -0.238271  1.371111</span>
-<span class="go">2000-01-04  0.987613  0.163472 -0.919693  1.566485</span>
-<span class="go">2000-01-05  1.426971  0.288267 -1.358877  1.808650</span>
+<pre class="literal-block">In [98]: df.rolling(window=len(df), min_periods=1).mean()[:5]
+Out[98]: 
+                   A         B         C         D
+2000-01-01  0.314226 -0.001675  0.071823  0.892566
+2000-01-02  0.654522 -0.171495  0.179278  0.853361
+2000-01-03  0.708733 -0.064489 -0.238271  1.371111
+2000-01-04  0.987613  0.163472 -0.919693  1.566485
+2000-01-05  1.426971  0.288267 -1.358877  1.808650
 
-<span class="go">[5 rows x 4 columns]</span>
+[5 rows x 4 columns]
 
-<span class="gp">In [99]: </span><span class="n">df</span><span class="o">.</span><span class="n">expanding</span><span class="p">(</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                  Out[99]: </span>
-<span class="go">                   A         B         C         D</span>
-<span class="go">2000-01-01  0.314226 -0.001675  0.071823  0.892566</span>
-<span class="go">2000-01-02  0.654522 -0.171495  0.179278  0.853361</span>
-<span class="go">2000-01-03  0.708733 -0.064489 -0.238271  1.371111</span>
-<span class="go">2000-01-04  0.987613  0.163472 -0.919693  1.566485</span>
-<span class="go">2000-01-05  1.426971  0.288267 -1.358877  1.808650</span>
+In [99]: df.expanding(min_periods=1).mean()[:5]
+Out[99]: 
+                   A         B         C         D
+2000-01-01  0.314226 -0.001675  0.071823  0.892566
+2000-01-02  0.654522 -0.171495  0.179278  0.853361
+2000-01-03  0.708733 -0.064489 -0.238271  1.371111
+2000-01-04  0.987613  0.163472 -0.919693  1.566485
+2000-01-05  1.426971  0.288267 -1.358877  1.808650
 
-<span class="go">[5 rows x 4 columns]</span>
-</pre></div>
-</div>
+[5 rows x 4 columns]</pre>
 <p>These have a similar set of methods to <code class="docutils literal notranslate"><span class="pre">.rolling</span></code> methods.</p>
 <div class="section" id="id1">
 <h3>Method Summary<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col style="width: 20%" />
+<col style="width: 80%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Function</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.count.html#pandas.core.window.Expanding.count" title="pandas.core.window.Expanding.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code></a></td>
-<td>Number of non-null observations</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.count.html#pandas.core.window.Expanding.count" title="pandas.core.window.Expanding.count"><code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code></a></p></td>
+<td><p>Number of non-null observations</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.sum.html#pandas.core.window.Expanding.sum" title="pandas.core.window.Expanding.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></a></td>
-<td>Sum of values</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.sum.html#pandas.core.window.Expanding.sum" title="pandas.core.window.Expanding.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></a></p></td>
+<td><p>Sum of values</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.mean.html#pandas.core.window.Expanding.mean" title="pandas.core.window.Expanding.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></td>
-<td>Mean of values</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.mean.html#pandas.core.window.Expanding.mean" title="pandas.core.window.Expanding.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></p></td>
+<td><p>Mean of values</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.median.html#pandas.core.window.Expanding.median" title="pandas.core.window.Expanding.median"><code class="xref py py-meth docutils literal notranslate"><span class="pre">median()</span></code></a></td>
-<td>Arithmetic median of values</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.median.html#pandas.core.window.Expanding.median" title="pandas.core.window.Expanding.median"><code class="xref py py-meth docutils literal notranslate"><span class="pre">median()</span></code></a></p></td>
+<td><p>Arithmetic median of values</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.min.html#pandas.core.window.Expanding.min" title="pandas.core.window.Expanding.min"><code class="xref py py-meth docutils literal notranslate"><span class="pre">min()</span></code></a></td>
-<td>Minimum</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.min.html#pandas.core.window.Expanding.min" title="pandas.core.window.Expanding.min"><code class="xref py py-meth docutils literal notranslate"><span class="pre">min()</span></code></a></p></td>
+<td><p>Minimum</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.max.html#pandas.core.window.Expanding.max" title="pandas.core.window.Expanding.max"><code class="xref py py-meth docutils literal notranslate"><span class="pre">max()</span></code></a></td>
-<td>Maximum</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.max.html#pandas.core.window.Expanding.max" title="pandas.core.window.Expanding.max"><code class="xref py py-meth docutils literal notranslate"><span class="pre">max()</span></code></a></p></td>
+<td><p>Maximum</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.std.html#pandas.core.window.Expanding.std" title="pandas.core.window.Expanding.std"><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></a></td>
-<td>Unbiased standard deviation</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.std.html#pandas.core.window.Expanding.std" title="pandas.core.window.Expanding.std"><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></a></p></td>
+<td><p>Unbiased standard deviation</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.var.html#pandas.core.window.Expanding.var" title="pandas.core.window.Expanding.var"><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></a></td>
-<td>Unbiased variance</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.var.html#pandas.core.window.Expanding.var" title="pandas.core.window.Expanding.var"><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></a></p></td>
+<td><p>Unbiased variance</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.skew.html#pandas.core.window.Expanding.skew" title="pandas.core.window.Expanding.skew"><code class="xref py py-meth docutils literal notranslate"><span class="pre">skew()</span></code></a></td>
-<td>Unbiased skewness (3rd moment)</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.skew.html#pandas.core.window.Expanding.skew" title="pandas.core.window.Expanding.skew"><code class="xref py py-meth docutils literal notranslate"><span class="pre">skew()</span></code></a></p></td>
+<td><p>Unbiased skewness (3rd moment)</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.kurt.html#pandas.core.window.Expanding.kurt" title="pandas.core.window.Expanding.kurt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">kurt()</span></code></a></td>
-<td>Unbiased kurtosis (4th moment)</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.kurt.html#pandas.core.window.Expanding.kurt" title="pandas.core.window.Expanding.kurt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">kurt()</span></code></a></p></td>
+<td><p>Unbiased kurtosis (4th moment)</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.quantile.html#pandas.core.window.Expanding.quantile" title="pandas.core.window.Expanding.quantile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">quantile()</span></code></a></td>
-<td>Sample quantile (value at %)</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.quantile.html#pandas.core.window.Expanding.quantile" title="pandas.core.window.Expanding.quantile"><code class="xref py py-meth docutils literal notranslate"><span class="pre">quantile()</span></code></a></p></td>
+<td><p>Sample quantile (value at %)</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.apply.html#pandas.core.window.Expanding.apply" title="pandas.core.window.Expanding.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a></td>
-<td>Generic apply</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.apply.html#pandas.core.window.Expanding.apply" title="pandas.core.window.Expanding.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a></p></td>
+<td><p>Generic apply</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.cov.html#pandas.core.window.Expanding.cov" title="pandas.core.window.Expanding.cov"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cov()</span></code></a></td>
-<td>Unbiased covariance (binary)</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.cov.html#pandas.core.window.Expanding.cov" title="pandas.core.window.Expanding.cov"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cov()</span></code></a></p></td>
+<td><p>Unbiased covariance (binary)</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.Expanding.corr.html#pandas.core.window.Expanding.corr" title="pandas.core.window.Expanding.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corr()</span></code></a></td>
-<td>Correlation (binary)</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.Expanding.corr.html#pandas.core.window.Expanding.corr" title="pandas.core.window.Expanding.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corr()</span></code></a></p></td>
+<td><p>Correlation (binary)</p></td>
 </tr>
 </tbody>
 </table>
@@ -1428,97 +1345,91 @@ they are implemented in pandas such that the following two calls are equivalent:
 interfaces as their <code class="docutils literal notranslate"><span class="pre">.rolling</span></code> counterparts. Like above, the parameters they
 all accept are:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">min_periods</span></code>: threshold of non-null data points to require. Defaults to
+<li><p><code class="docutils literal notranslate"><span class="pre">min_periods</span></code>: threshold of non-null data points to require. Defaults to
 minimum needed to compute statistic. No <code class="docutils literal notranslate"><span class="pre">NaNs</span></code> will be output once
-<code class="docutils literal notranslate"><span class="pre">min_periods</span></code> non-null data points have been seen.</li>
-<li><code class="docutils literal notranslate"><span class="pre">center</span></code>: boolean, whether to set the labels at the center (default is False).</li>
+<code class="docutils literal notranslate"><span class="pre">min_periods</span></code> non-null data points have been seen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">center</span></code>: boolean, whether to set the labels at the center (default is False).</p></li>
 </ul>
 <div class="admonition note" id="stats-moments-expanding-note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>The output of the <code class="docutils literal notranslate"><span class="pre">.rolling</span></code> and <code class="docutils literal notranslate"><span class="pre">.expanding</span></code> methods do not return a
 <code class="docutils literal notranslate"><span class="pre">NaN</span></code> if there are at least <code class="docutils literal notranslate"><span class="pre">min_periods</span></code> non-null values in the current
 window. For example:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [100]: </span><span class="n">sn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<pre class="literal-block">In [100]: sn = pd.Series([1, 2, np.nan, 3, np.nan, 4])
 
-<span class="gp">In [101]: </span><span class="n">sn</span>
-<span class="gh">Out[101]: </span><span class="go"></span>
-<span class="go">0    1.0</span>
-<span class="go">1    2.0</span>
-<span class="go">2    NaN</span>
-<span class="go">3    3.0</span>
-<span class="go">4    NaN</span>
-<span class="go">5    4.0</span>
-<span class="go">Length: 6, dtype: float64</span>
+In [101]: sn
+Out[101]: 
+0    1.0
+1    2.0
+2    NaN
+3    3.0
+4    NaN
+5    4.0
+Length: 6, dtype: float64
 
-<span class="gp">In [102]: </span><span class="n">sn</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="go">                                                                                           Out[102]: </span>
-<span class="go">0    NaN</span>
-<span class="go">1    2.0</span>
-<span class="go">2    NaN</span>
-<span class="go">3    NaN</span>
-<span class="go">4    NaN</span>
-<span class="go">5    NaN</span>
-<span class="go">Length: 6, dtype: float64</span>
+In [102]: sn.rolling(2).max()
+Out[102]: 
+0    NaN
+1    2.0
+2    NaN
+3    NaN
+4    NaN
+5    NaN
+Length: 6, dtype: float64
 
-<span class="gp">In [103]: </span><span class="n">sn</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                      Out[103]: </span>
-<span class="go">0    1.0</span>
-<span class="go">1    2.0</span>
-<span class="go">2    2.0</span>
-<span class="go">3    3.0</span>
-<span class="go">4    3.0</span>
-<span class="go">5    4.0</span>
-<span class="go">Length: 6, dtype: float64</span>
-</pre></div>
-</div>
+In [103]: sn.rolling(2, min_periods=1).max()
+Out[103]: 
+0    1.0
+1    2.0
+2    2.0
+3    3.0
+4    3.0
+5    4.0
+Length: 6, dtype: float64</pre>
 <p>In case of expanding functions, this differs from <a class="reference internal" href="../generated/pandas.DataFrame.cumsum.html#pandas.DataFrame.cumsum" title="pandas.DataFrame.cumsum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumsum()</span></code></a>,
 <a class="reference internal" href="../generated/pandas.DataFrame.cumprod.html#pandas.DataFrame.cumprod" title="pandas.DataFrame.cumprod"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumprod()</span></code></a>, <a class="reference internal" href="../generated/pandas.DataFrame.cummax.html#pandas.DataFrame.cummax" title="pandas.DataFrame.cummax"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cummax()</span></code></a>,
 and <a class="reference internal" href="../generated/pandas.DataFrame.cummin.html#pandas.DataFrame.cummin" title="pandas.DataFrame.cummin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cummin()</span></code></a>, which return <code class="docutils literal notranslate"><span class="pre">NaN</span></code> in the output wherever
 a <code class="docutils literal notranslate"><span class="pre">NaN</span></code> is encountered in the input. In order to match the output of <code class="docutils literal notranslate"><span class="pre">cumsum</span></code>
 with <code class="docutils literal notranslate"><span class="pre">expanding</span></code>, use <a class="reference internal" href="../generated/pandas.DataFrame.fillna.html#pandas.DataFrame.fillna" title="pandas.DataFrame.fillna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fillna()</span></code></a>:</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [104]: </span><span class="n">sn</span><span class="o">.</span><span class="n">expanding</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="gh">Out[104]: </span><span class="go"></span>
-<span class="go">0     1.0</span>
-<span class="go">1     3.0</span>
-<span class="go">2     3.0</span>
-<span class="go">3     6.0</span>
-<span class="go">4     6.0</span>
-<span class="go">5    10.0</span>
-<span class="go">Length: 6, dtype: float64</span>
+<pre class="literal-block">In [104]: sn.expanding().sum()
+Out[104]: 
+0     1.0
+1     3.0
+2     3.0
+3     6.0
+4     6.0
+5    10.0
+Length: 6, dtype: float64
 
-<span class="gp">In [105]: </span><span class="n">sn</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
-<span class="go">                                                                                                 Out[105]: </span>
-<span class="go">0     1.0</span>
-<span class="go">1     3.0</span>
-<span class="go">2     NaN</span>
-<span class="go">3     6.0</span>
-<span class="go">4     NaN</span>
-<span class="go">5    10.0</span>
-<span class="go">Length: 6, dtype: float64</span>
+In [105]: sn.cumsum()
+Out[105]: 
+0     1.0
+1     3.0
+2     NaN
+3     6.0
+4     NaN
+5    10.0
+Length: 6, dtype: float64
 
-<span class="gp">In [106]: </span><span class="n">sn</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                  Out[106]: </span>
-<span class="go">0     1.0</span>
-<span class="go">1     3.0</span>
-<span class="go">2     3.0</span>
-<span class="go">3     6.0</span>
-<span class="go">4     6.0</span>
-<span class="go">5    10.0</span>
-<span class="go">Length: 6, dtype: float64</span>
-</pre></div>
-</div>
+In [106]: sn.cumsum().fillna(method='ffill')
+Out[106]: 
+0     1.0
+1     3.0
+2     3.0
+3     6.0
+4     6.0
+5    10.0
+Length: 6, dtype: float64</pre>
 </div>
 <p>An expanding window statistic will be more stable (and less responsive) than
 its rolling window counterpart as the increasing window size decreases the
 relative impact of an individual data point. As an example, here is the
 <a class="reference internal" href="../generated/pandas.core.window.Expanding.mean.html#pandas.core.window.Expanding.mean" title="pandas.core.window.Expanding.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a> output for the previous time series dataset:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [107]: </span><span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="gh">Out[107]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaec0bb630&gt;</span>
+<pre class="literal-block">In [107]: s.plot(style='k--')
+Out[107]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6fee744e10&gt;
 
-<span class="gp">In [108]: </span><span class="n">s</span><span class="o">.</span><span class="n">expanding</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="go">                                                                    Out[108]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaec0bb630&gt;</span>
-</pre></div>
-</div>
+In [108]: s.expanding().mean().plot(style='k')
+Out[108]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6fee744e10&gt;</pre>
 <img alt="../_images/expanding_mean_frame.png" src="../_images/expanding_mean_frame.png" />
 </div>
 </div>
@@ -1529,31 +1440,31 @@ the above statistics. A similar interface to <code class="docutils literal notra
 through the <code class="docutils literal notranslate"><span class="pre">.ewm</span></code> method to receive an <code class="xref py py-class docutils literal notranslate"><span class="pre">EWM</span></code> object.
 A number of expanding EW (exponentially weighted)
 methods are provided:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col style="width: 20%" />
+<col style="width: 80%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Function</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.EWM.mean.html#pandas.core.window.EWM.mean" title="pandas.core.window.EWM.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></td>
-<td>EW moving average</td>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.EWM.mean.html#pandas.core.window.EWM.mean" title="pandas.core.window.EWM.mean"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></a></p></td>
+<td><p>EW moving average</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.EWM.var.html#pandas.core.window.EWM.var" title="pandas.core.window.EWM.var"><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></a></td>
-<td>EW moving variance</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.EWM.var.html#pandas.core.window.EWM.var" title="pandas.core.window.EWM.var"><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></a></p></td>
+<td><p>EW moving variance</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.EWM.std.html#pandas.core.window.EWM.std" title="pandas.core.window.EWM.std"><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></a></td>
-<td>EW moving standard deviation</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.EWM.std.html#pandas.core.window.EWM.std" title="pandas.core.window.EWM.std"><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></a></p></td>
+<td><p>EW moving standard deviation</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="../generated/pandas.core.window.EWM.corr.html#pandas.core.window.EWM.corr" title="pandas.core.window.EWM.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corr()</span></code></a></td>
-<td>EW moving correlation</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../generated/pandas.core.window.EWM.corr.html#pandas.core.window.EWM.corr" title="pandas.core.window.EWM.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">corr()</span></code></a></p></td>
+<td><p>EW moving correlation</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="../generated/pandas.core.window.EWM.cov.html#pandas.core.window.EWM.cov" title="pandas.core.window.EWM.cov"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cov()</span></code></a></td>
-<td>EW moving covariance</td>
+<tr class="row-even"><td><p><a class="reference internal" href="../generated/pandas.core.window.EWM.cov.html#pandas.core.window.EWM.cov" title="pandas.core.window.EWM.cov"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cov()</span></code></a></p></td>
+<td><p>EW moving covariance</p></td>
 </tr>
 </tbody>
 </table>
@@ -1580,9 +1491,9 @@ y_t &amp;= (1 - \alpha) y_{t-1} + \alpha x_t,\end{split}\]</div>
     (1 - \alpha)^i        &amp; \text{if } i = t.
 \end{cases}\end{split}\]</div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>These equations are sometimes written in terms of <span class="math notranslate nohighlight">\(\alpha' = 1 - \alpha\)</span>, e.g.</p>
-<div class="last math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[y_t = \alpha' y_{t-1} + (1 - \alpha') x_t.\]</div>
 </div>
 <p>The difference between the above two variants arises because we are
@@ -1620,21 +1531,19 @@ of an EW moment:</p>
 <p>One must specify precisely one of <strong>span</strong>, <strong>center of mass</strong>, <strong>half-life</strong>
 and <strong>alpha</strong> to the EW functions:</p>
 <ul class="simple">
-<li><strong>Span</strong> corresponds to what is commonly called an “N-day EW moving average”.</li>
-<li><strong>Center of mass</strong> has a more physical interpretation and can be thought of
-in terms of span: <span class="math notranslate nohighlight">\(c = (s - 1) / 2\)</span>.</li>
-<li><strong>Half-life</strong> is the period of time for the exponential weight to reduce to
-one half.</li>
-<li><strong>Alpha</strong> specifies the smoothing factor directly.</li>
+<li><p><strong>Span</strong> corresponds to what is commonly called an “N-day EW moving average”.</p></li>
+<li><p><strong>Center of mass</strong> has a more physical interpretation and can be thought of
+in terms of span: <span class="math notranslate nohighlight">\(c = (s - 1) / 2\)</span>.</p></li>
+<li><p><strong>Half-life</strong> is the period of time for the exponential weight to reduce to
+one half.</p></li>
+<li><p><strong>Alpha</strong> specifies the smoothing factor directly.</p></li>
 </ul>
 <p>Here is an example for a univariate time series:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [109]: </span><span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k--&#39;</span><span class="p">)</span>
-<span class="gh">Out[109]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaebf61630&gt;</span>
+<pre class="literal-block">In [109]: s.plot(style='k--')
+Out[109]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6ff6281ba8&gt;
 
-<span class="gp">In [110]: </span><span class="n">s</span><span class="o">.</span><span class="n">ewm</span><span class="p">(</span><span class="n">span</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="go">                                                                    Out[110]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7feaebf61630&gt;</span>
-</pre></div>
-</div>
+In [110]: s.ewm(span=20).mean().plot(style='k')
+Out[110]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f6ff6281ba8&gt;</pre>
 <img alt="../_images/ewma_ex.png" src="../_images/ewma_ex.png" />
 <p>EWM has a <code class="docutils literal notranslate"><span class="pre">min_periods</span></code> argument, which has the same
 meaning it does for all the <code class="docutils literal notranslate"><span class="pre">.expanding</span></code> and <code class="docutils literal notranslate"><span class="pre">.rolling</span></code> methods:
@@ -1688,7 +1597,7 @@ on Wikipedia for further details.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

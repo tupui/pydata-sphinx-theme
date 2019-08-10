@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.core.groupby.GroupBy.nth &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.core.groupby.GroupBy.nth &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,33 +91,34 @@
 <h1>pandas.core.groupby.GroupBy.nth<a class="headerlink" href="#pandas-core-groupby-groupby-nth" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.core.groupby.GroupBy.nth">
-<code class="descclassname">GroupBy.</code><code class="descname">nth</code><span class="sig-paren">(</span><em>n</em>, <em>dropna=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/groupby/groupby.py#L1598-L1752"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.core.groupby.GroupBy.nth" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">GroupBy.</code><code class="sig-name descname">nth</code><span class="sig-paren">(</span><em class="sig-param">n: Union[int, List[int]], dropna: Optional[str] = None</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/groupby/groupby.py#L1670-L1835"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.core.groupby.GroupBy.nth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take the nth row from each group if n is an int, or a subset of rows
 if n is a list of ints.</p>
 <p>If dropna, will take the nth non-null row, dropna is either
-Truthy (if a Series) or ‘all’, ‘any’ (if a DataFrame);
-this is equivalent to calling dropna(how=dropna) before the
-groupby.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int or list of ints</p>
+‘all’ or ‘any’; this is equivalent to calling dropna(how=dropna)
+before the groupby.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> : int or list of ints</p>
 <blockquote>
 <div><p>a single nth value for the row or a list of nth values</p>
 </div></blockquote>
 <p><strong>dropna</strong> : None or str, optional</p>
-<blockquote class="last">
+<blockquote>
 <div><p>apply the specified dropna operation before counting which row is
 the nth row. Needs to be None, ‘any’ or ‘all’</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Series or DataFrame</strong></p>
+<blockquote>
+<div><p>N-th value within each group.</p>
+</div></blockquote>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.Series.groupby.html#pandas.Series.groupby" title="pandas.Series.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.Series.groupby</span></code></a>, <a class="reference internal" href="pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.groupby</span></code></a>, <a class="reference internal" href="pandas.Panel.groupby.html#pandas.Panel.groupby" title="pandas.Panel.groupby"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.Panel.groupby</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.groupby</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.groupby</span></code></p>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
@@ -143,7 +148,7 @@ the nth row. Needs to be None, ‘any’ or ‘all’</p>
 <span class="go">2  5.0</span>
 </pre></div>
 </div>
-<p>Specifying <code class="docutils literal notranslate"><span class="pre">dropna</span></code> allows count ignoring NaN</p>
+<p>Specifying <cite>dropna</cite> allows count ignoring <code class="docutils literal notranslate"><span class="pre">NaN</span></code></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">nth</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">)</span>
 <span class="go">     B</span>
 <span class="go">A</span>
@@ -159,7 +164,7 @@ the nth row. Needs to be None, ‘any’ or ‘all’</p>
 <span class="go">2 NaN</span>
 </pre></div>
 </div>
-<p>Specifying <code class="docutils literal notranslate"><span class="pre">as_index=False</span></code> in <code class="docutils literal notranslate"><span class="pre">groupby</span></code> keeps the original index.</p>
+<p>Specifying <cite>as_index=False</cite> in <cite>groupby</cite> keeps the original index.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">nth</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">   A    B</span>
 <span class="go">1  1  2.0</span>
@@ -190,7 +195,7 @@ the nth row. Needs to be None, ‘any’ or ‘all’</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

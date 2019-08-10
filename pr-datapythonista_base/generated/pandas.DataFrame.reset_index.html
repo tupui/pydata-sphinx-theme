@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.reset_index &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.reset_index &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,29 +91,26 @@
 <h1>pandas.DataFrame.reset_index<a class="headerlink" href="#pandas-dataframe-reset-index" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.reset_index">
-<code class="descclassname">DataFrame.</code><code class="descname">reset_index</code><span class="sig-paren">(</span><em>level=None</em>, <em>drop=False</em>, <em>inplace=False</em>, <em>col_level=0</em>, <em>col_fill=''</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L3933-L4143"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reset_index" title="Permalink to this definition">¶</a></dt>
-<dd><p>For DataFrame with multi-level index, return new DataFrame with
-labeling information in the columns under the index names, defaulting
-to ‘level_0’, ‘level_1’, etc. if any are None. For a standard index,
-the index name will be used (if set), otherwise a default ‘index’ or
-‘level_0’ (if ‘index’ is already taken) will be used.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>level</strong> : int, str, tuple, or list, default None</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">reset_index</code><span class="sig-paren">(</span><em class="sig-param">level=None</em>, <em class="sig-param">drop=False</em>, <em class="sig-param">inplace=False</em>, <em class="sig-param">col_level=0</em>, <em class="sig-param">col_fill=''</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L4459-L4693"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reset_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the index, or a level of it.</p>
+<p>Reset the index of the DataFrame, and use the default one instead.
+If the DataFrame has a MultiIndex, this method can remove one or more
+levels.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>level</strong> : int, str, tuple, or list, default None</p>
 <blockquote>
 <div><p>Only remove the given levels from the index. Removes all levels by
-default</p>
+default.</p>
 </div></blockquote>
-<p><strong>drop</strong> : boolean, default False</p>
+<p><strong>drop</strong> : bool, default False</p>
 <blockquote>
 <div><p>Do not try to insert index into dataframe columns. This resets
 the index to the default integer index.</p>
 </div></blockquote>
-<p><strong>inplace</strong> : boolean, default False</p>
+<p><strong>inplace</strong> : bool, default False</p>
 <blockquote>
-<div><p>Modify the DataFrame in place (do not create a new object)</p>
+<div><p>Modify the DataFrame in place (do not create a new object).</p>
 </div></blockquote>
 <p><strong>col_level</strong> : int or str, default 0</p>
 <blockquote>
@@ -122,20 +123,29 @@ level.</p>
 <div><p>If the columns have multiple levels, determines how the other
 levels are named. If None then the index name is repeated.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>resetted</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>DataFrame</strong></p>
+<blockquote>
+<div><p>DataFrame with the new index.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.set_index.html#pandas.DataFrame.set_index" title="pandas.DataFrame.set_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.set_index</span></code></a></dt><dd><p>Opposite of reset_index.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reindex.html#pandas.DataFrame.reindex" title="pandas.DataFrame.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reindex</span></code></a></dt><dd><p>Change to new indices or expand indices.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reindex_like.html#pandas.DataFrame.reindex_like" title="pandas.DataFrame.reindex_like"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reindex_like</span></code></a></dt><dd><p>Change to same indices as other DataFrame.</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span>    <span class="mf">389.0</span><span class="p">),</span>
-<span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span>     <span class="mf">24.0</span><span class="p">),</span>
-<span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span>   <span class="mf">80.5</span><span class="p">),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="mf">389.0</span><span class="p">),</span>
+<span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">),</span>
+<span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="mf">80.5</span><span class="p">),</span>
 <span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)],</span>
 <span class="gp">... </span>                  <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;falcon&#39;</span><span class="p">,</span> <span class="s1">&#39;parrot&#39;</span><span class="p">,</span> <span class="s1">&#39;lion&#39;</span><span class="p">,</span> <span class="s1">&#39;monkey&#39;</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;max_speed&#39;</span><span class="p">))</span>
@@ -261,7 +271,7 @@ which one with the parameter <cite>col_fill</cite>:</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.to_string &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.to_string &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,66 +91,54 @@
 <h1>pandas.DataFrame.to_string<a class="headerlink" href="#pandas-dataframe-to-string" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.to_string">
-<code class="descclassname">DataFrame.</code><code class="descname">to_string</code><span class="sig-paren">(</span><em>buf=None</em>, <em>columns=None</em>, <em>col_space=None</em>, <em>header=True</em>, <em>index=True</em>, <em>na_rep='NaN'</em>, <em>formatters=None</em>, <em>float_format=None</em>, <em>sparsify=None</em>, <em>index_names=True</em>, <em>justify=None</em>, <em>line_width=None</em>, <em>max_rows=None</em>, <em>max_cols=None</em>, <em>show_dimensions=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L1947-L1975"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_string" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_string</code><span class="sig-paren">(</span><em class="sig-param">buf=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">col_space=None</em>, <em class="sig-param">header=True</em>, <em class="sig-param">index=True</em>, <em class="sig-param">na_rep='NaN'</em>, <em class="sig-param">formatters=None</em>, <em class="sig-param">float_format=None</em>, <em class="sig-param">sparsify=None</em>, <em class="sig-param">index_names=True</em>, <em class="sig-param">justify=None</em>, <em class="sig-param">max_rows=None</em>, <em class="sig-param">min_rows=None</em>, <em class="sig-param">max_cols=None</em>, <em class="sig-param">show_dimensions=False</em>, <em class="sig-param">decimal='.'</em>, <em class="sig-param">line_width=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L687-L760"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Render a DataFrame to a console-friendly tabular output.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>buf</strong> : StringIO-like, optional</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>buf</strong> : StringIO-like, optional</p>
 <blockquote>
-<div><p>buffer to write to</p>
+<div><p>Buffer to write to.</p>
 </div></blockquote>
-<p><strong>columns</strong> : sequence, optional</p>
+<p><strong>columns</strong> : sequence, optional, default None</p>
 <blockquote>
-<div><p>the subset of columns to write; default None writes all columns</p>
+<div><p>The subset of columns to write. Writes all columns by default.</p>
 </div></blockquote>
 <p><strong>col_space</strong> : int, optional</p>
 <blockquote>
-<div><p>the minimum width of each column</p>
+<div><p>The minimum width of each column.</p>
 </div></blockquote>
 <p><strong>header</strong> : bool, optional</p>
 <blockquote>
-<div><p>Write out the column names. If a list of strings is given, it is assumed to be aliases for the column names</p>
+<div><p>Write out the column names. If a list of strings is given, it is assumed to be aliases for the column names.</p>
 </div></blockquote>
-<p><strong>index</strong> : bool, optional</p>
+<p><strong>index</strong> : bool, optional, default True</p>
 <blockquote>
-<div><p>whether to print index (row) labels, default True</p>
+<div><p>Whether to print index (row) labels.</p>
 </div></blockquote>
-<p><strong>na_rep</strong> : string, optional</p>
+<p><strong>na_rep</strong> : str, optional, default ‘NaN’</p>
 <blockquote>
-<div><p>string representation of NAN to use, default ‘NaN’</p>
+<div><p>String representation of NAN to use.</p>
 </div></blockquote>
-<p><strong>formatters</strong> : list or dict of one-parameter functions, optional</p>
+<p><strong>formatters</strong> : list or dict of one-param. functions, optional</p>
 <blockquote>
-<div><p>formatter functions to apply to columns’ elements by position or name,
-default None. The result of each function must be a unicode string.
+<div><p>Formatter functions to apply to columns’ elements by position or
+name.
+The result of each function must be a unicode string.
 List must be of length equal to the number of columns.</p>
 </div></blockquote>
-<p><strong>float_format</strong> : one-parameter function, optional</p>
+<p><strong>float_format</strong> : one-parameter function, optional, default None</p>
 <blockquote>
-<div><p>formatter function to apply to columns’ elements if they are floats,
-default None. The result of this function must be a unicode string.</p>
+<div><p>Formatter function to apply to columns’ elements if they are
+floats. The result of this function must be a unicode string.</p>
 </div></blockquote>
-<p><strong>sparsify</strong> : bool, optional</p>
+<p><strong>sparsify</strong> : bool, optional, default True</p>
 <blockquote>
-<div><p>Set to False for a DataFrame with a hierarchical index to print every
-multiindex key at each row, default True</p>
+<div><p>Set to False for a DataFrame with a hierarchical index to print
+every multiindex key at each row.</p>
 </div></blockquote>
-<p><strong>index_names</strong> : bool, optional</p>
+<p><strong>index_names</strong> : bool, optional, default True</p>
 <blockquote>
-<div><p>Prints the names of the indexes, default True</p>
-</div></blockquote>
-<p><strong>line_width</strong> : int, optional</p>
-<blockquote>
-<div><p>Width to wrap a line in characters, default no wrap</p>
-</div></blockquote>
-<p><strong>table_id</strong> : str, optional</p>
-<blockquote>
-<div><p>id for the &lt;table&gt; element create by to_html</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
-</div>
+<div><p>Prints the names of the indexes.</p>
 </div></blockquote>
 <p><strong>justify</strong> : str, default None</p>
 <blockquote>
@@ -154,29 +146,72 @@ multiindex key at each row, default True</p>
 the print configuration (controlled by set_option), ‘right’ out
 of the box. Valid values are</p>
 <ul class="simple">
-<li>left</li>
-<li>right</li>
-<li>center</li>
-<li>justify</li>
-<li>justify-all</li>
-<li>start</li>
-<li>end</li>
-<li>inherit</li>
-<li>match-parent</li>
-<li>initial</li>
-<li>unset</li>
+<li><p>left</p></li>
+<li><p>right</p></li>
+<li><p>center</p></li>
+<li><p>justify</p></li>
+<li><p>justify-all</p></li>
+<li><p>start</p></li>
+<li><p>end</p></li>
+<li><p>inherit</p></li>
+<li><p>match-parent</p></li>
+<li><p>initial</p></li>
+<li><p>unset.</p></li>
 </ul>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>formatted</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string (or unicode, depending on data and options)</span></dt>
-<dd></dd>
+<p><strong>max_rows</strong> : int, optional</p>
+<blockquote>
+<div><p>Maximum number of rows to display in the console.</p>
+</div></blockquote>
+<p><strong>min_rows</strong> : int, optional</p>
+<blockquote>
+<div><p>The number of rows to display in the console in a truncated repr
+(when number of rows is above <cite>max_rows</cite>).</p>
+</div></blockquote>
+<p><strong>max_cols</strong> : int, optional</p>
+<blockquote>
+<div><p>Maximum number of columns to display in the console.</p>
+</div></blockquote>
+<p><strong>show_dimensions</strong> : bool, default False</p>
+<blockquote>
+<div><p>Display DataFrame dimensions (number of rows by number of columns).</p>
+</div></blockquote>
+<p><strong>decimal</strong> : str, default ‘.’</p>
+<blockquote>
+<div><p>Character recognized as decimal separator, e.g. ‘,’ in Europe.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+</div></blockquote>
+<p><strong>line_width</strong> : int, optional</p>
+<blockquote>
+<div><p>Width to wrap a line in characters.</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>str (or unicode, depending on data and options)</strong></p>
+<blockquote>
+<div><p>String representation of the dataframe.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.to_html.html#pandas.DataFrame.to_html" title="pandas.DataFrame.to_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_html</span></code></a></dt><dd><p>Convert DataFrame to HTML.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="go">   col1  col2</span>
+<span class="go">0     1     4</span>
+<span class="go">1     2     5</span>
+<span class="go">2     3     6</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -201,7 +236,7 @@ of the box. Valid values are</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

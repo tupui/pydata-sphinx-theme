@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.to_stata &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.to_stata &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,16 +91,16 @@
 <h1>pandas.DataFrame.to_stata<a class="headerlink" href="#pandas-dataframe-to-stata" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.to_stata">
-<code class="descclassname">DataFrame.</code><code class="descname">to_stata</code><span class="sig-paren">(</span><em>fname</em>, <em>convert_dates=None</em>, <em>write_index=True</em>, <em>encoding='latin-1'</em>, <em>byteorder=None</em>, <em>time_stamp=None</em>, <em>data_label=None</em>, <em>variable_labels=None</em>, <em>version=114</em>, <em>convert_strl=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L1768-L1877"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_stata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export Stata binary dta files.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fname</strong> : path (string), buffer or path object</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_stata</code><span class="sig-paren">(</span><em class="sig-param">fname</em>, <em class="sig-param">convert_dates=None</em>, <em class="sig-param">write_index=True</em>, <em class="sig-param">encoding='latin-1'</em>, <em class="sig-param">byteorder=None</em>, <em class="sig-param">time_stamp=None</em>, <em class="sig-param">data_label=None</em>, <em class="sig-param">variable_labels=None</em>, <em class="sig-param">version=114</em>, <em class="sig-param">convert_strl=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L1998-L2117"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_stata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export DataFrame object to Stata dta format.</p>
+<p>Writes the DataFrame to a Stata dataset file.
+“dta” files contain a Stata dataset.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fname</strong> : str, buffer or path object</p>
 <blockquote>
-<div><p>string, path object (pathlib.Path or py._path.local.LocalPath) or
-object implementing a binary write() functions. If using a buffer
+<div><p>String, path object (pathlib.Path or py._path.local.LocalPath) or
+object implementing a binary write() function. If using a buffer
 then the buffer will not be automatically closed after the file
 data has been written.</p>
 </div></blockquote>
@@ -126,7 +130,7 @@ a datetime column has timezone information.</p>
 <div><p>A datetime to use as file creation date.  Default is the current
 time.</p>
 </div></blockquote>
-<p><strong>data_label</strong> : str</p>
+<p><strong>data_label</strong> : str, optional</p>
 <blockquote>
 <div><p>A label for the data set.  Must be 80 characters or smaller.</p>
 </div></blockquote>
@@ -135,10 +139,10 @@ time.</p>
 <div><p>Dictionary containing columns as keys and variable labels as
 values. Each label must be 80 characters or smaller.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </div></blockquote>
-<p><strong>version</strong> : {114, 117}</p>
+<p><strong>version</strong> : {114, 117}, default 114</p>
 <blockquote>
 <div><p>Version to use in the output dta file.  Version 114 can be used
 read by Stata 10 and later.  Version 117 can be read by Stata 13
@@ -146,7 +150,7 @@ or later. Version 114 limits string variables to 244 characters or
 fewer while 117 allows strings with lengths up to 2,000,000
 characters.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </div></blockquote>
 <p><strong>convert_strl</strong> : list, optional</p>
@@ -156,61 +160,48 @@ format. Only available if version is 117.  Storing strings in the
 StrL format can produce smaller dta files if strings have more than
 8 characters and values are repeated.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>NotImplementedError</strong></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>If datetimes contain timezone information</li>
-<li>Column dtype is not representable in Stata</li>
+<li><p>If datetimes contain timezone information</p></li>
+<li><p>Column dtype is not representable in Stata</p></li>
 </ul>
 </div></blockquote>
 <p><strong>ValueError</strong></p>
-<blockquote class="last">
+<blockquote>
 <div><ul class="simple">
-<li>Columns listed in convert_dates are neither datetime64[ns]
-or datetime.datetime</li>
-<li>Column listed in convert_dates is not in DataFrame</li>
-<li>Categorical label contains more than 32,000 characters</li>
+<li><p>Columns listed in convert_dates are neither datetime64[ns]
+or datetime.datetime</p></li>
+<li><p>Column listed in convert_dates is not in DataFrame</p></li>
+<li><p>Categorical label contains more than 32,000 characters</p></li>
 </ul>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.read_stata.html#pandas.read_stata" title="pandas.read_stata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.read_stata</span></code></a></dt>
-<dd>Import Stata data files</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.io.stata.StataWriter</span></code></dt>
-<dd>low-level writer for Stata data files</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.io.stata.StataWriter117</span></code></dt>
-<dd>low-level writer for version 117 files</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.read_stata.html#pandas.read_stata" title="pandas.read_stata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_stata</span></code></a></dt><dd><p>Import Stata data files.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.stata.StataWriter</span></code></dt><dd><p>Low-level writer for Stata data files.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">io.stata.StataWriter117</span></code></dt><dd><p>Low-level writer for version 117 files.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">to_stata</span><span class="p">(</span><span class="s1">&#39;./data_file.dta&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Or with dates</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">to_stata</span><span class="p">(</span><span class="s1">&#39;./date_data_file.dta&#39;</span><span class="p">,</span> <span class="p">{</span><span class="mi">2</span> <span class="p">:</span> <span class="s1">&#39;tw&#39;</span><span class="p">})</span>
-</pre></div>
-</div>
-<p>Alternatively you can create an instance of the StataWriter class</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">writer</span> <span class="o">=</span> <span class="n">StataWriter</span><span class="p">(</span><span class="s1">&#39;./data_file.dta&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">writer</span><span class="o">.</span><span class="n">write_file</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>With dates:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">writer</span> <span class="o">=</span> <span class="n">StataWriter</span><span class="p">(</span><span class="s1">&#39;./date_data_file.dta&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="p">{</span><span class="mi">2</span> <span class="p">:</span> <span class="s1">&#39;tw&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">writer</span><span class="o">.</span><span class="n">write_file</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;animal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;falcon&#39;</span><span class="p">,</span> <span class="s1">&#39;parrot&#39;</span><span class="p">,</span> <span class="s1">&#39;falcon&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                              <span class="s1">&#39;parrot&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">350</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">361</span><span class="p">,</span> <span class="mi">15</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_stata</span><span class="p">(</span><span class="s1">&#39;animals.dta&#39;</span><span class="p">)</span>  <span class="c1"># doctest: +SKIP</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -237,7 +228,7 @@ or datetime.datetime</li>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

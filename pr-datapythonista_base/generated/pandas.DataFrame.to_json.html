@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.to_json &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.to_json &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,15 +91,13 @@
 <h1>pandas.DataFrame.to_json<a class="headerlink" href="#pandas-dataframe-to-json" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.to_json">
-<code class="descclassname">DataFrame.</code><code class="descname">to_json</code><span class="sig-paren">(</span><em>path_or_buf=None</em>, <em>orient=None</em>, <em>date_format=None</em>, <em>double_precision=10</em>, <em>force_ascii=True</em>, <em>date_unit='ms'</em>, <em>default_handler=None</em>, <em>lines=False</em>, <em>compression=None</em>, <em>index=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L1750-L1891"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_json</code><span class="sig-paren">(</span><em class="sig-param">path_or_buf=None</em>, <em class="sig-param">orient=None</em>, <em class="sig-param">date_format=None</em>, <em class="sig-param">double_precision=10</em>, <em class="sig-param">force_ascii=True</em>, <em class="sig-param">date_unit='ms'</em>, <em class="sig-param">default_handler=None</em>, <em class="sig-param">lines=False</em>, <em class="sig-param">compression='infer'</em>, <em class="sig-param">index=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L2260-L2426"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the object to a JSON string.</p>
 <p>Note NaN’s and None will be converted to null and datetime objects
 will be converted to UNIX timestamps.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path_or_buf</strong> : string or file handle, optional</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path_or_buf</strong> : string or file handle, optional</p>
 <blockquote>
 <div><p>File path or object. If not specified, the result is returned as
 a string.</p>
@@ -104,38 +106,33 @@ a string.</p>
 <blockquote>
 <div><p>Indication of expected JSON string format.</p>
 <ul>
-<li><p class="first">Series</p>
+<li><p>Series</p>
 <ul class="simple">
-<li>default is ‘index’</li>
-<li>allowed values are: {‘split’,’records’,’index’}</li>
+<li><p>default is ‘index’</p></li>
+<li><p>allowed values are: {‘split’,’records’,’index’,’table’}</p></li>
 </ul>
 </li>
-<li><p class="first">DataFrame</p>
+<li><p>DataFrame</p>
 <ul class="simple">
-<li>default is ‘columns’</li>
-<li>allowed values are:
-{‘split’,’records’,’index’,’columns’,’values’}</li>
+<li><p>default is ‘columns’</p></li>
+<li><p>allowed values are:
+{‘split’,’records’,’index’,’columns’,’values’,’table’}</p></li>
 </ul>
 </li>
-<li><p class="first">The format of the JSON string</p>
+<li><p>The format of the JSON string</p>
 <ul>
-<li><p class="first">‘split’ : dict like {‘index’ -&gt; [index],
-‘columns’ -&gt; [columns], ‘data’ -&gt; [values]}</p>
-</li>
-<li><p class="first">‘records’ : list like
-[{column -&gt; value}, … , {column -&gt; value}]</p>
-</li>
-<li><p class="first">‘index’ : dict like {index -&gt; {column -&gt; value}}</p>
-</li>
-<li><p class="first">‘columns’ : dict like {column -&gt; {index -&gt; value}}</p>
-</li>
-<li><p class="first">‘values’ : just the values array</p>
-</li>
-<li><p class="first">‘table’ : dict like {‘schema’: {schema}, ‘data’: {data}}
+<li><p>‘split’ : dict like {‘index’ -&gt; [index],
+‘columns’ -&gt; [columns], ‘data’ -&gt; [values]}</p></li>
+<li><p>‘records’ : list like
+[{column -&gt; value}, … , {column -&gt; value}]</p></li>
+<li><p>‘index’ : dict like {index -&gt; {column -&gt; value}}</p></li>
+<li><p>‘columns’ : dict like {column -&gt; {index -&gt; value}}</p></li>
+<li><p>‘values’ : just the values array</p></li>
+<li><p>‘table’ : dict like {‘schema’: {schema}, ‘data’: {data}}
 describing the data, and the data component is
 like <code class="docutils literal notranslate"><span class="pre">orient='records'</span></code>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.20.0.</span></p>
+<p><span class="versionmodified changed">Changed in version 0.20.0.</span></p>
 </div>
 </li>
 </ul>
@@ -154,7 +151,7 @@ the default is ‘epoch’.</p>
 <div><p>The number of decimal places to use when encoding
 floating point values.</p>
 </div></blockquote>
-<p><strong>force_ascii</strong> : boolean, default True</p>
+<p><strong>force_ascii</strong> : bool, default True</p>
 <blockquote>
 <div><p>Force encoded string to be ASCII.</p>
 </div></blockquote>
@@ -170,39 +167,48 @@ microsecond, and nanosecond respectively.</p>
 suitable format for JSON. Should receive a single argument which is
 the object to convert and return a serialisable object.</p>
 </div></blockquote>
-<p><strong>lines</strong> : boolean, default False</p>
+<p><strong>lines</strong> : bool, default False</p>
 <blockquote>
 <div><p>If ‘orient’ is ‘records’ write out line delimited json format. Will
 throw ValueError if incorrect ‘orient’ since others are not list
 like.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </div></blockquote>
-<p><strong>compression</strong> : {None, ‘gzip’, ‘bz2’, ‘zip’, ‘xz’}</p>
+<p><strong>compression</strong> : {‘infer’, ‘gzip’, ‘bz2’, ‘zip’, ‘xz’, None}</p>
 <blockquote>
 <div><p>A string representing the compression to use in the output file,
-only used when the first argument is a filename.</p>
+only used when the first argument is a filename. By default, the
+compression is inferred from the filename.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24.0: </span>‘infer’ option added and set to default</p>
 </div>
 </div></blockquote>
-<p><strong>index</strong> : boolean, default True</p>
-<blockquote class="last">
+<p><strong>index</strong> : bool, default True</p>
+<blockquote>
 <div><p>Whether to include the index values in the JSON string. Not
 including the index (<code class="docutils literal notranslate"><span class="pre">index=False</span></code>) is only supported when
 orient is ‘split’ or ‘table’.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>None or str</strong></p>
+<blockquote>
+<div><p>If path_or_buf is None, returns the resulting json format as a
+string. Otherwise returns None.</p>
+</div></blockquote>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.read_json</span></code></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_json</span></code></p>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]],</span>
@@ -270,7 +276,7 @@ Note that index labels are not preserved with this encoding.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

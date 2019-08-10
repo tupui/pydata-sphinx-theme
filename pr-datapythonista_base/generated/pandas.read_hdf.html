@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.read_hdf &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.read_hdf &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,25 +91,28 @@
 <h1>pandas.read_hdf<a class="headerlink" href="#pandas-read-hdf" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.read_hdf">
-<code class="descclassname">pandas.</code><code class="descname">read_hdf</code><span class="sig-paren">(</span><em>path_or_buf</em>, <em>key=None</em>, <em>mode='r'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/io/pytables.py#L284-L402"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.read_hdf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">read_hdf</code><span class="sig-paren">(</span><em class="sig-param">path_or_buf</em>, <em class="sig-param">key=None</em>, <em class="sig-param">mode='r'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/io/pytables.py#L283-L415"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.read_hdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read from the store, close it if we opened it.</p>
 <p>Retrieve pandas object stored in file, optionally based on where
 criteria</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path_or_buf</strong> : string, buffer or path object</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path_or_buf</strong> : str, path object, pandas.HDFStore or file-like object</p>
 <blockquote>
-<div><p>Path to the file to open, or an open <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.HDFStore</span></code> object.
-Supports any object implementing the <code class="docutils literal notranslate"><span class="pre">__fspath__</span></code> protocol.
-This includes <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pathlib.Path</span></code></a> and py._path.local.LocalPath
-objects.</p>
+<div><p>Any valid string path is acceptable. The string could be a URL. Valid
+URL schemes include http, ftp, s3, and file. For file URLs, a host is
+expected. A local file could be: <code class="docutils literal notranslate"><span class="pre">file://localhost/path/to/table.h5</span></code>.</p>
+<p>If you want to pass in a path object, pandas accepts any
+<code class="docutils literal notranslate"><span class="pre">os.PathLike</span></code>.</p>
+<p>Alternatively, pandas accepts an open <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.HDFStore</span></code> object.</p>
+<p>By file-like object, we refer to objects with a <code class="docutils literal notranslate"><span class="pre">read()</span></code> method,
+such as a file handler (e.g. via builtin <code class="docutils literal notranslate"><span class="pre">open</span></code> function)
+or <code class="docutils literal notranslate"><span class="pre">StringIO</span></code>.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0: </span>support for pathlib, py.path.</p>
+<p><span class="versionmodified added">New in version 0.19.0: </span>support for pathlib, py.path.</p>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0: </span>support for __fspath__ proptocol.</p>
+<p><span class="versionmodified added">New in version 0.21.0: </span>support for __fspath__ protocol.</p>
 </div>
 </div></blockquote>
 <p><strong>key</strong> : object, optional</p>
@@ -152,23 +159,21 @@ of options.</p>
 <blockquote>
 <div><p>Additional keyword arguments passed to HDFStore.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>item</strong> : object</p>
-<blockquote class="last">
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>item</strong> : object</p>
+<blockquote>
 <div><p>The selected object. Return type depends on the object stored.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.to_hdf.html#pandas.DataFrame.to_hdf" title="pandas.DataFrame.to_hdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.to_hdf</span></code></a></dt>
-<dd>write a HDF file from a DataFrame</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.HDFStore</span></code></dt>
-<dd>low-level access to HDF files</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.to_hdf.html#pandas.DataFrame.to_hdf" title="pandas.DataFrame.to_hdf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_hdf</span></code></a></dt><dd><p>Write a HDF file from a DataFrame.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">HDFStore</span></code></dt><dd><p>Low-level access to HDF files.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
@@ -201,7 +206,7 @@ of options.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.pivot_table &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.pivot_table &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,19 +91,15 @@
 <h1>pandas.pivot_table<a class="headerlink" href="#pandas-pivot-table" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.pivot_table">
-<code class="descclassname">pandas.</code><code class="descname">pivot_table</code><span class="sig-paren">(</span><em>data</em>, <em>values=None</em>, <em>index=None</em>, <em>columns=None</em>, <em>aggfunc='mean'</em>, <em>fill_value=None</em>, <em>margins=False</em>, <em>dropna=True</em>, <em>margins_name='All'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/reshape/pivot.py#L26-L154"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.pivot_table" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">pivot_table</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">values=None</em>, <em class="sig-param">index=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">aggfunc='mean'</em>, <em class="sig-param">fill_value=None</em>, <em class="sig-param">margins=False</em>, <em class="sig-param">dropna=True</em>, <em class="sig-param">margins_name='All'</em>, <em class="sig-param">observed=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/reshape/pivot.py#L20-L181"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.pivot_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a spreadsheet-style pivot table as a DataFrame. The levels in
 the pivot table will be stored in MultiIndex objects (hierarchical
-indexes) on the index and columns of the result DataFrame</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
-<dt><strong>values</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column to aggregate, optional</span></dt>
-<dd></dd>
+indexes) on the index and columns of the result DataFrame.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong><span class="classifier">DataFrame</span></dt><dd></dd>
+<dt><strong>values</strong><span class="classifier">column to aggregate, optional</span></dt><dd></dd>
 </dl>
 <p><strong>index</strong> : column, Grouper, array, or list of the previous</p>
 <blockquote>
@@ -140,21 +140,27 @@ is function or list of functions</p>
 <div><p>Name of the row / column that will contain the totals
 when margins is True.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>table</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+<p><strong>observed</strong> : boolean, default False</p>
+<blockquote>
+<div><p>This only applies if any of the groupers are Categoricals.
+If True: only show observed values for categorical groupers.
+If False: show all values for categorical groupers.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.25.0.</span></p>
+</div>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>DataFrame</strong></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pivot</span></code></a></dt>
-<dd>pivot without aggregation that can handle non-numeric data</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pivot</span></code></a></dt><dd><p>Pivot without aggregation that can handle non-numeric data.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
@@ -165,21 +171,23 @@ when margins is True.</p>
 <span class="gp">... </span>                   <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="s2">&quot;large&quot;</span><span class="p">,</span> <span class="s2">&quot;large&quot;</span><span class="p">,</span> <span class="s2">&quot;small&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="s2">&quot;large&quot;</span><span class="p">,</span> <span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="s2">&quot;small&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                         <span class="s2">&quot;large&quot;</span><span class="p">],</span>
-<span class="gp">... </span>                   <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]})</span>
+<span class="gp">... </span>                   <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
-<span class="go">     A    B      C  D</span>
-<span class="go">0  foo  one  small  1</span>
-<span class="go">1  foo  one  large  2</span>
-<span class="go">2  foo  one  large  2</span>
-<span class="go">3  foo  two  small  3</span>
-<span class="go">4  foo  two  small  3</span>
-<span class="go">5  bar  one  large  4</span>
-<span class="go">6  bar  one  small  5</span>
-<span class="go">7  bar  two  small  6</span>
-<span class="go">8  bar  two  large  7</span>
+<span class="go">     A    B      C  D  E</span>
+<span class="go">0  foo  one  small  1  2</span>
+<span class="go">1  foo  one  large  2  4</span>
+<span class="go">2  foo  one  large  2  5</span>
+<span class="go">3  foo  two  small  3  5</span>
+<span class="go">4  foo  two  small  3  6</span>
+<span class="go">5  bar  one  large  4  6</span>
+<span class="go">6  bar  one  small  5  8</span>
+<span class="go">7  bar  two  small  6  9</span>
+<span class="go">8  bar  two  large  7  9</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
+<p>This first example aggregates values by taking the sum.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span>
 <span class="go">C        large  small</span>
@@ -190,28 +198,44 @@ when margins is True.</p>
 <span class="go">    two    NaN    6.0</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
-<span class="gp">... </span>                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
+<p>We can also fill missing values using the <cite>fill_value</cite> parameter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span>
 <span class="go">C        large  small</span>
 <span class="go">A   B</span>
-<span class="go">bar one    4.0    5.0</span>
-<span class="go">    two    7.0    6.0</span>
-<span class="go">foo one    4.0    1.0</span>
-<span class="go">    two    NaN    6.0</span>
+<span class="go">bar one      4      5</span>
+<span class="go">    two      7      6</span>
+<span class="go">foo one      4      1</span>
+<span class="go">    two      0      6</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
+<p>The next example aggregates by taking the mean across multiple columns.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="n">aggfunc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
+<span class="gp">... </span>                             <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span>
+<span class="go">                D         E</span>
+<span class="go">A   C</span>
+<span class="go">bar large  5.500000  7.500000</span>
+<span class="go">    small  5.500000  8.500000</span>
+<span class="go">foo large  2.000000  4.500000</span>
+<span class="go">    small  2.333333  4.333333</span>
+</pre></div>
+</div>
+<p>We can also calculate multiple types of aggregations for any given
+value column.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
 <span class="gp">... </span>                    <span class="n">aggfunc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">]})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span>
-<span class="go">                  D   E</span>
-<span class="go">               mean max median min</span>
+<span class="go">                D    E</span>
+<span class="go">            mean  max      mean  min</span>
 <span class="go">A   C</span>
-<span class="go">bar large  5.500000  16   14.5  13</span>
-<span class="go">    small  5.500000  15   14.5  14</span>
-<span class="go">foo large  2.000000  10    9.5   9</span>
-<span class="go">    small  2.333333  12   11.0   8</span>
+<span class="go">bar large  5.500000  9.0  7.500000  6.0</span>
+<span class="go">    small  5.500000  9.0  8.500000  8.0</span>
+<span class="go">foo large  2.000000  5.0  4.500000  4.0</span>
+<span class="go">    small  2.333333  6.0  4.333333  2.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -238,7 +262,7 @@ when margins is True.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

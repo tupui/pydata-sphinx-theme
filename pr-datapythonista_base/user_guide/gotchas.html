@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Frequently Asked Questions (FAQ) &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>Frequently Asked Questions (FAQ) &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -40,11 +40,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -157,24 +161,22 @@ overridden by passing the <code class="docutils literal notranslate"><span class
 represented by column names and memory usage of each column shown in bytes. For
 the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> above, the memory usage of each column and the total memory
 usage can be found with the <code class="docutils literal notranslate"><span class="pre">memory_usage</span></code> method:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span>
-<span class="gh">Out[8]: </span><span class="go"></span>
-<span class="go">Index                 80</span>
-<span class="go">int64              40000</span>
-<span class="go">float64            40000</span>
-<span class="go">datetime64[ns]     40000</span>
-<span class="go">timedelta64[ns]    40000</span>
-<span class="go">complex128         80000</span>
-<span class="go">object             40000</span>
-<span class="go">bool                5000</span>
-<span class="go">categorical        10920</span>
-<span class="go">Length: 9, dtype: int64</span>
+<pre class="literal-block">In [8]: df.memory_usage()
+Out[8]: 
+Index                128
+int64              40000
+float64            40000
+datetime64[ns]     40000
+timedelta64[ns]    40000
+complex128         80000
+object             40000
+bool                5000
+categorical        10920
+Length: 9, dtype: int64
 
-<span class="go"># total memory usage of dataframe</span>
-<span class="gp">In [9]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                  Out[9]: 296000</span>
-</pre></div>
-</div>
+# total memory usage of dataframe
+In [9]: df.memory_usage().sum()
+Out[9]: 296048</pre>
 <p>By default the memory usage of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>’s index is shown in the
 returned <code class="docutils literal notranslate"><span class="pre">Series</span></code>, the memory usage of the index can be suppressed by passing
 the <code class="docutils literal notranslate"><span class="pre">index=False</span></code> argument:</p>
@@ -232,19 +234,17 @@ Alternatively, you might want to compare if the pandas object is <code class="do
 </div>
 <p>To evaluate single-element pandas objects in a boolean context, use the method
 <a class="reference internal" href="../generated/pandas.DataFrame.bool.html#pandas.DataFrame.bool" title="pandas.DataFrame.bool"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bool()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
-<span class="gh">Out[11]: </span><span class="go">True</span>
+<pre class="literal-block">In [11]: pd.Series([True]).bool()
+Out[11]: True
 
-<span class="gp">In [12]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
-<span class="go">              Out[12]: False</span>
+In [12]: pd.Series([False]).bool()
+Out[12]: False
 
-<span class="gp">In [13]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="bp">True</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
-<span class="go">                             Out[13]: True</span>
+In [13]: pd.DataFrame([[True]]).bool()
+Out[13]: True
 
-<span class="gp">In [14]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="bp">False</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
-<span class="go">                                           Out[14]: False</span>
-</pre></div>
-</div>
+In [14]: pd.DataFrame([[False]]).bool()
+Out[14]: False</pre>
 <div class="section" id="bitwise-boolean">
 <h3>Bitwise boolean<a class="headerlink" href="#bitwise-boolean" title="Permalink to this headline">¶</a></h3>
 <p>Bitwise boolean operators like <code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code> return a boolean <code class="docutils literal notranslate"><span class="pre">Series</span></code>,
@@ -265,31 +265,27 @@ which is almost always what you want anyways.</p>
 <h3>Using the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator<a class="headerlink" href="#using-the-in-operator" title="Permalink to this headline">¶</a></h3>
 <p>Using the Python <code class="docutils literal notranslate"><span class="pre">in</span></code> operator on a <code class="docutils literal notranslate"><span class="pre">Series</span></code> tests for membership in the
 index, not membership among the values.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [15]: s = pd.Series(range(5), index=list('abcde'))
 
-<span class="gp">In [16]: </span><span class="mi">2</span> <span class="ow">in</span> <span class="n">s</span>
-<span class="gh">Out[16]: </span><span class="go">False</span>
+In [16]: 2 in s
+Out[16]: False
 
-<span class="gp">In [17]: </span><span class="s1">&#39;b&#39;</span> <span class="ow">in</span> <span class="n">s</span>
-<span class="go">               Out[17]: True</span>
-</pre></div>
-</div>
+In [17]: 'b' in s
+Out[17]: True</pre>
 <p>If this behavior is surprising, keep in mind that using <code class="docutils literal notranslate"><span class="pre">in</span></code> on a Python
 dictionary tests keys, not values, and <code class="docutils literal notranslate"><span class="pre">Series</span></code> are dict-like.
 To test for membership in the values, use the method <a class="reference internal" href="../generated/pandas.Series.isin.html#pandas.Series.isin" title="pandas.Series.isin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isin()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span>
-<span class="gh">Out[18]: </span><span class="go"></span>
-<span class="go">a    False</span>
-<span class="go">b    False</span>
-<span class="go">c     True</span>
-<span class="go">d    False</span>
-<span class="go">e    False</span>
-<span class="go">Length: 5, dtype: bool</span>
+<pre class="literal-block">In [18]: s.isin([2])
+Out[18]: 
+a    False
+b    False
+c     True
+d    False
+e    False
+Length: 5, dtype: bool
 
-<span class="gp">In [19]: </span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-<span class="go">                                                                                        Out[19]: True</span>
-</pre></div>
-</div>
+In [19]: s.isin([2]).any()
+Out[19]: True</pre>
 <p>For <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>, likewise, <code class="docutils literal notranslate"><span class="pre">in</span></code> applies to the column axis,
 testing for membership in the list of column names.</p>
 </div>
@@ -301,10 +297,10 @@ testing for membership in the list of column names.</p>
 <p>For lack of <code class="docutils literal notranslate"><span class="pre">NA</span></code> (missing) support from the ground up in NumPy and Python in
 general, we were given the difficult choice between either:</p>
 <ul class="simple">
-<li>A <em>masked array</em> solution: an array of data and an array of boolean values
-indicating whether a value is there or is missing.</li>
-<li>Using a special sentinel value, bit pattern, or set of sentinel values to
-denote <code class="docutils literal notranslate"><span class="pre">NA</span></code> across the dtypes.</li>
+<li><p>A <em>masked array</em> solution: an array of data and an array of boolean values
+indicating whether a value is there or is missing.</p></li>
+<li><p>Using a special sentinel value, bit pattern, or set of sentinel values to
+denote <code class="docutils literal notranslate"><span class="pre">NA</span></code> across the dtypes.</p></li>
 </ul>
 <p>For many reasons we chose the latter. After years of production use it has
 proven, at least in my opinion, to be the best decision given the state of
@@ -320,35 +316,33 @@ not ignored.</p>
 <p>In the absence of high performance <code class="docutils literal notranslate"><span class="pre">NA</span></code> support being built into NumPy from
 the ground up, the primary casualty is the ability to represent NAs in integer
 arrays. For example:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [20]: s = pd.Series([1, 2, 3, 4, 5], index=list('abcde'))
 
-<span class="gp">In [21]: </span><span class="n">s</span>
-<span class="gh">Out[21]: </span><span class="go"></span>
-<span class="go">a    1</span>
-<span class="go">b    2</span>
-<span class="go">c    3</span>
-<span class="go">d    4</span>
-<span class="go">e    5</span>
-<span class="go">Length: 5, dtype: int64</span>
+In [21]: s
+Out[21]: 
+a    1
+b    2
+c    3
+d    4
+e    5
+Length: 5, dtype: int64
 
-<span class="gp">In [22]: </span><span class="n">s</span><span class="o">.</span><span class="n">dtype</span>
-<span class="go">                                                                     Out[22]: dtype(&#39;int64&#39;)</span>
+In [22]: s.dtype
+Out[22]: dtype('int64')
 
-<span class="gp">In [23]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">])</span>
+In [23]: s2 = s.reindex(['a', 'b', 'c', 'f', 'u'])
 
-<span class="gp">In [24]: </span><span class="n">s2</span>
-<span class="gh">Out[24]: </span><span class="go"></span>
-<span class="go">a    1.0</span>
-<span class="go">b    2.0</span>
-<span class="go">c    3.0</span>
-<span class="go">f    NaN</span>
-<span class="go">u    NaN</span>
-<span class="go">Length: 5, dtype: float64</span>
+In [24]: s2
+Out[24]: 
+a    1.0
+b    2.0
+c    3.0
+f    NaN
+u    NaN
+Length: 5, dtype: float64
 
-<span class="gp">In [25]: </span><span class="n">s2</span><span class="o">.</span><span class="n">dtype</span>
-<span class="go">                                                                                 Out[25]: dtype(&#39;float64&#39;)</span>
-</pre></div>
-</div>
+In [25]: s2.dtype
+Out[25]: dtype('float64')</pre>
 <p>This trade-off is made largely for memory and performance reasons, and also so
 that the resulting <code class="docutils literal notranslate"><span class="pre">Series</span></code> continues to be “numeric”. One possibility is to
 use <code class="docutils literal notranslate"><span class="pre">dtype=object</span></code> arrays instead.</p>
@@ -359,28 +353,28 @@ use <code class="docutils literal notranslate"><span class="pre">dtype=object</s
 <a class="reference internal" href="../generated/pandas.Series.reindex.html#pandas.Series.reindex" title="pandas.Series.reindex"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reindex()</span></code></a> or some other means, boolean and integer types will be
 promoted to a different dtype in order to store the NAs. The promotions are
 summarized in this table:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="40%" />
-<col width="60%" />
+<col style="width: 40%" />
+<col style="width: 60%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Typeclass</th>
-<th class="head">Promotion dtype for storing NAs</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Typeclass</p></th>
+<th class="head"><p>Promotion dtype for storing NAs</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">floating</span></code></td>
-<td>no change</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">floating</span></code></p></td>
+<td><p>no change</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">object</span></code></td>
-<td>no change</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">object</span></code></p></td>
+<td><p>no change</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">integer</span></code></td>
-<td>cast to <code class="docutils literal notranslate"><span class="pre">float64</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">integer</span></code></p></td>
+<td><p>cast to <code class="docutils literal notranslate"><span class="pre">float64</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">boolean</span></code></td>
-<td>cast to <code class="docutils literal notranslate"><span class="pre">object</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td><p>cast to <code class="docutils literal notranslate"><span class="pre">object</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -392,34 +386,34 @@ explanation for the motivation is in the next section.</p>
 <h3>Why not make NumPy like R?<a class="headerlink" href="#why-not-make-numpy-like-r" title="Permalink to this headline">¶</a></h3>
 <p>Many people have suggested that NumPy should simply emulate the <code class="docutils literal notranslate"><span class="pre">NA</span></code> support
 present in the more domain-specific statistical programming language <a class="reference external" href="https://r-project.org">R</a>. Part of the reason is the NumPy type hierarchy:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="30%" />
-<col width="70%" />
+<col style="width: 30%" />
+<col style="width: 70%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Typeclass</th>
-<th class="head">Dtypes</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Typeclass</p></th>
+<th class="head"><p>Dtypes</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">numpy.floating</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">float16,</span> <span class="pre">float32,</span> <span class="pre">float64,</span> <span class="pre">float128</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.floating</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float16,</span> <span class="pre">float32,</span> <span class="pre">float64,</span> <span class="pre">float128</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">numpy.integer</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">int8,</span> <span class="pre">int16,</span> <span class="pre">int32,</span> <span class="pre">int64</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.integer</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int8,</span> <span class="pre">int16,</span> <span class="pre">int32,</span> <span class="pre">int64</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">numpy.unsignedinteger</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">uint8,</span> <span class="pre">uint16,</span> <span class="pre">uint32,</span> <span class="pre">uint64</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.unsignedinteger</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint8,</span> <span class="pre">uint16,</span> <span class="pre">uint32,</span> <span class="pre">uint64</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">numpy.object_</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">object_</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.object_</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">object_</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">numpy.bool_</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">bool_</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.bool_</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool_</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">numpy.character</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">string_,</span> <span class="pre">unicode_</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.character</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string_,</span> <span class="pre">unicode_</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -503,7 +497,7 @@ details.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

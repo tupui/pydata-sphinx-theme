@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.Series.equals &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.Series.equals &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,9 +91,87 @@
 <h1>pandas.Series.equals<a class="headerlink" href="#pandas-series-equals" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.Series.equals">
-<code class="descclassname">Series.</code><code class="descname">equals</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L1153-L1160"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.equals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determines if two NDFrame objects contain the same elements. NaNs in
-the same location are considered equal.</p>
+<code class="sig-prename descclassname">Series.</code><code class="sig-name descname">equals</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L1419-L1503"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.equals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether two objects contain the same elements.</p>
+<p>This function allows two Series or DataFrames to be compared against
+each other to see if they have the same shape and elements. NaNs in
+the same location are considered equal. The column headers do not
+need to have the same type, but the elements within the columns must
+be the same dtype.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> : Series or DataFrame</p>
+<blockquote>
+<div><p>The other Series or DataFrame to be compared with the first.</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>bool</strong></p>
+<blockquote>
+<div><p>True if all elements are the same in both objects, False
+otherwise.</p>
+</div></blockquote>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Series.eq.html#pandas.Series.eq" title="pandas.Series.eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.eq</span></code></a></dt><dd><p>Compare two Series objects of the same length and return a Series where each element is True if the element in each Series is equal, False otherwise.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.eq.html#pandas.DataFrame.eq" title="pandas.DataFrame.eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.eq</span></code></a></dt><dd><p>Compare two DataFrame objects of the same shape and return a DataFrame where each element is True if the respective element in each DataFrame is equal, False otherwise.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_series_equal</span></code></dt><dd><p>Return True if left and right Series are equal, False otherwise.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_frame_equal</span></code></dt><dd><p>Return True if left and right DataFrames are equal, False otherwise.</p>
+</dd>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_equal.html#numpy.array_equal" title="(in NumPy v1.17)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.array_equal</span></code></a></dt><dd><p>Return True if two arrays have the same shape and elements, False otherwise.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function requires that the elements have the same dtype as their
+respective elements in the other Series or DataFrame. However, the
+column labels do not need to have the same type, as long as they are
+still considered equal.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">    1   2</span>
+<span class="go">0  10  20</span>
+</pre></div>
+</div>
+<p>DataFrames df and exactly_equal have the same types and values for
+their elements and column labels, which will return True.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exactly_equal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exactly_equal</span>
+<span class="go">    1   2</span>
+<span class="go">0  10  20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">exactly_equal</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>DataFrames df and different_column_type have the same element
+types and values, but have different types for the column labels,
+which will still return True.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">different_column_type</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mf">1.0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mf">2.0</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">different_column_type</span>
+<span class="go">   1.0  2.0</span>
+<span class="go">0   10   20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">different_column_type</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>DataFrames df and different_data_type have different types for the
+same values for their elements, and will return False even though
+their column labels are the same values and types.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">different_data_type</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mf">20.0</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">different_data_type</span>
+<span class="go">      1     2</span>
+<span class="go">0  10.0  20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">different_data_type</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -114,7 +196,7 @@ the same location are considered equal.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.Series.sparse.to_coo &#8212; pandas 0.25.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/carousel.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.DataFrame" href="pandas.DataFrame.html" />
+    <link rel="prev" title="pandas.Series.sparse.from_coo" href="pandas.Series.sparse.from_coo.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
+           </a>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
+            
+            
+              
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li><a class="reference internal" href="#">pandas.Series.sparse.to_coo</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <div class="section" id="pandas-series-sparse-to-coo">
+<h1>pandas.Series.sparse.to_coo<a class="headerlink" href="#pandas-series-sparse-to-coo" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.Series.sparse.to_coo">
+<code class="sig-prename descclassname">sparse.</code><code class="sig-name descname">to_coo</code><span class="sig-paren">(</span><em class="sig-param">row_levels=(0</em>, <em class="sig-param">)</em>, <em class="sig-param">column_levels=(1</em>, <em class="sig-param">)</em>, <em class="sig-param">sort_labels=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pandas.Series.sparse.to_coo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a scipy.sparse.coo_matrix from a SparseSeries with MultiIndex.</p>
+<p>Use row_levels and column_levels to determine the row and column
+coordinates respectively. row_levels and column_levels are the names
+(labels) or numbers of the levels. {row_levels, column_levels} must be
+a partition of the MultiIndex level names (or numbers).</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>row_levels</strong><span class="classifier">tuple/list</span></dt><dd></dd>
+<dt><strong>column_levels</strong><span class="classifier">tuple/list</span></dt><dd></dd>
+</dl>
+<p><strong>sort_labels</strong> : bool, default False</p>
+<blockquote>
+<div><p>Sort the row and column labels before forming the sparse matrix.</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>y</strong><span class="classifier">scipy.sparse.coo_matrix</span></dt><dd></dd>
+<dt><strong>rows</strong><span class="classifier">list (row labels)</span></dt><dd></dd>
+<dt><strong>columns</strong><span class="classifier">list (column labels)</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="go">                                        (1, 2, &#39;a&#39;, 1),</span>
+<span class="go">                                        (1, 1, &#39;b&#39;, 0),</span>
+<span class="go">                                        (1, 1, &#39;b&#39;, 1),</span>
+<span class="go">                                        (2, 1, &#39;b&#39;, 0),</span>
+<span class="go">                                        (2, 1, &#39;b&#39;, 1)],</span>
+<span class="go">                                        names=[&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ss</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">to_coo</span><span class="p">(</span><span class="n">row_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
+<span class="go">                                 column_levels=[&#39;C&#39;, &#39;D&#39;],</span>
+<span class="go">                                 sort_labels=True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>
+<span class="go">&lt;3x4 sparse matrix of type &#39;&lt;class &#39;numpy.float64&#39;&gt;&#39;</span>
+<span class="go">        with 3 stored elements in COOrdinate format&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+<span class="go">matrix([[ 0.,  0.,  1.,  3.],</span>
+<span class="go">[ 3.,  0.,  0.,  0.],</span>
+<span class="go">[ 0.,  0.,  0.,  0.]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span>
+<span class="go">[(1, 1), (1, 2), (2, 1)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">columns</span>
+<span class="go">[(&#39;a&#39;, 0), (&#39;a&#39;, 1), (&#39;b&#39;, 0), (&#39;b&#39;, 1)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="../_sources/generated/pandas.Series.sparse.to_coo.rst.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2008-2014, the pandas development team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

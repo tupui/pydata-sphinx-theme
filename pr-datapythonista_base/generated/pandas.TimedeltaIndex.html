@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.TimedeltaIndex &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.TimedeltaIndex &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -89,25 +93,25 @@
 <h1>pandas.TimedeltaIndex<a class="headerlink" href="#pandas-timedeltaindex" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pandas.TimedeltaIndex">
-<em class="property">class </em><code class="descclassname">pandas.</code><code class="descname">TimedeltaIndex</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/indexes/timedeltas.py#L99-L991"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.TimedeltaIndex" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">TimedeltaIndex</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/indexes/timedeltas.py#L75-L711"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.TimedeltaIndex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Immutable ndarray of timedelta64 data, represented internally as int64, and
 which can be boxed to timedelta objects</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array-like (1-dimensional), optional</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> : array-like (1-dimensional), optional</p>
 <blockquote>
 <div><p>Optional timedelta-like data to construct index with</p>
 </div></blockquote>
-<p><strong>unit: unit of the arg (D,h,m,s,ms,us,ns) denote the unit, optional</strong></p>
+<p><strong>unit</strong> : unit of the arg (D,h,m,s,ms,us,ns) denote the unit, optional</p>
 <blockquote>
 <div><p>which is an integer/float number</p>
 </div></blockquote>
-<dl class="docutils">
-<dt><strong>freq: a frequency for the index, optional</strong></dt>
-<dd></dd>
-</dl>
+<p><strong>freq</strong> : string or pandas offset object, optional</p>
+<blockquote>
+<div><p>One of pandas date offset strings or corresponding objects. The string
+‘infer’ can be passed in order to set the frequency of the index as the
+inferred frequency upon creation</p>
+</div></blockquote>
 <p><strong>copy</strong> : bool</p>
 <blockquote>
 <div><p>Make a copy of input ndarray</p>
@@ -116,96 +120,113 @@ which can be boxed to timedelta objects</p>
 <blockquote>
 <div><p>If data is None, start is used as the start point in generating regular
 timedelta data.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.0.</span></p>
+</div>
 </div></blockquote>
 <p><strong>periods</strong> : int, optional, &gt; 0</p>
 <blockquote>
 <div><p>Number of periods to generate, if generating index. Takes precedence
 over end argument</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.0.</span></p>
+</div>
 </div></blockquote>
 <p><strong>end</strong> : end time, timedelta-like, optional</p>
 <blockquote>
 <div><p>If periods is none, generated index will extend to first conforming
 time on or just past end argument</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.: </span>0</p>
+</div>
 </div></blockquote>
 <p><strong>closed</strong> : string or None, default None</p>
 <blockquote>
 <div><p>Make the interval closed with respect to the given frequency to
 the ‘left’, ‘right’, or both sides (None)</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.: </span>0</p>
+</div>
 </div></blockquote>
 <p><strong>name</strong> : object</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Name to be stored in the index</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index</span></code></a></dt>
-<dd>The base pandas Index type</dd>
-<dt><a class="reference internal" href="pandas.Timedelta.html#pandas.Timedelta" title="pandas.Timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Timedelta</span></code></a></dt>
-<dd>Represents a duration between two dates or times.</dd>
-<dt><a class="reference internal" href="pandas.DatetimeIndex.html#pandas.DatetimeIndex" title="pandas.DatetimeIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex</span></code></a></dt>
-<dd>Index of datetime64 data</dd>
-<dt><a class="reference internal" href="pandas.PeriodIndex.html#pandas.PeriodIndex" title="pandas.PeriodIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex</span></code></a></dt>
-<dd>Index of Period data</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index</span></code></a></dt><dd><p>The base pandas Index type.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.Timedelta.html#pandas.Timedelta" title="pandas.Timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Timedelta</span></code></a></dt><dd><p>Represents a duration between two dates or times.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DatetimeIndex.html#pandas.DatetimeIndex" title="pandas.DatetimeIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex</span></code></a></dt><dd><p>Index of datetime64 data.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.PeriodIndex.html#pandas.PeriodIndex" title="pandas.PeriodIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex</span></code></a></dt><dd><p>Index of Period data.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.timedelta_range.html#pandas.timedelta_range" title="pandas.timedelta_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timedelta_range</span></code></a></dt><dd><p>Create a fixed-frequency TimedeltaIndex.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>To learn more about the frequency strings, please see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases">this link</a>.</p>
+<p>To learn more about the frequency strings, please see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases">this link</a>.</p>
+<p>Creating a TimedeltaIndex based on <cite>start</cite>, <cite>periods</cite>, and <cite>end</cite> has
+been deprecated in favor of <a class="reference internal" href="pandas.timedelta_range.html#pandas.timedelta_range" title="pandas.timedelta_range"><code class="xref py py-func docutils literal notranslate"><span class="pre">timedelta_range()</span></code></a>.</p>
 <p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="pandas.TimedeltaIndex.days.html#pandas.TimedeltaIndex.days" title="pandas.TimedeltaIndex.days"><code class="xref py py-obj docutils literal notranslate"><span class="pre">days</span></code></a></td>
-<td>Number of days for each element.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.days.html#pandas.TimedeltaIndex.days" title="pandas.TimedeltaIndex.days"><code class="xref py py-obj docutils literal notranslate"><span class="pre">days</span></code></a></p></td>
+<td><p>Number of days for each element.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.TimedeltaIndex.seconds.html#pandas.TimedeltaIndex.seconds" title="pandas.TimedeltaIndex.seconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seconds</span></code></a></td>
-<td>Number of seconds (&gt;= 0 and less than 1 day) for each element.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.seconds.html#pandas.TimedeltaIndex.seconds" title="pandas.TimedeltaIndex.seconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seconds</span></code></a></p></td>
+<td><p>Number of seconds (&gt;= 0 and less than 1 day) for each element.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.TimedeltaIndex.microseconds.html#pandas.TimedeltaIndex.microseconds" title="pandas.TimedeltaIndex.microseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">microseconds</span></code></a></td>
-<td>Number of microseconds (&gt;= 0 and less than 1 second) for each element.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.microseconds.html#pandas.TimedeltaIndex.microseconds" title="pandas.TimedeltaIndex.microseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">microseconds</span></code></a></p></td>
+<td><p>Number of microseconds (&gt;= 0 and less than 1 second) for each element.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.TimedeltaIndex.nanoseconds.html#pandas.TimedeltaIndex.nanoseconds" title="pandas.TimedeltaIndex.nanoseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nanoseconds</span></code></a></td>
-<td>Number of nanoseconds (&gt;= 0 and less than 1 microsecond) for each element.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.nanoseconds.html#pandas.TimedeltaIndex.nanoseconds" title="pandas.TimedeltaIndex.nanoseconds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nanoseconds</span></code></a></p></td>
+<td><p>Number of nanoseconds (&gt;= 0 and less than 1 microsecond) for each element.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.TimedeltaIndex.components.html#pandas.TimedeltaIndex.components" title="pandas.TimedeltaIndex.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components</span></code></a></td>
-<td>Return a dataframe of the components (days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds) of the Timedeltas.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.components.html#pandas.TimedeltaIndex.components" title="pandas.TimedeltaIndex.components"><code class="xref py py-obj docutils literal notranslate"><span class="pre">components</span></code></a></p></td>
+<td><p>Return a dataframe of the components (days, hours, minutes, seconds, milliseconds, microseconds, nanoseconds) of the Timedeltas.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.TimedeltaIndex.inferred_freq.html#pandas.TimedeltaIndex.inferred_freq" title="pandas.TimedeltaIndex.inferred_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inferred_freq</span></code></a></td>
-<td>Tries to return a string representing a frequency guess, generated by infer_freq.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.inferred_freq.html#pandas.TimedeltaIndex.inferred_freq" title="pandas.TimedeltaIndex.inferred_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inferred_freq</span></code></a></p></td>
+<td><p>Tryies to return a string representing a frequency guess, generated by infer_freq.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="pandas.TimedeltaIndex.to_pytimedelta.html#pandas.TimedeltaIndex.to_pytimedelta" title="pandas.TimedeltaIndex.to_pytimedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pytimedelta</span></code></a>()</td>
-<td>Return TimedeltaIndex as object ndarray of datetime.timedelta objects</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.to_pytimedelta.html#pandas.TimedeltaIndex.to_pytimedelta" title="pandas.TimedeltaIndex.to_pytimedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pytimedelta</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Return Timedelta Array/Index as object ndarray of datetime.timedelta objects.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.TimedeltaIndex.to_series.html#pandas.TimedeltaIndex.to_series" title="pandas.TimedeltaIndex.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_series</span></code></a>([index,&nbsp;name])</td>
-<td>Create a Series with both index and values equal to the index keys useful with map for returning an indexer based on an index</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.to_series.html#pandas.TimedeltaIndex.to_series" title="pandas.TimedeltaIndex.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_series</span></code></a>([index, name])</p></td>
+<td><p>Create a Series with both index and values equal to the index keys useful with map for returning an indexer based on an index.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.TimedeltaIndex.round.html#pandas.TimedeltaIndex.round" title="pandas.TimedeltaIndex.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code></a>(freq,&nbsp;*args,&nbsp;**kwargs)</td>
-<td>round the data to the specified <cite>freq</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.round.html#pandas.TimedeltaIndex.round" title="pandas.TimedeltaIndex.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code></a>(freq[, ambiguous, nonexistent])</p></td>
+<td><p>Perform round operation on the data to the specified <cite>freq</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.TimedeltaIndex.floor.html#pandas.TimedeltaIndex.floor" title="pandas.TimedeltaIndex.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">floor</span></code></a>(freq)</td>
-<td>floor the data to the specified <cite>freq</cite>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.floor.html#pandas.TimedeltaIndex.floor" title="pandas.TimedeltaIndex.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">floor</span></code></a>(freq[, ambiguous, nonexistent])</p></td>
+<td><p>Perform floor operation on the data to the specified <cite>freq</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.TimedeltaIndex.ceil.html#pandas.TimedeltaIndex.ceil" title="pandas.TimedeltaIndex.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ceil</span></code></a>(freq)</td>
-<td>ceil the data to the specified <cite>freq</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.ceil.html#pandas.TimedeltaIndex.ceil" title="pandas.TimedeltaIndex.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ceil</span></code></a>(freq[, ambiguous, nonexistent])</p></td>
+<td><p>Perform ceil operation on the data to the specified <cite>freq</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.TimedeltaIndex.to_frame.html#pandas.TimedeltaIndex.to_frame" title="pandas.TimedeltaIndex.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>([index])</td>
-<td>Create a DataFrame with a column containing the Index.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.TimedeltaIndex.to_frame.html#pandas.TimedeltaIndex.to_frame" title="pandas.TimedeltaIndex.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>([index, name])</p></td>
+<td><p>Create a DataFrame with a column containing the Index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean</span></code>(*args, **kwargs)</p></td>
+<td><p>Return the mean value of the Array.</p></td>
 </tr>
 </tbody>
 </table>
@@ -233,7 +254,7 @@ the ‘left’, ‘right’, or both sides (None)</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.Series.replace &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.Series.replace &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,77 +91,75 @@
 <h1>pandas.Series.replace<a class="headerlink" href="#pandas-series-replace" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.Series.replace">
-<code class="descclassname">Series.</code><code class="descname">replace</code><span class="sig-paren">(</span><em>to_replace=None</em>, <em>value=None</em>, <em>inplace=False</em>, <em>limit=None</em>, <em>regex=False</em>, <em>method='pad'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/series.py#L3427-L3432"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.replace" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Series.</code><code class="sig-name descname">replace</code><span class="sig-paren">(</span><em class="sig-param">to_replace=None</em>, <em class="sig-param">value=None</em>, <em class="sig-param">inplace=False</em>, <em class="sig-param">limit=None</em>, <em class="sig-param">regex=False</em>, <em class="sig-param">method='pad'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/series.py#L4346-L4363"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.replace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Replace values given in <cite>to_replace</cite> with <cite>value</cite>.</p>
 <p>Values of the Series are replaced with other values dynamically.
 This differs from updating with <code class="docutils literal notranslate"><span class="pre">.loc</span></code> or <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>, which require
 you to specify a location to update with some value.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>to_replace</strong> : str, regex, list, dict, Series, int, float, or None</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>to_replace</strong> : str, regex, list, dict, Series, int, float, or None</p>
 <blockquote>
 <div><p>How to find the values that will be replaced.</p>
 <ul>
-<li><p class="first">numeric, str or regex:</p>
+<li><p>numeric, str or regex:</p>
 <blockquote>
 <div><ul class="simple">
-<li>numeric: numeric values equal to <cite>to_replace</cite> will be
-replaced with <cite>value</cite></li>
-<li>str: string exactly matching <cite>to_replace</cite> will be replaced
-with <cite>value</cite></li>
-<li>regex: regexs matching <cite>to_replace</cite> will be replaced with
-<cite>value</cite></li>
+<li><p>numeric: numeric values equal to <cite>to_replace</cite> will be
+replaced with <cite>value</cite></p></li>
+<li><p>str: string exactly matching <cite>to_replace</cite> will be replaced
+with <cite>value</cite></p></li>
+<li><p>regex: regexs matching <cite>to_replace</cite> will be replaced with
+<cite>value</cite></p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">list of str, regex, or numeric:</p>
+<li><p>list of str, regex, or numeric:</p>
 <blockquote>
 <div><ul class="simple">
-<li>First, if <cite>to_replace</cite> and <cite>value</cite> are both lists, they
-<strong>must</strong> be the same length.</li>
-<li>Second, if <code class="docutils literal notranslate"><span class="pre">regex=True</span></code> then all of the strings in <strong>both</strong>
+<li><p>First, if <cite>to_replace</cite> and <cite>value</cite> are both lists, they
+<strong>must</strong> be the same length.</p></li>
+<li><p>Second, if <code class="docutils literal notranslate"><span class="pre">regex=True</span></code> then all of the strings in <strong>both</strong>
 lists will be interpreted as regexs otherwise they will match
 directly. This doesn’t matter much for <cite>value</cite> since there
-are only a few possible substitution regexes you can use.</li>
-<li>str, regex and numeric rules apply as above.</li>
+are only a few possible substitution regexes you can use.</p></li>
+<li><p>str, regex and numeric rules apply as above.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">dict:</p>
+<li><p>dict:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Dicts can be used to specify different replacement values
+<li><p>Dicts can be used to specify different replacement values
 for different existing values. For example,
 <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">'b',</span> <span class="pre">'y':</span> <span class="pre">'z'}</span></code> replaces the value ‘a’ with ‘b’ and
 ‘y’ with ‘z’. To use a dict in this way the <cite>value</cite>
-parameter should be <cite>None</cite>.</li>
-<li>For a DataFrame a dict can specify that different values
+parameter should be <cite>None</cite>.</p></li>
+<li><p>For a DataFrame a dict can specify that different values
 should be replaced in different columns. For example,
 <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">1,</span> <span class="pre">'b':</span> <span class="pre">'z'}</span></code> looks for the value 1 in column ‘a’
 and the value ‘z’ in column ‘b’ and replaces these values
 with whatever is specified in <cite>value</cite>. The <cite>value</cite> parameter
 should not be <code class="docutils literal notranslate"><span class="pre">None</span></code> in this case. You can treat this as a
 special case of passing two lists except that you are
-specifying the column to search in.</li>
-<li>For a DataFrame nested dictionaries, e.g.,
+specifying the column to search in.</p></li>
+<li><p>For a DataFrame nested dictionaries, e.g.,
 <code class="docutils literal notranslate"><span class="pre">{'a':</span> <span class="pre">{'b':</span> <span class="pre">np.nan}}</span></code>, are read as follows: look in column
 ‘a’ for the value ‘b’ and replace it with NaN. The <cite>value</cite>
 parameter should be <code class="docutils literal notranslate"><span class="pre">None</span></code> to use a nested dict in this
 way. You can nest regular expressions as well. Note that
 column names (the top-level dictionary keys in a nested
-dictionary) <strong>cannot</strong> be regular expressions.</li>
+dictionary) <strong>cannot</strong> be regular expressions.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">None:</p>
+<li><p>None:</p>
 <blockquote>
 <div><ul class="simple">
-<li>This means that the <cite>regex</cite> argument must be a string,
+<li><p>This means that the <cite>regex</cite> argument must be a string,
 compiled regular expression, or list, dict, ndarray or
 Series of such elements. If <cite>value</cite> is also <code class="docutils literal notranslate"><span class="pre">None</span></code> then
-this <strong>must</strong> be a nested dictionary or Series.</li>
+this <strong>must</strong> be a nested dictionary or Series.</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -172,7 +174,7 @@ value to use for each column (columns not in the dict will not be
 filled). Regular expressions, strings and lists or dicts of such
 objects are also allowed.</p>
 </div></blockquote>
-<p><strong>inplace</strong> : boolean, default False</p>
+<p><strong>inplace</strong> : bool, default False</p>
 <blockquote>
 <div><p>If True, in place. Note: this will modify any
 other views on this object (e.g. a column from a DataFrame).
@@ -195,73 +197,71 @@ list, dict, or array of regular expressions in which case
 <div><p>The method to use when for replacement, when <cite>to_replace</cite> is a
 scalar, list or tuple and <cite>value</cite> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.23.0: </span>Added to DataFrame.</p>
+<p><span class="versionmodified changed">Changed in version 0.23.0: </span>Added to DataFrame.</p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>Series</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Series</strong></p>
 <blockquote>
 <div><p>Object after replacement.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>AssertionError</strong></p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>AssertionError</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>If <cite>regex</cite> is not a <code class="docutils literal notranslate"><span class="pre">bool</span></code> and <cite>to_replace</cite> is not
-<code class="docutils literal notranslate"><span class="pre">None</span></code>.</li>
+<li><p>If <cite>regex</cite> is not a <code class="docutils literal notranslate"><span class="pre">bool</span></code> and <cite>to_replace</cite> is not
+<code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>TypeError</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li>If <cite>to_replace</cite> is a <code class="docutils literal notranslate"><span class="pre">dict</span></code> and <cite>value</cite> is not a <code class="docutils literal notranslate"><span class="pre">list</span></code>,
-<code class="docutils literal notranslate"><span class="pre">dict</span></code>, <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, or <code class="docutils literal notranslate"><span class="pre">Series</span></code></li>
-<li>If <cite>to_replace</cite> is <code class="docutils literal notranslate"><span class="pre">None</span></code> and <cite>regex</cite> is not compilable
+<li><p>If <cite>to_replace</cite> is a <code class="docutils literal notranslate"><span class="pre">dict</span></code> and <cite>value</cite> is not a <code class="docutils literal notranslate"><span class="pre">list</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dict</span></code>, <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, or <code class="docutils literal notranslate"><span class="pre">Series</span></code></p></li>
+<li><p>If <cite>to_replace</cite> is <code class="docutils literal notranslate"><span class="pre">None</span></code> and <cite>regex</cite> is not compilable
 into a regular expression or is a list, dict, ndarray, or
-Series.</li>
-<li>When replacing multiple <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects and
+Series.</p></li>
+<li><p>When replacing multiple <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects and
 the arguments to <cite>to_replace</cite> does not match the type of the
-value being replaced</li>
+value being replaced</p></li>
 </ul>
 </div></blockquote>
 <p><strong>ValueError</strong></p>
-<blockquote class="last">
+<blockquote>
 <div><ul class="simple">
-<li>If a <code class="docutils literal notranslate"><span class="pre">list</span></code> or an <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> is passed to <cite>to_replace</cite> and
-<cite>value</cite> but they are not the same length.</li>
+<li><p>If a <code class="docutils literal notranslate"><span class="pre">list</span></code> or an <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> is passed to <cite>to_replace</cite> and
+<cite>value</cite> but they are not the same length.</p></li>
 </ul>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.Series.fillna.html#pandas.Series.fillna" title="pandas.Series.fillna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.fillna</span></code></a></dt>
-<dd>Fill NA values</dd>
-<dt><a class="reference internal" href="pandas.Series.where.html#pandas.Series.where" title="pandas.Series.where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.where</span></code></a></dt>
-<dd>Replace values based on boolean condition</dd>
-<dt><a class="reference internal" href="pandas.Series.str.replace.html#pandas.Series.str.replace" title="pandas.Series.str.replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.replace</span></code></a></dt>
-<dd>Simple string replacement.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Series.fillna.html#pandas.Series.fillna" title="pandas.Series.fillna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.fillna</span></code></a></dt><dd><p>Fill NA values.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.Series.where.html#pandas.Series.where" title="pandas.Series.where"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.where</span></code></a></dt><dd><p>Replace values based on boolean condition.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.Series.str.replace.html#pandas.Series.str.replace" title="pandas.Series.str.replace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.str.replace</span></code></a></dt><dd><p>Simple string replacement.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
 <ul class="simple">
-<li>Regex substitution is performed under the hood with <code class="docutils literal notranslate"><span class="pre">re.sub</span></code>. The
-rules for substitution for <code class="docutils literal notranslate"><span class="pre">re.sub</span></code> are the same.</li>
-<li>Regular expressions will only substitute on strings, meaning you
+<li><p>Regex substitution is performed under the hood with <code class="docutils literal notranslate"><span class="pre">re.sub</span></code>. The
+rules for substitution for <code class="docutils literal notranslate"><span class="pre">re.sub</span></code> are the same.</p></li>
+<li><p>Regular expressions will only substitute on strings, meaning you
 cannot provide, for example, a regular expression matching floating
 point numbers and expect the columns in your frame that have a
 numeric dtype to be matched. However, if those floating point
-numbers <em>are</em> strings, then you can do this.</li>
-<li>This method has <em>a lot</em> of options. You are encouraged to experiment
-and play with this method to gain intuition about how it works.</li>
-<li>When dict is used as the <cite>to_replace</cite> value, it is like
+numbers <em>are</em> strings, then you can do this.</p></li>
+<li><p>This method has <em>a lot</em> of options. You are encouraged to experiment
+and play with this method to gain intuition about how it works.</p></li>
+<li><p>When dict is used as the <cite>to_replace</cite> value, it is like
 key(s) in the dict are the to_replace part and
-value(s) in the dict are the value parameter.</li>
+value(s) in the dict are the value parameter.</p></li>
 </ul>
 <p class="rubric">Examples</p>
 <p><strong>Scalar `to_replace` and `value`</strong></p>
@@ -367,7 +367,7 @@ value(s) in the dict are the value parameter.</li>
 <span class="go">2  bait  xyz</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="p">{</span><span class="sa">r</span><span class="s1">&#39;^ba.$&#39;</span><span class="p">:</span><span class="s1">&#39;new&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">:</span><span class="s1">&#39;xyz&#39;</span><span class="p">})</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="p">{</span><span class="sa">r</span><span class="s1">&#39;^ba.$&#39;</span><span class="p">:</span> <span class="s1">&#39;new&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;xyz&#39;</span><span class="p">})</span>
 <span class="go">      A    B</span>
 <span class="go">0   new  abc</span>
 <span class="go">1   xyz  new</span>
@@ -395,7 +395,7 @@ type of the value being replaced:</p>
 <p>This raises a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> because one of the <code class="docutils literal notranslate"><span class="pre">dict</span></code> keys is not of
 the correct type for replacement.</p>
 <p>Compare the behavior of <code class="docutils literal notranslate"><span class="pre">s.replace({'a':</span> <span class="pre">None})</span></code> and
-<code class="docutils literal notranslate"><span class="pre">s.replace('a',</span> <span class="pre">None)</span></code> to understand the pecularities
+<code class="docutils literal notranslate"><span class="pre">s.replace('a',</span> <span class="pre">None)</span></code> to understand the peculiarities
 of the <cite>to_replace</cite> parameter:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">])</span>
 </pre></div>
@@ -452,7 +452,7 @@ The command <code class="docutils literal notranslate"><span class="pre">s.repla
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

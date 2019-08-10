@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.update &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.update &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,14 +91,12 @@
 <h1>pandas.DataFrame.update<a class="headerlink" href="#pandas-dataframe-update" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.update">
-<code class="descclassname">DataFrame.</code><code class="descname">update</code><span class="sig-paren">(</span><em>other</em>, <em>join='left'</em>, <em>overwrite=True</em>, <em>filter_func=None</em>, <em>raise_conflict=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L4951-L5085"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">join='left'</em>, <em class="sig-param">overwrite=True</em>, <em class="sig-param">filter_func=None</em>, <em class="sig-param">errors='ignore'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L5641-L5797"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modify in place using non-NA values from another DataFrame.</p>
 <p>Aligns on indices. There is no return value.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>other</strong> : DataFrame, or object coercible into a DataFrame</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> : DataFrame, or object coercible into a DataFrame</p>
 <blockquote>
 <div><p>Should have at least one matching index/column label
 with the original DataFrame. If a Series is passed,
@@ -110,39 +112,55 @@ original object.</p>
 <blockquote>
 <div><p>How to handle non-NA values for overlapping keys:</p>
 <ul class="simple">
-<li>True: overwrite original DataFrame’s values
-with values from <cite>other</cite>.</li>
-<li>False: only update values that are NA in
-the original DataFrame.</li>
+<li><p>True: overwrite original DataFrame’s values
+with values from <cite>other</cite>.</p></li>
+<li><p>False: only update values that are NA in
+the original DataFrame.</p></li>
 </ul>
 </div></blockquote>
-<p><strong>filter_func</strong> : callable(1d-array) -&gt; boolean 1d-array, optional</p>
+<p><strong>filter_func</strong> : callable(1d-array) -&gt; bool 1d-array, optional</p>
 <blockquote>
 <div><p>Can choose to replace values other than NA. Return True for values
 that should be updated.</p>
 </div></blockquote>
-<p><strong>raise_conflict</strong> : bool, default False</p>
+<p><strong>errors</strong> : {‘raise’, ‘ignore’}, default ‘ignore’</p>
 <blockquote>
-<div><p>If True, will raise a ValueError if the DataFrame and <cite>other</cite>
+<div><p>If ‘raise’, will raise a ValueError if the DataFrame and <cite>other</cite>
 both contain non-NA data in the same place.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24.0: </span>Changed from <cite>raise_conflict=False|True</cite>
+to <cite>errors=’ignore’|’raise’</cite>.</p>
+</div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
-<blockquote class="last">
-<div><p>When <cite>raise_conflict</cite> is True and there’s overlapping non-NA data.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>None</strong><span class="classifier">method directly changes calling object</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When <cite>errors=’raise’</cite> and there’s overlapping non-NA data.</p></li>
+<li><p>When <cite>errors</cite> is not either <cite>‘ignore’</cite> or <cite>‘raise’</cite></p></li>
+</ul>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+<p><strong>NotImplementedError</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If <cite>join != ‘left’</cite></p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict.update" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict.update</span></code></a></dt>
-<dd>Similar method for dictionaries.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.merge.html#pandas.DataFrame.merge" title="pandas.DataFrame.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.merge</span></code></a></dt>
-<dd>For column(s)-on-columns(s) operations.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict.update" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict.update</span></code></a></dt><dd><p>Similar method for dictionaries.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.merge.html#pandas.DataFrame.merge" title="pandas.DataFrame.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.merge</span></code></a></dt><dd><p>For column(s)-on-columns(s) operations.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
@@ -229,7 +247,7 @@ in the original dataframe.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

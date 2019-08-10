@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>v0.18.0 (March 13, 2016) &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>v0.18.0 (March 13, 2016) &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
@@ -40,11 +40,15 @@
         </button>
         <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../../install.html">Install</a></li>
+                <li><a href="../../docs.html">Documentation</a></li>
+                <li><a href="../../community.html">Community</a></li>
             
             
               
@@ -122,85 +126,85 @@
       
   <div class="section" id="v0-18-0-march-13-2016">
 <span id="whatsnew-0180"></span><h1>v0.18.0 (March 13, 2016)<a class="headerlink" href="#v0-18-0-march-13-2016" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">tocdepth:</th><td class="field-body">2</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">tocdepth</dt>
+<dd class="field-odd"><p>2</p>
+</dd>
+</dl>
 <p>This is a major release from 0.17.1 and includes a small number of API changes, several new features,
 enhancements, and performance improvements along with a large number of bug fixes. We recommend that all
 users upgrade to this version.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">pandas &gt;= 0.18.0 no longer supports compatibility with Python version 2.6
+<p class="admonition-title">Warning</p>
+<p>pandas &gt;= 0.18.0 no longer supports compatibility with Python version 2.6
 and 3.3 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7718">GH7718</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11273">GH11273</a>)</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">numexpr</span></code> version 2.4.4 will now show a warning and not be used as a computation back-end for pandas because of some buggy behavior. This does not affect other versions (&gt;= 2.1 and &gt;= 2.4.6). (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12489">GH12489</a>)</p>
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">numexpr</span></code> version 2.4.4 will now show a warning and not be used as a computation back-end for pandas because of some buggy behavior. This does not affect other versions (&gt;= 2.1 and &gt;= 2.4.6). (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12489">GH12489</a>)</p>
 </div>
 <p>Highlights include:</p>
 <ul class="simple">
-<li>Moving and expanding window functions are now methods on Series and DataFrame,
-similar to <code class="docutils literal notranslate"><span class="pre">.groupby</span></code>, see <a class="reference internal" href="#whatsnew-0180-enhancements-moments"><span class="std std-ref">here</span></a>.</li>
-<li>Adding support for a <code class="docutils literal notranslate"><span class="pre">RangeIndex</span></code> as a specialized form of the <code class="docutils literal notranslate"><span class="pre">Int64Index</span></code>
-for memory savings, see <a class="reference internal" href="#whatsnew-0180-enhancements-rangeindex"><span class="std std-ref">here</span></a>.</li>
-<li>API breaking change to the <code class="docutils literal notranslate"><span class="pre">.resample</span></code> method to make it more <code class="docutils literal notranslate"><span class="pre">.groupby</span></code>
-like, see <a class="reference internal" href="#whatsnew-0180-breaking-resample"><span class="std std-ref">here</span></a>.</li>
-<li>Removal of support for positional indexing with floats, which was deprecated
-since 0.14.0. This will now raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, see <a class="reference internal" href="#whatsnew-0180-float-indexers"><span class="std std-ref">here</span></a>.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">.to_xarray()</span></code> function has been added for compatibility with the
-<a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray package</a>, see <a class="reference internal" href="#whatsnew-0180-enhancements-xarray"><span class="std std-ref">here</span></a>.</li>
-<li>The <code class="docutils literal notranslate"><span class="pre">read_sas</span></code> function has been enhanced to read <code class="docutils literal notranslate"><span class="pre">sas7bdat</span></code> files, see <a class="reference internal" href="#whatsnew-0180-enhancements-sas"><span class="std std-ref">here</span></a>.</li>
-<li>Addition of the <a class="reference internal" href="#whatsnew-0180-enhancements-extract"><span class="std std-ref">.str.extractall() method</span></a>,
+<li><p>Moving and expanding window functions are now methods on Series and DataFrame,
+similar to <code class="docutils literal notranslate"><span class="pre">.groupby</span></code>, see <a class="reference internal" href="#whatsnew-0180-enhancements-moments"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>Adding support for a <code class="docutils literal notranslate"><span class="pre">RangeIndex</span></code> as a specialized form of the <code class="docutils literal notranslate"><span class="pre">Int64Index</span></code>
+for memory savings, see <a class="reference internal" href="#whatsnew-0180-enhancements-rangeindex"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>API breaking change to the <code class="docutils literal notranslate"><span class="pre">.resample</span></code> method to make it more <code class="docutils literal notranslate"><span class="pre">.groupby</span></code>
+like, see <a class="reference internal" href="#whatsnew-0180-breaking-resample"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>Removal of support for positional indexing with floats, which was deprecated
+since 0.14.0. This will now raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>, see <a class="reference internal" href="#whatsnew-0180-float-indexers"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.to_xarray()</span></code> function has been added for compatibility with the
+<a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray package</a>, see <a class="reference internal" href="#whatsnew-0180-enhancements-xarray"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">read_sas</span></code> function has been enhanced to read <code class="docutils literal notranslate"><span class="pre">sas7bdat</span></code> files, see <a class="reference internal" href="#whatsnew-0180-enhancements-sas"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>Addition of the <a class="reference internal" href="#whatsnew-0180-enhancements-extract"><span class="std std-ref">.str.extractall() method</span></a>,
 and API changes to the <a class="reference internal" href="#whatsnew-0180-enhancements-extract"><span class="std std-ref">.str.extract() method</span></a>
-and <a class="reference internal" href="#whatsnew-0180-enhancements-strcat"><span class="std std-ref">.str.cat() method</span></a>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">pd.test()</span></code> top-level nose test runner is available (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4327">GH4327</a>).</li>
+and <a class="reference internal" href="#whatsnew-0180-enhancements-strcat"><span class="std std-ref">.str.cat() method</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.test()</span></code> top-level nose test runner is available (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4327">GH4327</a>).</p></li>
 </ul>
 <p>Check the <a class="reference internal" href="#whatsnew-0180-api-breaking"><span class="std std-ref">API Changes</span></a> and <a class="reference internal" href="#whatsnew-0180-deprecations"><span class="std std-ref">deprecations</span></a> before updating.</p>
 <div class="contents local topic" id="what-s-new-in-v0-18-0">
 <p class="topic-title first">What’s new in v0.18.0</p>
 <ul class="simple">
-<li><a class="reference internal" href="#new-features" id="id1">New features</a><ul>
-<li><a class="reference internal" href="#window-functions-are-now-methods" id="id2">Window functions are now methods</a></li>
-<li><a class="reference internal" href="#changes-to-rename" id="id3">Changes to rename</a></li>
-<li><a class="reference internal" href="#range-index" id="id4">Range Index</a></li>
-<li><a class="reference internal" href="#changes-to-str-extract" id="id5">Changes to str.extract</a></li>
-<li><a class="reference internal" href="#addition-of-str-extractall" id="id6">Addition of str.extractall</a></li>
-<li><a class="reference internal" href="#changes-to-str-cat" id="id7">Changes to str.cat</a></li>
-<li><a class="reference internal" href="#datetimelike-rounding" id="id8">Datetimelike rounding</a></li>
-<li><a class="reference internal" href="#formatting-of-integers-in-floatindex" id="id9">Formatting of Integers in FloatIndex</a></li>
-<li><a class="reference internal" href="#changes-to-dtype-assignment-behaviors" id="id10">Changes to dtype assignment behaviors</a></li>
-<li><a class="reference internal" href="#to-xarray" id="id11">to_xarray</a></li>
-<li><a class="reference internal" href="#latex-representation" id="id12">Latex Representation</a></li>
-<li><a class="reference internal" href="#pd-read-sas-changes" id="id13"><code class="docutils literal notranslate"><span class="pre">pd.read_sas()</span></code> changes</a></li>
-<li><a class="reference internal" href="#other-enhancements" id="id14">Other enhancements</a></li>
+<li><p><a class="reference internal" href="#new-features" id="id1">New features</a></p>
+<ul>
+<li><p><a class="reference internal" href="#window-functions-are-now-methods" id="id2">Window functions are now methods</a></p></li>
+<li><p><a class="reference internal" href="#changes-to-rename" id="id3">Changes to rename</a></p></li>
+<li><p><a class="reference internal" href="#range-index" id="id4">Range Index</a></p></li>
+<li><p><a class="reference internal" href="#changes-to-str-extract" id="id5">Changes to str.extract</a></p></li>
+<li><p><a class="reference internal" href="#addition-of-str-extractall" id="id6">Addition of str.extractall</a></p></li>
+<li><p><a class="reference internal" href="#changes-to-str-cat" id="id7">Changes to str.cat</a></p></li>
+<li><p><a class="reference internal" href="#datetimelike-rounding" id="id8">Datetimelike rounding</a></p></li>
+<li><p><a class="reference internal" href="#formatting-of-integers-in-floatindex" id="id9">Formatting of Integers in FloatIndex</a></p></li>
+<li><p><a class="reference internal" href="#changes-to-dtype-assignment-behaviors" id="id10">Changes to dtype assignment behaviors</a></p></li>
+<li><p><a class="reference internal" href="#to-xarray" id="id11">to_xarray</a></p></li>
+<li><p><a class="reference internal" href="#latex-representation" id="id12">Latex Representation</a></p></li>
+<li><p><a class="reference internal" href="#pd-read-sas-changes" id="id13"><code class="docutils literal notranslate"><span class="pre">pd.read_sas()</span></code> changes</a></p></li>
+<li><p><a class="reference internal" href="#other-enhancements" id="id14">Other enhancements</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#backwards-incompatible-api-changes" id="id15">Backwards incompatible API changes</a><ul>
-<li><a class="reference internal" href="#nat-and-timedelta-operations" id="id16">NaT and Timedelta operations</a></li>
-<li><a class="reference internal" href="#changes-to-msgpack" id="id17">Changes to msgpack</a></li>
-<li><a class="reference internal" href="#signature-change-for-rank" id="id18">Signature change for .rank</a></li>
-<li><a class="reference internal" href="#bug-in-quarterbegin-with-n-0" id="id19">Bug in QuarterBegin with n=0</a></li>
-<li><a class="reference internal" href="#resample-api" id="id20">Resample API</a><ul>
-<li><a class="reference internal" href="#downsampling" id="id21">Downsampling</a></li>
-<li><a class="reference internal" href="#upsampling" id="id22">Upsampling</a></li>
-<li><a class="reference internal" href="#previous-api-will-work-but-with-deprecations" id="id23">Previous API will work but with deprecations</a></li>
+<li><p><a class="reference internal" href="#backwards-incompatible-api-changes" id="id15">Backwards incompatible API changes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nat-and-timedelta-operations" id="id16">NaT and Timedelta operations</a></p></li>
+<li><p><a class="reference internal" href="#changes-to-msgpack" id="id17">Changes to msgpack</a></p></li>
+<li><p><a class="reference internal" href="#signature-change-for-rank" id="id18">Signature change for .rank</a></p></li>
+<li><p><a class="reference internal" href="#bug-in-quarterbegin-with-n-0" id="id19">Bug in QuarterBegin with n=0</a></p></li>
+<li><p><a class="reference internal" href="#resample-api" id="id20">Resample API</a></p>
+<ul>
+<li><p><a class="reference internal" href="#downsampling" id="id21">Downsampling</a></p></li>
+<li><p><a class="reference internal" href="#upsampling" id="id22">Upsampling</a></p></li>
+<li><p><a class="reference internal" href="#previous-api-will-work-but-with-deprecations" id="id23">Previous API will work but with deprecations</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#changes-to-eval" id="id24">Changes to eval</a></li>
-<li><a class="reference internal" href="#other-api-changes" id="id25">Other API Changes</a></li>
-<li><a class="reference internal" href="#deprecations" id="id26">Deprecations</a></li>
-<li><a class="reference internal" href="#removal-of-deprecated-float-indexers" id="id27">Removal of deprecated float indexers</a></li>
-<li><a class="reference internal" href="#removal-of-prior-version-deprecations-changes" id="id28">Removal of prior version deprecations/changes</a></li>
+<li><p><a class="reference internal" href="#changes-to-eval" id="id24">Changes to eval</a></p></li>
+<li><p><a class="reference internal" href="#other-api-changes" id="id25">Other API Changes</a></p></li>
+<li><p><a class="reference internal" href="#deprecations" id="id26">Deprecations</a></p></li>
+<li><p><a class="reference internal" href="#removal-of-deprecated-float-indexers" id="id27">Removal of deprecated float indexers</a></p></li>
+<li><p><a class="reference internal" href="#removal-of-prior-version-deprecations-changes" id="id28">Removal of prior version deprecations/changes</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#performance-improvements" id="id29">Performance Improvements</a></li>
-<li><a class="reference internal" href="#bug-fixes" id="id30">Bug Fixes</a></li>
-<li><a class="reference internal" href="#contributors" id="id31">Contributors</a></li>
+<li><p><a class="reference internal" href="#performance-improvements" id="id29">Performance Improvements</a></p></li>
+<li><p><a class="reference internal" href="#bug-fixes" id="id30">Bug Fixes</a></p></li>
+<li><p><a class="reference internal" href="#contributors" id="id31">Contributors</a></p></li>
 </ul>
 </div>
 <div class="section" id="new-features">
@@ -372,15 +376,13 @@ This continues to work as before for function or dict-like values.</p>
 </pre></div>
 </div>
 <p>New Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<pre class="literal-block">In [13]: s = pd.Series(range(1000))
 
-<span class="gp">In [14]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span>
-<span class="gh">Out[14]: </span><span class="go">RangeIndex(start=0, stop=1000, step=1)</span>
+In [14]: s.index
+Out[14]: RangeIndex(start=0, stop=1000, step=1)
 
-<span class="gp">In [15]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">nbytes</span>
-<span class="go">                                                Out[15]: 80</span>
-</pre></div>
-</div>
+In [15]: s.index.nbytes
+Out[15]: 128</pre>
 </div>
 <div class="section" id="changes-to-str-extract">
 <span id="whatsnew-0180-enhancements-extract"></span><h3>Changes to str.extract<a class="headerlink" href="#changes-to-str-extract" title="Permalink to this headline">¶</a></h3>
@@ -391,8 +393,8 @@ string, and returns the contents of the capture groups
 <p>In v0.18.0, the <code class="docutils literal notranslate"><span class="pre">expand</span></code> argument was added to
 <code class="docutils literal notranslate"><span class="pre">extract</span></code>.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">expand=False</span></code>: it returns a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">Index</span></code>, or <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, depending on the subject and regular expression pattern (same behavior as pre-0.18.0).</li>
-<li><code class="docutils literal notranslate"><span class="pre">expand=True</span></code>: it always returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, which is more consistent and less confusing from the perspective of a user.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expand=False</span></code>: it returns a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">Index</span></code>, or <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, depending on the subject and regular expression pattern (same behavior as pre-0.18.0).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expand=True</span></code>: it always returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, which is more consistent and less confusing from the perspective of a user.</p></li>
 </ul>
 <p>Currently the default is <code class="docutils literal notranslate"><span class="pre">expand=None</span></code> which gives a <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> and uses <code class="docutils literal notranslate"><span class="pre">expand=False</span></code>. To avoid this warning, please explicitly specify <code class="docutils literal notranslate"><span class="pre">expand</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s1">&#39;[ab](\d)&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
@@ -429,15 +431,13 @@ string, and returns the contents of the capture groups
 </div>
 <p>Calling on an <code class="docutils literal notranslate"><span class="pre">Index</span></code> with a regex with exactly one capture group
 returns an <code class="docutils literal notranslate"><span class="pre">Index</span></code> if <code class="docutils literal notranslate"><span class="pre">expand=False</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;c3&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;A11&quot;</span><span class="p">,</span> <span class="s2">&quot;B22&quot;</span><span class="p">,</span> <span class="s2">&quot;C33&quot;</span><span class="p">])</span>
+<pre class="literal-block">In [18]: s = pd.Series([&quot;a1&quot;, &quot;b2&quot;, &quot;c3&quot;], [&quot;A11&quot;, &quot;B22&quot;, &quot;C33&quot;])
 
-<span class="gp">In [19]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span>
-<span class="gh">Out[19]: </span><span class="go">Index([&#39;A11&#39;, &#39;B22&#39;, &#39;C33&#39;], dtype=&#39;object&#39;)</span>
+In [19]: s.index
+Out[19]: Index(['A11', 'B22', 'C33'], dtype='object')
 
-<span class="gp">In [20]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[a-zA-Z])&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="go">                                                      Out[20]: Index([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;], dtype=&#39;object&#39;, name=&#39;letter&#39;)</span>
-</pre></div>
-</div>
+In [20]: s.index.str.extract(&quot;(?P&lt;letter&gt;[a-zA-Z])&quot;, expand=False)
+Out[20]: Index(['A', 'B', 'C'], dtype='object', name='letter')</pre>
 <p>It returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with one column if <code class="docutils literal notranslate"><span class="pre">expand=True</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[a-zA-Z])&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gh">Out[21]: </span><span class="go"></span>
@@ -475,25 +475,23 @@ group.</p>
 <p>The <a class="reference internal" href="../../user_guide/text.html#text-extractall"><span class="std std-ref">.str.extractall</span></a> method was added
 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11386">GH11386</a>).  Unlike <code class="docutils literal notranslate"><span class="pre">extract</span></code>, which returns only the first
 match.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a1a2&quot;</span><span class="p">,</span> <span class="s2">&quot;b1&quot;</span><span class="p">,</span> <span class="s2">&quot;c1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">])</span>
+<pre class="literal-block">In [23]: s = pd.Series([&quot;a1a2&quot;, &quot;b1&quot;, &quot;c1&quot;], [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;])
 
-<span class="gp">In [24]: </span><span class="n">s</span>
-<span class="gh">Out[24]: </span><span class="go"></span>
-<span class="go">A    a1a2</span>
-<span class="go">B      b1</span>
-<span class="go">C      c1</span>
-<span class="go">Length: 3, dtype: object</span>
+In [24]: s
+Out[24]: 
+A    a1a2
+B      b1
+C      c1
+Length: 3, dtype: object
 
-<span class="gp">In [25]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="go">                                                                 Out[25]: </span>
-<span class="go">  letter digit</span>
-<span class="go">A      a     1</span>
-<span class="go">B      b     1</span>
-<span class="go">C    NaN   NaN</span>
+In [25]: s.str.extract(&quot;(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)&quot;, expand=False)
+Out[25]: 
+  letter digit
+A      a     1
+B      b     1
+C    NaN   NaN
 
-<span class="go">[3 rows x 2 columns]</span>
-</pre></div>
-</div>
+[3 rows x 2 columns]</pre>
 <p>The <code class="docutils literal notranslate"><span class="pre">extractall</span></code> method returns all matches.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)&quot;</span><span class="p">)</span>
 <span class="gh">Out[26]: </span><span class="go"></span>
@@ -511,13 +509,11 @@ match.</p>
 <span id="whatsnew-0180-enhancements-strcat"></span><h3>Changes to str.cat<a class="headerlink" href="#changes-to-str-cat" title="Permalink to this headline">¶</a></h3>
 <p>The method <code class="docutils literal notranslate"><span class="pre">.str.cat()</span></code> concatenates the members of a <code class="docutils literal notranslate"><span class="pre">Series</span></code>. Before, if <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values were present in the Series, calling <code class="docutils literal notranslate"><span class="pre">.str.cat()</span></code> on it would return <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, unlike the rest of the <code class="docutils literal notranslate"><span class="pre">Series.str.*</span></code> API. This behavior has been amended to ignore <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values by default. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11435">GH11435</a>).</p>
 <p>A new, friendlier <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> is added to protect against the mistake of supplying the <code class="docutils literal notranslate"><span class="pre">sep</span></code> as an arg, rather than as a kwarg. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11334">GH11334</a>).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-<span class="gh">Out[27]: </span><span class="go">&#39;a b c&#39;</span>
+<pre class="literal-block">In [27]: pd.Series(['a','b',np.nan,'c']).str.cat(sep=' ')
+Out[27]: 'a b c'
 
-<span class="gp">In [28]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
-<span class="go">                 Out[28]: &#39;a b ? c&#39;</span>
-</pre></div>
-</div>
+In [28]: pd.Series(['a','b',np.nan,'c']).str.cat(sep=' ', na_rep='?')
+Out[28]: 'a b ? c'</pre>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 <span class="go">ValueError: Did you mean to supply a `sep` keyword?</span>
 </pre></div>
@@ -527,83 +523,75 @@ match.</p>
 <span id="whatsnew-0180-enhancements-rounding"></span><h3>Datetimelike rounding<a class="headerlink" href="#datetimelike-rounding" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>, <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code>, <code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code>, <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> have gained the <code class="docutils literal notranslate"><span class="pre">.round()</span></code>, <code class="docutils literal notranslate"><span class="pre">.floor()</span></code> and <code class="docutils literal notranslate"><span class="pre">.ceil()</span></code> method for datetimelike rounding, flooring and ceiling. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4314">GH4314</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11963">GH11963</a>)</p>
 <p>Naive datetimes</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">dr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101 09:12:56.1234&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<pre class="literal-block">In [29]: dr = pd.date_range('20130101 09:12:56.1234', periods=3)
 
-<span class="gp">In [30]: </span><span class="n">dr</span>
-<span class="gh">Out[30]: </span><span class="go"></span>
-<span class="go">DatetimeIndex([&#39;2013-01-01 09:12:56.123400&#39;, &#39;2013-01-02 09:12:56.123400&#39;,</span>
-<span class="go">               &#39;2013-01-03 09:12:56.123400&#39;],</span>
-<span class="go">              dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)</span>
+In [30]: dr
+Out[30]: 
+DatetimeIndex(['2013-01-01 09:12:56.123400', '2013-01-02 09:12:56.123400',
+               '2013-01-03 09:12:56.123400'],
+              dtype='datetime64[ns]', freq='D')
 
-<span class="gp">In [31]: </span><span class="n">dr</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                   Out[31]: </span>
-<span class="go">DatetimeIndex([&#39;2013-01-01 09:12:56&#39;, &#39;2013-01-02 09:12:56&#39;,</span>
-<span class="go">               &#39;2013-01-03 09:12:56&#39;],</span>
-<span class="go">              dtype=&#39;datetime64[ns]&#39;, freq=None)</span>
+In [31]: dr.round('s')
+Out[31]: 
+DatetimeIndex(['2013-01-01 09:12:56', '2013-01-02 09:12:56',
+               '2013-01-03 09:12:56'],
+              dtype='datetime64[ns]', freq=None)
 
-<span class="go"># Timestamp scalar</span>
-<span class="gp">In [32]: </span><span class="n">dr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                  Out[32]: Timestamp(&#39;2013-01-01 09:12:56.123400&#39;, freq=&#39;D&#39;)</span>
+# Timestamp scalar
+In [32]: dr[0]
+Out[32]: Timestamp('2013-01-01 09:12:56.123400', freq='D')
 
-<span class="gp">In [33]: </span><span class="n">dr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;10s&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                             Out[33]: Timestamp(&#39;2013-01-01 09:13:00&#39;)</span>
-</pre></div>
-</div>
+In [33]: dr[0].round('10s')
+Out[33]: Timestamp('2013-01-01 09:13:00')</pre>
 <p>Tz-aware are rounded, floored and ceiled in local times</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">dr</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;US/Eastern&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [34]: dr = dr.tz_localize('US/Eastern')
 
-<span class="gp">In [35]: </span><span class="n">dr</span>
-<span class="gh">Out[35]: </span><span class="go"></span>
-<span class="go">DatetimeIndex([&#39;2013-01-01 09:12:56.123400-05:00&#39;,</span>
-<span class="go">               &#39;2013-01-02 09:12:56.123400-05:00&#39;,</span>
-<span class="go">               &#39;2013-01-03 09:12:56.123400-05:00&#39;],</span>
-<span class="go">              dtype=&#39;datetime64[ns, US/Eastern]&#39;, freq=&#39;D&#39;)</span>
+In [35]: dr
+Out[35]: 
+DatetimeIndex(['2013-01-01 09:12:56.123400-05:00',
+               '2013-01-02 09:12:56.123400-05:00',
+               '2013-01-03 09:12:56.123400-05:00'],
+              dtype='datetime64[ns, US/Eastern]', freq='D')
 
-<span class="gp">In [36]: </span><span class="n">dr</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                Out[36]: </span>
-<span class="go">DatetimeIndex([&#39;2013-01-01 09:12:56-05:00&#39;, &#39;2013-01-02 09:12:56-05:00&#39;,</span>
-<span class="go">               &#39;2013-01-03 09:12:56-05:00&#39;],</span>
-<span class="go">              dtype=&#39;datetime64[ns, US/Eastern]&#39;, freq=None)</span>
-</pre></div>
-</div>
+In [36]: dr.round('s')
+Out[36]: 
+DatetimeIndex(['2013-01-01 09:12:56-05:00', '2013-01-02 09:12:56-05:00',
+               '2013-01-03 09:12:56-05:00'],
+              dtype='datetime64[ns, US/Eastern]', freq=None)</pre>
 <p>Timedeltas</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">timedelta_range</span><span class="p">(</span><span class="s1">&#39;1 days 2 hr 13 min 45 us&#39;</span><span class="p">,</span><span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [37]: t = timedelta_range('1 days 2 hr 13 min 45 us',periods=3,freq='d')
 
-<span class="gp">In [38]: </span><span class="n">t</span>
-<span class="gh">Out[38]: </span><span class="go"></span>
-<span class="go">TimedeltaIndex([&#39;1 days 02:13:00.000045&#39;, &#39;2 days 02:13:00.000045&#39;,</span>
-<span class="go">                &#39;3 days 02:13:00.000045&#39;],</span>
-<span class="go">               dtype=&#39;timedelta64[ns]&#39;, freq=&#39;D&#39;)</span>
+In [38]: t
+Out[38]: 
+TimedeltaIndex(['1 days 02:13:00.000045', '2 days 02:13:00.000045',
+                '3 days 02:13:00.000045'],
+               dtype='timedelta64[ns]', freq='D')
 
-<span class="gp">In [39]: </span><span class="n">t</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;10min&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                           Out[39]: TimedeltaIndex([&#39;1 days 02:10:00&#39;, &#39;2 days 02:10:00&#39;, &#39;3 days 02:10:00&#39;], dtype=&#39;timedelta64[ns]&#39;, freq=None)</span>
+In [39]: t.round('10min')
+Out[39]: TimedeltaIndex(['1 days 02:10:00', '2 days 02:10:00', '3 days 02:10:00'], dtype='timedelta64[ns]', freq=None)
 
-<span class="go"># Timedelta scalar</span>
-<span class="gp">In [40]: </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="go">                                                                                                                                                                                                                                                                                                  Out[40]: Timedelta(&#39;1 days 02:13:00.000045&#39;)</span>
+# Timedelta scalar
+In [40]: t[0]
+Out[40]: Timedelta('1 days 02:13:00.000045')
 
-<span class="gp">In [41]: </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;2h&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                               Out[41]: Timedelta(&#39;1 days 02:00:00&#39;)</span>
-</pre></div>
-</div>
+In [41]: t[0].round('2h')
+Out[41]: Timedelta('1 days 02:00:00')</pre>
 <p>In addition, <code class="docutils literal notranslate"><span class="pre">.round()</span></code>, <code class="docutils literal notranslate"><span class="pre">.floor()</span></code> and <code class="docutils literal notranslate"><span class="pre">.ceil()</span></code> will be available through the <code class="docutils literal notranslate"><span class="pre">.dt</span></code> accessor of <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dr</span><span class="p">)</span>
+<pre class="literal-block">In [42]: s = pd.Series(dr)
 
-<span class="gp">In [43]: </span><span class="n">s</span>
-<span class="gh">Out[43]: </span><span class="go"></span>
-<span class="go">0   2013-01-01 09:12:56.123400-05:00</span>
-<span class="go">1   2013-01-02 09:12:56.123400-05:00</span>
-<span class="go">2   2013-01-03 09:12:56.123400-05:00</span>
-<span class="go">Length: 3, dtype: datetime64[ns, US/Eastern]</span>
+In [43]: s
+Out[43]: 
+0   2013-01-01 09:12:56.123400-05:00
+1   2013-01-02 09:12:56.123400-05:00
+2   2013-01-03 09:12:56.123400-05:00
+Length: 3, dtype: datetime64[ns, US/Eastern]
 
-<span class="gp">In [44]: </span><span class="n">s</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                      Out[44]: </span>
-<span class="go">0   2013-01-01 00:00:00-05:00</span>
-<span class="go">1   2013-01-02 00:00:00-05:00</span>
-<span class="go">2   2013-01-03 00:00:00-05:00</span>
-<span class="go">Length: 3, dtype: datetime64[ns, US/Eastern]</span>
-</pre></div>
-</div>
+In [44]: s.dt.round('D')
+Out[44]: 
+0   2013-01-01 00:00:00-05:00
+1   2013-01-02 00:00:00-05:00
+2   2013-01-03 00:00:00-05:00
+Length: 3, dtype: datetime64[ns, US/Eastern]</pre>
 </div>
 <div class="section" id="formatting-of-integers-in-floatindex">
 <h3>Formatting of Integers in FloatIndex<a class="headerlink" href="#formatting-of-integers-in-floatindex" title="Permalink to this headline">¶</a></h3>
@@ -629,27 +617,22 @@ This change not only affects the display to the console, but also the output of 
 </pre></div>
 </div>
 <p>New Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">))</span>
+<pre class="literal-block">In [45]: s = pd.Series([1,2,3], index=np.arange(3.))
 
-<span class="gp">In [46]: </span><span class="n">s</span>
-<span class="gh">Out[46]: </span><span class="go"></span>
-<span class="go">0.0    1</span>
-<span class="go">1.0    2</span>
-<span class="go">2.0    3</span>
-<span class="go">Length: 3, dtype: int64</span>
+In [46]: s
+Out[46]: 
+0.0    1
+1.0    2
+2.0    3
+Length: 3, dtype: int64
 
-<span class="gp">In [47]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span>
-<span class="go">                                                             Out[47]: Float64Index([0.0, 1.0, 2.0], dtype=&#39;float64&#39;)</span>
+In [47]: s.index
+Out[47]: Float64Index([0.0, 1.0, 2.0], dtype='float64')
 
-<span class="gp">In [48]: </span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_or_buf</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
-<span class="go">                                                                                                                     ---------------------------------------------------------------------------</span>
-<span class="go">TypeError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-48-5c0d5471653c&gt; in &lt;module&gt;</span>
-<span class="go">----&gt; 1 print(s.to_csv(path_or_buf=None, header=False))</span>
-
-<span class="go">TypeError: to_csv() got an unexpected keyword argument &#39;path_or_buf&#39;</span>
-</pre></div>
-</div>
+In [48]: print(s.to_csv(path_or_buf=None, header=False))
+0.0,1
+1.0,2
+2.0,3</pre>
 </div>
 <div class="section" id="changes-to-dtype-assignment-behaviors">
 <h3>Changes to dtype assignment behaviors<a class="headerlink" href="#changes-to-dtype-assignment-behaviors" title="Permalink to this headline">¶</a></h3>
@@ -788,38 +771,38 @@ method. See the <a class="reference internal" href="../../user_guide/options.htm
 <div class="section" id="other-enhancements">
 <span id="whatsnew-0180-enhancements-other"></span><h3>Other enhancements<a class="headerlink" href="#other-enhancements" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Handle truncated floats in SAS xport files (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11713">GH11713</a>)</li>
-<li>Added option to hide index in <code class="docutils literal notranslate"><span class="pre">Series.to_string</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11729">GH11729</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">read_excel</span></code> now supports s3 urls of the format <code class="docutils literal notranslate"><span class="pre">s3://bucketname/filename</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11447">GH11447</a>)</li>
-<li>add support for <code class="docutils literal notranslate"><span class="pre">AWS_S3_HOST</span></code> env variable when reading from s3 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12198">GH12198</a>)</li>
-<li>A simple version of <code class="docutils literal notranslate"><span class="pre">Panel.round()</span></code> is now implemented (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11763">GH11763</a>)</li>
-<li>For Python 3.x, <code class="docutils literal notranslate"><span class="pre">round(DataFrame)</span></code>, <code class="docutils literal notranslate"><span class="pre">round(Series)</span></code>, <code class="docutils literal notranslate"><span class="pre">round(Panel)</span></code> will work (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11763">GH11763</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">sys.getsizeof(obj)</span></code> returns the memory usage of a pandas object, including the
-values it contains (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11597">GH11597</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Series</span></code> gained an <code class="docutils literal notranslate"><span class="pre">is_unique</span></code> attribute (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11946">GH11946</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">DataFrame.quantile</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.quantile</span></code> now accept <code class="docutils literal notranslate"><span class="pre">interpolation</span></code> keyword (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10174">GH10174</a>).</li>
-<li>Added <code class="docutils literal notranslate"><span class="pre">DataFrame.style.format</span></code> for more flexible formatting of cell values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11692">GH11692</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">DataFrame.select_dtypes</span></code> now allows the <code class="docutils literal notranslate"><span class="pre">np.float16</span></code> type code (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11990">GH11990</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code> now accepts most iterables for the <code class="docutils literal notranslate"><span class="pre">values</span></code> parameter (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12017">GH12017</a>)</li>
-<li>Added Google <code class="docutils literal notranslate"><span class="pre">BigQuery</span></code> service account authentication support, which enables authentication on remote servers. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11881">GH11881</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12572">GH12572</a>). For further details see <a class="reference external" href="https://pandas-gbq.readthedocs.io/en/latest/intro.html">here</a></li>
-<li><code class="docutils literal notranslate"><span class="pre">HDFStore</span></code> is now iterable: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">store</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">store.keys()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12221">GH12221</a>).</li>
-<li>Add missing methods/fields to <code class="docutils literal notranslate"><span class="pre">.dt</span></code> for <code class="docutils literal notranslate"><span class="pre">Period</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8848">GH8848</a>)</li>
-<li>The entire code base has been <code class="docutils literal notranslate"><span class="pre">PEP</span></code>-ified (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12096">GH12096</a>)</li>
+<li><p>Handle truncated floats in SAS xport files (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11713">GH11713</a>)</p></li>
+<li><p>Added option to hide index in <code class="docutils literal notranslate"><span class="pre">Series.to_string</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11729">GH11729</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_excel</span></code> now supports s3 urls of the format <code class="docutils literal notranslate"><span class="pre">s3://bucketname/filename</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11447">GH11447</a>)</p></li>
+<li><p>add support for <code class="docutils literal notranslate"><span class="pre">AWS_S3_HOST</span></code> env variable when reading from s3 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12198">GH12198</a>)</p></li>
+<li><p>A simple version of <code class="docutils literal notranslate"><span class="pre">Panel.round()</span></code> is now implemented (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11763">GH11763</a>)</p></li>
+<li><p>For Python 3.x, <code class="docutils literal notranslate"><span class="pre">round(DataFrame)</span></code>, <code class="docutils literal notranslate"><span class="pre">round(Series)</span></code>, <code class="docutils literal notranslate"><span class="pre">round(Panel)</span></code> will work (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11763">GH11763</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sys.getsizeof(obj)</span></code> returns the memory usage of a pandas object, including the
+values it contains (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11597">GH11597</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Series</span></code> gained an <code class="docutils literal notranslate"><span class="pre">is_unique</span></code> attribute (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11946">GH11946</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.quantile</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.quantile</span></code> now accept <code class="docutils literal notranslate"><span class="pre">interpolation</span></code> keyword (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10174">GH10174</a>).</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">DataFrame.style.format</span></code> for more flexible formatting of cell values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11692">GH11692</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.select_dtypes</span></code> now allows the <code class="docutils literal notranslate"><span class="pre">np.float16</span></code> type code (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11990">GH11990</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code> now accepts most iterables for the <code class="docutils literal notranslate"><span class="pre">values</span></code> parameter (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12017">GH12017</a>)</p></li>
+<li><p>Added Google <code class="docutils literal notranslate"><span class="pre">BigQuery</span></code> service account authentication support, which enables authentication on remote servers. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11881">GH11881</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12572">GH12572</a>). For further details see <a class="reference external" href="https://pandas-gbq.readthedocs.io/en/latest/intro.html">here</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HDFStore</span></code> is now iterable: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">store</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">store.keys()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12221">GH12221</a>).</p></li>
+<li><p>Add missing methods/fields to <code class="docutils literal notranslate"><span class="pre">.dt</span></code> for <code class="docutils literal notranslate"><span class="pre">Period</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8848">GH8848</a>)</p></li>
+<li><p>The entire code base has been <code class="docutils literal notranslate"><span class="pre">PEP</span></code>-ified (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12096">GH12096</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="backwards-incompatible-api-changes">
 <span id="whatsnew-0180-api-breaking"></span><h2>Backwards incompatible API changes<a class="headerlink" href="#backwards-incompatible-api-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>the leading white spaces have been removed from the output of <code class="docutils literal notranslate"><span class="pre">.to_string(index=False)</span></code> method (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11833">GH11833</a>)</li>
-<li>the <code class="docutils literal notranslate"><span class="pre">out</span></code> parameter has been removed from the <code class="docutils literal notranslate"><span class="pre">Series.round()</span></code> method. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11763">GH11763</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">DataFrame.round()</span></code> leaves non-numeric columns unchanged in its return, rather than raises. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11885">GH11885</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">DataFrame.head(0)</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame.tail(0)</span></code> return empty frames, rather than <code class="docutils literal notranslate"><span class="pre">self</span></code>.  (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11937">GH11937</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Series.head(0)</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.tail(0)</span></code> return empty series, rather than <code class="docutils literal notranslate"><span class="pre">self</span></code>.  (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11937">GH11937</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">to_msgpack</span></code> and <code class="docutils literal notranslate"><span class="pre">read_msgpack</span></code> encoding now defaults to <code class="docutils literal notranslate"><span class="pre">'utf-8'</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12170">GH12170</a>)</li>
-<li>the order of keyword arguments to text file parsing functions (<code class="docutils literal notranslate"><span class="pre">.read_csv()</span></code>, <code class="docutils literal notranslate"><span class="pre">.read_table()</span></code>, <code class="docutils literal notranslate"><span class="pre">.read_fwf()</span></code>) changed to group related arguments. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11555">GH11555</a>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">NaTType.isoformat</span></code> now returns the string <code class="docutils literal notranslate"><span class="pre">'NaT</span></code> to allow the result to
-be passed to the constructor of <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12300">GH12300</a>)</li>
+<li><p>the leading white spaces have been removed from the output of <code class="docutils literal notranslate"><span class="pre">.to_string(index=False)</span></code> method (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11833">GH11833</a>)</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">out</span></code> parameter has been removed from the <code class="docutils literal notranslate"><span class="pre">Series.round()</span></code> method. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11763">GH11763</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.round()</span></code> leaves non-numeric columns unchanged in its return, rather than raises. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11885">GH11885</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.head(0)</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame.tail(0)</span></code> return empty frames, rather than <code class="docutils literal notranslate"><span class="pre">self</span></code>.  (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11937">GH11937</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Series.head(0)</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.tail(0)</span></code> return empty series, rather than <code class="docutils literal notranslate"><span class="pre">self</span></code>.  (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11937">GH11937</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">to_msgpack</span></code> and <code class="docutils literal notranslate"><span class="pre">read_msgpack</span></code> encoding now defaults to <code class="docutils literal notranslate"><span class="pre">'utf-8'</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12170">GH12170</a>)</p></li>
+<li><p>the order of keyword arguments to text file parsing functions (<code class="docutils literal notranslate"><span class="pre">.read_csv()</span></code>, <code class="docutils literal notranslate"><span class="pre">.read_table()</span></code>, <code class="docutils literal notranslate"><span class="pre">.read_fwf()</span></code>) changed to group related arguments. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11555">GH11555</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NaTType.isoformat</span></code> now returns the string <code class="docutils literal notranslate"><span class="pre">'NaT</span></code> to allow the result to
+be passed to the constructor of <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12300">GH12300</a>)</p></li>
 </ul>
 <div class="section" id="nat-and-timedelta-operations">
 <h3>NaT and Timedelta operations<a class="headerlink" href="#nat-and-timedelta-operations" title="Permalink to this headline">¶</a></h3>
@@ -827,38 +810,32 @@ be passed to the constructor of <code class="docutils literal notranslate"><span
 arithmetic where applicable.  Operations defined for <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> or <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code>
 are now also defined for <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11564">GH11564</a>).</p>
 <p><code class="docutils literal notranslate"><span class="pre">NaT</span></code> now supports arithmetic operations with integers and floats.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">*</span> <span class="mi">1</span>
-<span class="gh">Out[58]: </span><span class="go">NaT</span>
+<pre class="literal-block">In [58]: pd.NaT * 1
+Out[58]: NaT
 
-<span class="gp">In [59]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">*</span> <span class="mf">1.5</span>
-<span class="go">             Out[59]: NaT</span>
+In [59]: pd.NaT * 1.5
+Out[59]: NaT
 
-<span class="gp">In [60]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="go">                          Out[60]: NaT</span>
+In [60]: pd.NaT / 2
+Out[60]: NaT
 
-<span class="gp">In [61]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-<span class="go">                                       Out[61]: NaT</span>
-</pre></div>
-</div>
+In [61]: pd.NaT * np.nan
+Out[61]: NaT</pre>
 <p><code class="docutils literal notranslate"><span class="pre">NaT</span></code> defines more arithmetic operations with <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> and <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">/</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
-<span class="gh">Out[62]: </span><span class="go">nan</span>
+<pre class="literal-block">In [62]: pd.NaT / pd.NaT
+Out[62]: nan
 
-<span class="gp">In [63]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
-<span class="go">             Out[63]: nan</span>
-</pre></div>
-</div>
+In [63]: pd.Timedelta('1s') / pd.NaT
+Out[63]: nan</pre>
 <p><code class="docutils literal notranslate"><span class="pre">NaT</span></code> may represent either a <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> null or a <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code> null.
 Given the ambiguity, it is treated as a <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code>, which allows more operations
 to succeed.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [64]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
-<span class="gh">Out[64]: </span><span class="go">NaT</span>
+<pre class="literal-block">In [64]: pd.NaT + pd.NaT
+Out[64]: NaT
 
-<span class="go"># same as</span>
-<span class="gp">In [65]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span>
-<span class="go">             Out[65]: Timedelta(&#39;0 days 00:00:02&#39;)</span>
-</pre></div>
-</div>
+# same as
+In [65]: pd.Timedelta('1s') + pd.Timedelta('1s')
+Out[65]: Timedelta('0 days 00:00:02')</pre>
 <p>as opposed to</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;19900315&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;19900315&#39;</span><span class="p">)</span>
 <span class="go">TypeError: unsupported operand type(s) for +: &#39;Timestamp&#39; and &#39;Timestamp&#39;</span>
@@ -883,23 +860,21 @@ the <code class="docutils literal notranslate"><span class="pre">dtype</span></c
 </pre></div>
 </div>
 <p>Subtraction by <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> in a <code class="docutils literal notranslate"><span class="pre">Series</span></code> by a <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> works (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11925">GH11925</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">timedelta_range</span><span class="p">(</span><span class="s1">&#39;1 day&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<pre class="literal-block">In [68]: ser = pd.Series(pd.timedelta_range('1 day', periods=3))
 
-<span class="gp">In [69]: </span><span class="n">ser</span>
-<span class="gh">Out[69]: </span><span class="go"></span>
-<span class="go">0   1 days</span>
-<span class="go">1   2 days</span>
-<span class="go">2   3 days</span>
-<span class="go">Length: 3, dtype: timedelta64[ns]</span>
+In [69]: ser
+Out[69]: 
+0   1 days
+1   2 days
+2   3 days
+Length: 3, dtype: timedelta64[ns]
 
-<span class="gp">In [70]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2012-01-01&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">ser</span>
-<span class="go">                                                                             Out[70]: </span>
-<span class="go">0   2011-12-31</span>
-<span class="go">1   2011-12-30</span>
-<span class="go">2   2011-12-29</span>
-<span class="go">Length: 3, dtype: datetime64[ns]</span>
-</pre></div>
-</div>
+In [70]: pd.Timestamp('2012-01-01') - ser
+Out[70]: 
+0   2011-12-31
+1   2011-12-30
+2   2011-12-29
+Length: 3, dtype: datetime64[ns]</pre>
 <p><code class="docutils literal notranslate"><span class="pre">NaT.isoformat()</span></code> now returns <code class="docutils literal notranslate"><span class="pre">'NaT'</span></code>. This change allows allows
 <code class="docutils literal notranslate"><span class="pre">pd.Timestamp</span></code> to rehydrate any timestamp like object from its isoformat
 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12300">GH12300</a>).</p>
@@ -909,40 +884,40 @@ the <code class="docutils literal notranslate"><span class="pre">dtype</span></c
 <p>Forward incompatible changes in <code class="docutils literal notranslate"><span class="pre">msgpack</span></code> writing format were made over 0.17.0 and 0.18.0; older versions of pandas cannot read files packed by newer versions (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12129">GH12129</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10527">GH10527</a>)</p>
 <p>Bugs in <code class="docutils literal notranslate"><span class="pre">to_msgpack</span></code> and <code class="docutils literal notranslate"><span class="pre">read_msgpack</span></code> introduced in 0.17.0 and fixed in 0.18.0, caused files packed in Python 2 unreadable by Python 3 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12142">GH12142</a>). The following table describes the backward and forward compat of msgpacks.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<table border="1" class="docutils">
+<p class="admonition-title">Warning</p>
+<table class="docutils align-default">
 <colgroup>
-<col width="48%" />
-<col width="52%" />
+<col style="width: 48%" />
+<col style="width: 52%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Packed with</th>
-<th class="head">Can be unpacked with</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Packed with</p></th>
+<th class="head"><p>Can be unpacked with</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>pre-0.17 / Python 2</td>
-<td>any</td>
+<tbody>
+<tr class="row-even"><td><p>pre-0.17 / Python 2</p></td>
+<td><p>any</p></td>
 </tr>
-<tr class="row-odd"><td>pre-0.17 / Python 3</td>
-<td>any</td>
+<tr class="row-odd"><td><p>pre-0.17 / Python 3</p></td>
+<td><p>any</p></td>
 </tr>
-<tr class="row-even"><td>0.17 / Python 2</td>
-<td><ul class="first last simple">
-<li>==0.17 / Python 2</li>
-<li>&gt;=0.18 / any Python</li>
+<tr class="row-even"><td><p>0.17 / Python 2</p></td>
+<td><ul class="simple">
+<li><p>==0.17 / Python 2</p></li>
+<li><p>&gt;=0.18 / any Python</p></li>
 </ul>
 </td>
 </tr>
-<tr class="row-odd"><td>0.17 / Python 3</td>
-<td>&gt;=0.18 / any Python</td>
+<tr class="row-odd"><td><p>0.17 / Python 3</p></td>
+<td><p>&gt;=0.18 / any Python</p></td>
 </tr>
-<tr class="row-even"><td>0.18</td>
-<td>&gt;= 0.18</td>
+<tr class="row-even"><td><p>0.18</p></td>
+<td><p>&gt;= 0.18</p></td>
 </tr>
 </tbody>
 </table>
-<p class="last">0.18.0 is backward-compatible for reading files packed by older versions, except for files packed with 0.17 in Python 2, in which case only they can only be unpacked in Python 2.</p>
+<p>0.18.0 is backward-compatible for reading files packed by older versions, except for files packed with 0.17 in Python 2, in which case only they can only be unpacked in Python 2.</p>
 </div>
 </div>
 <div class="section" id="signature-change-for-rank">
@@ -966,25 +941,23 @@ the <code class="docutils literal notranslate"><span class="pre">dtype</span></c
 </pre></div>
 </div>
 <p>New signature</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-<span class="gp">   ....: </span>                      <span class="n">na_option</span><span class="o">=</span><span class="s1">&#39;keep&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pct</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">   ....: </span>
-<span class="gh">Out[71]: </span><span class="go"></span>
-<span class="go">0    1.0</span>
-<span class="go">1    2.0</span>
-<span class="go">Length: 2, dtype: float64</span>
+<pre class="literal-block">In [71]: pd.Series([0,1]).rank(axis=0, method='average', numeric_only=None,
+   ....:                       na_option='keep', ascending=True, pct=False)
+   ....: 
+Out[71]: 
+0    1.0
+1    2.0
+Length: 2, dtype: float64
 
-<span class="gp">In [72]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-<span class="gp">   ....: </span>                         <span class="n">na_option</span><span class="o">=</span><span class="s1">&#39;keep&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pct</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">   ....: </span>
-<span class="go">                                                      Out[72]: </span>
-<span class="go">     0</span>
-<span class="go">0  1.0</span>
-<span class="go">1  2.0</span>
+In [72]: pd.DataFrame([0,1]).rank(axis=0, method='average', numeric_only=None,
+   ....:                          na_option='keep', ascending=True, pct=False)
+   ....: 
+Out[72]: 
+     0
+0  1.0
+1  2.0
 
-<span class="go">[2 rows x 1 columns]</span>
-</pre></div>
-</div>
+[2 rows x 1 columns]</pre>
 </div>
 <div class="section" id="bug-in-quarterbegin-with-n-0">
 <h3>Bug in QuarterBegin with n=0<a class="headerlink" href="#bug-in-quarterbegin-with-n-0" title="Permalink to this headline">¶</a></h3>
@@ -993,18 +966,16 @@ depending on the date when the <code class="docutils literal notranslate"><span 
 <p>The general semantics of anchored offsets for <code class="docutils literal notranslate"><span class="pre">n=0</span></code> is to not move the date
 when it is an anchor point (e.g., a quarter start date), and otherwise roll
 forward to the next anchor point.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-02-01&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [73]: d = pd.Timestamp('2014-02-01')
 
-<span class="gp">In [74]: </span><span class="n">d</span>
-<span class="gh">Out[74]: </span><span class="go">Timestamp(&#39;2014-02-01 00:00:00&#39;)</span>
+In [74]: d
+Out[74]: Timestamp('2014-02-01 00:00:00')
 
-<span class="gp">In [75]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">QuarterBegin</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startingMonth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">                                          Out[75]: Timestamp(&#39;2014-02-01 00:00:00&#39;)</span>
+In [75]: d + pd.offsets.QuarterBegin(n=0, startingMonth=2)
+Out[75]: Timestamp('2014-02-01 00:00:00')
 
-<span class="gp">In [76]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">QuarterBegin</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startingMonth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">                                                                                    Out[76]: Timestamp(&#39;2014-04-01 00:00:00&#39;)</span>
-</pre></div>
-</div>
+In [76]: d + pd.offsets.QuarterBegin(n=0, startingMonth=1)
+Out[76]: Timestamp('2014-04-01 00:00:00')</pre>
 <p>For the <code class="docutils literal notranslate"><span class="pre">QuarterBegin</span></code> offset in previous versions, the date would be rolled
 <em>backwards</em> if date was in the same month as the quarter start date.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-02-15&#39;</span><span class="p">)</span>
@@ -1079,7 +1050,7 @@ yields a <code class="docutils literal notranslate"><span class="pre">Resampler<
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [82]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span>
 
 <span class="gp">In [83]: </span><span class="n">r</span>
-<span class="gh">Out[83]: </span><span class="go">DatetimeIndexResampler [freq=&lt;2 * Seconds&gt;, axis=0, closed=left, label=left, convention=start, base=0]</span>
+<span class="gh">Out[83]: </span><span class="go">&lt;pandas.core.resample.DatetimeIndexResampler object at 0x7f6ff31f09b0&gt;</span>
 </pre></div>
 </div>
 <div class="section" id="downsampling">
@@ -1209,14 +1180,14 @@ performed with the <code class="docutils literal notranslate"><span class="pre">
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In the new API, you can either downsample OR upsample. The prior implementation would allow you to pass an aggregator function (like <code class="docutils literal notranslate"><span class="pre">mean</span></code>) even though you were upsampling, providing a bit of confusion.</p>
+<p class="admonition-title">Note</p>
+<p>In the new API, you can either downsample OR upsample. The prior implementation would allow you to pass an aggregator function (like <code class="docutils literal notranslate"><span class="pre">mean</span></code>) even though you were upsampling, providing a bit of confusion.</p>
 </div>
 </div>
 <div class="section" id="previous-api-will-work-but-with-deprecations">
 <h4>Previous API will work but with deprecations<a class="headerlink" href="#previous-api-will-work-but-with-deprecations" title="Permalink to this headline">¶</a></h4>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>This new API for resample includes some internal changes for the prior-to-0.18.0 API, to work with a deprecation warning in most cases, as the resample operation returns a deferred object. We can intercept operations and just do what the (pre 0.18.0) API did (with a warning). Here is a typical use case:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span>
 
@@ -1266,7 +1237,7 @@ This code is intending to resample every 2s, take the <code class="docutils lite
 <p>The good news is the return dimensions will differ between the new API and the old API, so this should loudly raise
 an exception.</p>
 <p>To replicate the original operation</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 <span class="gh">Out[93]: </span><span class="go"></span>
 <span class="go">A    0.433985</span>
 <span class="go">B    0.314582</span>
@@ -1312,56 +1283,54 @@ in an inplace change to the <code class="docutils literal notranslate"><span cla
 </div>
 <p>In version 0.18.0, a new <code class="docutils literal notranslate"><span class="pre">inplace</span></code> keyword was added to choose whether the
 assignment should be done inplace or return a copy.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="n">df</span>
-<span class="gh">Out[96]: </span><span class="go"></span>
-<span class="go">      a  b     c</span>
-<span class="go">0   0.0  0   0.0</span>
-<span class="go">1   2.5  1   3.5</span>
-<span class="go">2   5.0  2   7.0</span>
-<span class="go">3   7.5  3  10.5</span>
-<span class="go">4  10.0  4  14.0</span>
+<pre class="literal-block">In [96]: df
+Out[96]: 
+      a  b     c
+0   0.0  0   0.0
+1   2.5  1   3.5
+2   5.0  2   7.0
+3   7.5  3  10.5
+4  10.0  4  14.0
 
-<span class="go">[5 rows x 3 columns]</span>
+[5 rows x 3 columns]
 
-<span class="gp">In [97]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;d = c - b&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="go">                                                                                                                                      Out[97]: </span>
-<span class="go">      a  b     c     d</span>
-<span class="go">0   0.0  0   0.0   0.0</span>
-<span class="go">1   2.5  1   3.5   2.5</span>
-<span class="go">2   5.0  2   7.0   5.0</span>
-<span class="go">3   7.5  3  10.5   7.5</span>
-<span class="go">4  10.0  4  14.0  10.0</span>
+In [97]: df.eval('d = c - b', inplace=False)
+Out[97]: 
+      a  b     c     d
+0   0.0  0   0.0   0.0
+1   2.5  1   3.5   2.5
+2   5.0  2   7.0   5.0
+3   7.5  3  10.5   7.5
+4  10.0  4  14.0  10.0
 
-<span class="go">[5 rows x 4 columns]</span>
+[5 rows x 4 columns]
 
-<span class="gp">In [98]: </span><span class="n">df</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                Out[98]: </span>
-<span class="go">      a  b     c</span>
-<span class="go">0   0.0  0   0.0</span>
-<span class="go">1   2.5  1   3.5</span>
-<span class="go">2   5.0  2   7.0</span>
-<span class="go">3   7.5  3  10.5</span>
-<span class="go">4  10.0  4  14.0</span>
+In [98]: df
+Out[98]: 
+      a  b     c
+0   0.0  0   0.0
+1   2.5  1   3.5
+2   5.0  2   7.0
+3   7.5  3  10.5
+4  10.0  4  14.0
 
-<span class="go">[5 rows x 3 columns]</span>
+[5 rows x 3 columns]
 
-<span class="gp">In [99]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;d = c - b&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+In [99]: df.eval('d = c - b', inplace=True)
 
-<span class="gp">In [100]: </span><span class="n">df</span>
-<span class="gh">Out[100]: </span><span class="go"></span>
-<span class="go">      a  b     c     d</span>
-<span class="go">0   0.0  0   0.0   0.0</span>
-<span class="go">1   2.5  1   3.5   2.5</span>
-<span class="go">2   5.0  2   7.0   5.0</span>
-<span class="go">3   7.5  3  10.5   7.5</span>
-<span class="go">4  10.0  4  14.0  10.0</span>
+In [100]: df
+Out[100]: 
+      a  b     c     d
+0   0.0  0   0.0   0.0
+1   2.5  1   3.5   2.5
+2   5.0  2   7.0   5.0
+3   7.5  3  10.5   7.5
+4  10.0  4  14.0  10.0
 
-<span class="go">[5 rows x 4 columns]</span>
-</pre></div>
-</div>
+[5 rows x 4 columns]</pre>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> if not specified.
+<p class="admonition-title">Warning</p>
+<p>For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> if not specified.
 This will change in a future version of pandas. If your code depends on an
 inplace assignment you should update to explicitly set <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code></p>
 </div>
@@ -1386,8 +1355,8 @@ inplace assignment you should update to explicitly set <code class="docutils lit
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Note that the default value for <code class="docutils literal notranslate"><span class="pre">inplace</span></code> in a <code class="docutils literal notranslate"><span class="pre">query</span></code>
+<p class="admonition-title">Warning</p>
+<p>Note that the default value for <code class="docutils literal notranslate"><span class="pre">inplace</span></code> in a <code class="docutils literal notranslate"><span class="pre">query</span></code>
 is <code class="docutils literal notranslate"><span class="pre">False</span></code>, which is consistent with prior versions.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">eval</span></code> has also been updated to allow multi-line expressions for multiple
@@ -1420,7 +1389,7 @@ assignments are valid for multi-line expressions.</p>
 <div class="section" id="other-api-changes">
 <span id="whatsnew-0180-api"></span><h3>Other API Changes<a class="headerlink" href="#other-api-changes" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">DataFrame.between_time</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.between_time</span></code> now only parse a fixed set of time strings. Parsing of date strings is no longer supported and raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11818">GH11818</a>)</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.between_time</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.between_time</span></code> now only parse a fixed set of time strings. Parsing of date strings is no longer supported and raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11818">GH11818</a>)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [107]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
 
 <span class="gp">In [108]: </span><span class="n">s</span><span class="o">.</span><span class="n">between_time</span><span class="p">(</span><span class="s2">&quot;7:00am&quot;</span><span class="p">,</span> <span class="s2">&quot;9:00am&quot;</span><span class="p">)</span>
@@ -1437,34 +1406,23 @@ assignments are valid for multi-line expressions.</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.memory_usage()</span></code> now includes values in the index, as does memory_usage in <code class="docutils literal notranslate"><span class="pre">.info()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11597">GH11597</a>)</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">DataFrame.to_latex()</span></code> now supports non-ascii encodings (eg <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>) in Python 2 with the parameter <code class="docutils literal notranslate"><span class="pre">encoding</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7061">GH7061</a>)</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">pandas.merge()</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame.merge()</span></code> will show a specific error message when trying to merge with an object that is not of type <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or a subclass (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12081">GH12081</a>)</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">DataFrame.unstack</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.unstack</span></code> now take <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> keyword to allow direct replacement of missing values when an unstack results in missing values in the resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. As an added benefit, specifying <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> will preserve the data type of the original stacked data.  (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9746">GH9746</a>)</p>
-</li>
-<li><p class="first">As part of the new API for <a class="reference internal" href="#whatsnew-0180-enhancements-moments"><span class="std std-ref">window functions</span></a> and <a class="reference internal" href="#whatsnew-0180-breaking-resample"><span class="std std-ref">resampling</span></a>, aggregation functions have been clarified, raising more informative error messages on invalid aggregations. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9052">GH9052</a>). A full set of examples are presented in <a class="reference internal" href="../../user_guide/groupby.html#groupby-aggregate"><span class="std std-ref">groupby</span></a>.</p>
-</li>
-<li><p class="first">Statistical functions for <code class="docutils literal notranslate"><span class="pre">NDFrame</span></code> objects (like <code class="docutils literal notranslate"><span class="pre">sum(),</span> <span class="pre">mean(),</span> <span class="pre">min()</span></code>) will now raise if non-numpy-compatible arguments are passed in for <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12301">GH12301</a>)</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.to_latex</span></code> and <code class="docutils literal notranslate"><span class="pre">.to_html</span></code> gain a <code class="docutils literal notranslate"><span class="pre">decimal</span></code> parameter like <code class="docutils literal notranslate"><span class="pre">.to_csv</span></code>; the default is <code class="docutils literal notranslate"><span class="pre">'.'</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12031">GH12031</a>)</p>
-</li>
-<li><p class="first">More helpful error message when constructing a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with empty data but with indices (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8020">GH8020</a>)</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.describe()</span></code> will now properly handle bool dtype as a categorical (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6625">GH6625</a>)</p>
-</li>
-<li><p class="first">More helpful error message with an invalid <code class="docutils literal notranslate"><span class="pre">.transform</span></code> with user defined input (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10165">GH10165</a>)</p>
-</li>
-<li><p class="first">Exponentially weighted functions now allow specifying alpha directly (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10789">GH10789</a>) and raise <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if parameters violate <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">alpha</span> <span class="pre">&lt;=</span> <span class="pre">1</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12492">GH12492</a>)</p>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.memory_usage()</span></code> now includes values in the index, as does memory_usage in <code class="docutils literal notranslate"><span class="pre">.info()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11597">GH11597</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.to_latex()</span></code> now supports non-ascii encodings (eg <code class="docutils literal notranslate"><span class="pre">utf-8</span></code>) in Python 2 with the parameter <code class="docutils literal notranslate"><span class="pre">encoding</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7061">GH7061</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.merge()</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame.merge()</span></code> will show a specific error message when trying to merge with an object that is not of type <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or a subclass (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12081">GH12081</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.unstack</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.unstack</span></code> now take <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> keyword to allow direct replacement of missing values when an unstack results in missing values in the resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. As an added benefit, specifying <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> will preserve the data type of the original stacked data.  (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9746">GH9746</a>)</p></li>
+<li><p>As part of the new API for <a class="reference internal" href="#whatsnew-0180-enhancements-moments"><span class="std std-ref">window functions</span></a> and <a class="reference internal" href="#whatsnew-0180-breaking-resample"><span class="std std-ref">resampling</span></a>, aggregation functions have been clarified, raising more informative error messages on invalid aggregations. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9052">GH9052</a>). A full set of examples are presented in <a class="reference internal" href="../../user_guide/groupby.html#groupby-aggregate"><span class="std std-ref">groupby</span></a>.</p></li>
+<li><p>Statistical functions for <code class="docutils literal notranslate"><span class="pre">NDFrame</span></code> objects (like <code class="docutils literal notranslate"><span class="pre">sum(),</span> <span class="pre">mean(),</span> <span class="pre">min()</span></code>) will now raise if non-numpy-compatible arguments are passed in for <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12301">GH12301</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.to_latex</span></code> and <code class="docutils literal notranslate"><span class="pre">.to_html</span></code> gain a <code class="docutils literal notranslate"><span class="pre">decimal</span></code> parameter like <code class="docutils literal notranslate"><span class="pre">.to_csv</span></code>; the default is <code class="docutils literal notranslate"><span class="pre">'.'</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12031">GH12031</a>)</p></li>
+<li><p>More helpful error message when constructing a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with empty data but with indices (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8020">GH8020</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.describe()</span></code> will now properly handle bool dtype as a categorical (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6625">GH6625</a>)</p></li>
+<li><p>More helpful error message with an invalid <code class="docutils literal notranslate"><span class="pre">.transform</span></code> with user defined input (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10165">GH10165</a>)</p></li>
+<li><p>Exponentially weighted functions now allow specifying alpha directly (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10789">GH10789</a>) and raise <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if parameters violate <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">alpha</span> <span class="pre">&lt;=</span> <span class="pre">1</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12492">GH12492</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="deprecations">
 <span id="whatsnew-0180-deprecations"></span><h3>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this headline">¶</a></h3>
 <ul id="whatsnew-0180-window-deprecations">
-<li><p class="first">The functions <code class="docutils literal notranslate"><span class="pre">pd.rolling_*</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.expanding_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">pd.ewm*</span></code> are deprecated and replaced by the corresponding method call. Note that
+<li><p>The functions <code class="docutils literal notranslate"><span class="pre">pd.rolling_*</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.expanding_*</span></code>, and <code class="docutils literal notranslate"><span class="pre">pd.ewm*</span></code> are deprecated and replaced by the corresponding method call. Note that
 the new suggested syntax includes all of the arguments (even if default) (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11603">GH11603</a>)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 
@@ -1490,21 +1448,16 @@ the new suggested syntax includes all of the arguments (even if default) (<a cla
 </pre></div>
 </div>
 </li>
-<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">freq</span></code> and <code class="docutils literal notranslate"><span class="pre">how</span></code> arguments to the <code class="docutils literal notranslate"><span class="pre">.rolling</span></code>, <code class="docutils literal notranslate"><span class="pre">.expanding</span></code>, and <code class="docutils literal notranslate"><span class="pre">.ewm</span></code> (new) functions are deprecated, and will be removed in a future version. You can simply resample the input prior to creating a window function. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11603">GH11603</a>).</p>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">freq</span></code> and <code class="docutils literal notranslate"><span class="pre">how</span></code> arguments to the <code class="docutils literal notranslate"><span class="pre">.rolling</span></code>, <code class="docutils literal notranslate"><span class="pre">.expanding</span></code>, and <code class="docutils literal notranslate"><span class="pre">.ewm</span></code> (new) functions are deprecated, and will be removed in a future version. You can simply resample the input prior to creating a window function. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11603">GH11603</a>).</p>
 <p>For example, instead of <code class="docutils literal notranslate"><span class="pre">s.rolling(window=5,freq='D').max()</span></code> to get the max value on a rolling 5 Day window, one could use <code class="docutils literal notranslate"><span class="pre">s.resample('D').mean().rolling(window=5).max()</span></code>, which first resamples the data to daily data, then provides a rolling 5 day window.</p>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">pd.tseries.frequencies.get_offset_name</span></code> function is deprecated. Use offset’s <code class="docutils literal notranslate"><span class="pre">.freqstr</span></code> property as alternative (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11192">GH11192</a>)</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">pandas.stats.fama_macbeth</span></code> routines are deprecated and will be removed in a future version (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6077">GH6077</a>)</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">pandas.stats.ols</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.stats.plm</span></code> and <code class="docutils literal notranslate"><span class="pre">pandas.stats.var</span></code> routines are deprecated and will be removed in a future version (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6077">GH6077</a>)</p>
-</li>
-<li><p class="first">show a <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> rather than a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> on using long-time deprecated syntax in <code class="docutils literal notranslate"><span class="pre">HDFStore.select</span></code>, where the <code class="docutils literal notranslate"><span class="pre">where</span></code> clause is not a string-like (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12027">GH12027</a>)</p>
-</li>
-<li><p class="first">The <code class="docutils literal notranslate"><span class="pre">pandas.options.display.mpl_style</span></code> configuration has been deprecated
+<li><p><code class="docutils literal notranslate"><span class="pre">pd.tseries.frequencies.get_offset_name</span></code> function is deprecated. Use offset’s <code class="docutils literal notranslate"><span class="pre">.freqstr</span></code> property as alternative (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11192">GH11192</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.stats.fama_macbeth</span></code> routines are deprecated and will be removed in a future version (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6077">GH6077</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.stats.ols</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.stats.plm</span></code> and <code class="docutils literal notranslate"><span class="pre">pandas.stats.var</span></code> routines are deprecated and will be removed in a future version (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6077">GH6077</a>)</p></li>
+<li><p>show a <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> rather than a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> on using long-time deprecated syntax in <code class="docutils literal notranslate"><span class="pre">HDFStore.select</span></code>, where the <code class="docutils literal notranslate"><span class="pre">where</span></code> clause is not a string-like (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12027">GH12027</a>)</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pandas.options.display.mpl_style</span></code> configuration has been deprecated
 and will be removed in a future version of pandas. This functionality
-is better handled by matplotlib’s <a class="reference external" href="http://matplotlib.org/users/style_sheets.html">style sheets</a> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11783">GH11783</a>).</p>
-</li>
+is better handled by matplotlib’s <a class="reference external" href="http://matplotlib.org/users/style_sheets.html">style sheets</a> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11783">GH11783</a>).</p></li>
 </ul>
 </div>
 <div class="section" id="removal-of-deprecated-float-indexers">
@@ -1565,13 +1518,11 @@ In 0.18.0, this deprecation warning is removed and these will now raise a <code 
 </pre></div>
 </div>
 <p>Other indexers will coerce to a like integer for both getting and setting. The <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> has been dropped for <code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.ix</span></code> and <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [113]: </span><span class="n">s</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span>
-<span class="gh">Out[113]: </span><span class="go">2</span>
+<pre class="literal-block">In [113]: s[5.0]
+Out[113]: 2
 
-<span class="gp">In [114]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span>
-<span class="go">            Out[114]: 2</span>
-</pre></div>
-</div>
+In [114]: s.loc[5.0]
+Out[114]: 2</pre>
 <p>and setting</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [115]: </span><span class="n">s_copy</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
@@ -1623,128 +1574,126 @@ In 0.18.0, this deprecation warning is removed and these will now raise a <code 
 </pre></div>
 </div>
 <p>Float indexing on a <code class="docutils literal notranslate"><span class="pre">Float64Index</span></code> is unchanged.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [123]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">))</span>
+<pre class="literal-block">In [123]: s = pd.Series([1, 2, 3], index=np.arange(3.))
 
-<span class="gp">In [124]: </span><span class="n">s</span><span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
-<span class="gh">Out[124]: </span><span class="go">2</span>
+In [124]: s[1.0]
+Out[124]: 2
 
-<span class="gp">In [125]: </span><span class="n">s</span><span class="p">[</span><span class="mf">1.0</span><span class="p">:</span><span class="mf">2.5</span><span class="p">]</span>
-<span class="go">            Out[125]: </span>
-<span class="go">1.0    2</span>
-<span class="go">2.0    3</span>
-<span class="go">Length: 2, dtype: int64</span>
-</pre></div>
-</div>
+In [125]: s[1.0:2.5]
+Out[125]: 
+1.0    2
+2.0    3
+Length: 2, dtype: int64</pre>
 </div>
 <div class="section" id="removal-of-prior-version-deprecations-changes">
 <span id="whatsnew-0180-prior-deprecations"></span><h3>Removal of prior version deprecations/changes<a class="headerlink" href="#removal-of-prior-version-deprecations-changes" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Removal of <code class="docutils literal notranslate"><span class="pre">rolling_corr_pairwise</span></code> in favor of <code class="docutils literal notranslate"><span class="pre">.rolling().corr(pairwise=True)</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4950">GH4950</a>)</li>
-<li>Removal of <code class="docutils literal notranslate"><span class="pre">expanding_corr_pairwise</span></code> in favor of <code class="docutils literal notranslate"><span class="pre">.expanding().corr(pairwise=True)</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4950">GH4950</a>)</li>
-<li>Removal of <code class="docutils literal notranslate"><span class="pre">DataMatrix</span></code> module. This was not imported into the pandas namespace in any event (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12111">GH12111</a>)</li>
-<li>Removal of <code class="docutils literal notranslate"><span class="pre">cols</span></code> keyword in favor of <code class="docutils literal notranslate"><span class="pre">subset</span></code> in <code class="docutils literal notranslate"><span class="pre">DataFrame.duplicated()</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame.drop_duplicates()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6680">GH6680</a>)</li>
-<li>Removal of the <code class="docutils literal notranslate"><span class="pre">read_frame</span></code> and <code class="docutils literal notranslate"><span class="pre">frame_query</span></code> (both aliases for <code class="docutils literal notranslate"><span class="pre">pd.read_sql</span></code>)
+<li><p>Removal of <code class="docutils literal notranslate"><span class="pre">rolling_corr_pairwise</span></code> in favor of <code class="docutils literal notranslate"><span class="pre">.rolling().corr(pairwise=True)</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4950">GH4950</a>)</p></li>
+<li><p>Removal of <code class="docutils literal notranslate"><span class="pre">expanding_corr_pairwise</span></code> in favor of <code class="docutils literal notranslate"><span class="pre">.expanding().corr(pairwise=True)</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4950">GH4950</a>)</p></li>
+<li><p>Removal of <code class="docutils literal notranslate"><span class="pre">DataMatrix</span></code> module. This was not imported into the pandas namespace in any event (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12111">GH12111</a>)</p></li>
+<li><p>Removal of <code class="docutils literal notranslate"><span class="pre">cols</span></code> keyword in favor of <code class="docutils literal notranslate"><span class="pre">subset</span></code> in <code class="docutils literal notranslate"><span class="pre">DataFrame.duplicated()</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame.drop_duplicates()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6680">GH6680</a>)</p></li>
+<li><p>Removal of the <code class="docutils literal notranslate"><span class="pre">read_frame</span></code> and <code class="docutils literal notranslate"><span class="pre">frame_query</span></code> (both aliases for <code class="docutils literal notranslate"><span class="pre">pd.read_sql</span></code>)
 and <code class="docutils literal notranslate"><span class="pre">write_frame</span></code> (alias of <code class="docutils literal notranslate"><span class="pre">to_sql</span></code>) functions in the <code class="docutils literal notranslate"><span class="pre">pd.io.sql</span></code> namespace,
-deprecated since 0.14.0 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6292">GH6292</a>).</li>
-<li>Removal of the <code class="docutils literal notranslate"><span class="pre">order</span></code> keyword from <code class="docutils literal notranslate"><span class="pre">.factorize()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6930">GH6930</a>)</li>
+deprecated since 0.14.0 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6292">GH6292</a>).</p></li>
+<li><p>Removal of the <code class="docutils literal notranslate"><span class="pre">order</span></code> keyword from <code class="docutils literal notranslate"><span class="pre">.factorize()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6930">GH6930</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="performance-improvements">
 <span id="whatsnew-0180-performance"></span><h2>Performance Improvements<a class="headerlink" href="#performance-improvements" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Improved performance of <code class="docutils literal notranslate"><span class="pre">andrews_curves</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11534">GH11534</a>)</li>
-<li>Improved huge <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>, <code class="docutils literal notranslate"><span class="pre">PeriodIndex</span></code> and <code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code>’s ops performance including <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10277">GH10277</a>)</li>
-<li>Improved performance of <code class="docutils literal notranslate"><span class="pre">pandas.concat</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11958">GH11958</a>)</li>
-<li>Improved performance of <code class="docutils literal notranslate"><span class="pre">StataReader</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11591">GH11591</a>)</li>
-<li>Improved performance in construction of <code class="docutils literal notranslate"><span class="pre">Categoricals</span></code> with <code class="docutils literal notranslate"><span class="pre">Series</span></code> of datetimes containing <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12077">GH12077</a>)</li>
-<li>Improved performance of ISO 8601 date parsing for dates without separators (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11899">GH11899</a>), leading zeros (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11871">GH11871</a>) and with white space preceding the time zone (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9714">GH9714</a>)</li>
+<li><p>Improved performance of <code class="docutils literal notranslate"><span class="pre">andrews_curves</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11534">GH11534</a>)</p></li>
+<li><p>Improved huge <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>, <code class="docutils literal notranslate"><span class="pre">PeriodIndex</span></code> and <code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code>’s ops performance including <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10277">GH10277</a>)</p></li>
+<li><p>Improved performance of <code class="docutils literal notranslate"><span class="pre">pandas.concat</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11958">GH11958</a>)</p></li>
+<li><p>Improved performance of <code class="docutils literal notranslate"><span class="pre">StataReader</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11591">GH11591</a>)</p></li>
+<li><p>Improved performance in construction of <code class="docutils literal notranslate"><span class="pre">Categoricals</span></code> with <code class="docutils literal notranslate"><span class="pre">Series</span></code> of datetimes containing <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12077">GH12077</a>)</p></li>
+<li><p>Improved performance of ISO 8601 date parsing for dates without separators (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11899">GH11899</a>), leading zeros (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11871">GH11871</a>) and with white space preceding the time zone (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9714">GH9714</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="bug-fixes">
 <span id="whatsnew-0180-bug-fixes"></span><h2>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">GroupBy.size</span></code> when data-frame is empty. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11699">GH11699</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Period.end_time</span></code> when a multiple of time period is requested (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11738">GH11738</a>)</li>
-<li>Regression in <code class="docutils literal notranslate"><span class="pre">.clip</span></code> with tz-aware datetimes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11838">GH11838</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">date_range</span></code> when the boundaries fell on the frequency (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11804">GH11804</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12409">GH12409</a>)</li>
-<li>Bug in consistency of passing nested dicts to <code class="docutils literal notranslate"><span class="pre">.groupby(...).agg(...)</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9052">GH9052</a>)</li>
-<li>Accept unicode in <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> constructor (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11995">GH11995</a>)</li>
-<li>Bug in value label reading for <code class="docutils literal notranslate"><span class="pre">StataReader</span></code> when reading incrementally (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12014">GH12014</a>)</li>
-<li>Bug in vectorized <code class="docutils literal notranslate"><span class="pre">DateOffset</span></code> when <code class="docutils literal notranslate"><span class="pre">n</span></code> parameter is <code class="docutils literal notranslate"><span class="pre">0</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11370">GH11370</a>)</li>
-<li>Compat for numpy 1.11 w.r.t. <code class="docutils literal notranslate"><span class="pre">NaT</span></code> comparison changes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12049">GH12049</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> when reading from a <code class="docutils literal notranslate"><span class="pre">StringIO</span></code> in threads (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11790">GH11790</a>)</li>
-<li>Bug in not treating <code class="docutils literal notranslate"><span class="pre">NaT</span></code> as a missing value in datetimelikes when factorizing &amp; with <code class="docutils literal notranslate"><span class="pre">Categoricals</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12077">GH12077</a>)</li>
-<li>Bug in getitem when the values of a <code class="docutils literal notranslate"><span class="pre">Series</span></code> were tz-aware (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12089">GH12089</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Series.str.get_dummies</span></code> when one of the variables was ‘name’ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12180">GH12180</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">pd.concat</span></code> while concatenating tz-aware NaT series. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11693">GH11693</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11755">GH11755</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12217">GH12217</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">pd.read_stata</span></code> with version &lt;= 108 files (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12232">GH12232</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Series.resample</span></code> using a frequency of <code class="docutils literal notranslate"><span class="pre">Nano</span></code> when the index is a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> and contains non-zero nanosecond parts (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12037">GH12037</a>)</li>
-<li>Bug in resampling with <code class="docutils literal notranslate"><span class="pre">.nunique</span></code> and a sparse index (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12352">GH12352</a>)</li>
-<li>Removed some compiler warnings (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12471">GH12471</a>)</li>
-<li>Work around compat issues with <code class="docutils literal notranslate"><span class="pre">boto</span></code> in python 3.5 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11915">GH11915</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">NaT</span></code> subtraction from <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> or <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> with timezones (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11718">GH11718</a>)</li>
-<li>Bug in subtraction of <code class="docutils literal notranslate"><span class="pre">Series</span></code> of a single tz-aware <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12290">GH12290</a>)</li>
-<li>Use compat iterators in PY2 to support <code class="docutils literal notranslate"><span class="pre">.next()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12299">GH12299</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Timedelta.round</span></code> with negative values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11690">GH11690</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.loc</span></code> against <code class="docutils literal notranslate"><span class="pre">CategoricalIndex</span></code> may result in normal <code class="docutils literal notranslate"><span class="pre">Index</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11586">GH11586</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.info</span></code> when duplicated column names exist (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11761">GH11761</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.copy</span></code> of datetime tz-aware objects (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11794">GH11794</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Series.apply</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.map</span></code> where <code class="docutils literal notranslate"><span class="pre">timedelta64</span></code> was not boxed (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11349">GH11349</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.set_index()</span></code> with tz-aware <code class="docutils literal notranslate"><span class="pre">Series</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12358">GH12358</a>)</li>
-<li>Bug in subclasses of <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> where <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> did not propagate (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11808">GH11808</a>)</li>
-<li>Bug groupby on tz-aware data where selection not returning <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11616">GH11616</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">pd.read_clipboard</span></code> and <code class="docutils literal notranslate"><span class="pre">pd.to_clipboard</span></code> functions not supporting Unicode; upgrade included <code class="docutils literal notranslate"><span class="pre">pyperclip</span></code> to v1.5.15 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9263">GH9263</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.query</span></code> containing an assignment (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8664">GH8664</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">from_msgpack</span></code> where <code class="docutils literal notranslate"><span class="pre">__contains__()</span></code> fails for columns of the unpacked <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, if the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has object columns. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11880">GH11880</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.resample</span></code> on categorical data with <code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12169">GH12169</a>)</li>
-<li>Bug in timezone info lost when broadcasting scalar datetime to <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11682">GH11682</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Index</span></code> creation from <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> with mixed tz coerces to UTC (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11488">GH11488</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">to_numeric</span></code> where it does not raise if input is more than one dimension (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11776">GH11776</a>)</li>
-<li>Bug in parsing timezone offset strings with non-zero minutes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11708">GH11708</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">df.plot</span></code> using incorrect colors for bar plots under matplotlib 1.5+ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11614">GH11614</a>)</li>
-<li>Bug in the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> <code class="docutils literal notranslate"><span class="pre">plot</span></code> method when using keyword arguments (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11805">GH11805</a>).</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.duplicated</span></code> and <code class="docutils literal notranslate"><span class="pre">drop_duplicates</span></code> causing spurious matches when setting <code class="docutils literal notranslate"><span class="pre">keep=False</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11864">GH11864</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.loc</span></code> result with duplicated key may have <code class="docutils literal notranslate"><span class="pre">Index</span></code> with incorrect dtype (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11497">GH11497</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">pd.rolling_median</span></code> where memory allocation failed even with sufficient memory (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11696">GH11696</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.style</span></code> with spurious zeros (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12134">GH12134</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.style</span></code> with integer columns not starting at 0 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12125">GH12125</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.style.bar</span></code> may not rendered properly using specific browser (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11678">GH11678</a>)</li>
-<li>Bug in rich comparison of <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> with a <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code> of <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> that caused an infinite recursion (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11835">GH11835</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.round</span></code> dropping column index name (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11986">GH11986</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">df.replace</span></code> while replacing value in mixed dtype <code class="docutils literal notranslate"><span class="pre">Dataframe</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11698">GH11698</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Index</span></code> prevents copying name of passed <code class="docutils literal notranslate"><span class="pre">Index</span></code>, when a new name is not provided (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11193">GH11193</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to read any non-empty sheets when empty sheets exist and <code class="docutils literal notranslate"><span class="pre">sheetname=None</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11711">GH11711</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to raise <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code> error when keywords <code class="docutils literal notranslate"><span class="pre">parse_dates</span></code> and <code class="docutils literal notranslate"><span class="pre">date_parser</span></code> are provided (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11544">GH11544</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">read_sql</span></code> with <code class="docutils literal notranslate"><span class="pre">pymysql</span></code> connections failing to return chunked data (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11522">GH11522</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.to_csv</span></code> ignoring formatting parameters <code class="docutils literal notranslate"><span class="pre">decimal</span></code>, <code class="docutils literal notranslate"><span class="pre">na_rep</span></code>, <code class="docutils literal notranslate"><span class="pre">float_format</span></code> for float indexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11553">GH11553</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Int64Index</span></code> and <code class="docutils literal notranslate"><span class="pre">Float64Index</span></code> preventing the use of the modulo operator (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9244">GH9244</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">MultiIndex.drop</span></code> for not lexsorted MultiIndexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12078">GH12078</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> when masking an empty <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11859">GH11859</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.plot</span></code> potentially modifying the <code class="docutils literal notranslate"><span class="pre">colors</span></code> input when the number of columns didn’t match the number of series provided (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12039">GH12039</a>).</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Series.plot</span></code> failing when index has a <code class="docutils literal notranslate"><span class="pre">CustomBusinessDay</span></code> frequency (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7222">GH7222</a>).</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.to_sql</span></code> for <code class="docutils literal notranslate"><span class="pre">datetime.time</span></code> values with sqlite fallback (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8341">GH8341</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to read data with one column when <code class="docutils literal notranslate"><span class="pre">squeeze=True</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12157">GH12157</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to read one empty column (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12292">GH12292</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9002">GH9002</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.groupby</span></code> where a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> was not raised for a wrong column if there was only one row in the dataframe (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11741">GH11741</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.read_csv</span></code> with dtype specified on empty data producing an error (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12048">GH12048</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.read_csv</span></code> where strings like <code class="docutils literal notranslate"><span class="pre">'2E'</span></code> are treated as valid floats (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12237">GH12237</a>)</li>
-<li>Bug in building <em>pandas</em> with debugging symbols (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12123">GH12123</a>)</li>
-<li>Removed <code class="docutils literal notranslate"><span class="pre">millisecond</span></code> property of <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>. This would always raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12019">GH12019</a>).</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Series</span></code> constructor with read-only data (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11502">GH11502</a>)</li>
-<li>Removed <code class="docutils literal notranslate"><span class="pre">pandas.util.testing.choice()</span></code>.  Should use <code class="docutils literal notranslate"><span class="pre">np.random.choice()</span></code>, instead. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12386">GH12386</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.loc</span></code> setitem indexer preventing the use of a TZ-aware DatetimeIndex (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12050">GH12050</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.style</span></code> indexes and MultiIndexes not appearing (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11655">GH11655</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">to_msgpack</span></code> and <code class="docutils literal notranslate"><span class="pre">from_msgpack</span></code> which did not correctly serialize or deserialize <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12307">GH12307</a>).</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">.skew</span></code> and <code class="docutils literal notranslate"><span class="pre">.kurt</span></code> due to roundoff error for highly similar values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11974">GH11974</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> constructor where microsecond resolution was lost if HHMMSS were not separated with ‘:’ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10041">GH10041</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">buffer_rd_bytes</span></code> src-&gt;buffer could be freed more than once if reading failed, causing a segfault (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12098">GH12098</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">crosstab</span></code> where arguments with non-overlapping indexes would return a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10291">GH10291</a>)</li>
-<li>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.apply</span></code> in which reduction was not being prevented for cases in which <code class="docutils literal notranslate"><span class="pre">dtype</span></code> was not a numpy dtype (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12244">GH12244</a>)</li>
-<li>Bug when initializing categorical series with a scalar value. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12336">GH12336</a>)</li>
-<li>Bug when specifying a UTC <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> by setting <code class="docutils literal notranslate"><span class="pre">utc=True</span></code> in <code class="docutils literal notranslate"><span class="pre">.to_datetime</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11934">GH11934</a>)</li>
-<li>Bug when increasing the buffer size of CSV reader in <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12494">GH12494</a>)</li>
-<li>Bug when setting columns of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with duplicate column names (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12344">GH12344</a>)</li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">GroupBy.size</span></code> when data-frame is empty. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11699">GH11699</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Period.end_time</span></code> when a multiple of time period is requested (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11738">GH11738</a>)</p></li>
+<li><p>Regression in <code class="docutils literal notranslate"><span class="pre">.clip</span></code> with tz-aware datetimes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11838">GH11838</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">date_range</span></code> when the boundaries fell on the frequency (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11804">GH11804</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12409">GH12409</a>)</p></li>
+<li><p>Bug in consistency of passing nested dicts to <code class="docutils literal notranslate"><span class="pre">.groupby(...).agg(...)</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9052">GH9052</a>)</p></li>
+<li><p>Accept unicode in <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> constructor (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11995">GH11995</a>)</p></li>
+<li><p>Bug in value label reading for <code class="docutils literal notranslate"><span class="pre">StataReader</span></code> when reading incrementally (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12014">GH12014</a>)</p></li>
+<li><p>Bug in vectorized <code class="docutils literal notranslate"><span class="pre">DateOffset</span></code> when <code class="docutils literal notranslate"><span class="pre">n</span></code> parameter is <code class="docutils literal notranslate"><span class="pre">0</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11370">GH11370</a>)</p></li>
+<li><p>Compat for numpy 1.11 w.r.t. <code class="docutils literal notranslate"><span class="pre">NaT</span></code> comparison changes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12049">GH12049</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> when reading from a <code class="docutils literal notranslate"><span class="pre">StringIO</span></code> in threads (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11790">GH11790</a>)</p></li>
+<li><p>Bug in not treating <code class="docutils literal notranslate"><span class="pre">NaT</span></code> as a missing value in datetimelikes when factorizing &amp; with <code class="docutils literal notranslate"><span class="pre">Categoricals</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12077">GH12077</a>)</p></li>
+<li><p>Bug in getitem when the values of a <code class="docutils literal notranslate"><span class="pre">Series</span></code> were tz-aware (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12089">GH12089</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Series.str.get_dummies</span></code> when one of the variables was ‘name’ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12180">GH12180</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">pd.concat</span></code> while concatenating tz-aware NaT series. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11693">GH11693</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11755">GH11755</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12217">GH12217</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">pd.read_stata</span></code> with version &lt;= 108 files (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12232">GH12232</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Series.resample</span></code> using a frequency of <code class="docutils literal notranslate"><span class="pre">Nano</span></code> when the index is a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> and contains non-zero nanosecond parts (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12037">GH12037</a>)</p></li>
+<li><p>Bug in resampling with <code class="docutils literal notranslate"><span class="pre">.nunique</span></code> and a sparse index (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12352">GH12352</a>)</p></li>
+<li><p>Removed some compiler warnings (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12471">GH12471</a>)</p></li>
+<li><p>Work around compat issues with <code class="docutils literal notranslate"><span class="pre">boto</span></code> in python 3.5 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11915">GH11915</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">NaT</span></code> subtraction from <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> or <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> with timezones (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11718">GH11718</a>)</p></li>
+<li><p>Bug in subtraction of <code class="docutils literal notranslate"><span class="pre">Series</span></code> of a single tz-aware <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12290">GH12290</a>)</p></li>
+<li><p>Use compat iterators in PY2 to support <code class="docutils literal notranslate"><span class="pre">.next()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12299">GH12299</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Timedelta.round</span></code> with negative values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11690">GH11690</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.loc</span></code> against <code class="docutils literal notranslate"><span class="pre">CategoricalIndex</span></code> may result in normal <code class="docutils literal notranslate"><span class="pre">Index</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11586">GH11586</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.info</span></code> when duplicated column names exist (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11761">GH11761</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.copy</span></code> of datetime tz-aware objects (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11794">GH11794</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Series.apply</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.map</span></code> where <code class="docutils literal notranslate"><span class="pre">timedelta64</span></code> was not boxed (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11349">GH11349</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.set_index()</span></code> with tz-aware <code class="docutils literal notranslate"><span class="pre">Series</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12358">GH12358</a>)</p></li>
+<li><p>Bug in subclasses of <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> where <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> did not propagate (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11808">GH11808</a>)</p></li>
+<li><p>Bug groupby on tz-aware data where selection not returning <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11616">GH11616</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">pd.read_clipboard</span></code> and <code class="docutils literal notranslate"><span class="pre">pd.to_clipboard</span></code> functions not supporting Unicode; upgrade included <code class="docutils literal notranslate"><span class="pre">pyperclip</span></code> to v1.5.15 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9263">GH9263</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.query</span></code> containing an assignment (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8664">GH8664</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">from_msgpack</span></code> where <code class="docutils literal notranslate"><span class="pre">__contains__()</span></code> fails for columns of the unpacked <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, if the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has object columns. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11880">GH11880</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.resample</span></code> on categorical data with <code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12169">GH12169</a>)</p></li>
+<li><p>Bug in timezone info lost when broadcasting scalar datetime to <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11682">GH11682</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Index</span></code> creation from <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> with mixed tz coerces to UTC (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11488">GH11488</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">to_numeric</span></code> where it does not raise if input is more than one dimension (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11776">GH11776</a>)</p></li>
+<li><p>Bug in parsing timezone offset strings with non-zero minutes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11708">GH11708</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">df.plot</span></code> using incorrect colors for bar plots under matplotlib 1.5+ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11614">GH11614</a>)</p></li>
+<li><p>Bug in the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> <code class="docutils literal notranslate"><span class="pre">plot</span></code> method when using keyword arguments (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11805">GH11805</a>).</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.duplicated</span></code> and <code class="docutils literal notranslate"><span class="pre">drop_duplicates</span></code> causing spurious matches when setting <code class="docutils literal notranslate"><span class="pre">keep=False</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11864">GH11864</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.loc</span></code> result with duplicated key may have <code class="docutils literal notranslate"><span class="pre">Index</span></code> with incorrect dtype (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11497">GH11497</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">pd.rolling_median</span></code> where memory allocation failed even with sufficient memory (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11696">GH11696</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.style</span></code> with spurious zeros (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12134">GH12134</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.style</span></code> with integer columns not starting at 0 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12125">GH12125</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.style.bar</span></code> may not rendered properly using specific browser (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11678">GH11678</a>)</p></li>
+<li><p>Bug in rich comparison of <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> with a <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code> of <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> that caused an infinite recursion (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11835">GH11835</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.round</span></code> dropping column index name (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11986">GH11986</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">df.replace</span></code> while replacing value in mixed dtype <code class="docutils literal notranslate"><span class="pre">Dataframe</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11698">GH11698</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Index</span></code> prevents copying name of passed <code class="docutils literal notranslate"><span class="pre">Index</span></code>, when a new name is not provided (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11193">GH11193</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to read any non-empty sheets when empty sheets exist and <code class="docutils literal notranslate"><span class="pre">sheetname=None</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11711">GH11711</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to raise <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code> error when keywords <code class="docutils literal notranslate"><span class="pre">parse_dates</span></code> and <code class="docutils literal notranslate"><span class="pre">date_parser</span></code> are provided (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11544">GH11544</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">read_sql</span></code> with <code class="docutils literal notranslate"><span class="pre">pymysql</span></code> connections failing to return chunked data (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11522">GH11522</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.to_csv</span></code> ignoring formatting parameters <code class="docutils literal notranslate"><span class="pre">decimal</span></code>, <code class="docutils literal notranslate"><span class="pre">na_rep</span></code>, <code class="docutils literal notranslate"><span class="pre">float_format</span></code> for float indexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11553">GH11553</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Int64Index</span></code> and <code class="docutils literal notranslate"><span class="pre">Float64Index</span></code> preventing the use of the modulo operator (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9244">GH9244</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">MultiIndex.drop</span></code> for not lexsorted MultiIndexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12078">GH12078</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> when masking an empty <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11859">GH11859</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.plot</span></code> potentially modifying the <code class="docutils literal notranslate"><span class="pre">colors</span></code> input when the number of columns didn’t match the number of series provided (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12039">GH12039</a>).</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Series.plot</span></code> failing when index has a <code class="docutils literal notranslate"><span class="pre">CustomBusinessDay</span></code> frequency (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7222">GH7222</a>).</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.to_sql</span></code> for <code class="docutils literal notranslate"><span class="pre">datetime.time</span></code> values with sqlite fallback (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8341">GH8341</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to read data with one column when <code class="docutils literal notranslate"><span class="pre">squeeze=True</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12157">GH12157</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">read_excel</span></code> failing to read one empty column (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12292">GH12292</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9002">GH9002</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.groupby</span></code> where a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> was not raised for a wrong column if there was only one row in the dataframe (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11741">GH11741</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.read_csv</span></code> with dtype specified on empty data producing an error (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12048">GH12048</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.read_csv</span></code> where strings like <code class="docutils literal notranslate"><span class="pre">'2E'</span></code> are treated as valid floats (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12237">GH12237</a>)</p></li>
+<li><p>Bug in building <em>pandas</em> with debugging symbols (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12123">GH12123</a>)</p></li>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">millisecond</span></code> property of <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>. This would always raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12019">GH12019</a>).</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Series</span></code> constructor with read-only data (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11502">GH11502</a>)</p></li>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">pandas.util.testing.choice()</span></code>.  Should use <code class="docutils literal notranslate"><span class="pre">np.random.choice()</span></code>, instead. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12386">GH12386</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.loc</span></code> setitem indexer preventing the use of a TZ-aware DatetimeIndex (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12050">GH12050</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.style</span></code> indexes and MultiIndexes not appearing (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11655">GH11655</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">to_msgpack</span></code> and <code class="docutils literal notranslate"><span class="pre">from_msgpack</span></code> which did not correctly serialize or deserialize <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12307">GH12307</a>).</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">.skew</span></code> and <code class="docutils literal notranslate"><span class="pre">.kurt</span></code> due to roundoff error for highly similar values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11974">GH11974</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> constructor where microsecond resolution was lost if HHMMSS were not separated with ‘:’ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10041">GH10041</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">buffer_rd_bytes</span></code> src-&gt;buffer could be freed more than once if reading failed, causing a segfault (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12098">GH12098</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">crosstab</span></code> where arguments with non-overlapping indexes would return a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10291">GH10291</a>)</p></li>
+<li><p>Bug in <code class="docutils literal notranslate"><span class="pre">DataFrame.apply</span></code> in which reduction was not being prevented for cases in which <code class="docutils literal notranslate"><span class="pre">dtype</span></code> was not a numpy dtype (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12244">GH12244</a>)</p></li>
+<li><p>Bug when initializing categorical series with a scalar value. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12336">GH12336</a>)</p></li>
+<li><p>Bug when specifying a UTC <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> by setting <code class="docutils literal notranslate"><span class="pre">utc=True</span></code> in <code class="docutils literal notranslate"><span class="pre">.to_datetime</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11934">GH11934</a>)</p></li>
+<li><p>Bug when increasing the buffer size of CSV reader in <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12494">GH12494</a>)</p></li>
+<li><p>Bug when setting columns of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with duplicate column names (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12344">GH12344</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="contributors">
@@ -1772,7 +1721,7 @@ deprecated since 0.14.0 (<a class="reference external" href="https://github.com/
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

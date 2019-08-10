@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.Series.to_hdf &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.Series.to_hdf &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,7 +91,7 @@
 <h1>pandas.Series.to_hdf<a class="headerlink" href="#pandas-series-to-hdf" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.Series.to_hdf">
-<code class="descclassname">Series.</code><code class="descname">to_hdf</code><span class="sig-paren">(</span><em>path_or_buf</em>, <em>key</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L1893-L1996"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.to_hdf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Series.</code><code class="sig-name descname">to_hdf</code><span class="sig-paren">(</span><em class="sig-param">path_or_buf</em>, <em class="sig-param">key</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L2428-L2531"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.to_hdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write the contained data to an HDF5 file using HDFStore.</p>
 <p>Hierarchical Data Format (HDF) is self-describing, allowing an
 application to interpret the structure and contents of a file with
@@ -96,11 +100,9 @@ which can be accessed as a group or as individual objects.</p>
 <p>In order to add another DataFrame or Series to an existing HDF file
 please use append mode and a different a key.</p>
 <p>For more information see the <a class="reference internal" href="../user_guide/io.html#io-hdf5"><span class="std std-ref">user guide</span></a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path_or_buf</strong> : str or pandas.HDFStore</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path_or_buf</strong> : str or pandas.HDFStore</p>
 <blockquote>
 <div><p>File path or HDFStore object.</p>
 </div></blockquote>
@@ -112,22 +114,22 @@ please use append mode and a different a key.</p>
 <blockquote>
 <div><p>Mode to open file:</p>
 <ul class="simple">
-<li>‘w’: write, a new file is created (an existing file with
-the same name would be deleted).</li>
-<li>‘a’: append, an existing file is opened for reading and
-writing, and if the file does not exist it is created.</li>
-<li>‘r+’: similar to ‘a’, but the file must already exist.</li>
+<li><p>‘w’: write, a new file is created (an existing file with
+the same name would be deleted).</p></li>
+<li><p>‘a’: append, an existing file is opened for reading and
+writing, and if the file does not exist it is created.</p></li>
+<li><p>‘r+’: similar to ‘a’, but the file must already exist.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>format</strong> : {‘fixed’, ‘table’}, default ‘fixed’</p>
 <blockquote>
 <div><p>Possible values:</p>
 <ul class="simple">
-<li>‘fixed’: Fixed format. Fast writing/reading. Not-appendable,
-nor searchable.</li>
-<li>‘table’: Table format. Write as a PyTables Table structure
+<li><p>‘fixed’: Fixed format. Fast writing/reading. Not-appendable,
+nor searchable.</p></li>
+<li><p>‘table’: Table format. Write as a PyTables Table structure
 which may perform worse but allow more flexible operations
-like searching / selecting subsets of the data.</li>
+like searching / selecting subsets of the data.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>append</strong> : bool, default False</p>
@@ -165,28 +167,26 @@ a ValueError.</p>
 <div><p>If true, ALL nan rows will not be written to store.</p>
 </div></blockquote>
 <p><strong>errors</strong> : str, default ‘strict’</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Specifies how encoding and decoding errors are to be handled.
 See the errors argument for <a class="reference external" href="https://docs.python.org/3/library/functions.html#open" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> for a full list
 of options.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.read_hdf</span></code></dt>
-<dd>Read from HDF file.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_parquet.html#pandas.DataFrame.to_parquet" title="pandas.DataFrame.to_parquet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_parquet</span></code></a></dt>
-<dd>Write a DataFrame to the binary parquet format.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_sql</span></code></a></dt>
-<dd>Write to a sql table.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_feather.html#pandas.DataFrame.to_feather" title="pandas.DataFrame.to_feather"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_feather</span></code></a></dt>
-<dd>Write out feather-format for DataFrames.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" title="pandas.DataFrame.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_csv</span></code></a></dt>
-<dd>Write out to a csv file.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.read_hdf</span></code></dt><dd><p>Read from HDF file.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_parquet.html#pandas.DataFrame.to_parquet" title="pandas.DataFrame.to_parquet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_parquet</span></code></a></dt><dd><p>Write a DataFrame to the binary parquet format.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_sql</span></code></a></dt><dd><p>Write to a sql table.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_feather.html#pandas.DataFrame.to_feather" title="pandas.DataFrame.to_feather"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_feather</span></code></a></dt><dd><p>Write out feather-format for DataFrames.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" title="pandas.DataFrame.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_csv</span></code></a></dt><dd><p>Write out to a csv file.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
@@ -243,7 +243,7 @@ of options.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

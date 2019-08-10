@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.tseries.offsets.DateOffset &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.tseries.offsets.DateOffset &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -22,7 +22,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pandas.tseries.offsets.DateOffset.apply_index" href="pandas.tseries.offsets.DateOffset.apply_index.html" />
+    <link rel="next" title="pandas.tseries.offsets.DateOffset.base" href="pandas.tseries.offsets.DateOffset.base.html" />
     <link rel="prev" title="pandas.Timedelta.value" href="pandas.Timedelta.value.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -76,7 +80,9 @@
   <div class="row">
       <div class="col-md-3">
         <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
-<li><a class="reference internal" href="#">pandas.tseries.offsets.DateOffset</a></li>
+<li><a class="reference internal" href="#">pandas.tseries.offsets.DateOffset</a><ul>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -87,13 +93,13 @@
 <h1>pandas.tseries.offsets.DateOffset<a class="headerlink" href="#pandas-tseries-offsets-dateoffset" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pandas.tseries.offsets.DateOffset">
-<em class="property">class </em><code class="descclassname">pandas.tseries.offsets.</code><code class="descname">DateOffset</code><span class="sig-paren">(</span><em>n=1</em>, <em>normalize=False</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/tseries/offsets.py#L143-L448"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.tseries.offsets.DateOffset" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pandas.tseries.offsets.</code><code class="sig-name descname">DateOffset</code><span class="sig-paren">(</span><em class="sig-param">n=1</em>, <em class="sig-param">normalize=False</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/tseries/offsets.py#L157-L470"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.tseries.offsets.DateOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Standard kind of date increment used for a date range.</p>
 <p>Works exactly like relativedelta in terms of the keyword args you
 pass in, use of the keyword n is discouraged– you would be better
 off specifying n in the keywords you use, but regardless it is
 there for you. n is needed for DateOffset subclasses.</p>
-<p>DateOffets work as follows.  Each offset specify a set of dates
+<p>DateOffset work as follows.  Each offset specify a set of dates
 that conform to the DateOffset.  For example, Bday defines this
 set to be the set of dates that are weekdays (M-F).  To test if a
 date is in the set of a DateOffset dateOffset we can use the
@@ -106,84 +112,151 @@ valid dates.  For example, Bday(2) can be added to a date to move
 it two business days forward.  If the date does not start on a
 valid date, first it is moved to a valid date.  Thus pseudo code
 is:</p>
-<dl class="docutils">
-<dt>def __add__(date):</dt>
-<dd>date = rollback(date) # does nothing if date is valid
-return date + &lt;n number of periods&gt;</dd>
+<dl class="simple">
+<dt>def __add__(date):</dt><dd><p>date = rollback(date) # does nothing if date is valid
+return date + &lt;n number of periods&gt;</p>
+</dd>
 </dl>
 <p>When a date offset is created for a negative number of periods,
 the date is first rolled forward.  The pseudo code is:</p>
-<dl class="docutils">
-<dt>def __add__(date):</dt>
-<dd>date = rollforward(date) # does nothing is date is valid
-return date + &lt;n number of periods&gt;</dd>
+<dl class="simple">
+<dt>def __add__(date):</dt><dd><p>date = rollforward(date) # does nothing is date is valid
+return date + &lt;n number of periods&gt;</p>
+</dd>
 </dl>
 <p>Zero presents a problem.  Should it roll forward or back?  We
 arbitrarily have it rollforward:</p>
 <p>date + BDay(0) == BDay.rollforward(date)</p>
 <p>Since 0 is a bit weird, we suggest avoiding its use.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> : int, default 1</p>
+<blockquote>
+<div><p>The number of time periods the offset represents.</p>
+</div></blockquote>
+<p><strong>normalize</strong> : bool, default False</p>
+<blockquote>
+<div><p>Whether to round the result of a DateOffset addition down to the
+previous midnight.</p>
+</div></blockquote>
+<p><strong>**kwds</strong></p>
+<blockquote>
+<div><p>Temporal parameter that add to or replace the offset value.</p>
+<p>Parameters that <strong>add</strong> to the offset (like Timedelta):</p>
+<ul class="simple">
+<li><p>years</p></li>
+<li><p>months</p></li>
+<li><p>weeks</p></li>
+<li><p>days</p></li>
+<li><p>hours</p></li>
+<li><p>minutes</p></li>
+<li><p>seconds</p></li>
+<li><p>microseconds</p></li>
+<li><p>nanoseconds</p></li>
+</ul>
+<p>Parameters that <strong>replace</strong> the offset value:</p>
+<ul class="simple">
+<li><p>year</p></li>
+<li><p>month</p></li>
+<li><p>day</p></li>
+<li><p>weekday</p></li>
+<li><p>hour</p></li>
+<li><p>minute</p></li>
+<li><p>second</p></li>
+<li><p>microsecond</p></li>
+<li><p>nanosecond</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dateutil.relativedelta.relativedelta</span></code></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2017-01-01 09:10:11&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">+</span> <span class="n">DateOffset</span><span class="p">(</span><span class="n">months</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-04-01 09:10:11&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2017-01-01 09:10:11&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">+</span> <span class="n">DateOffset</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-03-01 09:10:11&#39;)</span>
+</pre></div>
+</div>
 <p class="rubric">Attributes</p>
-<table border="1" class="docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="57%" />
-<col width="43%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>freqstr</strong></td>
-<td>&#160;</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.tseries.offsets.DateOffset.base.html#pandas.tseries.offsets.DateOffset.base" title="pandas.tseries.offsets.DateOffset.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base</span></code></a></p></td>
+<td><p>Returns a copy of the calling offset object with n=1 and all other attributes equal.</p></td>
 </tr>
-<tr class="row-even"><td><strong>kwds</strong></td>
-<td>&#160;</td>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>freqstr</strong></p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><strong>name</strong></td>
-<td>&#160;</td>
+<tr class="row-even"><td><p><strong>kwds</strong></p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><strong>nanos</strong></td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p><strong>name</strong></p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><strong>rule_code</strong></td>
-<td>&#160;</td>
+<tr class="row-even"><td><p><strong>nanos</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>rule_code</strong></p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="pandas.tseries.offsets.DateOffset.apply_index.html#pandas.tseries.offsets.DateOffset.apply_index" title="pandas.tseries.offsets.DateOffset.apply_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_index</span></code></a></td>
-<td>Vectorized apply of DateOffset to DatetimeIndex, raises NotImplentedError for offsets without a vectorized implementation</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.tseries.offsets.DateOffset.apply_index.html#pandas.tseries.offsets.DateOffset.apply_index" title="pandas.tseries.offsets.DateOffset.apply_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_index</span></code></a></p></td>
+<td><p>Vectorized apply of DateOffset to DatetimeIndex, raises NotImplentedError for offsets without a vectorized implementation.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.tseries.offsets.DateOffset.rollback.html#pandas.tseries.offsets.DateOffset.rollback" title="pandas.tseries.offsets.DateOffset.rollback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rollback</span></code></a>(dt)</td>
-<td>Roll provided date backward to next offset only if not on offset</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.tseries.offsets.DateOffset.rollback.html#pandas.tseries.offsets.DateOffset.rollback" title="pandas.tseries.offsets.DateOffset.rollback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rollback</span></code></a>(dt)</p></td>
+<td><p>Roll provided date backward to next offset only if not on offset.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.tseries.offsets.DateOffset.rollforward.html#pandas.tseries.offsets.DateOffset.rollforward" title="pandas.tseries.offsets.DateOffset.rollforward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rollforward</span></code></a>(dt)</td>
-<td>Roll provided date forward to next offset only if not on offset</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.tseries.offsets.DateOffset.rollforward.html#pandas.tseries.offsets.DateOffset.rollforward" title="pandas.tseries.offsets.DateOffset.rollforward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rollforward</span></code></a>(dt)</p></td>
+<td><p>Roll provided date forward to next offset only if not on offset.</p></td>
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="58%" />
-<col width="42%" />
+<col style="width: 58%" />
+<col style="width: 42%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>__call__</strong></td>
-<td>&#160;</td>
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><strong>apply</strong></td>
-<td>&#160;</td>
+<tr class="row-even"><td><p><strong>apply</strong></p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><strong>copy</strong></td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p><strong>copy</strong></p></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><strong>isAnchored</strong></td>
-<td>&#160;</td>
+<tr class="row-even"><td><p><strong>isAnchored</strong></p></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><strong>onOffset</strong></td>
-<td>&#160;</td>
+<tr class="row-odd"><td><p><strong>onOffset</strong></p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -211,7 +284,7 @@ arbitrarily have it rollforward:</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

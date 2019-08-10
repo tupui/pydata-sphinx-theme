@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.reindex_like &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.reindex_like &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pandas.DataFrame.rename" href="pandas.DataFrame.rename.html" />
-    <link rel="prev" title="pandas.DataFrame.reindex_axis" href="pandas.DataFrame.reindex_axis.html" />
+    <link rel="prev" title="pandas.DataFrame.reindex" href="pandas.DataFrame.reindex.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,47 +91,117 @@
 <h1>pandas.DataFrame.reindex_like<a class="headerlink" href="#pandas-dataframe-reindex-like" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.reindex_like">
-<code class="descclassname">DataFrame.</code><code class="descname">reindex_like</code><span class="sig-paren">(</span><em>other</em>, <em>method=None</em>, <em>copy=True</em>, <em>limit=None</em>, <em>tolerance=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L3058-L3088"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reindex_like" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an object with matching indices to myself.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>other</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Object</span></dt>
-<dd></dd>
-<dt><strong>method</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string or None</span></dt>
-<dd></dd>
-<dt><strong>copy</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default True</span></dt>
-<dd></dd>
-</dl>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">reindex_like</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">method=None</em>, <em class="sig-param">copy=True</em>, <em class="sig-param">limit=None</em>, <em class="sig-param">tolerance=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L3779-L3882"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reindex_like" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an object with matching indices as other object.</p>
+<p>Conform the object to the same index on all axes. Optional
+filling logic, placing NaN in locations having no value
+in the previous index. A new object is produced unless the
+new index is equivalent to the current one and copy=False.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> : Object of the same data type</p>
+<blockquote>
+<div><p>Its row and column indices are used to define the new indices
+of this object.</p>
+</div></blockquote>
+<p><strong>method</strong> : {None, ‘backfill’/’bfill’, ‘pad’/’ffill’, ‘nearest’}</p>
+<blockquote>
+<div><p>Method to use for filling holes in reindexed DataFrame.
+Please note: this is only applicable to DataFrames/Series with a
+monotonically increasing/decreasing index.</p>
+<ul class="simple">
+<li><p>None (default): don’t fill gaps</p></li>
+<li><p>pad / ffill: propagate last valid observation forward to next
+valid</p></li>
+<li><p>backfill / bfill: use next valid observation to fill gap</p></li>
+<li><p>nearest: use nearest valid observations to fill gap</p></li>
+</ul>
+</div></blockquote>
+<p><strong>copy</strong> : bool, default True</p>
+<blockquote>
+<div><p>Return a new object, even if the passed indexes are the same.</p>
+</div></blockquote>
 <p><strong>limit</strong> : int, default None</p>
 <blockquote>
 <div><p>Maximum number of consecutive labels to fill for inexact matches.</p>
 </div></blockquote>
 <p><strong>tolerance</strong> : optional</p>
 <blockquote>
-<div><p>Maximum distance between labels of the other object and this
-object for inexact matches. Can be list-like.</p>
+<div><p>Maximum distance between original and new labels for inexact
+matches. The values of the index at the matching locations most
+satisfy the equation <code class="docutils literal notranslate"><span class="pre">abs(index[indexer]</span> <span class="pre">-</span> <span class="pre">target)</span> <span class="pre">&lt;=</span> <span class="pre">tolerance</span></code>.</p>
+<p>Tolerance may be a scalar value, which applies the same tolerance
+to all values, or list-like, which applies variable tolerance per
+element. List-like includes list, tuple, array, Series, and must be
+the same size as the index and its dtype must exactly match the
+index’s type.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0: </span>(list-like tolerance)</p>
+<p><span class="versionmodified added">New in version 0.21.0: </span>(list-like tolerance)</p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>reindexed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">same as input</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Series or DataFrame</strong></p>
+<blockquote>
+<div><p>Same type as caller, but with changed indices on each axis.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.set_index.html#pandas.DataFrame.set_index" title="pandas.DataFrame.set_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.set_index</span></code></a></dt><dd><p>Set row labels.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reset_index.html#pandas.DataFrame.reset_index" title="pandas.DataFrame.reset_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reset_index</span></code></a></dt><dd><p>Remove row labels or move them to new columns.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reindex.html#pandas.DataFrame.reindex" title="pandas.DataFrame.reindex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reindex</span></code></a></dt><dd><p>Change to new indices or expand indices.</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
-<dl class="docutils">
-<dt>Like calling s.reindex(index=other.index, columns=other.columns,</dt>
-<dd>method=…)</dd>
-</dl>
+<p>Same as calling
+<code class="docutils literal notranslate"><span class="pre">.reindex(index=other.index,</span> <span class="pre">columns=other.columns,...)</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mf">24.3</span><span class="p">,</span> <span class="mf">75.7</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mf">87.8</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">22</span><span class="p">,</span> <span class="mf">71.6</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp_celsius&#39;</span><span class="p">,</span> <span class="s1">&#39;temp_fahrenheit&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;2014-02-12&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2014-02-15&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span>
+<span class="go">            temp_celsius  temp_fahrenheit windspeed</span>
+<span class="go">2014-02-12          24.3             75.7      high</span>
+<span class="go">2014-02-13          31.0             87.8      high</span>
+<span class="go">2014-02-14          22.0             71.6    medium</span>
+<span class="go">2014-02-15          35.0             95.0    medium</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">28</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="p">[</span><span class="mf">35.1</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;temp_celsius&#39;</span><span class="p">,</span> <span class="s1">&#39;windspeed&#39;</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2014-02-12&#39;</span><span class="p">,</span> <span class="s1">&#39;2014-02-13&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="s1">&#39;2014-02-15&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
+<span class="go">            temp_celsius windspeed</span>
+<span class="go">2014-02-12          28.0       low</span>
+<span class="go">2014-02-13          30.0       low</span>
+<span class="go">2014-02-15          35.1    medium</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex_like</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+<span class="go">            temp_celsius  temp_fahrenheit windspeed</span>
+<span class="go">2014-02-12          28.0              NaN       low</span>
+<span class="go">2014-02-13          30.0              NaN       low</span>
+<span class="go">2014-02-14           NaN              NaN       NaN</span>
+<span class="go">2014-02-15          35.1              NaN    medium</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -152,7 +226,7 @@ object for inexact matches. Can be list-like.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

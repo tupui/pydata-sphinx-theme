@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.read_sql &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.read_sql &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,7 +91,7 @@
 <h1>pandas.read_sql<a class="headerlink" href="#pandas-read-sql" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.read_sql">
-<code class="descclassname">pandas.</code><code class="descname">read_sql</code><span class="sig-paren">(</span><em>sql</em>, <em>con</em>, <em>index_col=None</em>, <em>coerce_float=True</em>, <em>params=None</em>, <em>parse_dates=None</em>, <em>columns=None</em>, <em>chunksize=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/io/sql.py#L317-L397"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.read_sql" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">read_sql</code><span class="sig-paren">(</span><em class="sig-param">sql</em>, <em class="sig-param">con</em>, <em class="sig-param">index_col=None</em>, <em class="sig-param">coerce_float=True</em>, <em class="sig-param">params=None</em>, <em class="sig-param">parse_dates=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">chunksize=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/io/sql.py#L336-L437"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.read_sql" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read SQL query or database table into a DataFrame.</p>
 <p>This function is a convenience wrapper around <code class="docutils literal notranslate"><span class="pre">read_sql_table</span></code> and
 <code class="docutils literal notranslate"><span class="pre">read_sql_query</span></code> (for backward compatibility). It will delegate
@@ -95,11 +99,9 @@ to the specific function depending on the provided input. A SQL query
 will be routed to <code class="docutils literal notranslate"><span class="pre">read_sql_query</span></code>, while a database table name will
 be routed to <code class="docutils literal notranslate"><span class="pre">read_sql_table</span></code>. Note that the delegated function might
 have more specific notes about their functionality not listed here.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sql</strong> : string or SQLAlchemy Selectable (select or text object)</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sql</strong> : string or SQLAlchemy Selectable (select or text object)</p>
 <blockquote>
 <div><p>SQL query to be executed or a table name.</p>
 </div></blockquote>
@@ -129,14 +131,14 @@ Eg. for psycopg2, uses %(name)s so use params={‘name’ : ‘value’}</p>
 <p><strong>parse_dates</strong> : list or dict, default: None</p>
 <blockquote>
 <div><ul class="simple">
-<li>List of column names to parse as dates.</li>
-<li>Dict of <code class="docutils literal notranslate"><span class="pre">{column_name:</span> <span class="pre">format</span> <span class="pre">string}</span></code> where format string is
+<li><p>List of column names to parse as dates.</p></li>
+<li><p>Dict of <code class="docutils literal notranslate"><span class="pre">{column_name:</span> <span class="pre">format</span> <span class="pre">string}</span></code> where format string is
 strftime compatible in case of parsing string times, or is one of
-(D, s, ns, ms, us) in case of parsing integer timestamps.</li>
-<li>Dict of <code class="docutils literal notranslate"><span class="pre">{column_name:</span> <span class="pre">arg</span> <span class="pre">dict}</span></code>, where the arg dict corresponds
+(D, s, ns, ms, us) in case of parsing integer timestamps.</p></li>
+<li><p>Dict of <code class="docutils literal notranslate"><span class="pre">{column_name:</span> <span class="pre">arg</span> <span class="pre">dict}</span></code>, where the arg dict corresponds
 to the keyword arguments of <a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.to_datetime()</span></code></a>
 Especially useful with databases without native Datetime support,
-such as SQLite.</li>
+such as SQLite.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>columns</strong> : list, default: None</p>
@@ -149,23 +151,20 @@ a table).</p>
 <div><p>If specified, return an iterator where <cite>chunksize</cite> is the
 number of rows to include in each chunk.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>DataFrame</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>DataFrame</strong></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_table</span></code></a></dt>
-<dd>Read SQL database table into a DataFrame.</dd>
-<dt><a class="reference internal" href="pandas.read_sql_query.html#pandas.read_sql_query" title="pandas.read_sql_query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_query</span></code></a></dt>
-<dd>Read SQL query into a DataFrame.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_table</span></code></a></dt><dd><p>Read SQL database table into a DataFrame.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.read_sql_query.html#pandas.read_sql_query" title="pandas.read_sql_query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_query</span></code></a></dt><dd><p>Read SQL query into a DataFrame.</p>
+</dd>
 </dl>
 </div>
 </dd></dl>
@@ -192,7 +191,7 @@ number of rows to include in each chunk.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

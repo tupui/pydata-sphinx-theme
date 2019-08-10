@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.melt &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.melt &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,24 +91,19 @@
 <h1>pandas.DataFrame.melt<a class="headerlink" href="#pandas-dataframe-melt" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.melt">
-<code class="descclassname">DataFrame.</code><code class="descname">melt</code><span class="sig-paren">(</span><em>id_vars=None</em>, <em>value_vars=None</em>, <em>var_name=None</em>, <em>value_name='value'</em>, <em>col_level=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L5629-L5638"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.melt" title="Permalink to this definition">¶</a></dt>
-<dd><p>“Unpivots” a DataFrame from wide format to long format, optionally
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">melt</code><span class="sig-paren">(</span><em class="sig-param">id_vars=None</em>, <em class="sig-param">value_vars=None</em>, <em class="sig-param">var_name=None</em>, <em class="sig-param">value_name='value'</em>, <em class="sig-param">col_level=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L6471-L6494"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.melt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unpivot a DataFrame from wide format to long format, optionally
 leaving identifier variables set.</p>
 <p>This function is useful to massage a DataFrame into a format where one
 or more columns are identifier variables (<cite>id_vars</cite>), while all other
 columns, considered measured variables (<cite>value_vars</cite>), are “unpivoted” to
 the row axis, leaving just two non-identifier columns, ‘variable’ and
-‘value’.</p>
-<div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>frame</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+‘value’.
+.. versionadded:: 0.20.0</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>frame</strong><span class="classifier">DataFrame</span></dt><dd></dd>
 </dl>
 <p><strong>id_vars</strong> : tuple, list, or ndarray, optional</p>
 <blockquote>
@@ -125,20 +124,23 @@ are not set as <cite>id_vars</cite>.</p>
 <div><p>Name to use for the ‘value’ column.</p>
 </div></blockquote>
 <p><strong>col_level</strong> : int or string, optional</p>
-<blockquote class="last">
+<blockquote>
 <div><p>If columns are a MultiIndex then use this level to melt.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>DataFrame</strong></p>
+<blockquote>
+<div><p>Unpivoted DataFrame.</p>
+</div></blockquote>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">melt</span></code></a>, <a class="reference internal" href="pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pivot_table</span></code></a>, <a class="reference internal" href="pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pivot</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">melt</span></code></a>, <a class="reference internal" href="pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pivot_table</span></code></a>, <a class="reference internal" href="pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.pivot</span></code></a>, <a class="reference internal" href="pandas.Series.explode.html#pandas.Series.explode" title="pandas.Series.explode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.explode</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;c&#39;</span><span class="p">},</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;c&#39;</span><span class="p">},</span>
 <span class="gp">... </span>                   <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
 <span class="gp">... </span>                   <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">6</span><span class="p">}})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
@@ -222,7 +224,7 @@ are not set as <cite>id_vars</cite>.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

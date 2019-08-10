@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DatetimeIndex &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DatetimeIndex &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -89,15 +93,13 @@
 <h1>pandas.DatetimeIndex<a class="headerlink" href="#pandas-datetimeindex" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pandas.DatetimeIndex">
-<em class="property">class </em><code class="descclassname">pandas.</code><code class="descname">DatetimeIndex</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/indexes/datetimes.py#L175-L2555"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DatetimeIndex" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">DatetimeIndex</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/indexes/datetimes.py#L97-L1416"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DatetimeIndex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Immutable ndarray of datetime64 data, represented internally as int64, and
 which can be boxed to Timestamp objects that are subclasses of datetime and
 carry metadata such as frequency information.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array-like (1-dimensional), optional</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> : array-like (1-dimensional), optional</p>
 <blockquote>
 <div><p>Optional datetime-like data to construct index with</p>
 </div></blockquote>
@@ -107,42 +109,60 @@ carry metadata such as frequency information.</p>
 </div></blockquote>
 <p><strong>freq</strong> : string or pandas offset object, optional</p>
 <blockquote>
-<div><p>One of pandas date offset strings or corresponding objects</p>
+<div><p>One of pandas date offset strings or corresponding objects. The string
+‘infer’ can be passed in order to set the frequency of the index as the
+inferred frequency upon creation</p>
 </div></blockquote>
 <p><strong>start</strong> : starting value, datetime-like, optional</p>
 <blockquote>
 <div><p>If data is None, start is used as the start point in generating regular
 timestamp data.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.0.</span></p>
+</div>
 </div></blockquote>
 <p><strong>periods</strong> : int, optional, &gt; 0</p>
 <blockquote>
 <div><p>Number of periods to generate, if generating index. Takes precedence
 over end argument</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.0.</span></p>
+</div>
 </div></blockquote>
 <p><strong>end</strong> : end time, datetime-like, optional</p>
 <blockquote>
 <div><p>If periods is none, generated index will extend to first conforming
 time on or just past end argument</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.0.</span></p>
+</div>
 </div></blockquote>
 <p><strong>closed</strong> : string or None, default None</p>
 <blockquote>
 <div><p>Make the interval closed with respect to the given frequency to
 the ‘left’, ‘right’, or both sides (None)</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.: </span>0</p>
+</div>
 </div></blockquote>
-<dl class="docutils">
-<dt><strong>tz</strong> <span class="classifier-delimiter">:</span> <span class="classifier">pytz.timezone or dateutil.tz.tzfile</span></dt>
-<dd></dd>
+<dl class="simple">
+<dt><strong>tz</strong><span class="classifier">pytz.timezone or dateutil.tz.tzfile</span></dt><dd></dd>
 </dl>
 <p><strong>ambiguous</strong> : ‘infer’, bool-ndarray, ‘NaT’, default ‘raise’</p>
 <blockquote>
-<div><ul class="simple">
-<li>‘infer’ will attempt to infer fall dst-transition hours based on
-order</li>
-<li>bool-ndarray where True signifies a DST time, False signifies a
+<div><p>When clocks moved backward due to DST, ambiguous times may arise.
+For example in Central European Time (UTC+01), when going from 03:00
+DST to 02:00 non-DST, 02:30:00 local time occurs both at 00:30:00 UTC
+and at 01:30:00 UTC. In such a situation, the <cite>ambiguous</cite> parameter
+dictates how ambiguous times should be handled.</p>
+<ul class="simple">
+<li><p>‘infer’ will attempt to infer fall dst-transition hours based on
+order</p></li>
+<li><p>bool-ndarray where True signifies a DST time, False signifies a
 non-DST time (note that this flag is only applicable for ambiguous
-times)</li>
-<li>‘NaT’ will return NaT where there are ambiguous times</li>
-<li>‘raise’ will raise an AmbiguousTimeError if there are ambiguous times</li>
+times)</p></li>
+<li><p>‘NaT’ will return NaT where there are ambiguous times</p></li>
+<li><p>‘raise’ will raise an AmbiguousTimeError if there are ambiguous times</p></li>
 </ul>
 </div></blockquote>
 <p><strong>name</strong> : object</p>
@@ -154,177 +174,185 @@ times)</li>
 <div><p>If True, parse dates in <cite>data</cite> with the day first order</p>
 </div></blockquote>
 <p><strong>yearfirst</strong> : bool, default False</p>
-<blockquote class="last">
+<blockquote>
 <div><p>If True parse dates in <cite>data</cite> with the year first order</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index</span></code></a></dt>
-<dd>The base pandas Index type</dd>
-<dt><a class="reference internal" href="pandas.TimedeltaIndex.html#pandas.TimedeltaIndex" title="pandas.TimedeltaIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code></a></dt>
-<dd>Index of timedelta64 data</dd>
-<dt><a class="reference internal" href="pandas.PeriodIndex.html#pandas.PeriodIndex" title="pandas.PeriodIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex</span></code></a></dt>
-<dd>Index of Period data</dd>
-<dt><a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.to_datetime</span></code></a></dt>
-<dd>Convert argument to datetime</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index</span></code></a></dt><dd><p>The base pandas Index type.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.TimedeltaIndex.html#pandas.TimedeltaIndex" title="pandas.TimedeltaIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code></a></dt><dd><p>Index of timedelta64 data.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.PeriodIndex.html#pandas.PeriodIndex" title="pandas.PeriodIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex</span></code></a></dt><dd><p>Index of Period data.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_datetime</span></code></a></dt><dd><p>Convert argument to datetime.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.date_range.html#pandas.date_range" title="pandas.date_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date_range</span></code></a></dt><dd><p>Create a fixed-frequency DatetimeIndex.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
-<p>To learn more about the frequency strings, please see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases">this link</a>.</p>
+<p>To learn more about the frequency strings, please see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases">this link</a>.</p>
+<p>Creating a DatetimeIndex based on <cite>start</cite>, <cite>periods</cite>, and <cite>end</cite> has
+been deprecated in favor of <a class="reference internal" href="pandas.date_range.html#pandas.date_range" title="pandas.date_range"><code class="xref py py-func docutils literal notranslate"><span class="pre">date_range()</span></code></a>.</p>
 <p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.year.html#pandas.DatetimeIndex.year" title="pandas.DatetimeIndex.year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">year</span></code></a></td>
-<td>The year of the datetime</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.year.html#pandas.DatetimeIndex.year" title="pandas.DatetimeIndex.year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">year</span></code></a></p></td>
+<td><p>The year of the datetime.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.month.html#pandas.DatetimeIndex.month" title="pandas.DatetimeIndex.month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">month</span></code></a></td>
-<td>The month as January=1, December=12</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.month.html#pandas.DatetimeIndex.month" title="pandas.DatetimeIndex.month"><code class="xref py py-obj docutils literal notranslate"><span class="pre">month</span></code></a></p></td>
+<td><p>The month as January=1, December=12.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.day.html#pandas.DatetimeIndex.day" title="pandas.DatetimeIndex.day"><code class="xref py py-obj docutils literal notranslate"><span class="pre">day</span></code></a></td>
-<td>The days of the datetime</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.day.html#pandas.DatetimeIndex.day" title="pandas.DatetimeIndex.day"><code class="xref py py-obj docutils literal notranslate"><span class="pre">day</span></code></a></p></td>
+<td><p>The days of the datetime.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.hour.html#pandas.DatetimeIndex.hour" title="pandas.DatetimeIndex.hour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hour</span></code></a></td>
-<td>The hours of the datetime</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.hour.html#pandas.DatetimeIndex.hour" title="pandas.DatetimeIndex.hour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hour</span></code></a></p></td>
+<td><p>The hours of the datetime.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.minute.html#pandas.DatetimeIndex.minute" title="pandas.DatetimeIndex.minute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minute</span></code></a></td>
-<td>The minutes of the datetime</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.minute.html#pandas.DatetimeIndex.minute" title="pandas.DatetimeIndex.minute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minute</span></code></a></p></td>
+<td><p>The minutes of the datetime.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.second.html#pandas.DatetimeIndex.second" title="pandas.DatetimeIndex.second"><code class="xref py py-obj docutils literal notranslate"><span class="pre">second</span></code></a></td>
-<td>The seconds of the datetime</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.second.html#pandas.DatetimeIndex.second" title="pandas.DatetimeIndex.second"><code class="xref py py-obj docutils literal notranslate"><span class="pre">second</span></code></a></p></td>
+<td><p>The seconds of the datetime.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.microsecond.html#pandas.DatetimeIndex.microsecond" title="pandas.DatetimeIndex.microsecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">microsecond</span></code></a></td>
-<td>The microseconds of the datetime</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.microsecond.html#pandas.DatetimeIndex.microsecond" title="pandas.DatetimeIndex.microsecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">microsecond</span></code></a></p></td>
+<td><p>The microseconds of the datetime.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.nanosecond.html#pandas.DatetimeIndex.nanosecond" title="pandas.DatetimeIndex.nanosecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nanosecond</span></code></a></td>
-<td>The nanoseconds of the datetime</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.nanosecond.html#pandas.DatetimeIndex.nanosecond" title="pandas.DatetimeIndex.nanosecond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nanosecond</span></code></a></p></td>
+<td><p>The nanoseconds of the datetime.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.date.html#pandas.DatetimeIndex.date" title="pandas.DatetimeIndex.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date</span></code></a></td>
-<td>Returns numpy array of python datetime.date objects (namely, the date part of Timestamps without timezone information).</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.date.html#pandas.DatetimeIndex.date" title="pandas.DatetimeIndex.date"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date</span></code></a></p></td>
+<td><p>Returns numpy array of python datetime.date objects (namely, the date part of Timestamps without timezone information).</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.time.html#pandas.DatetimeIndex.time" title="pandas.DatetimeIndex.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time</span></code></a></td>
-<td>Returns numpy array of datetime.time.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.time.html#pandas.DatetimeIndex.time" title="pandas.DatetimeIndex.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time</span></code></a></p></td>
+<td><p>Returns numpy array of datetime.time.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.dayofyear.html#pandas.DatetimeIndex.dayofyear" title="pandas.DatetimeIndex.dayofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dayofyear</span></code></a></td>
-<td>The ordinal day of the year</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.timetz.html#pandas.DatetimeIndex.timetz" title="pandas.DatetimeIndex.timetz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timetz</span></code></a></p></td>
+<td><p>Returns numpy array of datetime.time also containing timezone information.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.weekofyear.html#pandas.DatetimeIndex.weekofyear" title="pandas.DatetimeIndex.weekofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weekofyear</span></code></a></td>
-<td>The week ordinal of the year</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.dayofyear.html#pandas.DatetimeIndex.dayofyear" title="pandas.DatetimeIndex.dayofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dayofyear</span></code></a></p></td>
+<td><p>The ordinal day of the year.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.week.html#pandas.DatetimeIndex.week" title="pandas.DatetimeIndex.week"><code class="xref py py-obj docutils literal notranslate"><span class="pre">week</span></code></a></td>
-<td>The week ordinal of the year</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.weekofyear.html#pandas.DatetimeIndex.weekofyear" title="pandas.DatetimeIndex.weekofyear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weekofyear</span></code></a></p></td>
+<td><p>The week ordinal of the year.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.dayofweek.html#pandas.DatetimeIndex.dayofweek" title="pandas.DatetimeIndex.dayofweek"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dayofweek</span></code></a></td>
-<td>The day of the week with Monday=0, Sunday=6</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.week.html#pandas.DatetimeIndex.week" title="pandas.DatetimeIndex.week"><code class="xref py py-obj docutils literal notranslate"><span class="pre">week</span></code></a></p></td>
+<td><p>The week ordinal of the year.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.weekday.html#pandas.DatetimeIndex.weekday" title="pandas.DatetimeIndex.weekday"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weekday</span></code></a></td>
-<td>The day of the week with Monday=0, Sunday=6</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.dayofweek.html#pandas.DatetimeIndex.dayofweek" title="pandas.DatetimeIndex.dayofweek"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dayofweek</span></code></a></p></td>
+<td><p>The day of the week with Monday=0, Sunday=6.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.quarter.html#pandas.DatetimeIndex.quarter" title="pandas.DatetimeIndex.quarter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quarter</span></code></a></td>
-<td>The quarter of the date</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.weekday.html#pandas.DatetimeIndex.weekday" title="pandas.DatetimeIndex.weekday"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weekday</span></code></a></p></td>
+<td><p>The day of the week with Monday=0, Sunday=6.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.freq.html#pandas.DatetimeIndex.freq" title="pandas.DatetimeIndex.freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freq</span></code></a></td>
-<td>Return the frequency object if it is set, otherwise None</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.quarter.html#pandas.DatetimeIndex.quarter" title="pandas.DatetimeIndex.quarter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quarter</span></code></a></p></td>
+<td><p>The quarter of the date.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.freqstr.html#pandas.DatetimeIndex.freqstr" title="pandas.DatetimeIndex.freqstr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqstr</span></code></a></td>
-<td>Return the frequency object as a string if it is set, otherwise None</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.freq.html#pandas.DatetimeIndex.freq" title="pandas.DatetimeIndex.freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freq</span></code></a></p></td>
+<td><p>Return the frequency object if it is set, otherwise None.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.is_month_start.html#pandas.DatetimeIndex.is_month_start" title="pandas.DatetimeIndex.is_month_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_month_start</span></code></a></td>
-<td>Logical indicating if first day of month (defined by frequency)</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.freqstr.html#pandas.DatetimeIndex.freqstr" title="pandas.DatetimeIndex.freqstr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqstr</span></code></a></p></td>
+<td><p>Return the frequency object as a string if it is set, otherwise None.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.is_month_end.html#pandas.DatetimeIndex.is_month_end" title="pandas.DatetimeIndex.is_month_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_month_end</span></code></a></td>
-<td>Indicator for whether the date is the last day of the month.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.is_month_start.html#pandas.DatetimeIndex.is_month_start" title="pandas.DatetimeIndex.is_month_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_month_start</span></code></a></p></td>
+<td><p>Indicates whether the date is the first day of the month.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.is_quarter_start.html#pandas.DatetimeIndex.is_quarter_start" title="pandas.DatetimeIndex.is_quarter_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_quarter_start</span></code></a></td>
-<td>Indicator for whether the date is the first day of a quarter.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.is_month_end.html#pandas.DatetimeIndex.is_month_end" title="pandas.DatetimeIndex.is_month_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_month_end</span></code></a></p></td>
+<td><p>Indicates whether the date is the last day of the month.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.is_quarter_end.html#pandas.DatetimeIndex.is_quarter_end" title="pandas.DatetimeIndex.is_quarter_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_quarter_end</span></code></a></td>
-<td>Indicator for whether the date is the last day of a quarter.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.is_quarter_start.html#pandas.DatetimeIndex.is_quarter_start" title="pandas.DatetimeIndex.is_quarter_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_quarter_start</span></code></a></p></td>
+<td><p>Indicator for whether the date is the first day of a quarter.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.is_year_start.html#pandas.DatetimeIndex.is_year_start" title="pandas.DatetimeIndex.is_year_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_year_start</span></code></a></td>
-<td>Indicate whether the date is the first day of a year.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.is_quarter_end.html#pandas.DatetimeIndex.is_quarter_end" title="pandas.DatetimeIndex.is_quarter_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_quarter_end</span></code></a></p></td>
+<td><p>Indicator for whether the date is the last day of a quarter.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.is_year_end.html#pandas.DatetimeIndex.is_year_end" title="pandas.DatetimeIndex.is_year_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_year_end</span></code></a></td>
-<td>Indicate whether the date is the last day of the year.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.is_year_start.html#pandas.DatetimeIndex.is_year_start" title="pandas.DatetimeIndex.is_year_start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_year_start</span></code></a></p></td>
+<td><p>Indicate whether the date is the first day of a year.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.is_leap_year.html#pandas.DatetimeIndex.is_leap_year" title="pandas.DatetimeIndex.is_leap_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_leap_year</span></code></a></td>
-<td>Boolean indicator if the date belongs to a leap year.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.is_year_end.html#pandas.DatetimeIndex.is_year_end" title="pandas.DatetimeIndex.is_year_end"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_year_end</span></code></a></p></td>
+<td><p>Indicate whether the date is the last day of the year.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.inferred_freq.html#pandas.DatetimeIndex.inferred_freq" title="pandas.DatetimeIndex.inferred_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inferred_freq</span></code></a></td>
-<td>Tries to return a string representing a frequency guess, generated by infer_freq.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.is_leap_year.html#pandas.DatetimeIndex.is_leap_year" title="pandas.DatetimeIndex.is_leap_year"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_leap_year</span></code></a></p></td>
+<td><p>Boolean indicator if the date belongs to a leap year.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.inferred_freq.html#pandas.DatetimeIndex.inferred_freq" title="pandas.DatetimeIndex.inferred_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inferred_freq</span></code></a></p></td>
+<td><p>Tryies to return a string representing a frequency guess, generated by infer_freq.</p></td>
 </tr>
 </tbody>
 </table>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="38%" />
-<col width="63%" />
+<col style="width: 38%" />
+<col style="width: 63%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>tz</strong></td>
-<td>&#160;</td>
+<tbody>
+<tr class="row-odd"><td><p><strong>tz</strong></p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.normalize.html#pandas.DatetimeIndex.normalize" title="pandas.DatetimeIndex.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>()</td>
-<td>Convert times to midnight.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.normalize.html#pandas.DatetimeIndex.normalize" title="pandas.DatetimeIndex.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert times to midnight.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.strftime.html#pandas.DatetimeIndex.strftime" title="pandas.DatetimeIndex.strftime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strftime</span></code></a>(date_format)</td>
-<td>Convert to Index using specified date_format.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.strftime.html#pandas.DatetimeIndex.strftime" title="pandas.DatetimeIndex.strftime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strftime</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert to Index using specified date_format.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.snap.html#pandas.DatetimeIndex.snap" title="pandas.DatetimeIndex.snap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">snap</span></code></a>([freq])</td>
-<td>Snap time stamps to nearest occurring frequency</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.snap.html#pandas.DatetimeIndex.snap" title="pandas.DatetimeIndex.snap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">snap</span></code></a>([freq])</p></td>
+<td><p>Snap time stamps to nearest occurring frequency</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.tz_convert.html#pandas.DatetimeIndex.tz_convert" title="pandas.DatetimeIndex.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz_convert</span></code></a>(tz)</td>
-<td>Convert tz-aware DatetimeIndex from one time zone to another.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.tz_convert.html#pandas.DatetimeIndex.tz_convert" title="pandas.DatetimeIndex.tz_convert"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz_convert</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert tz-aware Datetime Array/Index from one time zone to another.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.tz_localize.html#pandas.DatetimeIndex.tz_localize" title="pandas.DatetimeIndex.tz_localize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz_localize</span></code></a>(tz[,&nbsp;ambiguous,&nbsp;errors])</td>
-<td>Localize tz-naive DatetimeIndex to tz-aware DatetimeIndex.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.tz_localize.html#pandas.DatetimeIndex.tz_localize" title="pandas.DatetimeIndex.tz_localize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tz_localize</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Localize tz-naive Datetime Array/Index to tz-aware Datetime Array/Index.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.round.html#pandas.DatetimeIndex.round" title="pandas.DatetimeIndex.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code></a>(freq,&nbsp;*args,&nbsp;**kwargs)</td>
-<td>round the data to the specified <cite>freq</cite>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.round.html#pandas.DatetimeIndex.round" title="pandas.DatetimeIndex.round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">round</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Perform round operation on the data to the specified <cite>freq</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.floor.html#pandas.DatetimeIndex.floor" title="pandas.DatetimeIndex.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">floor</span></code></a>(freq)</td>
-<td>floor the data to the specified <cite>freq</cite>.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.floor.html#pandas.DatetimeIndex.floor" title="pandas.DatetimeIndex.floor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">floor</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Perform floor operation on the data to the specified <cite>freq</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.ceil.html#pandas.DatetimeIndex.ceil" title="pandas.DatetimeIndex.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ceil</span></code></a>(freq)</td>
-<td>ceil the data to the specified <cite>freq</cite>.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.ceil.html#pandas.DatetimeIndex.ceil" title="pandas.DatetimeIndex.ceil"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ceil</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Perform ceil operation on the data to the specified <cite>freq</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.to_period.html#pandas.DatetimeIndex.to_period" title="pandas.DatetimeIndex.to_period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_period</span></code></a>([freq])</td>
-<td>Cast to PeriodIndex at a particular frequency.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.to_period.html#pandas.DatetimeIndex.to_period" title="pandas.DatetimeIndex.to_period"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_period</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Cast to PeriodArray/Index at a particular frequency.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.to_perioddelta.html#pandas.DatetimeIndex.to_perioddelta" title="pandas.DatetimeIndex.to_perioddelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_perioddelta</span></code></a>(freq)</td>
-<td>Calculate TimedeltaIndex of difference between index values and index converted to periodIndex at specified freq.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.to_perioddelta.html#pandas.DatetimeIndex.to_perioddelta" title="pandas.DatetimeIndex.to_perioddelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_perioddelta</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Calculate TimedeltaArray of difference between index values and index converted to PeriodArray at specified freq.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.to_pydatetime.html#pandas.DatetimeIndex.to_pydatetime" title="pandas.DatetimeIndex.to_pydatetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pydatetime</span></code></a>()</td>
-<td>Return DatetimeIndex as object ndarray of datetime.datetime objects</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.to_pydatetime.html#pandas.DatetimeIndex.to_pydatetime" title="pandas.DatetimeIndex.to_pydatetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pydatetime</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Return Datetime Array/Index as object ndarray of datetime.datetime objects</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.to_series.html#pandas.DatetimeIndex.to_series" title="pandas.DatetimeIndex.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_series</span></code></a>([keep_tz,&nbsp;index,&nbsp;name])</td>
-<td>Create a Series with both index and values equal to the index keys useful with map for returning an indexer based on an index</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.to_series.html#pandas.DatetimeIndex.to_series" title="pandas.DatetimeIndex.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_series</span></code></a>([keep_tz, index, name])</p></td>
+<td><p>Create a Series with both index and values equal to the index keys useful with map for returning an indexer based on an index</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.to_frame.html#pandas.DatetimeIndex.to_frame" title="pandas.DatetimeIndex.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>([index])</td>
-<td>Create a DataFrame with a column containing the Index.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.to_frame.html#pandas.DatetimeIndex.to_frame" title="pandas.DatetimeIndex.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>([index, name])</p></td>
+<td><p>Create a DataFrame with a column containing the Index.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.DatetimeIndex.month_name.html#pandas.DatetimeIndex.month_name" title="pandas.DatetimeIndex.month_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">month_name</span></code></a>([locale])</td>
-<td>Return the month names of the DateTimeIndex with specified locale.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.DatetimeIndex.month_name.html#pandas.DatetimeIndex.month_name" title="pandas.DatetimeIndex.month_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">month_name</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Return the month names of the DateTimeIndex with specified locale.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.DatetimeIndex.day_name.html#pandas.DatetimeIndex.day_name" title="pandas.DatetimeIndex.day_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">day_name</span></code></a>([locale])</td>
-<td>Return the day names of the DateTimeIndex with specified locale.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.DatetimeIndex.day_name.html#pandas.DatetimeIndex.day_name" title="pandas.DatetimeIndex.day_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">day_name</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Return the day names of the DateTimeIndex with specified locale.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean</span></code>(*args, **kwargs)</p></td>
+<td><p>Return the mean value of the Array.</p></td>
 </tr>
 </tbody>
 </table>
@@ -352,7 +380,7 @@ times)</li>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

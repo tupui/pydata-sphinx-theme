@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.Series.xs &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.Series.xs &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,83 +91,109 @@
 <h1>pandas.Series.xs<a class="headerlink" href="#pandas-series-xs" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.Series.xs">
-<code class="descclassname">Series.</code><code class="descname">xs</code><span class="sig-paren">(</span><em>key</em>, <em>axis=0</em>, <em>level=None</em>, <em>drop_level=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L2893-L3021"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.xs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a cross-section (row(s) or column(s)) from the
-Series/DataFrame. Defaults to cross-section on the rows (axis=0).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> : object</p>
+<code class="sig-prename descclassname">Series.</code><code class="sig-name descname">xs</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">level=None</em>, <em class="sig-param">drop_level=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L3616-L3775"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.xs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return cross-section from the Series/DataFrame.</p>
+<p>This method takes a <cite>key</cite> argument to select data at a particular
+level of a MultiIndex.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key</strong> : label or tuple of label</p>
 <blockquote>
-<div><p>Some label contained in the index, or partially in a MultiIndex</p>
+<div><p>Label contained in the index, or partially in a MultiIndex.</p>
 </div></blockquote>
-<p><strong>axis</strong> : int, default 0</p>
+<p><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’}, default 0</p>
 <blockquote>
-<div><p>Axis to retrieve cross-section on</p>
+<div><p>Axis to retrieve cross-section on.</p>
 </div></blockquote>
 <p><strong>level</strong> : object, defaults to first n levels (n=1 or len(key))</p>
 <blockquote>
 <div><p>In case of a key partially contained in a MultiIndex, indicate
 which levels are used. Levels can be referred by label or position.</p>
 </div></blockquote>
-<p><strong>drop_level</strong> : boolean, default True</p>
+<p><strong>drop_level</strong> : bool, default True</p>
 <blockquote>
 <div><p>If False, returns object with same levels as self.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>xs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series or DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Series or DataFrame</strong></p>
+<blockquote>
+<div><p>Cross-section from the original Series or DataFrame
+corresponding to the selected index levels.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.loc</span></code></a></dt><dd><p>Access a group of rows and columns by label(s) or a boolean array.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.iloc.html#pandas.DataFrame.iloc" title="pandas.DataFrame.iloc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.iloc</span></code></a></dt><dd><p>Purely integer-location based indexing for selection by position.</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
-<p>xs is only for getting, not setting values.</p>
-<p>MultiIndex Slicers is a generic way to get/set values on any level or
-levels.  It is a superset of xs functionality, see
-<a class="reference internal" href="../user_guide/advanced.html#advanced-mi-slicers"><span class="std std-ref">MultiIndex Slicers</span></a></p>
+<p><cite>xs</cite> can not be used to set values.</p>
+<p>MultiIndex Slicers is a generic way to get/set values on
+any level or levels.
+It is a superset of <cite>xs</cite> functionality, see
+<a class="reference internal" href="../user_guide/advanced.html#advanced-mi-slicers"><span class="std std-ref">MultiIndex Slicers</span></a>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
-<span class="go">   A  B  C</span>
-<span class="go">a  4  5  2</span>
-<span class="go">b  4  0  9</span>
-<span class="go">c  9  7  3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
-<span class="go">A    4</span>
-<span class="go">B    5</span>
-<span class="go">C    2</span>
-<span class="go">Name: a</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">a    2</span>
-<span class="go">b    9</span>
-<span class="go">c    3</span>
-<span class="go">Name: C</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;num_legs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;num_wings&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="s1">&#39;bird&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;animal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;penguin&#39;</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;locomotion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;walks&#39;</span><span class="p">,</span> <span class="s1">&#39;walks&#39;</span><span class="p">,</span> <span class="s1">&#39;flies&#39;</span><span class="p">,</span> <span class="s1">&#39;walks&#39;</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;animal&#39;</span><span class="p">,</span> <span class="s1">&#39;locomotion&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">                           num_legs  num_wings</span>
+<span class="go">class  animal  locomotion</span>
+<span class="go">mammal cat     walks              4          0</span>
+<span class="go">       dog     walks              4          0</span>
+<span class="go">       bat     flies              2          2</span>
+<span class="go">bird   penguin walks              2          2</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
-<span class="go">                    A  B  C  D</span>
-<span class="go">first second third</span>
-<span class="go">bar   one    1      4  1  8  9</span>
-<span class="go">      two    1      7  5  5  0</span>
-<span class="go">baz   one    1      6  6  8  0</span>
-<span class="go">      three  2      5  3  5  3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">((</span><span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">))</span>
-<span class="go">       A  B  C  D</span>
-<span class="go">third</span>
-<span class="go">2      5  3  5  3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">             A  B  C  D</span>
-<span class="go">first third</span>
-<span class="go">bar   1      4  1  8  9</span>
-<span class="go">baz   1      6  6  8  0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">((</span><span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;third&#39;</span><span class="p">])</span>
-<span class="go">        A  B  C  D</span>
-<span class="go">second</span>
-<span class="go">three   5  3  5  3</span>
+<p>Get values at specified index</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">)</span>
+<span class="go">                   num_legs  num_wings</span>
+<span class="go">animal locomotion</span>
+<span class="go">cat    walks              4          0</span>
+<span class="go">dog    walks              4          0</span>
+<span class="go">bat    flies              2          2</span>
+</pre></div>
+</div>
+<p>Get values at several indexes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">((</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">))</span>
+<span class="go">            num_legs  num_wings</span>
+<span class="go">locomotion</span>
+<span class="go">walks              4          0</span>
+</pre></div>
+</div>
+<p>Get values at specified index and level</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">                   num_legs  num_wings</span>
+<span class="go">class  locomotion</span>
+<span class="go">mammal walks              4          0</span>
+</pre></div>
+</div>
+<p>Get values at several indexes and levels</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">((</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="s1">&#39;walks&#39;</span><span class="p">),</span>
+<span class="gp">... </span>      <span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;locomotion&#39;</span><span class="p">])</span>
+<span class="go">         num_legs  num_wings</span>
+<span class="go">animal</span>
+<span class="go">penguin         2          2</span>
+</pre></div>
+</div>
+<p>Get values at specified column and axis</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;num_wings&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">class   animal   locomotion</span>
+<span class="go">mammal  cat      walks         0</span>
+<span class="go">        dog      walks         0</span>
+<span class="go">        bat      flies         2</span>
+<span class="go">bird    penguin  walks         2</span>
+<span class="go">Name: num_wings, dtype: int64</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -190,7 +220,7 @@ levels.  It is a superset of xs functionality, see
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.io.formats.style.Styler.bar &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.io.formats.style.Styler.bar &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,59 +91,72 @@
 <h1>pandas.io.formats.style.Styler.bar<a class="headerlink" href="#pandas-io-formats-style-styler-bar" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.io.formats.style.Styler.bar">
-<code class="descclassname">Styler.</code><code class="descname">bar</code><span class="sig-paren">(</span><em>subset=None</em>, <em>axis=0</em>, <em>color='#d65f5f'</em>, <em>width=100</em>, <em>align='left'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/io/formats/style.py#L1051-L1111"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.io.formats.style.Styler.bar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Color the background <code class="docutils literal notranslate"><span class="pre">color</span></code> proptional to the values in each column.
-Excludes non-numeric data by default.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>subset: IndexSlice, default None</strong></p>
+<code class="sig-prename descclassname">Styler.</code><code class="sig-name descname">bar</code><span class="sig-paren">(</span><em class="sig-param">subset=None</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">color='#d65f5f'</em>, <em class="sig-param">width=100</em>, <em class="sig-param">align='left'</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/io/formats/style.py#L1160-L1245"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.io.formats.style.Styler.bar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw bar chart in the cell backgrounds.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subset</strong> : IndexSlice, optional</p>
 <blockquote>
-<div><p>a valid slice for <code class="docutils literal notranslate"><span class="pre">data</span></code> to limit the style application to</p>
+<div><p>A valid slice for <cite>data</cite> to limit the style application to.</p>
 </div></blockquote>
-<dl class="docutils">
-<dt><strong>axis: int</strong></dt>
-<dd></dd>
-</dl>
-<p><strong>color: str or 2-tuple/list</strong></p>
+<p><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’, None}, default 0</p>
+<blockquote>
+<div><p>apply to each column (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code> or <code class="docutils literal notranslate"><span class="pre">'index'</span></code>), to each row
+(<code class="docutils literal notranslate"><span class="pre">axis=1</span></code> or <code class="docutils literal notranslate"><span class="pre">'columns'</span></code>), or to the entire DataFrame at once
+with <code class="docutils literal notranslate"><span class="pre">axis=None</span></code>.</p>
+</div></blockquote>
+<p><strong>color</strong> : str or 2-tuple/list</p>
 <blockquote>
 <div><p>If a str is passed, the color is the same for both
 negative and positive numbers. If 2-tuple/list is used, the
 first element is the color_negative and the second is the
-color_positive (eg: [‘#d65f5f’, ‘#5fba7d’])</p>
+color_positive (eg: [‘#d65f5f’, ‘#5fba7d’]).</p>
 </div></blockquote>
-<p><strong>width: float</strong></p>
+<p><strong>width</strong> : float, default 100</p>
 <blockquote>
-<div><p>A number between 0 or 100. The largest value will cover <code class="docutils literal notranslate"><span class="pre">width</span></code>
-percent of the cell’s width</p>
+<div><p>A number between 0 or 100. The largest value will cover <cite>width</cite>
+percent of the cell’s width.</p>
 </div></blockquote>
 <p><strong>align</strong> : {‘left’, ‘zero’,’ mid’}, default ‘left’</p>
 <blockquote>
-<div><ul>
-<li><p class="first">‘left’ : the min value starts at the left of the cell</p>
-</li>
-<li><p class="first">‘zero’ : a value of zero is located at the center of the cell</p>
-</li>
-<li><p class="first">‘mid’ : the center of the cell is at (max-min)/2, or
+<div><p>How to align the bars with the cells.</p>
+<ul>
+<li><p>‘left’ : the min value starts at the left of the cell.</p></li>
+<li><p>‘zero’ : a value of zero is located at the center of the cell.</p></li>
+<li><p>‘mid’ : the center of the cell is at (max-min)/2, or
 if values are all negative (positive) the zero is aligned
-at the right (left) of the cell</p>
+at the right (left) of the cell.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 </li>
 </ul>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>self</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Styler</span></dt>
-<dd></dd>
+<p><strong>vmin</strong> : float, optional</p>
+<blockquote>
+<div><p>Minimum bar value, defining the left hand limit
+of the bar drawing range, lower values are clipped to <cite>vmin</cite>.
+When None (default): the minimum value of the data will be used.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+</div></blockquote>
+<p><strong>vmax</strong> : float, optional</p>
+<blockquote>
+<div><p>Maximum bar value, defining the right hand limit
+of the bar drawing range, higher values are clipped to <cite>vmax</cite>.
+When None (default): the maximum value of the data will be used.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>self</strong><span class="classifier">Styler</span></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -164,7 +181,7 @@ at the right (left) of the cell</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

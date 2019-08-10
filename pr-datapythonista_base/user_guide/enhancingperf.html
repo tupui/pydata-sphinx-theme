@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Enhancing Performance &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>Enhancing Performance &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -40,11 +40,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -77,7 +81,7 @@
 <li><a class="reference internal" href="#">Enhancing Performance</a><ul>
 <li><a class="reference internal" href="#cython-writing-c-extensions-for-pandas">Cython (Writing C extensions for pandas)</a></li>
 <li><a class="reference internal" href="#using-numba">Using Numba</a></li>
-<li><a class="reference internal" href="#expression-evaluation-via-eval">Expression Evaluation via <code class="docutils literal notranslate"><span class="pre">eval()</span></code></a></li>
+<li><a class="reference internal" href="#expression-evaluation-via-eval">Expression Evaluation via <code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -123,11 +127,7 @@ faster than the pure Python solution.</p>
 <span class="go">2   -1.509059 -0.723780  251  x</span>
 <span class="go">3   -1.135632  0.551225  972  x</span>
 <span class="go">4    1.212112 -0.497767  181  x</span>
-<span class="go">5   -0.173215  0.837519  458  x</span>
-<span class="go">6    0.119209  1.103245  159  x</span>
 <span class="go">..        ...       ...  ... ..</span>
-<span class="go">993  0.131892  0.290162  190  x</span>
-<span class="go">994  0.342097  0.215341  931  x</span>
 <span class="go">995 -1.512743  0.874737  374  x</span>
 <span class="go">996  0.933753  1.120790  246  x</span>
 <span class="go">997 -0.308013  0.198768  157  x</span>
@@ -160,23 +160,23 @@ faster than the pure Python solution.</p>
 time is spent during this operation (limited to the most time consuming
 four calls) using the <a class="reference external" href="http://ipython.org/ipython-doc/stable/api/generated/IPython.core.magics.execution.html#IPython.core.magics.execution.ExecutionMagics.prun">prun ipython magic function</a>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="o">%</span><span class="k">prun</span> -l 4 df.apply(lambda x: integrate_f(x[&#39;a&#39;], x[&#39;b&#39;], x[&#39;N&#39;]), axis=1)
-<span class="go">         671712 function calls (666692 primitive calls) in 0.603 seconds</span>
+<span class="go">         672332 function calls (667306 primitive calls) in 0.241 seconds</span>
 
 <span class="go">   Ordered by: internal time</span>
-<span class="go">   List reduced from 214 to 4 due to restriction &lt;4&gt;</span>
+<span class="go">   List reduced from 221 to 4 due to restriction &lt;4&gt;</span>
 
 <span class="go">   ncalls  tottime  percall  cumtime  percall filename:lineno(function)</span>
-<span class="go">     1000    0.331    0.000    0.474    0.000 &lt;ipython-input-4-c2a74e076cf0&gt;:1(integrate_f)</span>
-<span class="go">   552423    0.143    0.000    0.143    0.000 &lt;ipython-input-3-c138bdd570e3&gt;:1(f)</span>
-<span class="go">     3000    0.017    0.000    0.086    0.000 base.py:3090(get_value)</span>
-<span class="go">     3000    0.010    0.000    0.099    0.000 series.py:764(__getitem__)</span>
+<span class="go">     1000    0.122    0.000    0.179    0.000 &lt;ipython-input-4-c2a74e076cf0&gt;:1(integrate_f)</span>
+<span class="go">   552423    0.057    0.000    0.057    0.000 &lt;ipython-input-3-c138bdd570e3&gt;:1(f)</span>
+<span class="go">     3000    0.008    0.000    0.041    0.000 base.py:4695(get_value)</span>
+<span class="go">     3000    0.004    0.000    0.047    0.000 series.py:1061(__getitem__)</span>
 </pre></div>
 </div>
 <p>By far the majority of time is spend inside either <code class="docutils literal notranslate"><span class="pre">integrate_f</span></code> or <code class="docutils literal notranslate"><span class="pre">f</span></code>,
 hence we’ll concentrate our efforts cythonizing these two functions.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In Python 2 replacing the <code class="docutils literal notranslate"><span class="pre">range</span></code> with its generator counterpart (<code class="docutils literal notranslate"><span class="pre">xrange</span></code>)
+<p class="admonition-title">Note</p>
+<p>In Python 2 replacing the <code class="docutils literal notranslate"><span class="pre">range</span></code> with its generator counterpart (<code class="docutils literal notranslate"><span class="pre">xrange</span></code>)
 would mean the <code class="docutils literal notranslate"><span class="pre">range</span></code> line would vanish. In Python 3 <code class="docutils literal notranslate"><span class="pre">range</span></code> is already a generator.</p>
 </div>
 </div>
@@ -190,13 +190,13 @@ would mean the <code class="docutils literal notranslate"><span class="pre">rang
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;load_ext&#39;</span><span class="p">,</span> <span class="s1">&#39;Cython&#39;</span><span class="p">)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2285</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
-<span class="g g-Whitespace">   </span><span class="mi">2286</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2287</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2288</span>             <span class="k">return</span> <span class="n">result</span>
-<span class="g g-Whitespace">   </span><span class="mi">2289</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2312</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
+<span class="g g-Whitespace">   </span><span class="mi">2313</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2314</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2315</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2316</span> 
 
-<span class="nn">&lt;decorator-gen-65&gt;</span> in <span class="ni">load_ext</span><span class="nt">(self, module_str)</span>
+<span class="nn">&lt;/home/travis/miniconda/lib/python3.7/site-packages/decorator.py:decorator-gen-64&gt;</span> in <span class="ni">load_ext</span><span class="nt">(self, module_str)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
 <span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
@@ -250,8 +250,8 @@ is here to distinguish between function versions):</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you’re having trouble pasting the above into your ipython, you may need
+<p class="admonition-title">Note</p>
+<p>If you’re having trouble pasting the above into your ipython, you may need
 to be using bleeding edge ipython for paste to play well with cell magics.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="o">%</span><span class="k">timeit</span> df.apply(lambda x: integrate_f_plain(x[&#39;a&#39;], x[&#39;b&#39;], x[&#39;N&#39;]), axis=1)
@@ -291,13 +291,13 @@ look at what’s eating up time:</p>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;prun&#39;</span><span class="p">,</span> <span class="s2">&quot;-l 4 df.apply(lambda x: integrate_f_typed(x[&#39;a&#39;], x[&#39;b&#39;], x[&#39;N&#39;]), axis=1)&quot;</span><span class="p">)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2285</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
-<span class="g g-Whitespace">   </span><span class="mi">2286</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2287</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2288</span>             <span class="k">return</span> <span class="n">result</span>
-<span class="g g-Whitespace">   </span><span class="mi">2289</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2312</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
+<span class="g g-Whitespace">   </span><span class="mi">2313</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2314</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2315</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2316</span> 
 
-<span class="nn">&lt;decorator-gen-56&gt;</span> in <span class="ni">prun</span><span class="nt">(self, parameter_s, cell)</span>
+<span class="nn">&lt;/home/travis/miniconda/lib/python3.7/site-packages/decorator.py:decorator-gen-55&gt;</span> in <span class="ni">prun</span><span class="nt">(self, parameter_s, cell)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
 <span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
@@ -307,18 +307,18 @@ look at what’s eating up time:</p>
 <span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/magics/execution.py</span> in <span class="ni">prun</span><span class="nt">(self, parameter_s, cell)</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>             <span class="n">arg_str</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">cell</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span>         <span class="n">arg_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">transform_cell</span><span class="p">(</span><span class="n">arg_str</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">302</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_with_profiler</span><span class="p">(</span><span class="n">arg_str</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span> 
-<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="k">def</span> <span class="nf">_run_with_profiler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span>             <span class="n">arg_str</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">cell</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span>         <span class="n">arg_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">transform_cell</span><span class="p">(</span><span class="n">arg_str</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">317</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_with_profiler</span><span class="p">(</span><span class="n">arg_str</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span> 
+<span class="g g-Whitespace">    </span><span class="mi">319</span>     <span class="k">def</span> <span class="nf">_run_with_profiler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/magics/execution.py</span> in <span class="ni">_run_with_profiler</span><span class="nt">(self, code, opts, namespace)</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span>         <span class="n">prof</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">324</span>             <span class="n">prof</span> <span class="o">=</span> <span class="n">prof</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span>             <span class="n">sys_exit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="k">except</span> <span class="ne">SystemExit</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">337</span>         <span class="n">prof</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">338</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">339</span>             <span class="n">prof</span> <span class="o">=</span> <span class="n">prof</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span>             <span class="n">sys_exit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span>         <span class="k">except</span> <span class="ne">SystemExit</span><span class="p">:</span>
 
 <span class="nn">~/miniconda/lib/python3.7/cProfile.py</span> in <span class="ni">runctx</span><span class="nt">(self, cmd, globals, locals)</span>
 <span class="g g-Whitespace">     </span><span class="mi">98</span>         <span class="bp">self</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
@@ -330,32 +330,32 @@ look at what’s eating up time:</p>
 <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">apply</span><span class="nt">(self, func, axis, broadcast, raw, reduce, result_type, args, **kwds)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6012</span>                          <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">6013</span>                          <span class="n">kwds</span><span class="o">=</span><span class="n">kwds</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">6014</span>         <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">get_result</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">6015</span> 
-<span class="g g-Whitespace">   </span><span class="mi">6016</span>     <span class="k">def</span> <span class="nf">applymap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">6904</span>             <span class="n">kwds</span><span class="o">=</span><span class="n">kwds</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">6905</span>         <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">6906</span>         <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">get_result</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">6907</span> 
+<span class="g g-Whitespace">   </span><span class="mi">6908</span>     <span class="k">def</span> <span class="nf">applymap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/apply.py</span> in <span class="ni">get_result</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_raw</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span> 
-<span class="ne">--&gt; </span><span class="mi">142</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_standard</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> 
-<span class="g g-Whitespace">    </span><span class="mi">144</span>     <span class="k">def</span> <span class="nf">apply_empty_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_raw</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span> 
+<span class="ne">--&gt; </span><span class="mi">186</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_standard</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span> 
+<span class="g g-Whitespace">    </span><span class="mi">188</span>     <span class="k">def</span> <span class="nf">apply_empty_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/apply.py</span> in <span class="ni">apply_standard</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span> 
-<span class="g g-Whitespace">    </span><span class="mi">247</span>         <span class="c1"># compute the result using the series generator</span>
-<span class="ne">--&gt; </span><span class="mi">248</span>         <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_generator</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">249</span> 
-<span class="g g-Whitespace">    </span><span class="mi">250</span>         <span class="c1"># wrap results</span>
+<span class="g g-Whitespace">    </span><span class="mi">290</span> 
+<span class="g g-Whitespace">    </span><span class="mi">291</span>         <span class="c1"># compute the result using the series generator</span>
+<span class="ne">--&gt; </span><span class="mi">292</span>         <span class="bp">self</span><span class="o">.</span><span class="n">apply_series_generator</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span> 
+<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="c1"># wrap results</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/apply.py</span> in <span class="ni">apply_series_generator</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">275</span>             <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">276</span>                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series_gen</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">277</span>                     <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">278</span>                     <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">279</span>             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">319</span>             <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">320</span>                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">series_gen</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">321</span>                     <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">322</span>                     <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">323</span>             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
 <span class="nn">&lt;string&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x)</span>
 
@@ -369,8 +369,8 @@ look at what’s eating up time:</p>
 the index and the series (three times for each row). Function calls are expensive
 in Python, so maybe we could minimize these by cythonizing the apply part.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We are now passing ndarrays into the Cython function, fortunately Cython plays
+<p class="admonition-title">Note</p>
+<p>We are now passing ndarrays into the Cython function, fortunately Cython plays
 very nicely with NumPy.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="o">%%</span><span class="k">cython</span>
@@ -400,25 +400,25 @@ very nicely with NumPy.</p>
 <p>The implementation is simple, it creates an array of zeros and loops over
 the rows, applying our <code class="docutils literal notranslate"><span class="pre">integrate_f_typed</span></code>, and putting this in the zeros array.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>You can <strong>not pass</strong> a <code class="docutils literal notranslate"><span class="pre">Series</span></code> directly as a <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> typed parameter
 to a Cython function. Instead pass the actual <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> using the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code>. The reason is that the Cython
+<a class="reference internal" href="../generated/pandas.Series.to_numpy.html#pandas.Series.to_numpy" title="pandas.Series.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code></a>. The reason is that the Cython
 definition is specific to an ndarray and not the passed <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
 <p>So, do not do this:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">apply_integrate_f</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>But rather, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code> to get the underlying <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>:</p>
-<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">apply_integrate_f</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+<p>But rather, use <a class="reference internal" href="../generated/pandas.Series.to_numpy.html#pandas.Series.to_numpy" title="pandas.Series.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code></a> to get the underlying <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">apply_integrate_f</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                   <span class="n">df</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                   <span class="n">df</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Loops like this would be <em>extremely</em> slow in Python, but in Cython looping
+<p class="admonition-title">Note</p>
+<p>Loops like this would be <em>extremely</em> slow in Python, but in Cython looping
 over NumPy arrays is <em>fast</em>.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="o">%</span><span class="k">timeit</span> apply_integrate_f(df[&#39;a&#39;].values, df[&#39;b&#39;].values, df[&#39;N&#39;].values)
@@ -433,13 +433,13 @@ over NumPy arrays is <em>fast</em>.</p>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;prun&#39;</span><span class="p">,</span> <span class="s2">&quot;-l 4 apply_integrate_f(df[&#39;a&#39;].values, df[&#39;b&#39;].values, df[&#39;N&#39;].values)&quot;</span><span class="p">)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2285</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
-<span class="g g-Whitespace">   </span><span class="mi">2286</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2287</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2288</span>             <span class="k">return</span> <span class="n">result</span>
-<span class="g g-Whitespace">   </span><span class="mi">2289</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2312</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span><span class="o">.</span><span class="n">f_locals</span>
+<span class="g g-Whitespace">   </span><span class="mi">2313</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2314</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2315</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2316</span> 
 
-<span class="nn">&lt;decorator-gen-56&gt;</span> in <span class="ni">prun</span><span class="nt">(self, parameter_s, cell)</span>
+<span class="nn">&lt;/home/travis/miniconda/lib/python3.7/site-packages/decorator.py:decorator-gen-55&gt;</span> in <span class="ni">prun</span><span class="nt">(self, parameter_s, cell)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
 <span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
@@ -449,18 +449,18 @@ over NumPy arrays is <em>fast</em>.</p>
 <span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/magics/execution.py</span> in <span class="ni">prun</span><span class="nt">(self, parameter_s, cell)</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>             <span class="n">arg_str</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">cell</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span>         <span class="n">arg_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">transform_cell</span><span class="p">(</span><span class="n">arg_str</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">302</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_with_profiler</span><span class="p">(</span><span class="n">arg_str</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span> 
-<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="k">def</span> <span class="nf">_run_with_profiler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span>             <span class="n">arg_str</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">cell</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span>         <span class="n">arg_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">transform_cell</span><span class="p">(</span><span class="n">arg_str</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">317</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_with_profiler</span><span class="p">(</span><span class="n">arg_str</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span> 
+<span class="g g-Whitespace">    </span><span class="mi">319</span>     <span class="k">def</span> <span class="nf">_run_with_profiler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">opts</span><span class="p">,</span> <span class="n">namespace</span><span class="p">):</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/IPython/core/magics/execution.py</span> in <span class="ni">_run_with_profiler</span><span class="nt">(self, code, opts, namespace)</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span>         <span class="n">prof</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">323</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">324</span>             <span class="n">prof</span> <span class="o">=</span> <span class="n">prof</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">325</span>             <span class="n">sys_exit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="k">except</span> <span class="ne">SystemExit</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">337</span>         <span class="n">prof</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">338</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">339</span>             <span class="n">prof</span> <span class="o">=</span> <span class="n">prof</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span>             <span class="n">sys_exit</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span>         <span class="k">except</span> <span class="ne">SystemExit</span><span class="p">:</span>
 
 <span class="nn">~/miniconda/lib/python3.7/cProfile.py</span> in <span class="ni">runctx</span><span class="nt">(self, cmd, globals, locals)</span>
 <span class="g g-Whitespace">     </span><span class="mi">98</span>         <span class="bp">self</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
@@ -524,12 +524,12 @@ For more about <code class="docutils literal notranslate"><span class="pre">boun
 <p>Numba gives you the power to speed up your applications with high performance functions written directly in Python. With a few annotations, array-oriented and math-heavy Python code can be just-in-time compiled to native machine instructions, similar in performance to C, C++ and Fortran, without having to switch languages or Python interpreters.</p>
 <p>Numba works by generating optimized machine code using the LLVM compiler infrastructure at import time, runtime, or statically (using the included pycc tool). Numba supports compilation of Python to run on either CPU or GPU hardware, and is designed to integrate with the Python scientific software stack.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You will need to install Numba. This is easy with <code class="docutils literal notranslate"><span class="pre">conda</span></code>, by using: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">numba</span></code>, see <a class="reference internal" href="../install.html#install-miniconda"><span class="std std-ref">installing using miniconda</span></a>.</p>
+<p class="admonition-title">Note</p>
+<p>You will need to install Numba. This is easy with <code class="docutils literal notranslate"><span class="pre">conda</span></code>, by using: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">numba</span></code>, see <a class="reference internal" href="../install.html#install-miniconda"><span class="std std-ref">installing using miniconda</span></a>.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">As of Numba version 0.20, pandas objects cannot be passed directly to Numba-compiled functions. Instead, one must pass the NumPy array underlying the pandas object to the Numba-compiled function as demonstrated below.</p>
+<p class="admonition-title">Note</p>
+<p>As of Numba version 0.20, pandas objects cannot be passed directly to Numba-compiled functions. Instead, one must pass the NumPy array underlying the pandas object to the Numba-compiled function as demonstrated below.</p>
 </div>
 <div class="section" id="jit">
 <h3>Jit<a class="headerlink" href="#jit" title="Permalink to this headline">¶</a></h3>
@@ -610,8 +610,8 @@ Consider the following toy example of doubling each observation:</p>
 <div class="section" id="caveats">
 <h3>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Numba will execute on any function, but can only accelerate certain classes of functions.</p>
+<p class="admonition-title">Note</p>
+<p>Numba will execute on any function, but can only accelerate certain classes of functions.</p>
 </div>
 <p>Numba is best at accelerating functions that apply numerical functions to NumPy
 arrays. When passed a function that only uses operations it knows how to
@@ -632,8 +632,8 @@ troubleshooting Numba modes, see the <a class="reference external" href="http://
 <p>The top-level function <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> implements expression evaluation of
 <a class="reference internal" href="../generated/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> and <a class="reference internal" href="../generated/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> objects.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To benefit from using <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> you need to
+<p class="admonition-title">Note</p>
+<p>To benefit from using <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> you need to
 install <code class="docutils literal notranslate"><span class="pre">numexpr</span></code>. See the <a class="reference internal" href="../install.html#install-recommended-dependencies"><span class="std std-ref">recommended dependencies section</span></a> for more details.</p>
 </div>
 <p>The point of using <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> for expression evaluation rather than
@@ -642,8 +642,8 @@ evaluated more efficiently and 2) large arithmetic and boolean expressions are
 evaluated all at once by the underlying engine (by default <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> is used
 for evaluation).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You should not use <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> for simple
+<p class="admonition-title">Note</p>
+<p>You should not use <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> for simple
 expressions or for expressions involving small DataFrames. In fact,
 <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> is many orders of magnitude slower for
 smaller expressions/objects than plain ol’ Python. A good rule of thumb is
@@ -653,50 +653,50 @@ to only use <a class="reference internal" href="../generated/pandas.eval.html#pa
 <p><a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> supports all arithmetic expressions supported by the
 engine in addition to some extensions available only in pandas.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The larger the frame and the larger the expression the more speedup you will
+<p class="admonition-title">Note</p>
+<p>The larger the frame and the larger the expression the more speedup you will
 see from using <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>.</p>
 </div>
 <div class="section" id="supported-syntax">
 <h3>Supported Syntax<a class="headerlink" href="#supported-syntax" title="Permalink to this headline">¶</a></h3>
 <p>These operations are supported by <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a>:</p>
 <ul class="simple">
-<li>Arithmetic operations except for the left shift (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>) and right shift
-(<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>) operators, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">/</span> <span class="pre">s</span> <span class="pre">**</span> <span class="pre">4</span> <span class="pre">%</span> <span class="pre">42</span> <span class="pre">-</span> <span class="pre">the_golden_ratio</span></code></li>
-<li>Comparison operations, including chained comparisons, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span></code></li>
-<li>Boolean operations, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span> <span class="pre">and</span> <span class="pre">df3</span> <span class="pre">&lt;</span> <span class="pre">df4</span> <span class="pre">or</span> <span class="pre">not</span> <span class="pre">df_bool</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">tuple</span></code> literals, e.g., <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code> or <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code></li>
-<li>Attribute access, e.g., <code class="docutils literal notranslate"><span class="pre">df.a</span></code></li>
-<li>Subscript expressions, e.g., <code class="docutils literal notranslate"><span class="pre">df[0]</span></code></li>
-<li>Simple variable evaluation, e.g., <code class="docutils literal notranslate"><span class="pre">pd.eval('df')</span></code> (this is not very useful)</li>
-<li>Math functions: <cite>sin</cite>, <cite>cos</cite>, <cite>exp</cite>, <cite>log</cite>, <cite>expm1</cite>, <cite>log1p</cite>,
+<li><p>Arithmetic operations except for the left shift (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>) and right shift
+(<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>) operators, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">/</span> <span class="pre">s</span> <span class="pre">**</span> <span class="pre">4</span> <span class="pre">%</span> <span class="pre">42</span> <span class="pre">-</span> <span class="pre">the_golden_ratio</span></code></p></li>
+<li><p>Comparison operations, including chained comparisons, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span></code></p></li>
+<li><p>Boolean operations, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span> <span class="pre">and</span> <span class="pre">df3</span> <span class="pre">&lt;</span> <span class="pre">df4</span> <span class="pre">or</span> <span class="pre">not</span> <span class="pre">df_bool</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">tuple</span></code> literals, e.g., <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code> or <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code></p></li>
+<li><p>Attribute access, e.g., <code class="docutils literal notranslate"><span class="pre">df.a</span></code></p></li>
+<li><p>Subscript expressions, e.g., <code class="docutils literal notranslate"><span class="pre">df[0]</span></code></p></li>
+<li><p>Simple variable evaluation, e.g., <code class="docutils literal notranslate"><span class="pre">pd.eval('df')</span></code> (this is not very useful)</p></li>
+<li><p>Math functions: <cite>sin</cite>, <cite>cos</cite>, <cite>exp</cite>, <cite>log</cite>, <cite>expm1</cite>, <cite>log1p</cite>,
 <cite>sqrt</cite>, <cite>sinh</cite>, <cite>cosh</cite>, <cite>tanh</cite>, <cite>arcsin</cite>, <cite>arccos</cite>, <cite>arctan</cite>, <cite>arccosh</cite>,
-<cite>arcsinh</cite>, <cite>arctanh</cite>, <cite>abs</cite>, <cite>arctan2</cite> and <cite>log10</cite>.</li>
+<cite>arcsinh</cite>, <cite>arctanh</cite>, <cite>abs</cite>, <cite>arctan2</cite> and <cite>log10</cite>.</p></li>
 </ul>
 <p>This Python syntax is <strong>not</strong> allowed:</p>
 <ul>
-<li><p class="first">Expressions</p>
+<li><p>Expressions</p>
 <blockquote>
 <div><ul class="simple">
-<li>Function calls other than math functions.</li>
-<li><code class="docutils literal notranslate"><span class="pre">is</span></code>/<code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> operations</li>
-<li><code class="docutils literal notranslate"><span class="pre">if</span></code> expressions</li>
-<li><code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions</li>
-<li><code class="docutils literal notranslate"><span class="pre">list</span></code>/<code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">dict</span></code> comprehensions</li>
-<li>Literal <code class="docutils literal notranslate"><span class="pre">dict</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> expressions</li>
-<li><code class="docutils literal notranslate"><span class="pre">yield</span></code> expressions</li>
-<li>Generator expressions</li>
-<li>Boolean expressions consisting of only scalar values</li>
+<li><p>Function calls other than math functions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is</span></code>/<code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> operations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> expressions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>/<code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">dict</span></code> comprehensions</p></li>
+<li><p>Literal <code class="docutils literal notranslate"><span class="pre">dict</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> expressions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yield</span></code> expressions</p></li>
+<li><p>Generator expressions</p></li>
+<li><p>Boolean expressions consisting of only scalar values</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Statements</p>
+<li><p>Statements</p>
 <blockquote>
 <div><ul class="simple">
-<li>Neither <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html">simple</a>
+<li><p>Neither <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html">simple</a>
 nor <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html">compound</a>
 statements are allowed. This includes things like <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">if</span></code>.</li>
+<code class="docutils literal notranslate"><span class="pre">if</span></code>.</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -714,35 +714,35 @@ statements are allowed. This includes things like <code class="docutils literal 
 <p>Now let’s compare adding them together using plain ol’ Python versus
 <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="o">%</span><span class="k">timeit</span> df1 + df2 + df3 + df4
-<span class="go">22.8 ms +- 292 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">37.8 ms +- 324 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval(&#39;df1 + df2 + df3 + df4&#39;)
-<span class="go">24.2 ms +- 199 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">39.3 ms +- 373 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
 </pre></div>
 </div>
 <p>Now let’s do the same thing but with comparisons:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="o">%</span><span class="k">timeit</span> (df1 &gt; 0) &amp; (df2 &gt; 0) &amp; (df3 &gt; 0) &amp; (df4 &gt; 0)
-<span class="go">37.4 ms +- 1.58 ms per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">319 ms +- 2.47 ms per loop (mean +- std. dev. of 7 runs, 1 loop each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval(&#39;(df1 &gt; 0) &amp; (df2 &gt; 0) &amp; (df3 &gt; 0) &amp; (df4 &gt; 0)&#39;)
-<span class="go">39.2 ms +- 885 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">322 ms +- 3.46 ms per loop (mean +- std. dev. of 7 runs, 1 loop each)</span>
 </pre></div>
 </div>
 <p><a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> also works with unaligned pandas objects:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
 
 <span class="gp">In [20]: </span><span class="o">%</span><span class="k">timeit</span> df1 + df2 + df3 + df4 + s
-<span class="go">32.6 ms +- 1.41 ms per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">97.6 ms +- 476 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval(&#39;df1 + df2 + df3 + df4 + s&#39;)
-<span class="go">33.5 ms +- 3.24 ms per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">99 ms +- 412 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Operations such as</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">and</span> <span class="mi">2</span>  <span class="c1"># would parse to 1 &amp; 2, but should evaluate to 2</span>
@@ -751,7 +751,7 @@ statements are allowed. This includes things like <code class="docutils literal 
 </pre></div>
 </div>
 </div></blockquote>
-<p class="last">should be performed in Python. An exception will be raised if you try to
+<p>should be performed in Python. An exception will be raised if you try to
 perform any boolean/bitwise operations with scalar operands that are not
 of type <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">np.bool_</span></code>. Again, you should perform these kinds of
 operations in plain Python.</p>
@@ -782,13 +782,13 @@ This allows for <em>formulaic evaluation</em>.  The assignment target can be a
 new column name or an existing column name, and it must be a valid Python
 identifier.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">inplace</span></code> keyword determines whether this assignment will performed
 on the original <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or return a copy with the new column.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> if not
+<p class="admonition-title">Warning</p>
+<p>For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> if not
 specified. This will change in a future version of pandas - if your
 code depends on an inplace assignment you should update to explicitly
 set <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>.</p>
@@ -815,42 +815,40 @@ set <code class="docutils literal notranslate"><span class="pre">inplace=True</s
 </div>
 <p>When <code class="docutils literal notranslate"><span class="pre">inplace</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, a copy of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with the
 new or modified columns is returned and the original frame is unchanged.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">df</span>
-<span class="gh">Out[29]: </span><span class="go"></span>
-<span class="go">   a  b   c   d</span>
-<span class="go">0  1  5   5  10</span>
-<span class="go">1  1  6   7  14</span>
-<span class="go">2  1  7   9  18</span>
-<span class="go">3  1  8  11  22</span>
-<span class="go">4  1  9  13  26</span>
+<pre class="literal-block">In [29]: df
+Out[29]: 
+   a  b   c   d
+0  1  5   5  10
+1  1  6   7  14
+2  1  7   9  18
+3  1  8  11  22
+4  1  9  13  26
 
-<span class="go">[5 rows x 4 columns]</span>
+[5 rows x 4 columns]
 
-<span class="gp">In [30]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;e = a - c&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="go">                                                                                                                                Out[30]: </span>
-<span class="go">   a  b   c   d   e</span>
-<span class="go">0  1  5   5  10  -4</span>
-<span class="go">1  1  6   7  14  -6</span>
-<span class="go">2  1  7   9  18  -8</span>
-<span class="go">3  1  8  11  22 -10</span>
-<span class="go">4  1  9  13  26 -12</span>
+In [30]: df.eval('e = a - c', inplace=False)
+Out[30]: 
+   a  b   c   d   e
+0  1  5   5  10  -4
+1  1  6   7  14  -6
+2  1  7   9  18  -8
+3  1  8  11  22 -10
+4  1  9  13  26 -12
 
-<span class="go">[5 rows x 5 columns]</span>
+[5 rows x 5 columns]
 
-<span class="gp">In [31]: </span><span class="n">df</span>
-<span class="go">                                                                                                                                                                                                                                                                                        Out[31]: </span>
-<span class="go">   a  b   c   d</span>
-<span class="go">0  1  5   5  10</span>
-<span class="go">1  1  6   7  14</span>
-<span class="go">2  1  7   9  18</span>
-<span class="go">3  1  8  11  22</span>
-<span class="go">4  1  9  13  26</span>
+In [31]: df
+Out[31]: 
+   a  b   c   d
+0  1  5   5  10
+1  1  6   7  14
+2  1  7   9  18
+3  1  8  11  22
+4  1  9  13  26
 
-<span class="go">[5 rows x 4 columns]</span>
-</pre></div>
-</div>
+[5 rows x 4 columns]</pre>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>As a convenience, multiple assignments can be performed by using a
 multi-line string.</p>
@@ -892,7 +890,7 @@ multi-line string.</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">query</span></code> method gained the <code class="docutils literal notranslate"><span class="pre">inplace</span></code> keyword which determines
 whether the query modifies the original frame.</p>
@@ -918,8 +916,8 @@ whether the query modifies the original frame.</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Unlike with <code class="docutils literal notranslate"><span class="pre">eval</span></code>, the default value for <code class="docutils literal notranslate"><span class="pre">inplace</span></code> for <code class="docutils literal notranslate"><span class="pre">query</span></code>
+<p class="admonition-title">Warning</p>
+<p>Unlike with <code class="docutils literal notranslate"><span class="pre">eval</span></code>, the default value for <code class="docutils literal notranslate"><span class="pre">inplace</span></code> for <code class="docutils literal notranslate"><span class="pre">query</span></code>
 is <code class="docutils literal notranslate"><span class="pre">False</span></code>.  This is consistent with prior versions of pandas.</p>
 </div>
 </div>
@@ -927,50 +925,46 @@ is <code class="docutils literal notranslate"><span class="pre">False</span></co
 <h3>Local Variables<a class="headerlink" href="#local-variables" title="Permalink to this headline">¶</a></h3>
 <p>You must <em>explicitly reference</em> any local variable that you want to use in an
 expression by placing the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> character in front of the name. For example,</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;ab&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [42]: df = pd.DataFrame(np.random.randn(5, 2), columns=list('ab'))
 
-<span class="gp">In [43]: </span><span class="n">newcol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+In [43]: newcol = np.random.randn(len(df))
 
-<span class="gp">In [44]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;b + @newcol&#39;</span><span class="p">)</span>
-<span class="gh">Out[44]: </span><span class="go"></span>
-<span class="go">0   -0.173926</span>
-<span class="go">1    2.493083</span>
-<span class="go">2   -0.881831</span>
-<span class="go">3   -0.691045</span>
-<span class="go">4    1.334703</span>
-<span class="go">Name: b, Length: 5, dtype: float64</span>
+In [44]: df.eval('b + &#64;newcol')
+Out[44]: 
+0   -0.173926
+1    2.493083
+2   -0.881831
+3   -0.691045
+4    1.334703
+Name: b, Length: 5, dtype: float64
 
-<span class="gp">In [45]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;b &lt; @newcol&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                   Out[45]: </span>
-<span class="go">          a         b</span>
-<span class="go">0  0.863987 -0.115998</span>
-<span class="go">2 -2.621419 -1.297879</span>
+In [45]: df.query('b &lt; &#64;newcol')
+Out[45]: 
+          a         b
+0  0.863987 -0.115998
+2 -2.621419 -1.297879
 
-<span class="go">[2 rows x 2 columns]</span>
-</pre></div>
-</div>
+[2 rows x 2 columns]</pre>
 <p>If you don’t prefix the local variable with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>, pandas will raise an
 exception telling you the variable is undefined.</p>
 <p>When using <a class="reference internal" href="../generated/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.eval()</span></code></a> and <a class="reference internal" href="../generated/pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.query()</span></code></a>, this allows you
 to have a local variable and a <a class="reference internal" href="../generated/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> column with the same
 name in an expression.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+<pre class="literal-block">In [46]: a = np.random.randn()
 
-<span class="gp">In [47]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;@a &lt; a&#39;</span><span class="p">)</span>
-<span class="gh">Out[47]: </span><span class="go"></span>
-<span class="go">          a         b</span>
-<span class="go">0  0.863987 -0.115998</span>
+In [47]: df.query('&#64;a &lt; a')
+Out[47]: 
+          a         b
+0  0.863987 -0.115998
 
-<span class="go">[1 rows x 2 columns]</span>
+[1 rows x 2 columns]
 
-<span class="gp">In [48]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">df</span><span class="o">.</span><span class="n">a</span><span class="p">]</span>  <span class="c1"># same as the previous expression</span>
-<span class="go">                                                                            Out[48]: </span>
-<span class="go">          a         b</span>
-<span class="go">0  0.863987 -0.115998</span>
+In [48]: df.loc[a &lt; df.a]  # same as the previous expression
+Out[48]: 
+          a         b
+0  0.863987 -0.115998
 
-<span class="go">[1 rows x 2 columns]</span>
-</pre></div>
-</div>
+[1 rows x 2 columns]</pre>
 <p>With <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> you cannot use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> prefix <em>at all</em>, because it
 isn’t defined in that context. <code class="docutils literal notranslate"><span class="pre">pandas</span></code> will let you know this if you try to
 use <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> in a top-level call to <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a>. For example,</p>
@@ -979,16 +973,16 @@ use <code class="docutils literal notranslate"><span class="pre">&#64;</span></c
 <span class="gp">In [50]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;@a + b&#39;</span><span class="p">)</span>
 <span class="go">Traceback (most recent call last):</span>
 
-<span class="go">  File &quot;/home/travis/miniconda/lib/python3.7/site-packages/IPython/core/interactiveshell.py&quot;, line 3267, in run_code</span>
+<span class="go">  File &quot;/home/travis/miniconda/lib/python3.7/site-packages/IPython/core/interactiveshell.py&quot;, line 3326, in run_code</span>
 <span class="go">    exec(code_obj, self.user_global_ns, self.user_ns)</span>
 
 <span class="go">  File &quot;&lt;ipython-input-50-af17947a194f&gt;&quot;, line 1, in &lt;module&gt;</span>
 <span class="go">    pd.eval(&#39;@a + b&#39;)</span>
 
-<span class="go">  File &quot;/home/travis/miniconda/lib/python3.7/site-packages/pandas/core/computation/eval.py&quot;, line 283, in eval</span>
+<span class="go">  File &quot;/home/travis/miniconda/lib/python3.7/site-packages/pandas/core/computation/eval.py&quot;, line 311, in eval</span>
 <span class="go">    _check_for_locals(expr, level, parser)</span>
 
-<span class="go">  File &quot;/home/travis/miniconda/lib/python3.7/site-packages/pandas/core/computation/eval.py&quot;, line 150, in _check_for_locals</span>
+<span class="go">  File &quot;/home/travis/miniconda/lib/python3.7/site-packages/pandas/core/computation/eval.py&quot;, line 166, in _check_for_locals</span>
 <span class="go">    raise SyntaxError(msg)</span>
 
 <span class="go">  File &quot;&lt;string&gt;&quot;, line unknown</span>
@@ -1048,8 +1042,8 @@ in vanilla Python.</p>
 <p>There’s also the option to make <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> operate identical to plain
 ol’ Python.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Using the <code class="docutils literal notranslate"><span class="pre">'python'</span></code> engine is generally <em>not</em> useful, except for testing
+<p class="admonition-title">Note</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">'python'</span></code> engine is generally <em>not</em> useful, except for testing
 other evaluation engines against it. You will achieve <strong>no</strong> performance
 benefits using <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">engine='python'</span></code> and in fact may
 incur a performance hit.</p>
@@ -1057,11 +1051,11 @@ incur a performance hit.</p>
 <p>You can see this by using <a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">'python'</span></code> engine. It
 is a bit slower (not by much) than evaluating the same expression in Python</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="o">%</span><span class="k">timeit</span> df1 + df2 + df3 + df4
-<span class="go">22.9 ms +- 118 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">38.1 ms +- 268 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="o">%</span><span class="k">timeit</span> pd.eval(&#39;df1 + df2 + df3 + df4&#39;, engine=&#39;python&#39;)
-<span class="go">25 ms +- 525 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
+<span class="go">39.1 ms +- 183 us per loop (mean +- std. dev. of 7 runs, 10 loops each)</span>
 </pre></div>
 </div>
 </div>
@@ -1075,10 +1069,10 @@ significant performance benefit.  Here is a plot showing the running time of
 computation. The two lines are two different engines.</p>
 <img alt="user_guide/_static/eval-perf.png" src="user_guide/_static/eval-perf.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Operations with smallish objects (around 15k-20k rows) are faster using
 plain Python:</p>
-<blockquote class="last">
+<blockquote>
 <div><img alt="user_guide/_static/eval-perf-small.png" src="user_guide/_static/eval-perf-small.png" />
 </div></blockquote>
 </div>
@@ -1096,34 +1090,32 @@ can’t pass <code class="docutils literal notranslate"><span class="pre">object
 evaluated in Python space.</p>
 <p>The upshot is that this <em>only</em> applies to object-dtype expressions. So, if
 you have an expression–for example</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [64]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;strings&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;cba&#39;</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span>
-<span class="gp">   ....: </span>                   <span class="s1">&#39;nums&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="mi">3</span><span class="p">)})</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [64]: df = pd.DataFrame({'strings': np.repeat(list('cba'), 3),
+   ....:                    'nums': np.repeat(range(3), 3)})
+   ....: 
 
-<span class="gp">In [65]: </span><span class="n">df</span>
-<span class="gh">Out[65]: </span><span class="go"></span>
-<span class="go">  strings  nums</span>
-<span class="go">0       c     0</span>
-<span class="go">1       c     0</span>
-<span class="go">2       c     0</span>
-<span class="go">3       b     1</span>
-<span class="go">4       b     1</span>
-<span class="go">5       b     1</span>
-<span class="go">6       a     2</span>
-<span class="go">7       a     2</span>
-<span class="go">8       a     2</span>
+In [65]: df
+Out[65]: 
+  strings  nums
+0       c     0
+1       c     0
+2       c     0
+3       b     1
+4       b     1
+5       b     1
+6       a     2
+7       a     2
+8       a     2
 
-<span class="go">[9 rows x 2 columns]</span>
+[9 rows x 2 columns]
 
-<span class="gp">In [66]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;strings == &quot;a&quot; and nums == 1&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                Out[66]: </span>
-<span class="go">Empty DataFrame</span>
-<span class="go">Columns: [strings, nums]</span>
-<span class="go">Index: []</span>
+In [66]: df.query('strings == &quot;a&quot; and nums == 1')
+Out[66]: 
+Empty DataFrame
+Columns: [strings, nums]
+Index: []
 
-<span class="go">[0 rows x 2 columns]</span>
-</pre></div>
-</div>
+[0 rows x 2 columns]</pre>
 <p>the numeric part of the comparison (<code class="docutils literal notranslate"><span class="pre">nums</span> <span class="pre">==</span> <span class="pre">1</span></code>) will be evaluated by
 <code class="docutils literal notranslate"><span class="pre">numexpr</span></code>.</p>
 <p>In general, <a class="reference internal" href="../generated/pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.query()</span></code></a>/<a class="reference internal" href="../generated/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> will
@@ -1154,7 +1146,7 @@ by inferring the result type of an expression from its arguments and operators.<
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

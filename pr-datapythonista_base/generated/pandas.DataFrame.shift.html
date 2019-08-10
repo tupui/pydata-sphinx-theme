@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.shift &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.shift &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,39 +91,94 @@
 <h1>pandas.DataFrame.shift<a class="headerlink" href="#pandas-dataframe-shift" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.shift">
-<code class="descclassname">DataFrame.</code><code class="descname">shift</code><span class="sig-paren">(</span><em>periods=1</em>, <em>freq=None</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L3800-L3803"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.shift" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shift index by desired number of periods with an optional time freq</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>periods</strong> : int</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">shift</code><span class="sig-paren">(</span><em class="sig-param">periods=1</em>, <em class="sig-param">freq=None</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">fill_value=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L4261-L4265"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shift index by desired number of periods with an optional time <cite>freq</cite>.</p>
+<p>When <cite>freq</cite> is not passed, shift the index without realigning the data.
+If <cite>freq</cite> is passed (in this case, the index must be date or datetime,
+or it will raise a <cite>NotImplementedError</cite>), the index will be
+increased using the periods and the <cite>freq</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>periods</strong> : int</p>
 <blockquote>
-<div><p>Number of periods to move, can be positive or negative</p>
+<div><p>Number of periods to shift. Can be positive or negative.</p>
 </div></blockquote>
-<p><strong>freq</strong> : DateOffset, timedelta, or time rule string, optional</p>
+<p><strong>freq</strong> : DateOffset, tseries.offsets, timedelta, or str, optional</p>
 <blockquote>
-<div><p>Increment to use from the tseries module or time rule (e.g. ‘EOM’).
-See Notes.</p>
+<div><p>Offset to use from the tseries module or time rule (e.g. ‘EOM’).
+If <cite>freq</cite> is specified then the index values are shifted but the
+data is not realigned. That is, use <cite>freq</cite> if you would like to
+extend the index when shifting and preserve the original data.</p>
 </div></blockquote>
-<dl class="docutils">
-<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{0 or ‘index’, 1 or ‘columns’}</span></dt>
-<dd></dd>
+<p><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’, None}, default None</p>
+<blockquote>
+<div><p>Shift direction.</p>
+</div></blockquote>
+<p><strong>fill_value</strong> : object, optional</p>
+<blockquote>
+<div><p>The scalar value to use for newly introduced missing values.
+the default depends on the dtype of <cite>self</cite>.
+For numeric data, <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> is used.
+For datetime, timedelta, or period data, etc. <code class="xref py py-attr docutils literal notranslate"><span class="pre">NaT</span></code> is used.
+For extension dtypes, <code class="docutils literal notranslate"><span class="pre">self.dtype.na_value</span></code> is used.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24.0.</span></p>
+</div>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>DataFrame</strong></p>
+<blockquote>
+<div><p>Copy of input object, shifted.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>shifted</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Index.shift.html#pandas.Index.shift" title="pandas.Index.shift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Index.shift</span></code></a></dt><dd><p>Shift values of Index.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">DatetimeIndex.shift</span></code></dt><dd><p>Shift values of DatetimeIndex.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeriodIndex.shift</span></code></dt><dd><p>Shift values of PeriodIndex.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.tshift.html#pandas.DataFrame.tshift" title="pandas.DataFrame.tshift"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tshift</span></code></a></dt><dd><p>Shift the time index, using the index’s frequency if available.</p>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Notes</p>
-<p>If freq is specified then the index values are shifted but the data
-is not realigned. That is, use freq if you would like to extend the
-index when shifting and preserve the original data.</p>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;Col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">48</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;Col3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">52</span><span class="p">]})</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">   Col1  Col2  Col3</span>
+<span class="go">0   NaN   NaN   NaN</span>
+<span class="go">1   NaN   NaN   NaN</span>
+<span class="go">2   NaN   NaN   NaN</span>
+<span class="go">3  10.0  13.0  17.0</span>
+<span class="go">4  20.0  23.0  27.0</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+<span class="go">   Col1  Col2  Col3</span>
+<span class="go">0   NaN  10.0  13.0</span>
+<span class="go">1   NaN  20.0  23.0</span>
+<span class="go">2   NaN  15.0  18.0</span>
+<span class="go">3   NaN  30.0  33.0</span>
+<span class="go">4   NaN  45.0  48.0</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">   Col1  Col2  Col3</span>
+<span class="go">0     0     0     0</span>
+<span class="go">1     0     0     0</span>
+<span class="go">2     0     0     0</span>
+<span class="go">3    10    13    17</span>
+<span class="go">4    20    23    27</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -144,7 +203,7 @@ index when shifting and preserve the original data.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

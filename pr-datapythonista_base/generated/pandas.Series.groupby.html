@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.Series.groupby &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.Series.groupby &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,14 +91,15 @@
 <h1>pandas.Series.groupby<a class="headerlink" href="#pandas-series-groupby" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.Series.groupby">
-<code class="descclassname">Series.</code><code class="descname">groupby</code><span class="sig-paren">(</span><em>by=None</em>, <em>axis=0</em>, <em>level=None</em>, <em>as_index=True</em>, <em>sort=True</em>, <em>group_keys=True</em>, <em>squeeze=False</em>, <em>observed=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L6592-L6665"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.groupby" title="Permalink to this definition">¶</a></dt>
-<dd><p>Group series using mapper (dict or key function, apply given function
-to group, return result as series) or by a series of columns.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>by</strong> : mapping, function, label, or list of labels</p>
+<code class="sig-prename descclassname">Series.</code><code class="sig-name descname">groupby</code><span class="sig-paren">(</span><em class="sig-param">by=None</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">level=None</em>, <em class="sig-param">as_index=True</em>, <em class="sig-param">sort=True</em>, <em class="sig-param">group_keys=True</em>, <em class="sig-param">squeeze=False</em>, <em class="sig-param">observed=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L7760-L7897"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.groupby" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group DataFrame or Series using a mapper or by a Series of columns.</p>
+<p>A groupby operation involves some combination of splitting the
+object, applying a function, and combining the results. This can be
+used to group large amounts of data and compute operations on these
+groups.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>by</strong> : mapping, function, label, or list of labels</p>
 <blockquote>
 <div><p>Used to determine the groups for the groupby.
 If <code class="docutils literal notranslate"><span class="pre">by</span></code> is a function, it’s called on each value of the object’s
@@ -103,74 +108,112 @@ will be used to determine the groups (the Series’ values are first
 aligned; see <code class="docutils literal notranslate"><span class="pre">.align()</span></code> method). If an ndarray is passed, the
 values are used as-is determine the groups. A label or list of
 labels may be passed to group by the columns in <code class="docutils literal notranslate"><span class="pre">self</span></code>. Notice
-that a tuple is interpreted a (single) key.</p>
+that a tuple is interpreted as a (single) key.</p>
 </div></blockquote>
-<dl class="docutils">
-<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default 0</span></dt>
-<dd></dd>
-</dl>
+<p><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’}, default 0</p>
+<blockquote>
+<div><p>Split along rows (0) or columns (1).</p>
+</div></blockquote>
 <p><strong>level</strong> : int, level name, or sequence of such, default None</p>
 <blockquote>
 <div><p>If the axis is a MultiIndex (hierarchical), group by a particular
-level or levels</p>
+level or levels.</p>
 </div></blockquote>
-<p><strong>as_index</strong> : boolean, default True</p>
+<p><strong>as_index</strong> : bool, default True</p>
 <blockquote>
 <div><p>For aggregated output, return object with group labels as the
 index. Only relevant for DataFrame input. as_index=False is
-effectively “SQL-style” grouped output</p>
+effectively “SQL-style” grouped output.</p>
 </div></blockquote>
-<p><strong>sort</strong> : boolean, default True</p>
+<p><strong>sort</strong> : bool, default True</p>
 <blockquote>
 <div><p>Sort group keys. Get better performance by turning this off.
 Note this does not influence the order of observations within each
-group.  groupby preserves the order of rows within each group.</p>
+group. Groupby preserves the order of rows within each group.</p>
 </div></blockquote>
-<p><strong>group_keys</strong> : boolean, default True</p>
+<p><strong>group_keys</strong> : bool, default True</p>
 <blockquote>
-<div><p>When calling apply, add group keys to index to identify pieces</p>
+<div><p>When calling apply, add group keys to index to identify pieces.</p>
 </div></blockquote>
-<p><strong>squeeze</strong> : boolean, default False</p>
+<p><strong>squeeze</strong> : bool, default False</p>
 <blockquote>
-<div><p>reduce the dimensionality of the return type if possible,
-otherwise return a consistent type</p>
+<div><p>Reduce the dimensionality of the return type if possible,
+otherwise return a consistent type.</p>
 </div></blockquote>
-<p><strong>observed</strong> : boolean, default False</p>
+<p><strong>observed</strong> : bool, default False</p>
 <blockquote>
-<div><p>This only applies if any of the groupers are Categoricals
+<div><p>This only applies if any of the groupers are Categoricals.
 If True: only show observed values for categorical groupers.
 If False: show all values for categorical groupers.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>GroupBy object</strong></dt>
-<dd></dd>
+<p><strong>**kwargs</strong></p>
+<blockquote>
+<div><p>Optional, only accepts keyword argument ‘mutated’ and is passed
+to groupby.</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>DataFrameGroupBy or SeriesGroupBy</strong></p>
+<blockquote>
+<div><p>Depends on the calling object and returns groupby object that
+contains information about the groups.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.Series.resample.html#pandas.Series.resample" title="pandas.Series.resample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resample</span></code></a></dt>
-<dd>Convenience method for frequency conversion and resampling of time series.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Series.resample.html#pandas.Series.resample" title="pandas.Series.resample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resample</span></code></a></dt><dd><p>Convenience method for frequency conversion and resampling of time series.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
 <p>See the <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/groupby.html">user guide</a> for more.</p>
 <p class="rubric">Examples</p>
-<p>DataFrame results</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;col1&#39;</span><span class="p">,</span> <span class="s1">&#39;col2&#39;</span><span class="p">])[</span><span class="s1">&#39;col3&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Animal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Falcon&#39;</span><span class="p">,</span> <span class="s1">&#39;Falcon&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                              <span class="s1">&#39;Parrot&#39;</span><span class="p">,</span> <span class="s1">&#39;Parrot&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;Max Speed&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">380.</span><span class="p">,</span> <span class="mf">370.</span><span class="p">,</span> <span class="mf">24.</span><span class="p">,</span> <span class="mf">26.</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   Animal  Max Speed</span>
+<span class="go">0  Falcon      380.0</span>
+<span class="go">1  Falcon      370.0</span>
+<span class="go">2  Parrot       24.0</span>
+<span class="go">3  Parrot       26.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Animal&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">        Max Speed</span>
+<span class="go">Animal</span>
+<span class="go">Falcon      375.0</span>
+<span class="go">Parrot       25.0</span>
 </pre></div>
 </div>
-<p>DataFrame with hierarchical index</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;col1&#39;</span><span class="p">,</span> <span class="s1">&#39;col2&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<p><strong>Hierarchical Indexes</strong></p>
+<p>We can groupby different levels of a hierarchical index
+using the <cite>level</cite> parameter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">arrays</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Falcon&#39;</span><span class="p">,</span> <span class="s1">&#39;Falcon&#39;</span><span class="p">,</span> <span class="s1">&#39;Parrot&#39;</span><span class="p">,</span> <span class="s1">&#39;Parrot&#39;</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="p">[</span><span class="s1">&#39;Captive&#39;</span><span class="p">,</span> <span class="s1">&#39;Wild&#39;</span><span class="p">,</span> <span class="s1">&#39;Captive&#39;</span><span class="p">,</span> <span class="s1">&#39;Wild&#39;</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Animal&#39;</span><span class="p">,</span> <span class="s1">&#39;Type&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Max Speed&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">390.</span><span class="p">,</span> <span class="mf">350.</span><span class="p">,</span> <span class="mf">30.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">]},</span>
+<span class="gp">... </span>                  <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">                Max Speed</span>
+<span class="go">Animal Type</span>
+<span class="go">Falcon Captive      390.0</span>
+<span class="go">       Wild         350.0</span>
+<span class="go">Parrot Captive       30.0</span>
+<span class="go">       Wild          20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">        Max Speed</span>
+<span class="go">Animal</span>
+<span class="go">Falcon      370.0</span>
+<span class="go">Parrot       25.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="go">         Max Speed</span>
+<span class="go">Type</span>
+<span class="go">Captive      210.0</span>
+<span class="go">Wild         185.0</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -197,7 +240,7 @@ If False: show all values for categorical groupers.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

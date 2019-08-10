@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.cut &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.cut &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,31 +91,30 @@
 <h1>pandas.cut<a class="headerlink" href="#pandas-cut" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.cut">
-<code class="descclassname">pandas.</code><code class="descname">cut</code><span class="sig-paren">(</span><em>x</em>, <em>bins</em>, <em>right=True</em>, <em>labels=None</em>, <em>retbins=False</em>, <em>precision=3</em>, <em>include_lowest=False</em>, <em>duplicates='raise'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/reshape/tile.py#L26-L237"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.cut" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">cut</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">bins</em>, <em class="sig-param">right=True</em>, <em class="sig-param">labels=None</em>, <em class="sig-param">retbins=False</em>, <em class="sig-param">precision=3</em>, <em class="sig-param">include_lowest=False</em>, <em class="sig-param">duplicates='raise'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/reshape/tile.py#L38-L275"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.cut" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bin values into discrete intervals.</p>
 <p>Use <cite>cut</cite> when you need to segment and sort data values into bins. This
 function is also useful for going from a continuous variable to a
 categorical variable. For example, <cite>cut</cite> could convert ages to groups of
 age ranges. Supports binning into an equal number of bins, or a
 pre-specified array of bins.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array-like</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> : array-like</p>
 <blockquote>
 <div><p>The input array to be binned. Must be 1-dimensional.</p>
 </div></blockquote>
-<p><strong>bins</strong> : int, sequence of scalars, or pandas.IntervalIndex</p>
+<p><strong>bins</strong> : int, sequence of scalars, or IntervalIndex</p>
 <blockquote>
 <div><p>The criteria to bin by.</p>
 <ul class="simple">
-<li>int : Defines the number of equal-width bins in the range of <cite>x</cite>. The
+<li><p>int : Defines the number of equal-width bins in the range of <cite>x</cite>. The
 range of <cite>x</cite> is extended by .1% on each side to include the minimum
-and maximum values of <cite>x</cite>.</li>
-<li>sequence of scalars : Defines the bin edges allowing for non-uniform
-width. No extension of the range of <cite>x</cite> is done.</li>
-<li>IntervalIndex : Defines the exact bins to be used.</li>
+and maximum values of <cite>x</cite>.</p></li>
+<li><p>sequence of scalars : Defines the bin edges allowing for non-uniform
+width. No extension of the range of <cite>x</cite> is done.</p></li>
+<li><p>IntervalIndex : Defines the exact bins to be used. Note that
+IntervalIndex for <cite>bins</cite> must be non-overlapping.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>right</strong> : bool, default True</p>
@@ -145,52 +148,50 @@ as a scalar.</p>
 <blockquote>
 <div><p>If bin edges are not unique, raise ValueError or drop non-uniques.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out</strong> : pandas.Categorical, Series, or ndarray</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> : Categorical, Series, or ndarray</p>
 <blockquote>
 <div><p>An array-like object representing the respective bin for each value
 of <cite>x</cite>. The type depends on the value of <cite>labels</cite>.</p>
 <ul class="simple">
-<li>True (default) : returns a Series for Series <cite>x</cite> or a
-pandas.Categorical for all other inputs. The values stored within
-are Interval dtype.</li>
-<li>sequence of scalars : returns a Series for Series <cite>x</cite> or a
-pandas.Categorical for all other inputs. The values stored within
-are whatever the type in the sequence is.</li>
-<li>False : returns an ndarray of integers.</li>
+<li><p>True (default) : returns a Series for Series <cite>x</cite> or a
+Categorical for all other inputs. The values stored within
+are Interval dtype.</p></li>
+<li><p>sequence of scalars : returns a Series for Series <cite>x</cite> or a
+Categorical for all other inputs. The values stored within
+are whatever the type in the sequence is.</p></li>
+<li><p>False : returns an ndarray of integers.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>bins</strong> : numpy.ndarray or IntervalIndex.</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The computed or specified bins. Only returned when <cite>retbins=True</cite>.
 For scalar or sequence <cite>bins</cite>, this is an ndarray with the computed
 bins. If set <cite>duplicates=drop</cite>, <cite>bins</cite> will drop non-unique bin. For
 an IntervalIndex <cite>bins</cite>, this is equal to <cite>bins</cite>.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.qcut.html#pandas.qcut" title="pandas.qcut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qcut</span></code></a></dt>
-<dd>Discretize variable into equal-sized buckets based on rank or based on sample quantiles.</dd>
-<dt><a class="reference internal" href="pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.Categorical</span></code></a></dt>
-<dd>Array type for storing data that come from a fixed set of values.</dd>
-<dt><a class="reference internal" href="pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series</span></code></a></dt>
-<dd>One-dimensional array with axis labels (including time series).</dd>
-<dt><a class="reference internal" href="pandas.IntervalIndex.html#pandas.IntervalIndex" title="pandas.IntervalIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.IntervalIndex</span></code></a></dt>
-<dd>Immutable Index implementing an ordered, sliceable set.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.qcut.html#pandas.qcut" title="pandas.qcut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qcut</span></code></a></dt><dd><p>Discretize variable into equal-sized buckets based on rank or based on sample quantiles.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Categorical</span></code></a></dt><dd><p>Array type for storing data that come from a fixed set of values.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series</span></code></a></dt><dd><p>One-dimensional array with axis labels (including time series).</p>
+</dd>
+<dt><a class="reference internal" href="pandas.IntervalIndex.html#pandas.IntervalIndex" title="pandas.IntervalIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IntervalIndex</span></code></a></dt><dd><p>Immutable Index implementing an ordered, sliceable set.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
 <p>Any NA values will be NA in the result. Out of bounds values will be NA in
-the resulting Series or pandas.Categorical object.</p>
+the resulting Series or Categorical object.</p>
 <p class="rubric">Examples</p>
 <p>Discretize into three equal-sized bins.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
@@ -249,7 +250,7 @@ It is used to map numerically to intervals based on bins.</p>
 </div>
 <p>Use <cite>drop</cite> optional when bins is not unique</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retbins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>   <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span>
+<span class="gp">... </span>       <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span>
 <span class="gp">... </span><span class="c1"># doctest: +ELLIPSIS</span>
 <span class="go">(a    0.0</span>
 <span class="go"> b    1.0</span>
@@ -293,7 +294,7 @@ falls between two bins.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

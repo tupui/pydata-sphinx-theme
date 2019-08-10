@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.Series.nlargest &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.Series.nlargest &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,55 +91,117 @@
 <h1>pandas.Series.nlargest<a class="headerlink" href="#pandas-series-nlargest" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.Series.nlargest">
-<code class="descclassname">Series.</code><code class="descname">nlargest</code><span class="sig-paren">(</span><em>n=5</em>, <em>keep='first'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/series.py#L2693-L2738"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.nlargest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Series.</code><code class="sig-name descname">nlargest</code><span class="sig-paren">(</span><em class="sig-param">n=5</em>, <em class="sig-param">keep='first'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/series.py#L3401-L3497"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.Series.nlargest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the largest <cite>n</cite> elements.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n</strong> : int</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n</strong> : int, default 5</p>
 <blockquote>
-<div><p>Return this many descending sorted values</p>
+<div><p>Return this many descending sorted values.</p>
 </div></blockquote>
-<p><strong>keep</strong> : {‘first’, ‘last’}, default ‘first’</p>
+<p><strong>keep</strong> : {‘first’, ‘last’, ‘all’}, default ‘first’</p>
 <blockquote>
-<div><p>Where there are duplicate values:
-- <code class="docutils literal notranslate"><span class="pre">first</span></code> : take the first occurrence.
-- <code class="docutils literal notranslate"><span class="pre">last</span></code> : take the last occurrence.</p>
+<div><p>When there are duplicate values that cannot all fit in a
+Series of <cite>n</cite> elements:</p>
+<ul>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">first</span></code><span class="classifier">return the first <cite>n</cite> occurrences in order</span></dt><dd><p>of appearance.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><code class="docutils literal notranslate"><span class="pre">last</span></code><span class="classifier">return the last <cite>n</cite> occurrences in reverse</span></dt><dd><p>order of appearance.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">all</span></code><span class="classifier">keep all occurrences. This can result in a Series of</span></dt><dd><p>size larger than <cite>n</cite>.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>top_n</strong> : Series</p>
-<blockquote class="last">
-<div><p>The n largest values in the Series, in sorted order</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Series</strong></p>
+<blockquote>
+<div><p>The <cite>n</cite> largest values in the Series, sorted in decreasing order.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.Series.nsmallest.html#pandas.Series.nsmallest" title="pandas.Series.nsmallest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.nsmallest</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.Series.nsmallest.html#pandas.Series.nsmallest" title="pandas.Series.nsmallest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.nsmallest</span></code></a></dt><dd><p>Get the <cite>n</cite> smallest elements.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.Series.sort_values.html#pandas.Series.sort_values" title="pandas.Series.sort_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.sort_values</span></code></a></dt><dd><p>Sort Series by values.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.Series.head.html#pandas.Series.head" title="pandas.Series.head"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.head</span></code></a></dt><dd><p>Return the first <cite>n</cite> rows.</p>
+</dd>
+</dl>
 </div>
 <p class="rubric">Notes</p>
 <p>Faster than <code class="docutils literal notranslate"><span class="pre">.sort_values(ascending=False).head(n)</span></code> for small <cite>n</cite>
 relative to the size of the <code class="docutils literal notranslate"><span class="pre">Series</span></code> object.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># only sorts up to the N requested</span>
-<span class="go">219921    4.644710</span>
-<span class="go">82124     4.608745</span>
-<span class="go">421689    4.564644</span>
-<span class="go">425277    4.447014</span>
-<span class="go">718691    4.414137</span>
-<span class="go">43154     4.403520</span>
-<span class="go">283187    4.313922</span>
-<span class="go">595519    4.273635</span>
-<span class="go">503969    4.250236</span>
-<span class="go">121637    4.240952</span>
-<span class="go">dtype: float64</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">countries_population</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Italy&quot;</span><span class="p">:</span> <span class="mi">59000000</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">:</span> <span class="mi">65000000</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Malta&quot;</span><span class="p">:</span> <span class="mi">434000</span><span class="p">,</span> <span class="s2">&quot;Maldives&quot;</span><span class="p">:</span> <span class="mi">434000</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Brunei&quot;</span><span class="p">:</span> <span class="mi">434000</span><span class="p">,</span> <span class="s2">&quot;Iceland&quot;</span><span class="p">:</span> <span class="mi">337000</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Nauru&quot;</span><span class="p">:</span> <span class="mi">11300</span><span class="p">,</span> <span class="s2">&quot;Tuvalu&quot;</span><span class="p">:</span> <span class="mi">11300</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="s2">&quot;Anguilla&quot;</span><span class="p">:</span> <span class="mi">11300</span><span class="p">,</span> <span class="s2">&quot;Monserat&quot;</span><span class="p">:</span> <span class="mi">5200</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">countries_population</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">Italy       59000000</span>
+<span class="go">France      65000000</span>
+<span class="go">Malta         434000</span>
+<span class="go">Maldives      434000</span>
+<span class="go">Brunei        434000</span>
+<span class="go">Iceland       337000</span>
+<span class="go">Nauru          11300</span>
+<span class="go">Tuvalu         11300</span>
+<span class="go">Anguilla       11300</span>
+<span class="go">Monserat        5200</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>The <cite>n</cite> largest elements where <code class="docutils literal notranslate"><span class="pre">n=5</span></code> by default.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">nlargest</span><span class="p">()</span>
+<span class="go">France      65000000</span>
+<span class="go">Italy       59000000</span>
+<span class="go">Malta         434000</span>
+<span class="go">Maldives      434000</span>
+<span class="go">Brunei        434000</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>The <cite>n</cite> largest elements where <code class="docutils literal notranslate"><span class="pre">n=3</span></code>. Default <cite>keep</cite> value is ‘first’
+so Malta will be kept.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">France    65000000</span>
+<span class="go">Italy     59000000</span>
+<span class="go">Malta       434000</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>The <cite>n</cite> largest elements where <code class="docutils literal notranslate"><span class="pre">n=3</span></code> and keeping the last duplicates.
+Brunei will be kept since it is the last with value 434000 based on
+the index order.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span>
+<span class="go">France      65000000</span>
+<span class="go">Italy       59000000</span>
+<span class="go">Brunei        434000</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>The <cite>n</cite> largest elements where <code class="docutils literal notranslate"><span class="pre">n=3</span></code> with all duplicates kept. Note
+that the returned Series has five elements due to the three duplicates.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="go">France      65000000</span>
+<span class="go">Italy       59000000</span>
+<span class="go">Malta         434000</span>
+<span class="go">Maldives      434000</span>
+<span class="go">Brunei        434000</span>
+<span class="go">dtype: int64</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -162,7 +228,7 @@ relative to the size of the <code class="docutils literal notranslate"><span cla
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>v0.9.1 (November 14, 2012) &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>v0.9.1 (November 14, 2012) &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
@@ -40,11 +40,15 @@
         </button>
         <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../../install.html">Install</a></li>
+                <li><a href="../../docs.html">Documentation</a></li>
+                <li><a href="../../community.html">Community</a></li>
             
             
               
@@ -88,14 +92,11 @@
       
   <div class="section" id="v0-9-1-november-14-2012">
 <span id="whatsnew-0901"></span><h1>v0.9.1 (November 14, 2012)<a class="headerlink" href="#v0-9-1-november-14-2012" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">tocdepth:</th><td class="field-body">2</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">tocdepth</dt>
+<dd class="field-odd"><p>2</p>
+</dd>
+</dl>
 <p>This is a bug fix release from 0.9.0 and includes several new features and
 enhancements along with a large number of bug fixes. The new features include
 by-column sort order for DataFrame and Series, improved NA handling for the rank
@@ -105,7 +106,7 @@ DataFrame.</p>
 <h2>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul>
-<li><p class="first"><cite>Series.sort</cite>, <cite>DataFrame.sort</cite>, and <cite>DataFrame.sort_index</cite> can now be
+<li><p><cite>Series.sort</cite>, <cite>DataFrame.sort</cite>, and <cite>DataFrame.sort_index</cite> can now be
 specified in a per-column manner to support multiple sort orders (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/928">GH928</a>)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span> <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
 
@@ -122,117 +123,111 @@ specified in a per-column manner to support multiple sort orders (<a class="refe
 </pre></div>
 </div>
 </li>
-<li><p class="first"><cite>DataFrame.rank</cite> now supports additional argument values for the
+<li><p><cite>DataFrame.rank</cite> now supports additional argument values for the
 <cite>na_option</cite> parameter so missing values can be assigned either the largest
 or the smallest rank (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/1508">GH1508</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2159">GH2159</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [1]: df = DataFrame(np.random.randn(6, 3), columns=['A', 'B', 'C'])
 
-<span class="gp">In [2]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [2]: df.loc[2:4] = np.nan
 
-<span class="gp">In [3]: </span><span class="n">df</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
-<span class="gh">Out[3]: </span><span class="go"></span>
-<span class="go">     A    B    C</span>
-<span class="go">0  3.0  2.0  1.0</span>
-<span class="go">1  1.0  3.0  2.0</span>
-<span class="go">2  NaN  NaN  NaN</span>
-<span class="go">3  NaN  NaN  NaN</span>
-<span class="go">4  NaN  NaN  NaN</span>
-<span class="go">5  2.0  1.0  3.0</span>
+In [3]: df.rank()
+Out[3]: 
+     A    B    C
+0  3.0  2.0  1.0
+1  1.0  3.0  2.0
+2  NaN  NaN  NaN
+3  NaN  NaN  NaN
+4  NaN  NaN  NaN
+5  2.0  1.0  3.0
 
-<span class="go">[6 rows x 3 columns]</span>
+[6 rows x 3 columns]
 
-<span class="gp">In [4]: </span><span class="n">df</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">na_option</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                      Out[4]: </span>
-<span class="go">     A    B    C</span>
-<span class="go">0  6.0  5.0  4.0</span>
-<span class="go">1  4.0  6.0  5.0</span>
-<span class="go">2  2.0  2.0  2.0</span>
-<span class="go">3  2.0  2.0  2.0</span>
-<span class="go">4  2.0  2.0  2.0</span>
-<span class="go">5  5.0  4.0  6.0</span>
+In [4]: df.rank(na_option='top')
+Out[4]: 
+     A    B    C
+0  6.0  5.0  4.0
+1  4.0  6.0  5.0
+2  2.0  2.0  2.0
+3  2.0  2.0  2.0
+4  2.0  2.0  2.0
+5  5.0  4.0  6.0
 
-<span class="go">[6 rows x 3 columns]</span>
+[6 rows x 3 columns]
 
-<span class="gp">In [5]: </span><span class="n">df</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">na_option</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                            Out[5]: </span>
-<span class="go">     A    B    C</span>
-<span class="go">0  3.0  2.0  1.0</span>
-<span class="go">1  1.0  3.0  2.0</span>
-<span class="go">2  5.0  5.0  5.0</span>
-<span class="go">3  5.0  5.0  5.0</span>
-<span class="go">4  5.0  5.0  5.0</span>
-<span class="go">5  2.0  1.0  3.0</span>
+In [5]: df.rank(na_option='bottom')
+Out[5]: 
+     A    B    C
+0  3.0  2.0  1.0
+1  1.0  3.0  2.0
+2  5.0  5.0  5.0
+3  5.0  5.0  5.0
+4  5.0  5.0  5.0
+5  2.0  1.0  3.0
 
-<span class="go">[6 rows x 3 columns]</span>
-</pre></div>
-</div>
+[6 rows x 3 columns]</pre>
 </li>
-<li><p class="first">DataFrame has new <cite>where</cite> and <cite>mask</cite> methods to select values according to a
+<li><p>DataFrame has new <cite>where</cite> and <cite>mask</cite> methods to select values according to a
 given boolean mask (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2109">GH2109</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2151">GH2151</a>)</p>
 <blockquote>
 <div><p>DataFrame currently supports slicing via a boolean vector the same length as the DataFrame (inside the <cite>[]</cite>).
 The returned DataFrame has the same number of columns as the original, but is sliced on its index.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [6]: df = DataFrame(np.random.randn(5, 3), columns = ['A','B','C'])
 
-<span class="gp">In [7]: </span><span class="n">df</span>
-<span class="gh">Out[7]: </span><span class="go"></span>
-<span class="go">          A         B         C</span>
-<span class="go">0  0.276232 -1.087401 -0.673690</span>
-<span class="go">1  0.113648 -1.478427  0.524988</span>
-<span class="go">2  0.404705  0.577046 -1.715002</span>
-<span class="go">3 -1.039268 -0.370647 -1.157892</span>
-<span class="go">4 -1.344312  0.844885  1.075770</span>
+In [7]: df
+Out[7]: 
+          A         B         C
+0  0.276232 -1.087401 -0.673690
+1  0.113648 -1.478427  0.524988
+2  0.404705  0.577046 -1.715002
+3 -1.039268 -0.370647 -1.157892
+4 -1.344312  0.844885  1.075770
 
-<span class="go">[5 rows x 3 columns]</span>
+[5 rows x 3 columns]
 
-<span class="gp">In [8]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
-<span class="go">                                                                                                                                                                                                                               Out[8]: </span>
-<span class="go">          A         B         C</span>
-<span class="go">0  0.276232 -1.087401 -0.673690</span>
-<span class="go">1  0.113648 -1.478427  0.524988</span>
-<span class="go">2  0.404705  0.577046 -1.715002</span>
+In [8]: df[df['A'] &gt; 0]
+Out[8]: 
+          A         B         C
+0  0.276232 -1.087401 -0.673690
+1  0.113648 -1.478427  0.524988
+2  0.404705  0.577046 -1.715002
 
-<span class="go">[3 rows x 3 columns]</span>
-</pre></div>
-</div>
+[3 rows x 3 columns]</pre>
 <p>If a DataFrame is sliced with a DataFrame based boolean condition (with the same size as the original DataFrame),
 then a DataFrame the same size (index and columns) as the original is returned, with
 elements that do not meet the boolean condition as <cite>NaN</cite>. This is accomplished via
 the new method <cite>DataFrame.where</cite>. In addition, <cite>where</cite> takes an optional <cite>other</cite> argument for replacement.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
-<span class="gh">Out[9]: </span><span class="go"></span>
-<span class="go">          A         B         C</span>
-<span class="go">0  0.276232       NaN       NaN</span>
-<span class="go">1  0.113648       NaN  0.524988</span>
-<span class="go">2  0.404705  0.577046       NaN</span>
-<span class="go">3       NaN       NaN       NaN</span>
-<span class="go">4       NaN  0.844885  1.075770</span>
+<pre class="literal-block">In [9]: df[df&gt;0]
+Out[9]: 
+          A         B         C
+0  0.276232       NaN       NaN
+1  0.113648       NaN  0.524988
+2  0.404705  0.577046       NaN
+3       NaN       NaN       NaN
+4       NaN  0.844885  1.075770
 
-<span class="go">[5 rows x 3 columns]</span>
+[5 rows x 3 columns]
 
-<span class="gp">In [10]: </span><span class="n">df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                               Out[10]: </span>
-<span class="go">          A         B         C</span>
-<span class="go">0  0.276232       NaN       NaN</span>
-<span class="go">1  0.113648       NaN  0.524988</span>
-<span class="go">2  0.404705  0.577046       NaN</span>
-<span class="go">3       NaN       NaN       NaN</span>
-<span class="go">4       NaN  0.844885  1.075770</span>
+In [10]: df.where(df&gt;0)
+Out[10]: 
+          A         B         C
+0  0.276232       NaN       NaN
+1  0.113648       NaN  0.524988
+2  0.404705  0.577046       NaN
+3       NaN       NaN       NaN
+4       NaN  0.844885  1.075770
 
-<span class="go">[5 rows x 3 columns]</span>
+[5 rows x 3 columns]
 
-<span class="gp">In [11]: </span><span class="n">df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">df</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                               Out[11]: </span>
-<span class="go">          A         B         C</span>
-<span class="go">0  0.276232  1.087401  0.673690</span>
-<span class="go">1  0.113648  1.478427  0.524988</span>
-<span class="go">2  0.404705  0.577046  1.715002</span>
-<span class="go">3  1.039268  0.370647  1.157892</span>
-<span class="go">4  1.344312  0.844885  1.075770</span>
+In [11]: df.where(df&gt;0,-df)
+Out[11]: 
+          A         B         C
+0  0.276232  1.087401  0.673690
+1  0.113648  1.478427  0.524988
+2  0.404705  0.577046  1.715002
+3  1.039268  0.370647  1.157892
+4  1.344312  0.844885  1.075770
 
-<span class="go">[5 rows x 3 columns]</span>
-</pre></div>
-</div>
+[5 rows x 3 columns]</pre>
 <p>Furthermore, <cite>where</cite> now aligns the input boolean condition (ndarray or DataFrame), such that partial selection
 with setting is possible. This is analogous to partial setting via <cite>.ix</cite> (but on the contents rather than the axis labels)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -266,60 +261,56 @@ with setting is possible. This is analogous to partial setting via <cite>.ix</ci
 </div>
 </div></blockquote>
 </li>
-<li><p class="first">Enable referencing of Excel columns by their column names (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/1936">GH1936</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">xl</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="s1">&#39;data/test.xls&#39;</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/io/excel.py</span> in <span class="ni">__init__</span><span class="nt">(self, io, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">352</span>             <span class="kn">import</span> <span class="nn">xlrd</span>
-<span class="g g-Whitespace">    </span><span class="mi">353</span>         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+<li><p>Enable referencing of Excel columns by their column names (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/1936">GH1936</a>)</p>
+<pre class="literal-block">In [16]: xl = ExcelFile('data/test.xls')
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-16-5dce2c3c6798&gt; in &lt;module&gt;
+----&gt; 1 xl = ExcelFile('data/test.xls')
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;xlrd&#39;
+~/miniconda/lib/python3.7/site-packages/pandas/io/excel/_base.py in __init__(self, io, engine)
+    817         self._io = _stringify_path(io)
+    818 
+--&gt; 819         self._reader = self._engines[engine](self._io)
+    820 
+    821     def __fspath__(self):
 
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+~/miniconda/lib/python3.7/site-packages/pandas/io/excel/_xlrd.py in __init__(self, filepath_or_buffer)
+     18         &quot;&quot;&quot;
+     19         err_msg = &quot;Install xlrd &gt;= 1.0.0 for Excel support&quot;
+---&gt; 20         import_optional_dependency(&quot;xlrd&quot;, extra=err_msg)
+     21         super().__init__(filepath_or_buffer)
+     22 
 
-<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">16</span><span class="o">-</span><span class="mi">5</span><span class="n">dce2c3c6798</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">xl</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="s1">&#39;data/test.xls&#39;</span><span class="p">)</span>
+~/miniconda/lib/python3.7/site-packages/pandas/compat/_optional.py in import_optional_dependency(name, extra, raise_on_missing, on_version)
+     91     except ImportError:
+     92         if raise_on_missing:
+---&gt; 93             raise ImportError(message.format(name=name, extra=extra)) from None
+     94         else:
+     95             return None
 
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/io/excel.py</span> in <span class="ni">__init__</span><span class="nt">(self, io, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span>             <span class="kn">import</span> <span class="nn">xlrd</span>
-<span class="g g-Whitespace">    </span><span class="mi">353</span>         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">354</span>             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">356</span>             <span class="n">ver</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">xlrd</span><span class="o">.</span><span class="n">__VERSION__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]))</span>
+ImportError: Missing optional dependency 'xlrd'. Install xlrd &gt;= 1.0.0 for Excel support Use pip or conda to install xlrd.
 
-<span class="ne">ImportError</span>: Install xlrd &gt;= 0.9.0 for Excel support
+In [17]: xl.parse('Sheet1', index_col=0, parse_dates=True,
+   ....:          parse_cols='A:D')
+   ....: 
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-17-ab003043f6a9&gt; in &lt;module&gt;
+----&gt; 1 xl.parse('Sheet1', index_col=0, parse_dates=True,
+      2          parse_cols='A:D')
 
-<span class="gp">In [17]: </span><span class="n">xl</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-<span class="gp">   ....: </span>         <span class="n">parse_cols</span><span class="o">=</span><span class="s1">&#39;A:D&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-17-ab003043f6a9&gt; in &lt;module&gt;</span>
-<span class="go">----&gt; 1 xl.parse(&#39;Sheet1&#39;, index_col=0, parse_dates=True,</span>
-<span class="go">      2          parse_cols=&#39;A:D&#39;)</span>
-
-<span class="go">NameError: name &#39;xl&#39; is not defined</span>
-</pre></div>
-</div>
+NameError: name 'xl' is not defined</pre>
 </li>
-<li><p class="first">Added option to disable pandas-style tick locators and formatters
+<li><p>Added option to disable pandas-style tick locators and formatters
 using <cite>series.plot(x_compat=True)</cite> or <cite>pandas.plot_params[‘x_compat’] =
-True</cite> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2205">GH2205</a>)</p>
-</li>
-<li><p class="first">Existing TimeSeries methods <cite>at_time</cite> and <cite>between_time</cite> were added to
-DataFrame (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2149">GH2149</a>)</p>
-</li>
-<li><p class="first">DataFrame.dot can now accept ndarrays (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2042">GH2042</a>)</p>
-</li>
-<li><p class="first">DataFrame.drop now supports non-unique indexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2101">GH2101</a>)</p>
-</li>
-<li><p class="first">Panel.shift now supports negative periods (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2164">GH2164</a>)</p>
-</li>
-<li><p class="first">DataFrame now support unary ~ operator (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2110">GH2110</a>)</p>
-</li>
+True</cite> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2205">GH2205</a>)</p></li>
+<li><p>Existing TimeSeries methods <cite>at_time</cite> and <cite>between_time</cite> were added to
+DataFrame (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2149">GH2149</a>)</p></li>
+<li><p>DataFrame.dot can now accept ndarrays (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2042">GH2042</a>)</p></li>
+<li><p>DataFrame.drop now supports non-unique indexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2101">GH2101</a>)</p></li>
+<li><p>Panel.shift now supports negative periods (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2164">GH2164</a>)</p></li>
+<li><p>DataFrame now support unary ~ operator (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2110">GH2110</a>)</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -327,7 +318,7 @@ DataFrame (<a class="reference external" href="https://github.com/pandas-dev/pan
 <h2>API changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul>
-<li><p class="first">Upsampling data with a PeriodIndex will result in a higher frequency
+<li><p>Upsampling data with a PeriodIndex will result in a higher frequency
 TimeSeries that spans the original time window</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">prng</span> <span class="o">=</span> <span class="n">period_range</span><span class="p">(</span><span class="s1">&#39;2012Q1&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;Q&#39;</span><span class="p">)</span>
 
@@ -345,7 +336,7 @@ TimeSeries that spans the original time window</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Period.end_time now returns the last nanosecond in the time interval
+<li><p>Period.end_time now returns the last nanosecond in the time interval
 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2124">GH2124</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2125">GH2125</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/1764">GH1764</a>)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">p</span> <span class="o">=</span> <span class="n">Period</span><span class="p">(</span><span class="s1">&#39;2012&#39;</span><span class="p">)</span>
 
@@ -354,17 +345,17 @@ TimeSeries that spans the original time window</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">File parsers no longer coerce to float or bool for columns that have custom
+<li><p>File parsers no longer coerce to float or bool for columns that have custom
 converters specified (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2184">GH2184</a>)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;A,B,C</span><span class="se">\n</span><span class="s1">00001,001,5</span><span class="se">\n</span><span class="s1">00002,002,6&#39;</span>
 
 <span class="gp">In [21]: </span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;A&#39;</span> <span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()})</span>
-<span class="gh">Out[21]: </span><span class="go"></span>
-<span class="go">       A  B  C</span>
-<span class="go">0  00001  1  5</span>
-<span class="go">1  00002  2  6</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">21</span><span class="o">-</span><span class="n">efde497838b2</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;A&#39;</span> <span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()})</span>
 
-<span class="go">[2 rows x 3 columns]</span>
+<span class="ne">NameError</span>: name &#39;StringIO&#39; is not defined
 </pre></div>
 </div>
 </li>
@@ -398,7 +389,7 @@ on GitHub for a complete list.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

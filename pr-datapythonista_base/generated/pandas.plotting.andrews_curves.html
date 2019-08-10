@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.plotting.andrews_curves &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.plotting.andrews_curves &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -23,6 +23,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pandas.plotting.bootstrap_plot" href="pandas.plotting.bootstrap_plot.html" />
+    <link rel="prev" title="pandas.io.formats.style.Styler.loader" href="pandas.io.formats.style.Styler.loader.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -41,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -86,34 +91,29 @@
 <h1>pandas.plotting.andrews_curves<a class="headerlink" href="#pandas-plotting-andrews-curves" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.plotting.andrews_curves">
-<code class="descclassname">pandas.plotting.</code><code class="descname">andrews_curves</code><span class="sig-paren">(</span><em>frame</em>, <em>class_column</em>, <em>ax=None</em>, <em>samples=200</em>, <em>color=None</em>, <em>colormap=None</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/plotting/_misc.py#L275-L363"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.plotting.andrews_curves" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a matplotlib plot of Andrews curves, for visualising clusters of
+<code class="sig-prename descclassname">pandas.plotting.</code><code class="sig-name descname">andrews_curves</code><span class="sig-paren">(</span><em class="sig-param">frame</em>, <em class="sig-param">class_column</em>, <em class="sig-param">ax=None</em>, <em class="sig-param">samples=200</em>, <em class="sig-param">color=None</em>, <em class="sig-param">colormap=None</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/plotting/_misc.py#L216-L261"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.plotting.andrews_curves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a matplotlib plot of Andrews curves, for visualising clusters of
 multivariate data.</p>
 <p>Andrews curves have the functional form:</p>
-<dl class="docutils">
-<dt>f(t) = x_1/sqrt(2) + x_2 sin(t) + x_3 cos(t) +</dt>
-<dd>x_4 sin(2t) + x_5 cos(2t) + …</dd>
+<dl class="simple">
+<dt>f(t) = x_1/sqrt(2) + x_2 sin(t) + x_3 cos(t) +</dt><dd><p>x_4 sin(2t) + x_5 cos(2t) + …</p>
+</dd>
 </dl>
 <p>Where x coefficients correspond to the values of each dimension and t is
 linearly spaced between -pi and +pi. Each row of frame then corresponds to
 a single curve.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>frame</strong> : DataFrame</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>frame</strong> : DataFrame</p>
 <blockquote>
 <div><p>Data to be plotted, preferably normalized to (0.0, 1.0)</p>
 </div></blockquote>
-<dl class="docutils">
-<dt><strong>class_column</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Name of the column containing class names</span></dt>
-<dd></dd>
-<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib axes object, default None</span></dt>
-<dd></dd>
-<dt><strong>samples</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Number of points to plot in each curve</span></dt>
-<dd></dd>
+<dl class="simple">
+<dt><strong>class_column</strong><span class="classifier">Name of the column containing class names</span></dt><dd></dd>
+<dt><strong>ax</strong><span class="classifier">matplotlib axes object, default None</span></dt><dd></dd>
+<dt><strong>samples</strong><span class="classifier">Number of points to plot in each curve</span></dt><dd></dd>
 </dl>
-<p><strong>color: list or tuple, optional</strong></p>
+<p><strong>color</strong> : list or tuple, optional</p>
 <blockquote>
 <div><p>Colors to use for the different classes</p>
 </div></blockquote>
@@ -122,20 +122,17 @@ a single curve.</p>
 <div><p>Colormap to select colors from. If string, load colormap with that name
 from matplotlib.</p>
 </div></blockquote>
-<p><strong>kwds: keywords</strong></p>
+<p><strong>kwds</strong> : keywords</p>
 <blockquote>
 <div><p>Options to pass to matplotlib plotting method</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>ax: Matplotlib axis object</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>class:`matplotlip.axis.Axes`</strong></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -160,7 +157,7 @@ from matplotlib.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.reindex &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.reindex &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -22,7 +22,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pandas.DataFrame.reindex_axis" href="pandas.DataFrame.reindex_axis.html" />
+    <link rel="next" title="pandas.DataFrame.reindex_like" href="pandas.DataFrame.reindex_like.html" />
     <link rel="prev" title="pandas.DataFrame.rdiv" href="pandas.DataFrame.rdiv.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,59 +91,57 @@
 <h1>pandas.DataFrame.reindex<a class="headerlink" href="#pandas-dataframe-reindex" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.reindex">
-<code class="descclassname">DataFrame.</code><code class="descname">reindex</code><span class="sig-paren">(</span><em>labels=None</em>, <em>index=None</em>, <em>columns=None</em>, <em>axis=None</em>, <em>method=None</em>, <em>copy=True</em>, <em>level=None</em>, <em>fill_value=nan</em>, <em>limit=None</em>, <em>tolerance=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L3552-L3566"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reindex" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">reindex</code><span class="sig-paren">(</span><em class="sig-param">labels=None</em>, <em class="sig-param">index=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">axis=None</em>, <em class="sig-param">method=None</em>, <em class="sig-param">copy=True</em>, <em class="sig-param">level=None</em>, <em class="sig-param">fill_value=nan</em>, <em class="sig-param">limit=None</em>, <em class="sig-param">tolerance=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L3937-L3956"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reindex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Conform DataFrame to new index with optional filling logic, placing
 NA/NaN in locations having no value in the previous index. A new object
 is produced unless the new index is equivalent to the current one and
-copy=False</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>labels</strong> : array-like, optional</p>
+<code class="docutils literal notranslate"><span class="pre">copy=False</span></code>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>labels</strong> : array-like, optional</p>
 <blockquote>
 <div><p>New labels / index to conform the axis specified by ‘axis’ to.</p>
 </div></blockquote>
-<p><strong>index, columns</strong> : array-like, optional (should be specified using keywords)</p>
+<p><strong>index, columns</strong> : array-like, optional</p>
 <blockquote>
-<div><p>New labels / index to conform to. Preferably an Index object to
-avoid duplicating data</p>
+<div><p>New labels / index to conform to, should be specified using
+keywords. Preferably an Index object to avoid duplicating data</p>
 </div></blockquote>
 <p><strong>axis</strong> : int or str, optional</p>
 <blockquote>
 <div><p>Axis to target. Can be either the axis name (‘index’, ‘columns’)
 or number (0, 1).</p>
 </div></blockquote>
-<p><strong>method</strong> : {None, ‘backfill’/’bfill’, ‘pad’/’ffill’, ‘nearest’}, optional</p>
+<p><strong>method</strong> : {None, ‘backfill’/’bfill’, ‘pad’/’ffill’, ‘nearest’}</p>
 <blockquote>
-<div><p>method to use for filling holes in reindexed DataFrame.
+<div><p>Method to use for filling holes in reindexed DataFrame.
 Please note: this is only applicable to DataFrames/Series with a
 monotonically increasing/decreasing index.</p>
 <ul class="simple">
-<li>default: don’t fill gaps</li>
-<li>pad / ffill: propagate last valid observation forward to next
-valid</li>
-<li>backfill / bfill: use next valid observation to fill gap</li>
-<li>nearest: use nearest valid observations to fill gap</li>
+<li><p>None (default): don’t fill gaps</p></li>
+<li><p>pad / ffill: propagate last valid observation forward to next
+valid</p></li>
+<li><p>backfill / bfill: use next valid observation to fill gap</p></li>
+<li><p>nearest: use nearest valid observations to fill gap</p></li>
 </ul>
 </div></blockquote>
-<p><strong>copy</strong> : boolean, default True</p>
+<p><strong>copy</strong> : bool, default True</p>
 <blockquote>
-<div><p>Return a new object, even if the passed indexes are the same</p>
+<div><p>Return a new object, even if the passed indexes are the same.</p>
 </div></blockquote>
 <p><strong>level</strong> : int or name</p>
 <blockquote>
 <div><p>Broadcast across a level, matching Index values on the
-passed MultiIndex level</p>
+passed MultiIndex level.</p>
 </div></blockquote>
 <p><strong>fill_value</strong> : scalar, default np.NaN</p>
 <blockquote>
 <div><p>Value to use for missing values. Defaults to NaN, but can be any
-“compatible” value</p>
+“compatible” value.</p>
 </div></blockquote>
 <p><strong>limit</strong> : int, default None</p>
 <blockquote>
-<div><p>Maximum number of consecutive elements to forward or backward fill</p>
+<div><p>Maximum number of consecutive elements to forward or backward fill.</p>
 </div></blockquote>
 <p><strong>tolerance</strong> : optional</p>
 <blockquote>
@@ -152,24 +154,32 @@ element. List-like includes list, tuple, array, Series, and must be
 the same size as the index and its dtype must exactly match the
 index’s type.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0: </span>(list-like tolerance)</p>
+<p><span class="versionmodified added">New in version 0.21.0: </span>(list-like tolerance)</p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>reindexed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>DataFrame with changed index.</strong></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.set_index.html#pandas.DataFrame.set_index" title="pandas.DataFrame.set_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.set_index</span></code></a></dt><dd><p>Set row labels.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reset_index.html#pandas.DataFrame.reset_index" title="pandas.DataFrame.reset_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reset_index</span></code></a></dt><dd><p>Remove row labels or move them to new columns.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reindex_like.html#pandas.DataFrame.reindex_like" title="pandas.DataFrame.reindex_like"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reindex_like</span></code></a></dt><dd><p>Change to same indices as other DataFrame.</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Examples</p>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame.reindex</span></code> supports two calling conventions</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">(index=index_labels,</span> <span class="pre">columns=column_labels,</span> <span class="pre">...)</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">(labels,</span> <span class="pre">axis={'index',</span> <span class="pre">'columns'},</span> <span class="pre">...)</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(index=index_labels,</span> <span class="pre">columns=column_labels,</span> <span class="pre">...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(labels,</span> <span class="pre">axis={'index',</span> <span class="pre">'columns'},</span> <span class="pre">...)</span></code></p></li>
 </ul>
 <p>We <em>highly</em> recommend using keyword arguments to clarify your
 intent.</p>
@@ -253,12 +263,12 @@ of dates).</p>
 <span class="gp">... </span>                   <span class="n">index</span><span class="o">=</span><span class="n">date_index</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
 <span class="go">            prices</span>
-<span class="go">2010-01-01     100</span>
-<span class="go">2010-01-02     101</span>
+<span class="go">2010-01-01   100.0</span>
+<span class="go">2010-01-02   101.0</span>
 <span class="go">2010-01-03     NaN</span>
-<span class="go">2010-01-04     100</span>
-<span class="go">2010-01-05      89</span>
-<span class="go">2010-01-06      88</span>
+<span class="go">2010-01-04   100.0</span>
+<span class="go">2010-01-05    89.0</span>
+<span class="go">2010-01-06    88.0</span>
 </pre></div>
 </div>
 <p>Suppose we decide to expand the dataframe to cover a wider
@@ -269,12 +279,12 @@ date range.</p>
 <span class="go">2009-12-29     NaN</span>
 <span class="go">2009-12-30     NaN</span>
 <span class="go">2009-12-31     NaN</span>
-<span class="go">2010-01-01     100</span>
-<span class="go">2010-01-02     101</span>
+<span class="go">2010-01-01   100.0</span>
+<span class="go">2010-01-02   101.0</span>
 <span class="go">2010-01-03     NaN</span>
-<span class="go">2010-01-04     100</span>
-<span class="go">2010-01-05      89</span>
-<span class="go">2010-01-06      88</span>
+<span class="go">2010-01-04   100.0</span>
+<span class="go">2010-01-05    89.0</span>
+<span class="go">2010-01-06    88.0</span>
 <span class="go">2010-01-07     NaN</span>
 </pre></div>
 </div>
@@ -282,19 +292,19 @@ date range.</p>
 (for example, ‘2009-12-29’) are by default filled with <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.
 If desired, we can fill in the missing values using one of several
 options.</p>
-<p>For example, to backpropagate the last valid value to fill the <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
+<p>For example, to back-propagate the last valid value to fill the <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
 values, pass <code class="docutils literal notranslate"><span class="pre">bfill</span></code> as an argument to the <code class="docutils literal notranslate"><span class="pre">method</span></code> keyword.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">date_index2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
 <span class="go">            prices</span>
-<span class="go">2009-12-29     100</span>
-<span class="go">2009-12-30     100</span>
-<span class="go">2009-12-31     100</span>
-<span class="go">2010-01-01     100</span>
-<span class="go">2010-01-02     101</span>
+<span class="go">2009-12-29   100.0</span>
+<span class="go">2009-12-30   100.0</span>
+<span class="go">2009-12-31   100.0</span>
+<span class="go">2010-01-01   100.0</span>
+<span class="go">2010-01-02   101.0</span>
 <span class="go">2010-01-03     NaN</span>
-<span class="go">2010-01-04     100</span>
-<span class="go">2010-01-05      89</span>
-<span class="go">2010-01-06      88</span>
+<span class="go">2010-01-04   100.0</span>
+<span class="go">2010-01-05    89.0</span>
+<span class="go">2010-01-06    88.0</span>
 <span class="go">2010-01-07     NaN</span>
 </pre></div>
 </div>
@@ -329,7 +339,7 @@ in the original dataframe, use the <code class="docutils literal notranslate"><s
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

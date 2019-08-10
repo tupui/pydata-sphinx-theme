@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.api.extensions.ExtensionDtype &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.api.extensions.ExtensionDtype &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -89,58 +93,96 @@
 <h1>pandas.api.extensions.ExtensionDtype<a class="headerlink" href="#pandas-api-extensions-extensiondtype" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pandas.api.extensions.ExtensionDtype">
-<em class="property">class </em><code class="descclassname">pandas.api.extensions.</code><code class="descname">ExtensionDtype</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/dtypes/base.py#L98-L189"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.api.extensions.ExtensionDtype" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pandas.api.extensions.</code><code class="sig-name descname">ExtensionDtype</code><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/dtypes/base.py#L11-L298"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.api.extensions.ExtensionDtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>A custom data type, to be paired with an ExtensionArray.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extensions.register_extension_dtype</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">extensions.ExtensionArray</span></code></p>
 </div>
 <p class="rubric">Notes</p>
 <p>The interface includes the following abstract methods that must
 be implemented by subclasses:</p>
 <ul class="simple">
-<li>type</li>
-<li>name</li>
-<li>construct_from_string</li>
+<li><p>type</p></li>
+<li><p>name</p></li>
+<li><p>construct_from_string</p></li>
+</ul>
+<p>The following attributes influence the behavior of the dtype in
+pandas operations</p>
+<ul class="simple">
+<li><p>_is_numeric</p></li>
+<li><p>_is_boolean</p></li>
+</ul>
+<p>Optionally one can override construct_array_type for construction
+with the name of this dtype via the Registry. See
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">extensions.register_extension_dtype()</span></code>.</p>
+<ul class="simple">
+<li><p>construct_array_type</p></li>
 </ul>
 <p>The <cite>na_value</cite> class attribute can be used to set the default NA value
 for this type. <code class="xref py py-attr docutils literal notranslate"><span class="pre">numpy.nan</span></code> is used by default.</p>
+<p>ExtensionDtypes are required to be hashable. The base class provides
+a default implementation, which relies on the <code class="docutils literal notranslate"><span class="pre">_metadata</span></code> class
+attribute. <code class="docutils literal notranslate"><span class="pre">_metadata</span></code> should be a tuple containing the strings
+that define your data type. For example, with <code class="docutils literal notranslate"><span class="pre">PeriodDtype</span></code> that’s
+the <code class="docutils literal notranslate"><span class="pre">freq</span></code> attribute.</p>
+<p><strong>If you have a parametrized dtype you should set the ``_metadata``
+class property</strong>.</p>
+<p>Ideally, the attributes in <code class="docutils literal notranslate"><span class="pre">_metadata</span></code> will match the
+parameters to your <code class="docutils literal notranslate"><span class="pre">ExtensionDtype.__init__</span></code> (if any). If any of
+the attributes in <code class="docutils literal notranslate"><span class="pre">_metadata</span></code> don’t implement the standard
+<code class="docutils literal notranslate"><span class="pre">__eq__</span></code> or <code class="docutils literal notranslate"><span class="pre">__hash__</span></code>, the default implementations here will not
+work.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24.0: </span>Added <code class="docutils literal notranslate"><span class="pre">_metadata</span></code>, <code class="docutils literal notranslate"><span class="pre">__hash__</span></code>, and changed the default definition
+of <code class="docutils literal notranslate"><span class="pre">__eq__</span></code>.</p>
+</div>
 <p>This class does not inherit from ‘abc.ABCMeta’ for performance reasons.
 Methods and properties required by the interface raise
 <code class="docutils literal notranslate"><span class="pre">pandas.errors.AbstractMethodError</span></code> and no <code class="docutils literal notranslate"><span class="pre">register</span></code> method is
 provided for registering virtual subclasses.</p>
 <p class="rubric">Attributes</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.kind.html#pandas.api.extensions.ExtensionDtype.kind" title="pandas.api.extensions.ExtensionDtype.kind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kind</span></code></a></td>
-<td>A character code (one of ‘biufcmMOSUV’), default ‘O’</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.kind.html#pandas.api.extensions.ExtensionDtype.kind" title="pandas.api.extensions.ExtensionDtype.kind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kind</span></code></a></p></td>
+<td><p>A character code (one of ‘biufcmMOSUV’), default ‘O’</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.name.html#pandas.api.extensions.ExtensionDtype.name" title="pandas.api.extensions.ExtensionDtype.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></td>
-<td>A string identifying the data type.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.na_value.html#pandas.api.extensions.ExtensionDtype.na_value" title="pandas.api.extensions.ExtensionDtype.na_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">na_value</span></code></a></p></td>
+<td><p>Default NA value to use for this type.</p></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.names.html#pandas.api.extensions.ExtensionDtype.names" title="pandas.api.extensions.ExtensionDtype.names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">names</span></code></a></td>
-<td>Ordered list of field names, or None if there are no fields.</td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.name.html#pandas.api.extensions.ExtensionDtype.name" title="pandas.api.extensions.ExtensionDtype.name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></a></p></td>
+<td><p>A string identifying the data type.</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.type.html#pandas.api.extensions.ExtensionDtype.type" title="pandas.api.extensions.ExtensionDtype.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a></td>
-<td>The scalar type for the array, e.g.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.names.html#pandas.api.extensions.ExtensionDtype.names" title="pandas.api.extensions.ExtensionDtype.names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">names</span></code></a></p></td>
+<td><p>Ordered list of field names, or None if there are no fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.type.html#pandas.api.extensions.ExtensionDtype.type" title="pandas.api.extensions.ExtensionDtype.type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a></p></td>
+<td><p>The scalar type for the array, e.g.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
-<table border="1" class="longtable docutils">
+<table class="longtable docutils align-default">
 <colgroup>
-<col width="10%" />
-<col width="90%" />
+<col style="width: 10%" />
+<col style="width: 90%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.construct_from_string.html#pandas.api.extensions.ExtensionDtype.construct_from_string" title="pandas.api.extensions.ExtensionDtype.construct_from_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_from_string</span></code></a>(string)</td>
-<td>Attempt to construct this type from a string.</td>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.construct_array_type.html#pandas.api.extensions.ExtensionDtype.construct_array_type" title="pandas.api.extensions.ExtensionDtype.construct_array_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_array_type</span></code></a>()</p></td>
+<td><p>Return the array type associated with this dtype</p></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.is_dtype.html#pandas.api.extensions.ExtensionDtype.is_dtype" title="pandas.api.extensions.ExtensionDtype.is_dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_dtype</span></code></a>(dtype)</td>
-<td>Check if we match ‘dtype’.</td>
+<tr class="row-even"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.construct_from_string.html#pandas.api.extensions.ExtensionDtype.construct_from_string" title="pandas.api.extensions.ExtensionDtype.construct_from_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_from_string</span></code></a>(string)</p></td>
+<td><p>Construct this type from a string.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pandas.api.extensions.ExtensionDtype.is_dtype.html#pandas.api.extensions.ExtensionDtype.is_dtype" title="pandas.api.extensions.ExtensionDtype.is_dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_dtype</span></code></a>(dtype)</p></td>
+<td><p>Check if we match ‘dtype’.</p></td>
 </tr>
 </tbody>
 </table>
@@ -168,7 +210,7 @@ provided for registering virtual subclasses.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

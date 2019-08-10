@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.rank &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.rank &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,58 +91,104 @@
 <h1>pandas.DataFrame.rank<a class="headerlink" href="#pandas-dataframe-rank" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.rank">
-<code class="descclassname">DataFrame.</code><code class="descname">rank</code><span class="sig-paren">(</span><em>axis=0</em>, <em>method='average'</em>, <em>numeric_only=None</em>, <em>na_option='keep'</em>, <em>ascending=True</em>, <em>pct=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L7239-L7297"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.rank" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute numerical data ranks (1 through n) along axis. Equal values are
-assigned a rank that is the average of the ranks of those values</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’}, default 0</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">rank</code><span class="sig-paren">(</span><em class="sig-param">axis=0</em>, <em class="sig-param">method='average'</em>, <em class="sig-param">numeric_only=None</em>, <em class="sig-param">na_option='keep'</em>, <em class="sig-param">ascending=True</em>, <em class="sig-param">pct=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L8578-L8699"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.rank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute numerical data ranks (1 through n) along axis.</p>
+<p>By default, equal values are assigned a rank that is the average of the
+ranks of those values.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’}, default 0</p>
 <blockquote>
-<div><p>index to direct ranking</p>
+<div><p>Index to direct ranking.</p>
 </div></blockquote>
-<p><strong>method</strong> : {‘average’, ‘min’, ‘max’, ‘first’, ‘dense’}</p>
+<p><strong>method</strong> : {‘average’, ‘min’, ‘max’, ‘first’, ‘dense’}, default ‘average’</p>
 <blockquote>
-<div><ul class="simple">
-<li>average: average rank of group</li>
-<li>min: lowest rank in group</li>
-<li>max: highest rank in group</li>
-<li>first: ranks assigned in order they appear in the array</li>
-<li>dense: like ‘min’, but rank always increases by 1 between groups</li>
+<div><p>How to rank the group of records that have the same value
+(i.e. ties):</p>
+<ul class="simple">
+<li><p>average: average rank of the group</p></li>
+<li><p>min: lowest rank in the group</p></li>
+<li><p>max: highest rank in the group</p></li>
+<li><p>first: ranks assigned in order they appear in the array</p></li>
+<li><p>dense: like ‘min’, but rank always increases by 1 between groups</p></li>
 </ul>
 </div></blockquote>
-<p><strong>numeric_only</strong> : boolean, default None</p>
+<p><strong>numeric_only</strong> : bool, optional</p>
 <blockquote>
-<div><p>Include only float, int, boolean data. Valid only for DataFrame or
-Panel objects</p>
+<div><p>For DataFrame objects, rank only numeric columns if set to True.</p>
 </div></blockquote>
-<p><strong>na_option</strong> : {‘keep’, ‘top’, ‘bottom’}</p>
+<p><strong>na_option</strong> : {‘keep’, ‘top’, ‘bottom’}, default ‘keep’</p>
 <blockquote>
-<div><ul class="simple">
-<li>keep: leave NA values where they are</li>
-<li>top: smallest rank if ascending</li>
-<li>bottom: smallest rank if descending</li>
+<div><p>How to rank NaN values:</p>
+<ul class="simple">
+<li><p>keep: assign NaN rank to NaN values</p></li>
+<li><p>top: assign smallest rank to NaN values if ascending</p></li>
+<li><p>bottom: assign highest rank to NaN values if ascending</p></li>
 </ul>
 </div></blockquote>
-<p><strong>ascending</strong> : boolean, default True</p>
+<p><strong>ascending</strong> : bool, default True</p>
 <blockquote>
-<div><p>False for ranks by high (1) to low (N)</p>
+<div><p>Whether or not the elements should be ranked in ascending order.</p>
 </div></blockquote>
-<p><strong>pct</strong> : boolean, default False</p>
+<p><strong>pct</strong> : bool, default False</p>
 <blockquote>
-<div><p>Computes percentage rank of data</p>
+<div><p>Whether or not to display the returned rankings in percentile
+form.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>ranks</strong> <span class="classifier-delimiter">:</span> <span class="classifier">same type as caller</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>same type as caller</strong></p>
+<blockquote>
+<div><p>Return a Series or DataFrame with data ranks as values.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.core.groupby.GroupBy.rank.html#pandas.core.groupby.GroupBy.rank" title="pandas.core.groupby.GroupBy.rank"><code class="xref py py-obj docutils literal notranslate"><span class="pre">core.groupby.GroupBy.rank</span></code></a></dt><dd><p>Rank of values within each group.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Animal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;penguin&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                   <span class="s1">&#39;spider&#39;</span><span class="p">,</span> <span class="s1">&#39;snake&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                        <span class="s1">&#39;Number_legs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">    Animal  Number_legs</span>
+<span class="go">0      cat          4.0</span>
+<span class="go">1  penguin          2.0</span>
+<span class="go">2      dog          4.0</span>
+<span class="go">3   spider          8.0</span>
+<span class="go">4    snake          NaN</span>
+</pre></div>
+</div>
+<p>The following example shows how the method behaves with the above
+parameters:</p>
+<ul class="simple">
+<li><p>default_rank: this is the default behaviour obtained without using
+any parameter.</p></li>
+<li><p>max_rank: setting <code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">=</span> <span class="pre">'max'</span></code> the records that have the
+same values are ranked using the highest rank (e.g.: since ‘cat’
+and ‘dog’ are both in the 2nd and 3rd position, rank 3 is assigned.)</p></li>
+<li><p>NA_bottom: choosing <code class="docutils literal notranslate"><span class="pre">na_option</span> <span class="pre">=</span> <span class="pre">'bottom'</span></code>, if there are records
+with NaN values they are placed at the bottom of the ranking.</p></li>
+<li><p>pct_rank: when setting <code class="docutils literal notranslate"><span class="pre">pct</span> <span class="pre">=</span> <span class="pre">True</span></code>, the ranking is expressed as
+percentile rank.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;default_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number_legs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;max_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number_legs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;NA_bottom&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number_legs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">na_option</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pct_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Number_legs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">pct</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">    Animal  Number_legs  default_rank  max_rank  NA_bottom  pct_rank</span>
+<span class="go">0      cat          4.0           2.5       3.0        2.5     0.625</span>
+<span class="go">1  penguin          2.0           1.0       1.0        1.0     0.250</span>
+<span class="go">2      dog          4.0           2.5       3.0        2.5     0.625</span>
+<span class="go">3   spider          8.0           4.0       4.0        4.0     1.000</span>
+<span class="go">4    snake          NaN           NaN       NaN        5.0       NaN</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -163,7 +213,7 @@ Panel objects</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

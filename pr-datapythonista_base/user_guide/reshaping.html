@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Reshaping and Pivot Tables &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>Reshaping and Pivot Tables &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -40,11 +40,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -101,9 +105,19 @@
 <p>Data is often stored in so-called “stacked” or “record” format:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span>
 <span class="gh">Out[1]: </span><span class="go"></span>
-<span class="go">     a    b</span>
-<span class="go">0  xxx  yyy</span>
-<span class="go">1   ¡¡   ¡¡</span>
+<span class="go">         date variable     value</span>
+<span class="go">0  2000-01-03        A  0.469112</span>
+<span class="go">1  2000-01-04        A -0.282863</span>
+<span class="go">2  2000-01-05        A -1.509059</span>
+<span class="go">3  2000-01-03        B -1.135632</span>
+<span class="go">4  2000-01-04        B  1.212112</span>
+<span class="go">5  2000-01-05        B -0.173215</span>
+<span class="go">6  2000-01-03        C  0.119209</span>
+<span class="go">7  2000-01-04        C -1.044236</span>
+<span class="go">8  2000-01-05        C -0.861849</span>
+<span class="go">9  2000-01-03        D -2.104569</span>
+<span class="go">10 2000-01-04        D -0.494929</span>
+<span class="go">11 2000-01-05        D  1.071804</span>
 </pre></div>
 </div>
 <p>For the curious here is how the above <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> was created:</p>
@@ -125,73 +139,11 @@
 </div>
 <p>To select out everything for variable <code class="docutils literal notranslate"><span class="pre">A</span></code> we could do:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3077</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3078</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3079</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;variable&#39;
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">b865c7feaa1c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2686</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2687</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2688</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_column</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2689</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2690</span>     <span class="k">def</span> <span class="nf">_getitem_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">_getitem_column</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2693</span>         <span class="c1"># get column</span>
-<span class="g g-Whitespace">   </span><span class="mi">2694</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2695</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_cache</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2696</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2697</span>         <span class="c1"># duplicate columns &amp; possible reduce dimensionality</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py</span> in <span class="ni">_get_item_cache</span><span class="nt">(self, item)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2487</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2488</span>         <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2489</span>             <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2490</span>             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_box_item_values</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2491</span>             <span class="n">cache</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/internals.py</span> in <span class="ni">get</span><span class="nt">(self, item, fastpath)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4113</span> 
-<span class="g g-Whitespace">   </span><span class="mi">4114</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">isna</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">4115</span>                 <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4116</span>             <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">4117</span>                 <span class="n">indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">))[</span><span class="n">isna</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)]</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3078</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3079</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3080</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maybe_cast_indexer</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">3081</span> 
-<span class="g g-Whitespace">   </span><span class="mi">3082</span>         <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">key</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">)</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;variable&#39;
+<span class="gh">Out[2]: </span><span class="go"></span>
+<span class="go">        date variable     value</span>
+<span class="go">0 2000-01-03        A  0.469112</span>
+<span class="go">1 2000-01-04        A -0.282863</span>
+<span class="go">2 2000-01-05        A -1.509059</span>
 </pre></div>
 </div>
 <p>But suppose we wish to do time series operations with the variables. A better
@@ -200,87 +152,12 @@ representation would be where the <code class="docutils literal notranslate"><sp
 this form, we use the <a class="reference internal" href="../generated/pandas.DataFrame.pivot.html#pandas.DataFrame.pivot" title="pandas.DataFrame.pivot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.pivot()</span></code></a> method (also implemented as a
 top level function <a class="reference internal" href="../generated/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot()</span></code></a>):</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3077</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3078</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3079</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;date&#39;
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">5</span><span class="n">bfa87b0490a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">pivot</span><span class="nt">(self, index, columns, values)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5192</span>         <span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">5193</span><span class="sd">         from pandas.core.reshape.reshape import pivot</span>
-<span class="ne">-&gt; </span><span class="mi">5194</span><span class="sd">         return pivot(self, index=index, columns=columns, values=values)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5195</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">5196</span><span class="sd">     _shared_docs[&#39;pivot_table&#39;] = &quot;&quot;&quot;</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/reshape/reshape.py</span> in <span class="ni">pivot</span><span class="nt">(self, index, columns, values)</span>
-<span class="g g-Whitespace">    </span><span class="mi">403</span>             <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span>
-<span class="g g-Whitespace">    </span><span class="mi">404</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">405</span>             <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">406</span>         <span class="n">index</span> <span class="o">=</span> <span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">([</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="n">columns</span><span class="p">]])</span>
-<span class="g g-Whitespace">    </span><span class="mi">407</span> 
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2686</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2687</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2688</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_column</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2689</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2690</span>     <span class="k">def</span> <span class="nf">_getitem_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">_getitem_column</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2693</span>         <span class="c1"># get column</span>
-<span class="g g-Whitespace">   </span><span class="mi">2694</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2695</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_cache</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2696</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2697</span>         <span class="c1"># duplicate columns &amp; possible reduce dimensionality</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py</span> in <span class="ni">_get_item_cache</span><span class="nt">(self, item)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2487</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2488</span>         <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2489</span>             <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2490</span>             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_box_item_values</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2491</span>             <span class="n">cache</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/internals.py</span> in <span class="ni">get</span><span class="nt">(self, item, fastpath)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4113</span> 
-<span class="g g-Whitespace">   </span><span class="mi">4114</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">isna</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">4115</span>                 <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4116</span>             <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">4117</span>                 <span class="n">indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">))[</span><span class="n">isna</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)]</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3078</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3079</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3080</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maybe_cast_indexer</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">3081</span> 
-<span class="g g-Whitespace">   </span><span class="mi">3082</span>         <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">key</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">)</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;date&#39;
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">variable           A         B         C         D</span>
+<span class="go">date                                              </span>
+<span class="go">2000-01-03  0.469112 -1.135632  0.119209 -2.104569</span>
+<span class="go">2000-01-04 -0.282863  1.212112 -1.044236 -0.494929</span>
+<span class="go">2000-01-05 -1.509059 -0.173215 -0.861849  1.071804</span>
 </pre></div>
 </div>
 <p>If the <code class="docutils literal notranslate"><span class="pre">values</span></code> argument is omitted, and the input <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> has more than
@@ -288,188 +165,36 @@ one column of values which are not used as column or index inputs to <code class
 then the resulting “pivoted” <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> will have <a class="reference internal" href="advanced.html#advanced-hierarchical"><span class="std std-ref">hierarchical columns</span></a> whose topmost level indicates the respective value
 column:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;value2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3077</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3078</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3079</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;value&#39;
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
-<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">8</span><span class="n">a99b49fcd13</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;value2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2686</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2687</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2688</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_column</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2689</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2690</span>     <span class="k">def</span> <span class="nf">_getitem_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">_getitem_column</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2693</span>         <span class="c1"># get column</span>
-<span class="g g-Whitespace">   </span><span class="mi">2694</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2695</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_cache</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2696</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2697</span>         <span class="c1"># duplicate columns &amp; possible reduce dimensionality</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py</span> in <span class="ni">_get_item_cache</span><span class="nt">(self, item)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2487</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2488</span>         <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2489</span>             <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2490</span>             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_box_item_values</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2491</span>             <span class="n">cache</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/internals.py</span> in <span class="ni">get</span><span class="nt">(self, item, fastpath)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4113</span> 
-<span class="g g-Whitespace">   </span><span class="mi">4114</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">isna</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">4115</span>                 <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4116</span>             <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">4117</span>                 <span class="n">indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">))[</span><span class="n">isna</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)]</span>
-
-<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py</span> in <span class="ni">get_loc</span><span class="nt">(self, key, method, tolerance)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3078</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3079</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">3080</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maybe_cast_indexer</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">3081</span> 
-<span class="g g-Whitespace">   </span><span class="mi">3082</span>         <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">key</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">)</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/index.pyx</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="nn">pandas/_libs/hashtable_class_helper.pxi</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
-
-<span class="ne">KeyError</span>: &#39;value&#39;
 
 <span class="gp">In [5]: </span><span class="n">pivoted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ---------------------------------------------------------------------------</span>
-<span class="go">KeyError                                  Traceback (most recent call last)</span>
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)</span>
-<span class="go">   3077             try:</span>
-<span class="go">-&gt; 3078                 return self._engine.get_loc(key)</span>
-<span class="go">   3079             except KeyError:</span>
-
-<span class="go">pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()</span>
-
-<span class="go">pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()</span>
-
-<span class="go">pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()</span>
-
-<span class="go">pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()</span>
-
-<span class="go">KeyError: &#39;date&#39;</span>
-
-<span class="go">During handling of the above exception, another exception occurred:</span>
-
-<span class="go">KeyError                                  Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-5-016fb7c466bb&gt; in &lt;module&gt;</span>
-<span class="go">----&gt; 1 pivoted = df.pivot(index=&#39;date&#39;, columns=&#39;variable&#39;)</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py in pivot(self, index, columns, values)</span>
-<span class="go">   5192         &quot;&quot;&quot;</span>
-<span class="go">   5193         from pandas.core.reshape.reshape import pivot</span>
-<span class="go">-&gt; 5194         return pivot(self, index=index, columns=columns, values=values)</span>
-<span class="go">   5195 </span>
-<span class="go">   5196     _shared_docs[&#39;pivot_table&#39;] = &quot;&quot;&quot;</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/reshape/reshape.py in pivot(self, index, columns, values)</span>
-<span class="go">    398         cols = [columns] if index is None else [index, columns]</span>
-<span class="go">    399         append = index is None</span>
-<span class="go">--&gt; 400         indexed = self.set_index(cols, append=append)</span>
-<span class="go">    401     else:</span>
-<span class="go">    402         if index is None:</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py in set_index(self, keys, drop, append, inplace, verify_integrity)</span>
-<span class="go">   3907                 names.append(None)</span>
-<span class="go">   3908             else:</span>
-<span class="go">-&gt; 3909                 level = frame[col]._values</span>
-<span class="go">   3910                 names.append(col)</span>
-<span class="go">   3911                 if drop:</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py in __getitem__(self, key)</span>
-<span class="go">   2686             return self._getitem_multilevel(key)</span>
-<span class="go">   2687         else:</span>
-<span class="go">-&gt; 2688             return self._getitem_column(key)</span>
-<span class="go">   2689 </span>
-<span class="go">   2690     def _getitem_column(self, key):</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py in _getitem_column(self, key)</span>
-<span class="go">   2693         # get column</span>
-<span class="go">   2694         if self.columns.is_unique:</span>
-<span class="go">-&gt; 2695             return self._get_item_cache(key)</span>
-<span class="go">   2696 </span>
-<span class="go">   2697         # duplicate columns &amp; possible reduce dimensionality</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py in _get_item_cache(self, item)</span>
-<span class="go">   2487         res = cache.get(item)</span>
-<span class="go">   2488         if res is None:</span>
-<span class="go">-&gt; 2489             values = self._data.get(item)</span>
-<span class="go">   2490             res = self._box_item_values(item, values)</span>
-<span class="go">   2491             cache[item] = res</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/internals.py in get(self, item, fastpath)</span>
-<span class="go">   4113 </span>
-<span class="go">   4114             if not isna(item):</span>
-<span class="go">-&gt; 4115                 loc = self.items.get_loc(item)</span>
-<span class="go">   4116             else:</span>
-<span class="go">   4117                 indexer = np.arange(len(self.items))[isna(self.items)]</span>
-
-<span class="go">~/miniconda/lib/python3.7/site-packages/pandas/core/indexes/base.py in get_loc(self, key, method, tolerance)</span>
-<span class="go">   3078                 return self._engine.get_loc(key)</span>
-<span class="go">   3079             except KeyError:</span>
-<span class="go">-&gt; 3080                 return self._engine.get_loc(self._maybe_cast_indexer(key))</span>
-<span class="go">   3081 </span>
-<span class="go">   3082         indexer = self.get_indexer([key], method=method, tolerance=tolerance)</span>
-
-<span class="go">pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()</span>
-
-<span class="go">pandas/_libs/index.pyx in pandas._libs.index.IndexEngine.get_loc()</span>
-
-<span class="go">pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()</span>
-
-<span class="go">pandas/_libs/hashtable_class_helper.pxi in pandas._libs.hashtable.PyObjectHashTable.get_item()</span>
-
-<span class="go">KeyError: &#39;date&#39;</span>
 
 <span class="gp">In [6]: </span><span class="n">pivoted</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ---------------------------------------------------------------------------</span>
-<span class="go">NameError                                 Traceback (most recent call last)</span>
-<span class="go">&lt;ipython-input-6-157bfa9a7e29&gt; in &lt;module&gt;</span>
-<span class="go">----&gt; 1 pivoted</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">               value                      ...    value2                    </span>
+<span class="go">variable           A         B         C  ...         B         C         D</span>
+<span class="go">date                                      ...                              </span>
+<span class="go">2000-01-03  0.469112 -1.135632  0.119209  ... -2.271265  0.238417 -4.209138</span>
+<span class="go">2000-01-04 -0.282863  1.212112 -1.044236  ...  2.424224 -2.088472 -0.989859</span>
+<span class="go">2000-01-05 -1.509059 -0.173215 -0.861849  ... -0.346429 -1.723698  2.143608</span>
 
-<span class="go">NameError: name &#39;pivoted&#39; is not defined</span>
+<span class="go">[3 rows x 8 columns]</span>
 </pre></div>
 </div>
 <p>You can then select subsets from the pivoted <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">pivoted</span><span class="p">[</span><span class="s1">&#39;value2&#39;</span><span class="p">]</span>
-<span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">a6c6800146c9</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pivoted</span><span class="p">[</span><span class="s1">&#39;value2&#39;</span><span class="p">]</span>
-
-<span class="ne">NameError</span>: name &#39;pivoted&#39; is not defined
+<span class="gh">Out[7]: </span><span class="go"></span>
+<span class="go">variable           A         B         C         D</span>
+<span class="go">date                                              </span>
+<span class="go">2000-01-03  0.938225 -2.271265  0.238417 -4.209138</span>
+<span class="go">2000-01-04 -0.565727  2.424224 -2.088472 -0.989859</span>
+<span class="go">2000-01-05 -3.018117 -0.346429 -1.723698  2.143608</span>
 </pre></div>
 </div>
 <p>Note that this returns a view on the underlying data in the case where the data
 are homogeneously-typed.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><a class="reference internal" href="../generated/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot()</span></code></a> will error with a <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">Index</span> <span class="pre">contains</span> <span class="pre">duplicate</span>
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="../generated/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot()</span></code></a> will error with a <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">Index</span> <span class="pre">contains</span> <span class="pre">duplicate</span>
 <span class="pre">entries,</span> <span class="pre">cannot</span> <span class="pre">reshape</span></code> if the index/column pair is not unique. In this
 case, consider using <a class="reference internal" href="../generated/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">pivot_table()</span></code></a> which is a generalization
 of pivot that can handle duplicate values for one index/column pair.</p>
@@ -483,12 +208,12 @@ of pivot that can handle duplicate values for one index/column pair.</p>
 <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. These methods are designed to work together with
 <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> objects (see the section on <a class="reference internal" href="advanced.html#advanced-hierarchical"><span class="std std-ref">hierarchical indexing</span></a>). Here are essentially what these methods do:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">stack</span></code>: “pivot” a level of the (possibly hierarchical) column labels,
+<li><p><code class="docutils literal notranslate"><span class="pre">stack</span></code>: “pivot” a level of the (possibly hierarchical) column labels,
 returning a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with an index with a new inner-most level of row
-labels.</li>
-<li><code class="docutils literal notranslate"><span class="pre">unstack</span></code>: (inverse operation of <code class="docutils literal notranslate"><span class="pre">stack</span></code>) “pivot” a level of the
+labels.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unstack</span></code>: (inverse operation of <code class="docutils literal notranslate"><span class="pre">stack</span></code>) “pivot” a level of the
 (possibly hierarchical) row index to the column axis, producing a reshaped
-<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a new inner-most level of column labels.</li>
+<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with a new inner-most level of column labels.</p></li>
 </ul>
 <img alt="user_guide/_static/reshaping_unstack.png" src="user_guide/_static/reshaping_unstack.png" />
 <p>The clearest way to explain is by example. Let’s take a prior example data set
@@ -518,8 +243,8 @@ from the hierarchical indexing section:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">stack</span></code> function “compresses” a level in the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>’s columns to
 produce either:</p>
 <ul class="simple">
-<li>A <code class="docutils literal notranslate"><span class="pre">Series</span></code>, in the case of a simple column Index.</li>
-<li>A <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, in the case of a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> in the columns.</li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Series</span></code>, in the case of a simple column Index.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, in the case of a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> in the columns.</p></li>
 </ul>
 <p>If the columns have a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>, you can choose which level to stack. The
 stacked level becomes the new lowest level in a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> on the columns:</p>
@@ -542,34 +267,32 @@ stacked level becomes the new lowest level in a <code class="docutils literal no
 <p>With a “stacked” <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or <code class="docutils literal notranslate"><span class="pre">Series</span></code> (having a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> as the
 <code class="docutils literal notranslate"><span class="pre">index</span></code>), the inverse operation of <code class="docutils literal notranslate"><span class="pre">stack</span></code> is <code class="docutils literal notranslate"><span class="pre">unstack</span></code>, which by default
 unstacks the <strong>last level</strong>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
-<span class="gh">Out[15]: </span><span class="go"></span>
-<span class="go">                     A         B</span>
-<span class="go">first second                    </span>
-<span class="go">bar   one     0.721555 -0.706771</span>
-<span class="go">      two    -1.039575  0.271860</span>
-<span class="go">baz   one    -0.424972  0.567020</span>
-<span class="go">      two     0.276232 -1.087401</span>
+<pre class="literal-block">In [15]: stacked.unstack()
+Out[15]: 
+                     A         B
+first second                    
+bar   one     0.721555 -0.706771
+      two    -1.039575  0.271860
+baz   one    -0.424972  0.567020
+      two     0.276232 -1.087401
 
-<span class="gp">In [16]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                Out[16]: </span>
-<span class="go">second        one       two</span>
-<span class="go">first                      </span>
-<span class="go">bar   A  0.721555 -1.039575</span>
-<span class="go">      B -0.706771  0.271860</span>
-<span class="go">baz   A -0.424972  0.276232</span>
-<span class="go">      B  0.567020 -1.087401</span>
+In [16]: stacked.unstack(1)
+Out[16]: 
+second        one       two
+first                      
+bar   A  0.721555 -1.039575
+      B -0.706771  0.271860
+baz   A -0.424972  0.276232
+      B  0.567020 -1.087401
 
-<span class="gp">In [17]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                  Out[17]: </span>
-<span class="go">first          bar       baz</span>
-<span class="go">second                      </span>
-<span class="go">one    A  0.721555 -0.424972</span>
-<span class="go">       B -0.706771  0.567020</span>
-<span class="go">two    A -1.039575  0.276232</span>
-<span class="go">       B  0.271860 -1.087401</span>
-</pre></div>
-</div>
+In [17]: stacked.unstack(0)
+Out[17]: 
+first          bar       baz
+second                      
+one    A  0.721555 -0.424972
+       B -0.706771  0.567020
+two    A -1.039575  0.276232
+       B  0.271860 -1.087401</pre>
 <img alt="user_guide/_static/reshaping_unstack_1.png" id="reshaping-unstack-by-name" src="user_guide/_static/reshaping_unstack_1.png" />
 <p>If the indexes have names, you can use the level names instead of specifying
 the level numbers:</p>
@@ -587,22 +310,20 @@ the level numbers:</p>
 <p>Notice that the <code class="docutils literal notranslate"><span class="pre">stack</span></code> and <code class="docutils literal notranslate"><span class="pre">unstack</span></code> methods implicitly sort the index
 levels involved. Hence a call to <code class="docutils literal notranslate"><span class="pre">stack</span></code> and then <code class="docutils literal notranslate"><span class="pre">unstack</span></code>, or vice versa,
 will result in a <strong>sorted</strong> copy of the original <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or <code class="docutils literal notranslate"><span class="pre">Series</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_product</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]])</span>
+<pre class="literal-block">In [19]: index = pd.MultiIndex.from_product([[2, 1], ['a', 'b']])
 
-<span class="gp">In [20]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">])</span>
+In [20]: df = pd.DataFrame(np.random.randn(4), index=index, columns=['A'])
 
-<span class="gp">In [21]: </span><span class="n">df</span>
-<span class="gh">Out[21]: </span><span class="go"></span>
-<span class="go">            A</span>
-<span class="go">2 a -0.370647</span>
-<span class="go">  b -1.157892</span>
-<span class="go">1 a -1.344312</span>
-<span class="go">  b  0.844885</span>
+In [21]: df
+Out[21]: 
+            A
+2 a -0.370647
+  b -1.157892
+1 a -1.344312
+  b  0.844885
 
-<span class="gp">In [22]: </span><span class="nb">all</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span> <span class="o">==</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
-<span class="go">                                                                                Out[22]: True</span>
-</pre></div>
-</div>
+In [22]: all(df.unstack().stack() == df.sort_index())
+Out[22]: True</pre>
 <p>The above code will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> if the call to <code class="docutils literal notranslate"><span class="pre">sort_index</span></code> is
 removed.</p>
 <div class="section" id="multiple-levels">
@@ -610,39 +331,37 @@ removed.</p>
 <p>You may also stack or unstack more than one level at a time by passing a list
 of levels, in which case the end result is as if each level in the list were
 processed individually.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([</span>
-<span class="gp">   ....: </span>    <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">),</span>
-<span class="gp">   ....: </span>    <span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;short&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;short&#39;</span><span class="p">)],</span>
-<span class="gp">   ....: </span>    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exp&#39;</span><span class="p">,</span> <span class="s1">&#39;animal&#39;</span><span class="p">,</span> <span class="s1">&#39;hair_length&#39;</span><span class="p">]</span>
-<span class="gp">   ....: </span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [23]: columns = pd.MultiIndex.from_tuples([
+   ....:     ('A', 'cat', 'long'), ('B', 'cat', 'long'),
+   ....:     ('A', 'dog', 'short'), ('B', 'dog', 'short')],
+   ....:     names=['exp', 'animal', 'hair_length']
+   ....: )
+   ....: 
 
-<span class="gp">In [24]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+In [24]: df = pd.DataFrame(np.random.randn(4, 4), columns=columns)
 
-<span class="gp">In [25]: </span><span class="n">df</span>
-<span class="gh">Out[25]: </span><span class="go"></span>
-<span class="go">exp                 A         B         A         B</span>
-<span class="go">animal            cat       cat       dog       dog</span>
-<span class="go">hair_length      long      long     short     short</span>
-<span class="go">0            1.075770 -0.109050  1.643563 -1.469388</span>
-<span class="go">1            0.357021 -0.674600 -1.776904 -0.968914</span>
-<span class="go">2           -1.294524  0.413738  0.276662 -0.472035</span>
-<span class="go">3           -0.013960 -0.362543 -0.006154 -0.923061</span>
+In [25]: df
+Out[25]: 
+exp                 A         B         A         B
+animal            cat       cat       dog       dog
+hair_length      long      long     short     short
+0            1.075770 -0.109050  1.643563 -1.469388
+1            0.357021 -0.674600 -1.776904 -0.968914
+2           -1.294524  0.413738  0.276662 -0.472035
+3           -0.013960 -0.362543 -0.006154 -0.923061
 
-<span class="gp">In [26]: </span><span class="n">df</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;animal&#39;</span><span class="p">,</span> <span class="s1">&#39;hair_length&#39;</span><span class="p">])</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                      Out[26]: </span>
-<span class="go">exp                          A         B</span>
-<span class="go">  animal hair_length                    </span>
-<span class="go">0 cat    long         1.075770 -0.109050</span>
-<span class="go">  dog    short        1.643563 -1.469388</span>
-<span class="go">1 cat    long         0.357021 -0.674600</span>
-<span class="go">  dog    short       -1.776904 -0.968914</span>
-<span class="go">2 cat    long        -1.294524  0.413738</span>
-<span class="go">  dog    short        0.276662 -0.472035</span>
-<span class="go">3 cat    long        -0.013960 -0.362543</span>
-<span class="go">  dog    short       -0.006154 -0.923061</span>
-</pre></div>
-</div>
+In [26]: df.stack(level=['animal', 'hair_length'])
+Out[26]: 
+exp                          A         B
+  animal hair_length                    
+0 cat    long         1.075770 -0.109050
+  dog    short        1.643563 -1.469388
+1 cat    long         0.357021 -0.674600
+  dog    short       -1.776904 -0.968914
+2 cat    long        -1.294524  0.413738
+  dog    short        0.276662 -0.472035
+3 cat    long        -0.013960 -0.362543
+  dog    short       -0.006154 -0.923061</pre>
 <p>The list of levels can contain either level names or level numbers (but
 not a mixture of the two).</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># df.stack(level=[&#39;animal&#39;, &#39;hair_length&#39;])</span>
@@ -697,71 +416,67 @@ calling <code class="docutils literal notranslate"><span class="pre">sort_index<
 </div>
 <p>As mentioned above, <code class="docutils literal notranslate"><span class="pre">stack</span></code> can be called with a <code class="docutils literal notranslate"><span class="pre">level</span></code> argument to select
 which level in the columns to stack:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">df2</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="s1">&#39;exp&#39;</span><span class="p">)</span>
-<span class="gh">Out[33]: </span><span class="go"></span>
-<span class="go">animal                 cat       dog</span>
-<span class="go">first second exp                    </span>
-<span class="go">bar   one    A    0.895717  2.565646</span>
-<span class="go">             B   -1.206412  0.805244</span>
-<span class="go">      two    A    1.431256 -0.226169</span>
-<span class="go">             B   -1.170299  1.340309</span>
-<span class="go">baz   one    A    0.410835 -0.827317</span>
-<span class="go">             B    0.132003  0.813850</span>
-<span class="go">foo   one    A   -1.413681  0.569605</span>
-<span class="go">             B    1.024180  1.607920</span>
-<span class="go">      two    A    0.875906 -2.006747</span>
-<span class="go">             B    0.974466 -2.211372</span>
-<span class="go">qux   two    A   -1.226825 -0.727707</span>
-<span class="go">             B   -1.281247  0.769804</span>
+<pre class="literal-block">In [33]: df2.stack('exp')
+Out[33]: 
+animal                 cat       dog
+first second exp                    
+bar   one    A    0.895717  2.565646
+             B   -1.206412  0.805244
+      two    A    1.431256 -0.226169
+             B   -1.170299  1.340309
+baz   one    A    0.410835 -0.827317
+             B    0.132003  0.813850
+foo   one    A   -1.413681  0.569605
+             B    1.024180  1.607920
+      two    A    0.875906 -2.006747
+             B    0.974466 -2.211372
+qux   two    A   -1.226825 -0.727707
+             B   -1.281247  0.769804
 
-<span class="gp">In [34]: </span><span class="n">df2</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="s1">&#39;animal&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Out[34]: </span>
-<span class="go">exp                         A         B</span>
-<span class="go">first second animal                    </span>
-<span class="go">bar   one    cat     0.895717 -1.206412</span>
-<span class="go">             dog     2.565646  0.805244</span>
-<span class="go">      two    cat     1.431256 -1.170299</span>
-<span class="go">             dog    -0.226169  1.340309</span>
-<span class="go">baz   one    cat     0.410835  0.132003</span>
-<span class="go">             dog    -0.827317  0.813850</span>
-<span class="go">foo   one    cat    -1.413681  1.024180</span>
-<span class="go">             dog     0.569605  1.607920</span>
-<span class="go">      two    cat     0.875906  0.974466</span>
-<span class="go">             dog    -2.006747 -2.211372</span>
-<span class="go">qux   two    cat    -1.226825 -1.281247</span>
-<span class="go">             dog    -0.727707  0.769804</span>
-</pre></div>
-</div>
+In [34]: df2.stack('animal')
+Out[34]: 
+exp                         A         B
+first second animal                    
+bar   one    cat     0.895717 -1.206412
+             dog     2.565646  0.805244
+      two    cat     1.431256 -1.170299
+             dog    -0.226169  1.340309
+baz   one    cat     0.410835  0.132003
+             dog    -0.827317  0.813850
+foo   one    cat    -1.413681  1.024180
+             dog     0.569605  1.607920
+      two    cat     0.875906  0.974466
+             dog    -2.006747 -2.211372
+qux   two    cat    -1.226825 -1.281247
+             dog    -0.727707  0.769804</pre>
 <p>Unstacking can result in missing values if subgroups do not have the same
 set of labels.  By default, missing values will be replaced with the default
 fill value for that data type, <code class="docutils literal notranslate"><span class="pre">NaN</span></code> for float, <code class="docutils literal notranslate"><span class="pre">NaT</span></code> for datetimelike,
 etc.  For integer types, by default data will converted to float and missing
 values will be set to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">df3</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<pre class="literal-block">In [35]: df3 = df.iloc[[0, 1, 4, 7], [1, 2]]
 
-<span class="gp">In [36]: </span><span class="n">df3</span>
-<span class="gh">Out[36]: </span><span class="go"></span>
-<span class="go">exp                  B          </span>
-<span class="go">animal             dog       cat</span>
-<span class="go">first second                    </span>
-<span class="go">bar   one     0.805244 -1.206412</span>
-<span class="go">      two     1.340309 -1.170299</span>
-<span class="go">foo   one     1.607920  1.024180</span>
-<span class="go">qux   two     0.769804 -1.281247</span>
+In [36]: df3
+Out[36]: 
+exp                  B          
+animal             dog       cat
+first second                    
+bar   one     0.805244 -1.206412
+      two     1.340309 -1.170299
+foo   one     1.607920  1.024180
+qux   two     0.769804 -1.281247
 
-<span class="gp">In [37]: </span><span class="n">df3</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                 Out[37]: </span>
-<span class="go">exp            B                              </span>
-<span class="go">animal       dog                 cat          </span>
-<span class="go">second       one       two       one       two</span>
-<span class="go">first                                         </span>
-<span class="go">bar     0.805244  1.340309 -1.206412 -1.170299</span>
-<span class="go">foo     1.607920       NaN  1.024180       NaN</span>
-<span class="go">qux          NaN  0.769804       NaN -1.281247</span>
-</pre></div>
-</div>
+In [37]: df3.unstack()
+Out[37]: 
+exp            B                              
+animal       dog                 cat          
+second       one       two       one       two
+first                                         
+bar     0.805244  1.340309 -1.206412 -1.170299
+foo     1.607920       NaN  1.024180       NaN
+qux          NaN  0.769804       NaN -1.281247</pre>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>Alternatively, unstack takes an optional <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> argument, for specifying
 the value of missing data.</p>
@@ -781,31 +496,29 @@ the value of missing data.</p>
 <h3>With a MultiIndex<a class="headerlink" href="#with-a-multiindex" title="Permalink to this headline">¶</a></h3>
 <p>Unstacking when the columns are a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> is also careful about doing
 the right thing:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gh">Out[39]: </span><span class="go"></span>
-<span class="go">exp            A                   B    ...                      A          </span>
-<span class="go">animal       cat                 dog    ...          cat       dog          </span>
-<span class="go">first        bar       baz       bar    ...          baz       bar       baz</span>
-<span class="go">second                                  ...                                 </span>
-<span class="go">one     0.895717  0.410835  0.805244    ...     0.132003  2.565646 -0.827317</span>
-<span class="go">two     1.431256       NaN  1.340309    ...          NaN -0.226169       NaN</span>
+<pre class="literal-block">In [39]: df[:3].unstack(0)
+Out[39]: 
+exp            A                   B  ...                   A          
+animal       cat                 dog  ...       cat       dog          
+first        bar       baz       bar  ...       baz       bar       baz
+second                                ...                              
+one     0.895717  0.410835  0.805244  ...  0.132003  2.565646 -0.827317
+two     1.431256       NaN  1.340309  ...       NaN -0.226169       NaN
 
-<span class="go">[2 rows x 8 columns]</span>
+[2 rows x 8 columns]
 
-<span class="gp">In [40]: </span><span class="n">df2</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Out[40]: </span>
-<span class="go">exp            A                   B    ...                      A          </span>
-<span class="go">animal       cat                 dog    ...          cat       dog          </span>
-<span class="go">second       one       two       one    ...          two       one       two</span>
-<span class="go">first                                   ...                                 </span>
-<span class="go">bar     0.895717  1.431256  0.805244    ...    -1.170299  2.565646 -0.226169</span>
-<span class="go">baz     0.410835       NaN  0.813850    ...          NaN -0.827317       NaN</span>
-<span class="go">foo    -1.413681  0.875906  1.607920    ...     0.974466  0.569605 -2.006747</span>
-<span class="go">qux          NaN -1.226825       NaN    ...    -1.281247       NaN -0.727707</span>
+In [40]: df2.unstack(1)
+Out[40]: 
+exp            A                   B  ...                   A          
+animal       cat                 dog  ...       cat       dog          
+second       one       two       one  ...       two       one       two
+first                                 ...                              
+bar     0.895717  1.431256  0.805244  ... -1.170299  2.565646 -0.226169
+baz     0.410835       NaN  0.813850  ...       NaN -0.827317       NaN
+foo    -1.413681  0.875906  1.607920  ...  0.974466  0.569605 -2.006747
+qux          NaN -1.226825       NaN  ... -1.281247       NaN -0.727707
 
-<span class="go">[4 rows x 8 columns]</span>
-</pre></div>
-</div>
+[4 rows x 8 columns]</pre>
 </div>
 </div>
 <div class="section" id="reshaping-by-melt">
@@ -818,129 +531,123 @@ variables</em>, are “unpivoted” to the row axis, leaving just two non-identi
 columns, “variable” and “value”. The names of those columns can be customized
 by supplying the <code class="docutils literal notranslate"><span class="pre">var_name</span></code> and <code class="docutils literal notranslate"><span class="pre">value_name</span></code> parameters.</p>
 <p>For instance,</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">cheese</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;first&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;Mary&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;last&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;Bo&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">150</span><span class="p">]})</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [41]: cheese = pd.DataFrame({'first': ['John', 'Mary'],
+   ....:                        'last': ['Doe', 'Bo'],
+   ....:                        'height': [5.5, 6.0],
+   ....:                        'weight': [130, 150]})
+   ....: 
 
-<span class="gp">In [42]: </span><span class="n">cheese</span>
-<span class="gh">Out[42]: </span><span class="go"></span>
-<span class="go">  first last  height  weight</span>
-<span class="go">0  John  Doe     5.5     130</span>
-<span class="go">1  Mary   Bo     6.0     150</span>
+In [42]: cheese
+Out[42]: 
+  first last  height  weight
+0  John  Doe     5.5     130
+1  Mary   Bo     6.0     150
 
-<span class="gp">In [43]: </span><span class="n">cheese</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">])</span>
-<span class="go">                                                                                                 Out[43]: </span>
-<span class="go">  first last variable  value</span>
-<span class="go">0  John  Doe   height    5.5</span>
-<span class="go">1  Mary   Bo   height    6.0</span>
-<span class="go">2  John  Doe   weight  130.0</span>
-<span class="go">3  Mary   Bo   weight  150.0</span>
+In [43]: cheese.melt(id_vars=['first', 'last'])
+Out[43]: 
+  first last variable  value
+0  John  Doe   height    5.5
+1  Mary   Bo   height    6.0
+2  John  Doe   weight  130.0
+3  Mary   Bo   weight  150.0
 
-<span class="gp">In [44]: </span><span class="n">cheese</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s1">&#39;quantity&#39;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                            Out[44]: </span>
-<span class="go">  first last quantity  value</span>
-<span class="go">0  John  Doe   height    5.5</span>
-<span class="go">1  Mary   Bo   height    6.0</span>
-<span class="go">2  John  Doe   weight  130.0</span>
-<span class="go">3  Mary   Bo   weight  150.0</span>
-</pre></div>
-</div>
+In [44]: cheese.melt(id_vars=['first', 'last'], var_name='quantity')
+Out[44]: 
+  first last quantity  value
+0  John  Doe   height    5.5
+1  Mary   Bo   height    6.0
+2  John  Doe   weight  130.0
+3  Mary   Bo   weight  150.0</pre>
 <p>Another way to transform is to use the <a class="reference internal" href="../generated/pandas.wide_to_long.html#pandas.wide_to_long" title="pandas.wide_to_long"><code class="xref py py-func docutils literal notranslate"><span class="pre">wide_to_long()</span></code></a> panel data
 convenience function. It is less flexible than <a class="reference internal" href="../generated/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-func docutils literal notranslate"><span class="pre">melt()</span></code></a>, but more
 user-friendly.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">dft</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;A1970&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span>
-<span class="gp">   ....: </span>                    <span class="s2">&quot;A1980&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">},</span>
-<span class="gp">   ....: </span>                    <span class="s2">&quot;B1970&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="o">.</span><span class="mi">7</span><span class="p">},</span>
-<span class="gp">   ....: </span>                    <span class="s2">&quot;B1980&quot;</span><span class="p">:</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="o">.</span><span class="mi">1</span><span class="p">},</span>
-<span class="gp">   ....: </span>                    <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
-<span class="gp">   ....: </span>                   <span class="p">})</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [45]: dft = pd.DataFrame({&quot;A1970&quot;: {0: &quot;a&quot;, 1: &quot;b&quot;, 2: &quot;c&quot;},
+   ....:                     &quot;A1980&quot;: {0: &quot;d&quot;, 1: &quot;e&quot;, 2: &quot;f&quot;},
+   ....:                     &quot;B1970&quot;: {0: 2.5, 1: 1.2, 2: .7},
+   ....:                     &quot;B1980&quot;: {0: 3.2, 1: 1.3, 2: .1},
+   ....:                     &quot;X&quot;: dict(zip(range(3), np.random.randn(3)))
+   ....:                    })
+   ....: 
 
-<span class="gp">In [46]: </span><span class="n">dft</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dft</span><span class="o">.</span><span class="n">index</span>
+In [46]: dft[&quot;id&quot;] = dft.index
 
-<span class="gp">In [47]: </span><span class="n">dft</span>
-<span class="gh">Out[47]: </span><span class="go"></span>
-<span class="go">  A1970 A1980  B1970  B1980         X  id</span>
-<span class="go">0     a     d    2.5    3.2 -0.121306   0</span>
-<span class="go">1     b     e    1.2    1.3 -0.097883   1</span>
-<span class="go">2     c     f    0.7    0.1  0.695775   2</span>
+In [47]: dft
+Out[47]: 
+  A1970 A1980  B1970  B1980         X  id
+0     a     d    2.5    3.2 -0.121306   0
+1     b     e    1.2    1.3 -0.097883   1
+2     c     f    0.7    0.1  0.695775   2
 
-<span class="gp">In [48]: </span><span class="n">pd</span><span class="o">.</span><span class="n">wide_to_long</span><span class="p">(</span><span class="n">dft</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                  Out[48]: </span>
-<span class="go">                X  A    B</span>
-<span class="go">id year                  </span>
-<span class="go">0  1970 -0.121306  a  2.5</span>
-<span class="go">1  1970 -0.097883  b  1.2</span>
-<span class="go">2  1970  0.695775  c  0.7</span>
-<span class="go">0  1980 -0.121306  d  3.2</span>
-<span class="go">1  1980 -0.097883  e  1.3</span>
-<span class="go">2  1980  0.695775  f  0.1</span>
-</pre></div>
-</div>
+In [48]: pd.wide_to_long(dft, [&quot;A&quot;, &quot;B&quot;], i=&quot;id&quot;, j=&quot;year&quot;)
+Out[48]: 
+                X  A    B
+id year                  
+0  1970 -0.121306  a  2.5
+1  1970 -0.097883  b  1.2
+2  1970  0.695775  c  0.7
+0  1980 -0.121306  d  3.2
+1  1980 -0.097883  e  1.3
+2  1980  0.695775  f  0.1</pre>
 </div>
 <div class="section" id="combining-with-stats-and-groupby">
 <h2>Combining with stats and GroupBy<a class="headerlink" href="#combining-with-stats-and-groupby" title="Permalink to this headline">¶</a></h2>
 <p>It should be no shock that combining <code class="docutils literal notranslate"><span class="pre">pivot</span></code> / <code class="docutils literal notranslate"><span class="pre">stack</span></code> / <code class="docutils literal notranslate"><span class="pre">unstack</span></code> with
 GroupBy and the basic Series and DataFrame statistical functions can produce
 some very expressive and fast data manipulations.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">df</span>
-<span class="gh">Out[49]: </span><span class="go"></span>
-<span class="go">exp                  A         B                   A</span>
-<span class="go">animal             cat       dog       cat       dog</span>
-<span class="go">first second                                        </span>
-<span class="go">bar   one     0.895717  0.805244 -1.206412  2.565646</span>
-<span class="go">      two     1.431256  1.340309 -1.170299 -0.226169</span>
-<span class="go">baz   one     0.410835  0.813850  0.132003 -0.827317</span>
-<span class="go">      two    -0.076467 -1.187678  1.130127 -1.436737</span>
-<span class="go">foo   one    -1.413681  1.607920  1.024180  0.569605</span>
-<span class="go">      two     0.875906 -2.211372  0.974466 -2.006747</span>
-<span class="go">qux   one    -0.410001 -0.078638  0.545952 -1.219217</span>
-<span class="go">      two    -1.226825  0.769804 -1.281247 -0.727707</span>
+<pre class="literal-block">In [49]: df
+Out[49]: 
+exp                  A         B                   A
+animal             cat       dog       cat       dog
+first second                                        
+bar   one     0.895717  0.805244 -1.206412  2.565646
+      two     1.431256  1.340309 -1.170299 -0.226169
+baz   one     0.410835  0.813850  0.132003 -0.827317
+      two    -0.076467 -1.187678  1.130127 -1.436737
+foo   one    -1.413681  1.607920  1.024180  0.569605
+      two     0.875906 -2.211372  0.974466 -2.006747
+qux   one    -0.410001 -0.078638  0.545952 -1.219217
+      two    -1.226825  0.769804 -1.281247 -0.727707
 
-<span class="gp">In [50]: </span><span class="n">df</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Out[50]: </span>
-<span class="go">animal             cat       dog</span>
-<span class="go">first second                    </span>
-<span class="go">bar   one    -0.155347  1.685445</span>
-<span class="go">      two     0.130479  0.557070</span>
-<span class="go">baz   one     0.271419 -0.006733</span>
-<span class="go">      two     0.526830 -1.312207</span>
-<span class="go">foo   one    -0.194750  1.088763</span>
-<span class="go">      two     0.925186 -2.109060</span>
-<span class="go">qux   one     0.067976 -0.648927</span>
-<span class="go">      two    -1.254036  0.021048</span>
+In [50]: df.stack().mean(1).unstack()
+Out[50]: 
+animal             cat       dog
+first second                    
+bar   one    -0.155347  1.685445
+      two     0.130479  0.557070
+baz   one     0.271419 -0.006733
+      two     0.526830 -1.312207
+foo   one    -0.194750  1.088763
+      two     0.925186 -2.109060
+qux   one     0.067976 -0.648927
+      two    -1.254036  0.021048
 
-<span class="go"># same result, another way</span>
-<span class="gp">In [51]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Out[51]: </span>
-<span class="go">animal             cat       dog</span>
-<span class="go">first second                    </span>
-<span class="go">bar   one    -0.155347  1.685445</span>
-<span class="go">      two     0.130479  0.557070</span>
-<span class="go">baz   one     0.271419 -0.006733</span>
-<span class="go">      two     0.526830 -1.312207</span>
-<span class="go">foo   one    -0.194750  1.088763</span>
-<span class="go">      two     0.925186 -2.109060</span>
-<span class="go">qux   one     0.067976 -0.648927</span>
-<span class="go">      two    -1.254036  0.021048</span>
+# same result, another way
+In [51]: df.groupby(level=1, axis=1).mean()
+Out[51]: 
+animal             cat       dog
+first second                    
+bar   one    -0.155347  1.685445
+      two     0.130479  0.557070
+baz   one     0.271419 -0.006733
+      two     0.526830 -1.312207
+foo   one    -0.194750  1.088763
+      two     0.925186 -2.109060
+qux   one     0.067976 -0.648927
+      two    -1.254036  0.021048
 
-<span class="gp">In [52]: </span><span class="n">df</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Out[52]: </span>
-<span class="go">exp            A         B</span>
-<span class="go">second                    </span>
-<span class="go">one     0.071448  0.455513</span>
-<span class="go">two    -0.424186 -0.204486</span>
+In [52]: df.stack().groupby(level=1).mean()
+Out[52]: 
+exp            A         B
+second                    
+one     0.071448  0.455513
+two    -0.424186 -0.204486
 
-<span class="gp">In [53]: </span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Out[53]: </span>
-<span class="go">exp            A         B</span>
-<span class="go">animal                    </span>
-<span class="go">cat     0.060843  0.018596</span>
-<span class="go">dog    -0.413580  0.232430</span>
-</pre></div>
-</div>
+In [53]: df.mean().unstack(0)
+Out[53]: 
+exp            A         B
+animal                    
+cat     0.060843  0.018596
+dog    -0.413580  0.232430</pre>
 </div>
 <div class="section" id="pivot-tables">
 <h2>Pivot tables<a class="headerlink" href="#pivot-tables" title="Permalink to this headline">¶</a></h2>
@@ -952,13 +659,13 @@ pivot tables. See the <a class="reference internal" href="../getting_started/coo
 strategies.</p>
 <p>It takes a number of arguments:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">data</span></code>: a DataFrame object.</li>
-<li><code class="docutils literal notranslate"><span class="pre">values</span></code>: a column or a list of columns to aggregate.</li>
-<li><code class="docutils literal notranslate"><span class="pre">index</span></code>: a column, Grouper, array which has the same length as data, or list of them.
-Keys to group by on the pivot table index. If an array is passed, it is being used as the same manner as column values.</li>
-<li><code class="docutils literal notranslate"><span class="pre">columns</span></code>: a column, Grouper, array which has the same length as data, or list of them.
-Keys to group by on the pivot table column. If an array is passed, it is being used as the same manner as column values.</li>
-<li><code class="docutils literal notranslate"><span class="pre">aggfunc</span></code>: function to use for aggregation, defaulting to <code class="docutils literal notranslate"><span class="pre">numpy.mean</span></code>.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: a DataFrame object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code>: a column or a list of columns to aggregate.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index</span></code>: a column, Grouper, array which has the same length as data, or list of them.
+Keys to group by on the pivot table index. If an array is passed, it is being used as the same manner as column values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columns</span></code>: a column, Grouper, array which has the same length as data, or list of them.
+Keys to group by on the pivot table column. If an array is passed, it is being used as the same manner as column values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aggfunc</span></code>: function to use for aggregation, defaulting to <code class="docutils literal notranslate"><span class="pre">numpy.mean</span></code>.</p></li>
 </ul>
 <p>Consider a data set like this:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="kn">import</span> <span class="nn">datetime</span>
@@ -980,11 +687,7 @@ Keys to group by on the pivot table column. If an array is passed, it is being u
 <span class="go">2     two  C  foo -1.110336  0.896171 2013-03-01</span>
 <span class="go">3   three  A  bar -0.619976 -0.487602 2013-04-01</span>
 <span class="go">4     one  B  bar  0.149748 -0.082240 2013-05-01</span>
-<span class="go">5     one  C  bar -0.732339 -2.182937 2013-06-01</span>
-<span class="go">6     two  A  foo  0.687738  0.380396 2013-07-01</span>
 <span class="go">..    ... ..  ...       ...       ...        ...</span>
-<span class="go">17    one  C  bar -0.345352  0.206053 2013-06-15</span>
-<span class="go">18    two  A  foo  1.314232 -0.251905 2013-07-15</span>
 <span class="go">19  three  B  foo  0.690579 -2.213588 2013-08-15</span>
 <span class="go">20    one  C  foo  0.995761  1.063327 2013-09-15</span>
 <span class="go">21    one  A  bar  2.396780  1.266143 2013-10-15</span>
@@ -995,44 +698,42 @@ Keys to group by on the pivot table column. If an array is passed, it is being u
 </pre></div>
 </div>
 <p>We can produce pivot tables from this data very easily:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">])</span>
-<span class="gh">Out[57]: </span><span class="go"></span>
-<span class="go">C             bar       foo</span>
-<span class="go">A     B                    </span>
-<span class="go">one   A  1.120915 -0.514058</span>
-<span class="go">      B -0.338421  0.002759</span>
-<span class="go">      C -0.538846  0.699535</span>
-<span class="go">three A -1.181568       NaN</span>
-<span class="go">      B       NaN  0.433512</span>
-<span class="go">      C  0.588783       NaN</span>
-<span class="go">two   A       NaN  1.000985</span>
-<span class="go">      B  0.158248       NaN</span>
-<span class="go">      C       NaN  0.176180</span>
+<pre class="literal-block">In [57]: pd.pivot_table(df, values='D', index=['A', 'B'], columns=['C'])
+Out[57]: 
+C             bar       foo
+A     B                    
+one   A  1.120915 -0.514058
+      B -0.338421  0.002759
+      C -0.538846  0.699535
+three A -1.181568       NaN
+      B       NaN  0.433512
+      C  0.588783       NaN
+two   A       NaN  1.000985
+      B  0.158248       NaN
+      C       NaN  0.176180
 
-<span class="gp">In [58]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                                                                                                                                                                              Out[58]: </span>
-<span class="go">A       one               three                 two          </span>
-<span class="go">C       bar       foo       bar       foo       bar       foo</span>
-<span class="go">B                                                            </span>
-<span class="go">A  2.241830 -1.028115 -2.363137       NaN       NaN  2.001971</span>
-<span class="go">B -0.676843  0.005518       NaN  0.867024  0.316495       NaN</span>
-<span class="go">C -1.077692  1.399070  1.177566       NaN       NaN  0.352360</span>
+In [58]: pd.pivot_table(df, values='D', index=['B'], columns=['A', 'C'], aggfunc=np.sum)
+Out[58]: 
+A       one               three                 two          
+C       bar       foo       bar       foo       bar       foo
+B                                                            
+A  2.241830 -1.028115 -2.363137       NaN       NaN  2.001971
+B -0.676843  0.005518       NaN  0.867024  0.316495       NaN
+C -1.077692  1.399070  1.177566       NaN       NaN  0.352360
 
-<span class="gp">In [59]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>               <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">)</span>
-<span class="gp">   ....: </span>
-<span class="go">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Out[59]: </span>
-<span class="go">          D                        ...            E                    </span>
-<span class="go">A       one               three    ...        three       two          </span>
-<span class="go">C       bar       foo       bar    ...          foo       bar       foo</span>
-<span class="go">B                                  ...                                 </span>
-<span class="go">A  2.241830 -1.028115 -2.363137    ...          NaN       NaN  0.128491</span>
-<span class="go">B -0.676843  0.005518       NaN    ...    -2.128743 -0.194294       NaN</span>
-<span class="go">C -1.077692  1.399070  1.177566    ...          NaN       NaN  0.872482</span>
+In [59]: pd.pivot_table(df, values=['D', 'E'], index=['B'], columns=['A', 'C'],
+   ....:                aggfunc=np.sum)
+   ....: 
+Out[59]: 
+          D                      ...         E                    
+A       one               three  ...     three       two          
+C       bar       foo       bar  ...       foo       bar       foo
+B                                ...                              
+A  2.241830 -1.028115 -2.363137  ...       NaN       NaN  0.128491
+B -0.676843  0.005518       NaN  ... -2.128743 -0.194294       NaN
+C -1.077692  1.399070  1.177566  ...       NaN       NaN  0.872482
 
-<span class="go">[3 rows x 12 columns]</span>
-</pre></div>
-</div>
+[3 rows x 12 columns]</pre>
 <p>The result object is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> having potentially hierarchical indexes on the
 rows and columns. If the <code class="docutils literal notranslate"><span class="pre">values</span></code> column name is not given, the pivot table
 will include all of the data that can be aggregated in an additional level of
@@ -1093,9 +794,9 @@ calling <code class="docutils literal notranslate"><span class="pre">to_string</
 <span class="go">      C            0.176180            0.436241</span>
 </pre></div>
 </div>
-<dl class="docutils">
-<dt>Note that <code class="docutils literal notranslate"><span class="pre">pivot_table</span></code> is also available as an instance method on DataFrame,</dt>
-<dd>i.e. <a class="reference internal" href="../generated/pandas.DataFrame.pivot_table.html#pandas.DataFrame.pivot_table" title="pandas.DataFrame.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.pivot_table()</span></code></a>.</dd>
+<dl class="simple">
+<dt>Note that <code class="docutils literal notranslate"><span class="pre">pivot_table</span></code> is also available as an instance method on DataFrame,</dt><dd><p>i.e. <a class="reference internal" href="../generated/pandas.DataFrame.pivot_table.html#pandas.DataFrame.pivot_table" title="pandas.DataFrame.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.pivot_table()</span></code></a>.</p>
+</dd>
 </dl>
 <div class="section" id="adding-margins">
 <span id="reshaping-pivot-margins"></span><h3>Adding margins<a class="headerlink" href="#adding-margins" title="Permalink to this headline">¶</a></h3>
@@ -1128,18 +829,18 @@ factors. By default <code class="docutils literal notranslate"><span class="pre"
 unless an array of values and an aggregation function are passed.</p>
 <p>It takes a number of arguments</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">index</span></code>: array-like, values to group by in the rows.</li>
-<li><code class="docutils literal notranslate"><span class="pre">columns</span></code>: array-like, values to group by in the columns.</li>
-<li><code class="docutils literal notranslate"><span class="pre">values</span></code>: array-like, optional, array of values to aggregate according to
-the factors.</li>
-<li><code class="docutils literal notranslate"><span class="pre">aggfunc</span></code>: function, optional, If no values array is passed, computes a
-frequency table.</li>
-<li><code class="docutils literal notranslate"><span class="pre">rownames</span></code>: sequence, default <code class="docutils literal notranslate"><span class="pre">None</span></code>, must match number of row arrays passed.</li>
-<li><code class="docutils literal notranslate"><span class="pre">colnames</span></code>: sequence, default <code class="docutils literal notranslate"><span class="pre">None</span></code>, if passed, must match number of column
-arrays passed.</li>
-<li><code class="docutils literal notranslate"><span class="pre">margins</span></code>: boolean, default <code class="docutils literal notranslate"><span class="pre">False</span></code>, Add row/column margins (subtotals)</li>
-<li><code class="docutils literal notranslate"><span class="pre">normalize</span></code>: boolean, {‘all’, ‘index’, ‘columns’}, or {0,1}, default <code class="docutils literal notranslate"><span class="pre">False</span></code>.
-Normalize by dividing all values by the sum of values.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index</span></code>: array-like, values to group by in the rows.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columns</span></code>: array-like, values to group by in the columns.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code>: array-like, optional, array of values to aggregate according to
+the factors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aggfunc</span></code>: function, optional, If no values array is passed, computes a
+frequency table.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rownames</span></code>: sequence, default <code class="docutils literal notranslate"><span class="pre">None</span></code>, must match number of row arrays passed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">colnames</span></code>: sequence, default <code class="docutils literal notranslate"><span class="pre">None</span></code>, if passed, must match number of column
+arrays passed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">margins</span></code>: boolean, default <code class="docutils literal notranslate"><span class="pre">False</span></code>, Add row/column margins (subtotals)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">normalize</span></code>: boolean, {‘all’, ‘index’, ‘columns’}, or {0,1}, default <code class="docutils literal notranslate"><span class="pre">False</span></code>.
+Normalize by dividing all values by the sum of values.</p></li>
 </ul>
 <p>Any <code class="docutils literal notranslate"><span class="pre">Series</span></code> passed will have their name attributes used unless row or column
 names for the cross-tabulation are specified</p>
@@ -1162,27 +863,25 @@ names for the cross-tabulation are specified</p>
 </pre></div>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">crosstab</span></code> receives only two Series, it will provide a frequency table.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
-<span class="gp">   ....: </span>                   <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [70]: df = pd.DataFrame({'A': [1, 2, 2, 2, 2], 'B': [3, 3, 4, 4, 4],
+   ....:                    'C': [1, 1, np.nan, 1, 1]})
+   ....: 
 
-<span class="gp">In [71]: </span><span class="n">df</span>
-<span class="gh">Out[71]: </span><span class="go"></span>
-<span class="go">   A  B    C</span>
-<span class="go">0  1  3  1.0</span>
-<span class="go">1  2  3  1.0</span>
-<span class="go">2  2  4  NaN</span>
-<span class="go">3  2  4  1.0</span>
-<span class="go">4  2  4  1.0</span>
+In [71]: df
+Out[71]: 
+   A  B    C
+0  1  3  1.0
+1  2  3  1.0
+2  2  4  NaN
+3  2  4  1.0
+4  2  4  1.0
 
-<span class="gp">In [72]: </span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
-<span class="go">                                                                                        Out[72]: </span>
-<span class="go">B  3  4</span>
-<span class="go">A      </span>
-<span class="go">1  1  0</span>
-<span class="go">2  1  3</span>
-</pre></div>
-</div>
+In [72]: pd.crosstab(df.A, df.B)
+Out[72]: 
+B  3  4
+A      
+1  1  0
+2  1  3</pre>
 <p>Any input passed containing <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> data will have <strong>all</strong> of its
 categories included in the cross-tabulation, even if the actual data does
 not contain any instances of a particular category.</p>
@@ -1201,7 +900,7 @@ not contain any instances of a particular category.</p>
 <div class="section" id="normalization">
 <h3>Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.1.</span></p>
+<p><span class="versionmodified added">New in version 0.18.1.</span></p>
 </div>
 <p>Frequency tables can also be normalized to show percentages rather than counts
 using the <code class="docutils literal notranslate"><span class="pre">normalize</span></code> argument:</p>
@@ -1274,7 +973,7 @@ Alternatively we can specify custom bin-edges:</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <p>If the <code class="docutils literal notranslate"><span class="pre">bins</span></code> keyword is an <code class="docutils literal notranslate"><span class="pre">IntervalIndex</span></code>, then these will be
 used to bin the passed data.:</p>
@@ -1303,29 +1002,27 @@ values, can derive a <code class="docutils literal notranslate"><span class="pre
 </div>
 <p>Sometimes it’s useful to prefix the column names, for example when merging the result
 with the original <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [86]: </span><span class="n">dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [86]: dummies = pd.get_dummies(df['key'], prefix='key')
 
-<span class="gp">In [87]: </span><span class="n">dummies</span>
-<span class="gh">Out[87]: </span><span class="go"></span>
-<span class="go">   key_a  key_b  key_c</span>
-<span class="go">0      0      1      0</span>
-<span class="go">1      0      1      0</span>
-<span class="go">2      1      0      0</span>
-<span class="go">3      0      0      1</span>
-<span class="go">4      1      0      0</span>
-<span class="go">5      0      1      0</span>
+In [87]: dummies
+Out[87]: 
+   key_a  key_b  key_c
+0      0      1      0
+1      0      1      0
+2      1      0      0
+3      0      0      1
+4      1      0      0
+5      0      1      0
 
-<span class="gp">In [88]: </span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;data1&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dummies</span><span class="p">)</span>
-<span class="go">                                                                                                                                                                           Out[88]: </span>
-<span class="go">   data1  key_a  key_b  key_c</span>
-<span class="go">0      0      0      1      0</span>
-<span class="go">1      1      0      1      0</span>
-<span class="go">2      2      1      0      0</span>
-<span class="go">3      3      0      0      1</span>
-<span class="go">4      4      1      0      0</span>
-<span class="go">5      5      0      1      0</span>
-</pre></div>
-</div>
+In [88]: df[['data1']].join(dummies)
+Out[88]: 
+   data1  key_a  key_b  key_c
+0      0      0      1      0
+1      1      0      1      0
+2      2      1      0      0
+3      3      0      0      1
+4      4      1      0      0
+5      5      0      1      0</pre>
 <p>This function is often used along with discretization functions like <code class="docutils literal notranslate"><span class="pre">cut</span></code>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [89]: </span><span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
@@ -1384,10 +1081,10 @@ want to include it in the output.</p>
 <code class="docutils literal notranslate"><span class="pre">prefix_sep</span></code>. By default the column name is used as the prefix, and ‘_’ as
 the prefix separator. You can specify <code class="docutils literal notranslate"><span class="pre">prefix</span></code> and <code class="docutils literal notranslate"><span class="pre">prefix_sep</span></code> in 3 ways:</p>
 <ul class="simple">
-<li>string: Use the same value for <code class="docutils literal notranslate"><span class="pre">prefix</span></code> or <code class="docutils literal notranslate"><span class="pre">prefix_sep</span></code> for each column
-to be encoded.</li>
-<li>list: Must be the same length as the number of columns being encoded.</li>
-<li>dict: Mapping column name to prefix.</li>
+<li><p>string: Use the same value for <code class="docutils literal notranslate"><span class="pre">prefix</span></code> or <code class="docutils literal notranslate"><span class="pre">prefix_sep</span></code> for each column
+to be encoded.</p></li>
+<li><p>list: Must be the same length as the number of columns being encoded.</p></li>
+<li><p>dict: Mapping column name to prefix.</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="n">simple</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;new_prefix&#39;</span><span class="p">)</span>
 
@@ -1418,54 +1115,50 @@ to be encoded.</li>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>Sometimes it will be useful to only keep k-1 levels of a categorical
 variable to avoid collinearity when feeding the result to statistical models.
 You can switch to this mode by turn on <code class="docutils literal notranslate"><span class="pre">drop_first</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [102]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcaa&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [102]: s = pd.Series(list('abcaa'))
 
-<span class="gp">In [103]: </span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="gh">Out[103]: </span><span class="go"></span>
-<span class="go">   a  b  c</span>
-<span class="go">0  1  0  0</span>
-<span class="go">1  0  1  0</span>
-<span class="go">2  0  0  1</span>
-<span class="go">3  1  0  0</span>
-<span class="go">4  1  0  0</span>
+In [103]: pd.get_dummies(s)
+Out[103]: 
+   a  b  c
+0  1  0  0
+1  0  1  0
+2  0  0  1
+3  1  0  0
+4  1  0  0
 
-<span class="gp">In [104]: </span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">                                                                             Out[104]: </span>
-<span class="go">   b  c</span>
-<span class="go">0  0  0</span>
-<span class="go">1  1  0</span>
-<span class="go">2  0  1</span>
-<span class="go">3  0  0</span>
-<span class="go">4  0  0</span>
-</pre></div>
-</div>
+In [104]: pd.get_dummies(s, drop_first=True)
+Out[104]: 
+   b  c
+0  0  0
+1  1  0
+2  0  1
+3  0  0
+4  0  0</pre>
 <p>When a column contains only one level, it will be omitted in the result.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [105]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;aaaaa&#39;</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;ababc&#39;</span><span class="p">)})</span>
+<pre class="literal-block">In [105]: df = pd.DataFrame({'A': list('aaaaa'), 'B': list('ababc')})
 
-<span class="gp">In [106]: </span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="gh">Out[106]: </span><span class="go"></span>
-<span class="go">   A_a  B_a  B_b  B_c</span>
-<span class="go">0    1    1    0    0</span>
-<span class="go">1    1    0    1    0</span>
-<span class="go">2    1    1    0    0</span>
-<span class="go">3    1    0    1    0</span>
-<span class="go">4    1    0    0    1</span>
+In [106]: pd.get_dummies(df)
+Out[106]: 
+   A_a  B_a  B_b  B_c
+0    1    1    0    0
+1    1    0    1    0
+2    1    1    0    0
+3    1    0    1    0
+4    1    0    0    1
 
-<span class="gp">In [107]: </span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">                                                                                                                                               Out[107]: </span>
-<span class="go">   B_b  B_c</span>
-<span class="go">0    0    0</span>
-<span class="go">1    1    0</span>
-<span class="go">2    0    0</span>
-<span class="go">3    1    0</span>
-<span class="go">4    0    1</span>
-</pre></div>
-</div>
+In [107]: pd.get_dummies(df, drop_first=True)
+Out[107]: 
+   B_b  B_c
+0    0    0
+1    1    0
+2    0    0
+3    1    0
+4    0    1</pre>
 <p>By default new columns will have <code class="docutils literal notranslate"><span class="pre">np.uint8</span></code> dtype.
 To choose another dtype, use the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [108]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">]})</span>
@@ -1480,38 +1173,36 @@ To choose another dtype, use the <code class="docutils literal notranslate"><spa
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </div>
 <div class="section" id="factorizing-values">
 <span id="reshaping-factorize"></span><h2>Factorizing values<a class="headerlink" href="#factorizing-values" title="Permalink to this headline">¶</a></h2>
 <p>To encode 1-d values as an enumerated type use <a class="reference internal" href="../generated/pandas.factorize.html#pandas.factorize" title="pandas.factorize"><code class="xref py py-func docutils literal notranslate"><span class="pre">factorize()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+<pre class="literal-block">In [110]: x = pd.Series(['A', 'A', np.nan, 'B', 3.14, np.inf])
 
-<span class="gp">In [111]: </span><span class="n">x</span>
-<span class="gh">Out[111]: </span><span class="go"></span>
-<span class="go">0       A</span>
-<span class="go">1       A</span>
-<span class="go">2     NaN</span>
-<span class="go">3       B</span>
-<span class="go">4    3.14</span>
-<span class="go">5     inf</span>
-<span class="go">dtype: object</span>
+In [111]: x
+Out[111]: 
+0       A
+1       A
+2     NaN
+3       B
+4    3.14
+5     inf
+dtype: object
 
-<span class="gp">In [112]: </span><span class="n">labels</span><span class="p">,</span> <span class="n">uniques</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">factorize</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+In [112]: labels, uniques = pd.factorize(x)
 
-<span class="gp">In [113]: </span><span class="n">labels</span>
-<span class="gh">Out[113]: </span><span class="go">array([ 0,  0, -1,  1,  2,  3])</span>
+In [113]: labels
+Out[113]: array([ 0,  0, -1,  1,  2,  3])
 
-<span class="gp">In [114]: </span><span class="n">uniques</span>
-<span class="go">                                          Out[114]: Index([&#39;A&#39;, &#39;B&#39;, 3.14, inf], dtype=&#39;object&#39;)</span>
-</pre></div>
-</div>
+In [114]: uniques
+Out[114]: Index(['A', 'B', 3.14, inf], dtype='object')</pre>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">factorize</span></code> is similar to <code class="docutils literal notranslate"><span class="pre">numpy.unique</span></code>, but differs in its
 handling of NaN:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The following <code class="docutils literal notranslate"><span class="pre">numpy.unique</span></code> will fail under Python 3 with a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>
+<p class="admonition-title">Note</p>
+<p>The following <code class="docutils literal notranslate"><span class="pre">numpy.unique</span></code> will fail under Python 3 with a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>
 because of an ordering bug. See also
 <a class="reference external" href="https://github.com/numpy/numpy/issues/641">here</a>.</p>
 </div>
@@ -1526,8 +1217,8 @@ because of an ordering bug. See also
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you just want to handle one column as a categorical variable (like R’s factor),
+<p class="admonition-title">Note</p>
+<p>If you just want to handle one column as a categorical variable (like R’s factor),
 you can use  <code class="docutils literal notranslate"><span class="pre">df[&quot;cat_col&quot;]</span> <span class="pre">=</span> <span class="pre">pd.Categorical(df[&quot;col&quot;])</span></code> or
 <code class="docutils literal notranslate"><span class="pre">df[&quot;cat_col&quot;]</span> <span class="pre">=</span> <span class="pre">df[&quot;col&quot;].astype(&quot;category&quot;)</span></code>. For full docs on <a class="reference internal" href="../generated/pandas.Categorical.html#pandas.Categorical" title="pandas.Categorical"><code class="xref py py-class docutils literal notranslate"><span class="pre">Categorical</span></code></a>,
 see the <a class="reference internal" href="categorical.html#categorical"><span class="std std-ref">Categorical introduction</span></a> and the
@@ -1561,11 +1252,7 @@ DataFrame will be pivoted in the answers below.</p>
 <span class="go">2   key1  row0  item1  col0  0.77  0.01</span>
 <span class="go">3   key0  row4  item0  col2  0.15  0.59</span>
 <span class="go">4   key1  row0  item2  col1  0.81  0.64</span>
-<span class="go">5   key1  row2  item2  col4  0.13  0.88</span>
-<span class="go">6   key2  row4  item1  col3  0.88  0.39</span>
 <span class="go">..   ...   ...    ...   ...   ...   ...</span>
-<span class="go">13  key0  row4  item1  col4  0.24  0.46</span>
-<span class="go">14  key1  row3  item2  col3  0.28  0.11</span>
 <span class="go">15  key0  row3  item1  col1  0.31  0.23</span>
 <span class="go">16  key0  row0  item2  col3  0.86  0.01</span>
 <span class="go">17  key0  row4  item0  col3  0.64  0.21</span>
@@ -1581,8 +1268,8 @@ DataFrame will be pivoted in the answers below.</p>
 <code class="docutils literal notranslate"><span class="pre">row</span></code> values are the index, and the mean of <code class="docutils literal notranslate"><span class="pre">val0</span></code> are the values? In
 particular, the resulting DataFrame should look like:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">col   col0   col1   col2   col3  col4
+<p class="admonition-title">Note</p>
+<p>col   col0   col1   col2   col3  col4
 row
 row0  0.77  0.605    NaN  0.860  0.65
 row2  0.13    NaN  0.395  0.500  0.25
@@ -1684,17 +1371,15 @@ and rows occur together a.k.a. “cross tabulation”. To do this, we can pass
 <span class="gp">   .....: </span>    <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;val0&#39;</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;row&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="s1">&#39;col&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">])</span>
 <span class="gp">   .....: </span>
 <span class="gh">Out[128]: </span><span class="go"></span>
-<span class="go">      mean                          ...                                </span>
-<span class="go">      val0                          ...                                </span>
-<span class="go">item item0             item1        ...        item2                   </span>
-<span class="go">col   col2  col3  col4  col0  col1  ...   col4  col0   col1  col3  col4</span>
-<span class="go">row                                 ...                                </span>
-<span class="go">row0   NaN   NaN   NaN  0.77   NaN  ...    NaN   NaN  0.605  0.86  0.65</span>
-<span class="go">row2  0.35   NaN  0.37   NaN   NaN  ...    NaN  0.13    NaN  0.50  0.13</span>
-<span class="go">row3   NaN   NaN   NaN   NaN  0.31  ...    NaN   NaN    NaN  0.28   NaN</span>
-<span class="go">row4  0.15  0.64   NaN   NaN  0.10  ...   0.24   NaN    NaN   NaN   NaN</span>
-
-<span class="go">[4 rows x 12 columns]</span>
+<span class="go">      mean                                                                   </span>
+<span class="go">      val0                                                                   </span>
+<span class="go">item item0             item1                         item2                   </span>
+<span class="go">col   col2  col3  col4  col0  col1  col2  col3  col4  col0   col1  col3  col4</span>
+<span class="go">row                                                                          </span>
+<span class="go">row0   NaN   NaN   NaN  0.77   NaN   NaN   NaN   NaN   NaN  0.605  0.86  0.65</span>
+<span class="go">row2  0.35   NaN  0.37   NaN   NaN  0.44   NaN   NaN  0.13    NaN  0.50  0.13</span>
+<span class="go">row3   NaN   NaN   NaN   NaN  0.31   NaN  0.81   NaN   NaN    NaN  0.28   NaN</span>
+<span class="go">row4  0.15  0.64   NaN   NaN  0.10  0.64  0.88  0.24   NaN    NaN   NaN   NaN</span>
 </pre></div>
 </div>
 </div>
@@ -1721,7 +1406,7 @@ and rows occur together a.k.a. “cross tabulation”. To do this, we can pass
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

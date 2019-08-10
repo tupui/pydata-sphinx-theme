@@ -12,4 +12,4 @@ df = pd.DataFrame({
                      'versicolor', 'setosa', 'virginica',
                      'setosa']
     })
-rad_viz = pd.plotting.radviz(df, 'Category')
+rad_viz = pd.plotting.radviz(df, 'Category')  # doctest: +SKIP

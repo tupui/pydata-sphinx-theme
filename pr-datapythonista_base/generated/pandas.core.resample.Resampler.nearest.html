@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.core.resample.Resampler.nearest &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.core.resample.Resampler.nearest &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,32 +91,72 @@
 <h1>pandas.core.resample.Resampler.nearest<a class="headerlink" href="#pandas-core-resample-resampler-nearest" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.core.resample.Resampler.nearest">
-<code class="descclassname">Resampler.</code><code class="descname">nearest</code><span class="sig-paren">(</span><em>limit=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/resample.py#L397-L417"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.core.resample.Resampler.nearest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fill values with nearest neighbor starting from center</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>limit</strong> : integer, optional</p>
+<code class="sig-prename descclassname">Resampler.</code><code class="sig-name descname">nearest</code><span class="sig-paren">(</span><em class="sig-param">limit=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/resample.py#L443-L503"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.core.resample.Resampler.nearest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resample by using the nearest value.</p>
+<p>When resampling data, missing values may appear (e.g., when the
+resampling frequency is higher than the original frequency).
+The <cite>nearest</cite> method will replace <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values that appeared in
+the resampled data with the value from the nearest member of the
+sequence, based on the index value.
+Missing values that existed in the original data will not be modified.
+If <cite>limit</cite> is given, fill only this many values in each direction for
+each of the original values.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>limit</strong> : int, optional</p>
 <blockquote>
-<div><p>limit of how many values to fill</p>
+<div><p>Limit of how many values to fill.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
 </div>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>an upsampled Series</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Series or DataFrame</strong></p>
+<blockquote>
+<div><p>An upsampled Series or DataFrame with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values filled with
+their nearest value.</p>
+</div></blockquote>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.fillna</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.fillna</span></code></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.core.resample.Resampler.backfill.html#pandas.core.resample.Resampler.backfill" title="pandas.core.resample.Resampler.backfill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backfill</span></code></a></dt><dd><p>Backward fill the new missing values in the resampled data.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.core.resample.Resampler.pad.html#pandas.core.resample.Resampler.pad" title="pandas.core.resample.Resampler.pad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad</span></code></a></dt><dd><p>Forward fill <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>              <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20180101&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;1h&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">2018-01-01 00:00:00    1</span>
+<span class="go">2018-01-01 01:00:00    2</span>
+<span class="go">Freq: H, dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;15min&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">nearest</span><span class="p">()</span>
+<span class="go">2018-01-01 00:00:00    1</span>
+<span class="go">2018-01-01 00:15:00    1</span>
+<span class="go">2018-01-01 00:30:00    2</span>
+<span class="go">2018-01-01 00:45:00    2</span>
+<span class="go">2018-01-01 01:00:00    2</span>
+<span class="go">Freq: 15T, dtype: int64</span>
+</pre></div>
+</div>
+<p>Limit the number of upsampled values imputed by the nearest:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;15min&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">nearest</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">2018-01-01 00:00:00    1.0</span>
+<span class="go">2018-01-01 00:15:00    1.0</span>
+<span class="go">2018-01-01 00:30:00    NaN</span>
+<span class="go">2018-01-01 00:45:00    2.0</span>
+<span class="go">2018-01-01 01:00:00    2.0</span>
+<span class="go">Freq: 15T, dtype: float64</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -138,7 +182,7 @@
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

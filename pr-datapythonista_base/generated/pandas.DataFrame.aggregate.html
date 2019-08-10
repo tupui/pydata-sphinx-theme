@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.aggregate &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.aggregate &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,34 +91,29 @@
 <h1>pandas.DataFrame.aggregate<a class="headerlink" href="#pandas-dataframe-aggregate" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.aggregate">
-<code class="descclassname">DataFrame.</code><code class="descname">aggregate</code><span class="sig-paren">(</span><em>func</em>, <em>axis=0</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/frame.py#L5817-L5833"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.aggregate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param">func</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/frame.py#L6678-L6695"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregate using one or more operations over the specified axis.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>func</strong> : function, string, dictionary, or list of string/functions</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> : function, str, list or dict</p>
 <blockquote>
 <div><p>Function to use for aggregating the data. If a function, must either
-work when passed a DataFrame or when passed to DataFrame.apply. For
-a DataFrame, can pass a dict, if the keys are DataFrame column names.</p>
+work when passed a DataFrame or when passed to DataFrame.apply.</p>
 <p>Accepted combinations are:</p>
 <ul class="simple">
-<li>string function name.</li>
-<li>function.</li>
-<li>list of functions.</li>
-<li>dict of column names -&gt; functions (or list of functions).</li>
+<li><p>function</p></li>
+<li><p>string function name</p></li>
+<li><p>list of functions and/or function names, e.g. <code class="docutils literal notranslate"><span class="pre">[np.sum,</span> <span class="pre">'mean']</span></code></p></li>
+<li><p>dict of axis labels -&gt; functions, function names or list of such.</p></li>
 </ul>
 </div></blockquote>
 <p><strong>axis</strong> : {0 or ‘index’, 1 or ‘columns’}, default 0</p>
 <blockquote>
-<div><ul class="simple">
-<li>0 or ‘index’: apply function to each column.</li>
-<li>1 or ‘columns’: apply function to each row.</li>
-</ul>
+<div><p>If 0 or ‘index’: apply function to each column.
+If 1 or ‘columns’: apply function to each row.</p>
 </div></blockquote>
 <p><strong>*args</strong></p>
 <blockquote>
@@ -124,45 +123,51 @@ a DataFrame, can pass a dict, if the keys are DataFrame column names.</p>
 <blockquote>
 <div><p>Keyword arguments to pass to <cite>func</cite>.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>aggregated</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>scalar, Series or DataFrame</strong></p>
+<blockquote>
+<div><p>The return can be:</p>
+<ul class="simple">
+<li><p>scalar : when Series.agg is called with single function</p></li>
+<li><p>Series : when DataFrame.agg is called with a single function</p></li>
+<li><p>DataFrame : when DataFrame.agg is called with several functions</p></li>
+</ul>
+<p>Return scalar, Series or DataFrame.</p>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>The aggregation operations are always performed over an axis, either the</strong></dt><dd></dd>
+<dt><strong>index (default) or the column axis. This behavior is different from</strong></dt><dd></dd>
+<dt><strong>`numpy` aggregation functions (`mean`, `median`, `prod`, `sum`, `std`,</strong></dt><dd></dd>
+<dt><strong>`var`), where the default is to compute the aggregation of the flattened</strong></dt><dd></dd>
+<dt><strong>array, e.g., ``numpy.mean(arr_2d)`` as opposed to</strong></dt><dd></dd>
+<dt><strong>``numpy.mean(arr_2d, axis=0)``.</strong></dt><dd></dd>
+<dt><strong>`agg` is an alias for `aggregate`. Use the alias.</strong></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.apply</span></code></a></dt>
-<dd>Perform any type of operations.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.transform</span></code></a></dt>
-<dd>Perform transformation type operations.</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.groupby.GroupBy</span></code></dt>
-<dd>Perform operations over groups.</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.resample.Resampler</span></code></dt>
-<dd>Perform operations over resampled bins.</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.window.Rolling</span></code></dt>
-<dd>Perform operations over rolling window.</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.window.Expanding</span></code></dt>
-<dd>Perform operations over expanding window.</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.core.window.EWM</span></code></dt>
-<dd>Perform operation over exponential weighted window.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.apply</span></code></a></dt><dd><p>Perform any type of operations.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.transform</span></code></a></dt><dd><p>Perform transformation type operations.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">core.groupby.GroupBy</span></code></dt><dd><p>Perform operations over groups.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">core.resample.Resampler</span></code></dt><dd><p>Perform operations over resampled bins.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">core.window.Rolling</span></code></dt><dd><p>Perform operations over rolling window.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">core.window.Expanding</span></code></dt><dd><p>Perform operations over expanding window.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">core.window.EWM</span></code></dt><dd><p>Perform operation over exponential weighted window.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
 <p><cite>agg</cite> is an alias for <cite>aggregate</cite>. Use the alias.</p>
 <p>A passed user-defined-function will be passed a Series for evaluation.</p>
-<p>The aggregation operations are always performed over an axis, either the
-index (default) or the column axis. This behavior is different from
-<cite>numpy</cite> aggregation functions (<cite>mean</cite>, <cite>median</cite>, <cite>prod</cite>, <cite>sum</cite>, <cite>std</cite>,
-<cite>var</cite>), where the default is to compute the aggregation of the flattened
-array, e.g., <code class="docutils literal notranslate"><span class="pre">numpy.mean(arr_2d)</span></code> as opposed to <code class="docutils literal notranslate"><span class="pre">numpy.mean(arr_2d,</span>
-<span class="pre">axis=0)</span></code>.</p>
-<p><cite>agg</cite> is an alias for <cite>aggregate</cite>. Use the alias.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
 <span class="gp">... </span>                   <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
@@ -219,7 +224,7 @@ array, e.g., <code class="docutils literal notranslate"><span class="pre">numpy.
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

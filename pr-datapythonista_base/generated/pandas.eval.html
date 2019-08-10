@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.eval &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.eval &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,7 +91,7 @@
 <h1>pandas.eval<a class="headerlink" href="#pandas-eval" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.eval">
-<code class="descclassname">pandas.</code><code class="descname">eval</code><span class="sig-paren">(</span><em>expr</em>, <em>parser='pandas'</em>, <em>engine=None</em>, <em>truediv=True</em>, <em>local_dict=None</em>, <em>global_dict=None</em>, <em>resolvers=()</em>, <em>level=0</em>, <em>target=None</em>, <em>inplace=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/computation/eval.py#L153-L347"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.eval" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">eval</code><span class="sig-paren">(</span><em class="sig-param">expr</em>, <em class="sig-param">parser='pandas'</em>, <em class="sig-param">engine=None</em>, <em class="sig-param">truediv=True</em>, <em class="sig-param">local_dict=None</em>, <em class="sig-param">global_dict=None</em>, <em class="sig-param">resolvers=()</em>, <em class="sig-param">level=0</em>, <em class="sig-param">target=None</em>, <em class="sig-param">inplace=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/computation/eval.py#L169-L380"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a Python expression as a string using various backends.</p>
 <p>The following arithmetic operations are supported: <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>,
 <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">**</span></code>, <code class="docutils literal notranslate"><span class="pre">%</span></code>, <code class="docutils literal notranslate"><span class="pre">//</span></code> (python engine only) along with the following
@@ -97,11 +101,9 @@ Additionally, the <code class="docutils literal notranslate"><span class="pre">'
 corresponding bitwise operators.  <a class="reference internal" href="pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> and
 <a class="reference internal" href="pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> objects are supported and behave as they would
 with plain ol’ Python evaluation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>expr</strong> : str or unicode</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>expr</strong> : str or unicode</p>
 <blockquote>
 <div><p>The expression to evaluate. This string cannot contain any Python
 <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html#simple-statements">statements</a>,
@@ -120,16 +122,16 @@ more details.</p>
 <blockquote>
 <div><p>The engine used to evaluate the expression. Supported engines are</p>
 <ul class="simple">
-<li>None         : tries to use <code class="docutils literal notranslate"><span class="pre">numexpr</span></code>, falls back to <code class="docutils literal notranslate"><span class="pre">python</span></code></li>
-<li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'numexpr'</span></code>: This default engine evaluates pandas objects using</dt>
-<dd>numexpr for large speed ups in complex expressions
-with large frames.</dd>
+<li><p>None         : tries to use <code class="docutils literal notranslate"><span class="pre">numexpr</span></code>, falls back to <code class="docutils literal notranslate"><span class="pre">python</span></code></p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">'numexpr'</span></code>: This default engine evaluates pandas objects using</dt><dd><p>numexpr for large speed ups in complex expressions
+with large frames.</p>
+</dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'python'</span></code>: Performs operations as if you had <code class="docutils literal notranslate"><span class="pre">eval</span></code>’d in top</dt>
-<dd>level python. This engine is generally not that useful.</dd>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">'python'</span></code>: Performs operations as if you had <code class="docutils literal notranslate"><span class="pre">eval</span></code>’d in top</dt><dd><p>level python. This engine is generally not that useful.</p>
+</dd>
 </dl>
 </li>
 </ul>
@@ -175,44 +177,37 @@ returned, it must also support <cite>.copy()</cite>.</p>
 to modify <cite>target</cite> inplace. Otherwise, return a copy of <cite>target</cite> with
 the mutation.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>ndarray, numeric scalar, DataFrame, Series</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ndarray, numeric scalar, DataFrame, Series</strong></dt><dd></dd>
 </dl>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
-<blockquote class="last">
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ValueError</strong></p>
+<blockquote>
 <div><p>There are many instances where such an error can be raised:</p>
 <ul>
-<li><p class="first"><cite>target=None</cite>, but the expression is multiline.</p>
-</li>
-<li><p class="first">The expression is multiline, but not all them have item assignment.
+<li><p><cite>target=None</cite>, but the expression is multiline.</p></li>
+<li><p>The expression is multiline, but not all them have item assignment.
 An example of such an arrangement is this:</p>
 <p>a = b + 1
 a + 2</p>
 <p>Here, there are expressions on different lines, making it multiline,
 but the last line has no variable assigned to the output of <cite>a + 2</cite>.</p>
 </li>
-<li><p class="first"><cite>inplace=True</cite>, but the expression is missing item assignment.</p>
-</li>
-<li><p class="first">Item assignment is provided, but the <cite>target</cite> does not support
-string item assignment.</p>
-</li>
-<li><p class="first">Item assignment is provided and <cite>inplace=False</cite>, but the <cite>target</cite>
-does not support the <cite>.copy()</cite> method</p>
-</li>
+<li><p><cite>inplace=True</cite>, but the expression is missing item assignment.</p></li>
+<li><p>Item assignment is provided, but the <cite>target</cite> does not support
+string item assignment.</p></li>
+<li><p>Item assignment is provided and <cite>inplace=False</cite>, but the <cite>target</cite>
+does not support the <cite>.copy()</cite> method</p></li>
 </ul>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.query</span></code></a>, <a class="reference internal" href="pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas.DataFrame.eval</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.query</span></code></a>, <a class="reference internal" href="pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.eval</span></code></a></p>
 </div>
 <p class="rubric">Notes</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">dtype</span></code> of any objects involved in an arithmetic <code class="docutils literal notranslate"><span class="pre">%</span></code> operation are
@@ -243,7 +238,7 @@ more details.</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>

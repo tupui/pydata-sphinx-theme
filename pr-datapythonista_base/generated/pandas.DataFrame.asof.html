@@ -2,9 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.asof &#8212; pandas 0.23.4 documentation</title>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.asof &#8212; pandas 0.25.0 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/pandas_styles.css" />
@@ -13,7 +12,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
@@ -42,11 +42,15 @@
         </button>
         <a class="navbar-brand" href="../index.html"><span><img src="../_static/pandas_logo.png"></span>
            </a>
-        <span class="navbar-text navbar-version pull-left"><b>0.23.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.25.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../docs.html">Documentation</a></li>
+                <li><a href="../community.html">Community</a></li>
             
             
               
@@ -87,50 +91,107 @@
 <h1>pandas.DataFrame.asof<a class="headerlink" href="#pandas-dataframe-asof" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.asof">
-<code class="descclassname">DataFrame.</code><code class="descname">asof</code><span class="sig-paren">(</span><em>where</em>, <em>subset=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.23.4/pandas/core/generic.py#L6049-L6155"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.asof" title="Permalink to this definition">¶</a></dt>
-<dd><p>The last row without any NaN is taken (or the last row without
-NaN considering only the subset of columns in the case of a DataFrame)</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">asof</code><span class="sig-paren">(</span><em class="sig-param">where</em>, <em class="sig-param">subset=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.0/pandas/core/generic.py#L7082-L7251"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.asof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last row(s) without any NaNs before <cite>where</cite>.</p>
+<p>The last row (for each element in <cite>where</cite>, if list) without any
+NaN is taken.
+In case of a <a class="reference internal" href="pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, the last row without NaN
+considering only the subset of columns (if not <cite>None</cite>)</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0: </span>For DataFrame</p>
+<p><span class="versionmodified added">New in version 0.19.0: </span>For DataFrame</p>
 </div>
-<p>If there is no good value, NaN is returned for a Series
+<p>If there is no good value, NaN is returned for a Series or
 a Series of NaN values for a DataFrame</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>where</strong> <span class="classifier-delimiter">:</span> <span class="classifier">date or array of dates</span></dt>
-<dd></dd>
-</dl>
-<p><strong>subset</strong> : string or list of strings, default None</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>where</strong> : date or array-like of dates</p>
 <blockquote>
-<div><p>if not None use these columns for NaN propagation</p>
+<div><p>Date(s) before which the last row(s) are returned.</p>
 </div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>where is scalar</strong></p>
+<p><strong>subset</strong> : str or array-like of str, default <cite>None</cite></p>
 <blockquote>
-<div><ul class="simple">
-<li>value or NaN if input is Series</li>
-<li>Series if input is DataFrame</li>
+<div><p>For DataFrame, if not <cite>None</cite>, only use these columns to
+check for NaNs.</p>
+</div></blockquote>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>scalar, Series, or DataFrame</strong></p>
+<blockquote>
+<div><p>The return can be:</p>
+<ul class="simple">
+<li><p>scalar : when <cite>self</cite> is a Series and <cite>where</cite> is a scalar</p></li>
+<li><p>Series: when <cite>self</cite> is a Series and <cite>where</cite> is an array-like,
+or when <cite>self</cite> is a DataFrame and <cite>where</cite> is a scalar</p></li>
+<li><p>DataFrame : when <cite>self</cite> is a DataFrame and <cite>where</cite> is an
+array-like</p></li>
 </ul>
+<p>Return scalar, Series, or DataFrame.</p>
 </div></blockquote>
-<dl class="last docutils">
-<dt><strong>where is Index: same shape object as input</strong></dt>
-<dd></dd>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a></dt><dd><p>Perform an asof merge. Similar to left join.</p>
+</dd>
+</dl>
 </div>
 <p class="rubric">Notes</p>
-<p>Dates are assumed to be sorted
-Raises if this is not the case</p>
+<p>Dates are assumed to be sorted. Raises if this is not the case.</p>
+<p class="rubric">Examples</p>
+<p>A Series and a scalar <cite>where</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">10    1.0</span>
+<span class="go">20    2.0</span>
+<span class="go">30    NaN</span>
+<span class="go">40    4.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<p>For a sequence <cite>where</cite>, a Series is returned. The first value is
+NaN, because the first element of <cite>where</cite> is before the first
+index value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">asof</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="go">5     NaN</span>
+<span class="go">20    2.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>Missing values are not considered. The following is <code class="docutils literal notranslate"><span class="pre">2.0</span></code>, not
+NaN, even though NaN is at the index location for <code class="docutils literal notranslate"><span class="pre">30</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<p>Take all columns into consideration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">500</span><span class="p">]},</span>
+<span class="gp">... </span>                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-02-27 09:01:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:02:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:03:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:04:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:05:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-02-27 09:03:30&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="s1">&#39;2018-02-27 09:04:30&#39;</span><span class="p">]))</span>
+<span class="go">                      a   b</span>
+<span class="go">2018-02-27 09:03:30 NaN NaN</span>
+<span class="go">2018-02-27 09:04:30 NaN NaN</span>
+</pre></div>
+</div>
+<p>Take a single column into consideration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-02-27 09:03:30&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="s1">&#39;2018-02-27 09:04:30&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="go">                         a   b</span>
+<span class="go">2018-02-27 09:03:30   30.0 NaN</span>
+<span class="go">2018-02-27 09:04:30   40.0 NaN</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -155,7 +216,7 @@ Raises if this is not the case</p>
     </p>
     <p>
         &copy; Copyright 2008-2014, the pandas development team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
 </footer>
