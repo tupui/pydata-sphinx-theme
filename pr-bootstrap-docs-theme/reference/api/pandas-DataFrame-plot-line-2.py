@@ -1,5 +1,8 @@
-# An example with subplots, so an array of axes is returned.
+# The following example shows the populations for some animals
+# over the years.
 
-axes = df.plot.line(subplots=True)
-type(axes)
-# <class 'numpy.ndarray'>
+df = pd.DataFrame({
+   'pig': [20, 18, 489, 675, 1776],
+   'horse': [4, 25, 281, 600, 1900]
+   }, index=[1990, 1997, 2003, 2009, 2014])
+lines = df.plot.line()

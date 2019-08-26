@@ -148,8 +148,8 @@
 and <a class="reference internal" href="#indexing-index-types"><span class="std std-ref">other advanced indexing features</span></a>.</p>
 <p>See the <a class="reference internal" href="indexing.html#indexing"><span class="std std-ref">Indexing and Selecting Data</span></a> for general indexing documentation.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Whether a copy or a reference is returned for a setting operation may
+<p class="admonition-title">Warning</p>
+<p>Whether a copy or a reference is returned for a setting operation may
 depend on the context.  This is sometimes called <code class="docutils literal notranslate"><span class="pre">chained</span> <span class="pre">assignment</span></code> and
 should be avoided.  See <a class="reference internal" href="indexing.html#indexing-view-versus-copy"><span class="std std-ref">Returning a View versus Copy</span></a>.</p>
 </div>
@@ -168,7 +168,7 @@ non-trivial applications to illustrate how it aids in structuring data for
 analysis.</p>
 <p>See the <a class="reference internal" href="cookbook.html#cookbook-multi-index"><span class="std std-ref">cookbook</span></a> for some advanced strategies.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.24.0: </span><code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.labels</span></code> has been renamed to <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.codes</span></code>
+<p><span class="versionmodified changed">Changed in version 0.24.0: </span><code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.labels</span></code> has been renamed to <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.codes</span></code>
 and <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.set_labels</span></code> to <code class="xref py py-attr docutils literal notranslate"><span class="pre">MultiIndex.set_codes</span></code>.</p>
 </div>
 <div class="section" id="creating-a-multiindex-hierarchical-index-object">
@@ -211,7 +211,7 @@ to use the <code class="xref py py-meth docutils literal notranslate"><span clas
 the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">MultiIndex.from_frame()</span></code>. This is a complementary method to
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">MultiIndex.to_frame()</span></code>.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.24.0.</span></p>
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">],</span>
 <span class="gp">   ....: </span>                   <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">]],</span>
@@ -321,7 +321,7 @@ highly performant. If you want to see only the used levels, you can use the
 <p>To reconstruct the <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> with only the used levels, the
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">remove_unused_levels()</span></code> method may be used.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">remove_unused_levels</span><span class="p">()</span>
 </pre></div>
@@ -386,8 +386,8 @@ to <code class="docutils literal notranslate"><span class="pre">df.loc['bar',]</
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is important to note that tuples and lists are not treated identically
+<p class="admonition-title">Note</p>
+<p>It is important to note that tuples and lists are not treated identically
 in pandas when it comes to indexing. Whereas a tuple is interpreted as one
 multi-level key, a list is used to specify several keys. Or in other words,
 tuples go horizontally (traversing levels), lists go vertically (scanning levels).</p>
@@ -412,7 +412,7 @@ including slices, lists of labels, labels, and boolean indexers.</p>
 <em>deeper</em> levels, they will be implied as <code class="docutils literal notranslate"><span class="pre">slice(None)</span></code>.</p>
 <p>As usual, <strong>both sides</strong> of the slicers are included as this is label indexing.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>You should specify all axes in the <code class="docutils literal notranslate"><span class="pre">.loc</span></code> specifier, meaning the indexer for the <strong>index</strong> and
 for the <strong>columns</strong>. There are some ambiguous cases where the passed indexer could be mis-interpreted
 as indexing <em>both</em> axes, rather than into say the <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> for the rows.</p>
@@ -421,7 +421,7 @@ as indexing <em>both</em> axes, rather than into say the <code class="docutils l
 </pre></div>
 </div>
 <p>You should <strong>not</strong> do this:</p>
-<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">),</span> <span class="o">...</span><span class="p">)]</span>                <span class="c1"># noqa: E999</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">),</span> <span class="o">...</span><span class="p">)]</span>                <span class="c1"># noqa: E999</span>
 </pre></div>
 </div>
 </div>
@@ -824,10 +824,10 @@ values <strong>not</strong> in the categories, similarly to how you can reindex 
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>Reshaping and Comparison operations on a <code class="docutils literal notranslate"><span class="pre">CategoricalIndex</span></code> must have the same categories
 or a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> will be raised.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;aabbca&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;aabbca&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)})</span>
 
 <span class="gp">In [11]: </span><span class="n">df3</span> <span class="o">=</span> <span class="n">df3</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
 
@@ -843,8 +843,8 @@ or a <code class="docutils literal notranslate"><span class="pre">TypeError</spa
 <div class="section" id="int64index-and-rangeindex">
 <span id="indexing-rangeindex"></span><h3>Int64Index and RangeIndex<a class="headerlink" href="#int64index-and-rangeindex" title="Permalink to this headline">¶</a></h3>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Indexing on an integer-based Index with floats has been clarified in 0.18.0, for a summary of the changes, see <a class="reference internal" href="../whatsnew/v0.18.0.html#whatsnew-0180-float-indexers"><span class="std std-ref">here</span></a>.</p>
+<p class="admonition-title">Warning</p>
+<p>Indexing on an integer-based Index with floats has been clarified in 0.18.0, for a summary of the changes, see <a class="reference internal" href="../whatsnew/v0.18.0.html#whatsnew-0180-float-indexers"><span class="std std-ref">here</span></a>.</p>
 </div>
 <p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Index</span></code> is a fundamental basic index in pandas.
 This is an immutable array implementing an ordered, sliceable set.
@@ -906,9 +906,9 @@ boolean, in which case it will always be positional.</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>Using a scalar float indexer for <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> has been removed in 0.18.0, so the following will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>:</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mf">3.0</span><span class="p">]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mf">3.0</span><span class="p">]</span>
 <span class="go">TypeError: cannot do positional indexing on &lt;class &#39;pandas.indexes.range.RangeIndex&#39;&gt; with these indexers [3.0] of &lt;type &#39;float&#39;&gt;</span>
 </pre></div>
 </div>
@@ -947,7 +947,7 @@ example, be millisecond offsets.</p>
 <div class="section" id="intervalindex">
 <span id="advanced-intervalindex"></span><h3>IntervalIndex<a class="headerlink" href="#intervalindex" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <p><code class="xref py py-class docutils literal notranslate"><span class="pre">IntervalIndex</span></code> together with its own dtype, <code class="xref py py-class docutils literal notranslate"><span class="pre">IntervalDtype</span></code>
 as well as the <code class="xref py py-class docutils literal notranslate"><span class="pre">Interval</span></code> scalar type,  allow first-class support in pandas
@@ -955,8 +955,8 @@ for interval notation.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">IntervalIndex</span></code> allows some unique indexing and is also used as a
 return type for the categories in <a class="reference internal" href="../reference/api/pandas.cut.html#pandas.cut" title="pandas.cut"><code class="xref py py-func docutils literal notranslate"><span class="pre">cut()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.qcut.html#pandas.qcut" title="pandas.qcut"><code class="xref py py-func docutils literal notranslate"><span class="pre">qcut()</span></code></a>.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">These indexing behaviors are provisional and may change in a future version of pandas.</p>
+<p class="admonition-title">Warning</p>
+<p>These indexing behaviors are provisional and may change in a future version of pandas.</p>
 </div>
 <p>An <code class="docutils literal notranslate"><span class="pre">IntervalIndex</span></code> can be used in <code class="docutils literal notranslate"><span class="pre">Series</span></code> and in <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> as the index.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [183]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]},</span>
@@ -1022,7 +1022,7 @@ are closed on.  Intervals are closed on the right side by default.</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 <p>Specifying <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">end</span></code>, and <code class="docutils literal notranslate"><span class="pre">periods</span></code> will generate a range of evenly spaced
 intervals from <code class="docutils literal notranslate"><span class="pre">start</span></code> to <code class="docutils literal notranslate"><span class="pre">end</span></code> inclusively, with <code class="docutils literal notranslate"><span class="pre">periods</span></code> number of elements

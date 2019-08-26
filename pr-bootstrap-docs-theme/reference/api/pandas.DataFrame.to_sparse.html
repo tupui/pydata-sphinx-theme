@@ -83,46 +83,42 @@
 <h1>pandas.DataFrame.to_sparse<a class="headerlink" href="#pandas-dataframe-to-sparse" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.to_sparse">
-<code class="descclassname">DataFrame.</code><code class="descname">to_sparse</code><span class="sig-paren">(</span><em>fill_value=None</em>, <em>kind='block'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L1903-L1960"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_sparse" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_sparse</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">fill_value=None</em>, <em class="sig-param">kind='block'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L1928-L2001"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_sparse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert to SparseDataFrame.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.25.0.</span></p>
+</div>
 <p>Implement the sparse version of the DataFrame meaning that any data
 matching a specific value it’s omitted in the representation.
 The sparse DataFrame allows for a more efficient storage.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>fill_value</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, default None</span></dt>
-<dd><p class="first last">The specific value that should be omitted in the representation.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>fill_value</strong><span class="classifier">float, default None</span></dt><dd><p>The specific value that should be omitted in the representation.</p>
 </dd>
-<dt><strong>kind</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘block’, ‘integer’}, default ‘block’</span></dt>
-<dd><p class="first">The kind of the SparseIndex tracking where data is not equal to
+<dt><strong>kind</strong><span class="classifier">{‘block’, ‘integer’}, default ‘block’</span></dt><dd><p>The kind of the SparseIndex tracking where data is not equal to
 the fill value:</p>
 <ul class="simple">
-<li>‘block’ tracks only the locations and sizes of blocks of data.</li>
-<li>‘integer’ keeps an array with all the locations of the data.</li>
+<li><p>‘block’ tracks only the locations and sizes of blocks of data.</p></li>
+<li><p>‘integer’ keeps an array with all the locations of the data.</p></li>
 </ul>
-<p class="last">In most cases ‘block’ is recommended, since it’s more memory
+<p>In most cases ‘block’ is recommended, since it’s more memory
 efficient.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>SparseDataFrame</strong></dt>
-<dd><p class="first last">The sparse representation of the DataFrame.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>SparseDataFrame</dt><dd><p>The sparse representation of the DataFrame.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.to_dense.html#pandas.DataFrame.to_dense" title="pandas.DataFrame.to_dense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_dense</span></code></a></dt>
-<dd>Converts the DataFrame back to the its dense form.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.to_dense.html#pandas.DataFrame.to_dense" title="pandas.DataFrame.to_dense"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_dense</span></code></a></dt><dd><p>Converts the DataFrame back to the its dense form.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
@@ -138,13 +134,13 @@ efficient.</p>
 <span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sdf</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sdf</span>  
 <span class="go">     0    1</span>
 <span class="go">0  NaN  NaN</span>
 <span class="go">1  1.0  NaN</span>
 <span class="go">2  NaN  1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sdf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sdf</span><span class="p">)</span>  
 <span class="go">&lt;class &#39;pandas.core.sparse.frame.SparseDataFrame&#39;&gt;</span>
 </pre></div>
 </div>

@@ -83,19 +83,19 @@
 <h1>pandas.merge_asof<a class="headerlink" href="#pandas-merge-asof" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.merge_asof">
-<code class="descclassname">pandas.</code><code class="descname">merge_asof</code><span class="sig-paren">(</span><em>left</em>, <em>right</em>, <em>on=None</em>, <em>left_on=None</em>, <em>right_on=None</em>, <em>left_index=False</em>, <em>right_index=False</em>, <em>by=None</em>, <em>left_by=None</em>, <em>right_by=None</em>, <em>suffixes=('_x'</em>, <em>'_y')</em>, <em>tolerance=None</em>, <em>allow_exact_matches=True</em>, <em>direction='backward'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/reshape/merge.py#L230-L462"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.merge_asof" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">merge_asof</code><span class="sig-paren">(</span><em class="sig-param">left</em>, <em class="sig-param">right</em>, <em class="sig-param">on=None</em>, <em class="sig-param">left_on=None</em>, <em class="sig-param">right_on=None</em>, <em class="sig-param">left_index=False</em>, <em class="sig-param">right_index=False</em>, <em class="sig-param">by=None</em>, <em class="sig-param">left_by=None</em>, <em class="sig-param">right_by=None</em>, <em class="sig-param">suffixes=('_x'</em>, <em class="sig-param">'_y')</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">allow_exact_matches=True</em>, <em class="sig-param">direction='backward'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/reshape/merge.py#L291-L541"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.merge_asof" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform an asof merge. This is similar to a left-join except that we
 match on nearest key rather than equal keys.</p>
 <p>Both DataFrames must be sorted by the key.</p>
 <p>For each row in the left DataFrame:</p>
 <blockquote>
 <div><ul class="simple">
-<li>A “backward” search selects the last row in the right DataFrame whose
-‘on’ key is less than or equal to the left’s key.</li>
-<li>A “forward” search selects the first row in the right DataFrame whose
-‘on’ key is greater than or equal to the left’s key.</li>
-<li>A “nearest” search selects the row in the right DataFrame whose ‘on’
-key is closest in absolute distance to the left’s key.</li>
+<li><p>A “backward” search selects the last row in the right DataFrame whose
+‘on’ key is less than or equal to the left’s key.</p></li>
+<li><p>A “forward” search selects the first row in the right DataFrame whose
+‘on’ key is greater than or equal to the left’s key.</p></li>
+<li><p>A “nearest” search selects the row in the right DataFrame whose ‘on’
+key is closest in absolute distance to the left’s key.</p></li>
 </ul>
 </div></blockquote>
 <p>The default is “backward” and is compatible in versions below 0.20.0.
@@ -103,92 +103,76 @@ The direction parameter was added in version 0.20.0 and introduces
 “forward” and “nearest”.</p>
 <p>Optionally match on equivalent keys with ‘by’ before searching with ‘on’.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>left</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
-<dt><strong>right</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
-<dt><strong>on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label</span></dt>
-<dd><p class="first last">Field name to join on. Must be found in both DataFrames.
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>left</strong><span class="classifier">DataFrame</span></dt><dd></dd>
+<dt><strong>right</strong><span class="classifier">DataFrame</span></dt><dd></dd>
+<dt><strong>on</strong><span class="classifier">label</span></dt><dd><p>Field name to join on. Must be found in both DataFrames.
 The data MUST be ordered. Furthermore this must be a numeric column,
 such as datetimelike, integer, or float. On or left_on/right_on
 must be given.</p>
 </dd>
-<dt><strong>left_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label</span></dt>
-<dd><p class="first last">Field name to join on in left DataFrame.</p>
+<dt><strong>left_on</strong><span class="classifier">label</span></dt><dd><p>Field name to join on in left DataFrame.</p>
 </dd>
-<dt><strong>right_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label</span></dt>
-<dd><p class="first last">Field name to join on in right DataFrame.</p>
+<dt><strong>right_on</strong><span class="classifier">label</span></dt><dd><p>Field name to join on in right DataFrame.</p>
 </dd>
-<dt><strong>left_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
-<dd><p class="first">Use the index of the left DataFrame as the join key.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>left_index</strong><span class="classifier">boolean</span></dt><dd><p>Use the index of the left DataFrame as the join key.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>right_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
-<dd><p class="first">Use the index of the right DataFrame as the join key.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>right_index</strong><span class="classifier">boolean</span></dt><dd><p>Use the index of the right DataFrame as the join key.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name or list of column names</span></dt>
-<dd><p class="first last">Match on these columns before performing merge operation.</p>
+<dt><strong>by</strong><span class="classifier">column name or list of column names</span></dt><dd><p>Match on these columns before performing merge operation.</p>
 </dd>
-<dt><strong>left_by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name</span></dt>
-<dd><p class="first">Field names to match on in the left DataFrame.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>left_by</strong><span class="classifier">column name</span></dt><dd><p>Field names to match on in the left DataFrame.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>right_by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name</span></dt>
-<dd><p class="first">Field names to match on in the right DataFrame.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>right_by</strong><span class="classifier">column name</span></dt><dd><p>Field names to match on in the right DataFrame.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>suffixes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2-length sequence (tuple, list, …)</span></dt>
-<dd><p class="first last">Suffix to apply to overlapping column names in the left and right
+<dt><strong>suffixes</strong><span class="classifier">2-length sequence (tuple, list, …)</span></dt><dd><p>Suffix to apply to overlapping column names in the left and right
 side, respectively.</p>
 </dd>
-<dt><strong>tolerance</strong> <span class="classifier-delimiter">:</span> <span class="classifier">integer or Timedelta, optional, default None</span></dt>
-<dd><p class="first last">Select asof tolerance within this range; must be compatible
+<dt><strong>tolerance</strong><span class="classifier">integer or Timedelta, optional, default None</span></dt><dd><p>Select asof tolerance within this range; must be compatible
 with the merge index.</p>
 </dd>
-<dt><strong>allow_exact_matches</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default True</span></dt>
-<dd><ul class="first last simple">
-<li>If True, allow matching with the same ‘on’ value
-(i.e. less-than-or-equal-to / greater-than-or-equal-to)</li>
-<li>If False, don’t match the same ‘on’ value
-(i.e., strictly less-than / strictly greater-than)</li>
+<dt><strong>allow_exact_matches</strong><span class="classifier">boolean, default True</span></dt><dd><ul class="simple">
+<li><p>If True, allow matching with the same ‘on’ value
+(i.e. less-than-or-equal-to / greater-than-or-equal-to)</p></li>
+<li><p>If False, don’t match the same ‘on’ value
+(i.e., strictly less-than / strictly greater-than)</p></li>
 </ul>
 </dd>
-<dt><strong>direction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">‘backward’ (default), ‘forward’, or ‘nearest’</span></dt>
-<dd><p class="first">Whether to search for prior, subsequent, or closest matches.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<dt><strong>direction</strong><span class="classifier">‘backward’ (default), ‘forward’, or ‘nearest’</span></dt><dd><p>Whether to search for prior, subsequent, or closest matches.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>merged</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>merged</strong><span class="classifier">DataFrame</span></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>, <a class="reference internal" href="pandas.merge_ordered.html#pandas.merge_ordered" title="pandas.merge_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_ordered</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="pandas.merge_ordered.html#pandas.merge_ordered" title="pandas.merge_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_ordered</span></code></a></dt><dd></dd>
+</dl>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;left_val&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]})</span>

@@ -83,39 +83,32 @@
 <h1>pandas.DataFrame.iterrows<a class="headerlink" href="#pandas-dataframe-iterrows" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.iterrows">
-<code class="descclassname">DataFrame.</code><code class="descname">iterrows</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L797-L847"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.iterrows" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">iterrows</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L845-L895"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.iterrows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate over DataFrame rows as (index, Series) pairs.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Yields:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label or tuple of label</span></dt>
-<dd><p class="first last">The index of the row. A tuple for a <cite>MultiIndex</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>index</strong><span class="classifier">label or tuple of label</span></dt><dd><p>The index of the row. A tuple for a <cite>MultiIndex</cite>.</p>
 </dd>
-<dt><strong>data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series</span></dt>
-<dd><p class="first last">The data of the row as a Series.</p>
+<dt><strong>data</strong><span class="classifier">Series</span></dt><dd><p>The data of the row as a Series.</p>
 </dd>
-<dt><strong>it</strong> <span class="classifier-delimiter">:</span> <span class="classifier">generator</span></dt>
-<dd><p class="first last">A generator that iterates over the rows of the frame.</p>
+<dt><strong>it</strong><span class="classifier">generator</span></dt><dd><p>A generator that iterates over the rows of the frame.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">itertuples</span></code></a></dt>
-<dd>Iterate over DataFrame rows as namedtuples of the values.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.iteritems.html#pandas.DataFrame.iteritems" title="pandas.DataFrame.iteritems"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iteritems</span></code></a></dt>
-<dd>Iterate over (column name, Series) pairs.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">itertuples</span></code></a></dt><dd><p>Iterate over DataFrame rows as namedtuples of the values.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.items.html#pandas.DataFrame.items" title="pandas.DataFrame.items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">items</span></code></a></dt><dd><p>Iterate over (column name, Series) pairs.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
 <ol class="arabic">
-<li><p class="first">Because <code class="docutils literal notranslate"><span class="pre">iterrows</span></code> returns a Series for each row,
+<li><p>Because <code class="docutils literal notranslate"><span class="pre">iterrows</span></code> returns a Series for each row,
 it does <strong>not</strong> preserve dtypes across the rows (dtypes are
 preserved across columns for DataFrames). For example,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;float&#39;</span><span class="p">])</span>
@@ -134,11 +127,10 @@ preserved across columns for DataFrames). For example,</p>
 to use <a class="reference internal" href="pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itertuples()</span></code></a> which returns namedtuples of the values
 and which is generally faster than <code class="docutils literal notranslate"><span class="pre">iterrows</span></code>.</p>
 </li>
-<li><p class="first">You should <strong>never modify</strong> something you are iterating over.
+<li><p>You should <strong>never modify</strong> something you are iterating over.
 This is not guaranteed to work in all cases. Depending on the
 data types, the iterator returns a copy and not a view, and writing
-to it will have no effect.</p>
-</li>
+to it will have no effect.</p></li>
 </ol>
 </dd></dl>
 

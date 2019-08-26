@@ -83,93 +83,84 @@
 <h1>pandas.DataFrame.rolling<a class="headerlink" href="#pandas-dataframe-rolling" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.rolling">
-<code class="descclassname">DataFrame.</code><code class="descname">rolling</code><span class="sig-paren">(</span><em>window</em>, <em>min_periods=None</em>, <em>center=False</em>, <em>win_type=None</em>, <em>on=None</em>, <em>axis=0</em>, <em>closed=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L10140-L10147"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.rolling" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provides rolling window calculations.</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">rolling</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">window</em>, <em class="sig-param">min_periods=None</em>, <em class="sig-param">center=False</em>, <em class="sig-param">win_type=None</em>, <em class="sig-param">on=None</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">closed=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L10749-L10770"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.rolling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide rolling window calculations.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>window</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, or offset</span></dt>
-<dd><p class="first">Size of the moving window. This is the number of observations used for
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>window</strong><span class="classifier">int, or offset</span></dt><dd><p>Size of the moving window. This is the number of observations used for
 calculating the statistic. Each window will be a fixed size.</p>
-<p class="last">If its an offset then this will be the time period of each window. Each
+<p>If its an offset then this will be the time period of each window. Each
 window will be a variable sized based on the observations included in
 the time-period. This is only valid for datetimelike indexes. This is
 new in 0.19.0</p>
 </dd>
-<dt><strong>min_periods</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default None</span></dt>
-<dd><p class="first last">Minimum number of observations in window required to have a value
+<dt><strong>min_periods</strong><span class="classifier">int, default None</span></dt><dd><p>Minimum number of observations in window required to have a value
 (otherwise result is NA). For a window that is specified by an offset,
 <cite>min_periods</cite> will default to 1. Otherwise, <cite>min_periods</cite> will default
 to the size of the window.</p>
 </dd>
-<dt><strong>center</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">Set the labels at the center of the window.</p>
+<dt><strong>center</strong><span class="classifier">bool, default False</span></dt><dd><p>Set the labels at the center of the window.</p>
 </dd>
-<dt><strong>win_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default None</span></dt>
-<dd><p class="first last">Provide a window type. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, all points are evenly weighted.
+<dt><strong>win_type</strong><span class="classifier">str, default None</span></dt><dd><p>Provide a window type. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, all points are evenly weighted.
 See the notes below for further information.</p>
 </dd>
-<dt><strong>on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
-<dd><p class="first last">For a DataFrame, column on which to calculate
-the rolling window, rather than the index</p>
+<dt><strong>on</strong><span class="classifier">str, optional</span></dt><dd><p>For a DataFrame, a datetime-like column on which to calculate the rolling
+window, rather than the DataFrame’s index. Provided integer column is
+ignored and excluded from result since an integer index is not used to
+calculate the rolling window.</p>
 </dd>
-<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or str, default 0</span></dt>
-<dd></dd>
-<dt><strong>closed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default None</span></dt>
-<dd><p class="first">Make the interval closed on the ‘right’, ‘left’, ‘both’ or
+<dt><strong>axis</strong><span class="classifier">int or str, default 0</span></dt><dd></dd>
+<dt><strong>closed</strong><span class="classifier">str, default None</span></dt><dd><p>Make the interval closed on the ‘right’, ‘left’, ‘both’ or
 ‘neither’ endpoints.
 For offset-based windows, it defaults to ‘right’.
 For fixed windows, defaults to ‘both’. Remaining cases not implemented
 for fixed windows.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>a Window or Rolling sub-classed for the particular operation</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>a Window or Rolling sub-classed for the particular operation</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.expanding.html#pandas.DataFrame.expanding" title="pandas.DataFrame.expanding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expanding</span></code></a></dt>
-<dd>Provides expanding transformations.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.ewm.html#pandas.DataFrame.ewm" title="pandas.DataFrame.ewm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ewm</span></code></a></dt>
-<dd>Provides exponential weighted functions.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.expanding.html#pandas.DataFrame.expanding" title="pandas.DataFrame.expanding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expanding</span></code></a></dt><dd><p>Provides expanding transformations.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.ewm.html#pandas.DataFrame.ewm" title="pandas.DataFrame.ewm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ewm</span></code></a></dt><dd><p>Provides exponential weighted functions.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
 <p>By default, the result is set to the right edge of the window. This can be
 changed to the center of the window by setting <code class="docutils literal notranslate"><span class="pre">center=True</span></code>.</p>
-<p>To learn more about the offsets &amp; frequency strings, please see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/timeseries.html#offset-aliases">this link</a>.</p>
+<p>To learn more about the offsets &amp; frequency strings, please see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases">this link</a>.</p>
 <p>The recognized win_types are:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">boxcar</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">triang</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">blackman</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">hamming</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">bartlett</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">parzen</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">bohman</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">blackmanharris</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">nuttall</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">barthann</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">kaiser</span></code> (needs beta)</li>
-<li><code class="docutils literal notranslate"><span class="pre">gaussian</span></code> (needs std)</li>
-<li><code class="docutils literal notranslate"><span class="pre">general_gaussian</span></code> (needs power, width)</li>
-<li><code class="docutils literal notranslate"><span class="pre">slepian</span></code> (needs width).</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">boxcar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">triang</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blackman</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hamming</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bartlett</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parzen</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bohman</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blackmanharris</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nuttall</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">barthann</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kaiser</span></code> (needs beta)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gaussian</span></code> (needs std)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">general_gaussian</span></code> (needs power, width)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slepian</span></code> (needs width)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exponential</span></code> (needs tau), center is set to None.</p></li>
 </ul>
 <p>If <code class="docutils literal notranslate"><span class="pre">win_type=None</span></code> all points are evenly weighted. To learn more about
 different window types see <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html#window-functions">scipy.signal window functions</a>.</p>
@@ -189,8 +180,8 @@ window type.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s1">&#39;triang&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="go">     B</span>
 <span class="go">0  NaN</span>
-<span class="go">1  1.0</span>
-<span class="go">2  2.5</span>
+<span class="go">1  0.5</span>
+<span class="go">2  1.5</span>
 <span class="go">3  NaN</span>
 <span class="go">4  NaN</span>
 </pre></div>

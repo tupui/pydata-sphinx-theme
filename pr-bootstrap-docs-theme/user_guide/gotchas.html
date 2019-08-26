@@ -272,10 +272,10 @@ testing for membership in the list of column names.</p>
 <p>For lack of <code class="docutils literal notranslate"><span class="pre">NA</span></code> (missing) support from the ground up in NumPy and Python in
 general, we were given the difficult choice between either:</p>
 <ul class="simple">
-<li>A <em>masked array</em> solution: an array of data and an array of boolean values
-indicating whether a value is there or is missing.</li>
-<li>Using a special sentinel value, bit pattern, or set of sentinel values to
-denote <code class="docutils literal notranslate"><span class="pre">NA</span></code> across the dtypes.</li>
+<li><p>A <em>masked array</em> solution: an array of data and an array of boolean values
+indicating whether a value is there or is missing.</p></li>
+<li><p>Using a special sentinel value, bit pattern, or set of sentinel values to
+denote <code class="docutils literal notranslate"><span class="pre">NA</span></code> across the dtypes.</p></li>
 </ul>
 <p>For many reasons we chose the latter. After years of production use it has
 proven, at least in my opinion, to be the best decision given the state of
@@ -309,10 +309,10 @@ that the resulting <code class="docutils literal notranslate"><span class="pre">
 <p>If you need to represent integers with possibly missing values, use one of
 the nullable-integer extension dtypes provided by pandas</p>
 <ul class="simple">
-<li><code class="xref py py-class docutils literal notranslate"><span class="pre">Int8Dtype</span></code></li>
-<li><code class="xref py py-class docutils literal notranslate"><span class="pre">Int16Dtype</span></code></li>
-<li><code class="xref py py-class docutils literal notranslate"><span class="pre">Int32Dtype</span></code></li>
-<li><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Dtype</span></code></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int8Dtype</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int16Dtype</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int32Dtype</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Dtype</span></code></p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">s_int</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">),</span>
 <span class="gp">   ....: </span>                  <span class="n">dtype</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Int64Dtype</span><span class="p">())</span>
@@ -337,28 +337,28 @@ the nullable-integer extension dtypes provided by pandas</p>
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">reindex()</span></code> or some other means, boolean and integer types will be
 promoted to a different dtype in order to store the NAs. The promotions are
 summarized in this table:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="40%" />
-<col width="60%" />
+<col style="width: 40%" />
+<col style="width: 60%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Typeclass</th>
-<th class="head">Promotion dtype for storing NAs</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Typeclass</p></th>
+<th class="head"><p>Promotion dtype for storing NAs</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">floating</span></code></td>
-<td>no change</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">floating</span></code></p></td>
+<td><p>no change</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">object</span></code></td>
-<td>no change</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">object</span></code></p></td>
+<td><p>no change</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">integer</span></code></td>
-<td>cast to <code class="docutils literal notranslate"><span class="pre">float64</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">integer</span></code></p></td>
+<td><p>cast to <code class="docutils literal notranslate"><span class="pre">float64</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">boolean</span></code></td>
-<td>cast to <code class="docutils literal notranslate"><span class="pre">object</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">boolean</span></code></p></td>
+<td><p>cast to <code class="docutils literal notranslate"><span class="pre">object</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -370,34 +370,34 @@ explanation for the motivation is in the next section.</p>
 <h3>Why not make NumPy like R?<a class="headerlink" href="#why-not-make-numpy-like-r" title="Permalink to this headline">¶</a></h3>
 <p>Many people have suggested that NumPy should simply emulate the <code class="docutils literal notranslate"><span class="pre">NA</span></code> support
 present in the more domain-specific statistical programming language <a class="reference external" href="https://r-project.org">R</a>. Part of the reason is the NumPy type hierarchy:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="30%" />
-<col width="70%" />
+<col style="width: 30%" />
+<col style="width: 70%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Typeclass</th>
-<th class="head">Dtypes</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Typeclass</p></th>
+<th class="head"><p>Dtypes</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">numpy.floating</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">float16,</span> <span class="pre">float32,</span> <span class="pre">float64,</span> <span class="pre">float128</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.floating</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float16,</span> <span class="pre">float32,</span> <span class="pre">float64,</span> <span class="pre">float128</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">numpy.integer</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">int8,</span> <span class="pre">int16,</span> <span class="pre">int32,</span> <span class="pre">int64</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.integer</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int8,</span> <span class="pre">int16,</span> <span class="pre">int32,</span> <span class="pre">int64</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">numpy.unsignedinteger</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">uint8,</span> <span class="pre">uint16,</span> <span class="pre">uint32,</span> <span class="pre">uint64</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.unsignedinteger</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">uint8,</span> <span class="pre">uint16,</span> <span class="pre">uint32,</span> <span class="pre">uint64</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">numpy.object_</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">object_</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.object_</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">object_</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">numpy.bool_</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">bool_</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.bool_</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool_</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">numpy.character</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">string_,</span> <span class="pre">unicode_</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">numpy.character</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">string_,</span> <span class="pre">unicode_</span></code></p></td>
 </tr>
 </tbody>
 </table>

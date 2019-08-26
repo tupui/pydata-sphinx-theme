@@ -83,7 +83,7 @@
 <h1>pandas.DataFrame.to_hdf<a class="headerlink" href="#pandas-dataframe-to-hdf" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.to_hdf">
-<code class="descclassname">DataFrame.</code><code class="descname">to_hdf</code><span class="sig-paren">(</span><em>path_or_buf</em>, <em>key</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L2275-L2377"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_hdf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_hdf</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">path_or_buf</em>, <em class="sig-param">key</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L2427-L2530"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_hdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write the contained data to an HDF5 file using HDFStore.</p>
 <p>Hierarchical Data Format (HDF) is self-describing, allowing an
 application to interpret the structure and contents of a file with
@@ -92,52 +92,42 @@ which can be accessed as a group or as individual objects.</p>
 <p>In order to add another DataFrame or Series to an existing HDF file
 please use append mode and a different a key.</p>
 <p>For more information see the <a class="reference internal" href="../../user_guide/io.html#io-hdf5"><span class="std std-ref">user guide</span></a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>path_or_buf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or pandas.HDFStore</span></dt>
-<dd><p class="first last">File path or HDFStore object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path_or_buf</strong><span class="classifier">str or pandas.HDFStore</span></dt><dd><p>File path or HDFStore object.</p>
 </dd>
-<dt><strong>key</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">Identifier for the group in the store.</p>
+<dt><strong>key</strong><span class="classifier">str</span></dt><dd><p>Identifier for the group in the store.</p>
 </dd>
-<dt><strong>mode</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘a’, ‘w’, ‘r+’}, default ‘a’</span></dt>
-<dd><p class="first">Mode to open file:</p>
-<ul class="last simple">
-<li>‘w’: write, a new file is created (an existing file with
-the same name would be deleted).</li>
-<li>‘a’: append, an existing file is opened for reading and
-writing, and if the file does not exist it is created.</li>
-<li>‘r+’: similar to ‘a’, but the file must already exist.</li>
+<dt><strong>mode</strong><span class="classifier">{‘a’, ‘w’, ‘r+’}, default ‘a’</span></dt><dd><p>Mode to open file:</p>
+<ul class="simple">
+<li><p>‘w’: write, a new file is created (an existing file with
+the same name would be deleted).</p></li>
+<li><p>‘a’: append, an existing file is opened for reading and
+writing, and if the file does not exist it is created.</p></li>
+<li><p>‘r+’: similar to ‘a’, but the file must already exist.</p></li>
 </ul>
 </dd>
-<dt><strong>format</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘fixed’, ‘table’}, default ‘fixed’</span></dt>
-<dd><p class="first">Possible values:</p>
-<ul class="last simple">
-<li>‘fixed’: Fixed format. Fast writing/reading. Not-appendable,
-nor searchable.</li>
-<li>‘table’: Table format. Write as a PyTables Table structure
+<dt><strong>format</strong><span class="classifier">{‘fixed’, ‘table’}, default ‘fixed’</span></dt><dd><p>Possible values:</p>
+<ul class="simple">
+<li><p>‘fixed’: Fixed format. Fast writing/reading. Not-appendable,
+nor searchable.</p></li>
+<li><p>‘table’: Table format. Write as a PyTables Table structure
 which may perform worse but allow more flexible operations
-like searching / selecting subsets of the data.</li>
+like searching / selecting subsets of the data.</p></li>
 </ul>
 </dd>
-<dt><strong>append</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">For Table formats, append the input data to the existing.</p>
+<dt><strong>append</strong><span class="classifier">bool, default False</span></dt><dd><p>For Table formats, append the input data to the existing.</p>
 </dd>
-<dt><strong>data_columns</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of columns or True, optional</span></dt>
-<dd><p class="first last">List of columns to create as indexed data columns for on-disk
+<dt><strong>data_columns</strong><span class="classifier">list of columns or True, optional</span></dt><dd><p>List of columns to create as indexed data columns for on-disk
 queries, or True to use all columns. By default only the axes
 of the object are indexed. See <a class="reference internal" href="../../user_guide/io.html#io-hdf5-query-data-columns"><span class="std std-ref">Query via Data Columns</span></a>.
 Applicable only to format=’table’.</p>
 </dd>
-<dt><strong>complevel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{0-9}, optional</span></dt>
-<dd><p class="first last">Specifies a compression level for data.
+<dt><strong>complevel</strong><span class="classifier">{0-9}, optional</span></dt><dd><p>Specifies a compression level for data.
 A value of 0 disables compression.</p>
 </dd>
-<dt><strong>complib</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘zlib’, ‘lzo’, ‘bzip2’, ‘blosc’}, default ‘zlib’</span></dt>
-<dd><p class="first last">Specifies the compression library to be used.
+<dt><strong>complib</strong><span class="classifier">{‘zlib’, ‘lzo’, ‘bzip2’, ‘blosc’}, default ‘zlib’</span></dt><dd><p>Specifies the compression library to be used.
 As of v0.20.2 these additional compressors for Blosc are supported
 (default if no compressor specified: ‘blosc:blosclz’):
 {‘blosc:blosclz’, ‘blosc:lz4’, ‘blosc:lz4hc’, ‘blosc:snappy’,
@@ -145,35 +135,30 @@ As of v0.20.2 these additional compressors for Blosc are supported
 Specifying a compression library which is not available issues
 a ValueError.</p>
 </dd>
-<dt><strong>fletcher32</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">If applying compression use the fletcher32 checksum.</p>
+<dt><strong>fletcher32</strong><span class="classifier">bool, default False</span></dt><dd><p>If applying compression use the fletcher32 checksum.</p>
 </dd>
-<dt><strong>dropna</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">If true, ALL nan rows will not be written to store.</p>
+<dt><strong>dropna</strong><span class="classifier">bool, default False</span></dt><dd><p>If true, ALL nan rows will not be written to store.</p>
 </dd>
-<dt><strong>errors</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default ‘strict’</span></dt>
-<dd><p class="first last">Specifies how encoding and decoding errors are to be handled.
+<dt><strong>errors</strong><span class="classifier">str, default ‘strict’</span></dt><dd><p>Specifies how encoding and decoding errors are to be handled.
 See the errors argument for <a class="reference external" href="https://docs.python.org/3/library/functions.html#open" title="(in Python v3.7)"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> for a full list
 of options.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.read_hdf</span></code></dt>
-<dd>Read from HDF file.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_parquet.html#pandas.DataFrame.to_parquet" title="pandas.DataFrame.to_parquet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_parquet</span></code></a></dt>
-<dd>Write a DataFrame to the binary parquet format.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_sql</span></code></a></dt>
-<dd>Write to a sql table.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_feather.html#pandas.DataFrame.to_feather" title="pandas.DataFrame.to_feather"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_feather</span></code></a></dt>
-<dd>Write out feather-format for DataFrames.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" title="pandas.DataFrame.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_csv</span></code></a></dt>
-<dd>Write out to a csv file.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.read_hdf</span></code></dt><dd><p>Read from HDF file.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_parquet.html#pandas.DataFrame.to_parquet" title="pandas.DataFrame.to_parquet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_parquet</span></code></a></dt><dd><p>Write a DataFrame to the binary parquet format.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_sql</span></code></a></dt><dd><p>Write to a sql table.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_feather.html#pandas.DataFrame.to_feather" title="pandas.DataFrame.to_feather"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_feather</span></code></a></dt><dd><p>Write out feather-format for DataFrames.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" title="pandas.DataFrame.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_csv</span></code></a></dt><dd><p>Write out to a csv file.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>

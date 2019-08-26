@@ -129,11 +129,11 @@ was started to provide a more detailed look at the <a class="reference external"
 party libraries as they relate to <code class="docutils literal notranslate"><span class="pre">pandas</span></code>. In comparisons with R and CRAN
 libraries, we care about the following things:</p>
 <ul class="simple">
-<li><strong>Functionality / flexibility</strong>: what can/cannot be done with each tool</li>
-<li><strong>Performance</strong>: how fast are operations. Hard numbers/benchmarks are
-preferable</li>
-<li><strong>Ease-of-use</strong>: Is one tool easier/harder to use (you may have to be
-the judge of this, given side-by-side code comparisons)</li>
+<li><p><strong>Functionality / flexibility</strong>: what can/cannot be done with each tool</p></li>
+<li><p><strong>Performance</strong>: how fast are operations. Hard numbers/benchmarks are
+preferable</p></li>
+<li><p><strong>Ease-of-use</strong>: Is one tool easier/harder to use (you may have to be
+the judge of this, given side-by-side code comparisons)</p></li>
 </ul>
 <p>This page is also here to offer a bit of a translation guide for users of these
 R packages.</p>
@@ -147,138 +147,137 @@ operations using <a class="reference external" href="http://cran.r-project.org/w
 pandas equivalents.</p>
 <div class="section" id="querying-filtering-sampling">
 <h3>Querying, Filtering, Sampling<a class="headerlink" href="#querying-filtering-sampling" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="43%" />
-<col width="57%" />
+<col style="width: 43%" />
+<col style="width: 57%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">dim(df)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dim(df)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">head(df)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.head()</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">head(df)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.head()</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">slice(df,</span> <span class="pre">1:10)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.iloc[:9]</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">slice(df,</span> <span class="pre">1:10)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.iloc[:9]</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">filter(df,</span> <span class="pre">col1</span> <span class="pre">==</span> <span class="pre">1,</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.query('col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1')</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">filter(df,</span> <span class="pre">col1</span> <span class="pre">==</span> <span class="pre">1,</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.query('col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">col2</span> <span class="pre">==</span> <span class="pre">1')</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">df[df$col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">df$col2</span> <span class="pre">==</span> <span class="pre">1,]</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[(df.col1</span> <span class="pre">==</span> <span class="pre">1)</span> <span class="pre">&amp;</span> <span class="pre">(df.col2</span> <span class="pre">==</span> <span class="pre">1)]</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df[df$col1</span> <span class="pre">==</span> <span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">df$col2</span> <span class="pre">==</span> <span class="pre">1,]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[(df.col1</span> <span class="pre">==</span> <span class="pre">1)</span> <span class="pre">&amp;</span> <span class="pre">(df.col2</span> <span class="pre">==</span> <span class="pre">1)]</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']]</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']]</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1:col3)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.loc[:,</span> <span class="pre">'col1':'col3']</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1:col3)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[:,</span> <span class="pre">'col1':'col3']</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">-(col1:col3))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.drop(cols_to_drop,</span> <span class="pre">axis=1)</span></code> but see <a class="footnote-reference" href="#select-range" id="id1">[1]</a></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">-(col1:col3))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.drop(cols_to_drop,</span> <span class="pre">axis=1)</span></code> but see <a class="footnote-reference brackets" href="#select-range" id="id1">1</a></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[['col1']].drop_duplicates()</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[['col1']].drop_duplicates()</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1,</span> <span class="pre">col2))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']].drop_duplicates()</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">distinct(select(df,</span> <span class="pre">col1,</span> <span class="pre">col2))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']].drop_duplicates()</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">sample_n(df,</span> <span class="pre">10)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sample(n=10)</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sample_n(df,</span> <span class="pre">10)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sample(n=10)</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">sample_frac(df,</span> <span class="pre">0.01)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sample(frac=0.01)</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sample_frac(df,</span> <span class="pre">0.01)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sample(frac=0.01)</span></code></p></td>
 </tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="select-range" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>R’s shorthand for a subrange of columns
+<dl class="footnote brackets">
+<dt class="label" id="select-range"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>R’s shorthand for a subrange of columns
 (<code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col1:col3)</span></code>) can be approached
 cleanly in pandas, if you have the list of columns,
 for example <code class="docutils literal notranslate"><span class="pre">df[cols[1:3]]</span></code> or
 <code class="docutils literal notranslate"><span class="pre">df.drop(cols[1:3])</span></code>, but doing this by column
-name is a bit messy.</td></tr>
-</tbody>
-</table>
+name is a bit messy.</p>
+</dd>
+</dl>
 </div>
 <div class="section" id="sorting">
 <h3>Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sort_values(['col1',</span> <span class="pre">'col2'])</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">col1,</span> <span class="pre">col2)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sort_values(['col1',</span> <span class="pre">'col2'])</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">desc(col1))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.sort_values('col1',</span> <span class="pre">ascending=False)</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">arrange(df,</span> <span class="pre">desc(col1))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sort_values('col1',</span> <span class="pre">ascending=False)</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="transforming">
 <h3>Transforming<a class="headerlink" href="#transforming" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="45%" />
-<col width="55%" />
+<col style="width: 45%" />
+<col style="width: 55%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})['col_one']</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">select(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})['col_one']</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">rename(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rename(df,</span> <span class="pre">col_one</span> <span class="pre">=</span> <span class="pre">col1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'col1':</span> <span class="pre">'col_one'})</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mutate(df,</span> <span class="pre">c=a-b)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.assign(c=df.a-df.b)</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mutate(df,</span> <span class="pre">c=a-b)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.assign(c=df.a-df.b)</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="grouping-and-summarizing">
 <h3>Grouping and Summarizing<a class="headerlink" href="#grouping-and-summarizing" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="51%" />
-<col width="49%" />
+<col style="width: 51%" />
+<col style="width: 49%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">pandas</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>pandas</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">summary(df)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code></td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">summary(df)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">&lt;-</span> <span class="pre">group_by(df,</span> <span class="pre">col1)</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">=</span> <span class="pre">df.groupby('col1')</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">&lt;-</span> <span class="pre">group_by(df,</span> <span class="pre">col1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gdf</span> <span class="pre">=</span> <span class="pre">df.groupby('col1')</span></code></p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">avg=mean(col1,</span> <span class="pre">na.rm=TRUE))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').agg({'col1':</span> <span class="pre">'mean'})</span></code></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">avg=mean(col1,</span> <span class="pre">na.rm=TRUE))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').agg({'col1':</span> <span class="pre">'mean'})</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">total=sum(col1))</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').sum()</span></code></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">summarise(gdf,</span> <span class="pre">total=sum(col1))</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.groupby('col1').sum()</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -457,25 +456,25 @@ documentation</span></a>.</p>
 analysis. The functions revolve around three data structures in R, <code class="docutils literal notranslate"><span class="pre">a</span></code>
 for <code class="docutils literal notranslate"><span class="pre">arrays</span></code>, <code class="docutils literal notranslate"><span class="pre">l</span></code> for <code class="docutils literal notranslate"><span class="pre">lists</span></code>, and <code class="docutils literal notranslate"><span class="pre">d</span></code> for <code class="docutils literal notranslate"><span class="pre">data.frame</span></code>. The
 table below shows how these data structures could be mapped in Python.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="28%" />
-<col width="72%" />
+<col style="width: 28%" />
+<col style="width: 72%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">R</th>
-<th class="head">Python</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>R</p></th>
+<th class="head"><p>Python</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>array</td>
-<td>list</td>
+<tbody>
+<tr class="row-even"><td><p>array</p></td>
+<td><p>list</p></td>
 </tr>
-<tr class="row-odd"><td>lists</td>
-<td>dictionary or list of objects</td>
+<tr class="row-odd"><td><p>lists</p></td>
+<td><p>dictionary or list of objects</p></td>
 </tr>
-<tr class="row-even"><td>data.frame</td>
-<td>dataframe</td>
+<tr class="row-even"><td><p>data.frame</p></td>
+<td><p>dataframe</p></td>
 </tr>
 </tbody>
 </table>

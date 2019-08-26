@@ -108,14 +108,14 @@
 <li class="toc-entry toc-h3"><a class="reference internal" href="#caveats">Caveats</a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a class="reference internal" href="#expression-evaluation-via-eval">Expression Evaluation via <code class="docutils literal notranslate"><span class="pre">eval()</span></code></a><ul>
+<li class="toc-entry toc-h2"><a class="reference internal" href="#expression-evaluation-via-eval">Expression Evaluation via <code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a><ul>
 <li class="toc-entry toc-h3"><a class="reference internal" href="#supported-syntax">Supported Syntax</a></li>
-<li class="toc-entry toc-h3"><a class="reference internal" href="#eval-examples"><code class="docutils literal notranslate"><span class="pre">eval()</span></code> Examples</a></li>
+<li class="toc-entry toc-h3"><a class="reference internal" href="#eval-examples"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code> Examples</a></li>
 <li class="toc-entry toc-h3"><a class="reference internal" href="#the-dataframe-eval-method">The <code class="docutils literal notranslate"><span class="pre">DataFrame.eval</span></code> method</a></li>
 <li class="toc-entry toc-h3"><a class="reference internal" href="#local-variables">Local Variables</a></li>
-<li class="toc-entry toc-h3"><a class="reference internal" href="#pandas-eval-parsers"><code class="docutils literal notranslate"><span class="pre">pandas.eval()</span></code> Parsers</a></li>
-<li class="toc-entry toc-h3"><a class="reference internal" href="#pandas-eval-backends"><code class="docutils literal notranslate"><span class="pre">pandas.eval()</span></code> Backends</a></li>
-<li class="toc-entry toc-h3"><a class="reference internal" href="#pandas-eval-performance"><code class="docutils literal notranslate"><span class="pre">pandas.eval()</span></code> Performance</a></li>
+<li class="toc-entry toc-h3"><a class="reference internal" href="#pandas-eval-parsers"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code> Parsers</a></li>
+<li class="toc-entry toc-h3"><a class="reference internal" href="#pandas-eval-backends"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code> Backends</a></li>
+<li class="toc-entry toc-h3"><a class="reference internal" href="#pandas-eval-performance"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code> Performance</a></li>
 <li class="toc-entry toc-h3"><a class="reference internal" href="#technical-minutia-regarding-expression-evaluation">Technical Minutia Regarding Expression Evaluation</a></li>
 </ul>
 </li>
@@ -191,8 +191,8 @@ four calls) using the <a class="reference external" href="http://ipython.org/ipy
 <p>By far the majority of time is spend inside either <code class="docutils literal notranslate"><span class="pre">integrate_f</span></code> or <code class="docutils literal notranslate"><span class="pre">f</span></code>,
 hence we’ll concentrate our efforts cythonizing these two functions.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In Python 2 replacing the <code class="docutils literal notranslate"><span class="pre">range</span></code> with its generator counterpart (<code class="docutils literal notranslate"><span class="pre">xrange</span></code>)
+<p class="admonition-title">Note</p>
+<p>In Python 2 replacing the <code class="docutils literal notranslate"><span class="pre">range</span></code> with its generator counterpart (<code class="docutils literal notranslate"><span class="pre">xrange</span></code>)
 would mean the <code class="docutils literal notranslate"><span class="pre">range</span></code> line would vanish. In Python 3 <code class="docutils literal notranslate"><span class="pre">range</span></code> is already a generator.</p>
 </div>
 </div>
@@ -217,8 +217,8 @@ is here to distinguish between function versions):</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you’re having trouble pasting the above into your ipython, you may need
+<p class="admonition-title">Note</p>
+<p>If you’re having trouble pasting the above into your ipython, you may need
 to be using bleeding edge ipython for paste to play well with cell magics.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="o">%</span><span class="k">timeit</span> df.apply(lambda x: integrate_f_plain(x[&#39;a&#39;], x[&#39;b&#39;], x[&#39;N&#39;]), axis=1)
@@ -261,8 +261,8 @@ look at what’s eating up time:</p>
 the index and the series (three times for each row). Function calls are expensive
 in Python, so maybe we could minimize these by cythonizing the apply part.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">We are now passing ndarrays into the Cython function, fortunately Cython plays
+<p class="admonition-title">Note</p>
+<p>We are now passing ndarrays into the Cython function, fortunately Cython plays
 very nicely with NumPy.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="o">%%</span><span class="k">cython</span>
@@ -294,7 +294,7 @@ very nicely with NumPy.</p>
 <p>The implementation is simple, it creates an array of zeros and loops over
 the rows, applying our <code class="docutils literal notranslate"><span class="pre">integrate_f_typed</span></code>, and putting this in the zeros array.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>You can <strong>not pass</strong> a <code class="docutils literal notranslate"><span class="pre">Series</span></code> directly as a <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> typed parameter
 to a Cython function. Instead pass the actual <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> using the
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code>. The reason is that the Cython
@@ -304,15 +304,15 @@ definition is specific to an ndarray and not the passed <code class="docutils li
 </pre></div>
 </div>
 <p>But rather, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code> to get the underlying <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>:</p>
-<div class="last highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">apply_integrate_f</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">apply_integrate_f</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                   <span class="n">df</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
                   <span class="n">df</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Loops like this would be <em>extremely</em> slow in Python, but in Cython looping
+<p class="admonition-title">Note</p>
+<p>Loops like this would be <em>extremely</em> slow in Python, but in Cython looping
 over NumPy arrays is <em>fast</em>.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="o">%</span><span class="k">timeit</span> apply_integrate_f(df[&#39;a&#39;].values, df[&#39;b&#39;].values, df[&#39;N&#39;].values)
@@ -375,12 +375,12 @@ For more about <code class="docutils literal notranslate"><span class="pre">boun
 <p>Numba gives you the power to speed up your applications with high performance functions written directly in Python. With a few annotations, array-oriented and math-heavy Python code can be just-in-time compiled to native machine instructions, similar in performance to C, C++ and Fortran, without having to switch languages or Python interpreters.</p>
 <p>Numba works by generating optimized machine code using the LLVM compiler infrastructure at import time, runtime, or statically (using the included pycc tool). Numba supports compilation of Python to run on either CPU or GPU hardware, and is designed to integrate with the Python scientific software stack.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You will need to install Numba. This is easy with <code class="docutils literal notranslate"><span class="pre">conda</span></code>, by using: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">numba</span></code>, see <a class="reference internal" href="../install.html#install-miniconda"><span class="std std-ref">installing using miniconda</span></a>.</p>
+<p class="admonition-title">Note</p>
+<p>You will need to install Numba. This is easy with <code class="docutils literal notranslate"><span class="pre">conda</span></code>, by using: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">numba</span></code>, see <a class="reference internal" href="../install.html#install-miniconda"><span class="std std-ref">installing using miniconda</span></a>.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">As of Numba version 0.20, pandas objects cannot be passed directly to Numba-compiled functions. Instead, one must pass the NumPy array underlying the pandas object to the Numba-compiled function as demonstrated below.</p>
+<p class="admonition-title">Note</p>
+<p>As of Numba version 0.20, pandas objects cannot be passed directly to Numba-compiled functions. Instead, one must pass the NumPy array underlying the pandas object to the Numba-compiled function as demonstrated below.</p>
 </div>
 <div class="section" id="jit">
 <h3>Jit<a class="headerlink" href="#jit" title="Permalink to this headline">¶</a></h3>
@@ -461,8 +461,8 @@ Consider the following toy example of doubling each observation:</p>
 <div class="section" id="caveats">
 <h3>Caveats<a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Numba will execute on any function, but can only accelerate certain classes of functions.</p>
+<p class="admonition-title">Note</p>
+<p>Numba will execute on any function, but can only accelerate certain classes of functions.</p>
 </div>
 <p>Numba is best at accelerating functions that apply numerical functions to NumPy
 arrays. When passed a function that only uses operations it knows how to
@@ -483,8 +483,8 @@ troubleshooting Numba modes, see the <a class="reference external" href="http://
 <p>The top-level function <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a> implements expression evaluation of
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code> and <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> objects.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To benefit from using <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> you need to
+<p class="admonition-title">Note</p>
+<p>To benefit from using <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> you need to
 install <code class="docutils literal notranslate"><span class="pre">numexpr</span></code>. See the <a class="reference internal" href="../install.html#install-recommended-dependencies"><span class="std std-ref">recommended dependencies section</span></a> for more details.</p>
 </div>
 <p>The point of using <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> for expression evaluation rather than
@@ -493,8 +493,8 @@ evaluated more efficiently and 2) large arithmetic and boolean expressions are
 evaluated all at once by the underlying engine (by default <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> is used
 for evaluation).</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You should not use <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> for simple
+<p class="admonition-title">Note</p>
+<p>You should not use <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> for simple
 expressions or for expressions involving small DataFrames. In fact,
 <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> is many orders of magnitude slower for
 smaller expressions/objects than plain ol’ Python. A good rule of thumb is
@@ -504,50 +504,50 @@ to only use <a class="reference internal" href="../reference/api/pandas.eval.htm
 <p><a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> supports all arithmetic expressions supported by the
 engine in addition to some extensions available only in pandas.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The larger the frame and the larger the expression the more speedup you will
+<p class="admonition-title">Note</p>
+<p>The larger the frame and the larger the expression the more speedup you will
 see from using <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>.</p>
 </div>
 <div class="section" id="supported-syntax">
 <h3>Supported Syntax<a class="headerlink" href="#supported-syntax" title="Permalink to this headline">¶</a></h3>
 <p>These operations are supported by <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.eval()</span></code></a>:</p>
 <ul class="simple">
-<li>Arithmetic operations except for the left shift (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>) and right shift
-(<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>) operators, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">/</span> <span class="pre">s</span> <span class="pre">**</span> <span class="pre">4</span> <span class="pre">%</span> <span class="pre">42</span> <span class="pre">-</span> <span class="pre">the_golden_ratio</span></code></li>
-<li>Comparison operations, including chained comparisons, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span></code></li>
-<li>Boolean operations, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span> <span class="pre">and</span> <span class="pre">df3</span> <span class="pre">&lt;</span> <span class="pre">df4</span> <span class="pre">or</span> <span class="pre">not</span> <span class="pre">df_bool</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">tuple</span></code> literals, e.g., <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code> or <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code></li>
-<li>Attribute access, e.g., <code class="docutils literal notranslate"><span class="pre">df.a</span></code></li>
-<li>Subscript expressions, e.g., <code class="docutils literal notranslate"><span class="pre">df[0]</span></code></li>
-<li>Simple variable evaluation, e.g., <code class="docutils literal notranslate"><span class="pre">pd.eval('df')</span></code> (this is not very useful)</li>
-<li>Math functions: <cite>sin</cite>, <cite>cos</cite>, <cite>exp</cite>, <cite>log</cite>, <cite>expm1</cite>, <cite>log1p</cite>,
+<li><p>Arithmetic operations except for the left shift (<code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code>) and right shift
+(<code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>) operators, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">pi</span> <span class="pre">/</span> <span class="pre">s</span> <span class="pre">**</span> <span class="pre">4</span> <span class="pre">%</span> <span class="pre">42</span> <span class="pre">-</span> <span class="pre">the_golden_ratio</span></code></p></li>
+<li><p>Comparison operations, including chained comparisons, e.g., <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span></code></p></li>
+<li><p>Boolean operations, e.g., <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">&lt;</span> <span class="pre">df2</span> <span class="pre">and</span> <span class="pre">df3</span> <span class="pre">&lt;</span> <span class="pre">df4</span> <span class="pre">or</span> <span class="pre">not</span> <span class="pre">df_bool</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">tuple</span></code> literals, e.g., <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span></code> or <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">2)</span></code></p></li>
+<li><p>Attribute access, e.g., <code class="docutils literal notranslate"><span class="pre">df.a</span></code></p></li>
+<li><p>Subscript expressions, e.g., <code class="docutils literal notranslate"><span class="pre">df[0]</span></code></p></li>
+<li><p>Simple variable evaluation, e.g., <code class="docutils literal notranslate"><span class="pre">pd.eval('df')</span></code> (this is not very useful)</p></li>
+<li><p>Math functions: <cite>sin</cite>, <cite>cos</cite>, <cite>exp</cite>, <cite>log</cite>, <cite>expm1</cite>, <cite>log1p</cite>,
 <cite>sqrt</cite>, <cite>sinh</cite>, <cite>cosh</cite>, <cite>tanh</cite>, <cite>arcsin</cite>, <cite>arccos</cite>, <cite>arctan</cite>, <cite>arccosh</cite>,
-<cite>arcsinh</cite>, <cite>arctanh</cite>, <cite>abs</cite>, <cite>arctan2</cite> and <cite>log10</cite>.</li>
+<cite>arcsinh</cite>, <cite>arctanh</cite>, <cite>abs</cite>, <cite>arctan2</cite> and <cite>log10</cite>.</p></li>
 </ul>
 <p>This Python syntax is <strong>not</strong> allowed:</p>
 <ul>
-<li><p class="first">Expressions</p>
+<li><p>Expressions</p>
 <blockquote>
 <div><ul class="simple">
-<li>Function calls other than math functions.</li>
-<li><code class="docutils literal notranslate"><span class="pre">is</span></code>/<code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> operations</li>
-<li><code class="docutils literal notranslate"><span class="pre">if</span></code> expressions</li>
-<li><code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions</li>
-<li><code class="docutils literal notranslate"><span class="pre">list</span></code>/<code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">dict</span></code> comprehensions</li>
-<li>Literal <code class="docutils literal notranslate"><span class="pre">dict</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> expressions</li>
-<li><code class="docutils literal notranslate"><span class="pre">yield</span></code> expressions</li>
-<li>Generator expressions</li>
-<li>Boolean expressions consisting of only scalar values</li>
+<li><p>Function calls other than math functions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is</span></code>/<code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> operations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> expressions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span></code> expressions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code>/<code class="docutils literal notranslate"><span class="pre">set</span></code>/<code class="docutils literal notranslate"><span class="pre">dict</span></code> comprehensions</p></li>
+<li><p>Literal <code class="docutils literal notranslate"><span class="pre">dict</span></code> and <code class="docutils literal notranslate"><span class="pre">set</span></code> expressions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">yield</span></code> expressions</p></li>
+<li><p>Generator expressions</p></li>
+<li><p>Boolean expressions consisting of only scalar values</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Statements</p>
+<li><p>Statements</p>
 <blockquote>
 <div><ul class="simple">
-<li>Neither <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html">simple</a>
+<li><p>Neither <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html">simple</a>
 nor <a class="reference external" href="https://docs.python.org/3/reference/compound_stmts.html">compound</a>
 statements are allowed. This includes things like <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">if</span></code>.</li>
+<code class="docutils literal notranslate"><span class="pre">if</span></code>.</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -587,7 +587,7 @@ statements are allowed. This includes things like <code class="docutils literal 
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Operations such as</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">and</span> <span class="mi">2</span>  <span class="c1"># would parse to 1 &amp; 2, but should evaluate to 2</span>
@@ -596,7 +596,7 @@ statements are allowed. This includes things like <code class="docutils literal 
 </pre></div>
 </div>
 </div></blockquote>
-<p class="last">should be performed in Python. An exception will be raised if you try to
+<p>should be performed in Python. An exception will be raised if you try to
 perform any boolean/bitwise operations with scalar operands that are not
 of type <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">np.bool_</span></code>. Again, you should perform these kinds of
 operations in plain Python.</p>
@@ -620,13 +620,13 @@ This allows for <em>formulaic evaluation</em>.  The assignment target can be a
 new column name or an existing column name, and it must be a valid Python
 identifier.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">inplace</span></code> keyword determines whether this assignment will performed
 on the original <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or return a copy with the new column.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> if not
+<p class="admonition-title">Warning</p>
+<p>For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> if not
 specified. This will change in a future version of pandas - if your
 code depends on an inplace assignment you should update to explicitly
 set <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code>.</p>
@@ -652,7 +652,7 @@ new or modified columns is returned and the original frame is unchanged.</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>As a convenience, multiple assignments can be performed by using a
 multi-line string.</p>
@@ -676,7 +676,7 @@ multi-line string.</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">query</span></code> method gained the <code class="docutils literal notranslate"><span class="pre">inplace</span></code> keyword which determines
 whether the query modifies the original frame.</p>
@@ -690,8 +690,8 @@ whether the query modifies the original frame.</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Unlike with <code class="docutils literal notranslate"><span class="pre">eval</span></code>, the default value for <code class="docutils literal notranslate"><span class="pre">inplace</span></code> for <code class="docutils literal notranslate"><span class="pre">query</span></code>
+<p class="admonition-title">Warning</p>
+<p>Unlike with <code class="docutils literal notranslate"><span class="pre">eval</span></code>, the default value for <code class="docutils literal notranslate"><span class="pre">inplace</span></code> for <code class="docutils literal notranslate"><span class="pre">query</span></code>
 is <code class="docutils literal notranslate"><span class="pre">False</span></code>.  This is consistent with prior versions of pandas.</p>
 </div>
 </div>
@@ -777,8 +777,8 @@ in vanilla Python.</p>
 <p>There’s also the option to make <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> operate identical to plain
 ol’ Python.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Using the <code class="docutils literal notranslate"><span class="pre">'python'</span></code> engine is generally <em>not</em> useful, except for testing
+<p class="admonition-title">Note</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">'python'</span></code> engine is generally <em>not</em> useful, except for testing
 other evaluation engines against it. You will achieve <strong>no</strong> performance
 benefits using <a class="reference internal" href="../reference/api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">engine='python'</span></code> and in fact may
 incur a performance hit.</p>
@@ -802,10 +802,10 @@ significant performance benefit.  Here is a plot showing the running time of
 computation. The two lines are two different engines.</p>
 <img alt="../_images/eval-perf.png" src="../_images/eval-perf.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Operations with smallish objects (around 15k-20k rows) are faster using
 plain Python:</p>
-<blockquote class="last">
+<blockquote>
 <div><img alt="../_images/eval-perf-small.png" src="../_images/eval-perf-small.png" />
 </div></blockquote>
 </div>

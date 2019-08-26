@@ -199,12 +199,11 @@ of elements to display is five, but you may pass a custom number.</p>
 <span id="basics-attrs"></span><h2>Attributes and Underlying Data<a class="headerlink" href="#attributes-and-underlying-data" title="Permalink to this headline">¶</a></h2>
 <p>pandas objects have a number of attributes enabling you to access the metadata</p>
 <ul class="simple">
-<li><strong>shape</strong>: gives the axis dimensions of the object, consistent with ndarray</li>
-<li><dl class="first docutils">
-<dt>Axis labels</dt>
-<dd><ul class="first last">
-<li><strong>Series</strong>: <em>index</em> (only axis)</li>
-<li><strong>DataFrame</strong>: <em>index</em> (rows) and <em>columns</em></li>
+<li><p><strong>shape</strong>: gives the axis dimensions of the object, consistent with ndarray</p></li>
+<li><dl class="simple">
+<dt>Axis labels</dt><dd><ul>
+<li><p><strong>Series</strong>: <em>index</em> (only axis)</p></li>
+<li><p><strong>DataFrame</strong>: <em>index</em> (rows) and <em>columns</em></p></li>
 </ul>
 </dd>
 </dl>
@@ -221,7 +220,7 @@ of elements to display is five, but you may pass a custom number.</p>
 <p>Pandas objects (<code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>, <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) can be
 thought of as containers for arrays, which hold the actual data and do the
 actual computation. For many types, the underlying array is a
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>. However, pandas and 3rd party libraries may <em>extend</em>
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>. However, pandas and 3rd party libraries may <em>extend</em>
 NumPy’s type system to add support for custom arrays
 (see <a class="reference internal" href="#basics-dtypes"><span class="std std-ref">dtypes</span></a>).</p>
 <p>To get the actual data inside a <code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>, use
@@ -245,14 +244,14 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
 an <code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionArray</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numpy()</span></code>
 may involve copying data and coercing values. See <a class="reference internal" href="#basics-dtypes"><span class="std std-ref">dtypes</span></a> for more.</p>
 <p><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numpy()</span></code> gives some control over the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> of the
-resulting <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>. For example, consider datetimes with timezones.
+resulting <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>. For example, consider datetimes with timezones.
 NumPy doesn’t have a dtype to represent timezone-aware datetimes, so there
 are two possibly useful representations:</p>
 <ol class="arabic simple">
-<li>An object-dtype <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> objects, each
-with the correct <code class="docutils literal notranslate"><span class="pre">tz</span></code></li>
-<li>A <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> -dtype <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.16)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, where the values have
-been converted to UTC and the timezone discarded</li>
+<li><p>An object-dtype <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> with <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> objects, each
+with the correct <code class="docutils literal notranslate"><span class="pre">tz</span></code></p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> -dtype <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a>, where the values have
+been converted to UTC and the timezone discarded</p></li>
 </ol>
 <p>Timezones may be preserved with <code class="docutils literal notranslate"><span class="pre">dtype=object</span></code></p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s2">&quot;CET&quot;</span><span class="p">))</span>
@@ -276,8 +275,8 @@ structure. For heterogeneous data (e.g. some of the DataFrame’s columns are no
 all the same dtype), this will not be the case. The values attribute itself,
 unlike the axis labels, cannot be assigned to.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When working with heterogeneous data, the dtype of the resulting ndarray
+<p class="admonition-title">Note</p>
+<p>When working with heterogeneous data, the dtype of the resulting ndarray
 will be chosen to accommodate all of the data involved. For example, if
 strings are involved, the result will be of object dtype. If there are only
 floats and integers, the resulting array will be of float dtype.</p>
@@ -288,15 +287,15 @@ to these in old code bases and online. Going forward, we recommend avoiding
 <code class="docutils literal notranslate"><span class="pre">.values</span></code> and using <code class="docutils literal notranslate"><span class="pre">.array</span></code> or <code class="docutils literal notranslate"><span class="pre">.to_numpy()</span></code>. <code class="docutils literal notranslate"><span class="pre">.values</span></code> has the following
 drawbacks:</p>
 <ol class="arabic simple">
-<li>When your Series contains an <a class="reference internal" href="../development/extending.html#extending-extension-types"><span class="std std-ref">extension type</span></a>, it’s
+<li><p>When your Series contains an <a class="reference internal" href="../development/extending.html#extending-extension-types"><span class="std std-ref">extension type</span></a>, it’s
 unclear whether <code class="xref py py-attr docutils literal notranslate"><span class="pre">Series.values</span></code> returns a NumPy array or the extension array.
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">Series.array</span></code> will always return an <code class="xref py py-class docutils literal notranslate"><span class="pre">ExtensionArray</span></code>, and will never
 copy data. <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.to_numpy()</span></code> will always return a NumPy array,
-potentially at the cost of copying / coercing values.</li>
-<li>When your DataFrame contains a mixture of data types, <a class="reference internal" href="../reference/api/pandas.DataFrame.values.html#pandas.DataFrame.values" title="pandas.DataFrame.values"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DataFrame.values</span></code></a> may
+potentially at the cost of copying / coercing values.</p></li>
+<li><p>When your DataFrame contains a mixture of data types, <a class="reference internal" href="../reference/api/pandas.DataFrame.values.html#pandas.DataFrame.values" title="pandas.DataFrame.values"><code class="xref py py-attr docutils literal notranslate"><span class="pre">DataFrame.values</span></code></a> may
 involve copying data and coercing values to a common dtype, a relatively expensive
 operation. <a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a>, being a method, makes it clearer that the
-returned NumPy array may not be a view on the same data in the DataFrame.</li>
+returned NumPy array may not be a view on the same data in the DataFrame.</p></li>
 </ol>
 </div>
 <div class="section" id="accelerated-operations">
@@ -308,35 +307,35 @@ speedups. <code class="docutils literal notranslate"><span class="pre">numexpr</
 a set of specialized cython routines that are especially fast when dealing with arrays that have
 <code class="docutils literal notranslate"><span class="pre">nans</span></code>.</p>
 <p>Here is a sample (using 100 column x 100,000 row <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>):</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Operation</th>
-<th class="head">0.11.0 (ms)</th>
-<th class="head">Prior Version (ms)</th>
-<th class="head">Ratio to Prior</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>0.11.0 (ms)</p></th>
+<th class="head"><p>Prior Version (ms)</p></th>
+<th class="head"><p>Ratio to Prior</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">df1</span> <span class="pre">&gt;</span> <span class="pre">df2</span></code></td>
-<td>13.32</td>
-<td>125.35</td>
-<td>0.1063</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df1</span> <span class="pre">&gt;</span> <span class="pre">df2</span></code></p></td>
+<td><p>13.32</p></td>
+<td><p>125.35</p></td>
+<td><p>0.1063</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">df1</span> <span class="pre">*</span> <span class="pre">df2</span></code></td>
-<td>21.71</td>
-<td>36.63</td>
-<td>0.5928</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df1</span> <span class="pre">*</span> <span class="pre">df2</span></code></p></td>
+<td><p>21.71</p></td>
+<td><p>36.63</p></td>
+<td><p>0.5928</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">df1</span> <span class="pre">+</span> <span class="pre">df2</span></code></td>
-<td>22.04</td>
-<td>36.50</td>
-<td>0.6039</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df1</span> <span class="pre">+</span> <span class="pre">df2</span></code></p></td>
+<td><p>22.04</p></td>
+<td><p>36.50</p></td>
+<td><p>0.6039</p></td>
 </tr>
 </tbody>
 </table>
@@ -344,7 +343,7 @@ a set of specialized cython routines that are especially fast when dealing with 
 <a class="reference internal" href="../install.html#install-recommended-dependencies"><span class="std std-ref">Recommended Dependencies</span></a> for more installation info.</p>
 <p>These are both enabled to be used by default, you can control this by setting the options:</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;compute.use_bottleneck&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;compute.use_numexpr&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
@@ -356,9 +355,9 @@ a set of specialized cython routines that are especially fast when dealing with 
 <p>With binary operations between pandas data structures, there are two key points
 of interest:</p>
 <ul class="simple">
-<li>Broadcasting behavior between higher- (e.g. DataFrame) and
-lower-dimensional (e.g. Series) objects.</li>
-<li>Missing data in computations.</li>
+<li><p>Broadcasting behavior between higher- (e.g. DataFrame) and
+lower-dimensional (e.g. Series) objects.</p></li>
+<li><p>Missing data in computations.</p></li>
 </ul>
 <p>We will demonstrate how to manage these issues independently, though they can
 be handled simultaneously.</p>
@@ -499,7 +498,7 @@ way to summarize a boolean result.</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>You might be tempted to do the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">df</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">pass</span>
@@ -510,7 +509,7 @@ way to summarize a boolean result.</p>
 </pre></div>
 </div>
 <p>These will both raise errors, as you are trying to compare multiple values.:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">The</span> <span class="n">truth</span> <span class="n">value</span> <span class="n">of</span> <span class="n">an</span> <span class="n">array</span> <span class="ow">is</span> <span class="n">ambiguous</span><span class="o">.</span> <span class="n">Use</span> <span class="n">a</span><span class="o">.</span><span class="n">empty</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">The</span> <span class="n">truth</span> <span class="n">value</span> <span class="n">of</span> <span class="n">an</span> <span class="n">array</span> <span class="ow">is</span> <span class="n">ambiguous</span><span class="o">.</span> <span class="n">Use</span> <span class="n">a</span><span class="o">.</span><span class="n">empty</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span>
 </pre></div>
 </div>
 </div>
@@ -639,8 +638,8 @@ produce an object of the same size. Generally speaking, these methods take an
 <strong>axis</strong> argument, just like <em>ndarray.{sum, std, …}</em>, but the axis can be
 specified by name or integer:</p>
 <ul class="simple">
-<li><strong>Series</strong>: no axis argument needed</li>
-<li><strong>DataFrame</strong>: “index” (axis=0, default), “columns” (axis=1)</li>
+<li><p><strong>Series</strong>: no axis argument needed</p></li>
+<li><p><strong>DataFrame</strong>: “index” (axis=0, default), “columns” (axis=1)</p></li>
 </ul>
 <p>For example:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [88]: </span><span class="n">df</span>
@@ -679,76 +678,76 @@ For more details please see <a class="reference internal" href="../user_guide/co
 <p>Here is a quick reference summary table of common functions. Each also takes an
 optional <code class="docutils literal notranslate"><span class="pre">level</span></code> parameter which applies only if the object has a
 <a class="reference internal" href="../user_guide/advanced.html#advanced-hierarchical"><span class="std std-ref">hierarchical index</span></a>.</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col style="width: 20%" />
+<col style="width: 80%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Function</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">count</span></code></td>
-<td>Number of non-NA observations</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">count</span></code></p></td>
+<td><p>Number of non-NA observations</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">sum</span></code></td>
-<td>Sum of values</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum</span></code></p></td>
+<td><p>Sum of values</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mean</span></code></td>
-<td>Mean of values</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mean</span></code></p></td>
+<td><p>Mean of values</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">mad</span></code></td>
-<td>Mean absolute deviation</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mad</span></code></p></td>
+<td><p>Mean absolute deviation</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">median</span></code></td>
-<td>Arithmetic median of values</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">median</span></code></p></td>
+<td><p>Arithmetic median of values</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">min</span></code></td>
-<td>Minimum</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min</span></code></p></td>
+<td><p>Minimum</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">max</span></code></td>
-<td>Maximum</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max</span></code></p></td>
+<td><p>Maximum</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">mode</span></code></td>
-<td>Mode</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mode</span></code></p></td>
+<td><p>Mode</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">abs</span></code></td>
-<td>Absolute Value</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">abs</span></code></p></td>
+<td><p>Absolute Value</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">prod</span></code></td>
-<td>Product of values</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">prod</span></code></p></td>
+<td><p>Product of values</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">std</span></code></td>
-<td>Bessel-corrected sample standard deviation</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std</span></code></p></td>
+<td><p>Bessel-corrected sample standard deviation</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">var</span></code></td>
-<td>Unbiased variance</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">var</span></code></p></td>
+<td><p>Unbiased variance</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">sem</span></code></td>
-<td>Standard error of the mean</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sem</span></code></p></td>
+<td><p>Standard error of the mean</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">skew</span></code></td>
-<td>Sample skewness (3rd moment)</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">skew</span></code></p></td>
+<td><p>Sample skewness (3rd moment)</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">kurt</span></code></td>
-<td>Sample kurtosis (4th moment)</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kurt</span></code></p></td>
+<td><p>Sample kurtosis (4th moment)</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">quantile</span></code></td>
-<td>Sample quantile (value at %)</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">quantile</span></code></p></td>
+<td><p>Sample quantile (value at %)</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">cumsum</span></code></td>
-<td>Cumulative sum</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cumsum</span></code></p></td>
+<td><p>Cumulative sum</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">cumprod</span></code></td>
-<td>Cumulative product</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cumprod</span></code></p></td>
+<td><p>Cumulative product</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">cummax</span></code></td>
-<td>Cumulative maximum</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cummax</span></code></p></td>
+<td><p>Cumulative maximum</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">cummin</span></code></td>
-<td>Cumulative minimum</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cummin</span></code></p></td>
+<td><p>Cumulative minimum</p></td>
 </tr>
 </tbody>
 </table>
@@ -853,8 +852,8 @@ matching index:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">idxmin</span></code> and <code class="docutils literal notranslate"><span class="pre">idxmax</span></code> are called <code class="docutils literal notranslate"><span class="pre">argmin</span></code> and <code class="docutils literal notranslate"><span class="pre">argmax</span></code> in NumPy.</p>
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">idxmin</span></code> and <code class="docutils literal notranslate"><span class="pre">idxmax</span></code> are called <code class="docutils literal notranslate"><span class="pre">argmin</span></code> and <code class="docutils literal notranslate"><span class="pre">argmax</span></code> in NumPy.</p>
 </div>
 </div>
 <div class="section" id="value-counts-histogramming-mode">
@@ -928,10 +927,10 @@ you should be aware of the three methods below. The appropriate
 method to use depends on whether your function expects to operate
 on an entire <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or <code class="docutils literal notranslate"><span class="pre">Series</span></code>, row- or column-wise, or elementwise.</p>
 <ol class="arabic simple">
-<li><a class="reference internal" href="#tablewise-function-application">Tablewise Function Application</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.pipe.html#pandas.DataFrame.pipe" title="pandas.DataFrame.pipe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pipe()</span></code></a></li>
-<li><a class="reference internal" href="#row-or-column-wise-function-application">Row or Column-wise Function Application</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a></li>
-<li><a class="reference internal" href="#aggregation-api">Aggregation API</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg" title="pandas.DataFrame.agg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">agg()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code></a></li>
-<li><a class="reference internal" href="#applying-elementwise-functions">Applying Elementwise Functions</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.applymap.html#pandas.DataFrame.applymap" title="pandas.DataFrame.applymap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">applymap()</span></code></a></li>
+<li><p><a class="reference internal" href="#tablewise-function-application">Tablewise Function Application</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.pipe.html#pandas.DataFrame.pipe" title="pandas.DataFrame.pipe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pipe()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#row-or-column-wise-function-application">Row or Column-wise Function Application</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#aggregation-api">Aggregation API</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg" title="pandas.DataFrame.agg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">agg()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#applying-elementwise-functions">Applying Elementwise Functions</a>: <a class="reference internal" href="../reference/api/pandas.DataFrame.applymap.html#pandas.DataFrame.applymap" title="pandas.DataFrame.applymap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">applymap()</span></code></a></p></li>
 </ol>
 <div class="section" id="tablewise-function-application">
 <span id="basics-pipe"></span><h3>Tablewise Function Application<a class="headerlink" href="#tablewise-function-application" title="Permalink to this headline">¶</a></h3>
@@ -999,9 +998,9 @@ statistics methods, takes an optional <code class="docutils literal notranslate"
 <p>The return type of the function passed to <a class="reference internal" href="../reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> affects the
 type of the final output from <code class="docutils literal notranslate"><span class="pre">DataFrame.apply</span></code> for the default behaviour:</p>
 <ul class="simple">
-<li>If the applied function returns a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, the final output is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.
-The columns match the index of the <code class="docutils literal notranslate"><span class="pre">Series</span></code> returned by the applied function.</li>
-<li>If the applied function returns any other type, the final output is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</li>
+<li><p>If the applied function returns a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, the final output is a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.
+The columns match the index of the <code class="docutils literal notranslate"><span class="pre">Series</span></code> returned by the applied function.</p></li>
+<li><p>If the applied function returns any other type, the final output is a <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p></li>
 </ul>
 <p>This default behaviour can be overridden using the <code class="docutils literal notranslate"><span class="pre">result_type</span></code>, which
 accepts three options: <code class="docutils literal notranslate"><span class="pre">reduce</span></code>, <code class="docutils literal notranslate"><span class="pre">broadcast</span></code>, and <code class="docutils literal notranslate"><span class="pre">expand</span></code>.
@@ -1042,7 +1041,7 @@ functionality.</p>
 <div class="section" id="aggregation-api">
 <span id="basics-aggregate"></span><h3>Aggregation API<a class="headerlink" href="#aggregation-api" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <p>The aggregation API allows one to express possibly multiple aggregation operations in a single concise way.
 This API is similar across pandas objects, see <a class="reference internal" href="../user_guide/groupby.html#groupby-aggregate"><span class="std std-ref">groupby API</span></a>, the
@@ -1158,7 +1157,7 @@ to the built in <a class="reference internal" href="#basics-describe"><span clas
 <div class="section" id="transform-api">
 <span id="basics-transform"></span><h3>Transform API<a class="headerlink" href="#transform-api" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <p>The <a class="reference internal" href="../reference/api/pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transform()</span></code></a> method returns an object that is indexed the same (same size)
 as the original. This API allows you to provide <em>multiple</em> operations at the same
@@ -1257,11 +1256,11 @@ It is used to implement nearly all other features relying on label-alignment
 functionality. To <em>reindex</em> means to conform the data to match a given set of
 labels along a particular axis. This accomplishes several things:</p>
 <ul class="simple">
-<li>Reorders the existing data to match a new set of labels</li>
-<li>Inserts missing value (NA) markers in label locations where no data for
-that label existed</li>
-<li>If specified, <strong>fill</strong> data for missing labels using logic (highly relevant
-to working with time series data)</li>
+<li><p>Reorders the existing data to match a new set of labels</p></li>
+<li><p>Inserts missing value (NA) markers in label locations where no data for
+that label existed</p></li>
+<li><p>If specified, <strong>fill</strong> data for missing labels using logic (highly relevant
+to working with time series data)</p></li>
 </ul>
 <p>Here is a simple example:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [210]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">])</span>
@@ -1296,7 +1295,7 @@ following can be done:</p>
 <p>This means that the reindexed Series’s index is the same Python object as the
 DataFrame’s index.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
 </div>
 <p><a class="reference internal" href="../reference/api/pandas.DataFrame.reindex.html#pandas.DataFrame.reindex" title="pandas.DataFrame.reindex"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.reindex()</span></code></a> also supports an “axis-style” calling convention,
 where you specify a single <code class="docutils literal notranslate"><span class="pre">labels</span></code> argument and the <code class="docutils literal notranslate"><span class="pre">axis</span></code> it applies to.</p>
@@ -1306,13 +1305,13 @@ where you specify a single <code class="docutils literal notranslate"><span clas
 </pre></div>
 </div>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="../user_guide/advanced.html#advanced"><span class="std std-ref">MultiIndex / Advanced Indexing</span></a> is an even more concise way of
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../user_guide/advanced.html#advanced"><span class="std std-ref">MultiIndex / Advanced Indexing</span></a> is an even more concise way of
 doing reindexing.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When writing performance-sensitive code, there is a good reason to spend
+<p class="admonition-title">Note</p>
+<p>When writing performance-sensitive code, there is a good reason to spend
 some time becoming a reindexing ninja: <strong>many operations are faster on
 pre-aligned data</strong>. Adding two unaligned DataFrames internally triggers a
 reindexing step. For exploratory analysis you will hardly notice the
@@ -1340,10 +1339,10 @@ available to make this simpler:</p>
 supports a <code class="docutils literal notranslate"><span class="pre">join</span></code> argument (related to <a class="reference internal" href="../user_guide/merging.html#merging"><span class="std std-ref">joining and merging</span></a>):</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">join='outer'</span></code>: take the union of the indexes (default)</li>
-<li><code class="docutils literal notranslate"><span class="pre">join='left'</span></code>: use the calling object’s index</li>
-<li><code class="docutils literal notranslate"><span class="pre">join='right'</span></code>: use the passed object’s index</li>
-<li><code class="docutils literal notranslate"><span class="pre">join='inner'</span></code>: intersect the indexes</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">join='outer'</span></code>: take the union of the indexes (default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">join='left'</span></code>: use the calling object’s index</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">join='right'</span></code>: use the passed object’s index</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">join='inner'</span></code>: intersect the indexes</p></li>
 </ul>
 </div></blockquote>
 <p>It returns a tuple with both of the reindexed Series:</p>
@@ -1379,25 +1378,25 @@ objects either on the DataFrame’s index or columns using the <code class="docu
 <span id="basics-reindex-fill"></span><h3>Filling while reindexing<a class="headerlink" href="#filling-while-reindexing" title="Permalink to this headline">¶</a></h3>
 <p><code class="xref py py-meth docutils literal notranslate"><span class="pre">reindex()</span></code> takes an optional parameter <code class="docutils literal notranslate"><span class="pre">method</span></code> which is a
 filling method chosen from the following table:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="38%" />
-<col width="63%" />
+<col style="width: 38%" />
+<col style="width: 63%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method</th>
-<th class="head">Action</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Action</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>pad / ffill</td>
-<td>Fill values forward</td>
+<tbody>
+<tr class="row-even"><td><p>pad / ffill</p></td>
+<td><p>Fill values forward</p></td>
 </tr>
-<tr class="row-odd"><td>bfill / backfill</td>
-<td>Fill values backward</td>
+<tr class="row-odd"><td><p>bfill / backfill</p></td>
+<td><p>Fill values backward</p></td>
 </tr>
-<tr class="row-even"><td>nearest</td>
-<td>Fill from the nearest index value</td>
+<tr class="row-even"><td><p>nearest</p></td>
+<td><p>Fill from the nearest index value</p></td>
 </tr>
 </tbody>
 </table>
@@ -1486,7 +1485,7 @@ Series can also be used:</p>
 <p>If the mapping doesn’t include a column/index label, it isn’t renamed. Note that
 extra labels in the mapping don’t throw an error.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
 </div>
 <p><a class="reference internal" href="../reference/api/pandas.DataFrame.rename.html#pandas.DataFrame.rename" title="pandas.DataFrame.rename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.rename()</span></code></a> also supports an “axis-style” calling convention, where
 you specify a single <code class="docutils literal notranslate"><span class="pre">mapper</span></code> and the <code class="docutils literal notranslate"><span class="pre">axis</span></code> to apply that mapping to.</p>
@@ -1499,7 +1498,7 @@ you specify a single <code class="docutils literal notranslate"><span class="pre
 parameter that is by default <code class="docutils literal notranslate"><span class="pre">False</span></code> and copies the underlying data. Pass
 <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> to rename the data in place.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 <p>Finally, <code class="xref py py-meth docutils literal notranslate"><span class="pre">rename()</span></code> also accepts a scalar or list-like
 for altering the <code class="docutils literal notranslate"><span class="pre">Series.name</span></code> attribute.</p>
@@ -1507,7 +1506,7 @@ for altering the <code class="docutils literal notranslate"><span class="pre">Se
 </pre></div>
 </div>
 <div class="versionadded" id="basics-rename-axis">
-<p><span class="versionmodified">New in version 0.24.0.</span></p>
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
 </div>
 <p>The methods <a class="reference internal" href="../reference/api/pandas.DataFrame.rename_axis.html#pandas.DataFrame.rename_axis" title="pandas.DataFrame.rename_axis"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rename_axis()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">rename_axis()</span></code>
 allow specific names of a <cite>MultiIndex</cite> to be changed (as opposed to the
@@ -1536,8 +1535,8 @@ follow the dict-like convention of iterating over the “keys” of the
 objects.</p>
 <p>In short, basic iteration (<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">object</span></code>) produces:</p>
 <ul class="simple">
-<li><strong>Series</strong>: values</li>
-<li><strong>DataFrame</strong>: column labels</li>
+<li><p><strong>Series</strong>: values</p></li>
+<li><p><strong>DataFrame</strong>: column labels</p></li>
 </ul>
 <p>Thus, for example, iterating over a DataFrame gives you the column names:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [261]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
@@ -1553,39 +1552,39 @@ objects.</p>
 iterate over the (key, value) pairs.</p>
 <p>To iterate over the rows of a DataFrame, you can use the following methods:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows" title="pandas.DataFrame.iterrows"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iterrows()</span></code></a>: Iterate over the rows of a DataFrame as (index, Series) pairs.
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows" title="pandas.DataFrame.iterrows"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iterrows()</span></code></a>: Iterate over the rows of a DataFrame as (index, Series) pairs.
 This converts the rows to Series objects, which can change the dtypes and has some
-performance implications.</li>
-<li><a class="reference internal" href="../reference/api/pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itertuples()</span></code></a>: Iterate over the rows of a DataFrame
+performance implications.</p></li>
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itertuples()</span></code></a>: Iterate over the rows of a DataFrame
 as namedtuples of the values.  This is a lot faster than
 <a class="reference internal" href="../reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows" title="pandas.DataFrame.iterrows"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iterrows()</span></code></a>, and is in most cases preferable to use
-to iterate over the values of a DataFrame.</li>
+to iterate over the values of a DataFrame.</p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>Iterating through pandas objects is generally <strong>slow</strong>. In many cases,
 iterating manually over the rows is not needed and can be avoided with
 one of the following approaches:</p>
-<ul class="last simple">
-<li>Look for a <em>vectorized</em> solution: many operations can be performed using
-built-in methods or NumPy functions, (boolean) indexing, …</li>
-<li>When you have a function that cannot work on the full DataFrame/Series
+<ul class="simple">
+<li><p>Look for a <em>vectorized</em> solution: many operations can be performed using
+built-in methods or NumPy functions, (boolean) indexing, …</p></li>
+<li><p>When you have a function that cannot work on the full DataFrame/Series
 at once, it is better to use <a class="reference internal" href="../reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply" title="pandas.DataFrame.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> instead of iterating
-over the values. See the docs on <a class="reference internal" href="#basics-apply"><span class="std std-ref">function application</span></a>.</li>
-<li>If you need to do iterative manipulations on the values but performance is
+over the values. See the docs on <a class="reference internal" href="#basics-apply"><span class="std std-ref">function application</span></a>.</p></li>
+<li><p>If you need to do iterative manipulations on the values but performance is
 important, consider writing the inner loop with cython or numba.
 See the <a class="reference internal" href="../user_guide/enhancingperf.html#enhancingperf"><span class="std std-ref">enhancing performance</span></a> section for some
-examples of this approach.</li>
+examples of this approach.</p></li>
 </ul>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>You should <strong>never modify</strong> something you are iterating over.
 This is not guaranteed to work in all cases. Depending on the
 data types, the iterator returns a copy and not a view, and writing
 to it will have no effect!</p>
 <p>For example, in the following case setting the value has no effect:</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [263]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [263]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]})</span>
 
 <span class="gp">In [264]: </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
 <span class="gp">   .....: </span>    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
@@ -1600,8 +1599,8 @@ to it will have no effect!</p>
 <p>Consistent with the dict-like interface, <a class="reference internal" href="../reference/api/pandas.DataFrame.iteritems.html#pandas.DataFrame.iteritems" title="pandas.DataFrame.iteritems"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iteritems()</span></code></a> iterates
 through key-value pairs:</p>
 <ul class="simple">
-<li><strong>Series</strong>: (index, scalar value) pairs</li>
-<li><strong>DataFrame</strong>: (column, Series) pairs</li>
+<li><p><strong>Series</strong>: (index, scalar value) pairs</p></li>
+<li><p><strong>DataFrame</strong>: (column, Series) pairs</p></li>
 </ul>
 <p>For example:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [266]: </span><span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
@@ -1622,7 +1621,7 @@ index value along with a Series containing the data in each row:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Because <a class="reference internal" href="../reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows" title="pandas.DataFrame.iterrows"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iterrows()</span></code></a> returns a Series for each row,
 it does <strong>not</strong> preserve dtypes across the rows (dtypes are
 preserved across columns for DataFrames). For example,</p>
@@ -1642,7 +1641,7 @@ to floats, also the original integer value in column <cite>x</cite>:</p>
 <span class="gp">In [273]: </span><span class="n">df_orig</span><span class="p">[</span><span class="s1">&#39;int&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
 </pre></div>
 </div>
-<p class="last">To preserve dtypes while iterating over the rows, it is better
+<p>To preserve dtypes while iterating over the rows, it is better
 to use <a class="reference internal" href="../reference/api/pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itertuples()</span></code></a> which returns namedtuples of the values
 and which is generally much faster than <a class="reference internal" href="../reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows" title="pandas.DataFrame.iterrows"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iterrows()</span></code></a>.</p>
 </div>
@@ -1676,8 +1675,8 @@ returns the values inside a namedtuple. Therefore,
 <a class="reference internal" href="../reference/api/pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itertuples()</span></code></a> preserves the data type of the values
 and is generally faster as <a class="reference internal" href="../reference/api/pandas.DataFrame.iterrows.html#pandas.DataFrame.iterrows" title="pandas.DataFrame.iterrows"><code class="xref py py-meth docutils literal notranslate"><span class="pre">iterrows()</span></code></a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The column names will be renamed to positional names if they are
+<p class="admonition-title">Note</p>
+<p>The column names will be renamed to positional names if they are
 invalid Python identifiers, repeated, or start with an underscore.
 With a large number of columns (&gt;255), regular tuples are returned.</p>
 </div>
@@ -1758,8 +1757,8 @@ supports the same format as the standard <a class="reference external" href="htt
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">Series.dt</span></code> will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> if you access with a non-datetime-like values.</p>
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">Series.dt</span></code> will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> if you access with a non-datetime-like values.</p>
 </div>
 </div>
 <div class="section" id="vectorized-string-methods">
@@ -1845,7 +1844,7 @@ argument:</p>
 <div class="section" id="by-indexes-and-values">
 <span id="basics-sort-indexes-and-values"></span><h3>By Indexes and Values<a class="headerlink" href="#by-indexes-and-values" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 <p>Strings passed as the <code class="docutils literal notranslate"><span class="pre">by</span></code> parameter to <a class="reference internal" href="../reference/api/pandas.DataFrame.sort_values.html#pandas.DataFrame.sort_values" title="pandas.DataFrame.sort_values"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.sort_values()</span></code></a> may
 refer to either columns or index level names.</p>
@@ -1869,8 +1868,8 @@ refer to either columns or index level names.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If a string matches both a column name and an index level name then a
+<p class="admonition-title">Note</p>
+<p>If a string matches both a column name and an index level name then a
 warning is issued and the column takes precedence. This will result in an
 ambiguity error in a future version.</p>
 </div>
@@ -1878,7 +1877,7 @@ ambiguity error in a future version.</p>
 <div class="section" id="searchsorted">
 <span id="basics-searchsorted"></span><h3>searchsorted<a class="headerlink" href="#searchsorted" title="Permalink to this headline">¶</a></h3>
 <p>Series has the <code class="xref py py-meth docutils literal notranslate"><span class="pre">searchsorted()</span></code> method, which works similarly to
-<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.searchsorted.html#numpy.ndarray.searchsorted" title="(in NumPy v1.16)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">numpy.ndarray.searchsorted()</span></code></a>.</p>
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.searchsorted.html#numpy.ndarray.searchsorted" title="(in NumPy v1.17)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">numpy.ndarray.searchsorted()</span></code></a>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [325]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 
 <span class="gp">In [326]: </span><span class="n">ser</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
@@ -1948,10 +1947,10 @@ the axis indexes, since they are immutable) and returns a new object. Note that
 <strong>it is seldom necessary to copy objects</strong>. For example, there are only a
 handful of ways to alter a DataFrame <em>in-place</em>:</p>
 <ul class="simple">
-<li>Inserting, deleting, or modifying a column.</li>
-<li>Assigning to the <code class="docutils literal notranslate"><span class="pre">index</span></code> or <code class="docutils literal notranslate"><span class="pre">columns</span></code> attributes.</li>
-<li>For homogeneous data, directly modifying the values via the <code class="docutils literal notranslate"><span class="pre">values</span></code>
-attribute or advanced indexing.</li>
+<li><p>Inserting, deleting, or modifying a column.</p></li>
+<li><p>Assigning to the <code class="docutils literal notranslate"><span class="pre">index</span></code> or <code class="docutils literal notranslate"><span class="pre">columns</span></code> attributes.</p></li>
+<li><p>For homogeneous data, directly modifying the values via the <code class="docutils literal notranslate"><span class="pre">values</span></code>
+attribute or advanced indexing.</p></li>
 </ul>
 <p>To be clear, no pandas method has the side effect of modifying your data;
 almost every method returns a new object, leaving the original object
@@ -1970,58 +1969,58 @@ works with pandas. See <a class="reference internal" href="../ecosystem.html#eco
 libraries that have implemented an extension.</p>
 <p>The following table lists all of pandas extension types. See the respective
 documentation sections for more on each type.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="16%" />
-<col width="21%" />
-<col width="15%" />
-<col width="24%" />
-<col width="24%" />
+<col style="width: 16%" />
+<col style="width: 21%" />
+<col style="width: 15%" />
+<col style="width: 24%" />
+<col style="width: 24%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Kind of Data</th>
-<th class="head">Data Type</th>
-<th class="head">Scalar</th>
-<th class="head">Array</th>
-<th class="head">Documentation</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Kind of Data</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Scalar</p></th>
+<th class="head"><p>Array</p></th>
+<th class="head"><p>Documentation</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>tz-aware datetime</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeTZDtype</span></code></td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code></td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.DatetimeArray</span></code></td>
-<td><a class="reference internal" href="../user_guide/timeseries.html#timeseries-timezone"><span class="std std-ref">Time Zone Handling</span></a></td>
+<tbody>
+<tr class="row-even"><td><p>tz-aware datetime</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeTZDtype</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.DatetimeArray</span></code></p></td>
+<td><p><a class="reference internal" href="../user_guide/timeseries.html#timeseries-timezone"><span class="std std-ref">Time Zone Handling</span></a></p></td>
 </tr>
-<tr class="row-odd"><td>Categorical</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalDtype</span></code></td>
-<td>(none)</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">Categorical</span></code></td>
-<td><a class="reference internal" href="../user_guide/categorical.html#categorical"><span class="std std-ref">Categorical Data</span></a></td>
+<tr class="row-odd"><td><p>Categorical</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalDtype</span></code></p></td>
+<td><p>(none)</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Categorical</span></code></p></td>
+<td><p><a class="reference internal" href="../user_guide/categorical.html#categorical"><span class="std std-ref">Categorical Data</span></a></p></td>
 </tr>
-<tr class="row-even"><td>period (time spans)</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">PeriodDtype</span></code></td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code></td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.PeriodArray</span></code></td>
-<td><a class="reference internal" href="../user_guide/timeseries.html#timeseries-periods"><span class="std std-ref">Time Span Representation</span></a></td>
+<tr class="row-even"><td><p>period (time spans)</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PeriodDtype</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Period</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.PeriodArray</span></code></p></td>
+<td><p><a class="reference internal" href="../user_guide/timeseries.html#timeseries-periods"><span class="std std-ref">Time Span Representation</span></a></p></td>
 </tr>
-<tr class="row-odd"><td>sparse</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseDtype</span></code></td>
-<td>(none)</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.SparseArray</span></code></td>
-<td><a class="reference internal" href="../user_guide/sparse.html#sparse"><span class="std std-ref">Sparse data structures</span></a></td>
+<tr class="row-odd"><td><p>sparse</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SparseDtype</span></code></p></td>
+<td><p>(none)</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.SparseArray</span></code></p></td>
+<td><p><a class="reference internal" href="../user_guide/sparse.html#sparse"><span class="std std-ref">Sparse data structures</span></a></p></td>
 </tr>
-<tr class="row-even"><td>intervals</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">IntervalDtype</span></code></td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">Interval</span></code></td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.IntervalArray</span></code></td>
-<td><a class="reference internal" href="../user_guide/advanced.html#advanced-intervalindex"><span class="std std-ref">IntervalIndex</span></a></td>
+<tr class="row-even"><td><p>intervals</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">IntervalDtype</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Interval</span></code></p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.IntervalArray</span></code></p></td>
+<td><p><a class="reference internal" href="../user_guide/advanced.html#advanced-intervalindex"><span class="std std-ref">IntervalIndex</span></a></p></td>
 </tr>
-<tr class="row-odd"><td>nullable integer</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Dtype</span></code>, …</td>
-<td>(none)</td>
-<td><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.IntegerArray</span></code></td>
-<td><a class="reference internal" href="../user_guide/integer_na.html#integer-na"><span class="std std-ref">Nullable Integer Data Type</span></a></td>
+<tr class="row-odd"><td><p>nullable integer</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Dtype</span></code>, …</p></td>
+<td><p>(none)</p></td>
+<td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">arrays.IntegerArray</span></code></p></td>
+<td><p><a class="reference internal" href="../user_guide/integer_na.html#integer-na"><span class="std std-ref">Nullable Integer Data Type</span></a></p></td>
 </tr>
 </tbody>
 </table>
@@ -2147,7 +2146,7 @@ then the more <em>general</em> one will be used as the result of the operation.<
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 <p>Convert certain columns to a specific dtype by passing a dict to <a class="reference internal" href="../reference/api/pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-meth docutils literal notranslate"><span class="pre">astype()</span></code></a>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [372]: </span><span class="n">dft1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
@@ -2160,10 +2159,10 @@ then the more <em>general</em> one will be used as the result of the operation.<
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>When trying to convert a subset of columns to a specified type using <a class="reference internal" href="../reference/api/pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-meth docutils literal notranslate"><span class="pre">astype()</span></code></a>  and <a class="reference internal" href="../reference/api/pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loc()</span></code></a>, upcasting occurs.</p>
 <p><a class="reference internal" href="../reference/api/pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loc()</span></code></a> tries to fit in what we are assigning to the current dtypes, while <code class="docutils literal notranslate"><span class="pre">[]</span></code> will overwrite them taking the dtype from the right hand side. Therefore the following piece of code produces the unintended result.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [376]: </span><span class="n">dft</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [376]: </span><span class="n">dft</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
 
 <span class="gp">In [377]: </span><span class="n">dft</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span>
 
@@ -2207,14 +2206,14 @@ to the correct type.</p>
 <p>The following functions are available for one dimensional object arrays or scalars to perform
 hard conversion of objects to a specified type:</p>
 <ul>
-<li><p class="first"><a class="reference internal" href="../reference/api/pandas.to_numeric.html#pandas.to_numeric" title="pandas.to_numeric"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numeric()</span></code></a> (conversion to numeric dtypes)</p>
+<li><p><a class="reference internal" href="../reference/api/pandas.to_numeric.html#pandas.to_numeric" title="pandas.to_numeric"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numeric()</span></code></a> (conversion to numeric dtypes)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [386]: </span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1.1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 
 <span class="gp">In [387]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><a class="reference internal" href="../reference/api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_datetime()</span></code></a> (conversion to datetime objects)</p>
+<li><p><a class="reference internal" href="../reference/api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_datetime()</span></code></a> (conversion to datetime objects)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [388]: </span><span class="kn">import</span> <span class="nn">datetime</span>
 
 <span class="gp">In [389]: </span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2016-07-09&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
@@ -2223,7 +2222,7 @@ hard conversion of objects to a specified type:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first"><a class="reference internal" href="../reference/api/pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_timedelta()</span></code></a> (conversion to timedelta objects)</p>
+<li><p><a class="reference internal" href="../reference/api/pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_timedelta()</span></code></a> (conversion to timedelta objects)</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [391]: </span><span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5us&#39;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1day&#39;</span><span class="p">)]</span>
 
 <span class="gp">In [392]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
@@ -2411,8 +2410,8 @@ can define a function that returns a tree of child dtypes:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Pandas also defines the types <code class="docutils literal notranslate"><span class="pre">category</span></code>, and <code class="docutils literal notranslate"><span class="pre">datetime64[ns,</span> <span class="pre">tz]</span></code>, which are not integrated into the normal
+<p class="admonition-title">Note</p>
+<p>Pandas also defines the types <code class="docutils literal notranslate"><span class="pre">category</span></code>, and <code class="docutils literal notranslate"><span class="pre">datetime64[ns,</span> <span class="pre">tz]</span></code>, which are not integrated into the normal
 NumPy hierarchy and won’t show up with the above function.</p>
 </div>
 </div>

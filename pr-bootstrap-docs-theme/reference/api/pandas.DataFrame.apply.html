@@ -83,54 +83,47 @@
 <h1>pandas.DataFrame.apply<a class="headerlink" href="#pandas-dataframe-apply" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.apply">
-<code class="descclassname">DataFrame.</code><code class="descname">apply</code><span class="sig-paren">(</span><em>func</em>, <em>axis=0</em>, <em>broadcast=None</em>, <em>raw=False</em>, <em>reduce=None</em>, <em>result_type=None</em>, <em>args=()</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L6310-L6487"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">func</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">broadcast=None</em>, <em class="sig-param">raw=False</em>, <em class="sig-param">reduce=None</em>, <em class="sig-param">result_type=None</em>, <em class="sig-param">args=()</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L6722-L6913"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply a function along an axis of the DataFrame.</p>
 <p>Objects passed to the function are Series objects whose index is
 either the DataFrame’s index (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>) or the DataFrame’s columns
 (<code class="docutils literal notranslate"><span class="pre">axis=1</span></code>). By default (<code class="docutils literal notranslate"><span class="pre">result_type=None</span></code>), the final return type
 is inferred from the return type of the applied function. Otherwise,
 it depends on the <cite>result_type</cite> argument.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
-<dd><p class="first last">Function to apply to each column or row.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>func</strong><span class="classifier">function</span></dt><dd><p>Function to apply to each column or row.</p>
 </dd>
-<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{0 or ‘index’, 1 or ‘columns’}, default 0</span></dt>
-<dd><p class="first">Axis along which the function is applied:</p>
-<ul class="last simple">
-<li>0 or ‘index’: apply function to each column.</li>
-<li>1 or ‘columns’: apply function to each row.</li>
-</ul>
-</dd>
-<dt><strong>broadcast</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
-<dd><p class="first">Only relevant for aggregation functions:</p>
+<dt><strong>axis</strong><span class="classifier">{0 or ‘index’, 1 or ‘columns’}, default 0</span></dt><dd><p>Axis along which the function is applied:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">False</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code> : returns a Series whose length is the
-length of the index or the number of columns (based on the
-<cite>axis</cite> parameter)</li>
-<li><code class="docutils literal notranslate"><span class="pre">True</span></code> : results will be broadcast to the original shape
-of the frame, the original index and columns will be retained.</li>
+<li><p>0 or ‘index’: apply function to each column.</p></li>
+<li><p>1 or ‘columns’: apply function to each row.</p></li>
 </ul>
-<div class="last deprecated">
-<p><span class="versionmodified">Deprecated since version 0.23.0: </span>This argument will be removed in a future version, replaced
+</dd>
+<dt><strong>broadcast</strong><span class="classifier">bool, optional</span></dt><dd><p>Only relevant for aggregation functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> or <code class="docutils literal notranslate"><span class="pre">None</span></code> : returns a Series whose length is the
+length of the index or the number of columns (based on the
+<cite>axis</cite> parameter)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> : results will be broadcast to the original shape
+of the frame, the original index and columns will be retained.</p></li>
+</ul>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.23.0: </span>This argument will be removed in a future version, replaced
 by result_type=’broadcast’.</p>
 </div>
 </dd>
-<dt><strong>raw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">False</span></code> : passes each row or column as a Series to the
-function.</li>
-<li><code class="docutils literal notranslate"><span class="pre">True</span></code> : the passed function will receive ndarray objects
+<dt><strong>raw</strong><span class="classifier">bool, default False</span></dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code> : passes each row or column as a Series to the
+function.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code> : the passed function will receive ndarray objects
 instead.
 If you are just applying a NumPy reduction function this will
-achieve much better performance.</li>
+achieve much better performance.</p></li>
 </ul>
 </dd>
-<dt><strong>reduce</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool or None, default None</span></dt>
-<dd><p class="first">Try to apply reduction procedures. If the DataFrame is empty,
+<dt><strong>reduce</strong><span class="classifier">bool or None, default None</span></dt><dd><p>Try to apply reduction procedures. If the DataFrame is empty,
 <cite>apply</cite> will use <cite>reduce</cite> to determine whether the result
 should be a Series or a DataFrame. If <code class="docutils literal notranslate"><span class="pre">reduce=None</span></code> (the
 default), <cite>apply</cite>’s return value will be guessed by calling
@@ -139,57 +132,53 @@ default), <cite>apply</cite>’s return value will be guessed by calling
 ignored).
 If <code class="docutils literal notranslate"><span class="pre">reduce=True</span></code> a Series will always be returned, and if
 <code class="docutils literal notranslate"><span class="pre">reduce=False</span></code> a DataFrame will always be returned.</p>
-<div class="last deprecated">
-<p><span class="versionmodified">Deprecated since version 0.23.0: </span>This argument will be removed in a future version, replaced
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.23.0: </span>This argument will be removed in a future version, replaced
 by <code class="docutils literal notranslate"><span class="pre">result_type='reduce'</span></code>.</p>
 </div>
 </dd>
-<dt><strong>result_type</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘expand’, ‘reduce’, ‘broadcast’, None}, default None</span></dt>
-<dd><p class="first">These only act when <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> (columns):</p>
+<dt><strong>result_type</strong><span class="classifier">{‘expand’, ‘reduce’, ‘broadcast’, None}, default None</span></dt><dd><p>These only act when <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> (columns):</p>
 <ul class="simple">
-<li>‘expand’ : list-like results will be turned into columns.</li>
-<li>‘reduce’ : returns a Series if possible rather than expanding
-list-like results. This is the opposite of ‘expand’.</li>
-<li>‘broadcast’ : results will be broadcast to the original shape
+<li><p>‘expand’ : list-like results will be turned into columns.</p></li>
+<li><p>‘reduce’ : returns a Series if possible rather than expanding
+list-like results. This is the opposite of ‘expand’.</p></li>
+<li><p>‘broadcast’ : results will be broadcast to the original shape
 of the DataFrame, the original index and columns will be
-retained.</li>
+retained.</p></li>
 </ul>
 <p>The default behaviour (None) depends on the return value of the
 applied function: list-like results will be returned as a Series
 of those. However if the apply function returns a Series these
 are expanded to columns.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </dd>
-<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
-<dd><p class="first last">Positional arguments to pass to <cite>func</cite> in addition to the
+<dt><strong>args</strong><span class="classifier">tuple</span></dt><dd><p>Positional arguments to pass to <cite>func</cite> in addition to the
 array/series.</p>
 </dd>
-<dt><strong>**kwds</strong></dt>
-<dd><p class="first last">Additional keyword arguments to pass as keywords arguments to
+<dt><strong>**kwds</strong></dt><dd><p>Additional keyword arguments to pass as keywords arguments to
 <cite>func</cite>.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>applied</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series or DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Series or DataFrame</dt><dd><p>Result of applying <code class="docutils literal notranslate"><span class="pre">func</span></code> along the given axis of the
+DataFrame.</p>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.applymap.html#pandas.DataFrame.applymap" title="pandas.DataFrame.applymap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.applymap</span></code></a></dt>
-<dd>For elementwise operations.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.aggregate.html#pandas.DataFrame.aggregate" title="pandas.DataFrame.aggregate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.aggregate</span></code></a></dt>
-<dd>Only perform aggregating type operations.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.transform</span></code></a></dt>
-<dd>Only perform transforming type operations.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.applymap.html#pandas.DataFrame.applymap" title="pandas.DataFrame.applymap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.applymap</span></code></a></dt><dd><p>For elementwise operations.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.aggregate.html#pandas.DataFrame.aggregate" title="pandas.DataFrame.aggregate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.aggregate</span></code></a></dt><dd><p>Only perform aggregating type operations.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.transform.html#pandas.DataFrame.transform" title="pandas.DataFrame.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.transform</span></code></a></dt><dd><p>Only perform transforming type operations.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
@@ -199,7 +188,7 @@ code path. This can lead to unexpected behavior if <cite>func</cite> has
 side-effects, as they will take effect twice for the first
 column/row.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">],]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
 <span class="go">   A  B</span>
 <span class="go">0  4  9</span>
@@ -230,7 +219,7 @@ column/row.</p>
 <span class="go">dtype: int64</span>
 </pre></div>
 </div>
-<p>Retuning a list-like will result in a Series</p>
+<p>Returning a list-like will result in a Series</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">0    [1, 2]</span>
 <span class="go">1    [1, 2]</span>

@@ -106,24 +106,24 @@ intended for developers of pandas itself.</p>
 <p>In pandas there are a few objects implemented which can serve as valid
 containers for the axis labels:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">Index</span></code>: the generic “ordered set” object, an ndarray of object dtype
+<li><p><code class="docutils literal notranslate"><span class="pre">Index</span></code>: the generic “ordered set” object, an ndarray of object dtype
 assuming nothing about its contents. The labels must be hashable (and
 likely immutable) and unique. Populates a dict of label to location in
-Cython to do <code class="docutils literal notranslate"><span class="pre">O(1)</span></code> lookups.</li>
-<li><code class="docutils literal notranslate"><span class="pre">Int64Index</span></code>: a version of <code class="docutils literal notranslate"><span class="pre">Index</span></code> highly optimized for 64-bit integer
-data, such as time stamps</li>
-<li><code class="docutils literal notranslate"><span class="pre">Float64Index</span></code>: a version of <code class="docutils literal notranslate"><span class="pre">Index</span></code> highly optimized for 64-bit float data</li>
-<li><code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>: the standard hierarchical index object</li>
-<li><code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>: An Index object with <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> boxed elements (impl are the int64 values)</li>
-<li><code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code>: An Index object with <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> boxed elements (impl are the in64 values)</li>
-<li><code class="docutils literal notranslate"><span class="pre">PeriodIndex</span></code>: An Index object with Period elements</li>
+Cython to do <code class="docutils literal notranslate"><span class="pre">O(1)</span></code> lookups.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Int64Index</span></code>: a version of <code class="docutils literal notranslate"><span class="pre">Index</span></code> highly optimized for 64-bit integer
+data, such as time stamps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Float64Index</span></code>: a version of <code class="docutils literal notranslate"><span class="pre">Index</span></code> highly optimized for 64-bit float data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>: the standard hierarchical index object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>: An Index object with <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> boxed elements (impl are the int64 values)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code>: An Index object with <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> boxed elements (impl are the in64 values)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PeriodIndex</span></code>: An Index object with Period elements</p></li>
 </ul>
 <p>There are functions that make the creation of a regular index easy:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">date_range</span></code>: fixed frequency date range generated from a time rule or
-DateOffset. An ndarray of Python datetime objects</li>
-<li><code class="docutils literal notranslate"><span class="pre">period_range</span></code>: fixed frequency date range generated from a time rule or
-DateOffset. An ndarray of <code class="docutils literal notranslate"><span class="pre">Period</span></code> objects, representing timespans</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_range</span></code>: fixed frequency date range generated from a time rule or
+DateOffset. An ndarray of Python datetime objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">period_range</span></code>: fixed frequency date range generated from a time rule or
+DateOffset. An ndarray of <code class="docutils literal notranslate"><span class="pre">Period</span></code> objects, representing timespans</p></li>
 </ul>
 <p>The motivation for having an <code class="docutils literal notranslate"><span class="pre">Index</span></code> class in the first place was to enable
 different implementations of indexing. This means that it’s possible for you,
@@ -133,22 +133,22 @@ a particular application than the ones provided in pandas.</p>
 <code class="docutils literal notranslate"><span class="pre">Index</span></code> must define are one or more of the following (depending on how
 incompatible the new object internals are with the <code class="docutils literal notranslate"><span class="pre">Index</span></code> functions):</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">get_loc</span></code>: returns an “indexer” (an integer, or in some cases a
-slice object) for a label</li>
-<li><code class="docutils literal notranslate"><span class="pre">slice_locs</span></code>: returns the “range” to slice between two labels</li>
-<li><code class="docutils literal notranslate"><span class="pre">get_indexer</span></code>: Computes the indexing vector for reindexing / data
-alignment purposes. See the source / docstrings for more on this</li>
-<li><code class="docutils literal notranslate"><span class="pre">get_indexer_non_unique</span></code>: Computes the indexing vector for reindexing / data
+<li><p><code class="docutils literal notranslate"><span class="pre">get_loc</span></code>: returns an “indexer” (an integer, or in some cases a
+slice object) for a label</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slice_locs</span></code>: returns the “range” to slice between two labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_indexer</span></code>: Computes the indexing vector for reindexing / data
+alignment purposes. See the source / docstrings for more on this</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_indexer_non_unique</span></code>: Computes the indexing vector for reindexing / data
 alignment purposes when the index is non-unique. See the source / docstrings
-for more on this</li>
-<li><code class="docutils literal notranslate"><span class="pre">reindex</span></code>: Does any pre-conversion of the input index then calls
-<code class="docutils literal notranslate"><span class="pre">get_indexer</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">union</span></code>, <code class="docutils literal notranslate"><span class="pre">intersection</span></code>: computes the union or intersection of two
-Index objects</li>
-<li><code class="docutils literal notranslate"><span class="pre">insert</span></code>: Inserts a new label into an Index, yielding a new object</li>
-<li><code class="docutils literal notranslate"><span class="pre">delete</span></code>: Delete a label, yielding a new object</li>
-<li><code class="docutils literal notranslate"><span class="pre">drop</span></code>: Deletes a set of labels</li>
-<li><code class="docutils literal notranslate"><span class="pre">take</span></code>: Analogous to ndarray.take</li>
+for more on this</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reindex</span></code>: Does any pre-conversion of the input index then calls
+<code class="docutils literal notranslate"><span class="pre">get_indexer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">union</span></code>, <code class="docutils literal notranslate"><span class="pre">intersection</span></code>: computes the union or intersection of two
+Index objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">insert</span></code>: Inserts a new label into an Index, yielding a new object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delete</span></code>: Delete a label, yielding a new object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop</span></code>: Deletes a set of labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">take</span></code>: Analogous to ndarray.take</p></li>
 </ul>
 <div class="section" id="multiindex">
 <h3>MultiIndex<a class="headerlink" href="#multiindex" title="Permalink to this headline">¶</a></h3>
@@ -180,13 +180,13 @@ if you compute the levels and codes yourself, please be careful.</p>
 datetimes with a timezone, so we have multiple notions of “values”. For 1-D
 containers (<code class="docutils literal notranslate"><span class="pre">Index</span></code> classes and <code class="docutils literal notranslate"><span class="pre">Series</span></code>) we have the following convention:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">cls._ndarray_values</span></code> is <em>always</em> a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>. Ideally,
+<li><p><code class="docutils literal notranslate"><span class="pre">cls._ndarray_values</span></code> is <em>always</em> a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>. Ideally,
 <code class="docutils literal notranslate"><span class="pre">_ndarray_values</span></code> is cheap to compute. For example, for a <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>,
-this returns the codes, not the array of objects.</li>
-<li><code class="docutils literal notranslate"><span class="pre">cls._values</span></code> refers is the “best possible” array. This could be an
+this returns the codes, not the array of objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cls._values</span></code> refers is the “best possible” array. This could be an
 <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>, or in <code class="docutils literal notranslate"><span class="pre">Index</span></code> subclass (note: we’re in the
 process of removing the index subclasses here so that it’s always an
-<code class="docutils literal notranslate"><span class="pre">ndarray</span></code> or <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>).</li>
+<code class="docutils literal notranslate"><span class="pre">ndarray</span></code> or <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>).</p></li>
 </ul>
 <p>So, for example, <code class="docutils literal notranslate"><span class="pre">Series[category]._values</span></code> is a <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>, while
 <code class="docutils literal notranslate"><span class="pre">Series[category]._ndarray_values</span></code> is the underlying codes.</p>

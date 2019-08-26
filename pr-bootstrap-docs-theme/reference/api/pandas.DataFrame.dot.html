@@ -83,43 +83,39 @@
 <h1>pandas.DataFrame.dot<a class="headerlink" href="#pandas-dataframe-dot" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.dot">
-<code class="descclassname">DataFrame.</code><code class="descname">dot</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L943-L1041"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.dot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the matrix mutiplication between the DataFrame and other.</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">dot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L983-L1092"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the matrix multiplication between the DataFrame and other.</p>
 <p>This method computes the matrix product between the DataFrame and the
 values of an other Series, DataFrame or a numpy array.</p>
 <p>It can also be called using <code class="docutils literal notranslate"><span class="pre">self</span> <span class="pre">&#64;</span> <span class="pre">other</span></code> in Python &gt;= 3.5.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>other</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Series, DataFrame or array-like</span></dt>
-<dd><p class="first last">The other object to compute the matrix product with.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>other</strong><span class="classifier">Series, DataFrame or array-like</span></dt><dd><p>The other object to compute the matrix product with.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>Series or DataFrame</strong></dt>
-<dd><p class="first last">If other is a Series, return the matrix product between self and
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Series or DataFrame</dt><dd><p>If other is a Series, return the matrix product between self and
 other as a Serie. If other is a DataFrame or a numpy.array, return
 the matrix product of self and other in a DataFrame of a np.array.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dot</span></code></dt>
-<dd>Similar method for Series.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.dot</span></code></dt><dd><p>Similar method for Series.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
 <p>The dimensions of DataFrame and other must be compatible in order to
-compute the matrix multiplication.</p>
+compute the matrix multiplication. In addition, the column names of
+DataFrame and the index of other must contain the same values, as they
+will be aligned prior to the multiplication.</p>
 <p>The dot method for Series computes the inner product, instead of the
 matrix product here.</p>
 <p class="rubric">Examples</p>
@@ -153,6 +149,14 @@ matrix product here.</p>
 <span class="go">    0   1</span>
 <span class="go">0   1   4</span>
 <span class="go">1   2   2</span>
+</pre></div>
+</div>
+<p>Note how shuffling of the objects does not change the result.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="go">0    -4</span>
+<span class="go">1     5</span>
+<span class="go">dtype: int64</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -83,73 +83,68 @@
 <h1>pandas.merge_ordered<a class="headerlink" href="#pandas-merge-ordered" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.merge_ordered">
-<code class="descclassname">pandas.</code><code class="descname">merge_ordered</code><span class="sig-paren">(</span><em>left</em>, <em>right</em>, <em>on=None</em>, <em>left_on=None</em>, <em>right_on=None</em>, <em>left_by=None</em>, <em>right_by=None</em>, <em>fill_method=None</em>, <em>suffixes=('_x'</em>, <em>'_y')</em>, <em>how='outer'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/reshape/merge.py#L132-L227"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.merge_ordered" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">merge_ordered</code><span class="sig-paren">(</span><em class="sig-param">left</em>, <em class="sig-param">right</em>, <em class="sig-param">on=None</em>, <em class="sig-param">left_on=None</em>, <em class="sig-param">right_on=None</em>, <em class="sig-param">left_by=None</em>, <em class="sig-param">right_by=None</em>, <em class="sig-param">fill_method=None</em>, <em class="sig-param">suffixes=('_x'</em>, <em class="sig-param">'_y')</em>, <em class="sig-param">how='outer'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/reshape/merge.py#L166-L288"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.merge_ordered" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform merge with optional filling/interpolation designed for ordered
 data like time series data. Optionally perform group-wise merge (see
 examples)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>left</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
-<dt><strong>right</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
-<dt><strong>on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label or list</span></dt>
-<dd><p class="first last">Field names to join on. Must be found in both DataFrames.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>left</strong><span class="classifier">DataFrame</span></dt><dd></dd>
+<dt><strong>right</strong><span class="classifier">DataFrame</span></dt><dd></dd>
+<dt><strong>on</strong><span class="classifier">label or list</span></dt><dd><p>Field names to join on. Must be found in both DataFrames.</p>
 </dd>
-<dt><strong>left_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label or list, or array-like</span></dt>
-<dd><p class="first last">Field names to join on in left DataFrame. Can be a vector or list of
+<dt><strong>left_on</strong><span class="classifier">label or list, or array-like</span></dt><dd><p>Field names to join on in left DataFrame. Can be a vector or list of
 vectors of the length of the DataFrame to use a particular vector as
 the join key instead of columns</p>
 </dd>
-<dt><strong>right_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label or list, or array-like</span></dt>
-<dd><p class="first last">Field names to join on in right DataFrame or vector/list of vectors per
+<dt><strong>right_on</strong><span class="classifier">label or list, or array-like</span></dt><dd><p>Field names to join on in right DataFrame or vector/list of vectors per
 left_on docs</p>
 </dd>
-<dt><strong>left_by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name or list of column names</span></dt>
-<dd><p class="first last">Group left DataFrame by group columns and merge piece by piece with
+<dt><strong>left_by</strong><span class="classifier">column name or list of column names</span></dt><dd><p>Group left DataFrame by group columns and merge piece by piece with
 right DataFrame</p>
 </dd>
-<dt><strong>right_by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name or list of column names</span></dt>
-<dd><p class="first last">Group right DataFrame by group columns and merge piece by piece with
+<dt><strong>right_by</strong><span class="classifier">column name or list of column names</span></dt><dd><p>Group right DataFrame by group columns and merge piece by piece with
 left DataFrame</p>
 </dd>
-<dt><strong>fill_method</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘ffill’, None}, default None</span></dt>
-<dd><p class="first last">Interpolation method for data</p>
+<dt><strong>fill_method</strong><span class="classifier">{‘ffill’, None}, default None</span></dt><dd><p>Interpolation method for data</p>
 </dd>
-<dt><strong>suffixes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2-length sequence (tuple, list, …)</span></dt>
-<dd><p class="first last">Suffix to apply to overlapping column names in the left and right
-side, respectively</p>
+<dt><strong>suffixes</strong><span class="classifier">Sequence, default is (“_x”, “_y”)</span></dt><dd><p>A length-2 sequence where each element is optionally a string
+indicating the suffix to add to overlapping column names in
+<cite>left</cite> and <cite>right</cite> respectively. Pass a value of <cite>None</cite> instead
+of a string to indicate that the column name from <cite>left</cite> or
+<cite>right</cite> should be left as-is, with no suffix. At least one of the
+values must not be None.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.25.0.</span></p>
+</div>
 </dd>
-<dt><strong>how</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘left’, ‘right’, ‘outer’, ‘inner’}, default ‘outer’</span></dt>
-<dd><ul class="first simple">
-<li>left: use only keys from left frame (SQL: left outer join)</li>
-<li>right: use only keys from right frame (SQL: right outer join)</li>
-<li>outer: use union of keys from both frames (SQL: full outer join)</li>
-<li>inner: use intersection of keys from both frames (SQL: inner join)</li>
+<dt><strong>how</strong><span class="classifier">{‘left’, ‘right’, ‘outer’, ‘inner’}, default ‘outer’</span></dt><dd><ul class="simple">
+<li><p>left: use only keys from left frame (SQL: left outer join)</p></li>
+<li><p>right: use only keys from right frame (SQL: right outer join)</p></li>
+<li><p>outer: use union of keys from both frames (SQL: full outer join)</p></li>
+<li><p>inner: use intersection of keys from both frames (SQL: inner join)</p></li>
 </ul>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>merged</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd><p class="first last">The output type will the be same as ‘left’, if it is a subclass
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>merged</strong><span class="classifier">DataFrame</span></dt><dd><p>The output type will the be same as ‘left’, if it is a subclass
 of DataFrame.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>, <a class="reference internal" href="pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a></dt><dd></dd>
+</dl>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span>                      <span class="o">&gt;&gt;&gt;</span> <span class="n">B</span>

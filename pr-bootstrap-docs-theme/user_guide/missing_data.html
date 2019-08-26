@@ -133,8 +133,8 @@
 <p>In this section, we will discuss missing (also referred to as NA) values in
 pandas.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The choice of using <code class="docutils literal notranslate"><span class="pre">NaN</span></code> internally to denote missing data was largely
+<p class="admonition-title">Note</p>
+<p>The choice of using <code class="docutils literal notranslate"><span class="pre">NaN</span></code> internally to denote missing data was largely
 for simplicity and performance reasons. It differs from the MaskedArray
 approach of, for example, <code class="xref py py-mod docutils literal notranslate"><span class="pre">scikits.timeseries</span></code>. We are hopeful that
 NumPy will soon be able to provide a native NA type solution (similar to R)
@@ -150,8 +150,8 @@ detect this value with data of different types: floating point, integer,
 boolean, and general object. In many cases, however, the Python <code class="docutils literal notranslate"><span class="pre">None</span></code> will
 arise and we wish to also consider that “missing” or “not available” or “NA”.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you want to consider <code class="docutils literal notranslate"><span class="pre">inf</span></code> and <code class="docutils literal notranslate"><span class="pre">-inf</span></code> to be “NA” in computations,
+<p class="admonition-title">Note</p>
+<p>If you want to consider <code class="docutils literal notranslate"><span class="pre">inf</span></code> and <code class="docutils literal notranslate"><span class="pre">-inf</span></code> to be “NA” in computations,
 you can set <code class="docutils literal notranslate"><span class="pre">pandas.options.mode.use_inf_as_na</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
 </div>
 <div class="highlight-ipython notranslate" id="missing-isna"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">],</span>
@@ -183,7 +183,7 @@ Series and DataFrame objects:</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>One has to be mindful that in Python (and NumPy), the <code class="docutils literal notranslate"><span class="pre">nan's</span></code> don’t compare equal, but <code class="docutils literal notranslate"><span class="pre">None's</span></code> <strong>do</strong>.
 Note that pandas/NumPy uses the fact that <code class="docutils literal notranslate"><span class="pre">np.nan</span> <span class="pre">!=</span> <span class="pre">np.nan</span></code>, and treats <code class="docutils literal notranslate"><span class="pre">None</span></code> like <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="bp">None</span> <span class="o">==</span> <span class="bp">None</span>                                                 <span class="c1"># noqa: E711</span>
@@ -192,7 +192,7 @@ Note that pandas/NumPy uses the fact that <code class="docutils literal notransl
 </pre></div>
 </div>
 <p>So as compared to above, a scalar equality comparison versus a <code class="docutils literal notranslate"><span class="pre">None/np.nan</span></code> doesn’t provide useful information.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 </pre></div>
 </div>
 </div>
@@ -268,9 +268,9 @@ objects.</p>
 <a class="reference internal" href="../getting_started/basics.html#basics-stats"><span class="std std-ref">data structure overview</span></a> (and listed <span class="xref std std-ref">here</span> and <a class="reference internal" href="../reference/frame.html#api-dataframe-stats"><span class="std std-ref">here</span></a>) are all written to
 account for missing data. For example:</p>
 <ul class="simple">
-<li>When summing data, NA (missing) values will be treated as zero.</li>
-<li>If the data are all NA, the result will be 0.</li>
-<li>Cumulative methods like <a class="reference internal" href="../reference/api/pandas.DataFrame.cumsum.html#pandas.DataFrame.cumsum" title="pandas.DataFrame.cumsum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumsum()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.cumprod.html#pandas.DataFrame.cumprod" title="pandas.DataFrame.cumprod"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumprod()</span></code></a> ignore NA values by default, but preserve them in the resulting arrays. To override this behaviour and include NA values, use <code class="docutils literal notranslate"><span class="pre">skipna=False</span></code>.</li>
+<li><p>When summing data, NA (missing) values will be treated as zero.</p></li>
+<li><p>If the data are all NA, the result will be 0.</p></li>
+<li><p>Cumulative methods like <a class="reference internal" href="../reference/api/pandas.DataFrame.cumsum.html#pandas.DataFrame.cumsum" title="pandas.DataFrame.cumsum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumsum()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.cumprod.html#pandas.DataFrame.cumprod" title="pandas.DataFrame.cumprod"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cumprod()</span></code></a> ignore NA values by default, but preserve them in the resulting arrays. To override this behaviour and include NA values, use <code class="docutils literal notranslate"><span class="pre">skipna=False</span></code>.</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">df</span>
 
@@ -288,8 +288,8 @@ account for missing data. For example:</p>
 <div class="section" id="sum-prod-of-empties-nans">
 <span id="missing-data-numeric-sum"></span><h2>Sum/Prod of Empties/Nans<a class="headerlink" href="#sum-prod-of-empties-nans" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This behavior is now standard as of v0.22.0 and is consistent with the default in <code class="docutils literal notranslate"><span class="pre">numpy</span></code>; previously sum/prod of all-NA or empty Series/DataFrames would return NaN.
+<p class="admonition-title">Warning</p>
+<p>This behavior is now standard as of v0.22.0 and is consistent with the default in <code class="docutils literal notranslate"><span class="pre">numpy</span></code>; previously sum/prod of all-NA or empty Series/DataFrames would return NaN.
 See <a class="reference internal" href="../whatsnew/v0.22.0.html#whatsnew-0220"><span class="std std-ref">v0.22.0 whatsnew</span></a> for more.</p>
 </div>
 <p>The sum of an empty or all-NA Series or column of a DataFrame is 0.</p>
@@ -350,22 +350,22 @@ we can use the <cite>limit</cite> keyword:</p>
 </pre></div>
 </div>
 <p>To remind you, these are the available filling methods:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="38%" />
-<col width="63%" />
+<col style="width: 38%" />
+<col style="width: 63%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Method</th>
-<th class="head">Action</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Action</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>pad / ffill</td>
-<td>Fill values forward</td>
+<tbody>
+<tr class="row-even"><td><p>pad / ffill</p></td>
+<td><p>Fill values forward</p></td>
 </tr>
-<tr class="row-odd"><td>bfill / backfill</td>
-<td>Fill values backward</td>
+<tr class="row-odd"><td><p>bfill / backfill</p></td>
+<td><p>Fill values backward</p></td>
 </tr>
 </tbody>
 </table>
@@ -420,7 +420,7 @@ examined <a class="reference internal" href="../reference/frame.html#api-datafra
 <div class="section" id="interpolation">
 <span id="missing-data-interpolate"></span><h2>Interpolation<a class="headerlink" href="#interpolation" title="Permalink to this headline">¶</a></h2>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0: </span>The <code class="docutils literal notranslate"><span class="pre">limit_area</span></code> keyword argument was added.</p>
+<p><span class="versionmodified added">New in version 0.23.0: </span>The <code class="docutils literal notranslate"><span class="pre">limit_area</span></code> keyword argument was added.</p>
 </div>
 <p>Both Series and DataFrame objects have <a class="reference internal" href="../reference/api/pandas.DataFrame.interpolate.html#pandas.DataFrame.interpolate" title="pandas.DataFrame.interpolate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">interpolate()</span></code></a>
 that, by default, performs linear interpolation at missing data points.</p>
@@ -465,15 +465,15 @@ If you have <a class="reference external" href="http://www.scipy.org">scipy</a> 
 You’ll want to consult the full scipy interpolation <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/interpolate.html#univariate-interpolation">documentation</a> and reference <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/tutorial/interpolate.html">guide</a> for details.
 The appropriate interpolation method will depend on the type of data you are working with.</p>
 <ul class="simple">
-<li>If you are dealing with a time series that is growing at an increasing rate,
-<code class="docutils literal notranslate"><span class="pre">method='quadratic'</span></code> may be appropriate.</li>
-<li>If you have values approximating a cumulative distribution function,
-then <code class="docutils literal notranslate"><span class="pre">method='pchip'</span></code> should work well.</li>
-<li>To fill missing values with goal of smooth plotting, consider <code class="docutils literal notranslate"><span class="pre">method='akima'</span></code>.</li>
+<li><p>If you are dealing with a time series that is growing at an increasing rate,
+<code class="docutils literal notranslate"><span class="pre">method='quadratic'</span></code> may be appropriate.</p></li>
+<li><p>If you have values approximating a cumulative distribution function,
+then <code class="docutils literal notranslate"><span class="pre">method='pchip'</span></code> should work well.</p></li>
+<li><p>To fill missing values with goal of smooth plotting, consider <code class="docutils literal notranslate"><span class="pre">method='akima'</span></code>.</p></li>
 </ul>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">These methods require <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p>
+<p class="admonition-title">Warning</p>
+<p>These methods require <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [97]: </span><span class="n">df</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;barycentric&#39;</span><span class="p">)</span>
 
@@ -596,8 +596,8 @@ missing and interpolate over them:</p>
 <div class="section" id="string-regular-expression-replacement">
 <span id="missing-data-replace-expression"></span><h2>String/Regular Expression Replacement<a class="headerlink" href="#string-regular-expression-replacement" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Python strings prefixed with the <code class="docutils literal notranslate"><span class="pre">r</span></code> character such as <code class="docutils literal notranslate"><span class="pre">r'hello</span> <span class="pre">world'</span></code>
+<p class="admonition-title">Note</p>
+<p>Python strings prefixed with the <code class="docutils literal notranslate"><span class="pre">r</span></code> character such as <code class="docutils literal notranslate"><span class="pre">r'hello</span> <span class="pre">world'</span></code>
 are so-called “raw” strings. They have different semantics regarding
 backslashes than strings without this prefix. Backslashes in raw strings
 will be interpreted as an escaped backslash, e.g., <code class="docutils literal notranslate"><span class="pre">r'\'</span> <span class="pre">==</span> <span class="pre">'\\'</span></code>. You
@@ -662,8 +662,8 @@ dictionary. The previous example, in this case, would then be:</p>
 <p>This can be convenient if you do not want to pass <code class="docutils literal notranslate"><span class="pre">regex=True</span></code> every time you
 want to use a regular expression.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Anywhere in the above <code class="docutils literal notranslate"><span class="pre">replace</span></code> examples that you see a regular expression
+<p class="admonition-title">Note</p>
+<p>Anywhere in the above <code class="docutils literal notranslate"><span class="pre">replace</span></code> examples that you see a regular expression
 a compiled regular expression is valid as well.</p>
 </div>
 </div>
@@ -690,7 +690,7 @@ a compiled regular expression is valid as well.</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>When replacing multiple <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects, the first
 argument to <code class="docutils literal notranslate"><span class="pre">replace</span></code> (<code class="docutils literal notranslate"><span class="pre">to_replace</span></code>) must match the type of the value
 being replaced. For example,</p>
@@ -707,7 +707,7 @@ correct type for replacement.</p>
 <span class="gp">In [150]: </span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;a string&#39;</span><span class="p">,</span> <span class="s1">&#39;another string&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="last">the original <code class="docutils literal notranslate"><span class="pre">NDFrame</span></code> object will be returned untouched. We’re working on
+<p>the original <code class="docutils literal notranslate"><span class="pre">NDFrame</span></code> object will be returned untouched. We’re working on
 unifying this API, but for backwards compatibility reasons we cannot break
 the latter behavior. See <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6354">GH6354</a> for more details.</p>
 </div>
@@ -718,28 +718,28 @@ are not capable of storing missing data. Until we can switch to using a native
 NA type in NumPy, we’ve established some “casting rules”. When a reindexing
 operation introduces missing data, the Series will be cast according to the
 rules introduced in the table below.</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col style="width: 50%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">data type</th>
-<th class="head">Cast to</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>data type</p></th>
+<th class="head"><p>Cast to</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>integer</td>
-<td>float</td>
+<tbody>
+<tr class="row-even"><td><p>integer</p></td>
+<td><p>float</p></td>
 </tr>
-<tr class="row-odd"><td>boolean</td>
-<td>object</td>
+<tr class="row-odd"><td><p>boolean</p></td>
+<td><p>object</p></td>
 </tr>
-<tr class="row-even"><td>float</td>
-<td>no cast</td>
+<tr class="row-even"><td><p>float</p></td>
+<td><p>no cast</p></td>
 </tr>
-<tr class="row-odd"><td>object</td>
-<td>no cast</td>
+<tr class="row-odd"><td><p>object</p></td>
+<td><p>no cast</p></td>
 </tr>
 </tbody>
 </table>

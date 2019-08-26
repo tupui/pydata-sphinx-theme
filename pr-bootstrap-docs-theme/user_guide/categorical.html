@@ -171,13 +171,13 @@ consists of a <cite>categories</cite> array and an integer array of <cite>codes<
 the <cite>categories</cite> array.</p>
 <p>The categorical data type is useful in the following cases:</p>
 <ul class="simple">
-<li>A string variable consisting of only a few different values. Converting such a string
-variable to a categorical variable will save some memory, see <a class="reference internal" href="#categorical-memory"><span class="std std-ref">here</span></a>.</li>
-<li>The lexical order of a variable is not the same as the logical order (“one”, “two”, “three”).
+<li><p>A string variable consisting of only a few different values. Converting such a string
+variable to a categorical variable will save some memory, see <a class="reference internal" href="#categorical-memory"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>The lexical order of a variable is not the same as the logical order (“one”, “two”, “three”).
 By converting to a categorical and specifying an order on the categories, sorting and
-min/max will use the logical order instead of the lexical order, see <a class="reference internal" href="#categorical-sort"><span class="std std-ref">here</span></a>.</li>
-<li>As a signal to other Python libraries that this column should be treated as a categorical
-variable (e.g. to use suitable statistical methods or plot types).</li>
+min/max will use the logical order instead of the lexical order, see <a class="reference internal" href="#categorical-sort"><span class="std std-ref">here</span></a>.</p></li>
+<li><p>As a signal to other Python libraries that this column should be treated as a categorical
+variable (e.g. to use suitable statistical methods or plot types).</p></li>
 </ul>
 <p>See also the <span class="xref std std-ref">API docs on categoricals</span>.</p>
 <div class="section" id="object-creation">
@@ -249,7 +249,7 @@ only labels present in a given column are categories:</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 <p>Analogously, all columns in an existing <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> can be batch converted using <a class="reference internal" href="../reference/api/pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.astype()</span></code></a>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abca&#39;</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;bccd&#39;</span><span class="p">)})</span>
@@ -271,8 +271,8 @@ only labels present in a given column are categories:</p>
 <p>In the examples above where we passed <code class="docutils literal notranslate"><span class="pre">dtype='category'</span></code>, we used the default
 behavior:</p>
 <ol class="arabic simple">
-<li>Categories are inferred from the data.</li>
-<li>Categories are unordered.</li>
+<li><p>Categories are inferred from the data.</p></li>
+<li><p>Categories are unordered.</p></li>
 </ol>
 <p>To control those behaviors, instead of passing <code class="docutils literal notranslate"><span class="pre">'category'</span></code>, use an instance
 of <code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalDtype</span></code>.</p>
@@ -307,8 +307,8 @@ are consistent among all columns.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">To perform table-wise conversion, where all labels in the entire <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> are used as
+<p class="admonition-title">Note</p>
+<p>To perform table-wise conversion, where all labels in the entire <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> are used as
 categories for each column, the <code class="docutils literal notranslate"><span class="pre">categories</span></code> parameter can be determined programmatically by
 <code class="docutils literal notranslate"><span class="pre">categories</span> <span class="pre">=</span> <span class="pre">pd.unique(df.to_numpy().ravel())</span></code>.</p>
 </div>
@@ -341,13 +341,13 @@ during normal constructor mode:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In contrast to R’s <cite>factor</cite> function, categorical data is not converting input values to
+<p class="admonition-title">Note</p>
+<p>In contrast to R’s <cite>factor</cite> function, categorical data is not converting input values to
 strings; categories will end up the same data type as the original values.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In contrast to R’s <cite>factor</cite> function, there is currently no way to assign/change labels at
+<p class="admonition-title">Note</p>
+<p>In contrast to R’s <cite>factor</cite> function, there is currently no way to assign/change labels at
 creation time. Use <cite>categories</cite> to change the categories after creation time.</p>
 </div>
 </div>
@@ -355,12 +355,12 @@ creation time. Use <cite>categories</cite> to change the categories after creati
 <div class="section" id="categoricaldtype">
 <span id="categorical-categoricaldtype"></span><h2>CategoricalDtype<a class="headerlink" href="#categoricaldtype" title="Permalink to this headline">¶</a></h2>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.21.0.</span></p>
+<p><span class="versionmodified changed">Changed in version 0.21.0.</span></p>
 </div>
 <p>A categorical’s type is fully described by</p>
 <ol class="arabic simple">
-<li><code class="docutils literal notranslate"><span class="pre">categories</span></code>: a sequence of unique values and no missing values</li>
-<li><code class="docutils literal notranslate"><span class="pre">ordered</span></code>: a boolean</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">categories</span></code>: a sequence of unique values and no missing values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ordered</span></code>: a boolean</p></li>
 </ol>
 <p>This information can be stored in a <code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalDtype</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">categories</span></code> argument is optional, which implies that the actual categories
@@ -380,8 +380,8 @@ by default.</p>
 expects a <cite>dtype</cite>. For example <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_csv()</span></code></a>,
 <a class="reference internal" href="../reference/api/pandas.DataFrame.astype.html#pandas.DataFrame.astype" title="pandas.DataFrame.astype"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.DataFrame.astype()</span></code></a>, or in the <code class="docutils literal notranslate"><span class="pre">Series</span></code> constructor.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">As a convenience, you can use the string <code class="docutils literal notranslate"><span class="pre">'category'</span></code> in place of a
+<p class="admonition-title">Note</p>
+<p>As a convenience, you can use the string <code class="docutils literal notranslate"><span class="pre">'category'</span></code> in place of a
 <code class="xref py py-class docutils literal notranslate"><span class="pre">CategoricalDtype</span></code> when you want the default behavior of
 the categories being unordered, and equal to the set values present in the
 array. In other words, <code class="docutils literal notranslate"><span class="pre">dtype='category'</span></code> is equivalent to
@@ -406,8 +406,8 @@ unordered categoricals, the order of the <code class="docutils literal notransla
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Since <code class="docutils literal notranslate"><span class="pre">dtype='category'</span></code> is essentially <code class="docutils literal notranslate"><span class="pre">CategoricalDtype(None,</span> <span class="pre">False)</span></code>,
+<p class="admonition-title">Warning</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">dtype='category'</span></code> is essentially <code class="docutils literal notranslate"><span class="pre">CategoricalDtype(None,</span> <span class="pre">False)</span></code>,
 and since all instances <code class="docutils literal notranslate"><span class="pre">CategoricalDtype</span></code> compare equal to <code class="docutils literal notranslate"><span class="pre">'category'</span></code>,
 all instances of <code class="docutils literal notranslate"><span class="pre">CategoricalDtype</span></code> compare equal to a
 <code class="docutils literal notranslate"><span class="pre">CategoricalDtype(None,</span> <span class="pre">False)</span></code>, regardless of <code class="docutils literal notranslate"><span class="pre">categories</span></code> or
@@ -453,16 +453,16 @@ specify categories and ordering, they are inferred from the passed arguments.</p
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">New categorical data are <strong>not</strong> automatically ordered. You must explicitly
+<p class="admonition-title">Note</p>
+<p>New categorical data are <strong>not</strong> automatically ordered. You must explicitly
 pass <code class="docutils literal notranslate"><span class="pre">ordered=True</span></code> to indicate an ordered <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>The result of <code class="xref py py-meth docutils literal notranslate"><span class="pre">unique()</span></code> is not always the same as <code class="docutils literal notranslate"><span class="pre">Series.cat.categories</span></code>,
 because <code class="docutils literal notranslate"><span class="pre">Series.unique()</span></code> has a couple of guarantees, namely that it returns categories
 in the order of appearance, and it only includes values that are actually present.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;babc&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">CategoricalDtype</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcd&#39;</span><span class="p">)))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;babc&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">CategoricalDtype</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcd&#39;</span><span class="p">)))</span>
 
 <span class="gp">In [72]: </span><span class="n">s</span>
 
@@ -498,12 +498,12 @@ in the order of appearance, and it only includes values that are actually presen
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In contrast to R’s <cite>factor</cite>, categorical data can have categories of other types than string.</p>
+<p class="admonition-title">Note</p>
+<p>In contrast to R’s <cite>factor</cite>, categorical data can have categories of other types than string.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Be aware that assigning new categories is an inplace operation, while most other operations
+<p class="admonition-title">Note</p>
+<p>Be aware that assigning new categories is an inplace operation, while most other operations
 under <code class="docutils literal notranslate"><span class="pre">Series.cat</span></code> per default return a new <code class="docutils literal notranslate"><span class="pre">Series</span></code> of dtype <cite>category</cite>.</p>
 </div>
 <p>Categories must be unique or a <cite>ValueError</cite> is raised:</p>
@@ -574,8 +574,8 @@ use <code class="xref py py-meth docutils literal notranslate"><span class="pre"
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Be aware that <code class="xref py py-func docutils literal notranslate"><span class="pre">Categorical.set_categories()</span></code> cannot know whether some category is omitted
+<p class="admonition-title">Note</p>
+<p>Be aware that <code class="xref py py-func docutils literal notranslate"><span class="pre">Categorical.set_categories()</span></code> cannot know whether some category is omitted
 intentionally or because it is misspelled or (under Python3) due to a type difference (e.g.,
 NumPy S1 dtype and Python strings). This can result in surprising behaviour!</p>
 </div>
@@ -643,16 +643,16 @@ necessarily make the sort order the same as the categories order.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Note the difference between assigning new categories and reordering the categories: the first
+<p class="admonition-title">Note</p>
+<p>Note the difference between assigning new categories and reordering the categories: the first
 renames categories and therefore the individual values in the <code class="docutils literal notranslate"><span class="pre">Series</span></code>, but if the first
 position was sorted last, the renamed value will still be sorted last. Reordering means that the
 way values are sorted is different afterwards, but not that individual values in the
 <code class="docutils literal notranslate"><span class="pre">Series</span></code> are changed.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If the <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> is not ordered, <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.min()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.max()</span></code> will raise
+<p class="admonition-title">Note</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> is not ordered, <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.min()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.max()</span></code> will raise
 <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. Numeric operations like <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code> and operations based on them
 (e.g. <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.median()</span></code>, which would need to compute the mean between two values if the length
 of an array is even) do not work and raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
@@ -683,17 +683,17 @@ The ordering of the categorical is determined by the <code class="docutils liter
 <h2>Comparisons<a class="headerlink" href="#comparisons" title="Permalink to this headline">¶</a></h2>
 <p>Comparing categorical data with other objects is possible in three cases:</p>
 <ul class="simple">
-<li>Comparing equality (<code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code>) to a list-like object (list, Series, array,
-…) of the same length as the categorical data.</li>
-<li>All comparisons (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) of categorical data to
-another categorical Series, when <code class="docutils literal notranslate"><span class="pre">ordered==True</span></code> and the <cite>categories</cite> are the same.</li>
-<li>All comparisons of a categorical data to a scalar.</li>
+<li><p>Comparing equality (<code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code>) to a list-like object (list, Series, array,
+…) of the same length as the categorical data.</p></li>
+<li><p>All comparisons (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>) of categorical data to
+another categorical Series, when <code class="docutils literal notranslate"><span class="pre">ordered==True</span></code> and the <cite>categories</cite> are the same.</p></li>
+<li><p>All comparisons of a categorical data to a scalar.</p></li>
 </ul>
 <p>All other comparisons, especially “non-equality” comparisons of two categoricals with different
 categories or a categorical with any list-like object, will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Any “non-equality” comparisons of categorical data with a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">np.array</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code> or
+<p class="admonition-title">Note</p>
+<p>Any “non-equality” comparisons of categorical data with a <code class="docutils literal notranslate"><span class="pre">Series</span></code>, <code class="docutils literal notranslate"><span class="pre">np.array</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code> or
 categorical data with different categories or ordering will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> because custom
 categories ordering could be interpreted in two ways: one with taking into account the
 ordering and one without.</p>
@@ -853,8 +853,8 @@ of length “1”.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The is in contrast to R’s <cite>factor</cite> function, where <code class="docutils literal notranslate"><span class="pre">factor(c(1,2,3))[1]</span></code>
+<p class="admonition-title">Note</p>
+<p>The is in contrast to R’s <cite>factor</cite> function, where <code class="docutils literal notranslate"><span class="pre">factor(c(1,2,3))[1]</span></code>
 returns a single value <cite>factor</cite>.</p>
 </div>
 <p>To get a single value <code class="docutils literal notranslate"><span class="pre">Series</span></code> of type <code class="docutils literal notranslate"><span class="pre">category</span></code>, you pass in a list with
@@ -885,8 +885,8 @@ an appropriate type:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The returned <code class="docutils literal notranslate"><span class="pre">Series</span></code> (or <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>) is of the same type as if you used the
+<p class="admonition-title">Note</p>
+<p>The returned <code class="docutils literal notranslate"><span class="pre">Series</span></code> (or <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>) is of the same type as if you used the
 <code class="docutils literal notranslate"><span class="pre">.str.&lt;method&gt;</span></code> / <code class="docutils literal notranslate"><span class="pre">.dt.&lt;method&gt;</span></code> on a <code class="docutils literal notranslate"><span class="pre">Series</span></code> of that type (and not of
 type <code class="docutils literal notranslate"><span class="pre">category</span></code>!).</p>
 </div>
@@ -903,8 +903,8 @@ type <code class="docutils literal notranslate"><span class="pre">category</span
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The work is done on the <code class="docutils literal notranslate"><span class="pre">categories</span></code> and then a new <code class="docutils literal notranslate"><span class="pre">Series</span></code> is constructed. This has
+<p class="admonition-title">Note</p>
+<p>The work is done on the <code class="docutils literal notranslate"><span class="pre">categories</span></code> and then a new <code class="docutils literal notranslate"><span class="pre">Series</span></code> is constructed. This has
 some performance implication if you have a <code class="docutils literal notranslate"><span class="pre">Series</span></code> of type string, where lots of elements
 are repeated (i.e. the number of unique elements in the <code class="docutils literal notranslate"><span class="pre">Series</span></code> is a lot smaller than the
 length of the <code class="docutils literal notranslate"><span class="pre">Series</span></code>). In this case it can be faster to convert the original <code class="docutils literal notranslate"><span class="pre">Series</span></code>
@@ -997,7 +997,7 @@ but the categories of these categoricals need to be the same:</p>
 <div class="section" id="unioning">
 <span id="categorical-union"></span><h3>Unioning<a class="headerlink" href="#unioning" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 <p>If you want to combine categoricals that do not necessarily have the same
 categories, the <code class="xref py py-func docutils literal notranslate"><span class="pre">union_categoricals()</span></code> function will
@@ -1037,7 +1037,7 @@ categoricals of the same categories and order information
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <p>Ordered categoricals with different categories or orderings can be combined by
 using the <code class="docutils literal notranslate"><span class="pre">ignore_ordered=True</span></code> argument.</p>
@@ -1059,12 +1059,12 @@ the resulting array will always be a plain <code class="docutils literal notrans
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">union_categoricals</span></code> may recode the integer codes for categories
 when combining categoricals.  This is likely what you want,
 but if you are relying on the exact numbering of the categories, be
 aware.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [213]: </span><span class="n">c1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [213]: </span><span class="n">c1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 
 <span class="gp">In [214]: </span><span class="n">c2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
 
@@ -1112,34 +1112,34 @@ Use <code class="docutils literal notranslate"><span class="pre">.astype</span><
 </pre></div>
 </div>
 <p>Following table summarizes the results of <code class="docutils literal notranslate"><span class="pre">Categoricals</span></code> related concatenations.</p>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="11%" />
-<col width="60%" />
-<col width="30%" />
+<col style="width: 11%" />
+<col style="width: 60%" />
+<col style="width: 30%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">arg1</th>
-<th class="head">arg2</th>
-<th class="head">result</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>arg1</p></th>
+<th class="head"><p>arg2</p></th>
+<th class="head"><p>result</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>category</td>
-<td>category (identical categories)</td>
-<td>category</td>
+<tbody>
+<tr class="row-even"><td><p>category</p></td>
+<td><p>category (identical categories)</p></td>
+<td><p>category</p></td>
 </tr>
-<tr class="row-odd"><td>category</td>
-<td>category (different categories, both not ordered)</td>
-<td>object (dtype is inferred)</td>
+<tr class="row-odd"><td><p>category</p></td>
+<td><p>category (different categories, both not ordered)</p></td>
+<td><p>object (dtype is inferred)</p></td>
 </tr>
-<tr class="row-even"><td>category</td>
-<td>category (different categories, either one is ordered)</td>
-<td>object (dtype is inferred)</td>
+<tr class="row-even"><td><p>category</p></td>
+<td><p>category (different categories, either one is ordered)</p></td>
+<td><p>object (dtype is inferred)</p></td>
 </tr>
-<tr class="row-odd"><td>category</td>
-<td>not category</td>
-<td>object (dtype is inferred)</td>
+<tr class="row-odd"><td><p>category</p></td>
+<td><p>not category</p></td>
+<td><p>object (dtype is inferred)</p></td>
 </tr>
 </tbody>
 </table>
@@ -1224,15 +1224,15 @@ a code of <code class="docutils literal notranslate"><span class="pre">-1</span>
 <h2>Differences to R’s <cite>factor</cite><a class="headerlink" href="#differences-to-r-s-factor" title="Permalink to this headline">¶</a></h2>
 <p>The following differences to R’s factor functions can be observed:</p>
 <ul class="simple">
-<li>R’s <cite>levels</cite> are named <cite>categories</cite>.</li>
-<li>R’s <cite>levels</cite> are always of type string, while <cite>categories</cite> in pandas can be of any dtype.</li>
-<li>It’s not possible to specify labels at creation time. Use <code class="docutils literal notranslate"><span class="pre">s.cat.rename_categories(new_labels)</span></code>
-afterwards.</li>
-<li>In contrast to R’s <cite>factor</cite> function, using categorical data as the sole input to create a
+<li><p>R’s <cite>levels</cite> are named <cite>categories</cite>.</p></li>
+<li><p>R’s <cite>levels</cite> are always of type string, while <cite>categories</cite> in pandas can be of any dtype.</p></li>
+<li><p>It’s not possible to specify labels at creation time. Use <code class="docutils literal notranslate"><span class="pre">s.cat.rename_categories(new_labels)</span></code>
+afterwards.</p></li>
+<li><p>In contrast to R’s <cite>factor</cite> function, using categorical data as the sole input to create a
 new categorical series will <em>not</em> remove unused categories but create a new categorical series
-which is equal to the passed in one!</li>
-<li>R allows for missing values to be included in its <cite>levels</cite> (pandas’ <cite>categories</cite>). Pandas
-does not allow <cite>NaN</cite> categories, but missing values can still be in the <cite>values</cite>.</li>
+which is equal to the passed in one!</p></li>
+<li><p>R allows for missing values to be included in its <cite>levels</cite> (pandas’ <cite>categories</cite>). Pandas
+does not allow <cite>NaN</cite> categories, but missing values can still be in the <cite>values</cite>.</p></li>
 </ul>
 </div>
 <div class="section" id="gotchas">
@@ -1251,10 +1251,10 @@ an <code class="docutils literal notranslate"><span class="pre">object</span></c
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>If the number of categories approaches the length of the data, the <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> will use nearly the same or
 more memory than an equivalent <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype representation.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [253]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;foo</span><span class="si">%04d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">)])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [253]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;foo</span><span class="si">%04d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">)])</span>
 
 <span class="go"># object dtype</span>
 <span class="gp">In [254]: </span><span class="n">s</span><span class="o">.</span><span class="n">nbytes</span>
@@ -1310,8 +1310,8 @@ are not numeric data (even in the case that <code class="docutils literal notran
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If such a function works, please file a bug at <a class="reference external" href="https://github.com/pandas-dev/pandas">https://github.com/pandas-dev/pandas</a>!</p>
+<p class="admonition-title">Note</p>
+<p>If such a function works, please file a bug at <a class="reference external" href="https://github.com/pandas-dev/pandas">https://github.com/pandas-dev/pandas</a>!</p>
 </div>
 </div>
 <div class="section" id="dtype-in-apply">
@@ -1389,8 +1389,8 @@ change the original <code class="docutils literal notranslate"><span class="pre"
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">This also happens in some cases when you supply a NumPy array instead of a <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>:
+<p class="admonition-title">Note</p>
+<p>This also happens in some cases when you supply a NumPy array instead of a <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>:
 using an int array (e.g. <code class="docutils literal notranslate"><span class="pre">np.array([1,2,3,4])</span></code>) will exhibit the same behavior, while using
 a string array (e.g. <code class="docutils literal notranslate"><span class="pre">np.array([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;a&quot;])</span></code>) will not.</p>
 </div>

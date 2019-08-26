@@ -83,43 +83,36 @@
 <h1>pandas.DataFrame.filter<a class="headerlink" href="#pandas-dataframe-filter" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.filter">
-<code class="descclassname">DataFrame.</code><code class="descname">filter</code><span class="sig-paren">(</span><em>items=None</em>, <em>like=None</em>, <em>regex=None</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L4497-L4583"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">items=None</em>, <em class="sig-param">like=None</em>, <em class="sig-param">regex=None</em>, <em class="sig-param">axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L4585-L4676"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Subset rows or columns of dataframe according to labels in
 the specified index.</p>
 <p>Note that this routine does not filter a dataframe on its
 contents. The filter is applied to the labels of the index.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>items</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list-like</span></dt>
-<dd><p class="first last">List of axis to restrict to (must not all be present).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>items</strong><span class="classifier">list-like</span></dt><dd><p>Keep labels from axis which are in items.</p>
 </dd>
-<dt><strong>like</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
-<dd><p class="first last">Keep axis where “arg in col == True”.</p>
+<dt><strong>like</strong><span class="classifier">string</span></dt><dd><p>Keep labels from axis for which “like in label == True”.</p>
 </dd>
-<dt><strong>regex</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string (regular expression)</span></dt>
-<dd><p class="first last">Keep axis with re.search(regex, col) == True.</p>
+<dt><strong>regex</strong><span class="classifier">string (regular expression)</span></dt><dd><p>Keep labels from axis for which re.search(regex, label) == True.</p>
 </dd>
-<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or string axis name</span></dt>
-<dd><p class="first last">The axis to filter on.  By default this is the info axis,
+<dt><strong>axis</strong><span class="classifier">int or string axis name</span></dt><dd><p>The axis to filter on.  By default this is the info axis,
 ‘index’ for Series, ‘columns’ for DataFrame.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>same type as input object</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>same type as input object</dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.loc</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.loc.html#pandas.DataFrame.loc" title="pandas.DataFrame.loc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.loc</span></code></a></dt><dd></dd>
+</dl>
 </div>
 <p class="rubric">Notes</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">items</span></code>, <code class="docutils literal notranslate"><span class="pre">like</span></code>, and <code class="docutils literal notranslate"><span class="pre">regex</span></code> parameters are
@@ -127,7 +120,7 @@ enforced to be mutually exclusive.</p>
 <p><code class="docutils literal notranslate"><span class="pre">axis</span></code> defaults to the info axis that is used when indexing
 with <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])),</span>
 <span class="gp">... </span>                  <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mouse&#39;</span><span class="p">,</span> <span class="s1">&#39;rabbit&#39;</span><span class="p">],</span>
 <span class="gp">... </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">])</span>
 </pre></div>

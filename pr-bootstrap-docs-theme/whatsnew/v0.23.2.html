@@ -118,23 +118,23 @@
 <p>This is a minor bug-fix release in the 0.23.x series and includes some small regression fixes
 and bug fixes. We recommend that all users upgrade to this version.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Pandas 0.23.2 is first pandas release that’s compatible with
+<p class="admonition-title">Note</p>
+<p>Pandas 0.23.2 is first pandas release that’s compatible with
 Python 3.7 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/20552">GH20552</a>)</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Starting January 1, 2019, pandas feature releases will support Python 3 only.
+<p class="admonition-title">Warning</p>
+<p>Starting January 1, 2019, pandas feature releases will support Python 3 only.
 See <a class="reference internal" href="../install.html#install-dropping-27"><span class="std std-ref">Plan for dropping Python 2.7</span></a> for more.</p>
 </div>
 <div class="contents local topic" id="what-s-new-in-v0-23-2">
 <p class="topic-title first">What’s new in v0.23.2</p>
 <ul class="simple">
-<li><a class="reference internal" href="#logical-reductions-over-entire-dataframe" id="id1">Logical Reductions over Entire DataFrame</a></li>
-<li><a class="reference internal" href="#fixed-regressions" id="id2">Fixed Regressions</a></li>
-<li><a class="reference internal" href="#build-changes" id="id3">Build Changes</a></li>
-<li><a class="reference internal" href="#bug-fixes" id="id4">Bug Fixes</a></li>
-<li><a class="reference internal" href="#contributors" id="id5">Contributors</a></li>
+<li><p><a class="reference internal" href="#logical-reductions-over-entire-dataframe" id="id1">Logical Reductions over Entire DataFrame</a></p></li>
+<li><p><a class="reference internal" href="#fixed-regressions" id="id2">Fixed Regressions</a></p></li>
+<li><p><a class="reference internal" href="#build-changes" id="id3">Build Changes</a></p></li>
+<li><p><a class="reference internal" href="#bug-fixes" id="id4">Bug Fixes</a></p></li>
+<li><p><a class="reference internal" href="#contributors" id="id5">Contributors</a></p></li>
 </ul>
 </div>
 <div class="section" id="logical-reductions-over-entire-dataframe">
@@ -146,7 +146,7 @@ See <a class="reference internal" href="../install.html#install-dropping-27"><sp
 </pre></div>
 </div>
 <p>This also provides compatibility with NumPy 1.15, which now dispatches to <code class="docutils literal notranslate"><span class="pre">DataFrame.all</span></code>.
-With NumPy 1.15 and pandas 0.23.1 or earlier, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.all.html#numpy.all" title="(in NumPy v1.16)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.all()</span></code></a> will no longer reduce over every axis:</p>
+With NumPy 1.15 and pandas 0.23.1 or earlier, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.all.html#numpy.all" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.all()</span></code></a> will no longer reduce over every axis:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># NumPy 1.15, pandas 0.23.1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">False</span><span class="p">],</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">False</span><span class="p">]}))</span>
 <span class="go">A    False</span>
@@ -162,59 +162,59 @@ With NumPy 1.15 and pandas 0.23.1 or earlier, <a class="reference external" href
 <div class="section" id="fixed-regressions">
 <span id="whatsnew-0232-fixed-regressions"></span><h2>Fixed Regressions<a class="headerlink" href="#fixed-regressions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Fixed regression in <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_csv()</span></code> when handling file-like object incorrectly (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21471">GH21471</a>)</li>
-<li>Re-allowed duplicate level names of a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>. Accessing a level that has a duplicate name by name still raises an error (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/19029">GH19029</a>).</li>
-<li>Bug in both <a class="reference internal" href="../reference/api/pandas.DataFrame.first_valid_index.html#pandas.DataFrame.first_valid_index" title="pandas.DataFrame.first_valid_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.first_valid_index()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.first_valid_index()</span></code> raised for a row index having duplicate values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21441">GH21441</a>)</li>
-<li>Fixed printing of DataFrames with hierarchical columns with long names (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21180">GH21180</a>)</li>
-<li>Fixed regression in <a class="reference internal" href="../reference/api/pandas.DataFrame.reindex.html#pandas.DataFrame.reindex" title="pandas.DataFrame.reindex"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reindex()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a>
-with a MultiIndex or multiple keys that contains categorical datetime-like values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21390">GH21390</a>).</li>
-<li>Fixed regression in unary negative operations with object dtype (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21380">GH21380</a>)</li>
-<li>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.ceil()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.floor()</span></code> when timestamp is a multiple of the rounding frequency (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21262">GH21262</a>)</li>
-<li>Fixed regression in <code class="xref py py-func docutils literal notranslate"><span class="pre">to_clipboard()</span></code> that defaulted to copying dataframes with space delimited instead of tab delimited (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21104">GH21104</a>)</li>
+<li><p>Fixed regression in <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_csv()</span></code> when handling file-like object incorrectly (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21471">GH21471</a>)</p></li>
+<li><p>Re-allowed duplicate level names of a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>. Accessing a level that has a duplicate name by name still raises an error (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/19029">GH19029</a>).</p></li>
+<li><p>Bug in both <a class="reference internal" href="../reference/api/pandas.DataFrame.first_valid_index.html#pandas.DataFrame.first_valid_index" title="pandas.DataFrame.first_valid_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.first_valid_index()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.first_valid_index()</span></code> raised for a row index having duplicate values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21441">GH21441</a>)</p></li>
+<li><p>Fixed printing of DataFrames with hierarchical columns with long names (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21180">GH21180</a>)</p></li>
+<li><p>Fixed regression in <a class="reference internal" href="../reference/api/pandas.DataFrame.reindex.html#pandas.DataFrame.reindex" title="pandas.DataFrame.reindex"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reindex()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a>
+with a MultiIndex or multiple keys that contains categorical datetime-like values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21390">GH21390</a>).</p></li>
+<li><p>Fixed regression in unary negative operations with object dtype (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21380">GH21380</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.ceil()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.floor()</span></code> when timestamp is a multiple of the rounding frequency (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21262">GH21262</a>)</p></li>
+<li><p>Fixed regression in <code class="xref py py-func docutils literal notranslate"><span class="pre">to_clipboard()</span></code> that defaulted to copying dataframes with space delimited instead of tab delimited (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21104">GH21104</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="build-changes">
 <h2>Build Changes<a class="headerlink" href="#build-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>The source and binary distributions no longer include test data files, resulting in smaller download sizes. Tests relying on these data files will be skipped when using <code class="docutils literal notranslate"><span class="pre">pandas.test()</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/19320">GH19320</a>)</li>
+<li><p>The source and binary distributions no longer include test data files, resulting in smaller download sizes. Tests relying on these data files will be skipped when using <code class="docutils literal notranslate"><span class="pre">pandas.test()</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/19320">GH19320</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="bug-fixes">
 <span id="whatsnew-0232-bug-fixes"></span><h2>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h2>
 <p><strong>Conversion</strong></p>
 <ul class="simple">
-<li>Bug in constructing <code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code> with an iterator or generator (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21470">GH21470</a>)</li>
-<li>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.nlargest()</span></code> for signed and unsigned integer dtypes when the minimum value is present (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21426">GH21426</a>)</li>
+<li><p>Bug in constructing <code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code> with an iterator or generator (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21470">GH21470</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.nlargest()</span></code> for signed and unsigned integer dtypes when the minimum value is present (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21426">GH21426</a>)</p></li>
 </ul>
 <p><strong>Indexing</strong></p>
 <ul class="simple">
-<li>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Index.get_indexer_non_unique()</span></code> with categorical key (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21448">GH21448</a>)</li>
-<li>Bug in comparison operations for <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiIndex</span></code> where error was raised on equality / inequality comparison involving a MultiIndex with <code class="docutils literal notranslate"><span class="pre">nlevels</span> <span class="pre">==</span> <span class="pre">1</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21149">GH21149</a>)</li>
-<li>Bug in <a class="reference internal" href="../reference/api/pandas.DataFrame.drop.html#pandas.DataFrame.drop" title="pandas.DataFrame.drop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.drop()</span></code></a> behaviour is not consistent for unique and non-unique indexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21494">GH21494</a>)</li>
-<li>Bug in <a class="reference internal" href="../reference/api/pandas.DataFrame.duplicated.html#pandas.DataFrame.duplicated" title="pandas.DataFrame.duplicated"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.duplicated()</span></code></a> with a large number of columns causing a ‘maximum recursion depth exceeded’ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21524">GH21524</a>).</li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Index.get_indexer_non_unique()</span></code> with categorical key (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21448">GH21448</a>)</p></li>
+<li><p>Bug in comparison operations for <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiIndex</span></code> where error was raised on equality / inequality comparison involving a MultiIndex with <code class="docutils literal notranslate"><span class="pre">nlevels</span> <span class="pre">==</span> <span class="pre">1</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21149">GH21149</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.DataFrame.drop.html#pandas.DataFrame.drop" title="pandas.DataFrame.drop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.drop()</span></code></a> behaviour is not consistent for unique and non-unique indexes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21494">GH21494</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.DataFrame.duplicated.html#pandas.DataFrame.duplicated" title="pandas.DataFrame.duplicated"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.duplicated()</span></code></a> with a large number of columns causing a ‘maximum recursion depth exceeded’ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21524">GH21524</a>).</p></li>
 </ul>
 <p><strong>I/O</strong></p>
 <ul class="simple">
-<li>Bug in <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_csv()</span></code></a> that caused it to incorrectly raise an error when <code class="docutils literal notranslate"><span class="pre">nrows=0</span></code>, <code class="docutils literal notranslate"><span class="pre">low_memory=True</span></code>, and <code class="docutils literal notranslate"><span class="pre">index_col</span></code> was not <code class="docutils literal notranslate"><span class="pre">None</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21141">GH21141</a>)</li>
-<li>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">json_normalize()</span></code> when formatting the <code class="docutils literal notranslate"><span class="pre">record_prefix</span></code> with integer columns (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21536">GH21536</a>)</li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_csv()</span></code></a> that caused it to incorrectly raise an error when <code class="docutils literal notranslate"><span class="pre">nrows=0</span></code>, <code class="docutils literal notranslate"><span class="pre">low_memory=True</span></code>, and <code class="docutils literal notranslate"><span class="pre">index_col</span></code> was not <code class="docutils literal notranslate"><span class="pre">None</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21141">GH21141</a>)</p></li>
+<li><p>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">json_normalize()</span></code> when formatting the <code class="docutils literal notranslate"><span class="pre">record_prefix</span></code> with integer columns (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21536">GH21536</a>)</p></li>
 </ul>
 <p><strong>Categorical</strong></p>
 <ul class="simple">
-<li>Bug in rendering <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code> with <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> dtype in rare conditions under Python 2.7 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21002">GH21002</a>)</li>
+<li><p>Bug in rendering <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code> with <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> dtype in rare conditions under Python 2.7 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21002">GH21002</a>)</p></li>
 </ul>
 <p><strong>Timezones</strong></p>
 <ul class="simple">
-<li>Bug in <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> where passing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> localized after a DST transition would return a datetime before the DST transition (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/20854">GH20854</a>)</li>
-<li>Bug in comparing <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> with tz-aware <code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> columns with a DST transition that raised a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/19970">GH19970</a>)</li>
-<li>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.shift()</span></code> where an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> would raise when shifting across DST (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8616">GH8616</a>)</li>
-<li>Bug in <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> constructor where passing an invalid timezone offset designator (<code class="docutils literal notranslate"><span class="pre">Z</span></code>) would not raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8910">GH8910</a>)</li>
-<li>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.replace()</span></code> where replacing at a DST boundary would retain an incorrect offset (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7825">GH7825</a>)</li>
-<li>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.reindex()</span></code> when reindexing a tz-naive and tz-aware <code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8306">GH8306</a>)</li>
-<li>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.resample()</span></code> when downsampling across a DST boundary (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8531">GH8531</a>)</li>
+<li><p>Bug in <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> where passing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> localized after a DST transition would return a datetime before the DST transition (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/20854">GH20854</a>)</p></li>
+<li><p>Bug in comparing <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> with tz-aware <code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> columns with a DST transition that raised a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/19970">GH19970</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.shift()</span></code> where an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> would raise when shifting across DST (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8616">GH8616</a>)</p></li>
+<li><p>Bug in <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> constructor where passing an invalid timezone offset designator (<code class="docutils literal notranslate"><span class="pre">Z</span></code>) would not raise a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8910">GH8910</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.replace()</span></code> where replacing at a DST boundary would retain an incorrect offset (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7825">GH7825</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.reindex()</span></code> when reindexing a tz-naive and tz-aware <code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8306">GH8306</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.resample()</span></code> when downsampling across a DST boundary (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8531">GH8531</a>)</p></li>
 </ul>
 <p><strong>Timedelta</strong></p>
 <ul class="simple">
-<li>Bug in <code class="xref py py-class docutils literal notranslate"><span class="pre">Timedelta</span></code> where non-zero timedeltas shorter than 1 microsecond were considered False (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21484">GH21484</a>)</li>
+<li><p>Bug in <code class="xref py py-class docutils literal notranslate"><span class="pre">Timedelta</span></code> where non-zero timedeltas shorter than 1 microsecond were considered False (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21484">GH21484</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="contributors">

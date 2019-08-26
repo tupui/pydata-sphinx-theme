@@ -83,55 +83,55 @@
 <h1>pandas.DataFrame.corr<a class="headerlink" href="#pandas-dataframe-corr" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.corr">
-<code class="descclassname">DataFrame.</code><code class="descname">corr</code><span class="sig-paren">(</span><em>method='pearson'</em>, <em>min_periods=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L6960-L7038"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.corr" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">corr</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">method='pearson'</em>, <em class="sig-param">min_periods=1</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L7451-L7534"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.corr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute pairwise correlation of columns, excluding NA/null values.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>method</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘pearson’, ‘kendall’, ‘spearman’} or callable</span></dt>
-<dd><ul class="first last simple">
-<li>pearson : standard correlation coefficient</li>
-<li>kendall : Kendall Tau correlation coefficient</li>
-<li>spearman : Spearman rank correlation</li>
-<li><dl class="first docutils">
-<dt>callable: callable with input two 1d ndarrays</dt>
-<dd>and returning a float
-.. versionadded:: 0.24.0</dd>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>method</strong><span class="classifier">{‘pearson’, ‘kendall’, ‘spearman’} or callable</span></dt><dd><ul class="simple">
+<li><p>pearson : standard correlation coefficient</p></li>
+<li><p>kendall : Kendall Tau correlation coefficient</p></li>
+<li><p>spearman : Spearman rank correlation</p></li>
+<li><dl class="simple">
+<dt>callable: callable with input two 1d ndarrays</dt><dd><p>and returning a float. Note that the returned matrix from corr
+will have 1 along the diagonals and will be symmetric
+regardless of the callable’s behavior
+.. versionadded:: 0.24.0</p>
+</dd>
 </dl>
 </li>
 </ul>
 </dd>
-<dt><strong>min_periods</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
-<dd><p class="first last">Minimum number of observations required per pair of columns
-to have a valid result. Currently only available for pearson
-and spearman correlation</p>
+<dt><strong>min_periods</strong><span class="classifier">int, optional</span></dt><dd><p>Minimum number of observations required per pair of columns
+to have a valid result. Currently only available for Pearson
+and Spearman correlation.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>Correlation matrix.</p>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.DataFrame.corrwith.html#pandas.DataFrame.corrwith" title="pandas.DataFrame.corrwith"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.corrwith</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.corr</span></code></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.corrwith.html#pandas.DataFrame.corrwith" title="pandas.DataFrame.corrwith"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.corrwith</span></code></a></dt><dd></dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.corr</span></code></dt><dd></dd>
+</dl>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">histogram_intersection</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span>
-<span class="gp">... </span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">decimals</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">histogram_intersection</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">decimals</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">v</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="o">.</span><span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span> <span class="o">.</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">)],</span>
 <span class="gp">... </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dogs&#39;</span><span class="p">,</span> <span class="s1">&#39;cats&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">histogram_intersection</span><span class="p">)</span>
-<span class="go">      dogs cats</span>
-<span class="go">dogs   1.0  0.3</span>
-<span class="go">cats   0.3  1.0</span>
+<span class="go">      dogs  cats</span>
+<span class="go">dogs   1.0   0.3</span>
+<span class="go">cats   0.3   1.0</span>
 </pre></div>
 </div>
 </dd></dl>

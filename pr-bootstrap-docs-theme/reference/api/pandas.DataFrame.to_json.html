@@ -83,118 +83,108 @@
 <h1>pandas.DataFrame.to_json<a class="headerlink" href="#pandas-dataframe-to-json" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.to_json">
-<code class="descclassname">DataFrame.</code><code class="descname">to_json</code><span class="sig-paren">(</span><em>path_or_buf=None</em>, <em>orient=None</em>, <em>date_format=None</em>, <em>double_precision=10</em>, <em>force_ascii=True</em>, <em>date_unit='ms'</em>, <em>default_handler=None</em>, <em>lines=False</em>, <em>compression='infer'</em>, <em>index=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L2129-L2273"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_json" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_json</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">path_or_buf=None</em>, <em class="sig-param">orient=None</em>, <em class="sig-param">date_format=None</em>, <em class="sig-param">double_precision=10</em>, <em class="sig-param">force_ascii=True</em>, <em class="sig-param">date_unit='ms'</em>, <em class="sig-param">default_handler=None</em>, <em class="sig-param">lines=False</em>, <em class="sig-param">compression='infer'</em>, <em class="sig-param">index=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L2259-L2425"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the object to a JSON string.</p>
 <p>Note NaN’s and None will be converted to null and datetime objects
 will be converted to UNIX timestamps.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>path_or_buf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string or file handle, optional</span></dt>
-<dd><p class="first last">File path or object. If not specified, the result is returned as
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>path_or_buf</strong><span class="classifier">string or file handle, optional</span></dt><dd><p>File path or object. If not specified, the result is returned as
 a string.</p>
 </dd>
-<dt><strong>orient</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
-<dd><p class="first">Indication of expected JSON string format.</p>
-<ul class="last">
-<li><p class="first">Series</p>
-<ul class="simple">
-<li>default is ‘index’</li>
-<li>allowed values are: {‘split’,’records’,’index’,’table’}</li>
-</ul>
-</li>
-<li><p class="first">DataFrame</p>
-<ul class="simple">
-<li>default is ‘columns’</li>
-<li>allowed values are:
-{‘split’,’records’,’index’,’columns’,’values’,’table’}</li>
-</ul>
-</li>
-<li><p class="first">The format of the JSON string</p>
+<dt><strong>orient</strong><span class="classifier">string</span></dt><dd><p>Indication of expected JSON string format.</p>
 <ul>
-<li><p class="first">‘split’ : dict like {‘index’ -&gt; [index],
-‘columns’ -&gt; [columns], ‘data’ -&gt; [values]}</p>
+<li><p>Series</p>
+<ul class="simple">
+<li><p>default is ‘index’</p></li>
+<li><p>allowed values are: {‘split’,’records’,’index’,’table’}</p></li>
+</ul>
 </li>
-<li><p class="first">‘records’ : list like
-[{column -&gt; value}, … , {column -&gt; value}]</p>
+<li><p>DataFrame</p>
+<ul class="simple">
+<li><p>default is ‘columns’</p></li>
+<li><p>allowed values are:
+{‘split’,’records’,’index’,’columns’,’values’,’table’}</p></li>
+</ul>
 </li>
-<li><p class="first">‘index’ : dict like {index -&gt; {column -&gt; value}}</p>
-</li>
-<li><p class="first">‘columns’ : dict like {column -&gt; {index -&gt; value}}</p>
-</li>
-<li><p class="first">‘values’ : just the values array</p>
-</li>
-<li><p class="first">‘table’ : dict like {‘schema’: {schema}, ‘data’: {data}}
+<li><p>The format of the JSON string</p>
+<ul>
+<li><p>‘split’ : dict like {‘index’ -&gt; [index],
+‘columns’ -&gt; [columns], ‘data’ -&gt; [values]}</p></li>
+<li><p>‘records’ : list like
+[{column -&gt; value}, … , {column -&gt; value}]</p></li>
+<li><p>‘index’ : dict like {index -&gt; {column -&gt; value}}</p></li>
+<li><p>‘columns’ : dict like {column -&gt; {index -&gt; value}}</p></li>
+<li><p>‘values’ : just the values array</p></li>
+<li><p>‘table’ : dict like {‘schema’: {schema}, ‘data’: {data}}
 describing the data, and the data component is
 like <code class="docutils literal notranslate"><span class="pre">orient='records'</span></code>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.20.0.</span></p>
+<p><span class="versionmodified changed">Changed in version 0.20.0.</span></p>
 </div>
 </li>
 </ul>
 </li>
 </ul>
 </dd>
-<dt><strong>date_format</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{None, ‘epoch’, ‘iso’}</span></dt>
-<dd><p class="first last">Type of date conversion. ‘epoch’ = epoch milliseconds,
+<dt><strong>date_format</strong><span class="classifier">{None, ‘epoch’, ‘iso’}</span></dt><dd><p>Type of date conversion. ‘epoch’ = epoch milliseconds,
 ‘iso’ = ISO8601. The default depends on the <cite>orient</cite>. For
 <code class="docutils literal notranslate"><span class="pre">orient='table'</span></code>, the default is ‘iso’. For all other orients,
 the default is ‘epoch’.</p>
 </dd>
-<dt><strong>double_precision</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default 10</span></dt>
-<dd><p class="first last">The number of decimal places to use when encoding
+<dt><strong>double_precision</strong><span class="classifier">int, default 10</span></dt><dd><p>The number of decimal places to use when encoding
 floating point values.</p>
 </dd>
-<dt><strong>force_ascii</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
-<dd><p class="first last">Force encoded string to be ASCII.</p>
+<dt><strong>force_ascii</strong><span class="classifier">bool, default True</span></dt><dd><p>Force encoded string to be ASCII.</p>
 </dd>
-<dt><strong>date_unit</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, default ‘ms’ (milliseconds)</span></dt>
-<dd><p class="first last">The time unit to encode to, governs timestamp and ISO8601
+<dt><strong>date_unit</strong><span class="classifier">string, default ‘ms’ (milliseconds)</span></dt><dd><p>The time unit to encode to, governs timestamp and ISO8601
 precision.  One of ‘s’, ‘ms’, ‘us’, ‘ns’ for second, millisecond,
 microsecond, and nanosecond respectively.</p>
 </dd>
-<dt><strong>default_handler</strong> <span class="classifier-delimiter">:</span> <span class="classifier">callable, default None</span></dt>
-<dd><p class="first last">Handler to call if object cannot otherwise be converted to a
+<dt><strong>default_handler</strong><span class="classifier">callable, default None</span></dt><dd><p>Handler to call if object cannot otherwise be converted to a
 suitable format for JSON. Should receive a single argument which is
 the object to convert and return a serialisable object.</p>
 </dd>
-<dt><strong>lines</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first">If ‘orient’ is ‘records’ write out line delimited json format. Will
+<dt><strong>lines</strong><span class="classifier">bool, default False</span></dt><dd><p>If ‘orient’ is ‘records’ write out line delimited json format. Will
 throw ValueError if incorrect ‘orient’ since others are not list
 like.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </dd>
-<dt><strong>compression</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘infer’, ‘gzip’, ‘bz2’, ‘zip’, ‘xz’, None}</span></dt>
-<dd><p class="first">A string representing the compression to use in the output file,
+<dt><strong>compression</strong><span class="classifier">{‘infer’, ‘gzip’, ‘bz2’, ‘zip’, ‘xz’, None}</span></dt><dd><p>A string representing the compression to use in the output file,
 only used when the first argument is a filename. By default, the
 compression is inferred from the filename.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
 </div>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.24.0: </span>‘infer’ option added and set to default</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24.0: </span>‘infer’ option added and set to default</p>
 </div>
 </dd>
-<dt><strong>index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
-<dd><p class="first">Whether to include the index values in the JSON string. Not
+<dt><strong>index</strong><span class="classifier">bool, default True</span></dt><dd><p>Whether to include the index values in the JSON string. Not
 including the index (<code class="docutils literal notranslate"><span class="pre">index=False</span></code>) is only supported when
 orient is ‘split’ or ‘table’.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None or str</dt><dd><p>If path_or_buf is None, returns the resulting json format as a
+string. Otherwise returns None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_json</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_json</span></code></a></dt><dd></dd>
+</dl>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]],</span>

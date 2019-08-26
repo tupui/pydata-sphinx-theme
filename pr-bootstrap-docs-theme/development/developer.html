@@ -128,14 +128,14 @@ for each column, <em>including the index columns</em>. This has JSON form:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Every index column is stored with a name matching the pattern
 <code class="docutils literal notranslate"><span class="pre">__index_level_\d+__</span></code> and its corresponding column information is can be
 found with the following code snippet.</p>
 <p>Following this naming convention isn’t strictly necessary, but strongly
 suggested for compatibility with Arrow.</p>
 <p>Here’s an example of how the index metadata is structured in pyarrow:</p>
-<blockquote class="last">
+<blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># assuming there&#39;s at least 3 levels in the index</span>
 <span class="n">index_columns</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;index_columns&#39;</span><span class="p">]</span>  <span class="c1"># noqa: F821</span>
 <span class="n">columns</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span>  <span class="c1"># noqa: F821</span>
@@ -149,13 +149,13 @@ suggested for compatibility with Arrow.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">pandas_type</span></code> is the logical type of the column, and is one of:</p>
 <ul class="simple">
-<li>Boolean: <code class="docutils literal notranslate"><span class="pre">'bool'</span></code></li>
-<li>Integers: <code class="docutils literal notranslate"><span class="pre">'int8',</span> <span class="pre">'int16',</span> <span class="pre">'int32',</span> <span class="pre">'int64',</span> <span class="pre">'uint8',</span> <span class="pre">'uint16',</span> <span class="pre">'uint32',</span> <span class="pre">'uint64'</span></code></li>
-<li>Floats: <code class="docutils literal notranslate"><span class="pre">'float16',</span> <span class="pre">'float32',</span> <span class="pre">'float64'</span></code></li>
-<li>Date and Time Types: <code class="docutils literal notranslate"><span class="pre">'datetime',</span> <span class="pre">'datetimetz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'timedelta'</span></code></li>
-<li>String: <code class="docutils literal notranslate"><span class="pre">'unicode',</span> <span class="pre">'bytes'</span></code></li>
-<li>Categorical: <code class="docutils literal notranslate"><span class="pre">'categorical'</span></code></li>
-<li>Other Python objects: <code class="docutils literal notranslate"><span class="pre">'object'</span></code></li>
+<li><p>Boolean: <code class="docutils literal notranslate"><span class="pre">'bool'</span></code></p></li>
+<li><p>Integers: <code class="docutils literal notranslate"><span class="pre">'int8',</span> <span class="pre">'int16',</span> <span class="pre">'int32',</span> <span class="pre">'int64',</span> <span class="pre">'uint8',</span> <span class="pre">'uint16',</span> <span class="pre">'uint32',</span> <span class="pre">'uint64'</span></code></p></li>
+<li><p>Floats: <code class="docutils literal notranslate"><span class="pre">'float16',</span> <span class="pre">'float32',</span> <span class="pre">'float64'</span></code></p></li>
+<li><p>Date and Time Types: <code class="docutils literal notranslate"><span class="pre">'datetime',</span> <span class="pre">'datetimetz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'timedelta'</span></code></p></li>
+<li><p>String: <code class="docutils literal notranslate"><span class="pre">'unicode',</span> <span class="pre">'bytes'</span></code></p></li>
+<li><p>Categorical: <code class="docutils literal notranslate"><span class="pre">'categorical'</span></code></p></li>
+<li><p>Other Python objects: <code class="docutils literal notranslate"><span class="pre">'object'</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">numpy_type</span></code> is the physical storage type of the column, which is the
 result of <code class="docutils literal notranslate"><span class="pre">str(dtype)</span></code> for the underlying NumPy array that holds the data. So
@@ -163,39 +163,37 @@ for <code class="docutils literal notranslate"><span class="pre">datetimetz</spa
 any of the supported integer categorical types.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> field is <code class="docutils literal notranslate"><span class="pre">None</span></code> except for:</p>
 <ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">datetimetz</span></code>: <code class="docutils literal notranslate"><span class="pre">{'timezone':</span> <span class="pre">zone,</span> <span class="pre">'unit':</span> <span class="pre">'ns'}</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">{'timezone',</span>
+<li><p><code class="docutils literal notranslate"><span class="pre">datetimetz</span></code>: <code class="docutils literal notranslate"><span class="pre">{'timezone':</span> <span class="pre">zone,</span> <span class="pre">'unit':</span> <span class="pre">'ns'}</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">{'timezone',</span>
 <span class="pre">'America/New_York',</span> <span class="pre">'unit':</span> <span class="pre">'ns'}</span></code>. The <code class="docutils literal notranslate"><span class="pre">'unit'</span></code> is optional, and if
-omitted it is assumed to be nanoseconds.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">categorical</span></code>: <code class="docutils literal notranslate"><span class="pre">{'num_categories':</span> <span class="pre">K,</span> <span class="pre">'ordered':</span> <span class="pre">is_ordered,</span> <span class="pre">'type':</span> <span class="pre">$TYPE}</span></code></p>
+omitted it is assumed to be nanoseconds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">categorical</span></code>: <code class="docutils literal notranslate"><span class="pre">{'num_categories':</span> <span class="pre">K,</span> <span class="pre">'ordered':</span> <span class="pre">is_ordered,</span> <span class="pre">'type':</span> <span class="pre">$TYPE}</span></code></p>
 <blockquote>
 <div><ul class="simple">
-<li>Here <code class="docutils literal notranslate"><span class="pre">'type'</span></code> is optional, and can be a nested pandas type specification
-here (but not categorical)</li>
+<li><p>Here <code class="docutils literal notranslate"><span class="pre">'type'</span></code> is optional, and can be a nested pandas type specification
+here (but not categorical)</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">unicode</span></code>: <code class="docutils literal notranslate"><span class="pre">{'encoding':</span> <span class="pre">encoding}</span></code></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">unicode</span></code>: <code class="docutils literal notranslate"><span class="pre">{'encoding':</span> <span class="pre">encoding}</span></code></p>
 <blockquote>
 <div><ul class="simple">
-<li>The encoding is optional, and if not present is UTF-8</li>
+<li><p>The encoding is optional, and if not present is UTF-8</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">object</span></code>: <code class="docutils literal notranslate"><span class="pre">{'encoding':</span> <span class="pre">encoding}</span></code>. Objects can be serialized and stored
+<li><p><code class="docutils literal notranslate"><span class="pre">object</span></code>: <code class="docutils literal notranslate"><span class="pre">{'encoding':</span> <span class="pre">encoding}</span></code>. Objects can be serialized and stored
 in <code class="docutils literal notranslate"><span class="pre">BYTE_ARRAY</span></code> Parquet columns. The encoding can be one of:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">'pickle'</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">'msgpack'</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">'bson'</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">'json'</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'pickle'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'msgpack'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'bson'</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'json'</span></code></p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">timedelta</span></code>: <code class="docutils literal notranslate"><span class="pre">{'unit':</span> <span class="pre">'ns'}</span></code>. The <code class="docutils literal notranslate"><span class="pre">'unit'</span></code> is optional, and if omitted
-it is assumed to be nanoseconds. This metadata is optional altogether</p>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timedelta</span></code>: <code class="docutils literal notranslate"><span class="pre">{'unit':</span> <span class="pre">'ns'}</span></code>. The <code class="docutils literal notranslate"><span class="pre">'unit'</span></code> is optional, and if omitted
+it is assumed to be nanoseconds. This metadata is optional altogether</p></li>
 </ul>
 <p>For types other than these, the <code class="docutils literal notranslate"><span class="pre">'metadata'</span></code> key can be
 omitted. Implementations can assume <code class="docutils literal notranslate"><span class="pre">None</span></code> if the key is not present.</p>

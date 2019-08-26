@@ -83,156 +83,134 @@
 <h1>pandas.read_excel<a class="headerlink" href="#pandas-read-excel" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.read_excel">
-<code class="descclassname">pandas.</code><code class="descname">read_excel</code><span class="sig-paren">(</span><em>io</em>, <em>sheet_name=0</em>, <em>header=0</em>, <em>names=None</em>, <em>index_col=None</em>, <em>parse_cols=None</em>, <em>usecols=None</em>, <em>squeeze=False</em>, <em>dtype=None</em>, <em>engine=None</em>, <em>converters=None</em>, <em>true_values=None</em>, <em>false_values=None</em>, <em>skiprows=None</em>, <em>nrows=None</em>, <em>na_values=None</em>, <em>keep_default_na=True</em>, <em>verbose=False</em>, <em>parse_dates=False</em>, <em>date_parser=None</em>, <em>thousands=None</em>, <em>comment=None</em>, <em>skip_footer=0</em>, <em>skipfooter=0</em>, <em>convert_float=True</em>, <em>mangle_dupe_cols=True</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/io/excel.py#L308-L375"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.read_excel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">read_excel</code><span class="sig-paren">(</span><em class="sig-param">io</em>, <em class="sig-param">sheet_name=0</em>, <em class="sig-param">header=0</em>, <em class="sig-param">names=None</em>, <em class="sig-param">index_col=None</em>, <em class="sig-param">usecols=None</em>, <em class="sig-param">squeeze=False</em>, <em class="sig-param">dtype=None</em>, <em class="sig-param">engine=None</em>, <em class="sig-param">converters=None</em>, <em class="sig-param">true_values=None</em>, <em class="sig-param">false_values=None</em>, <em class="sig-param">skiprows=None</em>, <em class="sig-param">nrows=None</em>, <em class="sig-param">na_values=None</em>, <em class="sig-param">keep_default_na=True</em>, <em class="sig-param">verbose=False</em>, <em class="sig-param">parse_dates=False</em>, <em class="sig-param">date_parser=None</em>, <em class="sig-param">thousands=None</em>, <em class="sig-param">comment=None</em>, <em class="sig-param">skip_footer=0</em>, <em class="sig-param">skipfooter=0</em>, <em class="sig-param">convert_float=True</em>, <em class="sig-param">mangle_dupe_cols=True</em>, <em class="sig-param">**kwds</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/io/excel/_base.py#L272-L341"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.read_excel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read an Excel file into a pandas DataFrame.</p>
 <p>Support both <cite>xls</cite> and <cite>xlsx</cite> file extensions from a local filesystem or URL.
 Support an option to read a single sheet or a list of sheets.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>io</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, file descriptor, pathlib.Path, ExcelFile or xlrd.Book</span></dt>
-<dd><p class="first last">The string could be a URL. Valid URL schemes include http, ftp, s3,
-gcs, and file. For file URLs, a host is expected. For instance, a local
-file could be /path/to/workbook.xlsx.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>io</strong><span class="classifier">str, ExcelFile, xlrd.Book, path object or file-like object</span></dt><dd><p>Any valid string path is acceptable. The string could be a URL. Valid
+URL schemes include http, ftp, s3, and file. For file URLs, a host is
+expected. A local file could be: <code class="docutils literal notranslate"><span class="pre">file://localhost/path/to/table.xlsx</span></code>.</p>
+<p>If you want to pass in a path object, pandas accepts any <code class="docutils literal notranslate"><span class="pre">os.PathLike</span></code>.</p>
+<p>By file-like object, we refer to objects with a <code class="docutils literal notranslate"><span class="pre">read()</span></code> method,
+such as a file handler (e.g. via builtin <code class="docutils literal notranslate"><span class="pre">open</span></code> function)
+or <code class="docutils literal notranslate"><span class="pre">StringIO</span></code>.</p>
 </dd>
-<dt><strong>sheet_name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, int, list, or None, default 0</span></dt>
-<dd><p class="first">Strings are used for sheet names. Integers are used in zero-indexed
+<dt><strong>sheet_name</strong><span class="classifier">str, int, list, or None, default 0</span></dt><dd><p>Strings are used for sheet names. Integers are used in zero-indexed
 sheet positions. Lists of strings/integers are used to request
 multiple sheets. Specify None to get all sheets.</p>
 <p>Available cases:</p>
-<ul class="last simple">
-<li>Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>: 1st sheet as a <cite>DataFrame</cite></li>
-<li><code class="docutils literal notranslate"><span class="pre">1</span></code>: 2nd sheet as a <cite>DataFrame</cite></li>
-<li><code class="docutils literal notranslate"><span class="pre">&quot;Sheet1&quot;</span></code>: Load sheet with name “Sheet1”</li>
-<li><code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">&quot;Sheet5&quot;]</span></code>: Load first, second and sheet named “Sheet5”
-as a dict of <cite>DataFrame</cite></li>
-<li>None: All sheets.</li>
+<ul class="simple">
+<li><p>Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>: 1st sheet as a <cite>DataFrame</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: 2nd sheet as a <cite>DataFrame</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Sheet1&quot;</span></code>: Load sheet with name “Sheet1”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">&quot;Sheet5&quot;]</span></code>: Load first, second and sheet named “Sheet5”
+as a dict of <cite>DataFrame</cite></p></li>
+<li><p>None: All sheets.</p></li>
 </ul>
 </dd>
-<dt><strong>header</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, list of int, default 0</span></dt>
-<dd><p class="first last">Row (0-indexed) to use for the column labels of the parsed
+<dt><strong>header</strong><span class="classifier">int, list of int, default 0</span></dt><dd><p>Row (0-indexed) to use for the column labels of the parsed
 DataFrame. If a list of integers is passed those row positions will
 be combined into a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>. Use None if there is no header.</p>
 </dd>
-<dt><strong>names</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array-like, default None</span></dt>
-<dd><p class="first last">List of column names to use. If file contains no header row,
+<dt><strong>names</strong><span class="classifier">array-like, default None</span></dt><dd><p>List of column names to use. If file contains no header row,
 then you should explicitly pass header=None.</p>
 </dd>
-<dt><strong>index_col</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, list of int, default None</span></dt>
-<dd><p class="first last">Column (0-indexed) to use as the row labels of the DataFrame.
+<dt><strong>index_col</strong><span class="classifier">int, list of int, default None</span></dt><dd><p>Column (0-indexed) to use as the row labels of the DataFrame.
 Pass None if there is no such column.  If a list is passed,
 those columns will be combined into a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>.  If a
 subset of data is selected with <code class="docutils literal notranslate"><span class="pre">usecols</span></code>, index_col
 is based on the subset.</p>
 </dd>
-<dt><strong>parse_cols</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or list, default None</span></dt>
-<dd><p class="first">Alias of <cite>usecols</cite>.</p>
-<div class="last deprecated">
-<p><span class="versionmodified">Deprecated since version 0.21.0: </span>Use <cite>usecols</cite> instead.</p>
-</div>
-</dd>
-<dt><strong>usecols</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, str, list-like, or callable default None</span></dt>
-<dd><p class="first">Return a subset of the columns.
-* If None, then parse all columns.
-* If int, then indicates last column to be parsed.</p>
+<dt><strong>usecols</strong><span class="classifier">int, str, list-like, or callable default None</span></dt><dd><p>Return a subset of the columns.</p>
+<ul>
+<li><p>If None, then parse all columns.</p></li>
+<li><p>If int, then indicates last column to be parsed.</p>
 <div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 0.24.0: </span>Pass in a list of int instead from 0 to <cite>usecols</cite> inclusive.</p>
+<p><span class="versionmodified deprecated">Deprecated since version 0.24.0: </span>Pass in a list of int instead from 0 to <cite>usecols</cite> inclusive.</p>
 </div>
-<ul class="simple">
-<li>If str, then indicates comma separated list of Excel column letters
+</li>
+<li><p>If str, then indicates comma separated list of Excel column letters
 and column ranges (e.g. “A:E” or “A,C,E:F”). Ranges are inclusive of
-both sides.</li>
-<li>If list of int, then indicates list of column numbers to be parsed.</li>
-<li>If list of string, then indicates list of column names to be parsed.</li>
-</ul>
+both sides.</p></li>
+<li><p>If list of int, then indicates list of column numbers to be parsed.</p></li>
+<li><p>If list of string, then indicates list of column names to be parsed.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.24.0.</span></p>
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
 </div>
-<ul class="simple">
-<li>If callable, then evaluate each column name against it and parse the
-column if the callable returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</li>
+</li>
+<li><p>If callable, then evaluate each column name against it and parse the
+column if the callable returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+</li>
 </ul>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.24.0.</span></p>
-</div>
 </dd>
-<dt><strong>squeeze</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">If the parsed data only contains one column then return a Series.</p>
+<dt><strong>squeeze</strong><span class="classifier">bool, default False</span></dt><dd><p>If the parsed data only contains one column then return a Series.</p>
 </dd>
-<dt><strong>dtype</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Type name or dict of column -&gt; type, default None</span></dt>
-<dd><p class="first">Data type for data or columns. E.g. {‘a’: np.float64, ‘b’: np.int32}
+<dt><strong>dtype</strong><span class="classifier">Type name or dict of column -&gt; type, default None</span></dt><dd><p>Data type for data or columns. E.g. {‘a’: np.float64, ‘b’: np.int32}
 Use <cite>object</cite> to preserve data as stored in Excel and not interpret dtype.
 If converters are specified, they will be applied INSTEAD
 of dtype conversion.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 </dd>
-<dt><strong>engine</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default None</span></dt>
-<dd><p class="first last">If io is not a buffer or path, this must be set to identify io.
+<dt><strong>engine</strong><span class="classifier">str, default None</span></dt><dd><p>If io is not a buffer or path, this must be set to identify io.
 Acceptable values are None or xlrd.</p>
 </dd>
-<dt><strong>converters</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict, default None</span></dt>
-<dd><p class="first last">Dict of functions for converting values in certain columns. Keys can
+<dt><strong>converters</strong><span class="classifier">dict, default None</span></dt><dd><p>Dict of functions for converting values in certain columns. Keys can
 either be integers or column labels, values are functions that take one
 input argument, the Excel cell content, and return the transformed
 content.</p>
 </dd>
-<dt><strong>true_values</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list, default None</span></dt>
-<dd><p class="first">Values to consider as True.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<dt><strong>true_values</strong><span class="classifier">list, default None</span></dt><dd><p>Values to consider as True.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </dd>
-<dt><strong>false_values</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list, default None</span></dt>
-<dd><p class="first">Values to consider as False.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<dt><strong>false_values</strong><span class="classifier">list, default None</span></dt><dd><p>Values to consider as False.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 </dd>
-<dt><strong>skiprows</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list-like</span></dt>
-<dd><p class="first last">Rows to skip at the beginning (0-indexed).</p>
+<dt><strong>skiprows</strong><span class="classifier">list-like</span></dt><dd><p>Rows to skip at the beginning (0-indexed).</p>
 </dd>
-<dt><strong>nrows</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default None</span></dt>
-<dd><p class="first">Number of rows to parse.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.23.0.</span></p>
+<dt><strong>nrows</strong><span class="classifier">int, default None</span></dt><dd><p>Number of rows to parse.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
 </div>
 </dd>
-<dt><strong>na_values</strong> <span class="classifier-delimiter">:</span> <span class="classifier">scalar, str, list-like, or dict, default None</span></dt>
-<dd><p class="first last">Additional strings to recognize as NA/NaN. If dict passed, specific
+<dt><strong>na_values</strong><span class="classifier">scalar, str, list-like, or dict, default None</span></dt><dd><p>Additional strings to recognize as NA/NaN. If dict passed, specific
 per-column NA values. By default the following values are interpreted
 as NaN: ‘’, ‘#N/A’, ‘#N/A N/A’, ‘#NA’, ‘-1.#IND’, ‘-1.#QNAN’, ‘-NaN’, ‘-nan’,
 ‘1.#IND’, ‘1.#QNAN’, ‘N/A’, ‘NA’, ‘NULL’, ‘NaN’, ‘n/a’, ‘nan’,
 ‘null’.</p>
 </dd>
-<dt><strong>keep_default_na</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
-<dd><p class="first last">If na_values are specified and keep_default_na is False the default NaN
+<dt><strong>keep_default_na</strong><span class="classifier">bool, default True</span></dt><dd><p>If na_values are specified and keep_default_na is False the default NaN
 values are overridden, otherwise they’re appended to.</p>
 </dd>
-<dt><strong>verbose</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">Indicate number of NA values placed in non-numeric columns.</p>
+<dt><strong>verbose</strong><span class="classifier">bool, default False</span></dt><dd><p>Indicate number of NA values placed in non-numeric columns.</p>
 </dd>
-<dt><strong>parse_dates</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, list-like, or dict, default False</span></dt>
-<dd><p class="first">The behavior is as follows:</p>
+<dt><strong>parse_dates</strong><span class="classifier">bool, list-like, or dict, default False</span></dt><dd><p>The behavior is as follows:</p>
 <ul class="simple">
-<li>bool. If True -&gt; try parsing the index.</li>
-<li>list of int or names. e.g. If [1, 2, 3] -&gt; try parsing columns 1, 2, 3
-each as a separate date column.</li>
-<li>list of lists. e.g.  If [[1, 3]] -&gt; combine columns 1 and 3 and parse as
-a single date column.</li>
-<li>dict, e.g. {{‘foo’ : [1, 3]}} -&gt; parse columns 1, 3 as date and call
-result ‘foo’</li>
+<li><p>bool. If True -&gt; try parsing the index.</p></li>
+<li><p>list of int or names. e.g. If [1, 2, 3] -&gt; try parsing columns 1, 2, 3
+each as a separate date column.</p></li>
+<li><p>list of lists. e.g.  If [[1, 3]] -&gt; combine columns 1 and 3 and parse as
+a single date column.</p></li>
+<li><p>dict, e.g. {‘foo’ : [1, 3]} -&gt; parse columns 1, 3 as date and call
+result ‘foo’</p></li>
 </ul>
 <p>If a column or index contains an unparseable date, the entire column or
 index will be returned unaltered as an object data type. For non-standard
-datetime parsing, use <code class="docutils literal notranslate"><span class="pre">pd.to_datetime</span></code> after <code class="docutils literal notranslate"><span class="pre">pd.read_csv</span></code></p>
-<p class="last">Note: A fast-path exists for iso8601-formatted dates.</p>
+datetime parsing, use <code class="docutils literal notranslate"><span class="pre">pd.to_datetime</span></code> after <code class="docutils literal notranslate"><span class="pre">pd.read_excel</span></code>.</p>
+<p>Note: A fast-path exists for iso8601-formatted dates.</p>
 </dd>
-<dt><strong>date_parser</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function, optional</span></dt>
-<dd><p class="first last">Function to use for converting a sequence of string columns to an array of
+<dt><strong>date_parser</strong><span class="classifier">function, optional</span></dt><dd><p>Function to use for converting a sequence of string columns to an array of
 datetime instances. The default uses <code class="docutils literal notranslate"><span class="pre">dateutil.parser.parser</span></code> to do the
 conversion. Pandas will try to call <cite>date_parser</cite> in three different ways,
 advancing to the next if an exception occurs: 1) Pass one or more arrays
@@ -242,68 +220,58 @@ and pass that; and 3) call <cite>date_parser</cite> once for each row using one 
 more strings (corresponding to the columns defined by <cite>parse_dates</cite>) as
 arguments.</p>
 </dd>
-<dt><strong>thousands</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default None</span></dt>
-<dd><p class="first last">Thousands separator for parsing string columns to numeric.  Note that
+<dt><strong>thousands</strong><span class="classifier">str, default None</span></dt><dd><p>Thousands separator for parsing string columns to numeric.  Note that
 this parameter is only necessary for columns stored as TEXT in Excel,
 any numeric columns will automatically be parsed, regardless of display
 format.</p>
 </dd>
-<dt><strong>comment</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default None</span></dt>
-<dd><p class="first last">Comments out remainder of line. Pass a character or characters to this
+<dt><strong>comment</strong><span class="classifier">str, default None</span></dt><dd><p>Comments out remainder of line. Pass a character or characters to this
 argument to indicate comments in the input file. Any data between the
 comment string and the end of the current line is ignored.</p>
 </dd>
-<dt><strong>skip_footer</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default 0</span></dt>
-<dd><p class="first">Alias of <cite>skipfooter</cite>.</p>
-<div class="last deprecated">
-<p><span class="versionmodified">Deprecated since version 0.23.0: </span>Use <cite>skipfooter</cite> instead.</p>
+<dt><strong>skip_footer</strong><span class="classifier">int, default 0</span></dt><dd><p>Alias of <cite>skipfooter</cite>.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.23.0: </span>Use <cite>skipfooter</cite> instead.</p>
 </div>
 </dd>
-<dt><strong>skipfooter</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default 0</span></dt>
-<dd><p class="first last">Rows at the end to skip (0-indexed).</p>
+<dt><strong>skipfooter</strong><span class="classifier">int, default 0</span></dt><dd><p>Rows at the end to skip (0-indexed).</p>
 </dd>
-<dt><strong>convert_float</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
-<dd><p class="first last">Convert integral floats to int (i.e., 1.0 –&gt; 1). If False, all numeric
+<dt><strong>convert_float</strong><span class="classifier">bool, default True</span></dt><dd><p>Convert integral floats to int (i.e., 1.0 –&gt; 1). If False, all numeric
 data will be read in as floats: Excel stores all numbers as floats
 internally.</p>
 </dd>
-<dt><strong>mangle_dupe_cols</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
-<dd><p class="first last">Duplicate columns will be specified as ‘X’, ‘X.1’, …’X.N’, rather than
+<dt><strong>mangle_dupe_cols</strong><span class="classifier">bool, default True</span></dt><dd><p>Duplicate columns will be specified as ‘X’, ‘X.1’, …’X.N’, rather than
 ‘X’…’X’. Passing in False will cause data to be overwritten if there
 are duplicate names in the columns.</p>
 </dd>
-<dt><strong>**kwds</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
-<dd><p class="first last">Optional keyword arguments can be passed to <code class="docutils literal notranslate"><span class="pre">TextFileReader</span></code>.</p>
+<dt><strong>**kwds</strong><span class="classifier">optional</span></dt><dd><p>Optional keyword arguments can be passed to <code class="docutils literal notranslate"><span class="pre">TextFileReader</span></code>.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>DataFrame or dict of DataFrames</strong></dt>
-<dd><p class="first last">DataFrame from the passed in Excel file. See notes in sheet_name
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame or dict of DataFrames</dt><dd><p>DataFrame from the passed in Excel file. See notes in sheet_name
 argument for more information on when a dict of DataFrames is returned.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_excel</span></code></dt>
-<dd>Write DataFrame to an Excel file.</dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></dt>
-<dd>Write DataFrame to a comma-separated values (csv) file.</dd>
-<dt><a class="reference internal" href="pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_csv</span></code></a></dt>
-<dd>Read a comma-separated values (csv) file into DataFrame.</dd>
-<dt><a class="reference internal" href="pandas.read_fwf.html#pandas.read_fwf" title="pandas.read_fwf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_fwf</span></code></a></dt>
-<dd>Read a table of fixed-width formatted lines into DataFrame.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_excel</span></code></dt><dd><p>Write DataFrame to an Excel file.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></dt><dd><p>Write DataFrame to a comma-separated values (csv) file.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_csv</span></code></a></dt><dd><p>Read a comma-separated values (csv) file into DataFrame.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.read_fwf.html#pandas.read_fwf" title="pandas.read_fwf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_fwf</span></code></a></dt><dd><p>Read a table of fixed-width formatted lines into DataFrame.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
 <p>The file can be read using the file name as string or an open file object:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># doctest: +SKIP</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  
 <span class="go">       Name  Value</span>
 <span class="go">0   string1      1</span>
 <span class="go">1   string2      2</span>
@@ -311,7 +279,7 @@ argument for more information on when a dict of DataFrames is returned.</p>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">),</span>
-<span class="gp">... </span>              <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet3&#39;</span><span class="p">)</span>  <span class="c1"># doctest: +SKIP</span>
+<span class="gp">... </span>              <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet3&#39;</span><span class="p">)</span>  
 <span class="go">   Unnamed: 0      Name  Value</span>
 <span class="go">0           0   string1      1</span>
 <span class="go">1           1   string2      2</span>
@@ -319,7 +287,7 @@ argument for more information on when a dict of DataFrames is returned.</p>
 </pre></div>
 </div>
 <p>Index and header can be specified via the <cite>index_col</cite> and <cite>header</cite> arguments</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># doctest: +SKIP</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>  
 <span class="go">     0         1      2</span>
 <span class="go">0  NaN      Name  Value</span>
 <span class="go">1  0.0   string1      1</span>
@@ -329,7 +297,7 @@ argument for more information on when a dict of DataFrames is returned.</p>
 </div>
 <p>Column types are inferred but can be explicitly specified</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">})</span>  <span class="c1"># doctest: +SKIP</span>
+<span class="gp">... </span>              <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;Value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">})</span>  
 <span class="go">       Name  Value</span>
 <span class="go">0   string1    1.0</span>
 <span class="go">1   string2    2.0</span>
@@ -340,7 +308,7 @@ argument for more information on when a dict of DataFrames is returned.</p>
 but can be explicitly specified, too. Supply the values you would like
 as strings or lists of strings!</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;string1&#39;</span><span class="p">,</span> <span class="s1">&#39;string2&#39;</span><span class="p">])</span>  <span class="c1"># doctest: +SKIP</span>
+<span class="gp">... </span>              <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;string1&#39;</span><span class="p">,</span> <span class="s1">&#39;string2&#39;</span><span class="p">])</span>  
 <span class="go">       Name  Value</span>
 <span class="go">0       NaN      1</span>
 <span class="go">1       NaN      2</span>
@@ -348,7 +316,7 @@ as strings or lists of strings!</p>
 </pre></div>
 </div>
 <p>Comment lines in the excel input file can be skipped using the <cite>comment</cite> kwarg</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>  <span class="c1"># doctest: +SKIP</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;tmp.xlsx&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>  
 <span class="go">      Name  Value</span>
 <span class="go">0  string1    1.0</span>
 <span class="go">1  string2    2.0</span>

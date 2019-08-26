@@ -189,33 +189,33 @@ some configurable handling of “what to do with the other axes”:</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">objs</span></code> : a sequence or mapping of Series or DataFrame objects. If a
+<li><p><code class="docutils literal notranslate"><span class="pre">objs</span></code> : a sequence or mapping of Series or DataFrame objects. If a
 dict is passed, the sorted keys will be used as the <cite>keys</cite> argument, unless
 it is passed, in which case the values will be selected (see below). Any None
 objects will be dropped silently unless they are all None in which case a
-ValueError will be raised.</li>
-<li><code class="docutils literal notranslate"><span class="pre">axis</span></code> : {0, 1, …}, default 0. The axis to concatenate along.</li>
-<li><code class="docutils literal notranslate"><span class="pre">join</span></code> : {‘inner’, ‘outer’}, default ‘outer’. How to handle indexes on
-other axis(es). Outer for union and inner for intersection.</li>
-<li><code class="docutils literal notranslate"><span class="pre">ignore_index</span></code> : boolean, default False. If True, do not use the index
+ValueError will be raised.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">axis</span></code> : {0, 1, …}, default 0. The axis to concatenate along.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">join</span></code> : {‘inner’, ‘outer’}, default ‘outer’. How to handle indexes on
+other axis(es). Outer for union and inner for intersection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ignore_index</span></code> : boolean, default False. If True, do not use the index
 values on the concatenation axis. The resulting axis will be labeled 0, …,
 n - 1. This is useful if you are concatenating objects where the
 concatenation axis does not have meaningful indexing information. Note
-the index values on the other axes are still respected in the join.</li>
-<li><code class="docutils literal notranslate"><span class="pre">join_axes</span></code> : list of Index objects. Specific indexes to use for the other
-n - 1 axes instead of performing inner/outer set logic.</li>
-<li><code class="docutils literal notranslate"><span class="pre">keys</span></code> : sequence, default None. Construct hierarchical index using the
+the index values on the other axes are still respected in the join.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">join_axes</span></code> : list of Index objects. Specific indexes to use for the other
+n - 1 axes instead of performing inner/outer set logic.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keys</span></code> : sequence, default None. Construct hierarchical index using the
 passed keys as the outermost level. If multiple levels passed, should
-contain tuples.</li>
-<li><code class="docutils literal notranslate"><span class="pre">levels</span></code> : list of sequences, default None. Specific levels (unique values)
+contain tuples.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">levels</span></code> : list of sequences, default None. Specific levels (unique values)
 to use for constructing a MultiIndex. Otherwise they will be inferred from the
-keys.</li>
-<li><code class="docutils literal notranslate"><span class="pre">names</span></code> : list, default None. Names for the levels in the resulting
-hierarchical index.</li>
-<li><code class="docutils literal notranslate"><span class="pre">verify_integrity</span></code> : boolean, default False. Check whether the new
+keys.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">names</span></code> : list, default None. Names for the levels in the resulting
+hierarchical index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verify_integrity</span></code> : boolean, default False. Check whether the new
 concatenated axis contains duplicates. This can be very expensive relative
-to the actual data concatenation.</li>
-<li><code class="docutils literal notranslate"><span class="pre">copy</span></code> : boolean, default True. If False, do not copy data unnecessarily.</li>
+to the actual data concatenation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code> : boolean, default True. If False, do not copy data unnecessarily.</p></li>
 </ul>
 <p>Without a little bit of context many of these arguments don’t make much sense.
 Let’s revisit the above example. Suppose we wanted to associate specific keys
@@ -237,8 +237,8 @@ means that we can now select out each chunk by key:</p>
 <p>It’s not a stretch to see how this can be very useful. More detail on this
 functionality below.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It is worth noting that <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> (and therefore
+<p class="admonition-title">Note</p>
+<p>It is worth noting that <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> (and therefore
 <code class="xref py py-func docutils literal notranslate"><span class="pre">append()</span></code>) makes a full copy of the data, and that constantly
 reusing this function can create a significant performance hit. If you need
 to use the operation over several datasets, use a list comprehension.</p>
@@ -253,10 +253,10 @@ to use the operation over several datasets, use a list comprehension.</p>
 the other axes (other than the one being concatenated). This can be done in
 the following three ways:</p>
 <ul class="simple">
-<li>Take the union of them all, <code class="docutils literal notranslate"><span class="pre">join='outer'</span></code>. This is the default
-option as it results in zero information loss.</li>
-<li>Take the intersection, <code class="docutils literal notranslate"><span class="pre">join='inner'</span></code>.</li>
-<li>Use a specific index, as passed to the <code class="docutils literal notranslate"><span class="pre">join_axes</span></code> argument.</li>
+<li><p>Take the union of them all, <code class="docutils literal notranslate"><span class="pre">join='outer'</span></code>. This is the default
+option as it results in zero information loss.</p></li>
+<li><p>Take the intersection, <code class="docutils literal notranslate"><span class="pre">join='inner'</span></code>.</p></li>
+<li><p>Use a specific index, as passed to the <code class="docutils literal notranslate"><span class="pre">join_axes</span></code> argument.</p></li>
 </ul>
 <p>Here is an example of each of these methods. First, the default <code class="docutils literal notranslate"><span class="pre">join='outer'</span></code>
 behavior:</p>
@@ -274,11 +274,11 @@ behavior:</p>
 </div>
 <img alt="../_images/merging_concat_axis1.png" src="../_images/merging_concat_axis1.png" />
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 0.23.0.</span></p>
+<p><span class="versionmodified changed">Changed in version 0.23.0.</span></p>
 </div>
-<p class="last">The default behavior with <code class="docutils literal notranslate"><span class="pre">join='outer'</span></code> is to sort the other axis
+<p>The default behavior with <code class="docutils literal notranslate"><span class="pre">join='outer'</span></code> is to sort the other axis
 (columns in this case). In a future version of pandas, the default will
 be to not sort. We specified <code class="docutils literal notranslate"><span class="pre">sort=False</span></code> to opt in to the new
 behavior now.</p>
@@ -331,8 +331,8 @@ need to be:</p>
 </div>
 <img alt="../_images/merging_append3.png" src="../_images/merging_append3.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Unlike the <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> method, which appends to the original list
+<p class="admonition-title">Note</p>
+<p>Unlike the <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> method, which appends to the original list
 and returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, <a class="reference internal" href="../reference/api/pandas.DataFrame.append.html#pandas.DataFrame.append" title="pandas.DataFrame.append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code></a>  here <strong>does not</strong> modify
 <code class="docutils literal notranslate"><span class="pre">df1</span></code> and returns its copy with <code class="docutils literal notranslate"><span class="pre">df2</span></code> appended.</p>
 </div>
@@ -373,8 +373,8 @@ the name of the <code class="docutils literal notranslate"><span class="pre">Ser
 </div>
 <img alt="../_images/merging_concat_mixed_ndim.png" src="../_images/merging_concat_mixed_ndim.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Since we’re concatenating a <code class="docutils literal notranslate"><span class="pre">Series</span></code> to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, we could have
+<p class="admonition-title">Note</p>
+<p>Since we’re concatenating a <code class="docutils literal notranslate"><span class="pre">Series</span></code> to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, we could have
 achieved the same result with <a class="reference internal" href="../reference/api/pandas.DataFrame.assign.html#pandas.DataFrame.assign" title="pandas.DataFrame.assign"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.assign()</span></code></a>. To concatenate an
 arbitrary number of pandas objects (<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> or <code class="docutils literal notranslate"><span class="pre">Series</span></code>), use
 <code class="docutils literal notranslate"><span class="pre">concat</span></code>.</p>
@@ -517,74 +517,62 @@ all standard database join operations between <code class="docutils literal notr
 </pre></div>
 </div>
 <ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">left</span></code>: A DataFrame or named Series object.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">right</span></code>: Another DataFrame or named Series object.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">on</span></code>: Column or index level names to join on. Must be found in both the left
+<li><p><code class="docutils literal notranslate"><span class="pre">left</span></code>: A DataFrame or named Series object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right</span></code>: Another DataFrame or named Series object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">on</span></code>: Column or index level names to join on. Must be found in both the left
 and right DataFrame and/or Series objects. If not passed and <code class="docutils literal notranslate"><span class="pre">left_index</span></code> and
 <code class="docutils literal notranslate"><span class="pre">right_index</span></code> are <code class="docutils literal notranslate"><span class="pre">False</span></code>, the intersection of the columns in the
-DataFrames and/or Series will be inferred to be the join keys.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">left_on</span></code>: Columns or index levels from the left DataFrame or Series to use as
+DataFrames and/or Series will be inferred to be the join keys.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">left_on</span></code>: Columns or index levels from the left DataFrame or Series to use as
 keys. Can either be column names, index level names, or arrays with length
-equal to the length of the DataFrame or Series.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">right_on</span></code>: Columns or index levels from the right DataFrame or Series to use as
+equal to the length of the DataFrame or Series.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right_on</span></code>: Columns or index levels from the right DataFrame or Series to use as
 keys. Can either be column names, index level names, or arrays with length
-equal to the length of the DataFrame or Series.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">left_index</span></code>: If <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the index (row labels) from the left
+equal to the length of the DataFrame or Series.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">left_index</span></code>: If <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the index (row labels) from the left
 DataFrame or Series as its join key(s). In the case of a DataFrame or Series with a MultiIndex
 (hierarchical), the number of levels must match the number of join keys
-from the right DataFrame or Series.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">right_index</span></code>: Same usage as <code class="docutils literal notranslate"><span class="pre">left_index</span></code> for the right DataFrame or Series</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">how</span></code>: One of <code class="docutils literal notranslate"><span class="pre">'left'</span></code>, <code class="docutils literal notranslate"><span class="pre">'right'</span></code>, <code class="docutils literal notranslate"><span class="pre">'outer'</span></code>, <code class="docutils literal notranslate"><span class="pre">'inner'</span></code>. Defaults
-to <code class="docutils literal notranslate"><span class="pre">inner</span></code>. See below for more detailed description of each method.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">sort</span></code>: Sort the result DataFrame by the join keys in lexicographical
+from the right DataFrame or Series.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right_index</span></code>: Same usage as <code class="docutils literal notranslate"><span class="pre">left_index</span></code> for the right DataFrame or Series</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">how</span></code>: One of <code class="docutils literal notranslate"><span class="pre">'left'</span></code>, <code class="docutils literal notranslate"><span class="pre">'right'</span></code>, <code class="docutils literal notranslate"><span class="pre">'outer'</span></code>, <code class="docutils literal notranslate"><span class="pre">'inner'</span></code>. Defaults
+to <code class="docutils literal notranslate"><span class="pre">inner</span></code>. See below for more detailed description of each method.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sort</span></code>: Sort the result DataFrame by the join keys in lexicographical
 order. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>, setting to <code class="docutils literal notranslate"><span class="pre">False</span></code> will improve performance
-substantially in many cases.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: A tuple of string suffixes to apply to overlapping
-columns. Defaults to <code class="docutils literal notranslate"><span class="pre">('_x',</span> <span class="pre">'_y')</span></code>.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">copy</span></code>: Always copy data (default <code class="docutils literal notranslate"><span class="pre">True</span></code>) from the passed DataFrame or named Series
+substantially in many cases.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">suffixes</span></code>: A tuple of string suffixes to apply to overlapping
+columns. Defaults to <code class="docutils literal notranslate"><span class="pre">('_x',</span> <span class="pre">'_y')</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>: Always copy data (default <code class="docutils literal notranslate"><span class="pre">True</span></code>) from the passed DataFrame or named Series
 objects, even when reindexing is not necessary. Cannot be avoided in many
 cases but may improve performance / memory usage. The cases where copying
 can be avoided are somewhat pathological but this option is provided
-nonetheless.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">indicator</span></code>: Add a column to the output DataFrame called <code class="docutils literal notranslate"><span class="pre">_merge</span></code>
+nonetheless.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">indicator</span></code>: Add a column to the output DataFrame called <code class="docutils literal notranslate"><span class="pre">_merge</span></code>
 with information on the source of each row. <code class="docutils literal notranslate"><span class="pre">_merge</span></code> is Categorical-type
 and takes on a value of <code class="docutils literal notranslate"><span class="pre">left_only</span></code> for observations whose merge key
 only appears in <code class="docutils literal notranslate"><span class="pre">'left'</span></code> DataFrame or Series, <code class="docutils literal notranslate"><span class="pre">right_only</span></code> for observations whose
 merge key only appears in <code class="docutils literal notranslate"><span class="pre">'right'</span></code> DataFrame or Series, and <code class="docutils literal notranslate"><span class="pre">both</span></code> if the
-observation’s merge key is found in both.</p>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">validate</span></code> : string, default None.
+observation’s merge key is found in both.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validate</span></code> : string, default None.
 If specified, checks if merge is of specified type.</p>
 <blockquote>
 <div><ul class="simple">
-<li>“one_to_one” or “1:1”: checks if merge keys are unique in both
-left and right datasets.</li>
-<li>“one_to_many” or “1:m”: checks if merge keys are unique in left
-dataset.</li>
-<li>“many_to_one” or “m:1”: checks if merge keys are unique in right
-dataset.</li>
-<li>“many_to_many” or “m:m”: allowed, but does not result in checks.</li>
+<li><p>“one_to_one” or “1:1”: checks if merge keys are unique in both
+left and right datasets.</p></li>
+<li><p>“one_to_many” or “1:m”: checks if merge keys are unique in left
+dataset.</p></li>
+<li><p>“many_to_one” or “m:1”: checks if merge keys are unique in right
+dataset.</p></li>
+<li><p>“many_to_many” or “m:m”: allowed, but does not result in checks.</p></li>
 </ul>
 </div></blockquote>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
 </div>
 </li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Support for specifying index levels as the <code class="docutils literal notranslate"><span class="pre">on</span></code>, <code class="docutils literal notranslate"><span class="pre">left_on</span></code>, and
+<p class="admonition-title">Note</p>
+<p>Support for specifying index levels as the <code class="docutils literal notranslate"><span class="pre">on</span></code>, <code class="docutils literal notranslate"><span class="pre">left_on</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">right_on</span></code> parameters was added in version 0.23.0.
 Support for merging named <code class="docutils literal notranslate"><span class="pre">Series</span></code> objects was added in version 0.24.0.</p>
 </div>
@@ -603,15 +591,15 @@ terminology used to describe join operations between two SQL-table like
 structures (<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects). There are several cases to consider which
 are very important to understand:</p>
 <ul class="simple">
-<li><strong>one-to-one</strong> joins: for example when joining two <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects on
-their indexes (which must contain unique values).</li>
-<li><strong>many-to-one</strong> joins: for example when joining an index (unique) to one or
-more columns in a different <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</li>
-<li><strong>many-to-many</strong> joins: joining columns on columns.</li>
+<li><p><strong>one-to-one</strong> joins: for example when joining two <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects on
+their indexes (which must contain unique values).</p></li>
+<li><p><strong>many-to-one</strong> joins: for example when joining an index (unique) to one or
+more columns in a different <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p></li>
+<li><p><strong>many-to-many</strong> joins: joining columns on columns.</p></li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When joining columns on columns (potentially a many-to-many join), any
+<p class="admonition-title">Note</p>
+<p>When joining columns on columns (potentially a many-to-many join), any
 indexes on the passed <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects <strong>will be discarded</strong>.</p>
 </div>
 <p>It is worth spending some time understanding the result of the <strong>many-to-many</strong>
@@ -662,34 +650,34 @@ appearing in <code class="docutils literal notranslate"><span class="pre">left</
 be included in the resulting table. If a key combination <strong>does not appear</strong> in
 either the left or right tables, the values in the joined table will be
 <code class="docutils literal notranslate"><span class="pre">NA</span></code>. Here is a summary of the <code class="docutils literal notranslate"><span class="pre">how</span></code> options and their SQL equivalent names:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="60%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 60%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Merge method</th>
-<th class="head">SQL Join Name</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Merge method</p></th>
+<th class="head"><p>SQL Join Name</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">left</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code></td>
-<td>Use keys from left frame only</td>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">left</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code></p></td>
+<td><p>Use keys from left frame only</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">right</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">RIGHT</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code></td>
-<td>Use keys from right frame only</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">right</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RIGHT</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code></p></td>
+<td><p>Use keys from right frame only</p></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">outer</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">FULL</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code></td>
-<td>Use union of keys from both frames</td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">outer</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FULL</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code></p></td>
+<td><p>Use union of keys from both frames</p></td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">inner</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code></td>
-<td>Use intersection of keys from both frames</td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inner</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code></p></td>
+<td><p>Use intersection of keys from both frames</p></td>
 </tr>
 </tbody>
 </table>
@@ -734,14 +722,14 @@ either the left or right tables, the values in the joined table will be
 </div>
 <img alt="../_images/merging_merge_on_key_dup.png" src="../_images/merging_merge_on_key_dup.png" />
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Joining / merging on duplicate keys can cause a returned frame that is the multiplication of the row dimensions, which may result in memory overflow. It is the user’ s responsibility to manage duplicate values in keys before joining large DataFrames.</p>
+<p class="admonition-title">Warning</p>
+<p>Joining / merging on duplicate keys can cause a returned frame that is the multiplication of the row dimensions, which may result in memory overflow. It is the user’ s responsibility to manage duplicate values in keys before joining large DataFrames.</p>
 </div>
 </div>
 <div class="section" id="checking-for-duplicate-keys">
 <span id="merging-validation"></span><h3>Checking for duplicate keys<a class="headerlink" href="#checking-for-duplicate-keys" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
 </div>
 <p>Users can use the <code class="docutils literal notranslate"><span class="pre">validate</span></code> argument to automatically check whether there
 are unexpected duplicates in their merge keys. Key uniqueness is checked before
@@ -773,25 +761,25 @@ ensure there are no duplicates in the left DataFrame, one can use the
 Categorical-type column called <code class="docutils literal notranslate"><span class="pre">_merge</span></code> will be added to the output object
 that takes on values:</p>
 <blockquote>
-<div><table border="1" class="docutils">
+<div><table class="docutils align-default">
 <colgroup>
-<col width="69%" />
-<col width="31%" />
+<col style="width: 69%" />
+<col style="width: 31%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Observation Origin</th>
-<th class="head"><code class="docutils literal notranslate"><span class="pre">_merge</span></code> value</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Observation Origin</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">_merge</span></code> value</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Merge key only in <code class="docutils literal notranslate"><span class="pre">'left'</span></code> frame</td>
-<td><code class="docutils literal notranslate"><span class="pre">left_only</span></code></td>
+<tbody>
+<tr class="row-even"><td><p>Merge key only in <code class="docutils literal notranslate"><span class="pre">'left'</span></code> frame</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">left_only</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>Merge key only in <code class="docutils literal notranslate"><span class="pre">'right'</span></code> frame</td>
-<td><code class="docutils literal notranslate"><span class="pre">right_only</span></code></td>
+<tr class="row-odd"><td><p>Merge key only in <code class="docutils literal notranslate"><span class="pre">'right'</span></code> frame</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">right_only</span></code></p></td>
 </tr>
-<tr class="row-even"><td>Merge key in both frames</td>
-<td><code class="docutils literal notranslate"><span class="pre">both</span></code></td>
+<tr class="row-even"><td><p>Merge key in both frames</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">both</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -811,7 +799,7 @@ that takes on values:</p>
 <div class="section" id="merge-dtypes">
 <span id="merging-dtypes"></span><h3>Merge Dtypes<a class="headerlink" href="#merge-dtypes" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 <p>Merging will preserve the dtype of the join keys.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [120]: </span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;v1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">]})</span>
@@ -837,7 +825,7 @@ resulting dtype will be upcast.</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 <p>Merging will preserve <code class="docutils literal notranslate"><span class="pre">category</span></code> dtypes of the mergands. See also the section on <a class="reference internal" href="categorical.html#categorical-merge"><span class="std std-ref">categoricals</span></a>.</p>
 <p>The left frame.</p>
@@ -877,13 +865,13 @@ resulting dtype will be upcast.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The category dtypes must be <em>exactly</em> the same, meaning the same categories and the ordered attribute.
+<p class="admonition-title">Note</p>
+<p>The category dtypes must be <em>exactly</em> the same, meaning the same categories and the ordered attribute.
 Otherwise the result will coerce to <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Merging on <code class="docutils literal notranslate"><span class="pre">category</span></code> dtypes that are the same can be quite performant compared to <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype merging.</p>
+<p class="admonition-title">Note</p>
+<p>Merging on <code class="docutils literal notranslate"><span class="pre">category</span></code> dtypes that are the same can be quite performant compared to <code class="docutils literal notranslate"><span class="pre">object</span></code> dtype merging.</p>
 </div>
 </div>
 <div class="section" id="joining-on-index">
@@ -1116,7 +1104,7 @@ done using the following code.</p>
 <div class="section" id="merging-on-a-combination-of-columns-and-index-levels">
 <span id="merging-merge-on-columns-and-levels"></span><h3>Merging on a combination of columns and index levels<a class="headerlink" href="#merging-on-a-combination-of-columns-and-index-levels" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.23.</span></p>
+<p><span class="versionmodified added">New in version 0.23.</span></p>
 </div>
 <p>Strings passed as the <code class="docutils literal notranslate"><span class="pre">on</span></code>, <code class="docutils literal notranslate"><span class="pre">left_on</span></code>, and <code class="docutils literal notranslate"><span class="pre">right_on</span></code> parameters
 may refer to either column names or index level names.  This enables merging
@@ -1146,21 +1134,21 @@ resetting indexes.</p>
 </div>
 <img alt="../_images/merge_on_index_and_column.png" src="../_images/merge_on_index_and_column.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When DataFrames are merged on a string that matches an index level in both
+<p class="admonition-title">Note</p>
+<p>When DataFrames are merged on a string that matches an index level in both
 frames, the index level is preserved as an index level in the resulting
 DataFrame.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">When DataFrames are merged using only some of the levels of a <cite>MultiIndex</cite>,
+<p class="admonition-title">Note</p>
+<p>When DataFrames are merged using only some of the levels of a <cite>MultiIndex</cite>,
 the extra levels will be dropped from the resulting merge. In order to
 preserve those levels, use <code class="docutils literal notranslate"><span class="pre">reset_index</span></code> on those level names to move
 those levels to columns prior to doing the merge.</p>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If a string matches both a column name and an index level name, then a
+<p class="admonition-title">Note</p>
+<p>If a string matches both a column name and an index level name, then a
 warning is issued and the column takes precedence. This will result in an
 ambiguity error in a future version.</p>
 </div>
@@ -1273,7 +1261,7 @@ fill/interpolate missing data:</p>
 <div class="section" id="merging-asof">
 <span id="merging-merge-asof"></span><h3>Merging AsOf<a class="headerlink" href="#merging-asof" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
 <p>A <a class="reference internal" href="../reference/api/pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge_asof()</span></code></a> is similar to an ordered left-join except that we match on
 nearest key rather than equal keys. For each row in the <code class="docutils literal notranslate"><span class="pre">left</span></code> <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>,

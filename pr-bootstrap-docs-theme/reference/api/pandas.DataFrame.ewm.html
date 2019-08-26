@@ -83,65 +83,58 @@
 <h1>pandas.DataFrame.ewm<a class="headerlink" href="#pandas-dataframe-ewm" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.ewm">
-<code class="descclassname">DataFrame.</code><code class="descname">ewm</code><span class="sig-paren">(</span><em>com=None</em>, <em>span=None</em>, <em>halflife=None</em>, <em>alpha=None</em>, <em>min_periods=0</em>, <em>adjust=True</em>, <em>ignore_na=False</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L10159-L10166"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.ewm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provides exponential weighted functions.</p>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">ewm</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">com=None</em>, <em class="sig-param">span=None</em>, <em class="sig-param">halflife=None</em>, <em class="sig-param">alpha=None</em>, <em class="sig-param">min_periods=0</em>, <em class="sig-param">adjust=True</em>, <em class="sig-param">ignore_na=False</em>, <em class="sig-param">axis=0</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L10783-L10806"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.ewm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide exponential weighted functions.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>com</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
-<dd><p class="first last">Specify decay in terms of center of mass,
-<span class="math notranslate nohighlight">\(\alpha = 1 / (1 + com),\text{ for } com \geq 0\)</span></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>com</strong><span class="classifier">float, optional</span></dt><dd><p>Specify decay in terms of center of mass,
+<span class="math notranslate nohighlight">\(\alpha = 1 / (1 + com),\text{ for } com \geq 0\)</span>.</p>
 </dd>
-<dt><strong>span</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
-<dd><p class="first last">Specify decay in terms of span,
-<span class="math notranslate nohighlight">\(\alpha = 2 / (span + 1),\text{ for } span \geq 1\)</span></p>
+<dt><strong>span</strong><span class="classifier">float, optional</span></dt><dd><p>Specify decay in terms of span,
+<span class="math notranslate nohighlight">\(\alpha = 2 / (span + 1),\text{ for } span \geq 1\)</span>.</p>
 </dd>
-<dt><strong>halflife</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
-<dd><p class="first last">Specify decay in terms of half-life,
-<span class="math notranslate nohighlight">\(\alpha = 1 - exp(log(0.5) / halflife),\text{ for } halflife &gt; 0\)</span></p>
+<dt><strong>halflife</strong><span class="classifier">float, optional</span></dt><dd><p>Specify decay in terms of half-life,
+<span class="math notranslate nohighlight">\(\alpha = 1 - exp(log(0.5) / halflife),\text{for} halflife &gt; 0\)</span>.</p>
 </dd>
-<dt><strong>alpha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
-<dd><p class="first">Specify smoothing factor <span class="math notranslate nohighlight">\(\alpha\)</span> directly,
-<span class="math notranslate nohighlight">\(0 &lt; \alpha \leq 1\)</span></p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.18.0.</span></p>
+<dt><strong>alpha</strong><span class="classifier">float, optional</span></dt><dd><p>Specify smoothing factor <span class="math notranslate nohighlight">\(\alpha\)</span> directly,
+<span class="math notranslate nohighlight">\(0 &lt; \alpha \leq 1\)</span>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
 </div>
 </dd>
-<dt><strong>min_periods</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, default 0</span></dt>
-<dd><p class="first last">Minimum number of observations in window required to have a value
+<dt><strong>min_periods</strong><span class="classifier">int, default 0</span></dt><dd><p>Minimum number of observations in window required to have a value
 (otherwise result is NA).</p>
 </dd>
-<dt><strong>adjust</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default True</span></dt>
-<dd><p class="first last">Divide by decaying adjustment factor in beginning periods to account
-for imbalance in relative weightings (viewing EWMA as a moving average)</p>
+<dt><strong>adjust</strong><span class="classifier">bool, default True</span></dt><dd><p>Divide by decaying adjustment factor in beginning periods to account
+for imbalance in relative weightings
+(viewing EWMA as a moving average).</p>
 </dd>
-<dt><strong>ignore_na</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">Ignore missing values when calculating weights;
-specify True to reproduce pre-0.15.0 behavior</p>
+<dt><strong>ignore_na</strong><span class="classifier">bool, default False</span></dt><dd><p>Ignore missing values when calculating weights;
+specify True to reproduce pre-0.15.0 behavior.</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">{0 or ‘index’, 1 or ‘columns’}, default 0</span></dt><dd><p>The axis to use. The value 0 identifies the rows, and 1
+identifies the columns.</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>a Window sub-classed for the particular operation</strong></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>A Window sub-classed for the particular operation.</p>
+</dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.rolling.html#pandas.DataFrame.rolling" title="pandas.DataFrame.rolling"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling</span></code></a></dt>
-<dd>Provides rolling window calculations.</dd>
-<dt><a class="reference internal" href="pandas.DataFrame.expanding.html#pandas.DataFrame.expanding" title="pandas.DataFrame.expanding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expanding</span></code></a></dt>
-<dd>Provides expanding transformations.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.rolling.html#pandas.DataFrame.rolling" title="pandas.DataFrame.rolling"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rolling</span></code></a></dt><dd><p>Provides rolling window calculations.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.expanding.html#pandas.DataFrame.expanding" title="pandas.DataFrame.expanding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expanding</span></code></a></dt><dd><p>Provides expanding transformations.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
@@ -151,10 +144,10 @@ parameter descriptions above; see the link at the end of this section for
 a detailed explanation.</p>
 <p>When adjust is True (default), weighted averages are calculated using
 weights (1-alpha)**(n-1), (1-alpha)**(n-2), …, 1-alpha, 1.</p>
-<dl class="docutils">
-<dt>When adjust is False, weighted averages are calculated recursively as:</dt>
-<dd>weighted_average[0] = arg[0];
-weighted_average[i] = (1-alpha)*weighted_average[i-1] + alpha*arg[i].</dd>
+<dl class="simple">
+<dt>When adjust is False, weighted averages are calculated recursively as:</dt><dd><p>weighted_average[0] = arg[0];
+weighted_average[i] = (1-alpha)*weighted_average[i-1] + alpha*arg[i].</p>
+</dd>
 </dl>
 <p>When ignore_na is False (default), weights are based on absolute positions.
 For example, the weights of x and y used in calculating the final weighted
@@ -165,9 +158,10 @@ on relative positions. For example, the weights of x and y used in
 calculating the final weighted average of [x, None, y] are 1-alpha and 1
 (if adjust is True), and 1-alpha and alpha (if adjust is False).</p>
 <p>More details can be found at
-<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/computation.html#exponentially-weighted-windows">http://pandas.pydata.org/pandas-docs/stable/computation.html#exponentially-weighted-windows</a></p>
+<a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/user_guide/computation.html#exponentially-weighted-windows">http://pandas.pydata.org/pandas-docs/stable/user_guide/computation.html#exponentially-weighted-windows</a></p>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
 <span class="go">     B</span>
 <span class="go">0  0.0</span>
 <span class="go">1  1.0</span>

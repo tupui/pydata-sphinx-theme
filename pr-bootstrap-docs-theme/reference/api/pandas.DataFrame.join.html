@@ -83,68 +83,57 @@
 <h1>pandas.DataFrame.join<a class="headerlink" href="#pandas-dataframe-join" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.join">
-<code class="descclassname">DataFrame.</code><code class="descname">join</code><span class="sig-paren">(</span><em>other</em>, <em>on=None</em>, <em>how='left'</em>, <em>lsuffix=''</em>, <em>rsuffix=''</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/frame.py#L6694-L6815"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.join" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">join</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">other</em>, <em class="sig-param">on=None</em>, <em class="sig-param">how='left'</em>, <em class="sig-param">lsuffix=''</em>, <em class="sig-param">rsuffix=''</em>, <em class="sig-param">sort=False</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L7126-L7247"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.join" title="Permalink to this definition">¶</a></dt>
 <dd><p>Join columns of another DataFrame.</p>
 <p>Join columns with <cite>other</cite> DataFrame either on index or on a key
 column. Efficiently join multiple DataFrame objects by index at once by
 passing a list.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>other</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame, Series, or list of DataFrame</span></dt>
-<dd><p class="first last">Index should be similar to one of the columns in this one. If a
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>other</strong><span class="classifier">DataFrame, Series, or list of DataFrame</span></dt><dd><p>Index should be similar to one of the columns in this one. If a
 Series is passed, its name attribute must be set, and that will be
 used as the column name in the resulting joined DataFrame.</p>
 </dd>
-<dt><strong>on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, list of str, or array-like, optional</span></dt>
-<dd><p class="first last">Column or index level name(s) in the caller to join on the index
+<dt><strong>on</strong><span class="classifier">str, list of str, or array-like, optional</span></dt><dd><p>Column or index level name(s) in the caller to join on the index
 in <cite>other</cite>, otherwise joins index-on-index. If multiple
 values given, the <cite>other</cite> DataFrame must have a MultiIndex. Can
 pass an array as the join key if it is not already contained in
 the calling DataFrame. Like an Excel VLOOKUP operation.</p>
 </dd>
-<dt><strong>how</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘left’, ‘right’, ‘outer’, ‘inner’}, default ‘left’</span></dt>
-<dd><p class="first">How to handle the operation of the two objects.</p>
-<ul class="last simple">
-<li>left: use calling frame’s index (or column if on is specified)</li>
-<li>right: use <cite>other</cite>’s index.</li>
-<li>outer: form union of calling frame’s index (or column if on is
+<dt><strong>how</strong><span class="classifier">{‘left’, ‘right’, ‘outer’, ‘inner’}, default ‘left’</span></dt><dd><p>How to handle the operation of the two objects.</p>
+<ul class="simple">
+<li><p>left: use calling frame’s index (or column if on is specified)</p></li>
+<li><p>right: use <cite>other</cite>’s index.</p></li>
+<li><p>outer: form union of calling frame’s index (or column if on is
 specified) with <cite>other</cite>’s index, and sort it.
-lexicographically.</li>
-<li>inner: form intersection of calling frame’s index (or column if
+lexicographically.</p></li>
+<li><p>inner: form intersection of calling frame’s index (or column if
 on is specified) with <cite>other</cite>’s index, preserving the order
-of the calling’s one.</li>
+of the calling’s one.</p></li>
 </ul>
 </dd>
-<dt><strong>lsuffix</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default ‘’</span></dt>
-<dd><p class="first last">Suffix to use from left frame’s overlapping columns.</p>
+<dt><strong>lsuffix</strong><span class="classifier">str, default ‘’</span></dt><dd><p>Suffix to use from left frame’s overlapping columns.</p>
 </dd>
-<dt><strong>rsuffix</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default ‘’</span></dt>
-<dd><p class="first last">Suffix to use from right frame’s overlapping columns.</p>
+<dt><strong>rsuffix</strong><span class="classifier">str, default ‘’</span></dt><dd><p>Suffix to use from right frame’s overlapping columns.</p>
 </dd>
-<dt><strong>sort</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">Order result DataFrame lexicographically by the join key. If False,
+<dt><strong>sort</strong><span class="classifier">bool, default False</span></dt><dd><p>Order result DataFrame lexicographically by the join key. If False,
 the order of the join key depends on the join type (how keyword).</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>DataFrame</strong></dt>
-<dd><p class="first last">A dataframe containing columns from both the caller and <cite>other</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>A dataframe containing columns from both the caller and <cite>other</cite>.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference internal" href="pandas.DataFrame.merge.html#pandas.DataFrame.merge" title="pandas.DataFrame.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.merge</span></code></a></dt>
-<dd>For column(s)-on-columns(s) operations.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.merge.html#pandas.DataFrame.merge" title="pandas.DataFrame.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.merge</span></code></a></dt><dd><p>For column(s)-on-columns(s) operations.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Notes</p>
