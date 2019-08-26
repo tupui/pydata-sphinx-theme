@@ -1,0 +1,305 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+
+        
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+        
+
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-reindex">
+<h1>pandas.DataFrame.reindex<a class="headerlink" href="#pandas-dataframe-reindex" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.reindex">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">reindex</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">labels=None</em>, <em class="sig-param">index=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">axis=None</em>, <em class="sig-param">method=None</em>, <em class="sig-param">copy=True</em>, <em class="sig-param">level=None</em>, <em class="sig-param">fill_value=nan</em>, <em class="sig-param">limit=None</em>, <em class="sig-param">tolerance=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L3942-L3961"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.reindex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conform DataFrame to new index with optional filling logic, placing
+NA/NaN in locations having no value in the previous index. A new object
+is produced unless the new index is equivalent to the current one and
+<code class="docutils literal notranslate"><span class="pre">copy=False</span></code>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>labels</strong><span class="classifier">array-like, optional</span></dt><dd><p>New labels / index to conform the axis specified by ‘axis’ to.</p>
+</dd>
+<dt><strong>index, columns</strong><span class="classifier">array-like, optional</span></dt><dd><p>New labels / index to conform to, should be specified using
+keywords. Preferably an Index object to avoid duplicating data</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">int or str, optional</span></dt><dd><p>Axis to target. Can be either the axis name (‘index’, ‘columns’)
+or number (0, 1).</p>
+</dd>
+<dt><strong>method</strong><span class="classifier">{None, ‘backfill’/’bfill’, ‘pad’/’ffill’, ‘nearest’}</span></dt><dd><p>Method to use for filling holes in reindexed DataFrame.
+Please note: this is only applicable to DataFrames/Series with a
+monotonically increasing/decreasing index.</p>
+<ul class="simple">
+<li><p>None (default): don’t fill gaps</p></li>
+<li><p>pad / ffill: propagate last valid observation forward to next
+valid</p></li>
+<li><p>backfill / bfill: use next valid observation to fill gap</p></li>
+<li><p>nearest: use nearest valid observations to fill gap</p></li>
+</ul>
+</dd>
+<dt><strong>copy</strong><span class="classifier">bool, default True</span></dt><dd><p>Return a new object, even if the passed indexes are the same.</p>
+</dd>
+<dt><strong>level</strong><span class="classifier">int or name</span></dt><dd><p>Broadcast across a level, matching Index values on the
+passed MultiIndex level.</p>
+</dd>
+<dt><strong>fill_value</strong><span class="classifier">scalar, default np.NaN</span></dt><dd><p>Value to use for missing values. Defaults to NaN, but can be any
+“compatible” value.</p>
+</dd>
+<dt><strong>limit</strong><span class="classifier">int, default None</span></dt><dd><p>Maximum number of consecutive elements to forward or backward fill.</p>
+</dd>
+<dt><strong>tolerance</strong><span class="classifier">optional</span></dt><dd><p>Maximum distance between original and new labels for inexact
+matches. The values of the index at the matching locations most
+satisfy the equation <code class="docutils literal notranslate"><span class="pre">abs(index[indexer]</span> <span class="pre">-</span> <span class="pre">target)</span> <span class="pre">&lt;=</span> <span class="pre">tolerance</span></code>.</p>
+<p>Tolerance may be a scalar value, which applies the same tolerance
+to all values, or list-like, which applies variable tolerance per
+element. List-like includes list, tuple, array, Series, and must be
+the same size as the index and its dtype must exactly match the
+index’s type.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.21.0: </span>(list-like tolerance)</p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame with changed index.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.set_index.html#pandas.DataFrame.set_index" title="pandas.DataFrame.set_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.set_index</span></code></a></dt><dd><p>Set row labels.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reset_index.html#pandas.DataFrame.reset_index" title="pandas.DataFrame.reset_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reset_index</span></code></a></dt><dd><p>Remove row labels or move them to new columns.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.reindex_like.html#pandas.DataFrame.reindex_like" title="pandas.DataFrame.reindex_like"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.reindex_like</span></code></a></dt><dd><p>Change to same indices as other DataFrame.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p><code class="docutils literal notranslate"><span class="pre">DataFrame.reindex</span></code> supports two calling conventions</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(index=index_labels,</span> <span class="pre">columns=column_labels,</span> <span class="pre">...)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(labels,</span> <span class="pre">axis={'index',</span> <span class="pre">'columns'},</span> <span class="pre">...)</span></code></p></li>
+</ul>
+<p>We <em>highly</em> recommend using keyword arguments to clarify your
+intent.</p>
+<p>Create a dataframe with some fictional data.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;Safari&#39;</span><span class="p">,</span> <span class="s1">&#39;IE10&#39;</span><span class="p">,</span> <span class="s1">&#39;Konqueror&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span>     <span class="s1">&#39;http_status&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">404</span><span class="p">,</span><span class="mi">404</span><span class="p">,</span><span class="mi">301</span><span class="p">],</span>
+<span class="gp">... </span>     <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]},</span>
+<span class="gp">... </span>      <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">           http_status  response_time</span>
+<span class="go">Firefox            200           0.04</span>
+<span class="go">Chrome             200           0.02</span>
+<span class="go">Safari             404           0.07</span>
+<span class="go">IE10               404           0.08</span>
+<span class="go">Konqueror          301           1.00</span>
+</pre></div>
+</div>
+<p>Create a new index and reindex the dataframe. By default
+values in the new index that do not have corresponding
+records in the dataframe are assigned <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_index</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Safari&#39;</span><span class="p">,</span> <span class="s1">&#39;Iceweasel&#39;</span><span class="p">,</span> <span class="s1">&#39;Comodo Dragon&#39;</span><span class="p">,</span> <span class="s1">&#39;IE10&#39;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="s1">&#39;Chrome&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">)</span>
+<span class="go">               http_status  response_time</span>
+<span class="go">Safari               404.0           0.07</span>
+<span class="go">Iceweasel              NaN            NaN</span>
+<span class="go">Comodo Dragon          NaN            NaN</span>
+<span class="go">IE10                 404.0           0.08</span>
+<span class="go">Chrome               200.0           0.02</span>
+</pre></div>
+</div>
+<p>We can fill in the missing values by passing a value to
+the keyword <code class="docutils literal notranslate"><span class="pre">fill_value</span></code>. Because the index is not monotonically
+increasing or decreasing, we cannot use arguments to the keyword
+<code class="docutils literal notranslate"><span class="pre">method</span></code> to fill the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">               http_status  response_time</span>
+<span class="go">Safari                 404           0.07</span>
+<span class="go">Iceweasel                0           0.00</span>
+<span class="go">Comodo Dragon            0           0.00</span>
+<span class="go">IE10                   404           0.08</span>
+<span class="go">Chrome                 200           0.02</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;missing&#39;</span><span class="p">)</span>
+<span class="go">              http_status response_time</span>
+<span class="go">Safari                404          0.07</span>
+<span class="go">Iceweasel         missing       missing</span>
+<span class="go">Comodo Dragon     missing       missing</span>
+<span class="go">IE10                  404          0.08</span>
+<span class="go">Chrome                200          0.02</span>
+</pre></div>
+</div>
+<p>We can also reindex the columns.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;http_status&#39;</span><span class="p">,</span> <span class="s1">&#39;user_agent&#39;</span><span class="p">])</span>
+<span class="go">           http_status  user_agent</span>
+<span class="go">Firefox            200         NaN</span>
+<span class="go">Chrome             200         NaN</span>
+<span class="go">Safari             404         NaN</span>
+<span class="go">IE10               404         NaN</span>
+<span class="go">Konqueror          301         NaN</span>
+</pre></div>
+</div>
+<p>Or we can use “axis-style” keyword arguments</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;http_status&#39;</span><span class="p">,</span> <span class="s1">&#39;user_agent&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+<span class="go">           http_status  user_agent</span>
+<span class="go">Firefox            200         NaN</span>
+<span class="go">Chrome             200         NaN</span>
+<span class="go">Safari             404         NaN</span>
+<span class="go">IE10               404         NaN</span>
+<span class="go">Konqueror          301         NaN</span>
+</pre></div>
+</div>
+<p>To further illustrate the filling functionality in
+<code class="docutils literal notranslate"><span class="pre">reindex</span></code>, we will create a dataframe with a
+monotonically increasing index (for example, a sequence
+of dates).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2010&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;prices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">88</span><span class="p">]},</span>
+<span class="gp">... </span>                   <span class="n">index</span><span class="o">=</span><span class="n">date_index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
+<span class="go">            prices</span>
+<span class="go">2010-01-01   100.0</span>
+<span class="go">2010-01-02   101.0</span>
+<span class="go">2010-01-03     NaN</span>
+<span class="go">2010-01-04   100.0</span>
+<span class="go">2010-01-05    89.0</span>
+<span class="go">2010-01-06    88.0</span>
+</pre></div>
+</div>
+<p>Suppose we decide to expand the dataframe to cover a wider
+date range.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_index2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/29/2009&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">date_index2</span><span class="p">)</span>
+<span class="go">            prices</span>
+<span class="go">2009-12-29     NaN</span>
+<span class="go">2009-12-30     NaN</span>
+<span class="go">2009-12-31     NaN</span>
+<span class="go">2010-01-01   100.0</span>
+<span class="go">2010-01-02   101.0</span>
+<span class="go">2010-01-03     NaN</span>
+<span class="go">2010-01-04   100.0</span>
+<span class="go">2010-01-05    89.0</span>
+<span class="go">2010-01-06    88.0</span>
+<span class="go">2010-01-07     NaN</span>
+</pre></div>
+</div>
+<p>The index entries that did not have a value in the original data frame
+(for example, ‘2009-12-29’) are by default filled with <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.
+If desired, we can fill in the missing values using one of several
+options.</p>
+<p>For example, to back-propagate the last valid value to fill the <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
+values, pass <code class="docutils literal notranslate"><span class="pre">bfill</span></code> as an argument to the <code class="docutils literal notranslate"><span class="pre">method</span></code> keyword.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">date_index2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
+<span class="go">            prices</span>
+<span class="go">2009-12-29   100.0</span>
+<span class="go">2009-12-30   100.0</span>
+<span class="go">2009-12-31   100.0</span>
+<span class="go">2010-01-01   100.0</span>
+<span class="go">2010-01-02   101.0</span>
+<span class="go">2010-01-03     NaN</span>
+<span class="go">2010-01-04   100.0</span>
+<span class="go">2010-01-05    89.0</span>
+<span class="go">2010-01-06    88.0</span>
+<span class="go">2010-01-07     NaN</span>
+</pre></div>
+</div>
+<p>Please note that the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> value present in the original dataframe
+(at index value 2010-01-03) will not be filled by any of the
+value propagation schemes. This is because filling while reindexing
+does not look at dataframe values, but only compares the original and
+desired indexes. If you do want to fill in the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values present
+in the original dataframe, use the <code class="docutils literal notranslate"><span class="pre">fillna()</span></code> method.</p>
+<p>See the <a class="reference internal" href="../../getting_started/basics.html#basics-reindexing"><span class="std std-ref">user guide</span></a> for more.</p>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

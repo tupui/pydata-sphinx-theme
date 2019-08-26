@@ -1,0 +1,208 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../reference/index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+
+        
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing to pandas</a></li>
+<li class="toctree-l2 current active"><a class="current active reference internal" href="#">Internals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending.html">Extending Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer.html">Developer</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+        
+
+        
+        
+          <nav class="d-none d-xl-block col-xl-2 bd-toc" aria-label="Secondary navigation">
+            <ul class="section-nav">
+<li class="toc-entry toc-h1"><a class="reference internal" href="#">Internals</a><ul>
+<li class="toc-entry toc-h2"><a class="reference internal" href="#indexing">Indexing</a><ul>
+<li class="toc-entry toc-h3"><a class="reference internal" href="#multiindex">MultiIndex</a></li>
+<li class="toc-entry toc-h3"><a class="reference internal" href="#values">Values</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a class="reference internal" href="#subclassing-pandas-data-structures">Subclassing pandas Data Structures</a></li>
+</ul>
+</li>
+</ul>
+
+          </nav>
+        
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="internals">
+<span id="id1"></span><h1>Internals<a class="headerlink" href="#internals" title="Permalink to this headline">¶</a></h1>
+<p>This section will provide a look into some of pandas internals. It’s primarily
+intended for developers of pandas itself.</p>
+<div class="section" id="indexing">
+<h2>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h2>
+<p>In pandas there are a few objects implemented which can serve as valid
+containers for the axis labels:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Index</span></code>: the generic “ordered set” object, an ndarray of object dtype
+assuming nothing about its contents. The labels must be hashable (and
+likely immutable) and unique. Populates a dict of label to location in
+Cython to do <code class="docutils literal notranslate"><span class="pre">O(1)</span></code> lookups.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Int64Index</span></code>: a version of <code class="docutils literal notranslate"><span class="pre">Index</span></code> highly optimized for 64-bit integer
+data, such as time stamps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Float64Index</span></code>: a version of <code class="docutils literal notranslate"><span class="pre">Index</span></code> highly optimized for 64-bit float data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>: the standard hierarchical index object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>: An Index object with <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> boxed elements (impl are the int64 values)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code>: An Index object with <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> boxed elements (impl are the in64 values)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PeriodIndex</span></code>: An Index object with Period elements</p></li>
+</ul>
+<p>There are functions that make the creation of a regular index easy:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">date_range</span></code>: fixed frequency date range generated from a time rule or
+DateOffset. An ndarray of Python datetime objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">period_range</span></code>: fixed frequency date range generated from a time rule or
+DateOffset. An ndarray of <code class="docutils literal notranslate"><span class="pre">Period</span></code> objects, representing timespans</p></li>
+</ul>
+<p>The motivation for having an <code class="docutils literal notranslate"><span class="pre">Index</span></code> class in the first place was to enable
+different implementations of indexing. This means that it’s possible for you,
+the user, to implement a custom <code class="docutils literal notranslate"><span class="pre">Index</span></code> subclass that may be better suited to
+a particular application than the ones provided in pandas.</p>
+<p>From an internal implementation point of view, the relevant methods that an
+<code class="docutils literal notranslate"><span class="pre">Index</span></code> must define are one or more of the following (depending on how
+incompatible the new object internals are with the <code class="docutils literal notranslate"><span class="pre">Index</span></code> functions):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_loc</span></code>: returns an “indexer” (an integer, or in some cases a
+slice object) for a label</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slice_locs</span></code>: returns the “range” to slice between two labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_indexer</span></code>: Computes the indexing vector for reindexing / data
+alignment purposes. See the source / docstrings for more on this</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_indexer_non_unique</span></code>: Computes the indexing vector for reindexing / data
+alignment purposes when the index is non-unique. See the source / docstrings
+for more on this</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reindex</span></code>: Does any pre-conversion of the input index then calls
+<code class="docutils literal notranslate"><span class="pre">get_indexer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">union</span></code>, <code class="docutils literal notranslate"><span class="pre">intersection</span></code>: computes the union or intersection of two
+Index objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">insert</span></code>: Inserts a new label into an Index, yielding a new object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delete</span></code>: Delete a label, yielding a new object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop</span></code>: Deletes a set of labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">take</span></code>: Analogous to ndarray.take</p></li>
+</ul>
+<div class="section" id="multiindex">
+<h3>MultiIndex<a class="headerlink" href="#multiindex" title="Permalink to this headline">¶</a></h3>
+<p>Internally, the <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> consists of a few things: the <strong>levels</strong>, the
+integer <strong>codes</strong> (until version 0.24 named <em>labels</em>), and the level <strong>names</strong>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_product</span><span class="p">([</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">]],</span>
+<span class="gp">   ...: </span>                                   <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">])</span>
+<span class="gp">   ...: </span>
+
+<span class="gp">In [10]: </span><span class="n">index</span>
+
+<span class="gp">In [11]: </span><span class="n">index</span><span class="o">.</span><span class="n">levels</span>
+
+<span class="gp">In [12]: </span><span class="n">index</span><span class="o">.</span><span class="n">codes</span>
+
+<span class="gp">In [13]: </span><span class="n">index</span><span class="o">.</span><span class="n">names</span>
+</pre></div>
+</div>
+<p>You can probably guess that the codes determine which unique element is
+identified with that location at each layer of the index. It’s important to
+note that sortedness is determined <strong>solely</strong> from the integer codes and does
+not check (or care) whether the levels themselves are sorted. Fortunately, the
+constructors <code class="docutils literal notranslate"><span class="pre">from_tuples</span></code> and <code class="docutils literal notranslate"><span class="pre">from_arrays</span></code> ensure that this is true, but
+if you compute the levels and codes yourself, please be careful.</p>
+</div>
+<div class="section" id="values">
+<h3>Values<a class="headerlink" href="#values" title="Permalink to this headline">¶</a></h3>
+<p>Pandas extends NumPy’s type system with custom types, like <code class="docutils literal notranslate"><span class="pre">Categorical</span></code> or
+datetimes with a timezone, so we have multiple notions of “values”. For 1-D
+containers (<code class="docutils literal notranslate"><span class="pre">Index</span></code> classes and <code class="docutils literal notranslate"><span class="pre">Series</span></code>) we have the following convention:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cls._ndarray_values</span></code> is <em>always</em> a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>. Ideally,
+<code class="docutils literal notranslate"><span class="pre">_ndarray_values</span></code> is cheap to compute. For example, for a <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>,
+this returns the codes, not the array of objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cls._values</span></code> refers is the “best possible” array. This could be an
+<code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>, or in <code class="docutils literal notranslate"><span class="pre">Index</span></code> subclass (note: we’re in the
+process of removing the index subclasses here so that it’s always an
+<code class="docutils literal notranslate"><span class="pre">ndarray</span></code> or <code class="docutils literal notranslate"><span class="pre">ExtensionArray</span></code>).</p></li>
+</ul>
+<p>So, for example, <code class="docutils literal notranslate"><span class="pre">Series[category]._values</span></code> is a <code class="docutils literal notranslate"><span class="pre">Categorical</span></code>, while
+<code class="docutils literal notranslate"><span class="pre">Series[category]._ndarray_values</span></code> is the underlying codes.</p>
+</div>
+</div>
+<div class="section" id="subclassing-pandas-data-structures">
+<span id="ref-subclassing-pandas"></span><h2>Subclassing pandas Data Structures<a class="headerlink" href="#subclassing-pandas-data-structures" title="Permalink to this headline">¶</a></h2>
+<p>This section has been moved to <a class="reference internal" href="extending.html#extending-subclassing-pandas"><span class="std std-ref">Subclassing pandas Data Structures</span></a>.</p>
+</div>
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

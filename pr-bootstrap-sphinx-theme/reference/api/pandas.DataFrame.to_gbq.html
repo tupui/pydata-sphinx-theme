@@ -1,0 +1,182 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+
+        
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+        
+
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-to-gbq">
+<h1>pandas.DataFrame.to_gbq<a class="headerlink" href="#pandas-dataframe-to-gbq" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.to_gbq">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_gbq</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">destination_table</em>, <em class="sig-param">project_id=None</em>, <em class="sig-param">chunksize=None</em>, <em class="sig-param">reauth=False</em>, <em class="sig-param">if_exists='fail'</em>, <em class="sig-param">auth_local_webserver=False</em>, <em class="sig-param">table_schema=None</em>, <em class="sig-param">location=None</em>, <em class="sig-param">progress_bar=True</em>, <em class="sig-param">credentials=None</em>, <em class="sig-param">verbose=None</em>, <em class="sig-param">private_key=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L1384-L1509"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_gbq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a DataFrame to a Google BigQuery table.</p>
+<p>This function requires the <a class="reference external" href="https://pandas-gbq.readthedocs.io">pandas-gbq package</a>.</p>
+<p>See the <a class="reference external" href="https://pandas-gbq.readthedocs.io/en/latest/howto/authentication.html">How to authenticate with Google BigQuery</a>
+guide for authentication instructions.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>destination_table</strong><span class="classifier">str</span></dt><dd><p>Name of table to be written, in the form <code class="docutils literal notranslate"><span class="pre">dataset.tablename</span></code>.</p>
+</dd>
+<dt><strong>project_id</strong><span class="classifier">str, optional</span></dt><dd><p>Google BigQuery Account project ID. Optional when available from
+the environment.</p>
+</dd>
+<dt><strong>chunksize</strong><span class="classifier">int, optional</span></dt><dd><p>Number of rows to be inserted in each chunk from the dataframe.
+Set to <code class="docutils literal notranslate"><span class="pre">None</span></code> to load the whole dataframe at once.</p>
+</dd>
+<dt><strong>reauth</strong><span class="classifier">bool, default False</span></dt><dd><p>Force Google BigQuery to re-authenticate the user. This is useful
+if multiple accounts are used.</p>
+</dd>
+<dt><strong>if_exists</strong><span class="classifier">str, default ‘fail’</span></dt><dd><p>Behavior when the destination table exists. Value can be one of:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">'fail'</span></code></dt><dd><p>If table exists, do nothing.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'replace'</span></code></dt><dd><p>If table exists, drop it, recreate it, and insert data.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">'append'</span></code></dt><dd><p>If table exists, insert data. Create if does not exist.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>auth_local_webserver</strong><span class="classifier">bool, default False</span></dt><dd><p>Use the <a class="reference external" href="http://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.InstalledAppFlow.run_local_server">local webserver flow</a> instead of the <a class="reference external" href="http://google-auth-oauthlib.readthedocs.io/en/latest/reference/google_auth_oauthlib.flow.html#google_auth_oauthlib.flow.InstalledAppFlow.run_console">console flow</a>
+when getting user credentials.</p>
+<p><em>New in version 0.2.0 of pandas-gbq</em>.</p>
+</dd>
+<dt><strong>table_schema</strong><span class="classifier">list of dicts, optional</span></dt><dd><p>List of BigQuery table fields to which according DataFrame
+columns conform to, e.g. <code class="docutils literal notranslate"><span class="pre">[{'name':</span> <span class="pre">'col1',</span> <span class="pre">'type':</span>
+<span class="pre">'STRING'},...]</span></code>. If schema is not provided, it will be
+generated according to dtypes of DataFrame columns. See
+BigQuery API documentation on available names of a field.</p>
+<p><em>New in version 0.3.1 of pandas-gbq</em>.</p>
+</dd>
+<dt><strong>location</strong><span class="classifier">str, optional</span></dt><dd><p>Location where the load job should run. See the <a class="reference external" href="https://cloud.google.com/bigquery/docs/dataset-locations">BigQuery locations
+documentation</a> for a
+list of available locations. The location must match that of the
+target dataset.</p>
+<p><em>New in version 0.5.0 of pandas-gbq</em>.</p>
+</dd>
+<dt><strong>progress_bar</strong><span class="classifier">bool, default True</span></dt><dd><p>Use the library <cite>tqdm</cite> to show the progress bar for the upload,
+chunk by chunk.</p>
+<p><em>New in version 0.5.0 of pandas-gbq</em>.</p>
+</dd>
+<dt><strong>credentials</strong><span class="classifier">google.auth.credentials.Credentials, optional</span></dt><dd><p>Credentials for accessing Google APIs. Use this parameter to
+override default credentials, such as to use Compute Engine
+<code class="xref py py-class docutils literal notranslate"><span class="pre">google.auth.compute_engine.Credentials</span></code> or Service
+Account <code class="xref py py-class docutils literal notranslate"><span class="pre">google.oauth2.service_account.Credentials</span></code>
+directly.</p>
+<p><em>New in version 0.8.0 of pandas-gbq</em>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+</dd>
+<dt><strong>verbose</strong><span class="classifier">bool, deprecated</span></dt><dd><p>Deprecated in pandas-gbq version 0.4.0. Use the <a class="reference external" href="https://pandas-gbq.readthedocs.io/en/latest/intro.html#logging">logging module
+to adjust verbosity instead</a>.</p>
+</dd>
+<dt><strong>private_key</strong><span class="classifier">str, deprecated</span></dt><dd><p>Deprecated in pandas-gbq version 0.8.0. Use the <code class="docutils literal notranslate"><span class="pre">credentials</span></code>
+parameter and
+<code class="xref py py-func docutils literal notranslate"><span class="pre">google.oauth2.service_account.Credentials.from_service_account_info()</span></code>
+or
+<code class="xref py py-func docutils literal notranslate"><span class="pre">google.oauth2.service_account.Credentials.from_service_account_file()</span></code>
+instead.</p>
+<p>Service account private key in JSON format. Can be file path
+or string contents. This is useful for remote server
+authentication (eg. Jupyter/IPython notebook on remote host).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq" title="(in pandas-gbq v0.11.0+2.gaf4ab8f)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas_gbq.to_gbq</span></code></a></dt><dd><p>This function in the pandas-gbq library.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.read_gbq.html#pandas.read_gbq" title="pandas.read_gbq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_gbq</span></code></a></dt><dd><p>Read a DataFrame from Google BigQuery.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

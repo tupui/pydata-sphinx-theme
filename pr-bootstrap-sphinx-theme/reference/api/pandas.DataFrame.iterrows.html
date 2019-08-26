@@ -1,0 +1,146 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+
+        
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+        
+
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-iterrows">
+<h1>pandas.DataFrame.iterrows<a class="headerlink" href="#pandas-dataframe-iterrows" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.iterrows">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">iterrows</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L845-L895"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.iterrows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over DataFrame rows as (index, Series) pairs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>index</strong><span class="classifier">label or tuple of label</span></dt><dd><p>The index of the row. A tuple for a <cite>MultiIndex</cite>.</p>
+</dd>
+<dt><strong>data</strong><span class="classifier">Series</span></dt><dd><p>The data of the row as a Series.</p>
+</dd>
+<dt><strong>it</strong><span class="classifier">generator</span></dt><dd><p>A generator that iterates over the rows of the frame.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">itertuples</span></code></a></dt><dd><p>Iterate over DataFrame rows as namedtuples of the values.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.items.html#pandas.DataFrame.items" title="pandas.DataFrame.items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">items</span></code></a></dt><dd><p>Iterate over (column name, Series) pairs.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<ol class="arabic">
+<li><p>Because <code class="docutils literal notranslate"><span class="pre">iterrows</span></code> returns a Series for each row,
+it does <strong>not</strong> preserve dtypes across the rows (dtypes are
+preserved across columns for DataFrames). For example,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;float&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">())[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row</span>
+<span class="go">int      1.0</span>
+<span class="go">float    1.5</span>
+<span class="go">Name: 0, dtype: float64</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;int&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">float64</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;int&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">int64</span>
+</pre></div>
+</div>
+<p>To preserve dtypes while iterating over the rows, it is better
+to use <a class="reference internal" href="pandas.DataFrame.itertuples.html#pandas.DataFrame.itertuples" title="pandas.DataFrame.itertuples"><code class="xref py py-meth docutils literal notranslate"><span class="pre">itertuples()</span></code></a> which returns namedtuples of the values
+and which is generally faster than <code class="docutils literal notranslate"><span class="pre">iterrows</span></code>.</p>
+</li>
+<li><p>You should <strong>never modify</strong> something you are iterating over.
+This is not guaranteed to work in all cases. Depending on the
+data types, the iterator returns a copy and not a view, and writing
+to it will have no effect.</p></li>
+</ol>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>

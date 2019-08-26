@@ -1,0 +1,251 @@
+
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="docsearch:language" content="en">
+
+<title>Test</title>
+
+<link href="../../_static/bootstrap-4.3.1-dist/css/bootstrap.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" rel="stylesheet">
+
+<link href="../../_static/docs.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+  <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+    Pandas
+  </a>
+
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../install.html">Installation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">API Reference</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+
+        
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar"><form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+
+</form>
+
+<nav class="collapse bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current active"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+</nav>
+        </div>
+        
+
+        
+
+        
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+          
+          
+  <div class="section" id="pandas-dataframe-rolling">
+<h1>pandas.DataFrame.rolling<a class="headerlink" href="#pandas-dataframe-rolling" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.rolling">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">rolling</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">window</em>, <em class="sig-param">min_periods=None</em>, <em class="sig-param">center=False</em>, <em class="sig-param">win_type=None</em>, <em class="sig-param">on=None</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">closed=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L10749-L10770"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.rolling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provide rolling window calculations.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>window</strong><span class="classifier">int, or offset</span></dt><dd><p>Size of the moving window. This is the number of observations used for
+calculating the statistic. Each window will be a fixed size.</p>
+<p>If its an offset then this will be the time period of each window. Each
+window will be a variable sized based on the observations included in
+the time-period. This is only valid for datetimelike indexes. This is
+new in 0.19.0</p>
+</dd>
+<dt><strong>min_periods</strong><span class="classifier">int, default None</span></dt><dd><p>Minimum number of observations in window required to have a value
+(otherwise result is NA). For a window that is specified by an offset,
+<cite>min_periods</cite> will default to 1. Otherwise, <cite>min_periods</cite> will default
+to the size of the window.</p>
+</dd>
+<dt><strong>center</strong><span class="classifier">bool, default False</span></dt><dd><p>Set the labels at the center of the window.</p>
+</dd>
+<dt><strong>win_type</strong><span class="classifier">str, default None</span></dt><dd><p>Provide a window type. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, all points are evenly weighted.
+See the notes below for further information.</p>
+</dd>
+<dt><strong>on</strong><span class="classifier">str, optional</span></dt><dd><p>For a DataFrame, a datetime-like column on which to calculate the rolling
+window, rather than the DataFrame’s index. Provided integer column is
+ignored and excluded from result since an integer index is not used to
+calculate the rolling window.</p>
+</dd>
+<dt><strong>axis</strong><span class="classifier">int or str, default 0</span></dt><dd></dd>
+<dt><strong>closed</strong><span class="classifier">str, default None</span></dt><dd><p>Make the interval closed on the ‘right’, ‘left’, ‘both’ or
+‘neither’ endpoints.
+For offset-based windows, it defaults to ‘right’.
+For fixed windows, defaults to ‘both’. Remaining cases not implemented
+for fixed windows.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>a Window or Rolling sub-classed for the particular operation</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.expanding.html#pandas.DataFrame.expanding" title="pandas.DataFrame.expanding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">expanding</span></code></a></dt><dd><p>Provides expanding transformations.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.ewm.html#pandas.DataFrame.ewm" title="pandas.DataFrame.ewm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ewm</span></code></a></dt><dd><p>Provides exponential weighted functions.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>By default, the result is set to the right edge of the window. This can be
+changed to the center of the window by setting <code class="docutils literal notranslate"><span class="pre">center=True</span></code>.</p>
+<p>To learn more about the offsets &amp; frequency strings, please see <a class="reference external" href="http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases">this link</a>.</p>
+<p>The recognized win_types are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">boxcar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">triang</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blackman</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hamming</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bartlett</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parzen</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bohman</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blackmanharris</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nuttall</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">barthann</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kaiser</span></code> (needs beta)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gaussian</span></code> (needs std)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">general_gaussian</span></code> (needs power, width)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">slepian</span></code> (needs width)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exponential</span></code> (needs tau), center is set to None.</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">win_type=None</span></code> all points are evenly weighted. To learn more about
+different window types see <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/signal.html#window-functions">scipy.signal window functions</a>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">     B</span>
+<span class="go">0  0.0</span>
+<span class="go">1  1.0</span>
+<span class="go">2  2.0</span>
+<span class="go">3  NaN</span>
+<span class="go">4  4.0</span>
+</pre></div>
+</div>
+<p>Rolling sum with a window length of 2, using the ‘triang’
+window type.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">win_type</span><span class="o">=</span><span class="s1">&#39;triang&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">     B</span>
+<span class="go">0  NaN</span>
+<span class="go">1  0.5</span>
+<span class="go">2  1.5</span>
+<span class="go">3  NaN</span>
+<span class="go">4  NaN</span>
+</pre></div>
+</div>
+<p>Rolling sum with a window length of 2, min_periods defaults
+to the window length.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">     B</span>
+<span class="go">0  NaN</span>
+<span class="go">1  1.0</span>
+<span class="go">2  3.0</span>
+<span class="go">3  NaN</span>
+<span class="go">4  NaN</span>
+</pre></div>
+</div>
+<p>Same as above, but explicitly set the min_periods</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">     B</span>
+<span class="go">0  0.0</span>
+<span class="go">1  1.0</span>
+<span class="go">2  3.0</span>
+<span class="go">3  2.0</span>
+<span class="go">4  4.0</span>
+</pre></div>
+</div>
+<p>A ragged (meaning not-a-regular frequency), time-indexed DataFrame</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">]},</span>
+<span class="gp">... </span>                  <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:00&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                           <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:02&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                           <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:03&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                           <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:05&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                           <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101 09:00:06&#39;</span><span class="p">)])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">                       B</span>
+<span class="go">2013-01-01 09:00:00  0.0</span>
+<span class="go">2013-01-01 09:00:02  1.0</span>
+<span class="go">2013-01-01 09:00:03  2.0</span>
+<span class="go">2013-01-01 09:00:05  NaN</span>
+<span class="go">2013-01-01 09:00:06  4.0</span>
+</pre></div>
+</div>
+<p>Contrasting to an integer rolling window, this will roll a variable
+length window corresponding to the time period.
+The default for min_periods is 1.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="go">                       B</span>
+<span class="go">2013-01-01 09:00:00  0.0</span>
+<span class="go">2013-01-01 09:00:02  1.0</span>
+<span class="go">2013-01-01 09:00:03  3.0</span>
+<span class="go">2013-01-01 09:00:05  NaN</span>
+<span class="go">2013-01-01 09:00:06  4.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+        </main>
+      </div>
+    </div>
+
+    
+  </body>
+</html>
