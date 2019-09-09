@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.tz_localize &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.unstack" href="pandas.DataFrame.unstack.html" />
+    <link rel="prev" title="pandas.DataFrame.tz_convert" href="pandas.DataFrame.tz_convert.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-tz-localize">
+<h1>pandas.DataFrame.tz_localize<a class="headerlink" href="#pandas-dataframe-tz-localize" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.tz_localize">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">tz_localize</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">tz</em>, <em class="sig-param">axis=0</em>, <em class="sig-param">level=None</em>, <em class="sig-param">copy=True</em>, <em class="sig-param">ambiguous='raise'</em>, <em class="sig-param">nonexistent='raise'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L9709-L9871"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.tz_localize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Localize tz-naive index of a Series or DataFrame to target time zone.</p>
+<p>This operation localizes the Index. To localize the values in a
+timezone-naive Series, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.dt.tz_localize()</span></code>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>tz</strong><span class="classifier">string or pytz.timezone object</span></dt><dd></dd>
+<dt><strong>axis</strong><span class="classifier">the axis to localize</span></dt><dd></dd>
+<dt><strong>level</strong><span class="classifier">int, str, default None</span></dt><dd><p>If axis ia a MultiIndex, localize a specific level. Otherwise
+must be None</p>
+</dd>
+<dt><strong>copy</strong><span class="classifier">boolean, default True</span></dt><dd><p>Also make a copy of the underlying data</p>
+</dd>
+<dt><strong>ambiguous</strong><span class="classifier">‘infer’, bool-ndarray, ‘NaT’, default ‘raise’</span></dt><dd><p>When clocks moved backward due to DST, ambiguous times may arise.
+For example in Central European Time (UTC+01), when going from
+03:00 DST to 02:00 non-DST, 02:30:00 local time occurs both at
+00:30:00 UTC and at 01:30:00 UTC. In such a situation, the
+<cite>ambiguous</cite> parameter dictates how ambiguous times should be
+handled.</p>
+<ul class="simple">
+<li><p>‘infer’ will attempt to infer fall dst-transition hours based on
+order</p></li>
+<li><p>bool-ndarray where True signifies a DST time, False designates
+a non-DST time (note that this flag is only applicable for
+ambiguous times)</p></li>
+<li><p>‘NaT’ will return NaT where there are ambiguous times</p></li>
+<li><p>‘raise’ will raise an AmbiguousTimeError if there are ambiguous
+times</p></li>
+</ul>
+</dd>
+<dt><strong>nonexistent</strong><span class="classifier">str, default ‘raise’</span></dt><dd><p>A nonexistent time does not exist in a particular timezone
+where clocks moved forward due to DST. Valid values are:</p>
+<ul class="simple">
+<li><p>‘shift_forward’ will shift the nonexistent time forward to the
+closest existing time</p></li>
+<li><p>‘shift_backward’ will shift the nonexistent time backward to the
+closest existing time</p></li>
+<li><p>‘NaT’ will return NaT where there are nonexistent times</p></li>
+<li><p>timedelta objects will shift nonexistent times by the timedelta</p></li>
+<li><p>‘raise’ will raise an NonExistentTimeError if there are
+nonexistent times</p></li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Series or DataFrame</dt><dd><p>Same type as the input.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>**<span class="classifier">TypeError</span></dt><dd><p>If the TimeSeries is tz-aware and tz is not None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Localize local times:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-09-15 01:30:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;CET&#39;</span><span class="p">)</span>
+<span class="go">2018-09-15 01:30:00+02:00    1</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>Be careful with DST changes. When there is sequential data, pandas
+can infer the DST time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 01:30:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:00:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:30:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:00:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:30:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 03:00:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 03:30:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;CET&#39;</span><span class="p">,</span> <span class="n">ambiguous</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">)</span>
+<span class="go">2018-10-28 01:30:00+02:00    0</span>
+<span class="go">2018-10-28 02:00:00+02:00    1</span>
+<span class="go">2018-10-28 02:30:00+02:00    2</span>
+<span class="go">2018-10-28 02:00:00+01:00    3</span>
+<span class="go">2018-10-28 02:30:00+01:00    4</span>
+<span class="go">2018-10-28 03:00:00+01:00    5</span>
+<span class="go">2018-10-28 03:30:00+01:00    6</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>In some cases, inferring the DST is impossible. In such cases, you can
+pass an ndarray to the ambiguous parameter to set the DST explicitly</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 01:20:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 02:36:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;2018-10-28 03:46:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;CET&#39;</span><span class="p">,</span> <span class="n">ambiguous</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]))</span>
+<span class="go">2018-10-28 01:20:00+02:00    0</span>
+<span class="go">2018-10-28 02:36:00+02:00    1</span>
+<span class="go">2018-10-28 03:46:00+01:00    2</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<p>If the DST transition causes nonexistent times, you can shift these
+dates forward or backwards with a timedelta object or <cite>‘shift_forward’</cite>
+or <cite>‘shift_backwards’</cite>.
+&gt;&gt;&gt; s = pd.Series(range(2), index=pd.DatetimeIndex([
+… ‘2015-03-29 02:30:00’,
+… ‘2015-03-29 03:30:00’]))
+&gt;&gt;&gt; s.tz_localize(‘Europe/Warsaw’, nonexistent=’shift_forward’)
+2015-03-29 03:00:00+02:00    0
+2015-03-29 03:30:00+02:00    1
+dtype: int64
+&gt;&gt;&gt; s.tz_localize(‘Europe/Warsaw’, nonexistent=’shift_backward’)
+2015-03-29 01:59:59.999999999+01:00    0
+2015-03-29 03:30:00+02:00              1
+dtype: int64
+&gt;&gt;&gt; s.tz_localize(‘Europe/Warsaw’, nonexistent=pd.Timedelta(‘1H’))
+2015-03-29 03:30:00+02:00    0
+2015-03-29 03:30:00+02:00    1
+dtype: int64</p>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

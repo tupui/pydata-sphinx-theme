@@ -1,0 +1,274 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.plot.bar &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.plot.barh" href="pandas.DataFrame.plot.barh.html" />
+    <link rel="prev" title="pandas.DataFrame.plot.area" href="pandas.DataFrame.plot.area.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-plot-bar">
+<h1>pandas.DataFrame.plot.bar<a class="headerlink" href="#pandas-dataframe-plot-bar" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.plot.bar">
+<code class="sig-prename descclassname">DataFrame.plot.</code><code class="sig-name descname">bar</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">x=None</em>, <em class="sig-param">y=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/plotting/_core.py#L865-L948"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.plot.bar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vertical bar plot.</p>
+<p>A bar plot is a plot that presents categorical data with
+rectangular bars with lengths proportional to the values that they
+represent. A bar plot shows comparisons among discrete categories. One
+axis of the plot shows the specific categories being compared, and the
+other axis represents a measured value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">label or position, optional</span></dt><dd><p>Allows plotting of one column versus another. If not specified,
+the index of the DataFrame is used.</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">label or position, optional</span></dt><dd><p>Allows plotting of one column versus another. If not specified,
+all numerical columns are used.</p>
+</dd>
+<dt><strong>**kwds</strong></dt><dd><p>Additional keyword arguments are documented in
+<a class="reference internal" href="pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot()</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>matplotlib.axes.Axes or np.ndarray of them</dt><dd><p>An ndarray is returned with one <a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a>
+per column when <code class="docutils literal notranslate"><span class="pre">subplots=True</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.plot.barh.html#pandas.DataFrame.plot.barh" title="pandas.DataFrame.plot.barh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.plot.barh</span></code></a></dt><dd><p>Horizontal bar plot.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.plot</span></code></a></dt><dd><p>Make plots of a DataFrame.</p>
+</dd>
+<dt><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html#matplotlib.pyplot.bar" title="(in Matplotlib v3.1.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matplotlib.pyplot.bar</span></code></a></dt><dd><p>Make a bar plot with matplotlib.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<p>Basic plot.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;lab&#39;</span><span class="p">:[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="s1">&#39;val&#39;</span><span class="p">:[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;lab&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../../_images/pandas-DataFrame-plot-bar-1.png" src="../../_images/pandas-DataFrame-plot-bar-1.png" />
+</div>
+<p>Plot a whole dataframe to a bar plot. Each column is assigned a
+distinct color, and each row is nested in a group along the
+horizontal axis.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">speed</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">17.5</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lifespan</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;snail&#39;</span><span class="p">,</span> <span class="s1">&#39;pig&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">,</span>
+<span class="gp">... </span>         <span class="s1">&#39;rabbit&#39;</span><span class="p">,</span> <span class="s1">&#39;giraffe&#39;</span><span class="p">,</span> <span class="s1">&#39;coyote&#39;</span><span class="p">,</span> <span class="s1">&#39;horse&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">speed</span><span class="p">,</span>
+<span class="gp">... </span>                   <span class="s1">&#39;lifespan&#39;</span><span class="p">:</span> <span class="n">lifespan</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../../_images/pandas-DataFrame-plot-bar-2.png" src="../../_images/pandas-DataFrame-plot-bar-2.png" />
+</div>
+<p>Instead of nesting, the figure can be split by column with
+<code class="docutils literal notranslate"><span class="pre">subplots=True</span></code>. In this case, a <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.17)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></a> of
+<a class="reference external" href="https://matplotlib.org/api/axes_api.html#matplotlib.axes.Axes" title="(in Matplotlib v3.1.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a> are returned.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../../_images/pandas-DataFrame-plot-bar-3.png" src="../../_images/pandas-DataFrame-plot-bar-3.png" />
+</div>
+<p>Plot a single column.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;speed&#39;</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../../_images/pandas-DataFrame-plot-bar-4.png" src="../../_images/pandas-DataFrame-plot-bar-4.png" />
+</div>
+<p>Plot only selected categories for the DataFrame.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;lifespan&#39;</span><span class="p">,</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<img alt="../../_images/pandas-DataFrame-plot-bar-5.png" src="../../_images/pandas-DataFrame-plot-bar-5.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
