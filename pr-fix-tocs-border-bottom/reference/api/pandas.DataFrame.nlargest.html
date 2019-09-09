@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.nlargest &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.notna" href="pandas.DataFrame.notna.html" />
+    <link rel="prev" title="pandas.DataFrame.ne" href="pandas.DataFrame.ne.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-nlargest">
+<h1>pandas.DataFrame.nlargest<a class="headerlink" href="#pandas-dataframe-nlargest" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.nlargest">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">nlargest</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">n</em>, <em class="sig-param">columns</em>, <em class="sig-param">keep='first'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L5089-L5196"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.nlargest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the first <cite>n</cite> rows ordered by <cite>columns</cite> in descending order.</p>
+<p>Return the first <cite>n</cite> rows with the largest values in <cite>columns</cite>, in
+descending order. The columns that are not specified are returned as
+well, but not used for ordering.</p>
+<p>This method is equivalent to
+<code class="docutils literal notranslate"><span class="pre">df.sort_values(columns,</span> <span class="pre">ascending=False).head(n)</span></code>, but more
+performant.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>Number of rows to return.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">label or list of labels</span></dt><dd><p>Column label(s) to order by.</p>
+</dd>
+<dt><strong>keep</strong><span class="classifier">{‘first’, ‘last’, ‘all’}, default ‘first’</span></dt><dd><p>Where there are duplicate values:</p>
+<ul class="simple">
+<li><p><cite>first</cite> : prioritize the first occurrence(s)</p></li>
+<li><p><cite>last</cite> : prioritize the last occurrence(s)</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">all</span></code><span class="classifier">do not drop any duplicates, even it means</span></dt><dd><p>selecting more than <cite>n</cite> items.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>The first <cite>n</cite> rows ordered by the given columns in descending
+order.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.nsmallest.html#pandas.DataFrame.nsmallest" title="pandas.DataFrame.nsmallest"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.nsmallest</span></code></a></dt><dd><p>Return the first <cite>n</cite> rows ordered by <cite>columns</cite> in ascending order.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.sort_values.html#pandas.DataFrame.sort_values" title="pandas.DataFrame.sort_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.sort_values</span></code></a></dt><dd><p>Sort DataFrame by the values.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.head.html#pandas.DataFrame.head" title="pandas.DataFrame.head"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.head</span></code></a></dt><dd><p>Return the first <cite>n</cite> rows without re-ordering.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function cannot be used with all column types. For example, when
+specifying columns with <cite>object</cite> or <cite>category</cite> dtypes, <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> is
+raised.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;population&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">59000000</span><span class="p">,</span> <span class="mi">65000000</span><span class="p">,</span> <span class="mi">434000</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="mi">434000</span><span class="p">,</span> <span class="mi">434000</span><span class="p">,</span> <span class="mi">337000</span><span class="p">,</span> <span class="mi">11300</span><span class="p">,</span>
+<span class="gp">... </span>                                  <span class="mi">11300</span><span class="p">,</span> <span class="mi">11300</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;GDP&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1937894</span><span class="p">,</span> <span class="mi">2583560</span> <span class="p">,</span> <span class="mi">12011</span><span class="p">,</span> <span class="mi">4520</span><span class="p">,</span> <span class="mi">12128</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="mi">17036</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">311</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;alpha-2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;IT&quot;</span><span class="p">,</span> <span class="s2">&quot;FR&quot;</span><span class="p">,</span> <span class="s2">&quot;MT&quot;</span><span class="p">,</span> <span class="s2">&quot;MV&quot;</span><span class="p">,</span> <span class="s2">&quot;BN&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="s2">&quot;IS&quot;</span><span class="p">,</span> <span class="s2">&quot;NR&quot;</span><span class="p">,</span> <span class="s2">&quot;TV&quot;</span><span class="p">,</span> <span class="s2">&quot;AI&quot;</span><span class="p">]},</span>
+<span class="gp">... </span>                  <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Italy&quot;</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">,</span> <span class="s2">&quot;Malta&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="s2">&quot;Maldives&quot;</span><span class="p">,</span> <span class="s2">&quot;Brunei&quot;</span><span class="p">,</span> <span class="s2">&quot;Iceland&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="s2">&quot;Nauru&quot;</span><span class="p">,</span> <span class="s2">&quot;Tuvalu&quot;</span><span class="p">,</span> <span class="s2">&quot;Anguilla&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">          population      GDP alpha-2</span>
+<span class="go">Italy       59000000  1937894      IT</span>
+<span class="go">France      65000000  2583560      FR</span>
+<span class="go">Malta         434000    12011      MT</span>
+<span class="go">Maldives      434000     4520      MV</span>
+<span class="go">Brunei        434000    12128      BN</span>
+<span class="go">Iceland       337000    17036      IS</span>
+<span class="go">Nauru          11300      182      NR</span>
+<span class="go">Tuvalu         11300       38      TV</span>
+<span class="go">Anguilla       11300      311      AI</span>
+</pre></div>
+</div>
+<p>In the following example, we will use <code class="docutils literal notranslate"><span class="pre">nlargest</span></code> to select the three
+rows having the largest values in column “population”.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">)</span>
+<span class="go">        population      GDP alpha-2</span>
+<span class="go">France    65000000  2583560      FR</span>
+<span class="go">Italy     59000000  1937894      IT</span>
+<span class="go">Malta       434000    12011      MT</span>
+</pre></div>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">keep='last'</span></code>, ties are resolved in reverse order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span>
+<span class="go">        population      GDP alpha-2</span>
+<span class="go">France    65000000  2583560      FR</span>
+<span class="go">Italy     59000000  1937894      IT</span>
+<span class="go">Brunei      434000    12128      BN</span>
+</pre></div>
+</div>
+<p>When using <code class="docutils literal notranslate"><span class="pre">keep='all'</span></code>, all duplicate items are maintained:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="go">          population      GDP alpha-2</span>
+<span class="go">France      65000000  2583560      FR</span>
+<span class="go">Italy       59000000  1937894      IT</span>
+<span class="go">Malta         434000    12011      MT</span>
+<span class="go">Maldives      434000     4520      MV</span>
+<span class="go">Brunei        434000    12128      BN</span>
+</pre></div>
+</div>
+<p>To order by the largest values in column “population” and then “GDP”,
+we can specify multiple columns like in the next example.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;population&#39;</span><span class="p">,</span> <span class="s1">&#39;GDP&#39;</span><span class="p">])</span>
+<span class="go">        population      GDP alpha-2</span>
+<span class="go">France    65000000  2583560      FR</span>
+<span class="go">Italy     59000000  1937894      IT</span>
+<span class="go">Brunei      434000    12128      BN</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
