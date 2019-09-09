@@ -1,83 +1,234 @@
 
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="docsearch:language" content="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Indexing and Selecting Data &#8212; pandas 0.24.2 documentation</title>
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MultiIndex / Advanced Indexing" href="advanced.html" />
-    <link rel="prev" title="pandas.DataFrame.to_sql" href="../reference/api/pandas.DataFrame.to_sql.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="advanced.html" title="MultiIndex / Advanced Indexing"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../reference/api/pandas.DataFrame.to_sql.html" title="pandas.DataFrame.to_sql"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &#187;</li> 
-      </ul>
-    </div>
-<div class="content-wrapper">
-    <div class="content">
-        <div class="document">
-            <div class="sphinxsidebar">
-                <h3>Table Of Contents</h3>
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<title>Pandas documentation</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<link href="../_static/fontawesome-5.10.2/css/all.css", rel="stylesheet">
+<link href="../_static/css/custom.css" rel="stylesheet"> 
+
+  </head> 
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60"> 
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../reference/index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="io.html">IO Tools (Text, CSV, HDF5, …)</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="">Indexing and Selecting Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="advanced.html">MultiIndex / Advanced Indexing</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="merging.html">Merge, join, and concatenate</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="reshaping.html">Reshaping and Pivot Tables</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="text.html">Working with Text Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="missing_data.html">Working with missing data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="categorical.html">Categorical Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="integer_na.html">Nullable Integer Data Type</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="visualization.html">Visualization</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="computation.html">Computational tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="groupby.html">Group By: split-apply-combine</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="timeseries.html">Time Series / Date functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="timedeltas.html">Time Deltas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="options.html">Options and Settings</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="enhancingperf.html">Enhancing Performance</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="sparse.html">Sparse data structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="gotchas.html">Frequently Asked Questions (FAQ)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="cookbook.html">Cookbook</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
 <li class="toctree-l2"><a class="reference internal" href="io.html">IO Tools (Text, CSV, HDF5, …)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Indexing and Selecting Data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#different-choices-for-indexing">Different Choices for Indexing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#attribute-access">Attribute Access</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#slicing-ranges">Slicing ranges</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#selection-by-label">Selection By Label</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#selection-by-position">Selection By Position</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#selection-by-callable">Selection By Callable</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ix-indexer-is-deprecated">IX Indexer is Deprecated</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#indexing-with-list-with-missing-labels-is-deprecated">Indexing with list with missing labels is Deprecated</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#selecting-random-samples">Selecting Random Samples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#setting-with-enlargement">Setting With Enlargement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fast-scalar-value-getting-and-setting">Fast scalar value getting and setting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#boolean-indexing">Boolean indexing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#indexing-with-isin">Indexing with isin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-where-method-and-masking">The <code class="docutils literal notranslate"><span class="pre">where()</span></code> Method and Masking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-query-method">The <code class="docutils literal notranslate"><span class="pre">query()</span></code> Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#duplicate-data">Duplicate Data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dictionary-like-get-method">Dictionary-like <code class="docutils literal notranslate"><span class="pre">get()</span></code> method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-lookup-method">The <code class="docutils literal notranslate"><span class="pre">lookup()</span></code> Method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#index-objects">Index objects</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#set-reset-index">Set / Reset Index</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#returning-a-view-versus-a-copy">Returning a view versus a copy</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Indexing and Selecting Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced.html">MultiIndex / Advanced Indexing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="merging.html">Merge, join, and concatenate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reshaping.html">Reshaping and Pivot Tables</a></li>
@@ -96,47 +247,219 @@
 <li class="toctree-l2"><a class="reference internal" href="gotchas.html">Frequently Asked Questions (FAQ)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cookbook.html">Cookbook</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../ecosystem.html">pandas Ecosystem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a></li>
-</ul>
 
-                <h3 style="margin-top: 1.5em;">Search</h3>
+</div>
+-->
+</nav>
 
-                <form class="search" action="../search.html" method="get">
-                    <input type="text" name="q" size="18"/>
-                    <input type="submit" value="Go"/>
-                    <input type="hidden" name="check_keywords" value="yes"/>
-                    <input type="hidden" name="area" value="default"/>
-                </form>
-                <p class="searchtip" style="font-size: 90%">
-                    Enter search terms or a module, class or function name.
-                </p>
 
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav nav-tabs section-nav flex-column" role="tablist">
+    
+        <li class="toc-entry toc-h2">
+            <a href="#different-choices-for-indexing" class="nav-item nav-link">Different Choices for Indexing</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#basics" class="nav-item nav-link">Basics</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#attribute-access" class="nav-item nav-link">Attribute Access</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#slicing-ranges" class="nav-item nav-link">Slicing ranges</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#selection-by-label" class="nav-item nav-link">Selection By Label</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#slicing-with-labels" class="nav-item nav-link">Slicing with labels</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#selection-by-position" class="nav-item nav-link">Selection By Position</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#selection-by-callable" class="nav-item nav-link">Selection By Callable</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#ix-indexer-is-deprecated" class="nav-item nav-link">IX Indexer is Deprecated</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#indexing-with-list-with-missing-labels-is-deprecated" class="nav-item nav-link">Indexing with list with missing labels is Deprecated</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#reindexing" class="nav-item nav-link">Reindexing</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#selecting-random-samples" class="nav-item nav-link">Selecting Random Samples</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#setting-with-enlargement" class="nav-item nav-link">Setting With Enlargement</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#fast-scalar-value-getting-and-setting" class="nav-item nav-link">Fast scalar value getting and setting</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#boolean-indexing" class="nav-item nav-link">Boolean indexing</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#indexing-with-isin" class="nav-item nav-link">Indexing with isin</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#the-where-method-and-masking" class="nav-item nav-link">The </a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#mask" class="nav-item nav-link">Mask</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#the-query-method" class="nav-item nav-link">The </a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#multiindex-query-syntax" class="nav-item nav-link">MultiIndex</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#query-use-cases" class="nav-item nav-link">query()</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#query-python-versus-pandas-syntax-comparison" class="nav-item nav-link">query()</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#the-in-and-not-in-operators" class="nav-item nav-link">The </a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#special-use-of-the-operator-with-list-objects" class="nav-item nav-link">Special use of the </a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#boolean-operators" class="nav-item nav-link">Boolean Operators</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#performance-of-query" class="nav-item nav-link">Performance of </a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#duplicate-data" class="nav-item nav-link">Duplicate Data</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#dictionary-like-get-method" class="nav-item nav-link">Dictionary-like </a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#the-lookup-method" class="nav-item nav-link">The </a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#index-objects" class="nav-item nav-link">Index objects</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#setting-metadata" class="nav-item nav-link">Setting metadata</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#set-operations-on-index-objects" class="nav-item nav-link">Set operations on Index objects</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#missing-values" class="nav-item nav-link">Missing values</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#set-reset-index" class="nav-item nav-link">Set / Reset Index</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#set-an-index" class="nav-item nav-link">Set an index</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#reset-the-index" class="nav-item nav-link">Reset the index</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#adding-an-ad-hoc-index" class="nav-item nav-link">Adding an ad hoc index</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#returning-a-view-versus-a-copy" class="nav-item nav-link">Returning a view versus a copy</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#why-does-assignment-fail-when-using-chained-indexing" class="nav-item nav-link">Why does assignment fail when using chained indexing?</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#evaluation-order-matters" class="nav-item nav-link">Evaluation order matters</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+              
             </div>
-             
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body">
-                        
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
   <div class="section" id="indexing-and-selecting-data">
 <span id="indexing"></span><h1>Indexing and Selecting Data<a class="headerlink" href="#indexing-and-selecting-data" title="Permalink to this headline">¶</a></h1>
 <p>The axis labeling information in pandas objects serves many purposes:</p>
 <ul class="simple">
-<li>Identifies data (i.e. provides <em>metadata</em>) using known indicators,
-important for analysis, visualization, and interactive console display.</li>
-<li>Enables automatic and explicit data alignment.</li>
-<li>Allows intuitive getting and setting of subsets of the data set.</li>
+<li><p>Identifies data (i.e. provides <em>metadata</em>) using known indicators,
+important for analysis, visualization, and interactive console display.</p></li>
+<li><p>Enables automatic and explicit data alignment.</p></li>
+<li><p>Allows intuitive getting and setting of subsets of the data set.</p></li>
 </ul>
 <p>In this section, we will focus on the final point: namely, how to slice, dice,
 and generally get and set subsets of pandas objects. The primary focus will be
 on Series and DataFrame as they have received more development attention in
 this area.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The Python and NumPy indexing operators <code class="docutils literal notranslate"><span class="pre">[]</span></code> and attribute operator <code class="docutils literal notranslate"><span class="pre">.</span></code>
+<p class="admonition-title">Note</p>
+<p>The Python and NumPy indexing operators <code class="docutils literal notranslate"><span class="pre">[]</span></code> and attribute operator <code class="docutils literal notranslate"><span class="pre">.</span></code>
 provide quick and easy access to pandas data structures across a wide range
 of use cases. This makes interactive work intuitive, as there’s little new
 to learn if you already know how to deal with Python dictionaries and NumPy
@@ -146,14 +469,14 @@ production code, we recommended that you take advantage of the optimized
 pandas data access methods exposed in this chapter.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Whether a copy or a reference is returned for a setting operation, may
+<p class="admonition-title">Warning</p>
+<p>Whether a copy or a reference is returned for a setting operation, may
 depend on the context. This is sometimes called <code class="docutils literal notranslate"><span class="pre">chained</span> <span class="pre">assignment</span></code> and
 should be avoided. See <a class="reference internal" href="#indexing-view-versus-copy"><span class="std std-ref">Returning a View versus Copy</span></a>.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Indexing on an integer-based Index with floats has been clarified in 0.18.0, for a summary of the changes, see <a class="reference internal" href="../whatsnew/v0.18.0.html#whatsnew-0180-float-indexers"><span class="std std-ref">here</span></a>.</p>
+<p class="admonition-title">Warning</p>
+<p>Indexing on an integer-based Index with floats has been clarified in 0.18.0, for a summary of the changes, see <a class="reference internal" href="../whatsnew/v0.18.0.html#whatsnew-0180-float-indexers"><span class="std std-ref">here</span></a>.</p>
 </div>
 <p>See the <a class="reference internal" href="advanced.html#advanced"><span class="std std-ref">MultiIndex / Advanced Indexing</span></a> for <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> and more advanced indexing documentation.</p>
 <p>See the <a class="reference internal" href="cookbook.html#cookbook-selection"><span class="std std-ref">cookbook</span></a> for some advanced strategies.</p>
@@ -163,32 +486,28 @@ should be avoided. See <a class="reference internal" href="#indexing-view-versus
 support more explicit location based indexing. Pandas now supports three types
 of multi-axis indexing.</p>
 <ul>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.loc</span></code> is primarily label based, but may also be used with a boolean array. <code class="docutils literal notranslate"><span class="pre">.loc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> when the items are not found. Allowed inputs are:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">.loc</span></code> is primarily label based, but may also be used with a boolean array. <code class="docutils literal notranslate"><span class="pre">.loc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">KeyError</span></code> when the items are not found. Allowed inputs are:</p>
 <blockquote>
 <div><ul>
-<li><p class="first">A single label, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">'a'</span></code> (Note that <code class="docutils literal notranslate"><span class="pre">5</span></code> is interpreted as a
+<li><p>A single label, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">'a'</span></code> (Note that <code class="docutils literal notranslate"><span class="pre">5</span></code> is interpreted as a
 <em>label</em> of the index. This use is <strong>not</strong> an integer position along the
-index.).</p>
-</li>
-<li><p class="first">A list or array of labels <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code>.</p>
-</li>
-<li><p class="first">A slice object with labels <code class="docutils literal notranslate"><span class="pre">'a':'f'</span></code> (Note that contrary to usual python
+index.).</p></li>
+<li><p>A list or array of labels <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code>.</p></li>
+<li><p>A slice object with labels <code class="docutils literal notranslate"><span class="pre">'a':'f'</span></code> (Note that contrary to usual python
 slices, <strong>both</strong> the start and the stop are included, when present in the
-index! See <a class="reference internal" href="#indexing-slicing-with-labels"><span class="std std-ref">Slicing with labels</span></a>.).</p>
-</li>
-<li><p class="first">A boolean array</p>
-</li>
-<li><p class="first">A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and
+index! See <a class="reference internal" href="#indexing-slicing-with-labels"><span class="std std-ref">Slicing with labels</span></a>.).</p></li>
+<li><p>A boolean array</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and
 that returns valid output for indexing (one of the above).</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.1.</span></p>
+<p><span class="versionmodified added">New in version 0.18.1.</span></p>
 </div>
 </li>
 </ul>
 </div></blockquote>
 <p>See more at <a class="reference internal" href="#indexing-label"><span class="std std-ref">Selection by Label</span></a>.</p>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.iloc</span></code> is primarily integer position based (from <code class="docutils literal notranslate"><span class="pre">0</span></code> to
+<li><p><code class="docutils literal notranslate"><span class="pre">.iloc</span></code> is primarily integer position based (from <code class="docutils literal notranslate"><span class="pre">0</span></code> to
 <code class="docutils literal notranslate"><span class="pre">length-1</span></code> of the axis), but may also be used with a boolean
 array.  <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> will raise <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> if a requested
 indexer is out-of-bounds, except <em>slice</em> indexers which allow
@@ -196,18 +515,14 @@ out-of-bounds indexing.  (this conforms with Python/NumPy <em>slice</em>
 semantics).  Allowed inputs are:</p>
 <blockquote>
 <div><ul>
-<li><p class="first">An integer e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p>
-</li>
-<li><p class="first">A list or array of integers <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code>.</p>
-</li>
-<li><p class="first">A slice object with ints <code class="docutils literal notranslate"><span class="pre">1:7</span></code>.</p>
-</li>
-<li><p class="first">A boolean array.</p>
-</li>
-<li><p class="first">A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and
+<li><p>An integer e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p>A list or array of integers <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code>.</p></li>
+<li><p>A slice object with ints <code class="docutils literal notranslate"><span class="pre">1:7</span></code>.</p></li>
+<li><p>A boolean array.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code> function with one argument (the calling Series or DataFrame) and
 that returns valid output for indexing (one of the above).</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.1.</span></p>
+<p><span class="versionmodified added">New in version 0.18.1.</span></p>
 </div>
 </li>
 </ul>
@@ -216,30 +531,29 @@ that returns valid output for indexing (one of the above).</p>
 <a class="reference internal" href="advanced.html#advanced"><span class="std std-ref">Advanced Indexing</span></a> and <a class="reference internal" href="advanced.html#advanced-advanced-hierarchical"><span class="std std-ref">Advanced
 Hierarchical</span></a>.</p>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>, and also <code class="docutils literal notranslate"><span class="pre">[]</span></code> indexing can accept a <code class="docutils literal notranslate"><span class="pre">callable</span></code> as indexer. See more at <a class="reference internal" href="#indexing-callable"><span class="std std-ref">Selection By Callable</span></a>.</p>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>, and also <code class="docutils literal notranslate"><span class="pre">[]</span></code> indexing can accept a <code class="docutils literal notranslate"><span class="pre">callable</span></code> as indexer. See more at <a class="reference internal" href="#indexing-callable"><span class="std std-ref">Selection By Callable</span></a>.</p></li>
 </ul>
 <p>Getting values from an object with multi-axes selection uses the following
 notation (using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> as an example, but the following applies to <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> as
 well). Any of the axes accessors may be the null slice <code class="docutils literal notranslate"><span class="pre">:</span></code>. Axes left out of
 the specification are assumed to be <code class="docutils literal notranslate"><span class="pre">:</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">p.loc['a']</span></code> is equivalent to
 <code class="docutils literal notranslate"><span class="pre">p.loc['a',</span> <span class="pre">:,</span> <span class="pre">:]</span></code>.</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="38%" />
-<col width="63%" />
+<col style="width: 38%" />
+<col style="width: 63%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Object Type</th>
-<th class="head">Indexers</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Object Type</p></th>
+<th class="head"><p>Indexers</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Series</td>
-<td><code class="docutils literal notranslate"><span class="pre">s.loc[indexer]</span></code></td>
+<tbody>
+<tr class="row-even"><td><p>Series</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">s.loc[indexer]</span></code></p></td>
 </tr>
-<tr class="row-odd"><td>DataFrame</td>
-<td><code class="docutils literal notranslate"><span class="pre">df.loc[row_indexer,column_indexer]</span></code></td>
+<tr class="row-odd"><td><p>DataFrame</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.loc[row_indexer,column_indexer]</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -250,26 +564,26 @@ the specification are assumed to be <code class="docutils literal notranslate"><
 for those familiar with implementing class behavior in Python) is selecting out
 lower-dimensional slices. The following table shows return type values when
 indexing pandas objects with <code class="docutils literal notranslate"><span class="pre">[]</span></code>:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="50%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Object Type</th>
-<th class="head">Selection</th>
-<th class="head">Return Value Type</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Object Type</p></th>
+<th class="head"><p>Selection</p></th>
+<th class="head"><p>Return Value Type</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>Series</td>
-<td><code class="docutils literal notranslate"><span class="pre">series[label]</span></code></td>
-<td>scalar value</td>
+<tbody>
+<tr class="row-even"><td><p>Series</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series[label]</span></code></p></td>
+<td><p>scalar value</p></td>
 </tr>
-<tr class="row-odd"><td>DataFrame</td>
-<td><code class="docutils literal notranslate"><span class="pre">frame[colname]</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">Series</span></code> corresponding to colname</td>
+<tr class="row-odd"><td><p>DataFrame</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">frame[colname]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Series</span></code> corresponding to colname</p></td>
 </tr>
 </tbody>
 </table>
@@ -285,8 +599,8 @@ indexing functionality:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">None of the indexing functionality is time series specific unless
+<p class="admonition-title">Note</p>
+<p>None of the indexing functionality is time series specific unless
 specifically stated.</p>
 </div>
 <p>Thus, as per above, we have the most basic indexing using <code class="docutils literal notranslate"><span class="pre">[]</span></code>:</p>
@@ -308,7 +622,7 @@ raised. Multiple columns can also be set in this manner:</p>
 <p>You may find this useful for applying a transform (in-place) to a subset of the
 columns.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>pandas aligns all AXES when setting <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> from <code class="docutils literal notranslate"><span class="pre">.loc</span></code>, and <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>.</p>
 <p>This will <strong>not</strong> modify <code class="docutils literal notranslate"><span class="pre">df</span></code> because the column alignment is before value assignment.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span>
@@ -319,7 +633,7 @@ columns.</p>
 </pre></div>
 </div>
 <p>The correct way to swap column values is by using raw values:</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 
 <span class="gp">In [21]: </span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span>
 </pre></div>
@@ -354,15 +668,15 @@ as an attribute:</p>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<ul class="last simple">
-<li>You can use this access only if the index element is a valid Python identifier, e.g. <code class="docutils literal notranslate"><span class="pre">s.1</span></code> is not allowed.
-See <a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#identifiers">here for an explanation of valid identifiers</a>.</li>
-<li>The attribute will not be available if it conflicts with an existing method name, e.g. <code class="docutils literal notranslate"><span class="pre">s.min</span></code> is not allowed.</li>
-<li>Similarly, the attribute will not be available if it conflicts with any of the following list: <code class="docutils literal notranslate"><span class="pre">index</span></code>,
-<code class="docutils literal notranslate"><span class="pre">major_axis</span></code>, <code class="docutils literal notranslate"><span class="pre">minor_axis</span></code>, <code class="docutils literal notranslate"><span class="pre">items</span></code>.</li>
-<li>In any of these cases, standard indexing will still work, e.g. <code class="docutils literal notranslate"><span class="pre">s['1']</span></code>, <code class="docutils literal notranslate"><span class="pre">s['min']</span></code>, and <code class="docutils literal notranslate"><span class="pre">s['index']</span></code> will
-access the corresponding element or column.</li>
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>You can use this access only if the index element is a valid Python identifier, e.g. <code class="docutils literal notranslate"><span class="pre">s.1</span></code> is not allowed.
+See <a class="reference external" href="https://docs.python.org/3/reference/lexical_analysis.html#identifiers">here for an explanation of valid identifiers</a>.</p></li>
+<li><p>The attribute will not be available if it conflicts with an existing method name, e.g. <code class="docutils literal notranslate"><span class="pre">s.min</span></code> is not allowed.</p></li>
+<li><p>Similarly, the attribute will not be available if it conflicts with any of the following list: <code class="docutils literal notranslate"><span class="pre">index</span></code>,
+<code class="docutils literal notranslate"><span class="pre">major_axis</span></code>, <code class="docutils literal notranslate"><span class="pre">minor_axis</span></code>, <code class="docutils literal notranslate"><span class="pre">items</span></code>.</p></li>
+<li><p>In any of these cases, standard indexing will still work, e.g. <code class="docutils literal notranslate"><span class="pre">s['1']</span></code>, <code class="docutils literal notranslate"><span class="pre">s['min']</span></code>, and <code class="docutils literal notranslate"><span class="pre">s['index']</span></code> will
+access the corresponding element or column.</p></li>
 </ul>
 </div>
 <p>If you are using the IPython environment, you may also use tab-completion to
@@ -423,16 +737,17 @@ largely as a convenience since it is such a common operation.</p>
 <div class="section" id="selection-by-label">
 <span id="indexing-label"></span><h2>Selection By Label<a class="headerlink" href="#selection-by-label" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Whether a copy or a reference is returned for a setting operation, may depend on the context.
+<p class="admonition-title">Warning</p>
+<p>Whether a copy or a reference is returned for a setting operation, may depend on the context.
 This is sometimes called <code class="docutils literal notranslate"><span class="pre">chained</span> <span class="pre">assignment</span></code> and should be avoided.
 See <a class="reference internal" href="#indexing-view-versus-copy"><span class="std std-ref">Returning a View versus Copy</span></a>.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <blockquote>
-<div><code class="docutils literal notranslate"><span class="pre">.loc</span></code> is strict when you present slicers that are not compatible (or convertible) with the index type. For example
-using integers in a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>. These will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</div></blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">.loc</span></code> is strict when you present slicers that are not compatible (or convertible) with the index type. For example
+using integers in a <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>. These will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div></blockquote>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="n">dfl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
@@ -446,13 +761,13 @@ using integers in a <code class="docutils literal notranslate"><span class="pre"
 </pre></div>
 </div>
 <p>String likes in slicing <em>can</em> be convertible to the type of the index and lead to natural slicing.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">dfl</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;20130102&#39;</span><span class="p">:</span><span class="s1">&#39;20130104&#39;</span><span class="p">]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">dfl</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;20130102&#39;</span><span class="p">:</span><span class="s1">&#39;20130104&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Starting in 0.21.0, pandas will show a <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> if indexing with a list with missing labels. In the future
+<p class="admonition-title">Warning</p>
+<p>Starting in 0.21.0, pandas will show a <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> if indexing with a list with missing labels. In the future
 this will raise a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>. See <a class="reference internal" href="#indexing-deprecate-loc-reindex-listlike"><span class="std std-ref">list-like Using loc with missing keys in a list is Deprecated</span></a>.</p>
 </div>
 <p>pandas provides a suite of methods in order to have <strong>purely label based indexing</strong>. This is a strict inclusion based protocol.
@@ -461,13 +776,13 @@ When slicing, both the start bound <strong>AND</strong> the stop bound are <em>i
 Integers are valid labels, but they refer to the label <strong>and not the position</strong>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">.loc</span></code> attribute is the primary access method. The following are valid inputs:</p>
 <ul class="simple">
-<li>A single label, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">'a'</span></code> (Note that <code class="docutils literal notranslate"><span class="pre">5</span></code> is interpreted as a <em>label</em> of the index. This use is <strong>not</strong> an integer position along the index.).</li>
-<li>A list or array of labels <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code>.</li>
-<li>A slice object with labels <code class="docutils literal notranslate"><span class="pre">'a':'f'</span></code> (Note that contrary to usual python
+<li><p>A single label, e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code> or <code class="docutils literal notranslate"><span class="pre">'a'</span></code> (Note that <code class="docutils literal notranslate"><span class="pre">5</span></code> is interpreted as a <em>label</em> of the index. This use is <strong>not</strong> an integer position along the index.).</p></li>
+<li><p>A list or array of labels <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></code>.</p></li>
+<li><p>A slice object with labels <code class="docutils literal notranslate"><span class="pre">'a':'f'</span></code> (Note that contrary to usual python
 slices, <strong>both</strong> the start and the stop are included, when present in the
-index! See <a class="reference internal" href="#indexing-slicing-with-labels"><span class="std std-ref">Slicing with labels</span></a>.).</li>
-<li>A boolean array.</li>
-<li>A <code class="docutils literal notranslate"><span class="pre">callable</span></code>, see <a class="reference internal" href="#indexing-callable"><span class="std std-ref">Selection By Callable</span></a>.</li>
+index! See <a class="reference internal" href="#indexing-slicing-with-labels"><span class="std std-ref">Slicing with labels</span></a>.).</p></li>
+<li><p>A boolean array.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code>, see <a class="reference internal" href="#indexing-callable"><span class="std std-ref">Selection By Callable</span></a>.</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcdef&#39;</span><span class="p">))</span>
 
@@ -541,19 +856,19 @@ above example, <code class="docutils literal notranslate"><span class="pre">s.lo
 <div class="section" id="selection-by-position">
 <span id="indexing-integer"></span><h2>Selection By Position<a class="headerlink" href="#selection-by-position" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Whether a copy or a reference is returned for a setting operation, may depend on the context.
+<p class="admonition-title">Warning</p>
+<p>Whether a copy or a reference is returned for a setting operation, may depend on the context.
 This is sometimes called <code class="docutils literal notranslate"><span class="pre">chained</span> <span class="pre">assignment</span></code> and should be avoided.
 See <a class="reference internal" href="#indexing-view-versus-copy"><span class="std std-ref">Returning a View versus Copy</span></a>.</p>
 </div>
 <p>Pandas provides a suite of methods in order to get <strong>purely integer based indexing</strong>. The semantics follow closely Python and NumPy slicing. These are <code class="docutils literal notranslate"><span class="pre">0-based</span></code> indexing. When slicing, the start bound is <em>included</em>, while the upper bound is <em>excluded</em>. Trying to use a non-integer, even a <strong>valid</strong> label will raise an <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">.iloc</span></code> attribute is the primary access method. The following are valid inputs:</p>
 <ul class="simple">
-<li>An integer e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code>.</li>
-<li>A list or array of integers <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code>.</li>
-<li>A slice object with ints <code class="docutils literal notranslate"><span class="pre">1:7</span></code>.</li>
-<li>A boolean array.</li>
-<li>A <code class="docutils literal notranslate"><span class="pre">callable</span></code>, see <a class="reference internal" href="#indexing-callable"><span class="std std-ref">Selection By Callable</span></a>.</li>
+<li><p>An integer e.g. <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p>A list or array of integers <code class="docutils literal notranslate"><span class="pre">[4,</span> <span class="pre">3,</span> <span class="pre">0]</span></code>.</p></li>
+<li><p>A slice object with ints <code class="docutils literal notranslate"><span class="pre">1:7</span></code>.</p></li>
+<li><p>A boolean array.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">callable</span></code>, see <a class="reference internal" href="#indexing-callable"><span class="std std-ref">Selection By Callable</span></a>.</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [64]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 
@@ -649,7 +964,7 @@ A list of indexers where any element is out of bounds will raise an
 <div class="section" id="selection-by-callable">
 <span id="indexing-callable"></span><h2>Selection By Callable<a class="headerlink" href="#selection-by-callable" title="Permalink to this headline">¶</a></h2>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.1.</span></p>
+<p><span class="versionmodified added">New in version 0.18.1.</span></p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>, and also <code class="docutils literal notranslate"><span class="pre">[]</span></code> indexing can accept a <code class="docutils literal notranslate"><span class="pre">callable</span></code> as indexer.
 The <code class="docutils literal notranslate"><span class="pre">callable</span></code> must be a function with one argument (the calling Series or DataFrame) that returns valid output for indexing.</p>
@@ -686,8 +1001,8 @@ without using a temporary variable.</p>
 <div class="section" id="ix-indexer-is-deprecated">
 <span id="indexing-deprecate-ix"></span><h2>IX Indexer is Deprecated<a class="headerlink" href="#ix-indexer-is-deprecated" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Starting in 0.20.0, the <code class="docutils literal notranslate"><span class="pre">.ix</span></code> indexer is deprecated, in favor of the more strict <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>
+<p class="admonition-title">Warning</p>
+<p>Starting in 0.20.0, the <code class="docutils literal notranslate"><span class="pre">.ix</span></code> indexer is deprecated, in favor of the more strict <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>
 and <code class="docutils literal notranslate"><span class="pre">.loc</span></code> indexers.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">.ix</span></code> offers a lot of magic on the inference of what the user wants to do. To wit, <code class="docutils literal notranslate"><span class="pre">.ix</span></code> can decide
@@ -695,8 +1010,8 @@ to index <em>positionally</em> OR via <em>labels</em> depending on the data type
 bit of user confusion over the years.</p>
 <p>The recommended methods of indexing are:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">.loc</span></code> if you want to <em>label</em> index.</li>
-<li><code class="docutils literal notranslate"><span class="pre">.iloc</span></code> if you want to <em>positionally</em> index.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.loc</span></code> if you want to <em>label</em> index.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.iloc</span></code> if you want to <em>positionally</em> index.</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [101]: </span><span class="n">dfd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
 <span class="gp">   .....: </span>                    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]},</span>
@@ -731,8 +1046,8 @@ bit of user confusion over the years.</p>
 <div class="section" id="indexing-with-list-with-missing-labels-is-deprecated">
 <span id="indexing-deprecate-loc-reindex-listlike"></span><span id="deprecate-loc-reindex-listlike"></span><h2>Indexing with list with missing labels is Deprecated<a class="headerlink" href="#indexing-with-list-with-missing-labels-is-deprecated" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Starting in 0.21.0, using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> or <code class="docutils literal notranslate"><span class="pre">[]</span></code> with a list with one or more missing labels, is deprecated, in favor of <code class="docutils literal notranslate"><span class="pre">.reindex</span></code>.</p>
+<p class="admonition-title">Warning</p>
+<p>Starting in 0.21.0, using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> or <code class="docutils literal notranslate"><span class="pre">[]</span></code> with a list with one or more missing labels, is deprecated, in favor of <code class="docutils literal notranslate"><span class="pre">.reindex</span></code>.</p>
 </div>
 <p>In prior versions, using <code class="docutils literal notranslate"><span class="pre">.loc[list-of-labels]</span></code> would work as long as <em>at least 1</em> of the keys was found (otherwise it
 would raise a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>). This behavior is deprecated and will show a warning message pointing to this section. The
@@ -1102,10 +1417,10 @@ without creating a copy:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The signature for <a class="reference internal" href="../reference/api/pandas.DataFrame.where.html#pandas.DataFrame.where" title="pandas.DataFrame.where"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.where()</span></code></a> differs from <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html#numpy.where" title="(in NumPy v1.16)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.where()</span></code></a>.
+<p class="admonition-title">Note</p>
+<p>The signature for <a class="reference internal" href="../reference/api/pandas.DataFrame.where.html#pandas.DataFrame.where" title="pandas.DataFrame.where"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.where()</span></code></a> differs from <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html#numpy.where" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.where()</span></code></a>.
 Roughly <code class="docutils literal notranslate"><span class="pre">df1.where(m,</span> <span class="pre">df2)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">np.where(m,</span> <span class="pre">df1,</span> <span class="pre">df2)</span></code>.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [196]: </span><span class="n">df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">-</span><span class="n">df</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [196]: </span><span class="n">df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">-</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1134,7 +1449,7 @@ performing the <code class="docutils literal notranslate"><span class="pre">wher
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.1.</span></p>
+<p><span class="versionmodified added">New in version 0.18.1.</span></p>
 </div>
 <p>Where can accept a callable as condition and <code class="docutils literal notranslate"><span class="pre">other</span></code> arguments. The function must
 be with one argument (the calling Series or DataFrame) and that returns valid output
@@ -1197,7 +1512,7 @@ with the name <code class="docutils literal notranslate"><span class="pre">a</sp
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>If the name of your index overlaps with a column name, the column name is
 given precedence. For example,</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [220]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)})</span>
@@ -1212,7 +1527,7 @@ identifier ‘index’:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [223]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;index &gt; 2&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="last">If for some reason you have a column named <code class="docutils literal notranslate"><span class="pre">index</span></code>, then you can refer to
+<p>If for some reason you have a column named <code class="docutils literal notranslate"><span class="pre">index</span></code>, then you can refer to
 the index as <code class="docutils literal notranslate"><span class="pre">ilevel_0</span></code> as well, but at this point you should consider
 renaming your columns to something less ambiguous.</p>
 </div>
@@ -1331,7 +1646,7 @@ operators bind tighter than <code class="docutils literal notranslate"><span cla
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code> are evaluated in Python, since <code class="docutils literal notranslate"><span class="pre">numexpr</span></code>
 has no equivalent of this operation. However, <strong>only the</strong> <code class="docutils literal notranslate"><span class="pre">in</span></code>/<code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code>
 <strong>expression itself</strong> is evaluated in vanilla Python. For example, in the
@@ -1339,7 +1654,7 @@ expression</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;a in b + c + d&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">(b</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">+</span> <span class="pre">d)</span></code> is evaluated by <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> and <em>then</em> the <code class="docutils literal notranslate"><span class="pre">in</span></code>
+<p><code class="docutils literal notranslate"><span class="pre">(b</span> <span class="pre">+</span> <span class="pre">c</span> <span class="pre">+</span> <span class="pre">d)</span></code> is evaluated by <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> and <em>then</em> the <code class="docutils literal notranslate"><span class="pre">in</span></code>
 operation is evaluated in plain Python. In general, any operations that can
 be evaluated using <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> will be.</p>
 </div>
@@ -1402,11 +1717,11 @@ to <code class="docutils literal notranslate"><span class="pre">in</span></code>
 large frames.</p>
 <img alt="../_images/query-perf.png" src="../_images/query-perf.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>You will only see the performance benefits of using the <code class="docutils literal notranslate"><span class="pre">numexpr</span></code> engine
 with <code class="docutils literal notranslate"><span class="pre">DataFrame.query()</span></code> if your frame has more than approximately 200,000
 rows.</p>
-<blockquote class="last">
+<blockquote>
 <div><img alt="../_images/query-perf-small.png" src="../_images/query-perf-small.png" />
 </div></blockquote>
 </div>
@@ -1420,15 +1735,15 @@ floating point values generated using <code class="docutils literal notranslate"
 two methods that will help: <code class="docutils literal notranslate"><span class="pre">duplicated</span></code> and <code class="docutils literal notranslate"><span class="pre">drop_duplicates</span></code>. Each
 takes as an argument the columns to use to identify duplicated rows.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">duplicated</span></code> returns a boolean vector whose length is the number of rows, and which indicates whether a row is duplicated.</li>
-<li><code class="docutils literal notranslate"><span class="pre">drop_duplicates</span></code> removes duplicate rows.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">duplicated</span></code> returns a boolean vector whose length is the number of rows, and which indicates whether a row is duplicated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_duplicates</span></code> removes duplicate rows.</p></li>
 </ul>
 <p>By default, the first observed row of a duplicate set is considered unique, but
 each method has a <code class="docutils literal notranslate"><span class="pre">keep</span></code> parameter to specify targets to be kept.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">keep='first'</span></code> (default): mark / drop duplicates except for the first occurrence.</li>
-<li><code class="docutils literal notranslate"><span class="pre">keep='last'</span></code>: mark / drop duplicates except for the last occurrence.</li>
-<li><code class="docutils literal notranslate"><span class="pre">keep=False</span></code>: mark  / drop all duplicates.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep='first'</span></code> (default): mark / drop duplicates except for the first occurrence.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep='last'</span></code>: mark / drop duplicates except for the last occurrence.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keep=False</span></code>: mark  / drop all duplicates.</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [276]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="s1">&#39;four&#39;</span><span class="p">],</span>
 <span class="gp">   .....: </span>                    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">],</span>
@@ -1597,15 +1912,15 @@ with duplicates dropped.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The resulting index from a set operation will be sorted in ascending order.</p>
+<p class="admonition-title">Note</p>
+<p>The resulting index from a set operation will be sorted in ascending order.</p>
 </div>
 </div>
 <div class="section" id="missing-values">
 <h3>Missing values<a class="headerlink" href="#missing-values" title="Permalink to this headline">¶</a></h3>
 <div class="admonition important" id="indexing-missing">
-<p class="first admonition-title">Important</p>
-<p class="last">Even though <code class="docutils literal notranslate"><span class="pre">Index</span></code> can hold missing values (<code class="docutils literal notranslate"><span class="pre">NaN</span></code>), it should be avoided
+<p class="admonition-title">Important</p>
+<p>Even though <code class="docutils literal notranslate"><span class="pre">Index</span></code> can hold missing values (<code class="docutils literal notranslate"><span class="pre">NaN</span></code>), it should be avoided
 if you do not want any unexpected results. For example, some operations
 exclude missing values implicitly.</p>
 </div>
@@ -1755,8 +2070,8 @@ the <code class="docutils literal notranslate"><span class="pre">__setitem__</sp
 out immediately afterward. <strong>That’s</strong> what <code class="docutils literal notranslate"><span class="pre">SettingWithCopy</span></code> is warning you
 about!</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You may be wondering whether we should be concerned about the <code class="docutils literal notranslate"><span class="pre">loc</span></code>
+<p class="admonition-title">Note</p>
+<p>You may be wondering whether we should be concerned about the <code class="docutils literal notranslate"><span class="pre">loc</span></code>
 property in the first example. But <code class="docutils literal notranslate"><span class="pre">dfmi.loc</span></code> is guaranteed to be <code class="docutils literal notranslate"><span class="pre">dfmi</span></code>
 itself with modified indexing behavior, so <code class="docutils literal notranslate"><span class="pre">dfmi.loc.__getitem__</span></code> /
 <code class="docutils literal notranslate"><span class="pre">dfmi.loc.__setitem__</span></code> operate on <code class="docutils literal notranslate"><span class="pre">dfmi</span></code> directly. Of course,
@@ -1788,10 +2103,10 @@ returning a copy where a slice was expected.</p>
 chained indexing expression, you can set the <a class="reference internal" href="options.html#options"><span class="std std-ref">option</span></a>
 <code class="docutils literal notranslate"><span class="pre">mode.chained_assignment</span></code> to one of these values:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">'warn'</span></code>, the default, means a <code class="docutils literal notranslate"><span class="pre">SettingWithCopyWarning</span></code> is printed.</li>
-<li><code class="docutils literal notranslate"><span class="pre">'raise'</span></code> means pandas will raise a <code class="docutils literal notranslate"><span class="pre">SettingWithCopyException</span></code>
-you have to deal with.</li>
-<li><code class="docutils literal notranslate"><span class="pre">None</span></code> will suppress the warnings entirely.</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'warn'</span></code>, the default, means a <code class="docutils literal notranslate"><span class="pre">SettingWithCopyWarning</span></code> is printed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'raise'</span></code> means pandas will raise a <code class="docutils literal notranslate"><span class="pre">SettingWithCopyException</span></code>
+you have to deal with.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> will suppress the warnings entirely.</p></li>
 </ul>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [353]: </span><span class="n">dfb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span>
 <span class="gp">   .....: </span>                          <span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;six&#39;</span><span class="p">],</span>
@@ -1815,8 +2130,8 @@ you have to deal with.</li>
 </div>
 <p>A chained assignment can also crop up in setting in a mixed dtype frame.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">These setting rules apply to all of <code class="docutils literal notranslate"><span class="pre">.loc/.iloc</span></code>.</p>
+<p class="admonition-title">Note</p>
+<p>These setting rules apply to all of <code class="docutils literal notranslate"><span class="pre">.loc/.iloc</span></code>.</p>
 </div>
 <p>This is the correct access method:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [355]: </span><span class="n">dfc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]})</span>
@@ -1845,8 +2160,8 @@ you have to deal with.</li>
 </pre></div>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The chained assignment warnings / exceptions are aiming to inform the user of a possibly invalid
+<p class="admonition-title">Warning</p>
+<p>The chained assignment warnings / exceptions are aiming to inform the user of a possibly invalid
 assignment. There may be false positives; situations where a chained assignment is inadvertently
 reported.</p>
 </div>
@@ -1855,76 +2170,12 @@ reported.</p>
 </div>
 
 
-                    </div>
-                </div>
-            </div>
+              </div>
+          </main>
 
-            
-            <div class="clearer"></div>
-        </div>
+      </div>
     </div>
-</div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="advanced.html" title="MultiIndex / Advanced Indexing"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../reference/api/pandas.DataFrame.to_sql.html" title="pandas.DataFrame.to_sql"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &#187;</li> 
-      </ul>
-    </div>
-<style type="text/css">
-    .scrollToTop {
-        text-align: center;
-        font-weight: bold;
-        position: fixed;
-        bottom: 60px;
-        right: 40px;
-        display: none;
-    }
-</style>
-<a href="#" class="scrollToTop">Scroll To Top</a>
-<script type="text/javascript">
-$(document).ready(function() {
-    //Check to see if the window is top if not then display button
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 200) {
-            $('.scrollToTop').fadeIn();
-        } else {
-            $('.scrollToTop').fadeOut();
-        }
-    });
 
-    //Click event to scroll to top
-    $('.scrollToTop').click(function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
-});
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27880019-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
+    
   </body>
 </html>

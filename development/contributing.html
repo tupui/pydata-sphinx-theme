@@ -1,155 +1,418 @@
 
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="docsearch:language" content="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Contributing to pandas &#8212; pandas 0.24.2 documentation</title>
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pandas docstring guide" href="contributing_docstring.html" />
-    <link rel="prev" title="Development" href="index.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="contributing_docstring.html" title="pandas docstring guide"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Development"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Development</a> &#187;</li> 
-      </ul>
-    </div>
-<div class="content-wrapper">
-    <div class="content">
-        <div class="document">
-            <div class="sphinxsidebar">
-                <h3>Table Of Contents</h3>
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ecosystem.html">pandas Ecosystem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">API Reference</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Development</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Contributing to pandas</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#where-to-start">Where to start?</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#bug-reports-and-enhancement-requests">Bug reports and enhancement requests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#working-with-the-code">Working with the code</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#contributing-to-the-documentation">Contributing to the documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#contributing-to-the-code-base">Contributing to the code base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#contributing-your-changes-to-pandas">Contributing your changes to <em>pandas</em></a></li>
-</ul>
-</li>
+<title>Pandas documentation</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<link href="../_static/fontawesome-5.10.2/css/all.css", rel="stylesheet">
+<link href="../_static/css/custom.css" rel="stylesheet"> 
+
+  </head> 
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60"> 
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../reference/index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="active">
+                  <a href="">Contributing to pandas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="internals.html">Internals</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="extending.html">Extending Pandas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="developer.html">Developer</a>
+              </li>
+          
+        
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Contributing to pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="internals.html">Internals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extending.html">Extending Pandas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="developer.html">Developer</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a></li>
-</ul>
 
-                <h3 style="margin-top: 1.5em;">Search</h3>
+</div>
+-->
+</nav>
 
-                <form class="search" action="../search.html" method="get">
-                    <input type="text" name="q" size="18"/>
-                    <input type="submit" value="Go"/>
-                    <input type="hidden" name="check_keywords" value="yes"/>
-                    <input type="hidden" name="area" value="default"/>
-                </form>
-                <p class="searchtip" style="font-size: 90%">
-                    Enter search terms or a module, class or function name.
-                </p>
 
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav nav-tabs section-nav flex-column" role="tablist">
+    
+        <li class="toc-entry toc-h2">
+            <a href="#where-to-start" class="nav-item nav-link">Where to start?</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#bug-reports-and-enhancement-requests" class="nav-item nav-link">Bug reports and enhancement requests</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#working-with-the-code" class="nav-item nav-link">Working with the code</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#version-control-git-and-github" class="nav-item nav-link">Version control, Git, and GitHub</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#getting-started-with-git" class="nav-item nav-link">Getting started with Git</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#forking" class="nav-item nav-link">Forking</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#creating-a-development-environment" class="nav-item nav-link">Creating a development environment</a><ul>
+                
+        <li class="toc-entry toc-h4">
+            <a href="#installing-a-c-compiler" class="nav-item nav-link">Installing a C Compiler</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#creating-a-python-environment" class="nav-item nav-link">Creating a Python Environment</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#creating-a-python-environment-pip" class="nav-item nav-link">Creating a Python Environment (pip)</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#creating-a-branch" class="nav-item nav-link">Creating a branch</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#contributing-to-the-documentation" class="nav-item nav-link">Contributing to the documentation</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#about-the-pandas-documentation" class="nav-item nav-link">About the </a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#updating-a-pandas-docstring" class="nav-item nav-link">Updating a </a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#how-to-build-the-pandas-documentation" class="nav-item nav-link">How to build the </a><ul>
+                
+        <li class="toc-entry toc-h4">
+            <a href="#requirements" class="nav-item nav-link">Requirements</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#building-the-documentation" class="nav-item nav-link">Building the documentation</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#building-master-branch-documentation" class="nav-item nav-link">Building master branch documentation</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#contributing-to-the-code-base" class="nav-item nav-link">Contributing to the code base</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#code-standards" class="nav-item nav-link">Code standards</a><ul>
+                
+        <li class="toc-entry toc-h4">
+            <a href="#c-cpplint" class="nav-item nav-link">C (cpplint)</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#python-pep8" class="nav-item nav-link">Python (PEP8)</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#import-formatting" class="nav-item nav-link">Import Formatting</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#backwards-compatibility" class="nav-item nav-link">Backwards Compatibility</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#testing-with-continuous-integration" class="nav-item nav-link">Testing With Continuous Integration</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#test-driven-development-code-writing" class="nav-item nav-link">Test-driven development/code writing</a><ul>
+                
+        <li class="toc-entry toc-h4">
+            <a href="#writing-tests" class="nav-item nav-link">Writing tests</a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#transitioning-to-pytest" class="nav-item nav-link">Transitioning to </a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#using-pytest" class="nav-item nav-link">Using </a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#using-hypothesis" class="nav-item nav-link">Using </a>
+        </li>
+    
+        <li class="toc-entry toc-h4">
+            <a href="#testing-warnings" class="nav-item nav-link">Testing Warnings</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#running-the-test-suite" class="nav-item nav-link">Running the test suite</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#running-the-performance-test-suite" class="nav-item nav-link">Running the performance test suite</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#documenting-your-code" class="nav-item nav-link">Documenting your code</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#contributing-your-changes-to-pandas" class="nav-item nav-link">Contributing your changes to </a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#committing-your-code" class="nav-item nav-link">Committing your code</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#pushing-your-changes" class="nav-item nav-link">Pushing your changes</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#review-your-code" class="nav-item nav-link">Review your code</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#finally-make-the-pull-request" class="nav-item nav-link">Finally, make the pull request</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#updating-your-pull-request" class="nav-item nav-link">Updating your pull request</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#delete-your-merged-branch-optional" class="nav-item nav-link">Delete your merged branch (optional)</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+              
             </div>
-             
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body">
-                        
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
   <div class="section" id="contributing-to-pandas">
 <span id="contributing"></span><h1>Contributing to pandas<a class="headerlink" href="#contributing-to-pandas" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title first">Table of contents:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#where-to-start" id="id3">Where to start?</a></li>
-<li><a class="reference internal" href="#bug-reports-and-enhancement-requests" id="id4">Bug reports and enhancement requests</a></li>
-<li><a class="reference internal" href="#working-with-the-code" id="id5">Working with the code</a><ul>
-<li><a class="reference internal" href="#version-control-git-and-github" id="id6">Version control, Git, and GitHub</a></li>
-<li><a class="reference internal" href="#getting-started-with-git" id="id7">Getting started with Git</a></li>
-<li><a class="reference internal" href="#forking" id="id8">Forking</a></li>
-<li><a class="reference internal" href="#creating-a-development-environment" id="id9">Creating a development environment</a><ul>
-<li><a class="reference internal" href="#installing-a-c-compiler" id="id10">Installing a C Compiler</a></li>
-<li><a class="reference internal" href="#creating-a-python-environment" id="id11">Creating a Python Environment</a></li>
-<li><a class="reference internal" href="#creating-a-python-environment-pip" id="id12">Creating a Python Environment (pip)</a></li>
+<li><p><a class="reference internal" href="#where-to-start" id="id3">Where to start?</a></p></li>
+<li><p><a class="reference internal" href="#bug-reports-and-enhancement-requests" id="id4">Bug reports and enhancement requests</a></p></li>
+<li><p><a class="reference internal" href="#working-with-the-code" id="id5">Working with the code</a></p>
+<ul>
+<li><p><a class="reference internal" href="#version-control-git-and-github" id="id6">Version control, Git, and GitHub</a></p></li>
+<li><p><a class="reference internal" href="#getting-started-with-git" id="id7">Getting started with Git</a></p></li>
+<li><p><a class="reference internal" href="#forking" id="id8">Forking</a></p></li>
+<li><p><a class="reference internal" href="#creating-a-development-environment" id="id9">Creating a development environment</a></p>
+<ul>
+<li><p><a class="reference internal" href="#installing-a-c-compiler" id="id10">Installing a C Compiler</a></p></li>
+<li><p><a class="reference internal" href="#creating-a-python-environment" id="id11">Creating a Python Environment</a></p></li>
+<li><p><a class="reference internal" href="#creating-a-python-environment-pip" id="id12">Creating a Python Environment (pip)</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#creating-a-branch" id="id13">Creating a branch</a></li>
+<li><p><a class="reference internal" href="#creating-a-branch" id="id13">Creating a branch</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#contributing-to-the-documentation" id="id14">Contributing to the documentation</a><ul>
-<li><a class="reference internal" href="#about-the-pandas-documentation" id="id15">About the <em>pandas</em> documentation</a></li>
-<li><a class="reference internal" href="#updating-a-pandas-docstring" id="id16">Updating a <em>pandas</em> docstring</a></li>
-<li><a class="reference internal" href="#how-to-build-the-pandas-documentation" id="id17">How to build the <em>pandas</em> documentation</a><ul>
-<li><a class="reference internal" href="#requirements" id="id18">Requirements</a></li>
-<li><a class="reference internal" href="#building-the-documentation" id="id19">Building the documentation</a></li>
-<li><a class="reference internal" href="#building-master-branch-documentation" id="id20">Building master branch documentation</a></li>
+<li><p><a class="reference internal" href="#contributing-to-the-documentation" id="id14">Contributing to the documentation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#about-the-pandas-documentation" id="id15">About the <em>pandas</em> documentation</a></p></li>
+<li><p><a class="reference internal" href="#updating-a-pandas-docstring" id="id16">Updating a <em>pandas</em> docstring</a></p></li>
+<li><p><a class="reference internal" href="#how-to-build-the-pandas-documentation" id="id17">How to build the <em>pandas</em> documentation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#requirements" id="id18">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#building-the-documentation" id="id19">Building the documentation</a></p></li>
+<li><p><a class="reference internal" href="#building-master-branch-documentation" id="id20">Building master branch documentation</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#contributing-to-the-code-base" id="id21">Contributing to the code base</a><ul>
-<li><a class="reference internal" href="#code-standards" id="id22">Code standards</a><ul>
-<li><a class="reference internal" href="#c-cpplint" id="id23">C (cpplint)</a></li>
-<li><a class="reference internal" href="#python-pep8" id="id24">Python (PEP8)</a></li>
-<li><a class="reference internal" href="#import-formatting" id="id25">Import Formatting</a></li>
-<li><a class="reference internal" href="#backwards-compatibility" id="id26">Backwards Compatibility</a></li>
+<li><p><a class="reference internal" href="#contributing-to-the-code-base" id="id21">Contributing to the code base</a></p>
+<ul>
+<li><p><a class="reference internal" href="#code-standards" id="id22">Code standards</a></p>
+<ul>
+<li><p><a class="reference internal" href="#c-cpplint" id="id23">C (cpplint)</a></p></li>
+<li><p><a class="reference internal" href="#python-pep8" id="id24">Python (PEP8)</a></p></li>
+<li><p><a class="reference internal" href="#import-formatting" id="id25">Import Formatting</a></p></li>
+<li><p><a class="reference internal" href="#backwards-compatibility" id="id26">Backwards Compatibility</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#testing-with-continuous-integration" id="id27">Testing With Continuous Integration</a></li>
-<li><a class="reference internal" href="#test-driven-development-code-writing" id="id28">Test-driven development/code writing</a><ul>
-<li><a class="reference internal" href="#writing-tests" id="id29">Writing tests</a></li>
-<li><a class="reference internal" href="#transitioning-to-pytest" id="id30">Transitioning to <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
-<li><a class="reference internal" href="#using-pytest" id="id31">Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
-<li><a class="reference internal" href="#using-hypothesis" id="id32">Using <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a></li>
-<li><a class="reference internal" href="#testing-warnings" id="id33">Testing Warnings</a></li>
+<li><p><a class="reference internal" href="#testing-with-continuous-integration" id="id27">Testing With Continuous Integration</a></p></li>
+<li><p><a class="reference internal" href="#test-driven-development-code-writing" id="id28">Test-driven development/code writing</a></p>
+<ul>
+<li><p><a class="reference internal" href="#writing-tests" id="id29">Writing tests</a></p></li>
+<li><p><a class="reference internal" href="#transitioning-to-pytest" id="id30">Transitioning to <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></p></li>
+<li><p><a class="reference internal" href="#using-pytest" id="id31">Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></p></li>
+<li><p><a class="reference internal" href="#using-hypothesis" id="id32">Using <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a></p></li>
+<li><p><a class="reference internal" href="#testing-warnings" id="id33">Testing Warnings</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#running-the-test-suite" id="id34">Running the test suite</a></li>
-<li><a class="reference internal" href="#running-the-performance-test-suite" id="id35">Running the performance test suite</a></li>
-<li><a class="reference internal" href="#documenting-your-code" id="id36">Documenting your code</a></li>
+<li><p><a class="reference internal" href="#running-the-test-suite" id="id34">Running the test suite</a></p></li>
+<li><p><a class="reference internal" href="#running-the-performance-test-suite" id="id35">Running the performance test suite</a></p></li>
+<li><p><a class="reference internal" href="#documenting-your-code" id="id36">Documenting your code</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#contributing-your-changes-to-pandas" id="id37">Contributing your changes to <em>pandas</em></a><ul>
-<li><a class="reference internal" href="#committing-your-code" id="id38">Committing your code</a></li>
-<li><a class="reference internal" href="#pushing-your-changes" id="id39">Pushing your changes</a></li>
-<li><a class="reference internal" href="#review-your-code" id="id40">Review your code</a></li>
-<li><a class="reference internal" href="#finally-make-the-pull-request" id="id41">Finally, make the pull request</a></li>
-<li><a class="reference internal" href="#updating-your-pull-request" id="id42">Updating your pull request</a></li>
-<li><a class="reference internal" href="#delete-your-merged-branch-optional" id="id43">Delete your merged branch (optional)</a></li>
+<li><p><a class="reference internal" href="#contributing-your-changes-to-pandas" id="id37">Contributing your changes to <em>pandas</em></a></p>
+<ul>
+<li><p><a class="reference internal" href="#committing-your-code" id="id38">Committing your code</a></p></li>
+<li><p><a class="reference internal" href="#pushing-your-changes" id="id39">Pushing your changes</a></p></li>
+<li><p><a class="reference internal" href="#review-your-code" id="id40">Review your code</a></p></li>
+<li><p><a class="reference internal" href="#finally-make-the-pull-request" id="id41">Finally, make the pull request</a></p></li>
+<li><p><a class="reference internal" href="#updating-your-pull-request" id="id42">Updating your pull request</a></p></li>
+<li><p><a class="reference internal" href="#delete-your-merged-branch-optional" id="id43">Delete your merged branch (optional)</a></p></li>
 </ul>
 </li>
 </ul>
@@ -178,7 +441,7 @@ to confirm the bug still exists. It is also worth searching existing bug reports
 to see if the issue has already been reported and/or fixed.</p>
 <p>Bug reports must:</p>
 <ol class="arabic">
-<li><p class="first">Include a short, self-contained Python snippet reproducing the problem.
+<li><p>Include a short, self-contained Python snippet reproducing the problem.
 You can format the code nicely by using <a class="reference external" href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
 &gt;&gt;&gt; from pandas import DataFrame
@@ -188,14 +451,13 @@ You can format the code nicely by using <a class="reference external" href="http
 </pre></div>
 </div>
 </li>
-<li><p class="first">Include the full version string of <em>pandas</em> and its dependencies. You can use the built-in function:</p>
+<li><p>Include the full version string of <em>pandas</em> and its dependencies. You can use the built-in function:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">show_versions</span><span class="p">()</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Explain why the current behavior is wrong/not desired and what you expect instead.</p>
-</li>
+<li><p>Explain why the current behavior is wrong/not desired and what you expect instead.</p></li>
 </ol>
 <p>The issue will then show up to the <em>pandas</em> community and be open to comments/ideas from others.</p>
 </div>
@@ -214,9 +476,9 @@ contribute you will need to sign up for a <a class="reference external" href="ht
 version control to allow many people to work together on the project.</p>
 <p>Some great resources for learning Git:</p>
 <ul class="simple">
-<li>the <a class="reference external" href="http://help.github.com/">GitHub help pages</a>.</li>
-<li>the <a class="reference external" href="http://docs.scipy.org/doc/numpy/dev/index.html">NumPy’s documentation</a>.</li>
-<li>Matthew Brett’s <a class="reference external" href="http://matthew-brett.github.com/pydagogue/">Pydagogue</a>.</li>
+<li><p>the <a class="reference external" href="http://help.github.com/">GitHub help pages</a>.</p></li>
+<li><p>the <a class="reference external" href="http://docs.scipy.org/doc/numpy/dev/index.html">NumPy’s documentation</a>.</p></li>
+<li><p>Matthew Brett’s <a class="reference external" href="http://matthew-brett.github.com/pydagogue/">Pydagogue</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="getting-started-with-git">
@@ -257,12 +519,12 @@ install <a class="reference external" href="https://visualstudio.com/">Visual St
 <strong>Python development workload</strong> and the <strong>Python native development tools</strong>
 option. Otherwise, the following links may be helpful.</p>
 <ul class="simple">
-<li><a class="reference external" href="https://blogs.msdn.microsoft.com/pythonengineering/2017/03/07/python-support-in-vs2017/">https://blogs.msdn.microsoft.com/pythonengineering/2017/03/07/python-support-in-vs2017/</a></li>
-<li><a class="reference external" href="https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/">https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/</a></li>
-<li><a class="reference external" href="https://github.com/conda/conda-recipes/wiki/Building-from-Source-on-Windows-32-bit-and-64-bit">https://github.com/conda/conda-recipes/wiki/Building-from-Source-on-Windows-32-bit-and-64-bit</a></li>
-<li><a class="reference external" href="https://cowboyprogrammer.org/building-python-wheels-for-windows/">https://cowboyprogrammer.org/building-python-wheels-for-windows/</a></li>
-<li><a class="reference external" href="https://blog.ionelmc.ro/2014/12/21/compiling-python-extensions-on-windows/">https://blog.ionelmc.ro/2014/12/21/compiling-python-extensions-on-windows/</a></li>
-<li><a class="reference external" href="https://support.enthought.com/hc/en-us/articles/204469260-Building-Python-extensions-with-Canopy">https://support.enthought.com/hc/en-us/articles/204469260-Building-Python-extensions-with-Canopy</a></li>
+<li><p><a class="reference external" href="https://blogs.msdn.microsoft.com/pythonengineering/2017/03/07/python-support-in-vs2017/">https://blogs.msdn.microsoft.com/pythonengineering/2017/03/07/python-support-in-vs2017/</a></p></li>
+<li><p><a class="reference external" href="https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/">https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/</a></p></li>
+<li><p><a class="reference external" href="https://github.com/conda/conda-recipes/wiki/Building-from-Source-on-Windows-32-bit-and-64-bit">https://github.com/conda/conda-recipes/wiki/Building-from-Source-on-Windows-32-bit-and-64-bit</a></p></li>
+<li><p><a class="reference external" href="https://cowboyprogrammer.org/building-python-wheels-for-windows/">https://cowboyprogrammer.org/building-python-wheels-for-windows/</a></p></li>
+<li><p><a class="reference external" href="https://blog.ionelmc.ro/2014/12/21/compiling-python-extensions-on-windows/">https://blog.ionelmc.ro/2014/12/21/compiling-python-extensions-on-windows/</a></p></li>
+<li><p><a class="reference external" href="https://support.enthought.com/hc/en-us/articles/204469260-Building-Python-extensions-with-Canopy">https://support.enthought.com/hc/en-us/articles/204469260-Building-Python-extensions-with-Canopy</a></p></li>
 </ul>
 <p>Let us know if you have any difficulties by opening an issue or reaching out on
 <a class="reference external" href="https://gitter.im/pydata/pandas">Gitter</a>.</p>
@@ -272,16 +534,16 @@ option. Otherwise, the following links may be helpful.</p>
 <p>Now that you have a C compiler, create an isolated pandas development
 environment:</p>
 <ul class="simple">
-<li>Install either <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a> or <a class="reference external" href="https://conda.io/miniconda.html">miniconda</a></li>
-<li>Make sure your conda is up to date (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">conda</span></code>)</li>
-<li>Make sure that you have <a class="reference internal" href="#contributing-forking"><span class="std std-ref">cloned the repository</span></a></li>
-<li><code class="docutils literal notranslate"><span class="pre">cd</span></code> to the <em>pandas</em> source directory</li>
+<li><p>Install either <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a> or <a class="reference external" href="https://conda.io/miniconda.html">miniconda</a></p></li>
+<li><p>Make sure your conda is up to date (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">conda</span></code>)</p></li>
+<li><p>Make sure that you have <a class="reference internal" href="#contributing-forking"><span class="std std-ref">cloned the repository</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span></code> to the <em>pandas</em> source directory</p></li>
 </ul>
 <p>We’ll now kick off a three-step process:</p>
 <ol class="arabic simple">
-<li>Install the build dependencies</li>
-<li>Build and install pandas</li>
-<li>Install the optional dependencies</li>
+<li><p>Install the build dependencies</p></li>
+<li><p>Build and install pandas</p></li>
+<li><p>Install the optional dependencies</p></li>
 </ol>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Create and activate the build environment
 conda env create -f environment.yml
@@ -376,12 +638,13 @@ the next person.</p>
 <div class="contents local topic" id="documentation">
 <p class="topic-title first">Documentation:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#about-the-pandas-documentation" id="id44">About the <em>pandas</em> documentation</a></li>
-<li><a class="reference internal" href="#updating-a-pandas-docstring" id="id45">Updating a <em>pandas</em> docstring</a></li>
-<li><a class="reference internal" href="#how-to-build-the-pandas-documentation" id="id46">How to build the <em>pandas</em> documentation</a><ul>
-<li><a class="reference internal" href="#requirements" id="id47">Requirements</a></li>
-<li><a class="reference internal" href="#building-the-documentation" id="id48">Building the documentation</a></li>
-<li><a class="reference internal" href="#building-master-branch-documentation" id="id49">Building master branch documentation</a></li>
+<li><p><a class="reference internal" href="#about-the-pandas-documentation" id="id44">About the <em>pandas</em> documentation</a></p></li>
+<li><p><a class="reference internal" href="#updating-a-pandas-docstring" id="id45">Updating a <em>pandas</em> docstring</a></p></li>
+<li><p><a class="reference internal" href="#how-to-build-the-pandas-documentation" id="id46">How to build the <em>pandas</em> documentation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#requirements" id="id47">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#building-the-documentation" id="id48">Building the documentation</a></p></li>
+<li><p><a class="reference internal" href="#building-master-branch-documentation" id="id49">Building master branch documentation</a></p></li>
 </ul>
 </li>
 </ul>
@@ -394,14 +657,14 @@ Sphinx Documentation has an excellent <a class="reference external" href="http:/
 complex changes to the documentation as well.</p>
 <p>Some other important things to know about the docs:</p>
 <ul>
-<li><p class="first">The <em>pandas</em> documentation consists of two parts: the docstrings in the code
+<li><p>The <em>pandas</em> documentation consists of two parts: the docstrings in the code
 itself and the docs in this folder <code class="docutils literal notranslate"><span class="pre">pandas/doc/</span></code>.</p>
 <p>The docstrings provide a clear explanation of the usage of the individual
 functions, while the documentation in this folder consists of tutorial-like
 overviews per topic together with some other information (what’s new,
 installation, etc).</p>
 </li>
-<li><p class="first">The docstrings follow a pandas convention, based on the <strong>Numpy Docstring
+<li><p>The docstrings follow a pandas convention, based on the <strong>Numpy Docstring
 Standard</strong>. Follow the <a class="reference internal" href="contributing_docstring.html#docstring"><span class="std std-ref">pandas docstring guide</span></a> for detailed
 instructions on how to write a correct docstring.</p>
 <div class="toctree-wrapper compound">
@@ -415,7 +678,7 @@ instructions on how to write a correct docstring.</p>
 </ul>
 </div>
 </li>
-<li><p class="first">The tutorials make heavy use of the <a class="reference external" href="http://matplotlib.org/sampledoc/ipython_directive.html">ipython directive</a> sphinx extension.
+<li><p>The tutorials make heavy use of the <a class="reference external" href="http://matplotlib.org/sampledoc/ipython_directive.html">ipython directive</a> sphinx extension.
 This directive lets you put code in the documentation which will be run
 during the doc build. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">ipython</span><span class="p">::</span> <span class="n">python</span>
@@ -435,34 +698,34 @@ during the doc build. For example:</p>
 doc build. This approach means that code examples will always be up to date,
 but it does make the doc building a bit more complex.</p>
 </li>
-<li><p class="first">Our API documentation in <code class="docutils literal notranslate"><span class="pre">doc/source/api.rst</span></code> houses the auto-generated
+<li><p>Our API documentation in <code class="docutils literal notranslate"><span class="pre">doc/source/api.rst</span></code> houses the auto-generated
 documentation from the docstrings. For classes, there are a few subtleties
 around controlling which methods and attributes have pages auto-generated.</p>
 <p>We have two autosummary templates for classes.</p>
 <ol class="arabic simple">
-<li><code class="docutils literal notranslate"><span class="pre">_templates/autosummary/class.rst</span></code>. Use this when you want to
+<li><p><code class="docutils literal notranslate"><span class="pre">_templates/autosummary/class.rst</span></code>. Use this when you want to
 automatically generate a page for every public method and attribute on the
 class. The <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> and <code class="docutils literal notranslate"><span class="pre">Methods</span></code> sections will be automatically
 added to the class’ rendered documentation by numpydoc. See <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>
-for an example.</li>
-<li><code class="docutils literal notranslate"><span class="pre">_templates/autosummary/class_without_autosummary</span></code>. Use this when you
+for an example.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_templates/autosummary/class_without_autosummary</span></code>. Use this when you
 want to pick a subset of methods / attributes to auto-generate pages for.
 When using this template, you should include an <code class="docutils literal notranslate"><span class="pre">Attributes</span></code> and
 <code class="docutils literal notranslate"><span class="pre">Methods</span></code> section in the class docstring. See <code class="docutils literal notranslate"><span class="pre">CategoricalIndex</span></code> for an
-example.</li>
+example.</p></li>
 </ol>
 <p>Every method should be included in a <code class="docutils literal notranslate"><span class="pre">toctree</span></code> in <code class="docutils literal notranslate"><span class="pre">api.rst</span></code>, else Sphinx
 will emit a warning.</p>
 </li>
 </ul>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files are used to automatically generate Markdown and HTML versions
 of the docs. For this reason, please do not edit <code class="docutils literal notranslate"><span class="pre">CONTRIBUTING.md</span></code> directly,
 but instead make any changes to <code class="docutils literal notranslate"><span class="pre">doc/source/contributing.rst</span></code>. Then, to
 generate <code class="docutils literal notranslate"><span class="pre">CONTRIBUTING.md</span></code>, use <a class="reference external" href="http://johnmacfarlane.net/pandoc/">pandoc</a>
 with the following command:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pandoc</span> <span class="n">doc</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">contributing</span><span class="o">.</span><span class="n">rst</span> <span class="o">-</span><span class="n">t</span> <span class="n">markdown_github</span> <span class="o">&gt;</span> <span class="n">CONTRIBUTING</span><span class="o">.</span><span class="n">md</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pandoc</span> <span class="n">doc</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">contributing</span><span class="o">.</span><span class="n">rst</span> <span class="o">-</span><span class="n">t</span> <span class="n">markdown_github</span> <span class="o">&gt;</span> <span class="n">CONTRIBUTING</span><span class="o">.</span><span class="n">md</span>
 </pre></div>
 </div>
 </div>
@@ -562,25 +825,27 @@ the <a class="reference internal" href="#contributing-ci"><span class="std std-r
 <div class="contents local topic" id="code-base">
 <p class="topic-title first">Code Base:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#code-standards" id="id50">Code standards</a><ul>
-<li><a class="reference internal" href="#c-cpplint" id="id51">C (cpplint)</a></li>
-<li><a class="reference internal" href="#python-pep8" id="id52">Python (PEP8)</a></li>
-<li><a class="reference internal" href="#import-formatting" id="id53">Import Formatting</a></li>
-<li><a class="reference internal" href="#backwards-compatibility" id="id54">Backwards Compatibility</a></li>
+<li><p><a class="reference internal" href="#code-standards" id="id50">Code standards</a></p>
+<ul>
+<li><p><a class="reference internal" href="#c-cpplint" id="id51">C (cpplint)</a></p></li>
+<li><p><a class="reference internal" href="#python-pep8" id="id52">Python (PEP8)</a></p></li>
+<li><p><a class="reference internal" href="#import-formatting" id="id53">Import Formatting</a></p></li>
+<li><p><a class="reference internal" href="#backwards-compatibility" id="id54">Backwards Compatibility</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#testing-with-continuous-integration" id="id55">Testing With Continuous Integration</a></li>
-<li><a class="reference internal" href="#test-driven-development-code-writing" id="id56">Test-driven development/code writing</a><ul>
-<li><a class="reference internal" href="#writing-tests" id="id57">Writing tests</a></li>
-<li><a class="reference internal" href="#transitioning-to-pytest" id="id58">Transitioning to <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
-<li><a class="reference internal" href="#using-pytest" id="id59">Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></li>
-<li><a class="reference internal" href="#using-hypothesis" id="id60">Using <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a></li>
-<li><a class="reference internal" href="#testing-warnings" id="id61">Testing Warnings</a></li>
+<li><p><a class="reference internal" href="#testing-with-continuous-integration" id="id55">Testing With Continuous Integration</a></p></li>
+<li><p><a class="reference internal" href="#test-driven-development-code-writing" id="id56">Test-driven development/code writing</a></p>
+<ul>
+<li><p><a class="reference internal" href="#writing-tests" id="id57">Writing tests</a></p></li>
+<li><p><a class="reference internal" href="#transitioning-to-pytest" id="id58">Transitioning to <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></p></li>
+<li><p><a class="reference internal" href="#using-pytest" id="id59">Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a></p></li>
+<li><p><a class="reference internal" href="#using-hypothesis" id="id60">Using <code class="docutils literal notranslate"><span class="pre">hypothesis</span></code></a></p></li>
+<li><p><a class="reference internal" href="#testing-warnings" id="id61">Testing Warnings</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#running-the-test-suite" id="id62">Running the test suite</a></li>
-<li><a class="reference internal" href="#running-the-performance-test-suite" id="id63">Running the performance test suite</a></li>
-<li><a class="reference internal" href="#documenting-your-code" id="id64">Documenting your code</a></li>
+<li><p><a class="reference internal" href="#running-the-test-suite" id="id62">Running the test suite</a></p></li>
+<li><p><a class="reference internal" href="#running-the-performance-test-suite" id="id63">Running the performance test suite</a></p></li>
+<li><p><a class="reference internal" href="#documenting-your-code" id="id64">Documenting your code</a></p></li>
 </ul>
 </div>
 <div class="section" id="code-standards">
@@ -613,8 +878,8 @@ standard. Google provides an open source style checker called <code class="docut
 use a fork of it that can be found <a class="reference external" href="https://github.com/cpplint/cpplint">here</a>.
 Here are <em>some</em> of the more common <code class="docutils literal notranslate"><span class="pre">cpplint</span></code> issues:</p>
 <ul class="simple">
-<li>we restrict line-length to 80 characters to promote readability</li>
-<li>every header file must include a header guard to avoid name collisions if re-included</li>
+<li><p>we restrict line-length to 80 characters to promote readability</p></li>
+<li><p>every header file must include a header guard to avoid name collisions if re-included</p></li>
 </ul>
 <p><a class="reference internal" href="#contributing-ci"><span class="std std-ref">Continuous Integration</span></a> will run the
 <a class="reference external" href="https://pypi.org/project/cpplint">cpplint</a> tool
@@ -660,8 +925,8 @@ fixes manually.</p>
 There are several tools to ensure you abide by this standard. Here are <em>some</em> of
 the more common <code class="docutils literal notranslate"><span class="pre">PEP8</span></code> issues:</p>
 <ul class="simple">
-<li>we restrict line-length to 79 characters to promote readability</li>
-<li>passing arguments should have spaces after commas, e.g. <code class="docutils literal notranslate"><span class="pre">foo(arg1,</span> <span class="pre">arg2,</span> <span class="pre">kw1='bar')</span></code></li>
+<li><p>we restrict line-length to 79 characters to promote readability</p></li>
+<li><p>passing arguments should have spaces after commas, e.g. <code class="docutils literal notranslate"><span class="pre">foo(arg1,</span> <span class="pre">arg2,</span> <span class="pre">kw1='bar')</span></code></p></li>
 </ul>
 <p><a class="reference internal" href="#contributing-ci"><span class="std std-ref">Continuous Integration</span></a> will run
 the <a class="reference external" href="https://pypi.org/project/flake8">flake8</a> tool
@@ -700,14 +965,14 @@ formatting across the codebase.</p>
 <p>A guide to import layout as per pep8 can be found <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#imports/">here</a>.</p>
 <p>A summary of our current import sections ( in order ):</p>
 <ul class="simple">
-<li>Future</li>
-<li>Python Standard Library</li>
-<li>Third Party</li>
-<li><code class="docutils literal notranslate"><span class="pre">pandas._libs</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.compat</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.util._*</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.errors</span></code> (largely not dependent on <code class="docutils literal notranslate"><span class="pre">pandas.core</span></code>)</li>
-<li><code class="docutils literal notranslate"><span class="pre">pandas.core.dtypes</span></code> (largely not dependent on the rest of <code class="docutils literal notranslate"><span class="pre">pandas.core</span></code>)</li>
-<li>Rest of <code class="docutils literal notranslate"><span class="pre">pandas.core.*</span></code></li>
-<li>Non-core <code class="docutils literal notranslate"><span class="pre">pandas.io</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.tseries</span></code></li>
-<li>Local application/library specific imports</li>
+<li><p>Future</p></li>
+<li><p>Python Standard Library</p></li>
+<li><p>Third Party</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas._libs</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.compat</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.util._*</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.errors</span></code> (largely not dependent on <code class="docutils literal notranslate"><span class="pre">pandas.core</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas.core.dtypes</span></code> (largely not dependent on the rest of <code class="docutils literal notranslate"><span class="pre">pandas.core</span></code>)</p></li>
+<li><p>Rest of <code class="docutils literal notranslate"><span class="pre">pandas.core.*</span></code></p></li>
+<li><p>Non-core <code class="docutils literal notranslate"><span class="pre">pandas.io</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.plotting</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.tseries</span></code></p></li>
+<li><p>Local application/library specific imports</p></li>
 </ul>
 <p>Imports are alphabetically sorted within these sections.</p>
 <p>As part of <a class="reference internal" href="#contributing-ci"><span class="std std-ref">Continuous Integration</span></a> checks we run:</p>
@@ -764,8 +1029,8 @@ the <code class="docutils literal notranslate"><span class="pre">pandas.util._de
 </div>
 <p>You’ll also need to</p>
 <ol class="arabic simple">
-<li>Write a new test that asserts a warning is issued when calling with the deprecated argument</li>
-<li>Update all of pandas existing tests and code to use the new argument</li>
+<li><p>Write a new test that asserts a warning is issued when calling with the deprecated argument</p></li>
+<li><p>Update all of pandas existing tests and code to use the new argument</p></li>
 </ol>
 <p>See <a class="reference internal" href="#contributing-warnings"><span class="std std-ref">Testing Warnings</span></a> for more.</p>
 </div>
@@ -784,8 +1049,8 @@ then you will get a red ‘X’, where you can click through to see the individu
 This is an example of a green build.</p>
 <img alt="../_images/ci.png" src="../_images/ci.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Each time you push to <em>your</em> fork, a <em>new</em> run of the tests will be triggered on the CI.
+<p class="admonition-title">Note</p>
+<p>Each time you push to <em>your</em> fork, a <em>new</em> run of the tests will be triggered on the CI.
 You can enable the auto-cancel feature, which removes any non-currently-running tests for that same pull-request, for
 <a class="reference external" href="https://docs.travis-ci.com/user/customizing-the-build/#Building-only-the-latest-commit">Travis-CI here</a>.</p>
 </div>
@@ -805,8 +1070,8 @@ it is worth getting in the habit of writing tests ahead of time so this is never
 <p>Like many packages, <em>pandas</em> uses <a class="reference external" href="http://docs.pytest.org/en/latest/">pytest</a> and the convenient
 extensions in <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/routines.testing.html">numpy.testing</a>.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The earliest supported pytest version is 4.0.2.</p>
+<p class="admonition-title">Note</p>
+<p>The earliest supported pytest version is 4.0.2.</p>
 </div>
 <div class="section" id="writing-tests">
 <h4><a class="toc-backref" href="#id57">Writing tests</a><a class="headerlink" href="#writing-tests" title="Permalink to this headline">¶</a></h4>
@@ -856,14 +1121,14 @@ framework that will facilitate testing and developing. Thus, instead of writing 
 <h4><a class="toc-backref" href="#id59">Using <code class="docutils literal notranslate"><span class="pre">pytest</span></code></a><a class="headerlink" href="#using-pytest" title="Permalink to this headline">¶</a></h4>
 <p>Here is an example of a self-contained set of tests that illustrate multiple features that we like to use.</p>
 <ul class="simple">
-<li>functional style: tests are like <code class="docutils literal notranslate"><span class="pre">test_*</span></code> and <em>only</em> take arguments that are either fixtures or parameters</li>
-<li><code class="docutils literal notranslate"><span class="pre">pytest.mark</span></code> can be used to set metadata on test functions, e.g. <code class="docutils literal notranslate"><span class="pre">skip</span></code> or <code class="docutils literal notranslate"><span class="pre">xfail</span></code>.</li>
-<li>using <code class="docutils literal notranslate"><span class="pre">parametrize</span></code>: allow testing of multiple cases</li>
-<li>to set a mark on a parameter, <code class="docutils literal notranslate"><span class="pre">pytest.param(...,</span> <span class="pre">marks=...)</span></code> syntax should be used</li>
-<li><code class="docutils literal notranslate"><span class="pre">fixture</span></code>, code for object construction, on a per-test basis</li>
-<li>using bare <code class="docutils literal notranslate"><span class="pre">assert</span></code> for scalars and truth-testing</li>
-<li><code class="docutils literal notranslate"><span class="pre">tm.assert_series_equal</span></code> (and its counter part <code class="docutils literal notranslate"><span class="pre">tm.assert_frame_equal</span></code>), for pandas object comparisons.</li>
-<li>the typical pattern of constructing an <code class="docutils literal notranslate"><span class="pre">expected</span></code> and comparing versus the <code class="docutils literal notranslate"><span class="pre">result</span></code></li>
+<li><p>functional style: tests are like <code class="docutils literal notranslate"><span class="pre">test_*</span></code> and <em>only</em> take arguments that are either fixtures or parameters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pytest.mark</span></code> can be used to set metadata on test functions, e.g. <code class="docutils literal notranslate"><span class="pre">skip</span></code> or <code class="docutils literal notranslate"><span class="pre">xfail</span></code>.</p></li>
+<li><p>using <code class="docutils literal notranslate"><span class="pre">parametrize</span></code>: allow testing of multiple cases</p></li>
+<li><p>to set a mark on a parameter, <code class="docutils literal notranslate"><span class="pre">pytest.param(...,</span> <span class="pre">marks=...)</span></code> syntax should be used</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fixture</span></code>, code for object construction, on a per-test basis</p></li>
+<li><p>using bare <code class="docutils literal notranslate"><span class="pre">assert</span></code> for scalars and truth-testing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tm.assert_series_equal</span></code> (and its counter part <code class="docutils literal notranslate"><span class="pre">tm.assert_frame_equal</span></code>), for pandas object comparisons.</p></li>
+<li><p>the typical pattern of constructing an <code class="docutils literal notranslate"><span class="pre">expected</span></code> and comparing versus the <code class="docutils literal notranslate"><span class="pre">result</span></code></p></li>
 </ul>
 <p>We would name this file <code class="docutils literal notranslate"><span class="pre">test_cool_feature.py</span></code> and put in an appropriate place in the <code class="docutils literal notranslate"><span class="pre">pandas/tests/</span></code> structure.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
@@ -1047,7 +1312,7 @@ submitting a pull request.</p>
 <p>For more, see the <a class="reference external" href="http://docs.pytest.org/en/latest/">pytest</a> documentation.</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 </div></blockquote>
 <p>Furthermore one can run</p>
@@ -1164,21 +1429,21 @@ or a new keyword argument (<a class="reference external" href="https://github.co
 uses a convention for commit message prefixes and layout.  Here are
 some common prefixes along with general guidelines for when to use them:</p>
 <ul class="simple">
-<li>ENH: Enhancement, new functionality</li>
-<li>BUG: Bug fix</li>
-<li>DOC: Additions/updates to documentation</li>
-<li>TST: Additions/updates to tests</li>
-<li>BLD: Updates to the build process/scripts</li>
-<li>PERF: Performance improvement</li>
-<li>CLN: Code cleanup</li>
+<li><p>ENH: Enhancement, new functionality</p></li>
+<li><p>BUG: Bug fix</p></li>
+<li><p>DOC: Additions/updates to documentation</p></li>
+<li><p>TST: Additions/updates to tests</p></li>
+<li><p>BLD: Updates to the build process/scripts</p></li>
+<li><p>PERF: Performance improvement</p></li>
+<li><p>CLN: Code cleanup</p></li>
 </ul>
 <p>The following defines how a commit message should be structured.  Please reference the
 relevant GitHub issues in your commit message using GH1234 or #1234.  Either style
 is fine, but the former is generally preferred:</p>
 <ul class="simple">
-<li>a subject line with <cite>&lt; 80</cite> chars.</li>
-<li>One blank line.</li>
-<li>Optionally, a commit message body.</li>
+<li><p>a subject line with <cite>&lt; 80</cite> chars.</p></li>
+<li><p>One blank line.</p></li>
+<li><p>Optionally, a commit message body.</p></li>
 </ul>
 <p>Now you can commit your changes in your local repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span>
@@ -1215,11 +1480,11 @@ again make sure that you have followed all the guidelines outlined in this docum
 regarding code style, tests, performance tests, and documentation. You should also
 double check your branch changes against the branch it was based on:</p>
 <ol class="arabic simple">
-<li>Navigate to your repository on GitHub – <a class="reference external" href="https://github.com/your-user-name/pandas">https://github.com/your-user-name/pandas</a></li>
-<li>Click on <code class="docutils literal notranslate"><span class="pre">Branches</span></code></li>
-<li>Click on the <code class="docutils literal notranslate"><span class="pre">Compare</span></code> button for your feature branch</li>
-<li>Select the <code class="docutils literal notranslate"><span class="pre">base</span></code> and <code class="docutils literal notranslate"><span class="pre">compare</span></code> branches, if necessary. This will be <code class="docutils literal notranslate"><span class="pre">master</span></code> and
-<code class="docutils literal notranslate"><span class="pre">shiny-new-feature</span></code>, respectively.</li>
+<li><p>Navigate to your repository on GitHub – <a class="reference external" href="https://github.com/your-user-name/pandas">https://github.com/your-user-name/pandas</a></p></li>
+<li><p>Click on <code class="docutils literal notranslate"><span class="pre">Branches</span></code></p></li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">Compare</span></code> button for your feature branch</p></li>
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">base</span></code> and <code class="docutils literal notranslate"><span class="pre">compare</span></code> branches, if necessary. This will be <code class="docutils literal notranslate"><span class="pre">master</span></code> and
+<code class="docutils literal notranslate"><span class="pre">shiny-new-feature</span></code>, respectively.</p></li>
 </ol>
 </div>
 <div class="section" id="finally-make-the-pull-request">
@@ -1230,12 +1495,12 @@ at and eventually merged into the master version.  This pull request and its ass
 changes will eventually be committed to the master branch and available in the next
 release.  To submit a pull request:</p>
 <ol class="arabic simple">
-<li>Navigate to your repository on GitHub</li>
-<li>Click on the <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">Request</span></code> button</li>
-<li>You can then click on <code class="docutils literal notranslate"><span class="pre">Commits</span></code> and <code class="docutils literal notranslate"><span class="pre">Files</span> <span class="pre">Changed</span></code> to make sure everything looks
-okay one last time</li>
-<li>Write a description of your changes in the <code class="docutils literal notranslate"><span class="pre">Preview</span> <span class="pre">Discussion</span></code> tab</li>
-<li>Click <code class="docutils literal notranslate"><span class="pre">Send</span> <span class="pre">Pull</span> <span class="pre">Request</span></code>.</li>
+<li><p>Navigate to your repository on GitHub</p></li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">Pull</span> <span class="pre">Request</span></code> button</p></li>
+<li><p>You can then click on <code class="docutils literal notranslate"><span class="pre">Commits</span></code> and <code class="docutils literal notranslate"><span class="pre">Files</span> <span class="pre">Changed</span></code> to make sure everything looks
+okay one last time</p></li>
+<li><p>Write a description of your changes in the <code class="docutils literal notranslate"><span class="pre">Preview</span> <span class="pre">Discussion</span></code> tab</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Send</span> <span class="pre">Pull</span> <span class="pre">Request</span></code>.</p></li>
 </ol>
 <p>This request then goes to the repository maintainers, and they will review
 the code.</p>
@@ -1302,76 +1567,12 @@ branch has not actually been merged.</p>
 </div>
 
 
-                    </div>
-                </div>
-            </div>
+              </div>
+          </main>
 
-            
-            <div class="clearer"></div>
-        </div>
+      </div>
     </div>
-</div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="contributing_docstring.html" title="pandas docstring guide"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Development"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Development</a> &#187;</li> 
-      </ul>
-    </div>
-<style type="text/css">
-    .scrollToTop {
-        text-align: center;
-        font-weight: bold;
-        position: fixed;
-        bottom: 60px;
-        right: 40px;
-        display: none;
-    }
-</style>
-<a href="#" class="scrollToTop">Scroll To Top</a>
-<script type="text/javascript">
-$(document).ready(function() {
-    //Check to see if the window is top if not then display button
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 200) {
-            $('.scrollToTop').fadeIn();
-        } else {
-            $('.scrollToTop').fadeOut();
-        }
-    });
 
-    //Click event to scroll to top
-    $('.scrollToTop').click(function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
-});
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27880019-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
+    
   </body>
 </html>

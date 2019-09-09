@@ -1,114 +1,173 @@
 
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="docsearch:language" content="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.merge_asof &#8212; pandas 0.24.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pandas.concat" href="pandas.concat.html" />
-    <link rel="prev" title="pandas.merge_ordered" href="pandas.merge_ordered.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="pandas.concat.html" title="pandas.concat"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="pandas.merge_ordered.html" title="pandas.merge_ordered"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >API Reference</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../general_functions.html" accesskey="U">General functions</a> &#187;</li> 
-      </ul>
-    </div>
-<div class="content-wrapper">
-    <div class="content">
-        <div class="document">
-            <div class="sphinxsidebar">
-                <h3>Table Of Contents</h3>
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<title>Pandas documentation</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<link href="../../_static/fontawesome-5.10.2/css/all.css", rel="stylesheet">
+<link href="../../_static/css/custom.css" rel="stylesheet"> 
+
+  </head> 
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60"> 
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
 <li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../general_functions.html">General functions</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../general_functions.html#data-manipulations">Data manipulations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-missing-data">Top-level missing data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-conversions">Top-level conversions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-dealing-with-datetimelike">Top-level dealing with datetimelike</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-dealing-with-intervals">Top-level dealing with intervals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-evaluation">Top-level evaluation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#hashing">Hashing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#testing">Testing</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../general_functions.html">General functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frame.html">DataFrame</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
-</ul>
 
-                <h3 style="margin-top: 1.5em;">Search</h3>
+</div>
+-->
+</nav>
 
-                <form class="search" action="../../search.html" method="get">
-                    <input type="text" name="q" size="18"/>
-                    <input type="submit" value="Go"/>
-                    <input type="hidden" name="check_keywords" value="yes"/>
-                    <input type="hidden" name="area" value="default"/>
-                </form>
-                <p class="searchtip" style="font-size: 90%">
-                    Enter search terms or a module, class or function name.
-                </p>
 
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
             </div>
-             
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body">
-                        
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
   <div class="section" id="pandas-merge-asof">
 <h1>pandas.merge_asof<a class="headerlink" href="#pandas-merge-asof" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.merge_asof">
-<code class="descclassname">pandas.</code><code class="descname">merge_asof</code><span class="sig-paren">(</span><em>left</em>, <em>right</em>, <em>on=None</em>, <em>left_on=None</em>, <em>right_on=None</em>, <em>left_index=False</em>, <em>right_index=False</em>, <em>by=None</em>, <em>left_by=None</em>, <em>right_by=None</em>, <em>suffixes=('_x'</em>, <em>'_y')</em>, <em>tolerance=None</em>, <em>allow_exact_matches=True</em>, <em>direction='backward'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/reshape/merge.py#L230-L462"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.merge_asof" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">merge_asof</code><span class="sig-paren">(</span><em class="sig-param">left</em>, <em class="sig-param">right</em>, <em class="sig-param">on=None</em>, <em class="sig-param">left_on=None</em>, <em class="sig-param">right_on=None</em>, <em class="sig-param">left_index=False</em>, <em class="sig-param">right_index=False</em>, <em class="sig-param">by=None</em>, <em class="sig-param">left_by=None</em>, <em class="sig-param">right_by=None</em>, <em class="sig-param">suffixes=('_x'</em>, <em class="sig-param">'_y')</em>, <em class="sig-param">tolerance=None</em>, <em class="sig-param">allow_exact_matches=True</em>, <em class="sig-param">direction='backward'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/reshape/merge.py#L291-L541"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.merge_asof" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform an asof merge. This is similar to a left-join except that we
 match on nearest key rather than equal keys.</p>
 <p>Both DataFrames must be sorted by the key.</p>
 <p>For each row in the left DataFrame:</p>
 <blockquote>
 <div><ul class="simple">
-<li>A “backward” search selects the last row in the right DataFrame whose
-‘on’ key is less than or equal to the left’s key.</li>
-<li>A “forward” search selects the first row in the right DataFrame whose
-‘on’ key is greater than or equal to the left’s key.</li>
-<li>A “nearest” search selects the row in the right DataFrame whose ‘on’
-key is closest in absolute distance to the left’s key.</li>
+<li><p>A “backward” search selects the last row in the right DataFrame whose
+‘on’ key is less than or equal to the left’s key.</p></li>
+<li><p>A “forward” search selects the first row in the right DataFrame whose
+‘on’ key is greater than or equal to the left’s key.</p></li>
+<li><p>A “nearest” search selects the row in the right DataFrame whose ‘on’
+key is closest in absolute distance to the left’s key.</p></li>
 </ul>
 </div></blockquote>
 <p>The default is “backward” and is compatible in versions below 0.20.0.
@@ -116,92 +175,76 @@ The direction parameter was added in version 0.20.0 and introduces
 “forward” and “nearest”.</p>
 <p>Optionally match on equivalent keys with ‘by’ before searching with ‘on’.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.19.0.</span></p>
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
 </div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>left</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
-<dt><strong>right</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
-<dt><strong>on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label</span></dt>
-<dd><p class="first last">Field name to join on. Must be found in both DataFrames.
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>left</strong><span class="classifier">DataFrame</span></dt><dd></dd>
+<dt><strong>right</strong><span class="classifier">DataFrame</span></dt><dd></dd>
+<dt><strong>on</strong><span class="classifier">label</span></dt><dd><p>Field name to join on. Must be found in both DataFrames.
 The data MUST be ordered. Furthermore this must be a numeric column,
 such as datetimelike, integer, or float. On or left_on/right_on
 must be given.</p>
 </dd>
-<dt><strong>left_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label</span></dt>
-<dd><p class="first last">Field name to join on in left DataFrame.</p>
+<dt><strong>left_on</strong><span class="classifier">label</span></dt><dd><p>Field name to join on in left DataFrame.</p>
 </dd>
-<dt><strong>right_on</strong> <span class="classifier-delimiter">:</span> <span class="classifier">label</span></dt>
-<dd><p class="first last">Field name to join on in right DataFrame.</p>
+<dt><strong>right_on</strong><span class="classifier">label</span></dt><dd><p>Field name to join on in right DataFrame.</p>
 </dd>
-<dt><strong>left_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
-<dd><p class="first">Use the index of the left DataFrame as the join key.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>left_index</strong><span class="classifier">boolean</span></dt><dd><p>Use the index of the left DataFrame as the join key.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>right_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
-<dd><p class="first">Use the index of the right DataFrame as the join key.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>right_index</strong><span class="classifier">boolean</span></dt><dd><p>Use the index of the right DataFrame as the join key.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name or list of column names</span></dt>
-<dd><p class="first last">Match on these columns before performing merge operation.</p>
+<dt><strong>by</strong><span class="classifier">column name or list of column names</span></dt><dd><p>Match on these columns before performing merge operation.</p>
 </dd>
-<dt><strong>left_by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name</span></dt>
-<dd><p class="first">Field names to match on in the left DataFrame.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>left_by</strong><span class="classifier">column name</span></dt><dd><p>Field names to match on in the left DataFrame.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>right_by</strong> <span class="classifier-delimiter">:</span> <span class="classifier">column name</span></dt>
-<dd><p class="first">Field names to match on in the right DataFrame.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.19.2.</span></p>
+<dt><strong>right_by</strong><span class="classifier">column name</span></dt><dd><p>Field names to match on in the right DataFrame.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.2.</span></p>
 </div>
 </dd>
-<dt><strong>suffixes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2-length sequence (tuple, list, …)</span></dt>
-<dd><p class="first last">Suffix to apply to overlapping column names in the left and right
+<dt><strong>suffixes</strong><span class="classifier">2-length sequence (tuple, list, …)</span></dt><dd><p>Suffix to apply to overlapping column names in the left and right
 side, respectively.</p>
 </dd>
-<dt><strong>tolerance</strong> <span class="classifier-delimiter">:</span> <span class="classifier">integer or Timedelta, optional, default None</span></dt>
-<dd><p class="first last">Select asof tolerance within this range; must be compatible
+<dt><strong>tolerance</strong><span class="classifier">integer or Timedelta, optional, default None</span></dt><dd><p>Select asof tolerance within this range; must be compatible
 with the merge index.</p>
 </dd>
-<dt><strong>allow_exact_matches</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, default True</span></dt>
-<dd><ul class="first last simple">
-<li>If True, allow matching with the same ‘on’ value
-(i.e. less-than-or-equal-to / greater-than-or-equal-to)</li>
-<li>If False, don’t match the same ‘on’ value
-(i.e., strictly less-than / strictly greater-than)</li>
+<dt><strong>allow_exact_matches</strong><span class="classifier">boolean, default True</span></dt><dd><ul class="simple">
+<li><p>If True, allow matching with the same ‘on’ value
+(i.e. less-than-or-equal-to / greater-than-or-equal-to)</p></li>
+<li><p>If False, don’t match the same ‘on’ value
+(i.e., strictly less-than / strictly greater-than)</p></li>
 </ul>
 </dd>
-<dt><strong>direction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">‘backward’ (default), ‘forward’, or ‘nearest’</span></dt>
-<dd><p class="first">Whether to search for prior, subsequent, or closest matches.</p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<dt><strong>direction</strong><span class="classifier">‘backward’ (default), ‘forward’, or ‘nearest’</span></dt><dd><p>Whether to search for prior, subsequent, or closest matches.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>merged</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd></dd>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>merged</strong><span class="classifier">DataFrame</span></dt><dd></dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>, <a class="reference internal" href="pandas.merge_ordered.html#pandas.merge_ordered" title="pandas.merge_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_ordered</span></code></a></p>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a></dt><dd></dd>
+<dt><a class="reference internal" href="pandas.merge_ordered.html#pandas.merge_ordered" title="pandas.merge_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_ordered</span></code></a></dt><dd></dd>
+</dl>
 </div>
 <p class="rubric">Examples</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;left_val&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]})</span>
@@ -346,77 +389,12 @@ propagate forward</p>
 </div>
 
 
-                    </div>
-                </div>
-            </div>
+              </div>
+          </main>
 
-            
-            <div class="clearer"></div>
-        </div>
+      </div>
     </div>
-</div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="pandas.concat.html" title="pandas.concat"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="pandas.merge_ordered.html" title="pandas.merge_ordered"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >API Reference</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../general_functions.html" >General functions</a> &#187;</li> 
-      </ul>
-    </div>
-<style type="text/css">
-    .scrollToTop {
-        text-align: center;
-        font-weight: bold;
-        position: fixed;
-        bottom: 60px;
-        right: 40px;
-        display: none;
-    }
-</style>
-<a href="#" class="scrollToTop">Scroll To Top</a>
-<script type="text/javascript">
-$(document).ready(function() {
-    //Check to see if the window is top if not then display button
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 200) {
-            $('.scrollToTop').fadeIn();
-        } else {
-            $('.scrollToTop').fadeOut();
-        }
-    });
 
-    //Click event to scroll to top
-    $('.scrollToTop').click(function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
-});
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27880019-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
+    
   </body>
 </html>

@@ -1,102 +1,161 @@
 
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="docsearch:language" content="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.wide_to_long &#8212; pandas 0.24.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pandas.isna" href="pandas.isna.html" />
-    <link rel="prev" title="pandas.unique" href="pandas.unique.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="pandas.isna.html" title="pandas.isna"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="pandas.unique.html" title="pandas.unique"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >API Reference</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../general_functions.html" accesskey="U">General functions</a> &#187;</li> 
-      </ul>
-    </div>
-<div class="content-wrapper">
-    <div class="content">
-        <div class="document">
-            <div class="sphinxsidebar">
-                <h3>Table Of Contents</h3>
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<title>Pandas documentation</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<link href="../../_static/fontawesome-5.10.2/css/all.css", rel="stylesheet">
+<link href="../../_static/css/custom.css" rel="stylesheet"> 
+
+  </head> 
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60"> 
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
 <li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../general_functions.html">General functions</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../general_functions.html#data-manipulations">Data manipulations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-missing-data">Top-level missing data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-conversions">Top-level conversions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-dealing-with-datetimelike">Top-level dealing with datetimelike</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-dealing-with-intervals">Top-level dealing with intervals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#top-level-evaluation">Top-level evaluation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#hashing">Hashing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../general_functions.html#testing">Testing</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../general_functions.html">General functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../frame.html">DataFrame</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
-</ul>
 
-                <h3 style="margin-top: 1.5em;">Search</h3>
+</div>
+-->
+</nav>
 
-                <form class="search" action="../../search.html" method="get">
-                    <input type="text" name="q" size="18"/>
-                    <input type="submit" value="Go"/>
-                    <input type="hidden" name="check_keywords" value="yes"/>
-                    <input type="hidden" name="area" value="default"/>
-                </form>
-                <p class="searchtip" style="font-size: 90%">
-                    Enter search terms or a module, class or function name.
-                </p>
 
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
             </div>
-             
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body">
-                        
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
   <div class="section" id="pandas-wide-to-long">
 <h1>pandas.wide_to_long<a class="headerlink" href="#pandas-wide-to-long" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="pandas.wide_to_long">
-<code class="descclassname">pandas.</code><code class="descname">wide_to_long</code><span class="sig-paren">(</span><em>df</em>, <em>stubnames</em>, <em>i</em>, <em>j</em>, <em>sep=''</em>, <em>suffix='\\d+'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/reshape/melt.py#L181-L461"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.wide_to_long" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pandas.</code><code class="sig-name descname">wide_to_long</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">stubnames</em>, <em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">sep=''</em>, <em class="sig-param">suffix='\d+'</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/reshape/melt.py#L192-L474"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.wide_to_long" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wide panel to long format. Less flexible but more user-friendly than melt.</p>
 <p>With stubnames [‘A’, ‘B’], this function expects to find one or more
 group of columns with format
@@ -106,61 +165,50 @@ with <cite>j</cite> (for example <cite>j=’year’</cite>)</p>
 <p>Each row of these wide variables are assumed to be uniquely identified by
 <cite>i</cite> (can be a single column name or a list of column names)</p>
 <p>All remaining variables in the data frame are left intact.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>df</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataFrame</span></dt>
-<dd><p class="first last">The wide-format DataFrame</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>df</strong><span class="classifier">DataFrame</span></dt><dd><p>The wide-format DataFrame</p>
 </dd>
-<dt><strong>stubnames</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or list-like</span></dt>
-<dd><p class="first last">The stub name(s). The wide format variables are assumed to
+<dt><strong>stubnames</strong><span class="classifier">str or list-like</span></dt><dd><p>The stub name(s). The wide format variables are assumed to
 start with the stub names.</p>
 </dd>
-<dt><strong>i</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or list-like</span></dt>
-<dd><p class="first last">Column(s) to use as id variable(s)</p>
+<dt><strong>i</strong><span class="classifier">str or list-like</span></dt><dd><p>Column(s) to use as id variable(s)</p>
 </dd>
-<dt><strong>j</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
-<dd><p class="first last">The name of the sub-observation variable. What you wish to name your
+<dt><strong>j</strong><span class="classifier">str</span></dt><dd><p>The name of the sub-observation variable. What you wish to name your
 suffix in the long format.</p>
 </dd>
-<dt><strong>sep</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default “”</span></dt>
-<dd><p class="first">A character indicating the separation of the variable names
+<dt><strong>sep</strong><span class="classifier">str, default “”</span></dt><dd><p>A character indicating the separation of the variable names
 in the wide format, to be stripped from the names in the long format.
 For example, if your column names are A-suffix1, A-suffix2, you
 can strip the hyphen by specifying <cite>sep=’-‘</cite></p>
-<div class="last versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
 </dd>
-<dt><strong>suffix</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, default ‘\d+’</span></dt>
-<dd><p class="first">A regular expression capturing the wanted suffixes. ‘\d+’ captures
+<dt><strong>suffix</strong><span class="classifier">str, default ‘\d+’</span></dt><dd><p>A regular expression capturing the wanted suffixes. ‘\d+’ captures
 numeric suffixes. Suffixes with no numbers could be specified with the
 negated character class ‘\D+’. You can also further disambiguate
 suffixes, for example, if your wide variables are of the form
 A-one, B-two,.., and you have an unrelated column A-rating, you can
 ignore the last one by specifying <cite>suffix=’(!?one|two)’</cite></p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.0.</span></p>
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
 </div>
-<div class="last versionchanged">
-<p><span class="versionmodified">Changed in version 0.23.0: </span>When all suffixes are numeric, they are cast to int64/float64.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.23.0: </span>When all suffixes are numeric, they are cast to int64/float64.</p>
 </div>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>DataFrame</strong></dt>
-<dd><p class="first last">A DataFrame that contains each stub name as a variable, with new index
-(i, j)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>A DataFrame that contains each stub name as a variable, with new index
+(i, j).</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <p class="rubric">Notes</p>
 <p>All extra variables are left untouched. This simply uses
 <cite>pandas.melt</cite> under the hood, but is hard-coded to “do the right thing”
@@ -180,7 +228,7 @@ in a typical case.</p>
 <span class="go">1     b     e    1.2    1.3  0.997345   1</span>
 <span class="go">2     c     f    0.7    0.1  0.282978   2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">wide_to_long</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
-<span class="gp">... </span><span class="c1"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="gp">... </span>
 <span class="go">                X  A    B</span>
 <span class="go">id year</span>
 <span class="go">0  1970 -1.085631  a  2.5</span>
@@ -199,19 +247,19 @@ in a typical case.</p>
 <span class="gp">... </span>    <span class="s1">&#39;ht2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">]</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
-<span class="go">   birth  famid  ht1  ht2</span>
+<span class="go">   famid  birth  ht1  ht2</span>
 <span class="go">0      1      1  2.8  3.4</span>
-<span class="go">1      2      1  2.9  3.8</span>
-<span class="go">2      3      1  2.2  2.9</span>
-<span class="go">3      1      2  2.0  3.2</span>
+<span class="go">1      1      2  2.9  3.8</span>
+<span class="go">2      1      3  2.2  2.9</span>
+<span class="go">3      2      1  2.0  3.2</span>
 <span class="go">4      2      2  1.8  2.8</span>
-<span class="go">5      3      2  1.9  2.4</span>
-<span class="go">6      1      3  2.2  3.3</span>
-<span class="go">7      2      3  2.3  3.4</span>
+<span class="go">5      2      3  1.9  2.4</span>
+<span class="go">6      3      1  2.2  3.3</span>
+<span class="go">7      3      2  2.3  3.4</span>
 <span class="go">8      3      3  2.1  2.9</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">wide_to_long</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">stubnames</span><span class="o">=</span><span class="s1">&#39;ht&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;famid&#39;</span><span class="p">,</span> <span class="s1">&#39;birth&#39;</span><span class="p">],</span> <span class="n">j</span><span class="o">=</span><span class="s1">&#39;age&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
-<span class="gp">... </span><span class="c1"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="gp">... </span>
 <span class="go">                  ht</span>
 <span class="go">famid birth age</span>
 <span class="go">1     1     1    2.8</span>
@@ -252,34 +300,30 @@ in a typical case.</p>
 </div>
 <p>Less wieldy column names are also handled</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A(quarterly)-2010&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
-<span class="gp">... </span>                   <span class="s1">&#39;A(quarterly)-2011&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
-<span class="gp">... </span>                   <span class="s1">&#39;B(quarterly)-2010&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
-<span class="gp">... </span>                   <span class="s1">&#39;B(quarterly)-2011&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A(weekly)-2010&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>                   <span class="s1">&#39;A(weekly)-2011&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>                   <span class="s1">&#39;B(weekly)-2010&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>                   <span class="s1">&#39;B(weekly)-2011&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
 <span class="gp">... </span>                   <span class="s1">&#39;X&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="c1"># doctest: +NORMALIZE_WHITESPACE, +ELLIPSIS</span>
-<span class="go">   A(quarterly)-2010  A(quarterly)-2011  B(quarterly)-2010  ...</span>
-<span class="go">0           0.548814           0.544883           0.437587  ...</span>
-<span class="go">1           0.715189           0.423655           0.891773  ...</span>
-<span class="go">2           0.602763           0.645894           0.963663  ...</span>
-<span class="go">   X  id</span>
-<span class="go">0  0   0</span>
-<span class="go">1  1   1</span>
-<span class="go">2  1   2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> 
+<span class="go">   A(weekly)-2010  A(weekly)-2011  B(weekly)-2010  B(weekly)-2011  X  id</span>
+<span class="go">0        0.548814        0.544883        0.437587        0.383442  0   0</span>
+<span class="go">1        0.715189        0.423655        0.891773        0.791725  1   1</span>
+<span class="go">2        0.602763        0.645894        0.963663        0.528895  1   2</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">wide_to_long</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;A(quarterly)&#39;</span><span class="p">,</span> <span class="s1">&#39;B(quarterly)&#39;</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pd</span><span class="o">.</span><span class="n">wide_to_long</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;A(weekly)&#39;</span><span class="p">,</span> <span class="s1">&#39;B(weekly)&#39;</span><span class="p">],</span> <span class="n">i</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">j</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="c1"># doctest: +NORMALIZE_WHITESPACE</span>
-<span class="go">         X  A(quarterly)  B(quarterly)</span>
+<span class="gp">... </span>
+<span class="go">         X  A(weekly)  B(weekly)</span>
 <span class="go">id year</span>
-<span class="go">0  2010  0      0.548814     0.437587</span>
-<span class="go">1  2010  1      0.715189     0.891773</span>
-<span class="go">2  2010  1      0.602763     0.963663</span>
-<span class="go">0  2011  0      0.544883     0.383442</span>
-<span class="go">1  2011  1      0.423655     0.791725</span>
-<span class="go">2  2011  1      0.645894     0.528895</span>
+<span class="go">0  2010  0   0.548814   0.437587</span>
+<span class="go">1  2010  1   0.715189   0.891773</span>
+<span class="go">2  2010  1   0.602763   0.963663</span>
+<span class="go">0  2011  0   0.544883   0.383442</span>
+<span class="go">1  2011  1   0.423655   0.791725</span>
+<span class="go">2  2011  1   0.645894   0.528895</span>
 </pre></div>
 </div>
 <p>If we have many columns, we could also use a regex to find our
@@ -289,7 +333,7 @@ stubnames and pass that list on to wide_to_long</p>
 <span class="gp">... </span>        <span class="sa">r</span><span class="s1">&#39;[A-B]\(.*\)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> <span class="k">if</span> <span class="n">match</span> <span class="o">!=</span> <span class="p">[]</span> <span class="p">])</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">stubnames</span><span class="p">)</span>
-<span class="go">[&#39;A(quarterly)&#39;, &#39;B(quarterly)&#39;]</span>
+<span class="go">[&#39;A(weekly)&#39;, &#39;B(weekly)&#39;]</span>
 </pre></div>
 </div>
 <p>All of the above examples have integers as suffixes. It is possible to
@@ -301,22 +345,22 @@ have non-integers as suffixes.</p>
 <span class="gp">... </span>    <span class="s1">&#39;ht_two&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.4</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">]</span>
 <span class="gp">... </span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
-<span class="go">   birth  famid  ht_one  ht_two</span>
+<span class="go">   famid  birth  ht_one  ht_two</span>
 <span class="go">0      1      1     2.8     3.4</span>
-<span class="go">1      2      1     2.9     3.8</span>
-<span class="go">2      3      1     2.2     2.9</span>
-<span class="go">3      1      2     2.0     3.2</span>
+<span class="go">1      1      2     2.9     3.8</span>
+<span class="go">2      1      3     2.2     2.9</span>
+<span class="go">3      2      1     2.0     3.2</span>
 <span class="go">4      2      2     1.8     2.8</span>
-<span class="go">5      3      2     1.9     2.4</span>
-<span class="go">6      1      3     2.2     3.3</span>
-<span class="go">7      2      3     2.3     3.4</span>
+<span class="go">5      2      3     1.9     2.4</span>
+<span class="go">6      3      1     2.2     3.3</span>
+<span class="go">7      3      2     2.3     3.4</span>
 <span class="go">8      3      3     2.1     2.9</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">wide_to_long</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">stubnames</span><span class="o">=</span><span class="s1">&#39;ht&#39;</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;famid&#39;</span><span class="p">,</span> <span class="s1">&#39;birth&#39;</span><span class="p">],</span> <span class="n">j</span><span class="o">=</span><span class="s1">&#39;age&#39;</span><span class="p">,</span>
-<span class="go">                        sep=&#39;_&#39;, suffix=&#39;\w&#39;)</span>
+<span class="gp">... </span>                    <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
-<span class="gp">... </span><span class="c1"># doctest: +NORMALIZE_WHITESPACE</span>
+<span class="gp">... </span>
 <span class="go">                  ht</span>
 <span class="go">famid birth age</span>
 <span class="go">1     1     one  2.8</span>
@@ -344,77 +388,12 @@ have non-integers as suffixes.</p>
 </div>
 
 
-                    </div>
-                </div>
-            </div>
+              </div>
+          </main>
 
-            
-            <div class="clearer"></div>
-        </div>
+      </div>
     </div>
-</div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="pandas.isna.html" title="pandas.isna"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="pandas.unique.html" title="pandas.unique"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >API Reference</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../general_functions.html" >General functions</a> &#187;</li> 
-      </ul>
-    </div>
-<style type="text/css">
-    .scrollToTop {
-        text-align: center;
-        font-weight: bold;
-        position: fixed;
-        bottom: 60px;
-        right: 40px;
-        display: none;
-    }
-</style>
-<a href="#" class="scrollToTop">Scroll To Top</a>
-<script type="text/javascript">
-$(document).ready(function() {
-    //Check to see if the window is top if not then display button
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 200) {
-            $('.scrollToTop').fadeIn();
-        } else {
-            $('.scrollToTop').fadeOut();
-        }
-    });
 
-    //Click event to scroll to top
-    $('.scrollToTop').click(function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
-});
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27880019-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
+    
   </body>
 </html>

@@ -1,129 +1,174 @@
 
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="docsearch:language" content="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>pandas.DataFrame.sample &#8212; pandas 0.24.2 documentation</title>
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="pandas.DataFrame.select" href="pandas.DataFrame.select.html" />
-    <link rel="prev" title="pandas.DataFrame.rtruediv" href="pandas.DataFrame.rtruediv.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="pandas.DataFrame.select.html" title="pandas.DataFrame.select"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="pandas.DataFrame.rtruediv.html" title="pandas.DataFrame.rtruediv"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >API Reference</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../frame.html" >DataFrame</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="pandas.DataFrame.html" accesskey="U">pandas.DataFrame</a> &#187;</li> 
-      </ul>
-    </div>
-<div class="content-wrapper">
-    <div class="content">
-        <div class="document">
-            <div class="sphinxsidebar">
-                <h3>Table Of Contents</h3>
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ecosystem.html">pandas Ecosystem</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<title>Pandas documentation</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<link href="../../_static/fontawesome-5.10.2/css/all.css", rel="stylesheet">
+<link href="../../_static/css/custom.css" rel="stylesheet"> 
+
+  </head> 
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60"> 
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
 <li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#constructor">Constructor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#attributes-and-underlying-data">Attributes and underlying data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#conversion">Conversion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#indexing-iteration">Indexing, iteration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#binary-operator-functions">Binary operator functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#function-application-groupby-window">Function application, GroupBy &amp; Window</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#computations-descriptive-stats">Computations / Descriptive Stats</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../frame.html#reindexing-selection-label-manipulation">Reindexing / Selection / Label manipulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#missing-data-handling">Missing data handling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#reshaping-sorting-transposing">Reshaping, sorting, transposing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#combining-joining-merging">Combining / joining / merging</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#time-series-related">Time series-related</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#plotting">Plotting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#serialization-io-conversion">Serialization / IO / Conversion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../frame.html#sparse">Sparse</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../whatsnew/index.html">Release Notes</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
 </ul>
 
-                <h3 style="margin-top: 1.5em;">Search</h3>
+</div>
+-->
+</nav>
 
-                <form class="search" action="../../search.html" method="get">
-                    <input type="text" name="q" size="18"/>
-                    <input type="submit" value="Go"/>
-                    <input type="hidden" name="check_keywords" value="yes"/>
-                    <input type="hidden" name="area" value="default"/>
-                </form>
-                <p class="searchtip" style="font-size: 90%">
-                    Enter search terms or a module, class or function name.
-                </p>
 
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
             </div>
-             
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body">
-                        
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
   <div class="section" id="pandas-dataframe-sample">
 <h1>pandas.DataFrame.sample<a class="headerlink" href="#pandas-dataframe-sample" title="Permalink to this headline">¶</a></h1>
 <dl class="method">
 <dt id="pandas.DataFrame.sample">
-<code class="descclassname">DataFrame.</code><code class="descname">sample</code><span class="sig-paren">(</span><em>n=None</em>, <em>frac=None</em>, <em>replace=False</em>, <em>weights=None</em>, <em>random_state=None</em>, <em>axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.24.2/pandas/core/generic.py#L4705-L4866"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">n=None</em>, <em class="sig-param">frac=None</em>, <em class="sig-param">replace=False</em>, <em class="sig-param">weights=None</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">axis=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L4798-L4971"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a random sample of items from an axis of object.</p>
 <p>You can use <cite>random_state</cite> for reproducibility.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
-<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
-<dd><p class="first last">Number of items from axis to return. Cannot be used with <cite>frac</cite>.
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n</strong><span class="classifier">int, optional</span></dt><dd><p>Number of items from axis to return. Cannot be used with <cite>frac</cite>.
 Default = 1 if <cite>frac</cite> = None.</p>
 </dd>
-<dt><strong>frac</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
-<dd><p class="first last">Fraction of axis items to return. Cannot be used with <cite>n</cite>.</p>
+<dt><strong>frac</strong><span class="classifier">float, optional</span></dt><dd><p>Fraction of axis items to return. Cannot be used with <cite>n</cite>.</p>
 </dd>
-<dt><strong>replace</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, default False</span></dt>
-<dd><p class="first last">Sample with or without replacement.</p>
+<dt><strong>replace</strong><span class="classifier">bool, default False</span></dt><dd><p>Sample with or without replacement.</p>
 </dd>
-<dt><strong>weights</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str or ndarray-like, optional</span></dt>
-<dd><p class="first last">Default ‘None’ results in equal probability weighting.
+<dt><strong>weights</strong><span class="classifier">str or ndarray-like, optional</span></dt><dd><p>Default ‘None’ results in equal probability weighting.
 If passed a Series, will align with target object on index. Index
 values in weights not found in sampled object will be ignored and
 index values in sampled object not in weights will be assigned
@@ -136,32 +181,27 @@ If weights do not sum to 1, they will be normalized to sum to 1.
 Missing values in the weights column will be treated as zero.
 Infinite values not allowed.</p>
 </dd>
-<dt><strong>random_state</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or numpy.random.RandomState, optional</span></dt>
-<dd><p class="first last">Seed for the random number generator (if int), or numpy RandomState
+<dt><strong>random_state</strong><span class="classifier">int or numpy.random.RandomState, optional</span></dt><dd><p>Seed for the random number generator (if int), or numpy RandomState
 object.</p>
 </dd>
-<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or string, optional</span></dt>
-<dd><p class="first last">Axis to sample. Accepts axis number or name. Default is stat axis
-for given data type (0 for Series and DataFrames, 1 for Panels).</p>
+<dt><strong>axis</strong><span class="classifier">int or string, optional</span></dt><dd><p>Axis to sample. Accepts axis number or name. Default is stat axis
+for given data type (0 for Series and DataFrames).</p>
 </dd>
 </dl>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
-<dt><strong>Series or DataFrame</strong></dt>
-<dd><p class="first last">A new object of same type as caller containing <cite>n</cite> items randomly
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Series or DataFrame</dt><dd><p>A new object of same type as caller containing <cite>n</cite> items randomly
 sampled from the caller object.</p>
 </dd>
 </dl>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<dl class="last docutils">
-<dt><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html#numpy.random.choice" title="(in NumPy v1.16)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.random.choice</span></code></a></dt>
-<dd>Generates a random sample from a given 1-D numpy array.</dd>
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.random.choice</span></code></dt><dd><p>Generates a random sample from a given 1-D numpy array.</p>
+</dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
@@ -207,78 +247,12 @@ the examples.</p>
 </div>
 
 
-                    </div>
-                </div>
-            </div>
+              </div>
+          </main>
 
-            
-            <div class="clearer"></div>
-        </div>
+      </div>
     </div>
-</div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="pandas.DataFrame.select.html" title="pandas.DataFrame.select"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="pandas.DataFrame.rtruediv.html" title="pandas.DataFrame.rtruediv"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >API Reference</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../frame.html" >DataFrame</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="pandas.DataFrame.html" >pandas.DataFrame</a> &#187;</li> 
-      </ul>
-    </div>
-<style type="text/css">
-    .scrollToTop {
-        text-align: center;
-        font-weight: bold;
-        position: fixed;
-        bottom: 60px;
-        right: 40px;
-        display: none;
-    }
-</style>
-<a href="#" class="scrollToTop">Scroll To Top</a>
-<script type="text/javascript">
-$(document).ready(function() {
-    //Check to see if the window is top if not then display button
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 200) {
-            $('.scrollToTop').fadeIn();
-        } else {
-            $('.scrollToTop').fadeOut();
-        }
-    });
 
-    //Click event to scroll to top
-    $('.scrollToTop').click(function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
-});
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27880019-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
+    
   </body>
 </html>

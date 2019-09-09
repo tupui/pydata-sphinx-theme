@@ -1,4 +1,5 @@
-# The following example shows the relationship between both
-# populations.
+# An example with subplots, so an array of axes is returned.
 
-lines = df.plot.line(x='pig', y='horse')
+axes = df.plot.line(subplots=True)
+type(axes)
+# <class 'numpy.ndarray'>

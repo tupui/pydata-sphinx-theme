@@ -1,57 +1,232 @@
 
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta name="docsearch:language" content="en">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Group By: split-apply-combine &#8212; pandas 0.24.2 documentation</title>
-    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Time Series / Date functionality" href="timeseries.html" />
-    <link rel="prev" title="Computational tools" href="computation.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="timeseries.html" title="Time Series / Date functionality"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="computation.html" title="Computational tools"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">User Guide</a> &#187;</li> 
-      </ul>
-    </div>
-<div class="content-wrapper">
-    <div class="content">
-        <div class="document">
-            <div class="sphinxsidebar">
-                <h3>Table Of Contents</h3>
-                <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../whatsnew/v0.25.0.html">What's New in 0.25.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<title>Pandas documentation</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<link href="../_static/fontawesome-5.10.2/css/all.css", rel="stylesheet">
+<link href="../_static/css/custom.css" rel="stylesheet"> 
+
+  </head> 
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60"> 
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../reference/index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="io.html">IO Tools (Text, CSV, HDF5, …)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="indexing.html">Indexing and Selecting Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="advanced.html">MultiIndex / Advanced Indexing</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="merging.html">Merge, join, and concatenate</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="reshaping.html">Reshaping and Pivot Tables</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="text.html">Working with Text Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="missing_data.html">Working with missing data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="categorical.html">Categorical Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="integer_na.html">Nullable Integer Data Type</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="visualization.html">Visualization</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="computation.html">Computational tools</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="">Group By: split-apply-combine</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="timeseries.html">Time Series / Date functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="timedeltas.html">Time Deltas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="options.html">Options and Settings</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="enhancingperf.html">Enhancing Performance</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="sparse.html">Sparse data structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="gotchas.html">Frequently Asked Questions (FAQ)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="cookbook.html">Cookbook</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
 <li class="toctree-l2"><a class="reference internal" href="io.html">IO Tools (Text, CSV, HDF5, …)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="indexing.html">Indexing and Selecting Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="advanced.html">MultiIndex / Advanced Indexing</a></li>
@@ -63,19 +238,7 @@
 <li class="toctree-l2"><a class="reference internal" href="integer_na.html">Nullable Integer Data Type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visualization.html">Visualization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="computation.html">Computational tools</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Group By: split-apply-combine</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#splitting-an-object-into-groups">Splitting an object into groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#iterating-through-groups">Iterating through groups</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#selecting-a-group">Selecting a group</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#aggregation">Aggregation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#transformation">Transformation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#filtration">Filtration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dispatching-to-instance-methods">Dispatching to instance methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#flexible-apply">Flexible <code class="docutils literal notranslate"><span class="pre">apply</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#other-useful-features">Other useful features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Group By: split-apply-combine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeseries.html">Time Series / Date functionality</a></li>
 <li class="toctree-l2"><a class="reference internal" href="timedeltas.html">Time Deltas</a></li>
 <li class="toctree-l2"><a class="reference internal" href="options.html">Options and Settings</a></li>
@@ -84,76 +247,219 @@
 <li class="toctree-l2"><a class="reference internal" href="gotchas.html">Frequently Asked Questions (FAQ)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cookbook.html">Cookbook</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../ecosystem.html">pandas Ecosystem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../whatsnew/index.html">Release Notes</a></li>
-</ul>
 
-                <h3 style="margin-top: 1.5em;">Search</h3>
+</div>
+-->
+</nav>
 
-                <form class="search" action="../search.html" method="get">
-                    <input type="text" name="q" size="18"/>
-                    <input type="submit" value="Go"/>
-                    <input type="hidden" name="check_keywords" value="yes"/>
-                    <input type="hidden" name="area" value="default"/>
-                </form>
-                <p class="searchtip" style="font-size: 90%">
-                    Enter search terms or a module, class or function name.
-                </p>
 
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav nav-tabs section-nav flex-column" role="tablist">
+    
+        <li class="toc-entry toc-h2">
+            <a href="#splitting-an-object-into-groups" class="nav-item nav-link">Splitting an object into groups</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#groupby-sorting" class="nav-item nav-link">GroupBy sorting</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#groupby-object-attributes" class="nav-item nav-link">GroupBy object attributes</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#groupby-with-multiindex" class="nav-item nav-link">GroupBy with MultiIndex</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#grouping-dataframe-with-index-levels-and-columns" class="nav-item nav-link">Grouping DataFrame with Index Levels and Columns</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#dataframe-column-selection-in-groupby" class="nav-item nav-link">DataFrame column selection in GroupBy</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#iterating-through-groups" class="nav-item nav-link">Iterating through groups</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#selecting-a-group" class="nav-item nav-link">Selecting a group</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#aggregation" class="nav-item nav-link">Aggregation</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#applying-multiple-functions-at-once" class="nav-item nav-link">Applying multiple functions at once</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#applying-different-functions-to-dataframe-columns" class="nav-item nav-link">Applying different functions to DataFrame columns</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#cython-optimized-aggregation-functions" class="nav-item nav-link">Cython-optimized aggregation functions</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#transformation" class="nav-item nav-link">Transformation</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#new-syntax-to-window-and-resample-operations" class="nav-item nav-link">New syntax to window and resample operations</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#filtration" class="nav-item nav-link">Filtration</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#dispatching-to-instance-methods" class="nav-item nav-link">Dispatching to instance methods</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#flexible-apply" class="nav-item nav-link">Flexible </a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#other-useful-features" class="nav-item nav-link">Other useful features</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#automatic-exclusion-of-nuisance-columns" class="nav-item nav-link">Automatic exclusion of “nuisance” columns</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#handling-of-un-observed-categorical-values" class="nav-item nav-link">Handling of (un)observed Categorical values</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#na-and-nat-group-handling" class="nav-item nav-link">NA and NaT group handling</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#grouping-with-ordered-factors" class="nav-item nav-link">Grouping with ordered factors</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#grouping-with-a-grouper-specification" class="nav-item nav-link">Grouping with a Grouper specification</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#taking-the-first-rows-of-each-group" class="nav-item nav-link">Taking the first rows of each group</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#taking-the-nth-row-of-each-group" class="nav-item nav-link">Taking the nth row of each group</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#enumerate-group-items" class="nav-item nav-link">Enumerate group items</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#enumerate-groups" class="nav-item nav-link">Enumerate groups</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#plotting" class="nav-item nav-link">Plotting</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#piping-function-calls" class="nav-item nav-link">Piping function calls</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#examples" class="nav-item nav-link">Examples</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#regrouping-by-factor" class="nav-item nav-link">Regrouping by factor</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#multi-column-factorization" class="nav-item nav-link">Multi-column factorization</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#groupby-by-indexer-to-resample-data" class="nav-item nav-link">Groupby by Indexer to ‘resample’ data</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#returning-a-series-to-propagate-names" class="nav-item nav-link">Returning a Series to propagate names</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+              
             </div>
-             
-            <div class="documentwrapper">
-                <div class="bodywrapper">
-                    <div class="body">
-                        
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
   <div class="section" id="group-by-split-apply-combine">
 <span id="groupby"></span><h1>Group By: split-apply-combine<a class="headerlink" href="#group-by-split-apply-combine" title="Permalink to this headline">¶</a></h1>
 <p>By “group by” we are referring to a process involving one or more of the following
 steps:</p>
 <ul class="simple">
-<li><strong>Splitting</strong> the data into groups based on some criteria.</li>
-<li><strong>Applying</strong> a function to each group independently.</li>
-<li><strong>Combining</strong> the results into a data structure.</li>
+<li><p><strong>Splitting</strong> the data into groups based on some criteria.</p></li>
+<li><p><strong>Applying</strong> a function to each group independently.</p></li>
+<li><p><strong>Combining</strong> the results into a data structure.</p></li>
 </ul>
 <p>Out of these, the split step is the most straightforward. In fact, in many
 situations we may wish to split the data set into groups and do something with
 those groups. In the apply step, we might wish to do one of the
 following:</p>
 <ul>
-<li><p class="first"><strong>Aggregation</strong>: compute a summary statistic (or statistics) for each
+<li><p><strong>Aggregation</strong>: compute a summary statistic (or statistics) for each
 group. Some examples:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Compute group sums or means.</li>
-<li>Compute group sizes / counts.</li>
+<li><p>Compute group sums or means.</p></li>
+<li><p>Compute group sizes / counts.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><strong>Transformation</strong>: perform some group-specific computations and return a
+<li><p><strong>Transformation</strong>: perform some group-specific computations and return a
 like-indexed object. Some examples:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Standardize data (zscore) within a group.</li>
-<li>Filling NAs within groups with a value derived from each group.</li>
+<li><p>Standardize data (zscore) within a group.</p></li>
+<li><p>Filling NAs within groups with a value derived from each group.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><strong>Filtration</strong>: discard some groups, according to a group-wise computation
+<li><p><strong>Filtration</strong>: discard some groups, according to a group-wise computation
 that evaluates True or False. Some examples:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Discard data that belongs to groups with only a few members.</li>
-<li>Filter out data based on the group sum or mean.</li>
+<li><p>Discard data that belongs to groups with only a few members.</p></li>
+<li><p>Filter out data based on the group sum or mean.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first">Some combination of the above: GroupBy will examine the results of the apply
+<li><p>Some combination of the above: GroupBy will examine the results of the apply
 step and try to return a sensibly combined result if it doesn’t fit into
-either of the above two categories.</p>
-</li>
+either of the above two categories.</p></li>
 </ul>
 <p>Since the set of object instance methods on pandas data structures are generally
 rich and expressive, we often simply want to invoke, say, a DataFrame function
@@ -194,21 +500,21 @@ object (more on what the GroupBy object is later), you may do the following:</p>
 </div>
 <p>The mapping can be specified many different ways:</p>
 <ul class="simple">
-<li>A Python function, to be called on each of the axis labels.</li>
-<li>A list or NumPy array of the same length as the selected axis.</li>
-<li>A dict or <code class="docutils literal notranslate"><span class="pre">Series</span></code>, providing a <code class="docutils literal notranslate"><span class="pre">label</span> <span class="pre">-&gt;</span> <span class="pre">group</span> <span class="pre">name</span></code> mapping.</li>
-<li>For <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects, a string indicating a column to be used to group.
+<li><p>A Python function, to be called on each of the axis labels.</p></li>
+<li><p>A list or NumPy array of the same length as the selected axis.</p></li>
+<li><p>A dict or <code class="docutils literal notranslate"><span class="pre">Series</span></code>, providing a <code class="docutils literal notranslate"><span class="pre">label</span> <span class="pre">-&gt;</span> <span class="pre">group</span> <span class="pre">name</span></code> mapping.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects, a string indicating a column to be used to group.
 Of course <code class="docutils literal notranslate"><span class="pre">df.groupby('A')</span></code> is just syntactic sugar for
-<code class="docutils literal notranslate"><span class="pre">df.groupby(df['A'])</span></code>, but it makes life simpler.</li>
-<li>For <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects, a string indicating an index level to be used to
-group.</li>
-<li>A list of any of the above things.</li>
+<code class="docutils literal notranslate"><span class="pre">df.groupby(df['A'])</span></code>, but it makes life simpler.</p></li>
+<li><p>For <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> objects, a string indicating an index level to be used to
+group.</p></li>
+<li><p>A list of any of the above things.</p></li>
 </ul>
 <p>Collectively we refer to the grouping objects as the <strong>keys</strong>. For example,
 consider the following <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">A string passed to <code class="docutils literal notranslate"><span class="pre">groupby</span></code> may refer to either a column or an index level.
+<p class="admonition-title">Note</p>
+<p>A string passed to <code class="docutils literal notranslate"><span class="pre">groupby</span></code> may refer to either a column or an index level.
 If a string matches both a column name and an index level name, a
 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> will be raised.</p>
 </div>
@@ -231,7 +537,7 @@ We could naturally group by either the <code class="docutils literal notranslate
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.24.</span></p>
+<p><span class="versionmodified added">New in version 0.24.</span></p>
 </div>
 <p>If we also have a MultiIndex on columns <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>, we can group by all
 but the specified columns</p>
@@ -274,8 +580,8 @@ output of aggregation functions will only contain unique index values:</p>
 <p>Note that <strong>no splitting occurs</strong> until it’s needed. Creating the GroupBy object
 only verifies that you’ve passed a valid mapping.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Many kinds of complicated data manipulations can be expressed in terms of
+<p class="admonition-title">Note</p>
+<p>Many kinds of complicated data manipulations can be expressed in terms of
 GroupBy operations (though can’t be guaranteed to be the most
 efficient). You can get quite creative with the label mapping functions.</p>
 </div>
@@ -371,7 +677,7 @@ chosen level:</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.</span></p>
+<p><span class="versionmodified added">New in version 0.20.</span></p>
 </div>
 <p>Index level names may be supplied as keys.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="n">s</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -408,7 +714,7 @@ the <code class="docutils literal notranslate"><span class="pre">A</span></code>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.</span></p>
+<p><span class="versionmodified added">New in version 0.20.</span></p>
 </div>
 <p>Index level names may be specified as keys directly to <code class="docutils literal notranslate"><span class="pre">groupby</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -512,64 +818,64 @@ index are the group names and whose values are the sizes of each group.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Aggregation functions <strong>will not</strong> return the groups that you are aggregating over
 if they are named <em>columns</em>, when <code class="docutils literal notranslate"><span class="pre">as_index=True</span></code>, the default. The grouped columns will
 be the <strong>indices</strong> of the returned object.</p>
-<p class="last">Passing <code class="docutils literal notranslate"><span class="pre">as_index=False</span></code> <strong>will</strong> return the groups that you are aggregating over, if they are
+<p>Passing <code class="docutils literal notranslate"><span class="pre">as_index=False</span></code> <strong>will</strong> return the groups that you are aggregating over, if they are
 named <em>columns</em>.</p>
 </div>
 <p>Aggregating functions are the ones that reduce the dimension of the returned objects.
 Some common aggregating functions are tabulated below:</p>
-<table border="1" class="colwidths-given docutils">
+<table class="colwidths-given docutils align-default">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col style="width: 20%" />
+<col style="width: 80%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Function</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></td>
-<td>Compute mean of groups</td>
+<tbody>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">mean()</span></code></p></td>
+<td><p>Compute mean of groups</p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></td>
-<td>Compute sum of group values</td>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></p></td>
+<td><p>Compute sum of group values</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">size()</span></code></td>
-<td>Compute group sizes</td>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">size()</span></code></p></td>
+<td><p>Compute group sizes</p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code></td>
-<td>Compute count of group</td>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code></p></td>
+<td><p>Compute count of group</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></td>
-<td>Standard deviation of groups</td>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">std()</span></code></p></td>
+<td><p>Standard deviation of groups</p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></td>
-<td>Compute variance of groups</td>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">var()</span></code></p></td>
+<td><p>Compute variance of groups</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">sem()</span></code></td>
-<td>Standard error of the mean of groups</td>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">sem()</span></code></p></td>
+<td><p>Standard error of the mean of groups</p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">describe()</span></code></td>
-<td>Generates descriptive statistics</td>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">describe()</span></code></p></td>
+<td><p>Generates descriptive statistics</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">first()</span></code></td>
-<td>Compute first of group values</td>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">first()</span></code></p></td>
+<td><p>Compute first of group values</p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">last()</span></code></td>
-<td>Compute last of group values</td>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">last()</span></code></p></td>
+<td><p>Compute last of group values</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">nth()</span></code></td>
-<td>Take nth value, or a subset if n is a list</td>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">nth()</span></code></p></td>
+<td><p>Take nth value, or a subset if n is a list</p></td>
 </tr>
-<tr class="row-odd"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">min()</span></code></td>
-<td>Compute min of group values</td>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">min()</span></code></p></td>
+<td><p>Compute min of group values</p></td>
 </tr>
-<tr class="row-even"><td><code class="xref py py-meth docutils literal notranslate"><span class="pre">max()</span></code></td>
-<td>Compute max of group values</td>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">max()</span></code></p></td>
+<td><p>Compute max of group values</p></td>
 </tr>
 </tbody>
 </table>
@@ -625,8 +931,8 @@ must be either implemented on GroupBy or available via <a class="reference inter
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you pass a dict to <code class="docutils literal notranslate"><span class="pre">aggregate</span></code>, the ordering of the output columns is
+<p class="admonition-title">Note</p>
+<p>If you pass a dict to <code class="docutils literal notranslate"><span class="pre">aggregate</span></code>, the ordering of the output columns is
 non-deterministic. If you want to be sure the output columns will be in a specific
 order, you can use an <code class="docutils literal notranslate"><span class="pre">OrderedDict</span></code>.  Compare the output of the following two commands:</p>
 </div>
@@ -656,17 +962,17 @@ code would work even without the special versions via dispatching (see below).</
 <p>The <code class="docutils literal notranslate"><span class="pre">transform</span></code> method returns an object that is indexed the same (same size)
 as the one being grouped. The transform function must:</p>
 <ul class="simple">
-<li>Return a result that is either the same size as the group chunk or
+<li><p>Return a result that is either the same size as the group chunk or
 broadcastable to the size of the group chunk (e.g., a scalar,
-<code class="docutils literal notranslate"><span class="pre">grouped.transform(lambda</span> <span class="pre">x:</span> <span class="pre">x.iloc[-1])</span></code>).</li>
-<li>Operate column-by-column on the group chunk.  The transform is applied to
-the first group chunk using chunk.apply.</li>
-<li>Not perform in-place operations on the group chunk. Group chunks should
+<code class="docutils literal notranslate"><span class="pre">grouped.transform(lambda</span> <span class="pre">x:</span> <span class="pre">x.iloc[-1])</span></code>).</p></li>
+<li><p>Operate column-by-column on the group chunk.  The transform is applied to
+the first group chunk using chunk.apply.</p></li>
+<li><p>Not perform in-place operations on the group chunk. Group chunks should
 be treated as immutable, and changes to a group chunk may produce unexpected
 results. For example, when using <code class="docutils literal notranslate"><span class="pre">fillna</span></code>, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> must be <code class="docutils literal notranslate"><span class="pre">False</span></code>
-(<code class="docutils literal notranslate"><span class="pre">grouped.transform(lambda</span> <span class="pre">x:</span> <span class="pre">x.fillna(inplace=False))</span></code>).</li>
-<li>(Optionally) operates on the entire group chunk. If this is supported, a
-fast path is used starting from the <em>second</em> chunk.</li>
+(<code class="docutils literal notranslate"><span class="pre">grouped.transform(lambda</span> <span class="pre">x:</span> <span class="pre">x.fillna(inplace=False))</span></code>).</p></li>
+<li><p>(Optionally) operates on the entire group chunk. If this is supported, a
+fast path is used starting from the <em>second</em> chunk.</p></li>
 </ul>
 <p>For example, suppose we wished to standardize the data within each group:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [103]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;10/1/1999&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1100</span><span class="p">)</span>
@@ -752,19 +1058,19 @@ and that the transformed data contains no NAs.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Some functions will automatically transform the input when applied to a
 GroupBy object, but returning an object of the same shape as the original.
 Passing <code class="docutils literal notranslate"><span class="pre">as_index=False</span></code> will not affect these transformation methods.</p>
 <p>For example: <code class="docutils literal notranslate"><span class="pre">fillna,</span> <span class="pre">ffill,</span> <span class="pre">bfill,</span> <span class="pre">shift.</span></code>.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [139]: </span><span class="n">grouped</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [139]: </span><span class="n">grouped</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="new-syntax-to-window-and-resample-operations">
 <span id="groupby-transform-window-resample"></span><h3>New syntax to window and resample operations<a class="headerlink" href="#new-syntax-to-window-and-resample-operations" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.18.1.</span></p>
+<p><span class="versionmodified added">New in version 0.18.1.</span></p>
 </div>
 <p>Working with the resample, expanding or rolling operations on the groupby
 level used to require the application of helper functions. However,
@@ -835,12 +1141,12 @@ with NaNs.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Some functions when applied to a groupby object will act as a <strong>filter</strong> on the input, returning
 a reduced shape of the original (and potentially eliminating groups), but with the index unchanged.
 Passing <code class="docutils literal notranslate"><span class="pre">as_index=False</span></code> will not affect these transformation methods.</p>
 <p>For example: <code class="docutils literal notranslate"><span class="pre">head,</span> <span class="pre">tail</span></code>.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [154]: </span><span class="n">dff</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [154]: </span><span class="n">dff</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -935,19 +1241,19 @@ that is itself a series, and possibly upcast the result to a DataFrame:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><code class="docutils literal notranslate"><span class="pre">apply</span></code> can act as a reducer, transformer, <em>or</em> filter function, depending on exactly what is passed to it.
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">apply</span></code> can act as a reducer, transformer, <em>or</em> filter function, depending on exactly what is passed to it.
 So depending on the path taken, and exactly what you are grouping. Thus the grouped columns(s) may be included in
 the output as well as set the indices.</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
+<p class="admonition-title">Warning</p>
 <p>In the current implementation apply calls func twice on the
 first group to decide whether it can take a fast or slow code
 path. This can lead to unexpected behavior if func has
 side-effects, as they will take effect twice for the first
 group.</p>
-<div class="last highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [177]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [177]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">],</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
 
 <span class="gp">In [178]: </span><span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
 <span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -980,11 +1286,11 @@ will be (silently) dropped. Thus, this does not pose any problems:</p>
 is only interesting over one column (here <code class="docutils literal notranslate"><span class="pre">colname</span></code>), it may be filtered
 <em>before</em> applying the aggregation function.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>Any object column, also if it contains numerical values such as <code class="docutils literal notranslate"><span class="pre">Decimal</span></code>
 objects, is considered as a “nuisance” columns. They are excluded from
 aggregate functions automatically in groupby.</p>
-<p class="last">If you do wish to include decimal or object columns in an aggregation with
+<p>If you do wish to include decimal or object columns in an aggregation with
 other non-nuisance data types, you must do so explicitly.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [182]: </span><span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
@@ -1182,7 +1488,7 @@ will return a single row (or no row) per group if you pass an int for n:</p>
 <div class="section" id="enumerate-groups">
 <span id="groupby-ngroup"></span><h3>Enumerate groups<a class="headerlink" href="#enumerate-groups" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.20.2.</span></p>
+<p><span class="versionmodified added">New in version 0.20.2.</span></p>
 </div>
 <p>To see the ordering of the groups (as opposed to the order of rows
 within a group given by <code class="docutils literal notranslate"><span class="pre">cumcount</span></code>) you can use
@@ -1224,8 +1530,8 @@ of our grouping column <code class="docutils literal notranslate"><span class="p
 can be controlled by the <code class="docutils literal notranslate"><span class="pre">return_type</span></code> keyword of <code class="docutils literal notranslate"><span class="pre">boxplot</span></code>.
 See the <a class="reference internal" href="visualization.html#visualization-box"><span class="std std-ref">visualization documentation</span></a> for more.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">For historical reasons, <code class="docutils literal notranslate"><span class="pre">df.groupby(&quot;g&quot;).boxplot()</span></code> is not equivalent
+<p class="admonition-title">Warning</p>
+<p>For historical reasons, <code class="docutils literal notranslate"><span class="pre">df.groupby(&quot;g&quot;).boxplot()</span></code> is not equivalent
 to <code class="docutils literal notranslate"><span class="pre">df.boxplot(by=&quot;g&quot;)</span></code>. See <a class="reference internal" href="visualization.html#visualization-box-return"><span class="std std-ref">here</span></a> for
 an explanation.</p>
 </div>
@@ -1233,7 +1539,7 @@ an explanation.</p>
 <div class="section" id="piping-function-calls">
 <span id="groupby-pipe"></span><h3>Piping function calls<a class="headerlink" href="#piping-function-calls" title="Permalink to this headline">¶</a></h3>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 0.21.0.</span></p>
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
 </div>
 <p>Similar to the functionality provided by <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">Series</span></code>, functions
 that take <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> objects can be chained together using a <code class="docutils literal notranslate"><span class="pre">pipe</span></code> method to
@@ -1324,8 +1630,8 @@ introduction</span></a> and the
 <p>In order to resample to work on indices that are non-datetimelike, the following procedure can be utilized.</p>
 <p>In the following examples, <strong>df.index // 5</strong> returns a binary array which is used to determine what gets selected for the groupby operation.</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The below example shows how we can downsample by consolidation of samples into fewer samples. Here by using <strong>df.index // 5</strong>, we are aggregating the samples in bins. By applying <strong>std()</strong> function, we aggregate the information contained in many samples into a small subset of values which is their standard deviation thereby reducing the number of samples.</p>
+<p class="admonition-title">Note</p>
+<p>The below example shows how we can downsample by consolidation of samples into fewer samples. Here by using <strong>df.index // 5</strong>, we are aggregating the samples in bins. By applying <strong>std()</strong> function, we aggregate the information contained in many samples into a small subset of values which is their standard deviation thereby reducing the number of samples.</p>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [250]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
@@ -1366,76 +1672,12 @@ column index name will be used as the name of the inserted column:</p>
 </div>
 
 
-                    </div>
-                </div>
-            </div>
+              </div>
+          </main>
 
-            
-            <div class="clearer"></div>
-        </div>
+      </div>
     </div>
-</div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="timeseries.html" title="Time Series / Date functionality"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="computation.html" title="Computational tools"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pandas 0.24.2 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >User Guide</a> &#187;</li> 
-      </ul>
-    </div>
-<style type="text/css">
-    .scrollToTop {
-        text-align: center;
-        font-weight: bold;
-        position: fixed;
-        bottom: 60px;
-        right: 40px;
-        display: none;
-    }
-</style>
-<a href="#" class="scrollToTop">Scroll To Top</a>
-<script type="text/javascript">
-$(document).ready(function() {
-    //Check to see if the window is top if not then display button
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 200) {
-            $('.scrollToTop').fadeIn();
-        } else {
-            $('.scrollToTop').fadeOut();
-        }
-    });
 
-    //Click event to scroll to top
-    $('.scrollToTop').click(function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500);
-        return false;
-    });
-});
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-27880019-2']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
+    
   </body>
 </html>
