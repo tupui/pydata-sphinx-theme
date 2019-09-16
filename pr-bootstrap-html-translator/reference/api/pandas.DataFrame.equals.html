@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.equals &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.eval" href="pandas.DataFrame.eval.html" />
+    <link rel="prev" title="pandas.DataFrame.eq" href="pandas.DataFrame.eq.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-equals">
+<h1>pandas.DataFrame.equals<a class="headerlink" href="#pandas-dataframe-equals" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.equals">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">equals</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">other</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L1418-L1502"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.equals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether two objects contain the same elements.</p>
+<p>This function allows two Series or DataFrames to be compared against
+each other to see if they have the same shape and elements. NaNs in
+the same location are considered equal. The column headers do not
+need to have the same type, but the elements within the columns must
+be the same dtype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>other</strong><span class="classifier">Series or DataFrame</span></dt><dd><p>The other Series or DataFrame to be compared with the first.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if all elements are the same in both objects, False
+otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Series.eq</span></code></dt><dd><p>Compare two Series objects of the same length and return a Series where each element is True if the element in each Series is equal, False otherwise.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.eq.html#pandas.DataFrame.eq" title="pandas.DataFrame.eq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.eq</span></code></a></dt><dd><p>Compare two DataFrame objects of the same shape and return a DataFrame where each element is True if the respective element in each DataFrame is equal, False otherwise.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_series_equal</span></code></dt><dd><p>Return True if left and right Series are equal, False otherwise.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_frame_equal</span></code></dt><dd><p>Return True if left and right DataFrames are equal, False otherwise.</p>
+</dd>
+<dt><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.array_equal.html#numpy.array_equal" title="(in NumPy v1.17)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.array_equal</span></code></a></dt><dd><p>Return True if two arrays have the same shape and elements, False otherwise.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function requires that the elements have the same dtype as their
+respective elements in the other Series or DataFrame. However, the
+column labels do not need to have the same type, as long as they are
+still considered equal.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">    1   2</span>
+<span class="go">0  10  20</span>
+</pre></div>
+</div>
+<p>DataFrames df and exactly_equal have the same types and values for
+their elements and column labels, which will return True.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exactly_equal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exactly_equal</span>
+<span class="go">    1   2</span>
+<span class="go">0  10  20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">exactly_equal</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>DataFrames df and different_column_type have the same element
+types and values, but have different types for the column labels,
+which will still return True.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">different_column_type</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mf">1.0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mf">2.0</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">different_column_type</span>
+<span class="go">   1.0  2.0</span>
+<span class="go">0   10   20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">different_column_type</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>DataFrames df and different_data_type have different types for the
+same values for their elements, and will return False even though
+their column labels are the same values and types.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">different_data_type</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mf">20.0</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">different_data_type</span>
+<span class="go">      1     2</span>
+<span class="go">0  10.0  20.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">different_data_type</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
