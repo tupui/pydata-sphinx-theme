@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Comparison with SQL &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Comparison with SAS" href="comparison_with_sas.html" />
+    <link rel="prev" title="Comparison with R / R libraries" href="comparison_with_r.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../reference/index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../overview.html">Package overview</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../10min.html">10 Minutes to pandas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../basics.html">Essential Basic Functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../dsintro.html">Intro to Data Structures</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="index.html">Comparison with other tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../tutorials.html">Tutorials</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">Package overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10min.html">10 Minutes to pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html">Essential Basic Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dsintro.html">Intro to Data Structures</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Comparison with other tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="toc-entry toc-h2">
+            <a href="#select" class="nav-item nav-link">SELECT</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#where" class="nav-item nav-link">WHERE</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#group-by" class="nav-item nav-link">GROUP BY</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#join" class="nav-item nav-link">JOIN</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#inner-join" class="nav-item nav-link">INNER JOIN</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#left-outer-join" class="nav-item nav-link">LEFT OUTER JOIN</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#right-join" class="nav-item nav-link">RIGHT JOIN</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#full-join" class="nav-item nav-link">FULL JOIN</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#union" class="nav-item nav-link">UNION</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#pandas-equivalents-for-some-sql-analytic-and-aggregate-functions" class="nav-item nav-link">Pandas equivalents for some SQL analytic and aggregate functions</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#top-n-rows-with-offset" class="nav-item nav-link">Top N rows with offset</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#top-n-rows-per-group" class="nav-item nav-link">Top N rows per group</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#update" class="nav-item nav-link">UPDATE</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#delete" class="nav-item nav-link">DELETE</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="comparison-with-sql">
+<span id="compare-with-sql"></span><h1>Comparison with SQL<a class="headerlink" href="#comparison-with-sql" title="Permalink to this headline">¶</a></h1>
+<p>Since many potential pandas users have some familiarity with
+<a class="reference external" href="https://en.wikipedia.org/wiki/SQL">SQL</a>, this page is meant to provide some examples of how
+various SQL operations would be performed using pandas.</p>
+<p>If you’re new to pandas, you might want to first read through <a class="reference internal" href="../10min.html#min"><span class="std std-ref">10 Minutes to pandas</span></a>
+to familiarize yourself with the library.</p>
+<p>As is customary, we import pandas and NumPy as follows:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="gp">In [10]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<p>Most of the examples will utilize the <code class="docutils literal notranslate"><span class="pre">tips</span></code> dataset found within pandas tests.  We’ll read
+the data into a DataFrame called <cite>tips</cite> and assume we have a database table of the same name and
+structure.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://raw.github.com/pandas-dev&#39;</span>
+<span class="gp">   ....: </span>       <span class="s1">&#39;/pandas/master/pandas/tests/data/tips.csv&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [12]: </span><span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="gp">In [13]: </span><span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="select">
+<h2>SELECT<a class="headerlink" href="#select" title="Permalink to this headline">¶</a></h2>
+<p>In SQL, selection is done using a comma-separated list of columns you’d like to select (or a <code class="docutils literal notranslate"><span class="pre">*</span></code>
+to select all columns):</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">total_bill</span><span class="p">,</span> <span class="n">tip</span><span class="p">,</span> <span class="n">smoker</span><span class="p">,</span> <span class="n">time</span>
+<span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>With pandas, column selection is done by passing a list of column names to your DataFrame:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">tips</span><span class="p">[[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="s1">&#39;tip&#39;</span><span class="p">,</span> <span class="s1">&#39;smoker&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Calling the DataFrame without the list of column names would display all columns (akin to SQL’s
+<code class="docutils literal notranslate"><span class="pre">*</span></code>).</p>
+</div>
+<div class="section" id="where">
+<h2>WHERE<a class="headerlink" href="#where" title="Permalink to this headline">¶</a></h2>
+<p>Filtering in SQL is done via a WHERE clause.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">WHERE</span> <span class="n">time</span> <span class="o">=</span> <span class="s1">&#39;Dinner&#39;</span>
+<span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>DataFrames can be filtered in multiple ways; the most intuitive of which is using
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/indexing.html#boolean-indexing">boolean indexing</a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Dinner&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above statement is simply passing a <code class="docutils literal notranslate"><span class="pre">Series</span></code> of True/False objects to the DataFrame,
+returning all rows with True.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">is_dinner</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Dinner&#39;</span>
+
+<span class="gp">In [17]: </span><span class="n">is_dinner</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="gp">In [18]: </span><span class="n">tips</span><span class="p">[</span><span class="n">is_dinner</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Just like SQL’s OR and AND, multiple conditions can be passed to a DataFrame using | (OR) and &amp;
+(AND).</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- tips of more than $5.00 at Dinner meals</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">WHERE</span> <span class="n">time</span> <span class="o">=</span> <span class="s1">&#39;Dinner&#39;</span> <span class="k">AND</span> <span class="n">tip</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">.</span><span class="mi">00</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># tips of more than $5.00 at Dinner meals</span>
+<span class="gp">In [19]: </span><span class="n">tips</span><span class="p">[(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Dinner&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">5.00</span><span class="p">)]</span>
+</pre></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- tips by parties of at least 5 diners OR bill total was more than $45</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">WHERE</span> <span class="k">size</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="k">OR</span> <span class="n">total_bill</span> <span class="o">&gt;</span> <span class="mi">45</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># tips by parties of at least 5 diners OR bill total was more than $45</span>
+<span class="gp">In [20]: </span><span class="n">tips</span><span class="p">[(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">45</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>NULL checking is done using the <code class="xref py py-meth docutils literal notranslate"><span class="pre">notna()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">isna()</span></code>
+methods.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                      <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">]})</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [22]: </span><span class="n">frame</span>
+</pre></div>
+</div>
+<p>Assume we have a table of the same structure as our DataFrame above. We can see only the records
+where <code class="docutils literal notranslate"><span class="pre">col2</span></code> IS NULL with the following query:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">frame</span>
+<span class="k">WHERE</span> <span class="n">col2</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;col2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+</pre></div>
+</div>
+<p>Getting items where <code class="docutils literal notranslate"><span class="pre">col1</span></code> IS NOT NULL can be done with <code class="xref py py-meth docutils literal notranslate"><span class="pre">notna()</span></code>.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">frame</span>
+<span class="k">WHERE</span> <span class="n">col1</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">frame</span><span class="p">[</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;col1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="group-by">
+<h2>GROUP BY<a class="headerlink" href="#group-by" title="Permalink to this headline">¶</a></h2>
+<p>In pandas, SQL’s GROUP BY operations are performed using the similarly named
+<a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> method. <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> typically refers to a
+process where we’d like to split a dataset into groups, apply some function (typically aggregation)
+, and then combine the groups together.</p>
+<p>A common SQL operation would be getting the count of records in each group throughout a dataset.
+For instance, a query getting us the number of tips left by sex:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">sex</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">sex</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">Female     87</span>
+<span class="cm">Male      157</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>The pandas equivalent would be:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Notice that in the pandas code we used <code class="xref py py-meth docutils literal notranslate"><span class="pre">size()</span></code> and not
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code>. This is because
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code> applies the function to each column, returning
+the number of <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">null</span></code> records within each.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Alternatively, we could have applied the <code class="xref py py-meth docutils literal notranslate"><span class="pre">count()</span></code> method
+to an individual column:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">)[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Multiple functions can also be applied at once. For instance, say we’d like to see how tip amount
+differs by day of the week - <code class="xref py py-meth docutils literal notranslate"><span class="pre">agg()</span></code> allows you to pass a dictionary
+to your grouped DataFrame, indicating which functions to apply to specific columns.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">day</span><span class="p">,</span> <span class="k">AVG</span><span class="p">(</span><span class="n">tip</span><span class="p">),</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">day</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">Fri   2.734737   19</span>
+<span class="cm">Sat   2.993103   87</span>
+<span class="cm">Sun   3.255132   76</span>
+<span class="cm">Thur  2.771452   62</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;tip&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Grouping by more than one column is done by passing a list of columns to the
+<a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> method.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">smoker</span><span class="p">,</span> <span class="k">day</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">AVG</span><span class="p">(</span><span class="n">tip</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">smoker</span><span class="p">,</span> <span class="k">day</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">smoker day</span>
+<span class="cm">No     Fri      4  2.812500</span>
+<span class="cm">       Sat     45  3.102889</span>
+<span class="cm">       Sun     57  3.167895</span>
+<span class="cm">       Thur    45  2.673778</span>
+<span class="cm">Yes    Fri     15  2.714000</span>
+<span class="cm">       Sat     42  2.875476</span>
+<span class="cm">       Sun     19  3.516842</span>
+<span class="cm">       Thur    17  3.030000</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;smoker&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;tip&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="join">
+<span id="compare-with-sql-join"></span><h2>JOIN<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h2>
+<p>JOINs can be performed with <a class="reference internal" href="../../reference/api/pandas.DataFrame.join.html#pandas.DataFrame.join" title="pandas.DataFrame.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> or <a class="reference internal" href="../../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">merge()</span></code></a>. By default,
+<a class="reference internal" href="../../reference/api/pandas.DataFrame.join.html#pandas.DataFrame.join" title="pandas.DataFrame.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> will join the DataFrames on their indices. Each method has
+parameters allowing you to specify the type of join to perform (LEFT, RIGHT, INNER, FULL) or the
+columns to join on (column names or indices).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [31]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>Assume we have two database tables of the same name and structure as our DataFrames.</p>
+<p>Now let’s go over the various types of JOINs.</p>
+<div class="section" id="inner-join">
+<h3>INNER JOIN<a class="headerlink" href="#inner-join" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">df1</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">df2</span>
+  <span class="k">ON</span> <span class="n">df1</span><span class="p">.</span><span class="k">key</span> <span class="o">=</span> <span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># merge performs an INNER JOIN by default</span>
+<span class="gp">In [32]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">merge()</span></code></a> also offers parameters for cases when you’d like to join one DataFrame’s
+column with another DataFrame’s index.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">indexed_df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+
+<span class="gp">In [34]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">indexed_df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="left-outer-join">
+<h3>LEFT OUTER JOIN<a class="headerlink" href="#left-outer-join" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- show all records from df1</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">df1</span>
+<span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">df2</span>
+  <span class="k">ON</span> <span class="n">df1</span><span class="p">.</span><span class="k">key</span> <span class="o">=</span> <span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># show all records from df1</span>
+<span class="gp">In [35]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="right-join">
+<h3>RIGHT JOIN<a class="headerlink" href="#right-join" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- show all records from df2</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">df1</span>
+<span class="k">RIGHT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">df2</span>
+  <span class="k">ON</span> <span class="n">df1</span><span class="p">.</span><span class="k">key</span> <span class="o">=</span> <span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># show all records from df2</span>
+<span class="gp">In [36]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="full-join">
+<h3>FULL JOIN<a class="headerlink" href="#full-join" title="Permalink to this headline">¶</a></h3>
+<p>pandas also allows for FULL JOINs, which display both sides of the dataset, whether or not the
+joined columns find a match. As of writing, FULL JOINs are not supported in all RDBMS (MySQL).</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- show all records from both tables</span>
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">df1</span>
+<span class="k">FULL</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">df2</span>
+  <span class="k">ON</span> <span class="n">df1</span><span class="p">.</span><span class="k">key</span> <span class="o">=</span> <span class="n">df2</span><span class="p">.</span><span class="k">key</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># show all records from both frames</span>
+<span class="gp">In [37]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="union">
+<h2>UNION<a class="headerlink" href="#union" title="Permalink to this headline">¶</a></h2>
+<p>UNION ALL can be performed using <a class="reference internal" href="../../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">concat()</span></code></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span> <span class="s1">&#39;San Francisco&#39;</span><span class="p">,</span> <span class="s1">&#39;New York City&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)})</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [39]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Chicago&#39;</span><span class="p">,</span> <span class="s1">&#39;Boston&#39;</span><span class="p">,</span> <span class="s1">&#39;Los Angeles&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">rank</span>
+<span class="k">FROM</span> <span class="n">df1</span>
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">rank</span>
+<span class="k">FROM</span> <span class="n">df2</span><span class="p">;</span>
+<span class="cm">/*</span>
+<span class="cm">         city  rank</span>
+<span class="cm">      Chicago     1</span>
+<span class="cm">San Francisco     2</span>
+<span class="cm">New York City     3</span>
+<span class="cm">      Chicago     1</span>
+<span class="cm">       Boston     4</span>
+<span class="cm">  Los Angeles     5</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>SQL’s UNION is similar to UNION ALL, however UNION will remove duplicate rows.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">rank</span>
+<span class="k">FROM</span> <span class="n">df1</span>
+<span class="k">UNION</span>
+<span class="k">SELECT</span> <span class="n">city</span><span class="p">,</span> <span class="n">rank</span>
+<span class="k">FROM</span> <span class="n">df2</span><span class="p">;</span>
+<span class="c1">-- notice that there is only one Chicago record this time</span>
+<span class="cm">/*</span>
+<span class="cm">         city  rank</span>
+<span class="cm">      Chicago     1</span>
+<span class="cm">San Francisco     2</span>
+<span class="cm">New York City     3</span>
+<span class="cm">       Boston     4</span>
+<span class="cm">  Los Angeles     5</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<p>In pandas, you can use <a class="reference internal" href="../../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">concat()</span></code></a> in conjunction with
+<a class="reference internal" href="../../reference/api/pandas.DataFrame.drop_duplicates.html#pandas.DataFrame.drop_duplicates" title="pandas.DataFrame.drop_duplicates"><code class="xref py py-meth docutils literal notranslate"><span class="pre">drop_duplicates()</span></code></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">])</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pandas-equivalents-for-some-sql-analytic-and-aggregate-functions">
+<h2>Pandas equivalents for some SQL analytic and aggregate functions<a class="headerlink" href="#pandas-equivalents-for-some-sql-analytic-and-aggregate-functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="top-n-rows-with-offset">
+<h3>Top N rows with offset<a class="headerlink" href="#top-n-rows-with-offset" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- MySQL</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">tip</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">10</span> <span class="k">OFFSET</span> <span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">tips</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;tip&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="top-n-rows-per-group">
+<h3>Top N rows per group<a class="headerlink" href="#top-n-rows-per-group" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Oracle&#39;s ROW_NUMBER() analytic function</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="p">(</span>
+  <span class="k">SELECT</span>
+    <span class="n">t</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+    <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span><span class="p">(</span><span class="n">PARTITION</span> <span class="k">BY</span> <span class="k">day</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">total_bill</span> <span class="k">DESC</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rn</span>
+  <span class="k">FROM</span> <span class="n">tips</span> <span class="n">t</span>
+<span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">rn</span> <span class="o">&lt;</span> <span class="mi">3</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">day</span><span class="p">,</span> <span class="n">rn</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">rn</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;total_bill&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">   ....: </span>                    <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">])</span>
+<span class="gp">   ....: </span>                    <span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">   ....: </span>     <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;rn &lt; 3&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>     <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;rn&#39;</span><span class="p">]))</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>the same using <cite>rank(method=’first’)</cite> function</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">rnk</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">])[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">]</span>
+<span class="gp">   ....: </span>                     <span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+<span class="gp">   ....: </span>     <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;rnk &lt; 3&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>     <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;rnk&#39;</span><span class="p">]))</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Oracle&#39;s RANK() analytic function</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="p">(</span>
+  <span class="k">SELECT</span>
+    <span class="n">t</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+    <span class="n">RANK</span><span class="p">()</span> <span class="n">OVER</span><span class="p">(</span><span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">sex</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">tip</span><span class="p">)</span> <span class="k">AS</span> <span class="n">rnk</span>
+  <span class="k">FROM</span> <span class="n">tips</span> <span class="n">t</span>
+  <span class="k">WHERE</span> <span class="n">tip</span> <span class="o">&lt;</span> <span class="mi">2</span>
+<span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">rnk</span> <span class="o">&lt;</span> <span class="mi">3</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sex</span><span class="p">,</span> <span class="n">rnk</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Let’s find tips with (rank &lt; 3) per gender group for (tips &lt; 2).
+Notice that when using <code class="docutils literal notranslate"><span class="pre">rank(method='min')</span></code> function
+<cite>rnk_min</cite> remains the same for the same <cite>tip</cite>
+(as Oracle’s RANK() function)</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">rnk_min</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;sex&#39;</span><span class="p">])[</span><span class="s1">&#39;tip&#39;</span><span class="p">]</span>
+<span class="gp">   ....: </span>                        <span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">))</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;rnk_min &lt; 3&#39;</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="s1">&#39;rnk_min&#39;</span><span class="p">]))</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="update">
+<h2>UPDATE<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">tips</span>
+<span class="k">SET</span> <span class="n">tip</span> <span class="o">=</span> <span class="n">tip</span><span class="o">*</span><span class="mi">2</span>
+<span class="k">WHERE</span> <span class="n">tip</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">tips</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;tip&#39;</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete">
+<h2>DELETE<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">tips</span>
+<span class="k">WHERE</span> <span class="n">tip</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In pandas we select the rows that should remain, instead of deleting them</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="n">tips</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s1">&#39;tip&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

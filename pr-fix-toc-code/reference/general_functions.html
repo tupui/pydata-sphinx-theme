@@ -1,0 +1,402 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>General functions &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pandas.melt" href="api/pandas.melt.html" />
+    <link rel="prev" title="pandas.io.stata.StataWriter.write_file" href="api/pandas.io.stata.StataWriter.write_file.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="">General functions</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="io.html">Input/Output</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">General functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="toc-entry toc-h2">
+            <a href="#data-manipulations" class="nav-item nav-link">Data manipulations</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#top-level-missing-data" class="nav-item nav-link">Top-level missing data</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#top-level-conversions" class="nav-item nav-link">Top-level conversions</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#top-level-dealing-with-datetimelike" class="nav-item nav-link">Top-level dealing with datetimelike</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#top-level-dealing-with-intervals" class="nav-item nav-link">Top-level dealing with intervals</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#top-level-evaluation" class="nav-item nav-link">Top-level evaluation</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#hashing" class="nav-item nav-link">Hashing</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#testing" class="nav-item nav-link">Testing</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="general-functions">
+<span id="api-general-functions"></span><h1>General functions<a class="headerlink" href="#general-functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="data-manipulations">
+<h2>Data manipulations<a class="headerlink" href="#data-manipulations" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">melt</span></code></a>(frame[, id_vars, value_vars, var_name, …])</p></td>
+<td><p>Unpivot a DataFrame from wide format to long format, optionally leaving identifier variables set.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.pivot.html#pandas.pivot" title="pandas.pivot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pivot</span></code></a>(data[, index, columns, values])</p></td>
+<td><p>Return reshaped DataFrame organized by given index / column values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pivot_table</span></code></a>(data[, values, index, columns, …])</p></td>
+<td><p>Create a spreadsheet-style pivot table as a DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.crosstab.html#pandas.crosstab" title="pandas.crosstab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crosstab</span></code></a>(index, columns[, values, rownames, …])</p></td>
+<td><p>Compute a simple cross tabulation of two (or more) factors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.cut.html#pandas.cut" title="pandas.cut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cut</span></code></a>(x, bins[, right, labels, retbins, …])</p></td>
+<td><p>Bin values into discrete intervals.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.qcut.html#pandas.qcut" title="pandas.qcut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qcut</span></code></a>(x, q[, labels, retbins, precision, …])</p></td>
+<td><p>Quantile-based discretization function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge</span></code></a>(left, right[, how, on, left_on, …])</p></td>
+<td><p>Merge DataFrame or named Series objects with a database-style join.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.merge_ordered.html#pandas.merge_ordered" title="pandas.merge_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_ordered</span></code></a>(left, right[, on, left_on, …])</p></td>
+<td><p>Perform merge with optional filling/interpolation designed for ordered data like time series data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a>(left, right[, on, left_on, …])</p></td>
+<td><p>Perform an asof merge.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">concat</span></code></a>(objs[, axis, join, join_axes, …])</p></td>
+<td><p>Concatenate pandas objects along a particular axis with optional set logic along the other axes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.get_dummies.html#pandas.get_dummies" title="pandas.get_dummies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dummies</span></code></a>(data[, prefix, prefix_sep, …])</p></td>
+<td><p>Convert categorical variable into dummy/indicator variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.factorize.html#pandas.factorize" title="pandas.factorize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">factorize</span></code></a>(values[, sort, order, …])</p></td>
+<td><p>Encode the object as an enumerated type or categorical variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.unique.html#pandas.unique" title="pandas.unique"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unique</span></code></a>(values)</p></td>
+<td><p>Hash table-based unique.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.wide_to_long.html#pandas.wide_to_long" title="pandas.wide_to_long"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wide_to_long</span></code></a>(df, stubnames, i, j[, sep, suffix])</p></td>
+<td><p>Wide panel to long format.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-missing-data">
+<h2>Top-level missing data<a class="headerlink" href="#top-level-missing-data" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.isna.html#pandas.isna" title="pandas.isna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isna</span></code></a>(obj)</p></td>
+<td><p>Detect missing values for an array-like object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.isnull.html#pandas.isnull" title="pandas.isnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isnull</span></code></a>(obj)</p></td>
+<td><p>Detect missing values for an array-like object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.notna.html#pandas.notna" title="pandas.notna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">notna</span></code></a>(obj)</p></td>
+<td><p>Detect non-missing values for an array-like object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.notnull.html#pandas.notnull" title="pandas.notnull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">notnull</span></code></a>(obj)</p></td>
+<td><p>Detect non-missing values for an array-like object.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-conversions">
+<h2>Top-level conversions<a class="headerlink" href="#top-level-conversions" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.to_numeric.html#pandas.to_numeric" title="pandas.to_numeric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_numeric</span></code></a>(arg[, errors, downcast])</p></td>
+<td><p>Convert argument to a numeric type.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-dealing-with-datetimelike">
+<h2>Top-level dealing with datetimelike<a class="headerlink" href="#top-level-dealing-with-datetimelike" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_datetime</span></code></a>(arg[, errors, dayfirst, …])</p></td>
+<td><p>Convert argument to datetime.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_timedelta</span></code></a>(arg[, unit, box, errors])</p></td>
+<td><p>Convert argument to timedelta.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.date_range.html#pandas.date_range" title="pandas.date_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">date_range</span></code></a>([start, end, periods, freq, tz, …])</p></td>
+<td><p>Return a fixed frequency DatetimeIndex.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.bdate_range.html#pandas.bdate_range" title="pandas.bdate_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bdate_range</span></code></a>([start, end, periods, freq, tz, …])</p></td>
+<td><p>Return a fixed frequency DatetimeIndex, with business day as the default frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.period_range.html#pandas.period_range" title="pandas.period_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">period_range</span></code></a>([start, end, periods, freq, name])</p></td>
+<td><p>Return a fixed frequency PeriodIndex, with day (calendar) as the default frequency</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.timedelta_range.html#pandas.timedelta_range" title="pandas.timedelta_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timedelta_range</span></code></a>([start, end, periods, freq, …])</p></td>
+<td><p>Return a fixed frequency TimedeltaIndex, with day as the default frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.infer_freq.html#pandas.infer_freq" title="pandas.infer_freq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_freq</span></code></a>(index[, warn])</p></td>
+<td><p>Infer the most likely frequency given the input index.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-dealing-with-intervals">
+<h2>Top-level dealing with intervals<a class="headerlink" href="#top-level-dealing-with-intervals" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.interval_range.html#pandas.interval_range" title="pandas.interval_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interval_range</span></code></a>([start, end, periods, freq, …])</p></td>
+<td><p>Return a fixed frequency IntervalIndex</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="top-level-evaluation">
+<h2>Top-level evaluation<a class="headerlink" href="#top-level-evaluation" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.eval.html#pandas.eval" title="pandas.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(expr[, parser, engine, truediv, …])</p></td>
+<td><p>Evaluate a Python expression as a string using various backends.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="hashing">
+<h2>Hashing<a class="headerlink" href="#hashing" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.util.hash_array.html#pandas.util.hash_array" title="pandas.util.hash_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">util.hash_array</span></code></a>(vals[, encoding, hash_key, …])</p></td>
+<td><p>Given a 1d array, return an array of deterministic integers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/pandas.util.hash_pandas_object.html#pandas.util.hash_pandas_object" title="pandas.util.hash_pandas_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">util.hash_pandas_object</span></code></a>(obj[, index, …])</p></td>
+<td><p>Return a data hash of the Index/Series/DataFrame</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/pandas.test.html#pandas.test" title="pandas.test"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test</span></code></a>([extra_args])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

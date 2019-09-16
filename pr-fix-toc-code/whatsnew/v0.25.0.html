@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>What’s New in 0.25.0 (April XX, 2019) &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="../install.html" />
+    <link rel="prev" title="pandas: powerful Python data analysis toolkit" href="../index.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../reference/index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+        
+          
+              <li class="">
+                  <a href="#other-enhancements">Other Enhancements</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#indexing-with-date-strings-with-utc-offsets">Indexing with date strings with UTC offsets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#concatenating-sparse-values">Concatenating Sparse Values</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#increased-minimum-versions-for-dependencies">Increased minimum versions for dependencies</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#other-api-changes">Other API Changes</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#categorical">Categorical</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#datetimelike">Datetimelike</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#timedelta">Timedelta</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#timezones">Timezones</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#numeric">Numeric</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#conversion">Conversion</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#strings">Strings</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#interval">Interval</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#indexing">Indexing</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#missing">Missing</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#multiindex">MultiIndex</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#i-o">I/O</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#plotting">Plotting</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#groupby-resample-rolling">Groupby/Resample/Rolling</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#reshaping">Reshaping</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#sparse">Sparse</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="#other">Other</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="#other-enhancements">Other Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#indexing-with-date-strings-with-utc-offsets">Indexing with date strings with UTC offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#concatenating-sparse-values">Concatenating Sparse Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#increased-minimum-versions-for-dependencies">Increased minimum versions for dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-api-changes">Other API Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#categorical">Categorical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#datetimelike">Datetimelike</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#timedelta">Timedelta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#timezones">Timezones</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#numeric">Numeric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conversion">Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#strings">Strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interval">Interval</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#indexing">Indexing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#missing">Missing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiindex">MultiIndex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i-o">I/O</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#groupby-resample-rolling">Groupby/Resample/Rolling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reshaping">Reshaping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sparse">Sparse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other">Other</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="toc-entry toc-h2">
+            <a href="#other-enhancements" class="nav-item nav-link">Other Enhancements</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#backwards-incompatible-api-changes" class="nav-item nav-link">Backwards incompatible API changes</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#indexing-with-date-strings-with-utc-offsets" class="nav-item nav-link">Indexing with date strings with UTC offsets</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#concatenating-sparse-values" class="nav-item nav-link">Concatenating Sparse Values</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#increased-minimum-versions-for-dependencies" class="nav-item nav-link">Increased minimum versions for dependencies</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#other-api-changes" class="nav-item nav-link">Other API Changes</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#deprecations" class="nav-item nav-link">Deprecations</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#removal-of-prior-version-deprecations-changes" class="nav-item nav-link">Removal of prior version deprecations/changes</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#performance-improvements" class="nav-item nav-link">Performance Improvements</a>
+        </li>
+    
+        <li class="toc-entry toc-h3">
+            <a href="#bug-fixes" class="nav-item nav-link">Bug Fixes</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#categorical" class="nav-item nav-link">Categorical</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#datetimelike" class="nav-item nav-link">Datetimelike</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#timedelta" class="nav-item nav-link">Timedelta</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#timezones" class="nav-item nav-link">Timezones</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#numeric" class="nav-item nav-link">Numeric</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#conversion" class="nav-item nav-link">Conversion</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#strings" class="nav-item nav-link">Strings</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#interval" class="nav-item nav-link">Interval</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#indexing" class="nav-item nav-link">Indexing</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#missing" class="nav-item nav-link">Missing</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#multiindex" class="nav-item nav-link">MultiIndex</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#i-o" class="nav-item nav-link">I/O</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#plotting" class="nav-item nav-link">Plotting</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#groupby-resample-rolling" class="nav-item nav-link">Groupby/Resample/Rolling</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#reshaping" class="nav-item nav-link">Reshaping</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#sparse" class="nav-item nav-link">Sparse</a>
+        </li>
+    
+        <li class="toc-entry toc-h2">
+            <a href="#other" class="nav-item nav-link">Other</a><ul>
+                
+        <li class="toc-entry toc-h3">
+            <a href="#contributors" class="nav-item nav-link">Contributors</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="what-s-new-in-0-25-0-april-xx-2019">
+<span id="whatsnew-0250"></span><h1>What’s New in 0.25.0 (April XX, 2019)<a class="headerlink" href="#what-s-new-in-0-25-0-april-xx-2019" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Starting with the 0.25.x series of releases, pandas only supports Python 3.5 and higher.
+See <a class="reference internal" href="../install.html#install-dropping-27"><span class="std std-ref">Plan for dropping Python 2.7</span></a> for more details.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><cite>Panel</cite> has been fully removed. For N-D labeled data structures, please
+use <a class="reference external" href="https://xarray.pydata.org/en/stable/">xarray</a></p>
+</div>
+<p>These are the changes in pandas 0.25.0. See <a class="reference internal" href="index.html#release"><span class="std std-ref">Release Notes</span></a> for a full changelog
+including other versions of pandas.</p>
+<div class="section" id="other-enhancements">
+<span id="whatsnew-0250-enhancements-other"></span><h2>Other Enhancements<a class="headerlink" href="#other-enhancements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added support for ISO week year format (‘%G-%V-%u’) when parsing datetimes using :meth: <cite>to_datetime</cite> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/16607">GH16607</a>)</p></li>
+<li><p>Indexing of <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">Series</span></code> now accepts zerodim <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24919">GH24919</a>)</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.replace()</span></code> now supports the <code class="docutils literal notranslate"><span class="pre">fold</span></code> argument to disambiguate DST transition times (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25017">GH25017</a>)</p></li>
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.at_time.html#pandas.DataFrame.at_time" title="pandas.DataFrame.at_time"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.at_time()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.at_time()</span></code> now support <code class="xref py py-meth docutils literal notranslate"><span class="pre">datetime.time()</span></code> objects with timezones (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24043">GH24043</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Series.str</span></code> has gained <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.casefold()</span></code> method to removes all case distinctions present in a string (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25405">GH25405</a>)</p></li>
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.set_index.html#pandas.DataFrame.set_index" title="pandas.DataFrame.set_index"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.set_index()</span></code></a> now works for instances of <code class="docutils literal notranslate"><span class="pre">abc.Iterator</span></code>, provided their output is of the same length as the calling frame (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/22484">GH22484</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24984">GH24984</a>)</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.union()</span></code> now supports the <code class="docutils literal notranslate"><span class="pre">sort</span></code> argument. The behaviour of the sort parameter matches that of <code class="xref py py-meth docutils literal notranslate"><span class="pre">Index.union()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24994">GH24994</a>)</p></li>
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.rename.html#pandas.DataFrame.rename" title="pandas.DataFrame.rename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.rename()</span></code></a> now supports the <code class="docutils literal notranslate"><span class="pre">errors</span></code> argument to raise errors when attempting to rename nonexistent keys (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/13473">GH13473</a>)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RangeIndex</span></code> has gained <code class="xref py py-attr docutils literal notranslate"><span class="pre">start</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">stop</span></code>, and <code class="xref py py-attr docutils literal notranslate"><span class="pre">step</span></code> attributes (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25710">GH25710</a>)</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.timezone" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timezone</span></code></a> objects are now supported as arguments to timezone methods and constructors (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25065">GH25065</a>)</p></li>
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.query()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.eval()</span></code></a> now supports quoting column names with backticks to refer to names with spaces (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6508">GH6508</a>)</p></li>
+</ul>
+<div class="section" id="backwards-incompatible-api-changes">
+<span id="whatsnew-0250-api-breaking"></span><h3>Backwards incompatible API changes<a class="headerlink" href="#backwards-incompatible-api-changes" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="indexing-with-date-strings-with-utc-offsets">
+<span id="whatsnew-0250-api-breaking-utc-offset-indexing"></span><h2>Indexing with date strings with UTC offsets<a class="headerlink" href="#indexing-with-date-strings-with-utc-offsets" title="Permalink to this headline">¶</a></h2>
+<p>Indexing a <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code> with a <code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeIndex</span></code> with a
+date string with a UTC offset would previously ignore the UTC offset. Now, the UTC offset
+is respected in indexing. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24076">GH24076</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/16785">GH16785</a>)</p>
+<p><em>Previous Behavior</em>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">],</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;US/Pacific&#39;</span><span class="p">))</span>
+
+<span class="gp">In [2]: </span><span class="n">df</span>
+<span class="gh">Out[2]:</span>
+<span class="go">                           0</span>
+<span class="go">2019-01-01 00:00:00-08:00  0</span>
+
+<span class="gp">In [3]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;2019-01-01 00:00:00+04:00&#39;</span><span class="p">:</span><span class="s1">&#39;2019-01-01 01:00:00+04:00&#39;</span><span class="p">]</span>
+<span class="gh">Out[3]:</span>
+<span class="go">                           0</span>
+<span class="go">2019-01-01 00:00:00-08:00  0</span>
+</pre></div>
+</div>
+<p><em>New Behavior</em>:</p>
+</div>
+<div class="section" id="concatenating-sparse-values">
+<h2>Concatenating Sparse Values<a class="headerlink" href="#concatenating-sparse-values" title="Permalink to this headline">¶</a></h2>
+<p>When passed DataFrames whose values are sparse, <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> will now return a
+Series or DataFrame with sparse values, rather than a <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25702">GH25702</a>).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseArray</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])})</span>
+</pre></div>
+</div>
+<p><em>Previous Behavior:</em></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="nb">type</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df</span><span class="p">]))</span>
+<span class="go">pandas.core.sparse.frame.SparseDataFrame</span>
+</pre></div>
+</div>
+<p><em>New Behavior:</em></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="nb">type</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>This now matches the existing behavior of <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-class docutils literal notranslate"><span class="pre">concat</span></code></a> on <code class="docutils literal notranslate"><span class="pre">Series</span></code> with sparse values.
+<a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> will continue to return a <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> when all the values
+are instances of <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code>.</p>
+<p>This change also affects routines using <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> internally, like <a class="reference internal" href="../reference/api/pandas.get_dummies.html#pandas.get_dummies" title="pandas.get_dummies"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_dummies()</span></code></a>,
+which now returns a <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> in all cases (previously a <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> was
+returned if all the columns were dummy encoded, and a <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> otherwise).</p>
+<p>Providing any <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code> or <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> to <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> will
+cause a <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code> or <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> to be returned, as before.</p>
+</div>
+<div class="section" id="increased-minimum-versions-for-dependencies">
+<span id="whatsnew-0250-api-breaking-deps"></span><h2>Increased minimum versions for dependencies<a class="headerlink" href="#increased-minimum-versions-for-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Due to dropping support for Python 2.7, a number of optional dependencies have updated minimum versions.
+Independently, some minimum supported versions of dependencies were updated (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/23519">GH23519</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24942">GH24942</a>).
+If installed, we now require:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 39%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Minimum Version</p></th>
+<th class="head"><p>Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>beautifulsoup4</p></td>
+<td><p>4.4.1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>openpyxl</p></td>
+<td><p>2.2.6</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>pymysql</p></td>
+<td><p>0.6.6</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>pytz</p></td>
+<td><p>2015.4</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>sqlalchemy</p></td>
+<td><p>1.0.8</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>xlsxwriter</p></td>
+<td><p>0.7.7</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>xlwt</p></td>
+<td><p>1.0.0</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>pytest (dev)</p></td>
+<td><p>4.0.2</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="other-api-changes">
+<span id="whatsnew-0250-api-other"></span><h2>Other API Changes<a class="headerlink" href="#other-api-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DatetimeTZDtype</span></code> will now standardize pytz timezones to a common timezone instance (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24713">GH24713</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> and <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> scalars now implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numpy()</span></code> method as aliases to <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.to_datetime64()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timedelta.to_timedelta64()</span></code>, respectively. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24653">GH24653</a>)</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.strptime()</span></code> will now rise a <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25016">GH25016</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">DatetimeIndex.snap()</span></code> which didn’t preserving the <code class="docutils literal notranslate"><span class="pre">name</span></code> of the input <code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25575">GH25575</a>)</p></li>
+</ul>
+<div class="section" id="deprecations">
+<span id="whatsnew-0250-deprecations"></span><h3>Deprecations<a class="headerlink" href="#deprecations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Deprecated the <cite>M (months)</cite> and <cite>Y (year)</cite> <cite>units</cite> parameter of :func: <cite>pandas.to_timedelta</cite>, :func: <cite>pandas.Timedelta</cite> and :func: <cite>pandas.TimedeltaIndex</cite> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/16344">GH16344</a>)</p></li>
+<li><p>The functions <a class="reference internal" href="../reference/api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.to_datetime()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.to_timedelta.html#pandas.to_timedelta" title="pandas.to_timedelta"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.to_timedelta()</span></code></a> have deprecated the <code class="docutils literal notranslate"><span class="pre">box</span></code> keyword. Instead, use <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numpy()</span></code> or <code class="xref py py-meth docutils literal notranslate"><span class="pre">Timestamp.to_datetime64()</span></code>/<code class="xref py py-meth docutils literal notranslate"><span class="pre">Timedelta.to_timedelta64()</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24416">GH24416</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="removal-of-prior-version-deprecations-changes">
+<span id="whatsnew-0250-prior-deprecations"></span><h3>Removal of prior version deprecations/changes<a class="headerlink" href="#removal-of-prior-version-deprecations-changes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Removed (parts of) <code class="xref py py-class docutils literal notranslate"><span class="pre">Panel</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25047">GH25047</a>,:issue:<cite>25191</cite>,:issue:<cite>25231</cite>)</p></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="performance-improvements">
+<span id="whatsnew-0250-performance"></span><h3>Performance Improvements<a class="headerlink" href="#performance-improvements" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Significant speedup in <cite>SparseArray</cite> initialization that benefits most operations, fixing performance regression introduced in v0.20.0 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24985">GH24985</a>)</p></li>
+<li><p><cite>DataFrame.to_stata()</cite> is now faster when outputting data with any string or non-native endian columns (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25045">GH25045</a>)</p></li>
+<li><p>Improved performance of <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.searchsorted()</span></code>. The speedup is especially large when the dtype is
+int8/int16/int32 and the searched key is within the integer bounds for the dtype (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/22034">GH22034</a>)</p></li>
+<li><p>Improved performance of <code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.core.groupby.GroupBy.quantile()</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/20405">GH20405</a>)</p></li>
+<li><p>Improved performance of <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_csv()</span></code></a> by faster tokenizing and faster parsing of small float numbers (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25784">GH25784</a>)</p></li>
+<li><p>Improved performance of <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_csv()</span></code></a> by faster parsing of N/A and boolean values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25804">GH25804</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="bug-fixes">
+<span id="whatsnew-0250-bug-fixes"></span><h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="categorical">
+<h2>Categorical<a class="headerlink" href="#categorical" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="datetimelike">
+<h2>Datetimelike<a class="headerlink" href="#datetimelike" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_datetime()</span></code></a> which would raise an (incorrect) <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> when called with a date far into the future and the <code class="docutils literal notranslate"><span class="pre">format</span></code> argument specified instead of raising <code class="docutils literal notranslate"><span class="pre">OutOfBoundsDatetime</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/23830">GH23830</a>)</p></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="timedelta">
+<h2>Timedelta<a class="headerlink" href="#timedelta" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="timezones">
+<h2>Timezones<a class="headerlink" href="#timezones" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">DatetimeIndex.to_frame()</span></code> where timezone aware data would be converted to timezone naive data (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25809">GH25809</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_datetime()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">utc=True</span></code> and datetime strings that would apply previously parsed UTC offsets to subsequent arguments (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24992">GH24992</a>)</p></li>
+<li><p>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">Timestamp.tz_localize()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">Timestamp.tz_convert()</span></code> does not propagate <code class="docutils literal notranslate"><span class="pre">freq</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25241">GH25241</a>)</p></li>
+<li><p>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">Series.at()</span></code> where setting <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> with timezone raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25506">GH25506</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.DataFrame.update.html#pandas.DataFrame.update" title="pandas.DataFrame.update"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.update()</span></code></a> when updating with timezone aware data would return timezone naive data (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25807">GH25807</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="numeric">
+<h2>Numeric<a class="headerlink" href="#numeric" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.to_numeric.html#pandas.to_numeric" title="pandas.to_numeric"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numeric()</span></code></a> in which large negative numbers were being improperly handled (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24910">GH24910</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.to_numeric.html#pandas.to_numeric" title="pandas.to_numeric"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_numeric()</span></code></a> in which numbers were being coerced to float, even though <code class="docutils literal notranslate"><span class="pre">errors</span></code> was not <code class="docutils literal notranslate"><span class="pre">coerce</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24910">GH24910</a>)</p></li>
+<li><p>Bug in error messages in <a class="reference internal" href="../reference/api/pandas.DataFrame.corr.html#pandas.DataFrame.corr" title="pandas.DataFrame.corr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.corr()</span></code></a> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.corr()</span></code>. Added the possibility of using a callable. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25729">GH25729</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.divmod()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.rdivmod()</span></code> which would raise an (incorrect) <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> rather than return a pair of <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code> objects as result (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25557">GH25557</a>)</p></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="conversion">
+<h2>Conversion<a class="headerlink" href="#conversion" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="interval">
+<h2>Interval<a class="headerlink" href="#interval" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Construction of <code class="xref py py-class docutils literal notranslate"><span class="pre">Interval</span></code> is restricted to numeric, <code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Timedelta</span></code> endpoints (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/23013">GH23013</a>)</p></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="indexing">
+<h2>Indexing<a class="headerlink" href="#indexing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="missing">
+<h2>Missing<a class="headerlink" href="#missing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Fixed misleading exception message in <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.missing()</span></code> if argument <code class="docutils literal notranslate"><span class="pre">order</span></code> is required, but omitted (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10633">GH10633</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24014">GH24014</a>).</p></li>
+<li><p>Fixed class type displayed in exception message in <a class="reference internal" href="../reference/api/pandas.DataFrame.dropna.html#pandas.DataFrame.dropna" title="pandas.DataFrame.dropna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.dropna()</span></code></a> if invalid <code class="docutils literal notranslate"><span class="pre">axis</span></code> parameter passed (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25555">GH25555</a>)</p></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="multiindex">
+<h2>MultiIndex<a class="headerlink" href="#multiindex" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bug in which incorrect exception raised by <code class="xref py py-meth docutils literal notranslate"><span class="pre">pd.Timedelta()</span></code> when testing the membership of <code class="xref py py-class docutils literal notranslate"><span class="pre">MultiIndex</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24570">GH24570</a>)</p></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="i-o">
+<h2>I/O<a class="headerlink" href="#i-o" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.DataFrame.to_html.html#pandas.DataFrame.to_html" title="pandas.DataFrame.to_html"><code class="xref py py-func docutils literal notranslate"><span class="pre">DataFrame.to_html()</span></code></a> where values were truncated using display options instead of outputting the full content (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/17004">GH17004</a>)</p></li>
+<li><p>Fixed bug in missing text when using <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_clipboard()</span></code> if copying utf-16 characters in Python 3 on Windows (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25040">GH25040</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_json()</span></code></a> for <code class="docutils literal notranslate"><span class="pre">orient='table'</span></code> when it tries to infer dtypes by default, which is not applicable as dtypes are already defined in the JSON schema (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21345">GH21345</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_json()</span></code></a> for <code class="docutils literal notranslate"><span class="pre">orient='table'</span></code> and float index, as it infers index dtype by default, which is not applicable because index dtype is already defined in the JSON schema (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25433">GH25433</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_json()</span></code></a> for <code class="docutils literal notranslate"><span class="pre">orient='table'</span></code> and string of float column names, as it makes a column name type conversion to Timestamp, which is not applicable because column names are already defined in the JSON schema (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25435">GH25435</a>)</p></li>
+<li><p>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">json_normalize()</span></code> for <code class="docutils literal notranslate"><span class="pre">errors='ignore'</span></code> where missing values in the input data, were filled in resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with the string “nan” instead of <code class="docutils literal notranslate"><span class="pre">numpy.nan</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25468">GH25468</a>)</p></li>
+<li><p><a class="reference internal" href="../reference/api/pandas.DataFrame.to_html.html#pandas.DataFrame.to_html" title="pandas.DataFrame.to_html"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_html()</span></code></a> now raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> when using an invalid type for the <code class="docutils literal notranslate"><span class="pre">classes</span></code> parameter instead of <code class="docutils literal notranslate"><span class="pre">AsseertionError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25608">GH25608</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.DataFrame.to_string.html#pandas.DataFrame.to_string" title="pandas.DataFrame.to_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_string()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.to_latex.html#pandas.DataFrame.to_latex" title="pandas.DataFrame.to_latex"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_latex()</span></code></a> that would lead to incorrect output when the <code class="docutils literal notranslate"><span class="pre">header</span></code> keyword is used (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/16718">GH16718</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_csv()</span></code></a> not properly interpreting the UTF8 encoded filenames on Windows on Python 3.6+ (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/15086">GH15086</a>)</p></li>
+<li><p>Improved performance in <a class="reference internal" href="../reference/api/pandas.read_stata.html#pandas.read_stata" title="pandas.read_stata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.read_stata()</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.io.stata.StataReader</span></code> when converting columns that have missing values (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25772">GH25772</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Fixed bug where <code class="xref py py-class docutils literal notranslate"><span class="pre">api.extensions.ExtensionArray</span></code> could not be used in matplotlib plotting (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25587">GH25587</a>)</p></li>
+<li><p>Bug in an error message in <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot()</span></code></a>. Improved the error message if non-numerics are passed to <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.plot()</span></code></a> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25481">GH25481</a>)</p></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="groupby-resample-rolling">
+<h2>Groupby/Resample/Rolling<a class="headerlink" href="#groupby-resample-rolling" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.core.resample.Resampler.agg()</span></code> with a timezone aware index where <code class="docutils literal notranslate"><span class="pre">OverflowError</span></code> would raise when passing a list of functions (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/22660">GH22660</a>)</p></li>
+<li><p>Bug in <code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.core.groupby.DataFrameGroupBy.nunique()</span></code> in which the names of column levels were lost (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/23222">GH23222</a>)</p></li>
+<li><p>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.core.groupby.GroupBy.agg()</span></code> when applying a aggregation function to timezone aware data (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/23683">GH23683</a>)</p></li>
+<li><p>Bug in <code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.core.groupby.GroupBy.first()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.core.groupby.GroupBy.last()</span></code> where timezone information would be dropped (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21603">GH21603</a>)</p></li>
+<li><p>Ensured that ordering of outputs in <code class="docutils literal notranslate"><span class="pre">groupby</span></code> aggregation functions is consistent across all versions of Python (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25692">GH25692</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="reshaping">
+<h2>Reshaping<a class="headerlink" href="#reshaping" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.merge()</span></code></a> adds a string of <code class="docutils literal notranslate"><span class="pre">None</span></code> if <code class="docutils literal notranslate"><span class="pre">None</span></code> is assigned in suffixes instead of remain the column name as-is (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24782">GH24782</a>).</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.merge.html#pandas.merge" title="pandas.merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge()</span></code></a> when merging by index name would sometimes result in an incorrectly numbered index (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24212">GH24212</a>)</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">to_records()</span></code> now accepts dtypes to its <cite>column_dtypes</cite> parameter (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24895">GH24895</a>)</p></li>
+<li><p>Bug in <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> where order of <code class="docutils literal notranslate"><span class="pre">OrderedDict</span></code> (and <code class="docutils literal notranslate"><span class="pre">dict</span></code> in Python 3.6+) is not respected, when passed in as  <code class="docutils literal notranslate"><span class="pre">objs</span></code> argument (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/21510">GH21510</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="sparse">
+<h2>Sparse<a class="headerlink" href="#sparse" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Significant speedup in <cite>SparseArray</cite> initialization that benefits most operations, fixing performance regression introduced in v0.20.0 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/24985">GH24985</a>)</p></li>
+<li><p>Bug in <code class="xref py py-class docutils literal notranslate"><span class="pre">SparseFrame</span></code> constructor where passing <code class="docutils literal notranslate"><span class="pre">None</span></code> as the data would cause <code class="docutils literal notranslate"><span class="pre">default_fill_value</span></code> to be ignored (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/16807">GH16807</a>)</p></li>
+<li></li>
+</ul>
+</div>
+<div class="section" id="other">
+<h2>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<div class="section" id="contributors">
+<span id="whatsnew-0-250-contributors"></span><h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
