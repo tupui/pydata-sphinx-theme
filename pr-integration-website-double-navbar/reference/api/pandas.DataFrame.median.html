@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.median &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.melt" href="pandas.DataFrame.melt.html" />
+    <link rel="prev" title="pandas.DataFrame.mean" href="pandas.DataFrame.mean.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+
+  <div class="collapse navbar-collapse" id="nav-content">   
+      <ul class="navbar-nav">
+          
+              
+                  <li class="nav-item">
+                      <a class="nav-link" href="/install.html">Install</a>
+                  </li>
+              
+          
+              
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle"
+                         data-toggle="dropdown"
+                         id="documentation"
+                         href="#"
+                         role="button"
+                         aria-haspopup="true"
+                         aria-expanded="false">Documentation</a>
+                      <div class="dropdown-menu" aria-labelledby="documentation">
+                      
+                          <a class="dropdown-item" href="/docs/getting_started/index.html">Getting started</a>
+                      
+                          <a class="dropdown-item" href="/docs/user_guide/index.html">User guide</a>
+                      
+                          <a class="dropdown-item" href="/docs/reference/index.html">API reference</a>
+                      
+                          <a class="dropdown-item" href="/docs/development/index.html">Contributing to pandas</a>
+                      
+                          <a class="dropdown-item" href="/docs/whatsnew/index.html">Release notes</a>
+                      
+                      </div>
+                  </li>
+              
+          
+              
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle"
+                         data-toggle="dropdown"
+                         id="community"
+                         href="#"
+                         role="button"
+                         aria-haspopup="true"
+                         aria-expanded="false">Community</a>
+                      <div class="dropdown-menu" aria-labelledby="community">
+                      
+                          <a class="dropdown-item" href="/community/about.html">About pandas</a>
+                      
+                          <a class="dropdown-item" href="/community/roadmap.html">Project roadmap</a>
+                      
+                          <a class="dropdown-item" href="/community/ecosystem.html">Ecosystem</a>
+                      
+                          <a class="dropdown-item" href="https://stackoverflow.com/questions/tagged/pandas">Ask a question (StackOverflow)</a>
+                      
+                          <a class="dropdown-item" href="https://groups.google.com/forum/#!forum/pydata">Discuss (mailing list)</a>
+                      
+                          <a class="dropdown-item" href="/community/team.html">Team</a>
+                      
+                          <a class="dropdown-item" href="/community/coc.html">Code of Conduct</a>
+                      
+                          <a class="dropdown-item" href="/community/citing.html">Citing pandas</a>
+                      
+                      </div>
+                  </li>
+              
+          
+              
+                  <li class="nav-item">
+                      <a class="nav-link" href="/donate.html">Donate</a>
+                  </li>
+              
+          
+      </ul>
+  </div>
+</nav>
+
+
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+        <div class="container">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../getting_started/index.html">Getting Started</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>        
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="../../install.html">
+        <span>
+          <span class="btn btn-primary d-lg-inline-block mb-3 mb-md-0 ml-md-3">Install</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-median">
+<h1>pandas.DataFrame.median<a class="headerlink" href="#pandas-dataframe-median" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.median">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">median</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">axis=None</em>, <em class="sig-param">skipna=None</em>, <em class="sig-param">level=None</em>, <em class="sig-param">numeric_only=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L11594-L11619"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.median" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the median of the values for the requested axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>axis</strong><span class="classifier">{index (0), columns (1)}</span></dt><dd><p>Axis for the function to be applied on.</p>
+</dd>
+<dt><strong>skipna</strong><span class="classifier">bool, default True</span></dt><dd><p>Exclude NA/null values when computing the result.</p>
+</dd>
+<dt><strong>level</strong><span class="classifier">int or level name, default None</span></dt><dd><p>If the axis is a MultiIndex (hierarchical), count along a
+particular level, collapsing into a Series.</p>
+</dd>
+<dt><strong>numeric_only</strong><span class="classifier">bool, default None</span></dt><dd><p>Include only float, int, boolean columns. If None, will attempt to use
+everything, then use only numeric data. Not implemented for Series.</p>
+</dd>
+<dt><strong>**kwargs</strong></dt><dd><p>Additional keyword arguments to be passed to the function.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Series or DataFrame (if level specified)</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+
+    
+  </body>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
