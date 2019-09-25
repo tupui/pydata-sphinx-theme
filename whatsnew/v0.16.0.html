@@ -286,68 +286,68 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#new-features" class="nav-item nav-link">New features</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#new-features" class="nav-link">New features</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#dataframe-assign" class="nav-item nav-link">DataFrame Assign</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#dataframe-assign" class="nav-link">DataFrame Assign</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#interaction-with-scipy-sparse" class="nav-item nav-link">Interaction with scipy.sparse</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#interaction-with-scipy-sparse" class="nav-link">Interaction with scipy.sparse</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#string-methods-enhancements" class="nav-item nav-link">String Methods Enhancements</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#string-methods-enhancements" class="nav-link">String Methods Enhancements</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#other-enhancements" class="nav-item nav-link">Other enhancements</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#other-enhancements" class="nav-link">Other enhancements</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#backwards-incompatible-api-changes" class="nav-item nav-link">Backwards incompatible API changes</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#backwards-incompatible-api-changes" class="nav-link">Backwards incompatible API changes</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#changes-in-timedelta" class="nav-item nav-link">Changes in Timedelta</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#changes-in-timedelta" class="nav-link">Changes in Timedelta</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#indexing-changes" class="nav-item nav-link">Indexing Changes</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#indexing-changes" class="nav-link">Indexing Changes</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#categorical-changes" class="nav-item nav-link">Categorical Changes</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#categorical-changes" class="nav-link">Categorical Changes</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#other-api-changes" class="nav-item nav-link">Other API Changes</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#other-api-changes" class="nav-link">Other API Changes</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#deprecations" class="nav-item nav-link">Deprecations</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#deprecations" class="nav-link">Deprecations</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#removal-of-prior-version-deprecations-changes" class="nav-item nav-link">Removal of prior version deprecations/changes</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#removal-of-prior-version-deprecations-changes" class="nav-link">Removal of prior version deprecations/changes</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#performance-improvements" class="nav-item nav-link">Performance Improvements</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#performance-improvements" class="nav-link">Performance Improvements</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#bug-fixes" class="nav-item nav-link">Bug Fixes</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#bug-fixes" class="nav-link">Bug Fixes</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#contributors" class="nav-item nav-link">Contributors</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#contributors" class="nav-link">Contributors</a>
         </li>
     
     </ul>
@@ -1029,10 +1029,27 @@ SQLAlchemy type  (<a class="reference external" href="https://github.com/pandas-
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

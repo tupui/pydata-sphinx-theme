@@ -181,42 +181,42 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#data-structures" class="nav-item nav-link">Data Structures</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#data-structures" class="nav-link">Data Structures</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#why-more-than-one-data-structure" class="nav-item nav-link">Why more than one data structure?</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#why-more-than-one-data-structure" class="nav-link">Why more than one data structure?</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#mutability-and-copying-of-data" class="nav-item nav-link">Mutability and copying of data</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#mutability-and-copying-of-data" class="nav-link">Mutability and copying of data</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#getting-support" class="nav-item nav-link">Getting Support</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#getting-support" class="nav-link">Getting Support</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#community" class="nav-item nav-link">Community</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#community" class="nav-link">Community</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#project-governance" class="nav-item nav-link">Project Governance</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#project-governance" class="nav-link">Project Governance</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#development-team" class="nav-item nav-link">Development Team</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#development-team" class="nav-link">Development Team</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#institutional-partners" class="nav-item nav-link">Institutional Partners</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#institutional-partners" class="nav-link">Institutional Partners</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#license" class="nav-item nav-link">License</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#license" class="nav-link">License</a>
         </li>
     
     </ul>
@@ -434,10 +434,27 @@ The documents clarify how decisions are made and how the various elements of our
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

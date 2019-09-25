@@ -174,57 +174,57 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#plan-for-dropping-python-2-7" class="nav-item nav-link">Plan for dropping Python 2.7</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plan-for-dropping-python-2-7" class="nav-link">Plan for dropping Python 2.7</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#python-version-support" class="nav-item nav-link">Python version support</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#python-version-support" class="nav-link">Python version support</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#installing-pandas" class="nav-item nav-link">Installing pandas</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#installing-pandas" class="nav-link">Installing pandas</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#installing-with-anaconda" class="nav-item nav-link">Installing with Anaconda</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#installing-with-anaconda" class="nav-link">Installing with Anaconda</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#installing-with-miniconda" class="nav-item nav-link">Installing with Miniconda</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#installing-with-miniconda" class="nav-link">Installing with Miniconda</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#installing-from-pypi" class="nav-item nav-link">Installing from PyPI</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#installing-from-pypi" class="nav-link">Installing from PyPI</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#installing-with-activepython" class="nav-item nav-link">Installing with ActivePython</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#installing-with-activepython" class="nav-link">Installing with ActivePython</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#installing-using-your-linux-distribution-s-package-manager" class="nav-item nav-link">Installing using your Linux distribution’s package manager.</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#installing-using-your-linux-distribution-s-package-manager" class="nav-link">Installing using your Linux distribution’s package manager.</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#installing-from-source" class="nav-item nav-link">Installing from source</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#installing-from-source" class="nav-link">Installing from source</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#running-the-test-suite" class="nav-item nav-link">Running the test suite</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#running-the-test-suite" class="nav-link">Running the test suite</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#dependencies" class="nav-item nav-link">Dependencies</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#dependencies" class="nav-link">Dependencies</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#recommended-dependencies" class="nav-item nav-link">Recommended Dependencies</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#recommended-dependencies" class="nav-link">Recommended Dependencies</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#optional-dependencies" class="nav-item nav-link">Optional Dependencies</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#optional-dependencies" class="nav-link">Optional Dependencies</a>
         </li>
     
             </ul>
@@ -577,10 +577,27 @@ distribution like <a class="reference external" href="http://docs.continuum.io/a
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

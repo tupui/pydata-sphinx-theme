@@ -286,36 +286,36 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#support-for-non-unique-indexes" class="nav-item nav-link">Support for non-unique indexes</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#support-for-non-unique-indexes" class="nav-link">Support for non-unique indexes</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#numpy-datetime64-dtype-and-1-6-dependency" class="nav-item nav-link">NumPy datetime64 dtype and 1.6 dependency</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#numpy-datetime64-dtype-and-1-6-dependency" class="nav-link">NumPy datetime64 dtype and 1.6 dependency</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#time-series-changes-and-improvements" class="nav-item nav-link">Time series changes and improvements</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#time-series-changes-and-improvements" class="nav-link">Time series changes and improvements</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#other-new-features" class="nav-item nav-link">Other new features</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#other-new-features" class="nav-link">Other new features</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#new-plotting-methods" class="nav-item nav-link">New plotting methods</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#new-plotting-methods" class="nav-link">New plotting methods</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#other-api-changes" class="nav-item nav-link">Other API changes</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#other-api-changes" class="nav-link">Other API changes</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#potential-porting-issues-for-pandas-0-7-3-users" class="nav-item nav-link">Potential porting issues for pandas <= 0.7.3 users</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#potential-porting-issues-for-pandas-0-7-3-users" class="nav-link">Potential porting issues for pandas <= 0.7.3 users</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#contributors" class="nav-item nav-link">Contributors</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#contributors" class="nav-link">Contributors</a>
         </li>
     
     </ul>
@@ -595,10 +595,27 @@ inspect <code class="docutils literal notranslate"><span class="pre">index.is_un
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

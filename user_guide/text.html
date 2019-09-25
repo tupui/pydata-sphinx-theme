@@ -272,64 +272,64 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#splitting-and-replacing-strings" class="nav-item nav-link">Splitting and Replacing Strings</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#splitting-and-replacing-strings" class="nav-link">Splitting and Replacing Strings</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#concatenation" class="nav-item nav-link">Concatenation</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#concatenation" class="nav-link">Concatenation</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#concatenating-a-single-series-into-a-string" class="nav-item nav-link">Concatenating a single Series into a string</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#concatenating-a-single-series-into-a-string" class="nav-link">Concatenating a single Series into a string</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#concatenating-a-series-and-something-list-like-into-a-series" class="nav-item nav-link">Concatenating a Series and something list-like into a Series</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#concatenating-a-series-and-something-list-like-into-a-series" class="nav-link">Concatenating a Series and something list-like into a Series</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#concatenating-a-series-and-something-array-like-into-a-series" class="nav-item nav-link">Concatenating a Series and something array-like into a Series</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#concatenating-a-series-and-something-array-like-into-a-series" class="nav-link">Concatenating a Series and something array-like into a Series</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#concatenating-a-series-and-an-indexed-object-into-a-series-with-alignment" class="nav-item nav-link">Concatenating a Series and an indexed object into a Series, with alignment</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#concatenating-a-series-and-an-indexed-object-into-a-series-with-alignment" class="nav-link">Concatenating a Series and an indexed object into a Series, with alignment</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#concatenating-a-series-and-many-objects-into-a-series" class="nav-item nav-link">Concatenating a Series and many objects into a Series</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#concatenating-a-series-and-many-objects-into-a-series" class="nav-link">Concatenating a Series and many objects into a Series</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#indexing-with-str" class="nav-item nav-link">Indexing with .str</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#indexing-with-str" class="nav-link">Indexing with .str</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#extracting-substrings" class="nav-item nav-link">Extracting Substrings</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#extracting-substrings" class="nav-link">Extracting Substrings</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#extract-first-match-in-each-subject-extract" class="nav-item nav-link">Extract first match in each subject (extract)</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#extract-first-match-in-each-subject-extract" class="nav-link">Extract first match in each subject (extract)</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#extract-all-matches-in-each-subject-extractall" class="nav-item nav-link">Extract all matches in each subject (extractall)</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#extract-all-matches-in-each-subject-extractall" class="nav-link">Extract all matches in each subject (extractall)</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#testing-for-strings-that-match-or-contain-a-pattern" class="nav-item nav-link">Testing for Strings that Match or Contain a Pattern</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#testing-for-strings-that-match-or-contain-a-pattern" class="nav-link">Testing for Strings that Match or Contain a Pattern</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#creating-indicator-variables" class="nav-item nav-link">Creating Indicator Variables</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#creating-indicator-variables" class="nav-link">Creating Indicator Variables</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#method-summary" class="nav-item nav-link">Method Summary</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#method-summary" class="nav-link">Method Summary</a>
         </li>
     
     </ul>
@@ -1025,10 +1025,27 @@ For example if they are separated by a <code class="docutils literal notranslate
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

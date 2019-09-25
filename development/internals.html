@@ -167,22 +167,22 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#indexing" class="nav-item nav-link">Indexing</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#indexing" class="nav-link">Indexing</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#multiindex" class="nav-item nav-link">MultiIndex</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#multiindex" class="nav-link">MultiIndex</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#values" class="nav-item nav-link">Values</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#values" class="nav-link">Values</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#subclassing-pandas-data-structures" class="nav-item nav-link">Subclassing pandas Data Structures</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#subclassing-pandas-data-structures" class="nav-link">Subclassing pandas Data Structures</a>
         </li>
     
     </ul>
@@ -299,10 +299,27 @@ process of removing the index subclasses here so that it’s always an
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

@@ -286,76 +286,76 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#new-features" class="nav-item nav-link">New features</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#new-features" class="nav-link">New features</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#categoricals-in-series-dataframe" class="nav-item nav-link">Categoricals in Series/DataFrame</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#categoricals-in-series-dataframe" class="nav-link">Categoricals in Series/DataFrame</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#timedeltaindex-scalar" class="nav-item nav-link">TimedeltaIndex/Scalar</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#timedeltaindex-scalar" class="nav-link">TimedeltaIndex/Scalar</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#memory-usage" class="nav-item nav-link">Memory Usage</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#memory-usage" class="nav-link">Memory Usage</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#dt-accessor" class="nav-item nav-link">.dt accessor</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#dt-accessor" class="nav-link">.dt accessor</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#timezone-handling-improvements" class="nav-item nav-link">Timezone handling improvements</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#timezone-handling-improvements" class="nav-link">Timezone handling improvements</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#rolling-expanding-moments-improvements" class="nav-item nav-link">Rolling/Expanding Moments improvements</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#rolling-expanding-moments-improvements" class="nav-link">Rolling/Expanding Moments improvements</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#improvements-in-the-sql-io-module" class="nav-item nav-link">Improvements in the sql io module</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#improvements-in-the-sql-io-module" class="nav-link">Improvements in the sql io module</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#backwards-incompatible-api-changes" class="nav-item nav-link">Backwards incompatible API changes</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#backwards-incompatible-api-changes" class="nav-link">Backwards incompatible API changes</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#breaking-changes" class="nav-item nav-link">Breaking changes</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#breaking-changes" class="nav-link">Breaking changes</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#internal-refactoring" class="nav-item nav-link">Internal Refactoring</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#internal-refactoring" class="nav-link">Internal Refactoring</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#deprecations" class="nav-item nav-link">Deprecations</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#deprecations" class="nav-link">Deprecations</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#removal-of-prior-version-deprecations-changes" class="nav-item nav-link">Removal of prior version deprecations/changes</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#removal-of-prior-version-deprecations-changes" class="nav-link">Removal of prior version deprecations/changes</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#enhancements" class="nav-item nav-link">Enhancements</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#enhancements" class="nav-link">Enhancements</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#performance" class="nav-item nav-link">Performance</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#performance" class="nav-link">Performance</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#bug-fixes" class="nav-item nav-link">Bug Fixes</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#bug-fixes" class="nav-link">Bug Fixes</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#contributors" class="nav-item nav-link">Contributors</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#contributors" class="nav-link">Contributors</a>
         </li>
     
     </ul>
@@ -1502,10 +1502,27 @@ was not correctly inferred as <code class="docutils literal notranslate"><span c
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

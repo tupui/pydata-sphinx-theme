@@ -167,70 +167,70 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#about-docstrings-and-standards" class="nav-item nav-link">About docstrings and standards</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#about-docstrings-and-standards" class="nav-link">About docstrings and standards</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#writing-a-docstring" class="nav-item nav-link">Writing a docstring</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#writing-a-docstring" class="nav-link">Writing a docstring</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#general-rules" class="nav-item nav-link">General rules</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#general-rules" class="nav-link">General rules</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#section-1-short-summary" class="nav-item nav-link">Section 1: Short summary</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#section-1-short-summary" class="nav-link">Section 1: Short summary</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#section-2-extended-summary" class="nav-item nav-link">Section 2: Extended summary</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#section-2-extended-summary" class="nav-link">Section 2: Extended summary</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#section-3-parameters" class="nav-item nav-link">Section 3: Parameters</a><ul>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#section-3-parameters" class="nav-link">Section 3: Parameters</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h4">
-            <a href="#parameter-types" class="nav-item nav-link">Parameter types</a>
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#parameter-types" class="nav-link">Parameter types</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#section-4-returns-or-yields" class="nav-item nav-link">Section 4: Returns or Yields</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#section-4-returns-or-yields" class="nav-link">Section 4: Returns or Yields</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#section-5-see-also" class="nav-item nav-link">Section 5: See Also</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#section-5-see-also" class="nav-link">Section 5: See Also</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#section-6-notes" class="nav-item nav-link">Section 6: Notes</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#section-6-notes" class="nav-link">Section 6: Notes</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#section-7-examples" class="nav-item nav-link">Section 7: Examples</a><ul>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#section-7-examples" class="nav-link">Section 7: Examples</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h4">
-            <a href="#conventions-for-the-examples" class="nav-item nav-link">Conventions for the examples</a>
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#conventions-for-the-examples" class="nav-link">Conventions for the examples</a>
         </li>
     
-        <li class="toc-entry toc-h4">
-            <a href="#tips-for-getting-your-examples-pass-the-doctests" class="nav-item nav-link">Tips for getting your examples pass the doctests</a>
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#tips-for-getting-your-examples-pass-the-doctests" class="nav-link">Tips for getting your examples pass the doctests</a>
         </li>
     
-        <li class="toc-entry toc-h4">
-            <a href="#plots-in-examples" class="nav-item nav-link">Plots in examples</a>
-        </li>
-    
-            </ul>
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#plots-in-examples" class="nav-link">Plots in examples</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#sharing-docstrings" class="nav-item nav-link">Sharing Docstrings</a>
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sharing-docstrings" class="nav-link">Sharing Docstrings</a>
         </li>
     
     </ul>
@@ -1127,10 +1127,27 @@ for the filled versions.</p>
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

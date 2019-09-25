@@ -286,34 +286,34 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#backwards-incompatible-api-changes" class="nav-item nav-link">Backwards incompatible API changes</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#backwards-incompatible-api-changes" class="nav-link">Backwards incompatible API changes</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#arithmetic-operations" class="nav-item nav-link">Arithmetic Operations</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#arithmetic-operations" class="nav-link">Arithmetic Operations</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#grouping-by-a-categorical" class="nav-item nav-link">Grouping by a Categorical</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#grouping-by-a-categorical" class="nav-link">Grouping by a Categorical</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#resample" class="nav-item nav-link">Resample</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#resample" class="nav-link">Resample</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#rolling-and-expanding" class="nav-item nav-link">Rolling and Expanding</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#rolling-and-expanding" class="nav-link">Rolling and Expanding</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#compatibility" class="nav-item nav-link">Compatibility</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#compatibility" class="nav-link">Compatibility</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#contributors" class="nav-item nav-link">Contributors</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#contributors" class="nav-link">Contributors</a>
         </li>
     
     </ul>
@@ -533,10 +533,27 @@ the empty case.</p>
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

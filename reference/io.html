@@ -160,56 +160,56 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#pickling" class="nav-item nav-link">Pickling</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#pickling" class="nav-link">Pickling</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#flat-file" class="nav-item nav-link">Flat File</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#flat-file" class="nav-link">Flat File</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#clipboard" class="nav-item nav-link">Clipboard</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#clipboard" class="nav-link">Clipboard</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#excel" class="nav-item nav-link">Excel</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#excel" class="nav-link">Excel</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#json" class="nav-item nav-link">JSON</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#json" class="nav-link">JSON</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#html" class="nav-item nav-link">HTML</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#html" class="nav-link">HTML</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#hdfstore-pytables-hdf5" class="nav-item nav-link">HDFStore: PyTables (HDF5)</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#hdfstore-pytables-hdf5" class="nav-link">HDFStore: PyTables (HDF5)</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#feather" class="nav-item nav-link">Feather</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#feather" class="nav-link">Feather</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#parquet" class="nav-item nav-link">Parquet</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#parquet" class="nav-link">Parquet</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#sas" class="nav-item nav-link">SAS</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sas" class="nav-link">SAS</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#sql" class="nav-item nav-link">SQL</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sql" class="nav-link">SQL</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#google-bigquery" class="nav-item nav-link">Google BigQuery</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#google-bigquery" class="nav-link">Google BigQuery</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#stata" class="nav-item nav-link">STATA</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#stata" class="nav-link">STATA</a>
         </li>
     
     </ul>
@@ -501,10 +501,27 @@
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

@@ -160,64 +160,64 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#constructor" class="nav-item nav-link">Constructor</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#constructor" class="nav-link">Constructor</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#attributes-and-underlying-data" class="nav-item nav-link">Attributes and underlying data</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#attributes-and-underlying-data" class="nav-link">Attributes and underlying data</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#conversion" class="nav-item nav-link">Conversion</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#conversion" class="nav-link">Conversion</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#indexing-iteration" class="nav-item nav-link">Indexing, iteration</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#indexing-iteration" class="nav-link">Indexing, iteration</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#binary-operator-functions" class="nav-item nav-link">Binary operator functions</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#binary-operator-functions" class="nav-link">Binary operator functions</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#function-application-groupby-window" class="nav-item nav-link">Function application, GroupBy & Window</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#function-application-groupby-window" class="nav-link">Function application, GroupBy & Window</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#computations-descriptive-stats" class="nav-item nav-link">Computations / Descriptive Stats</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#computations-descriptive-stats" class="nav-link">Computations / Descriptive Stats</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#reindexing-selection-label-manipulation" class="nav-item nav-link">Reindexing / Selection / Label manipulation</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#reindexing-selection-label-manipulation" class="nav-link">Reindexing / Selection / Label manipulation</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#missing-data-handling" class="nav-item nav-link">Missing data handling</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#missing-data-handling" class="nav-link">Missing data handling</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#reshaping-sorting-transposing" class="nav-item nav-link">Reshaping, sorting, transposing</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#reshaping-sorting-transposing" class="nav-link">Reshaping, sorting, transposing</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#combining-joining-merging" class="nav-item nav-link">Combining / joining / merging</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#combining-joining-merging" class="nav-link">Combining / joining / merging</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#time-series-related" class="nav-item nav-link">Time series-related</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#time-series-related" class="nav-link">Time series-related</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#plotting" class="nav-item nav-link">Plotting</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plotting" class="nav-link">Plotting</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#serialization-io-conversion" class="nav-item nav-link">Serialization / IO / Conversion</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#serialization-io-conversion" class="nav-link">Serialization / IO / Conversion</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#sparse" class="nav-item nav-link">Sparse</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sparse" class="nav-link">Sparse</a>
         </li>
     
     </ul>
@@ -1106,10 +1106,27 @@ specific plotting methods of the form <code class="docutils literal notranslate"
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

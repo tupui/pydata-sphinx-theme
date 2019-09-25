@@ -272,56 +272,56 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#dataframe-memory-usage" class="nav-item nav-link">DataFrame memory usage</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#dataframe-memory-usage" class="nav-link">DataFrame memory usage</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#using-if-truth-statements-with-pandas" class="nav-item nav-link">Using If/Truth Statements with pandas</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#using-if-truth-statements-with-pandas" class="nav-link">Using If/Truth Statements with pandas</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#bitwise-boolean" class="nav-item nav-link">Bitwise boolean</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#bitwise-boolean" class="nav-link">Bitwise boolean</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#using-the-in-operator" class="nav-item nav-link">Using the in operator</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#using-the-in-operator" class="nav-link">Using the in operator</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#nan-integer-na-values-and-na-type-promotions" class="nav-item nav-link">NaN, Integer NA values and NA type promotions</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#nan-integer-na-values-and-na-type-promotions" class="nav-link">NaN, Integer NA values and NA type promotions</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#choice-of-na-representation" class="nav-item nav-link">Choice of NA representation</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#choice-of-na-representation" class="nav-link">Choice of NA representation</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#support-for-integer-na" class="nav-item nav-link">Support for integer NA</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#support-for-integer-na" class="nav-link">Support for integer NA</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#na-type-promotions" class="nav-item nav-link">NA type promotions</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#na-type-promotions" class="nav-link">NA type promotions</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#why-not-make-numpy-like-r" class="nav-item nav-link">Why not make NumPy like R?</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#why-not-make-numpy-like-r" class="nav-link">Why not make NumPy like R?</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#differences-with-numpy" class="nav-item nav-link">Differences with NumPy</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#differences-with-numpy" class="nav-link">Differences with NumPy</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#thread-safety" class="nav-item nav-link">Thread-safety</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#thread-safety" class="nav-link">Thread-safety</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#byte-ordering-issues" class="nav-item nav-link">Byte-Ordering Issues</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#byte-ordering-issues" class="nav-link">Byte-Ordering Issues</a>
         </li>
     
     </ul>
@@ -676,10 +676,27 @@ details.</p>
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

@@ -181,64 +181,64 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#select" class="nav-item nav-link">SELECT</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#select" class="nav-link">SELECT</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#where" class="nav-item nav-link">WHERE</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#where" class="nav-link">WHERE</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#group-by" class="nav-item nav-link">GROUP BY</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#group-by" class="nav-link">GROUP BY</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#join" class="nav-item nav-link">JOIN</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#join" class="nav-link">JOIN</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#inner-join" class="nav-item nav-link">INNER JOIN</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#inner-join" class="nav-link">INNER JOIN</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#left-outer-join" class="nav-item nav-link">LEFT OUTER JOIN</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#left-outer-join" class="nav-link">LEFT OUTER JOIN</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#right-join" class="nav-item nav-link">RIGHT JOIN</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#right-join" class="nav-link">RIGHT JOIN</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#full-join" class="nav-item nav-link">FULL JOIN</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#full-join" class="nav-link">FULL JOIN</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#union" class="nav-item nav-link">UNION</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#union" class="nav-link">UNION</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#pandas-equivalents-for-some-sql-analytic-and-aggregate-functions" class="nav-item nav-link">Pandas equivalents for some SQL analytic and aggregate functions</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#pandas-equivalents-for-some-sql-analytic-and-aggregate-functions" class="nav-link">Pandas equivalents for some SQL analytic and aggregate functions</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#top-n-rows-with-offset" class="nav-item nav-link">Top N rows with offset</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#top-n-rows-with-offset" class="nav-link">Top N rows with offset</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#top-n-rows-per-group" class="nav-item nav-link">Top N rows per group</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#top-n-rows-per-group" class="nav-link">Top N rows per group</a>
         </li>
     
             </ul>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#update" class="nav-item nav-link">UPDATE</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#update" class="nav-link">UPDATE</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#delete" class="nav-item nav-link">DELETE</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#delete" class="nav-link">DELETE</a>
         </li>
     
     </ul>
@@ -670,10 +670,27 @@ Notice that when using <code class="docutils literal notranslate"><span class="p
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.

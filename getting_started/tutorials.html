@@ -181,43 +181,43 @@
 <nav id="bd-toc-nav">
     <ul class="nav section-nav flex-column">
     
-        <li class="toc-entry toc-h2">
-            <a href="#internal-guides" class="nav-item nav-link">Internal Guides</a>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#internal-guides" class="nav-link">Internal Guides</a>
         </li>
     
-        <li class="toc-entry toc-h2">
-            <a href="#community-guides" class="nav-item nav-link">Community Guides</a><ul>
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#community-guides" class="nav-link">Community Guides</a><ul class="nav section-nav flex-column">
                 
-        <li class="toc-entry toc-h3">
-            <a href="#pandas-cookbook-by-julia-evans" class="nav-item nav-link">pandas Cookbook by Julia Evans</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#pandas-cookbook-by-julia-evans" class="nav-link">pandas Cookbook by Julia Evans</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#learn-pandas-by-hernan-rojas" class="nav-item nav-link">Learn Pandas by Hernan Rojas</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#learn-pandas-by-hernan-rojas" class="nav-link">Learn Pandas by Hernan Rojas</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#practical-data-analysis-with-python" class="nav-item nav-link">Practical data analysis with Python</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#practical-data-analysis-with-python" class="nav-link">Practical data analysis with Python</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#exercises-for-new-users" class="nav-item nav-link">Exercises for new users</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#exercises-for-new-users" class="nav-link">Exercises for new users</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#modern-pandas" class="nav-item nav-link">Modern pandas</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#modern-pandas" class="nav-link">Modern pandas</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#excel-charts-with-pandas-vincent-and-xlsxwriter" class="nav-item nav-link">Excel charts with pandas, vincent and xlsxwriter</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#excel-charts-with-pandas-vincent-and-xlsxwriter" class="nav-link">Excel charts with pandas, vincent and xlsxwriter</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#video-tutorials" class="nav-item nav-link">Video Tutorials</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#video-tutorials" class="nav-link">Video Tutorials</a>
         </li>
     
-        <li class="toc-entry toc-h3">
-            <a href="#various-tutorials" class="nav-item nav-link">Various Tutorials</a>
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#various-tutorials" class="nav-link">Various Tutorials</a>
         </li>
     
             </ul>
@@ -332,10 +332,27 @@ The source may be found in the GitHub repository
           </main>
 
       </div>
-    </div>
-
-    
-  </body>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
