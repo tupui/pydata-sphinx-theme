@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.asof &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.assign" href="pandas.DataFrame.assign.html" />
+    <link rel="prev" title="pandas.DataFrame.asfreq" href="pandas.DataFrame.asfreq.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+<!--
+
+<div class="bd-toc-item active">
+  <ul class="current nav bd-sidenav active">
+<li class="toctree-l2"><a class="reference internal" href="../io.html">Input/Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general_functions.html">General functions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../frame.html">DataFrame</a></li>
+</ul>
+
+</div>
+-->
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-asof">
+<h1>pandas.DataFrame.asof<a class="headerlink" href="#pandas-dataframe-asof" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.asof">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">asof</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">where</em>, <em class="sig-param">subset=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/generic.py#L7080-L7249"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.asof" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the last row(s) without any NaNs before <cite>where</cite>.</p>
+<p>The last row (for each element in <cite>where</cite>, if list) without any
+NaN is taken.
+In case of a <a class="reference internal" href="pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, the last row without NaN
+considering only the subset of columns (if not <cite>None</cite>)</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0: </span>For DataFrame</p>
+</div>
+<p>If there is no good value, NaN is returned for a Series or
+a Series of NaN values for a DataFrame</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>where</strong><span class="classifier">date or array-like of dates</span></dt><dd><p>Date(s) before which the last row(s) are returned.</p>
+</dd>
+<dt><strong>subset</strong><span class="classifier">str or array-like of str, default <cite>None</cite></span></dt><dd><p>For DataFrame, if not <cite>None</cite>, only use these columns to
+check for NaNs.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt>scalar, Series, or DataFrame</dt><dd><p>The return can be:</p>
+<ul class="simple">
+<li><p>scalar : when <cite>self</cite> is a Series and <cite>where</cite> is a scalar</p></li>
+<li><p>Series: when <cite>self</cite> is a Series and <cite>where</cite> is an array-like,
+or when <cite>self</cite> is a DataFrame and <cite>where</cite> is a scalar</p></li>
+<li><p>DataFrame : when <cite>self</cite> is a DataFrame and <cite>where</cite> is an
+array-like</p></li>
+</ul>
+<p>Return scalar, Series, or DataFrame.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.merge_asof.html#pandas.merge_asof" title="pandas.merge_asof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_asof</span></code></a></dt><dd><p>Perform an asof merge. Similar to left join.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Dates are assumed to be sorted. Raises if this is not the case.</p>
+<p class="rubric">Examples</p>
+<p>A Series and a scalar <cite>where</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span>
+<span class="go">10    1.0</span>
+<span class="go">20    2.0</span>
+<span class="go">30    NaN</span>
+<span class="go">40    4.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<p>For a sequence <cite>where</cite>, a Series is returned. The first value is
+NaN, because the first element of <cite>where</cite> is before the first
+index value.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">asof</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="go">5     NaN</span>
+<span class="go">20    2.0</span>
+<span class="go">dtype: float64</span>
+</pre></div>
+</div>
+<p>Missing values are not considered. The following is <code class="docutils literal notranslate"><span class="pre">2.0</span></code>, not
+NaN, even though NaN is at the index location for <code class="docutils literal notranslate"><span class="pre">30</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<p>Take all columns into consideration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">500</span><span class="p">]},</span>
+<span class="gp">... </span>                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-02-27 09:01:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:02:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:03:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:04:00&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                          <span class="s1">&#39;2018-02-27 09:05:00&#39;</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-02-27 09:03:30&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="s1">&#39;2018-02-27 09:04:30&#39;</span><span class="p">]))</span>
+<span class="go">                      a   b</span>
+<span class="go">2018-02-27 09:03:30 NaN NaN</span>
+<span class="go">2018-02-27 09:04:30 NaN NaN</span>
+</pre></div>
+</div>
+<p>Take a single column into consideration</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2018-02-27 09:03:30&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="s1">&#39;2018-02-27 09:04:30&#39;</span><span class="p">]),</span>
+<span class="gp">... </span>        <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="go">                         a   b</span>
+<span class="go">2018-02-27 09:03:30   30.0 NaN</span>
+<span class="go">2018-02-27 09:04:30   40.0 NaN</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
