@@ -502,7 +502,7 @@ users upgrade to this version.</p>
 <li><p>Deprecation of <code class="docutils literal notranslate"><span class="pre">Panel4D</span></code> and <code class="docutils literal notranslate"><span class="pre">PanelND</span></code>. We recommend to represent these types of n-dimensional data with the <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray package</a>.</p></li>
 <li><p>Removal of the previously deprecated modules <code class="docutils literal notranslate"><span class="pre">pandas.io.data</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.io.wb</span></code>, <code class="docutils literal notranslate"><span class="pre">pandas.tools.rplot</span></code>.</p></li>
 </ul>
-<div class="admonition warning">
+<div class="alert alert-warning">
 <p class="admonition-title">Warning</p>
 <p>pandas &gt;= 0.19.0 will no longer silence numpy ufunc warnings upon import, see <a class="reference internal" href="#whatsnew-0190-errstate"><span class="std std-ref">here</span></a>.</p>
 </div>
@@ -749,7 +749,7 @@ converting to <code class="docutils literal notranslate"><span class="pre">Categ
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="s1">&#39;category&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
 </div>
-<div class="admonition note">
+<div class="alert alert-info">
 <p class="admonition-title">Note</p>
 <p>The resulting categories will always be parsed as strings (object dtype).
 If the categories are numeric they can be converted using the
@@ -920,7 +920,7 @@ will be published in future versions of pandas (<a class="reference external" hr
 <span class="gp">In [77]: </span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="admonition note">
+<div class="alert alert-info">
 <p class="admonition-title">Note</p>
 <p>Calling these functions from the internal module <code class="docutils literal notranslate"><span class="pre">pandas.core.common</span></code> will now show a <code class="docutils literal notranslate"><span class="pre">DeprecationWarning</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/13990">GH13990</a>)</p>
 </div>
@@ -1029,7 +1029,7 @@ including <code class="docutils literal notranslate"><span class="pre">DataFrame
 <li><p><code class="docutils literal notranslate"><span class="pre">Series</span></code> comparison operators now raise <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> when <code class="docutils literal notranslate"><span class="pre">index</span></code> are different.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Series</span></code> logical operators align both <code class="docutils literal notranslate"><span class="pre">index</span></code> of left and right hand side.</p></li>
 </ul>
-<div class="admonition warning">
+<div class="alert alert-warning">
 <p class="admonition-title">Warning</p>
 <p>Until 0.18.1, comparing <code class="docutils literal notranslate"><span class="pre">Series</span></code> with the same length, would succeed even if
 the <code class="docutils literal notranslate"><span class="pre">.index</span></code> are different (the result ignores <code class="docutils literal notranslate"><span class="pre">.index</span></code>). As of 0.19.0, this will raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> to be more strict. This section also describes how to keep previous behavior or align different indexes, using the flexible comparison methods like <code class="docutils literal notranslate"><span class="pre">.eq</span></code>.</p>
@@ -1071,7 +1071,7 @@ the <code class="docutils literal notranslate"><span class="pre">.index</span></
 <span class="go">ValueError: Can only compare identically-labeled Series objects</span>
 </pre></div>
 </div>
-<div class="admonition note">
+<div class="alert alert-info">
 <p class="admonition-title">Note</p>
 <p>To achieve the same result as previous versions (compare values based on locations ignoring <code class="docutils literal notranslate"><span class="pre">.index</span></code>), compare both <code class="docutils literal notranslate"><span class="pre">.values</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [95]: </span><span class="n">s1</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">values</span>
@@ -1111,11 +1111,11 @@ the <code class="docutils literal notranslate"><span class="pre">.index</span></
 <span class="gp">In [99]: </span><span class="n">s1</span> <span class="o">&amp;</span> <span class="n">s2</span>
 </pre></div>
 </div>
-<div class="admonition note">
+<div class="alert alert-info">
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">Series</span></code> logical operators fill a <code class="docutils literal notranslate"><span class="pre">NaN</span></code> result with <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </div>
-<div class="admonition note">
+<div class="alert alert-info">
 <p class="admonition-title">Note</p>
 <p>To achieve the same result as previous versions (compare values based on only left hand side index), you can use <code class="docutils literal notranslate"><span class="pre">reindex_like</span></code>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [100]: </span><span class="n">s1</span> <span class="o">&amp;</span> <span class="n">s2</span><span class="o">.</span><span class="n">reindex_like</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
@@ -1641,7 +1641,7 @@ Note that the limitation is applied to <code class="docutils literal notranslate
 </div>
 <div class="section" id="indexer-dtype-changes">
 <span id="whatsnew-0190-indexer-dtype"></span><h3>Indexer dtype changes<a class="headerlink" href="#indexer-dtype-changes" title="Permalink to this headline">¶</a></h3>
-<div class="admonition note">
+<div class="alert alert-info">
 <p class="admonition-title">Note</p>
 <p>This change only affects 64 bit python running on Windows, and only affects relatively advanced
 indexing operations</p>
