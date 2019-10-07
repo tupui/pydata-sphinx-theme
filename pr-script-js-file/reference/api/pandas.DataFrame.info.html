@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.info &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.insert" href="pandas.DataFrame.insert.html" />
+    <link rel="prev" title="pandas.DataFrame.infer_objects" href="pandas.DataFrame.infer_objects.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../_static/sphinx-bootstrap.js "></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-info">
+<h1>pandas.DataFrame.info<a class="headerlink" href="#pandas-dataframe-info" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.info">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">verbose=None</em>, <em class="sig-param">buf=None</em>, <em class="sig-param">max_cols=None</em>, <em class="sig-param">memory_usage=None</em>, <em class="sig-param">null_counts=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L2324-L2564"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a concise summary of a DataFrame.</p>
+<p>This method prints information about a DataFrame including
+the index dtype and column dtypes, non-null values and memory usage.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>verbose</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to print the full summary. By default, the setting in
+<code class="docutils literal notranslate"><span class="pre">pandas.options.display.max_info_columns</span></code> is followed.</p>
+</dd>
+<dt><strong>buf</strong><span class="classifier">writable buffer, defaults to sys.stdout</span></dt><dd><p>Where to send the output. By default, the output is printed to
+sys.stdout. Pass a writable buffer if you need to further process
+the output.</p>
+</dd>
+<dt><strong>max_cols</strong><span class="classifier">int, optional</span></dt><dd><p>When to switch from the verbose to the truncated output. If the
+DataFrame has more than <cite>max_cols</cite> columns, the truncated output
+is used. By default, the setting in
+<code class="docutils literal notranslate"><span class="pre">pandas.options.display.max_info_columns</span></code> is used.</p>
+</dd>
+<dt><strong>memory_usage</strong><span class="classifier">bool, str, optional</span></dt><dd><p>Specifies whether total memory usage of the DataFrame
+elements (including the index) should be displayed. By default,
+this follows the <code class="docutils literal notranslate"><span class="pre">pandas.options.display.memory_usage</span></code> setting.</p>
+<p>True always show memory usage. False never shows memory usage.
+A value of ‘deep’ is equivalent to “True with deep introspection”.
+Memory usage is shown in human-readable units (base-2
+representation). Without deep introspection a memory estimation is
+made based in column dtype and number of rows assuming values
+consume the same memory amount for corresponding dtypes. With deep
+memory introspection, a real memory usage calculation is performed
+at the cost of computational resources.</p>
+</dd>
+<dt><strong>null_counts</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to show the non-null counts. By default, this is shown
+only if the frame is smaller than
+<code class="docutils literal notranslate"><span class="pre">pandas.options.display.max_info_rows</span></code> and
+<code class="docutils literal notranslate"><span class="pre">pandas.options.display.max_info_columns</span></code>. A value of True always
+shows the counts, and False never shows the counts.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None</dt><dd><p>This method prints a summary of a DataFrame and returns None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.describe.html#pandas.DataFrame.describe" title="pandas.DataFrame.describe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.describe</span></code></a></dt><dd><p>Generate descriptive statistics of DataFrame columns.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.memory_usage.html#pandas.DataFrame.memory_usage" title="pandas.DataFrame.memory_usage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.memory_usage</span></code></a></dt><dd><p>Memory usage of DataFrame columns.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">int_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text_values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">,</span> <span class="s1">&#39;gamma&#39;</span><span class="p">,</span> <span class="s1">&#39;delta&#39;</span><span class="p">,</span> <span class="s1">&#39;epsilon&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">float_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;int_col&quot;</span><span class="p">:</span> <span class="n">int_values</span><span class="p">,</span> <span class="s2">&quot;text_col&quot;</span><span class="p">:</span> <span class="n">text_values</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="s2">&quot;float_col&quot;</span><span class="p">:</span> <span class="n">float_values</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   int_col text_col  float_col</span>
+<span class="go">0        1    alpha       0.00</span>
+<span class="go">1        2     beta       0.25</span>
+<span class="go">2        3    gamma       0.50</span>
+<span class="go">3        4    delta       0.75</span>
+<span class="go">4        5  epsilon       1.00</span>
+</pre></div>
+</div>
+<p>Prints information of all columns:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+<span class="go">RangeIndex: 5 entries, 0 to 4</span>
+<span class="go">Data columns (total 3 columns):</span>
+<span class="go">int_col      5 non-null int64</span>
+<span class="go">text_col     5 non-null object</span>
+<span class="go">float_col    5 non-null float64</span>
+<span class="go">dtypes: float64(1), int64(1), object(1)</span>
+<span class="go">memory usage: 248.0+ bytes</span>
+</pre></div>
+</div>
+<p>Prints a summary of columns count and its dtypes but not per column
+information:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+<span class="go">RangeIndex: 5 entries, 0 to 4</span>
+<span class="go">Columns: 3 entries, int_col to float_col</span>
+<span class="go">dtypes: float64(1), int64(1), object(1)</span>
+<span class="go">memory usage: 248.0+ bytes</span>
+</pre></div>
+</div>
+<p>Pipe output of DataFrame.info to buffer instead of sys.stdout, get
+buffer content and writes to a text file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">io</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">buffer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">buf</span><span class="o">=</span><span class="n">buffer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;df_info.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+<span class="gp">... </span>          <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+<span class="gp">... </span>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">260</span>
+</pre></div>
+</div>
+<p>The <cite>memory_usage</cite> parameter allows deep introspection mode, specially
+useful for big DataFrames and fine-tune memory optimization:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">random_strings_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;column_1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s1">&#39;column_2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="s1">&#39;column_3&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+<span class="go">RangeIndex: 1000000 entries, 0 to 999999</span>
+<span class="go">Data columns (total 3 columns):</span>
+<span class="go">column_1    1000000 non-null object</span>
+<span class="go">column_2    1000000 non-null object</span>
+<span class="go">column_3    1000000 non-null object</span>
+<span class="go">dtypes: object(3)</span>
+<span class="go">memory usage: 22.9+ MB</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+<span class="go">RangeIndex: 1000000 entries, 0 to 999999</span>
+<span class="go">Data columns (total 3 columns):</span>
+<span class="go">column_1    1000000 non-null object</span>
+<span class="go">column_2    1000000 non-null object</span>
+<span class="go">column_3    1000000 non-null object</span>
+<span class="go">dtypes: object(3)</span>
+<span class="go">memory usage: 188.8 MB</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

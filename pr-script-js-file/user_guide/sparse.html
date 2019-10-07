@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sparse data structures &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Frequently Asked Questions (FAQ)" href="gotchas.html" />
+    <link rel="prev" title="Enhancing Performance" href="enhancingperf.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../_static/sphinx-bootstrap.js "></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../reference/index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="io.html">IO Tools (Text, CSV, HDF5, …)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="indexing.html">Indexing and Selecting Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="advanced.html">MultiIndex / Advanced Indexing</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="merging.html">Merge, join, and concatenate</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="reshaping.html">Reshaping and Pivot Tables</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="text.html">Working with Text Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="missing_data.html">Working with missing data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="categorical.html">Categorical Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="integer_na.html">Nullable Integer Data Type</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="visualization.html">Visualization</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="computation.html">Computational tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="groupby.html">Group By: split-apply-combine</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="timeseries.html">Time Series / Date functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="timedeltas.html">Time Deltas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="options.html">Options and Settings</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="enhancingperf.html">Enhancing Performance</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="">Sparse data structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="gotchas.html">Frequently Asked Questions (FAQ)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="cookbook.html">Cookbook</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sparse-accessor" class="nav-link">Sparse Accessor</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sparsearray" class="nav-link">SparseArray</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sparseindex-objects" class="nav-link">SparseIndex objects</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sparse-dtypes" class="nav-link">Sparse Dtypes</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sparse-calculation" class="nav-link">Sparse Calculation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#interaction-with-scipy-sparse" class="nav-link">Interaction with scipy.sparse</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#sparsedataframe" class="nav-link">SparseDataFrame</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#sparseseries" class="nav-link">SparseSeries</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="sparse-data-structures">
+<span id="sparse"></span><h1>Sparse data structures<a class="headerlink" href="#sparse-data-structures" title="Permalink to this headline">¶</a></h1>
+<p>We have implemented “sparse” versions of <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. These are not sparse
+in the typical “mostly 0”. Rather, you can view these objects as being “compressed”
+where any data matching a specific value (<code class="docutils literal notranslate"><span class="pre">NaN</span></code> / missing value, though any value
+can be chosen) is omitted. A special <code class="docutils literal notranslate"><span class="pre">SparseIndex</span></code> object tracks where data has been
+“sparsified”. This will make much more sense with an example. All of the standard pandas
+data structures have a <code class="docutils literal notranslate"><span class="pre">to_sparse</span></code> method:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="gp">In [10]: </span><span class="n">ts</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [11]: </span><span class="n">sts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+
+<span class="gp">In [12]: </span><span class="n">sts</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">to_sparse</span></code> method takes a <code class="docutils literal notranslate"><span class="pre">kind</span></code> argument (for the sparse index, see
+below) and a <code class="docutils literal notranslate"><span class="pre">fill_value</span></code>. So if we had a mostly zero <code class="docutils literal notranslate"><span class="pre">Series</span></code>, we could
+convert it to sparse with <code class="docutils literal notranslate"><span class="pre">fill_value=0</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">ts</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The sparse objects exist for memory efficiency reasons. Suppose you had a
+large, mostly NA <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="gp">In [15]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">9998</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [16]: </span><span class="n">sdf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+
+<span class="gp">In [17]: </span><span class="n">sdf</span>
+
+<span class="gp">In [18]: </span><span class="n">sdf</span><span class="o">.</span><span class="n">density</span>
+</pre></div>
+</div>
+<p>As you can see, the density (% of values that have not been “compressed”) is
+extremely low. This sparse object takes up much less memory on disk (pickled)
+and in the Python interpreter. Functionally, their behavior should be nearly
+identical to their dense counterparts.</p>
+<p>Any sparse object can be converted back to the standard dense form by calling
+<code class="docutils literal notranslate"><span class="pre">to_dense</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">sts</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="sparse-accessor">
+<span id="id1"></span><h2>Sparse Accessor<a class="headerlink" href="#sparse-accessor" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+<p>Pandas provides a <code class="docutils literal notranslate"><span class="pre">.sparse</span></code> accessor, similar to <code class="docutils literal notranslate"><span class="pre">.str</span></code> for string data, <code class="docutils literal notranslate"><span class="pre">.cat</span></code>
+for categorical data, and <code class="docutils literal notranslate"><span class="pre">.dt</span></code> for datetime-like data. This namespace provides
+attributes and methods that are specific to sparse data.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;Sparse[int]&quot;</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">s</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">density</span>
+
+<span class="gp">In [22]: </span><span class="n">s</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">fill_value</span>
+</pre></div>
+</div>
+<p>This accessor is available only on data with <code class="docutils literal notranslate"><span class="pre">SparseDtype</span></code>, and on the <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code>
+class itself for creating a Series with sparse data from a scipy COO matrix with.</p>
+</div>
+<div class="section" id="sparsearray">
+<span id="sparse-array"></span><h2>SparseArray<a class="headerlink" href="#sparsearray" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SparseArray</span></code> is the base layer for all of the sparse indexed data
+structures. It is a 1-dimensional ndarray-like object storing only values
+distinct from the <code class="docutils literal notranslate"><span class="pre">fill_value</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="gp">In [24]: </span><span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [25]: </span><span class="n">arr</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="gp">In [26]: </span><span class="n">sparr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseArray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="gp">In [27]: </span><span class="n">sparr</span>
+</pre></div>
+</div>
+<p>Like the indexed objects (SparseSeries, SparseDataFrame), a <code class="docutils literal notranslate"><span class="pre">SparseArray</span></code>
+can be converted back to a regular ndarray by calling <code class="docutils literal notranslate"><span class="pre">to_dense</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">sparr</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sparseindex-objects">
+<h2>SparseIndex objects<a class="headerlink" href="#sparseindex-objects" title="Permalink to this headline">¶</a></h2>
+<p>Two kinds of <code class="docutils literal notranslate"><span class="pre">SparseIndex</span></code> are implemented, <code class="docutils literal notranslate"><span class="pre">block</span></code> and <code class="docutils literal notranslate"><span class="pre">integer</span></code>. We
+recommend using <code class="docutils literal notranslate"><span class="pre">block</span></code> as it’s more memory efficient. The <code class="docutils literal notranslate"><span class="pre">integer</span></code> format
+keeps an arrays of all of the locations where the data are not equal to the
+fill value. The <code class="docutils literal notranslate"><span class="pre">block</span></code> format tracks only the locations and sizes of blocks
+of data.</p>
+</div>
+<div class="section" id="sparse-dtypes">
+<span id="sparse-dtype"></span><h2>Sparse Dtypes<a class="headerlink" href="#sparse-dtypes" title="Permalink to this headline">¶</a></h2>
+<p>Sparse data should have the same dtype as its dense representation. Currently,
+<code class="docutils literal notranslate"><span class="pre">float64</span></code>, <code class="docutils literal notranslate"><span class="pre">int64</span></code> and <code class="docutils literal notranslate"><span class="pre">bool</span></code> dtypes are supported. Depending on the original
+dtype, <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> default changes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">float64</span></code>: <code class="docutils literal notranslate"><span class="pre">np.nan</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64</span></code>: <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span></code>: <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+
+<span class="gp">In [30]: </span><span class="n">s</span>
+
+<span class="gp">In [31]: </span><span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+
+<span class="gp">In [32]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="gp">In [33]: </span><span class="n">s</span>
+
+<span class="gp">In [34]: </span><span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+
+<span class="gp">In [35]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+
+<span class="gp">In [36]: </span><span class="n">s</span>
+
+<span class="gp">In [37]: </span><span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can change the dtype using <code class="docutils literal notranslate"><span class="pre">.astype()</span></code>, the result is also sparse. Note that
+<code class="docutils literal notranslate"><span class="pre">.astype()</span></code> also affects to the <code class="docutils literal notranslate"><span class="pre">fill_value</span></code> to keep its dense representation.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="gp">In [39]: </span><span class="n">s</span>
+
+<span class="gp">In [40]: </span><span class="n">ss</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+
+<span class="gp">In [41]: </span><span class="n">ss</span>
+
+<span class="gp">In [42]: </span><span class="n">ss</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It raises if any value cannot be coerced to specified dtype.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">ss</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+<span class="gh">Out[1]:</span>
+<span class="go">0    1.0</span>
+<span class="go">1    NaN</span>
+<span class="go">2    NaN</span>
+<span class="go">dtype: float64</span>
+<span class="go">BlockIndex</span>
+<span class="go">Block locations: array([0], dtype=int32)</span>
+<span class="go">Block lengths: array([1], dtype=int32)</span>
+
+<span class="gp">In [2]: </span><span class="n">ss</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+<span class="gh">Out[2]:</span>
+<span class="go">ValueError: unable to coerce current fill_value nan to int64 dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sparse-calculation">
+<span id="id2"></span><h2>Sparse Calculation<a class="headerlink" href="#sparse-calculation" title="Permalink to this headline">¶</a></h2>
+<p>You can apply NumPy <em>ufuncs</em> to <code class="docutils literal notranslate"><span class="pre">SparseArray</span></code> and get a <code class="docutils literal notranslate"><span class="pre">SparseArray</span></code> as a result.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseArray</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+
+<span class="gp">In [44]: </span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <em>ufunc</em> is also applied to <code class="docutils literal notranslate"><span class="pre">fill_value</span></code>. This is needed to get
+the correct dense result.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseArray</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">fill_value</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [46]: </span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="gp">In [47]: </span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span><span class="o">.</span><span class="n">to_dense</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interaction-with-scipy-sparse">
+<span id="sparse-scipysparse"></span><h2>Interaction with scipy.sparse<a class="headerlink" href="#interaction-with-scipy-sparse" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sparsedataframe">
+<h3>SparseDataFrame<a class="headerlink" href="#sparsedataframe" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.20.0.</span></p>
+</div>
+<p>Pandas supports creating sparse dataframes directly from <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code> matrices.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">csr_matrix</span>
+
+<span class="gp">In [49]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="gp">In [50]: </span><span class="n">arr</span><span class="p">[</span><span class="n">arr</span> <span class="o">&lt;</span> <span class="o">.</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="gp">In [51]: </span><span class="n">sp_arr</span> <span class="o">=</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="gp">In [52]: </span><span class="n">sp_arr</span>
+
+<span class="gp">In [53]: </span><span class="n">sdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseDataFrame</span><span class="p">(</span><span class="n">sp_arr</span><span class="p">)</span>
+
+<span class="gp">In [54]: </span><span class="n">sdf</span>
+</pre></div>
+</div>
+<p>All sparse formats are supported, but matrices that are not in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.3.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">COOrdinate</span></code></a> format will be converted, copying data as needed.
+To convert a <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> back to sparse SciPy matrix in COO format, you can use the <a class="reference internal" href="../reference/api/pandas.SparseDataFrame.to_coo.html#pandas.SparseDataFrame.to_coo" title="pandas.SparseDataFrame.to_coo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SparseDataFrame.to_coo()</span></code></a> method:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="n">sdf</span><span class="o">.</span><span class="n">to_coo</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sparseseries">
+<h3>SparseSeries<a class="headerlink" href="#sparseseries" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="xref py py-meth docutils literal notranslate"><span class="pre">SparseSeries.to_coo()</span></code> method is implemented for transforming a <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code> indexed by a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> to a <code class="docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code>.</p>
+<p>The method requires a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> with two or more levels.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+
+<span class="gp">In [57]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
+<span class="gp">   ....: </span>                                    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [58]: </span><span class="n">s</span>
+
+<span class="go"># SparseSeries</span>
+<span class="gp">In [59]: </span><span class="n">ss</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+
+<span class="gp">In [60]: </span><span class="n">ss</span>
+</pre></div>
+</div>
+<p>In the example below, we transform the <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code> to a sparse representation of a 2-d array by specifying that the first and second <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> levels define labels for the rows and the third and fourth levels define labels for the columns. We also specify that the column and row labels should be sorted in the final sparse representation.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">A</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">to_coo</span><span class="p">(</span><span class="n">row_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                             <span class="n">column_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                             <span class="n">sort_labels</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [62]: </span><span class="n">A</span>
+
+<span class="gp">In [63]: </span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+
+<span class="gp">In [64]: </span><span class="n">rows</span>
+
+<span class="gp">In [65]: </span><span class="n">columns</span>
+</pre></div>
+</div>
+<p>Specifying different row and column labels (and not sorting them) yields a different sparse matrix:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">A</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">to_coo</span><span class="p">(</span><span class="n">row_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                             <span class="n">column_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                             <span class="n">sort_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [67]: </span><span class="n">A</span>
+
+<span class="gp">In [68]: </span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+
+<span class="gp">In [69]: </span><span class="n">rows</span>
+
+<span class="gp">In [70]: </span><span class="n">columns</span>
+</pre></div>
+</div>
+<p>A convenience method <code class="xref py py-meth docutils literal notranslate"><span class="pre">SparseSeries.from_coo()</span></code> is implemented for creating a <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code> from a <code class="docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+
+<span class="gp">In [72]: </span><span class="n">A</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])),</span>
+<span class="gp">   ....: </span>                      <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [73]: </span><span class="n">A</span>
+
+<span class="gp">In [74]: </span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The default behaviour (with <code class="docutils literal notranslate"><span class="pre">dense_index=False</span></code>) simply returns a <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code> containing
+only the non-null entries.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="n">ss</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseSeries</span><span class="o">.</span><span class="n">from_coo</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="gp">In [76]: </span><span class="n">ss</span>
+</pre></div>
+</div>
+<p>Specifying <code class="docutils literal notranslate"><span class="pre">dense_index=True</span></code> will result in an index that is the Cartesian product of the
+row and columns coordinates of the matrix. Note that this will consume a significant amount of memory
+(relative to <code class="docutils literal notranslate"><span class="pre">dense_index=False</span></code>) if the sparse matrix is large (and sparse) enough.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">ss_dense</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseSeries</span><span class="o">.</span><span class="n">from_coo</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dense_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">In [78]: </span><span class="n">ss_dense</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

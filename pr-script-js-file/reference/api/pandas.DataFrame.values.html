@@ -1,0 +1,241 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.values &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.abs" href="pandas.DataFrame.abs.html" />
+    <link rel="prev" title="pandas.DataFrame.style" href="pandas.DataFrame.style.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../../_static/sphinx-bootstrap.js "></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-values">
+<h1>pandas.DataFrame.values<a class="headerlink" href="#pandas-dataframe-values" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.values">
+<em class="property">property </em><code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">values</code><a class="headerlink" href="#pandas.DataFrame.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a Numpy representation of the DataFrame.</p>
+<div class="alert alert-warning">
+<p class="admonition-title">Warning</p>
+<p>We recommend using <a class="reference internal" href="pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a> instead.</p>
+</div>
+<p>Only the values in the DataFrame will be returned, the axes labels
+will be removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>numpy.ndarray</dt><dd><p>The values of the DataFrame.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_numpy</span></code></a></dt><dd><p>Recommended alternative to this method.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.index.html#pandas.DataFrame.index" title="pandas.DataFrame.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.index</span></code></a></dt><dd><p>Retrieve the index labels.</p>
+</dd>
+<dt><a class="reference internal" href="pandas.DataFrame.columns.html#pandas.DataFrame.columns" title="pandas.DataFrame.columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.columns</span></code></a></dt><dd><p>Retrieving the column names.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The dtype will be a lower-common-denominator dtype (implicit
+upcasting); that is to say if the dtypes (even of numeric types)
+are mixed, the one that accommodates all will be chosen. Use this
+with care if you are not dealing with the blocks.</p>
+<p>e.g. If the dtypes are float16 and float32, dtype will be upcast to
+float32.  If dtypes are int32 and uint8, dtype will be upcast to
+int32. By <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.find_common_type.html#numpy.find_common_type" title="(in NumPy v1.17)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.find_common_type()</span></code></a> convention, mixing int64
+and uint64 will result in a float64 dtype.</p>
+<p class="rubric">Examples</p>
+<p>A DataFrame where all columns are the same type (e.g., int64) results
+in an array of the same type.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;age&#39;</span><span class="p">:</span>    <span class="p">[</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">29</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">94</span><span class="p">,</span> <span class="mi">170</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">115</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
+<span class="go">   age  height  weight</span>
+<span class="go">0    3      94      31</span>
+<span class="go">1   29     170     115</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="go">age       int64</span>
+<span class="go">height    int64</span>
+<span class="go">weight    int64</span>
+<span class="go">dtype: object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">values</span>
+<span class="go">array([[  3,  94,  31],</span>
+<span class="go">       [ 29, 170, 115]], dtype=int64)</span>
+</pre></div>
+</div>
+<p>A DataFrame with mixed type columns(e.g., str/object, int64, float32)
+results in an ndarray of the broadest type that accommodates these
+mixed types (e.g., object).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="s1">&#39;parrot&#39;</span><span class="p">,</span>   <span class="mf">24.0</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                    <span class="p">(</span><span class="s1">&#39;lion&#39;</span><span class="p">,</span>     <span class="mf">80.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>                    <span class="p">(</span><span class="s1">&#39;monkey&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="kc">None</span><span class="p">)],</span>
+<span class="gp">... </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;max_speed&#39;</span><span class="p">,</span> <span class="s1">&#39;rank&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="go">name          object</span>
+<span class="go">max_speed    float64</span>
+<span class="go">rank          object</span>
+<span class="go">dtype: object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">values</span>
+<span class="go">array([[&#39;parrot&#39;, 24.0, &#39;second&#39;],</span>
+<span class="go">       [&#39;lion&#39;, 80.5, 1],</span>
+<span class="go">       [&#39;monkey&#39;, nan, None]], dtype=object)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
