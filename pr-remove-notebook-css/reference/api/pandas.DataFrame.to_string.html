@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.to_string &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.to_timestamp" href="pandas.DataFrame.to_timestamp.html" />
+    <link rel="prev" title="pandas.DataFrame.to_stata" href="pandas.DataFrame.to_stata.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center">
+  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-to-string">
+<h1>pandas.DataFrame.to_string<a class="headerlink" href="#pandas-dataframe-to-string" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.to_string">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_string</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">buf=None</em>, <em class="sig-param">columns=None</em>, <em class="sig-param">col_space=None</em>, <em class="sig-param">header=True</em>, <em class="sig-param">index=True</em>, <em class="sig-param">na_rep='NaN'</em>, <em class="sig-param">formatters=None</em>, <em class="sig-param">float_format=None</em>, <em class="sig-param">sparsify=None</em>, <em class="sig-param">index_names=True</em>, <em class="sig-param">justify=None</em>, <em class="sig-param">max_rows=None</em>, <em class="sig-param">min_rows=None</em>, <em class="sig-param">max_cols=None</em>, <em class="sig-param">show_dimensions=False</em>, <em class="sig-param">decimal='.'</em>, <em class="sig-param">line_width=None</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.1/pandas/core/frame.py#L692-L765"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render a DataFrame to a console-friendly tabular output.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>buf</strong><span class="classifier">StringIO-like, optional</span></dt><dd><p>Buffer to write to.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">sequence, optional, default None</span></dt><dd><p>The subset of columns to write. Writes all columns by default.</p>
+</dd>
+<dt><strong>col_space</strong><span class="classifier">int, optional</span></dt><dd><p>The minimum width of each column.</p>
+</dd>
+<dt><strong>header</strong><span class="classifier">bool, optional</span></dt><dd><p>Write out the column names. If a list of strings is given, it is assumed to be aliases for the column names.</p>
+</dd>
+<dt><strong>index</strong><span class="classifier">bool, optional, default True</span></dt><dd><p>Whether to print index (row) labels.</p>
+</dd>
+<dt><strong>na_rep</strong><span class="classifier">str, optional, default ‘NaN’</span></dt><dd><p>String representation of NAN to use.</p>
+</dd>
+<dt><strong>formatters</strong><span class="classifier">list or dict of one-param. functions, optional</span></dt><dd><p>Formatter functions to apply to columns’ elements by position or
+name.
+The result of each function must be a unicode string.
+List must be of length equal to the number of columns.</p>
+</dd>
+<dt><strong>float_format</strong><span class="classifier">one-parameter function, optional, default None</span></dt><dd><p>Formatter function to apply to columns’ elements if they are
+floats. The result of this function must be a unicode string.</p>
+</dd>
+<dt><strong>sparsify</strong><span class="classifier">bool, optional, default True</span></dt><dd><p>Set to False for a DataFrame with a hierarchical index to print
+every multiindex key at each row.</p>
+</dd>
+<dt><strong>index_names</strong><span class="classifier">bool, optional, default True</span></dt><dd><p>Prints the names of the indexes.</p>
+</dd>
+<dt><strong>justify</strong><span class="classifier">str, default None</span></dt><dd><p>How to justify the column labels. If None uses the option from
+the print configuration (controlled by set_option), ‘right’ out
+of the box. Valid values are</p>
+<ul class="simple">
+<li><p>left</p></li>
+<li><p>right</p></li>
+<li><p>center</p></li>
+<li><p>justify</p></li>
+<li><p>justify-all</p></li>
+<li><p>start</p></li>
+<li><p>end</p></li>
+<li><p>inherit</p></li>
+<li><p>match-parent</p></li>
+<li><p>initial</p></li>
+<li><p>unset.</p></li>
+</ul>
+</dd>
+<dt><strong>max_rows</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum number of rows to display in the console.</p>
+</dd>
+<dt><strong>min_rows</strong><span class="classifier">int, optional</span></dt><dd><p>The number of rows to display in the console in a truncated repr
+(when number of rows is above <cite>max_rows</cite>).</p>
+</dd>
+<dt><strong>max_cols</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum number of columns to display in the console.</p>
+</dd>
+<dt><strong>show_dimensions</strong><span class="classifier">bool, default False</span></dt><dd><p>Display DataFrame dimensions (number of rows by number of columns).</p>
+</dd>
+<dt><strong>decimal</strong><span class="classifier">str, default ‘.’</span></dt><dd><p>Character recognized as decimal separator, e.g. ‘,’ in Europe.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.18.0.</span></p>
+</div>
+</dd>
+<dt><strong>line_width</strong><span class="classifier">int, optional</span></dt><dd><p>Width to wrap a line in characters.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>str (or unicode, depending on data and options)</dt><dd><p>String representation of the dataframe.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.DataFrame.to_html.html#pandas.DataFrame.to_html" title="pandas.DataFrame.to_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_html</span></code></a></dt><dd><p>Convert DataFrame to HTML.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="go">   col1  col2</span>
+<span class="go">0     1     4</span>
+<span class="go">1     2     5</span>
+<span class="go">2     3     6</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
