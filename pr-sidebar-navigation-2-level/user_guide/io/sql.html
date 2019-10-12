@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>SQL Queries &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Indexing and Selecting Data" href="../indexing.html" />
+    <link rel="prev" title="JSON" href="json.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../reference/index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+        
+          
+    
+              <li class="active">
+                  <a href="index.html">IO Tools (Text, CSV, HDF5, …)</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="json.html">JSON</a>
+                      </li>
+                  
+                      <li class="active">
+                          <a href="">SQL Queries</a>
+                      </li>
+                  
+                  </ul>
+              </li> 
+          
+        
+          
+              <li class="">
+                  <a href="../indexing.html">Indexing and Selecting Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../advanced.html">MultiIndex / Advanced Indexing</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../merging.html">Merge, join, and concatenate</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../reshaping.html">Reshaping and Pivot Tables</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../text.html">Working with Text Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../missing_data.html">Working with missing data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../categorical.html">Categorical Data</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../integer_na.html">Nullable Integer Data Type</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../visualization.html">Visualization</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../computation.html">Computational tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../groupby.html">Group By: split-apply-combine</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../timeseries.html">Time Series / Date functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../timedeltas.html">Time Deltas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../options.html">Options and Settings</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../enhancingperf.html">Enhancing Performance</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../sparse.html">Sparse data structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../gotchas.html">Frequently Asked Questions (FAQ)</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../cookbook.html">Cookbook</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#writing-dataframes" class="nav-link">Writing DataFrames</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#sql-data-types" class="nav-link">SQL data types</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#datetime-data-types" class="nav-link">Datetime data types</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#insertion-method" class="nav-link">Insertion Method</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#reading-tables" class="nav-link">Reading Tables</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#schema-support" class="nav-link">Schema support</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#querying" class="nav-link">Querying</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#engine-connection-examples" class="nav-link">Engine connection examples</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#advanced-sqlalchemy-queries" class="nav-link">Advanced SQLAlchemy queries</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#sqlite-fallback" class="nav-link">Sqlite fallback</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="sql-queries">
+<span id="io-sql"></span><h1>SQL Queries<a class="headerlink" href="#sql-queries" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">pandas.io.sql</span></code> module provides a collection of query wrappers to both
+facilitate data retrieval and to reduce dependency on DB-specific API. Database abstraction
+is provided by SQLAlchemy if installed. In addition you will need a driver library for
+your database. Examples of such drivers are <a class="reference external" href="http://initd.org/psycopg/">psycopg2</a>
+for PostgreSQL or <a class="reference external" href="https://github.com/PyMySQL/PyMySQL">pymysql</a> for MySQL.
+For <a class="reference external" href="https://docs.python.org/3/library/sqlite3.html">SQLite</a> this is
+included in Python’s standard library by default.
+You can find an overview of supported drivers for each SQL dialect in the
+<a class="reference external" href="https://docs.sqlalchemy.org/en/latest/dialects/index.html">SQLAlchemy docs</a>.</p>
+<p>If SQLAlchemy is not installed, a fallback is only provided for sqlite (and
+for mysql for backwards compatibility, but this is deprecated and will be
+removed in a future version).
+This mode requires a Python database adapter which respect the <a class="reference external" href="https://www.python.org/dev/peps/pep-0249/">Python
+DB-API</a>.</p>
+<p>See also some <a class="reference internal" href="../cookbook.html#cookbook-sql"><span class="std std-ref">cookbook examples</span></a> for some advanced strategies.</p>
+<p>The key functions are:</p>
+<table class="longtable table">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_table</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql_query</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_sql</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_sql</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>The function <a class="reference internal" href="../../reference/api/pandas.read_sql.html#pandas.read_sql" title="pandas.read_sql"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql()</span></code></a> is a convenience wrapper around
+<a class="reference internal" href="../../reference/api/pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_table()</span></code></a> and <a class="reference internal" href="../../reference/api/pandas.read_sql_query.html#pandas.read_sql_query" title="pandas.read_sql_query"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_query()</span></code></a> (and for
+backward compatibility) and will delegate to specific function depending on
+the provided input (database table name or sql query).
+Table names do not need to be quoted if they have special characters.</p>
+</div>
+<p>In the following example, we use the <a class="reference external" href="https://www.sqlite.org/">SQlite</a> SQL database
+engine. You can use a temporary SQLite database where data are stored in
+“memory”.</p>
+<p>To connect with SQLAlchemy you use the <code class="xref py py-func docutils literal notranslate"><span class="pre">create_engine()</span></code> function to create an engine
+object from database URI. You only need to create the engine once per database you are
+connecting to.
+For more information on <code class="xref py py-func docutils literal notranslate"><span class="pre">create_engine()</span></code> and the URI formatting, see the examples
+below and the SQLAlchemy <a class="reference external" href="https://docs.sqlalchemy.org/en/latest/core/engines.html">documentation</a></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="go"># Create your engine.</span>
+<span class="gp">In [2]: </span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///:memory:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you want to manage your own connections you can pass one of those instead:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">,</span> <span class="n">conn</span><span class="o">.</span><span class="n">begin</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="writing-dataframes">
+<h2>Writing DataFrames<a class="headerlink" href="#writing-dataframes" title="Permalink to this headline">¶</a></h2>
+<p>Assuming the following data is in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> <code class="docutils literal notranslate"><span class="pre">data</span></code>, we can insert it into
+the database using <a class="reference internal" href="../../reference/api/pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_sql()</span></code></a>.</p>
+<table class="table">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 32%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Col_1</p></th>
+<th class="head"><p>Col_2</p></th>
+<th class="head"><p>Col_3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>2012-10-18</p></td>
+<td><p>X</p></td>
+<td><p>25.7</p></td>
+<td><p>True</p></td>
+</tr>
+<tr class="row-odd"><td><p>42</p></td>
+<td><p>2012-10-19</p></td>
+<td><p>Y</p></td>
+<td><p>-12.4</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>63</p></td>
+<td><p>2012-10-20</p></td>
+<td><p>Z</p></td>
+<td><p>5.73</p></td>
+<td><p>True</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">data</span>
+
+<span class="gp">In [8]: </span><span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With some databases, writing large DataFrames can result in errors due to
+packet size limitations being exceeded. This can be avoided by setting the
+<code class="docutils literal notranslate"><span class="pre">chunksize</span></code> parameter when calling <code class="docutils literal notranslate"><span class="pre">to_sql</span></code>.  For example, the following
+writes <code class="docutils literal notranslate"><span class="pre">data</span></code> to the database in batches of 1000 rows at a time:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data_chunked&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="sql-data-types">
+<h3>SQL data types<a class="headerlink" href="#sql-data-types" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../reference/api/pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_sql()</span></code></a> will try to map your data to an appropriate
+SQL data type based on the dtype of the data. When you have columns of dtype
+<code class="docutils literal notranslate"><span class="pre">object</span></code>, pandas will try to infer the data type.</p>
+<p>You can always override the default type by specifying the desired SQL type of
+any of the columns by using the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument. This argument needs a
+dictionary mapping column names to SQLAlchemy types (or strings for the sqlite3
+fallback mode).
+For example, specifying to use the sqlalchemy <code class="docutils literal notranslate"><span class="pre">String</span></code> type instead of the
+default <code class="docutils literal notranslate"><span class="pre">Text</span></code> type for string columns:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="kn">from</span> <span class="nn">sqlalchemy.types</span> <span class="kn">import</span> <span class="n">String</span>
+
+<span class="gp">In [11]: </span><span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data_dtype&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Col_1&#39;</span><span class="p">:</span> <span class="n">String</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>Due to the limited support for timedelta’s in the different database
+flavors, columns with type <code class="docutils literal notranslate"><span class="pre">timedelta64</span></code> will be written as integer
+values as nanoseconds to the database and a warning will be raised.</p>
+</div>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>Columns of <code class="docutils literal notranslate"><span class="pre">category</span></code> dtype will be converted to the dense representation
+as you would get with <code class="docutils literal notranslate"><span class="pre">np.asarray(categorical)</span></code> (e.g. for string categories
+this gives an array of strings).
+Because of this, reading the database table back in does <strong>not</strong> generate
+a categorical.</p>
+</div>
+</div>
+</div>
+<div class="section" id="datetime-data-types">
+<span id="io-sql-datetime-data"></span><h2>Datetime data types<a class="headerlink" href="#datetime-data-types" title="Permalink to this headline">¶</a></h2>
+<p>Using SQLAlchemy, <a class="reference internal" href="../../reference/api/pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_sql()</span></code></a> is capable of writing
+datetime data that is timezone naive or timezone aware. However, the resulting
+data stored in the database ultimately depends on the supported data type
+for datetime data of the database system being used.</p>
+<p>The following table lists supported data types for datetime data for some
+common databases. Other database dialects may have different data types for
+datetime data.</p>
+<table class="table">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 60%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Database</p></th>
+<th class="head"><p>SQL Datetime Types</p></th>
+<th class="head"><p>Timezone Support</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SQLite</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TEXT</span></code></p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>MySQL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> or <code class="docutils literal notranslate"><span class="pre">DATETIME</span></code></p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>PostgreSQL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> or <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span> <span class="pre">WITH</span> <span class="pre">TIME</span> <span class="pre">ZONE</span></code></p></td>
+<td><p>Yes</p></td>
+</tr>
+</tbody>
+</table>
+<p>When writing timezone aware data to databases that do not support timezones,
+the data will be written as timezone naive timestamps that are in local time
+with respect to the timezone.</p>
+<p><a class="reference internal" href="../../reference/api/pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_table()</span></code></a> is also capable of reading datetime data that is
+timezone aware or naive. When reading <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span> <span class="pre">WITH</span> <span class="pre">TIME</span> <span class="pre">ZONE</span></code> types, pandas
+will convert the data to UTC.</p>
+<div class="section" id="insertion-method">
+<span id="io-sql-method"></span><h3>Insertion Method<a class="headerlink" href="#insertion-method" title="Permalink to this headline">¶</a></h3>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.24.0.</span></p>
+</div>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">method</span></code> controls the SQL insertion clause used.
+Possible values are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code>: Uses standard SQL <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> clause (one per row).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'multi'</span></code>: Pass multiple values in a single <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> clause.
+It uses a <em>special</em> SQL syntax not supported by all backends.
+This usually provides better performance for analytic databases
+like <em>Presto</em> and <em>Redshift</em>, but has worse performance for
+traditional SQL backend if the table contains many columns.
+For more information check the SQLAlchemy <a class="reference external" href="http://docs.sqlalchemy.org/en/latest/core/dml.html#sqlalchemy.sql.expression.Insert.values.params.*args">documention</a>.</p></li>
+<li><p>callable with signature <code class="docutils literal notranslate"><span class="pre">(pd_table,</span> <span class="pre">conn,</span> <span class="pre">keys,</span> <span class="pre">data_iter)</span></code>:
+This can be used to implement a more performant insertion method based on
+specific backend dialect features.</p></li>
+</ul>
+<p>Example of a callable using PostgreSQL <a class="reference external" href="https://www.postgresql.org/docs/current/static/sql-copy.html">COPY clause</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alternative to_sql() *method* for DBs that support COPY FROM</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+
+<span class="k">def</span> <span class="nf">psql_insert_copy</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">data_iter</span><span class="p">):</span>
+    <span class="c1"># gets a DBAPI connection that can provide a cursor</span>
+    <span class="n">dbapi_conn</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">connection</span>
+    <span class="k">with</span> <span class="n">dbapi_conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="k">as</span> <span class="n">cur</span><span class="p">:</span>
+        <span class="n">s_buf</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">s_buf</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">data_iter</span><span class="p">)</span>
+        <span class="n">s_buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">table</span><span class="o">.</span><span class="n">schema</span><span class="p">:</span>
+            <span class="n">table_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">table_name</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">name</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;COPY </span><span class="si">{}</span><span class="s1"> (</span><span class="si">{}</span><span class="s1">) FROM STDIN WITH CSV&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">table_name</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">copy_expert</span><span class="p">(</span><span class="n">sql</span><span class="o">=</span><span class="n">sql</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">s_buf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="reading-tables">
+<h2>Reading Tables<a class="headerlink" href="#reading-tables" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../reference/api/pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_table()</span></code></a> will read a database table given the
+table name and optionally a subset of columns to read.</p>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>In order to use <a class="reference internal" href="../../reference/api/pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_table()</span></code></a>, you <strong>must</strong> have the
+SQLAlchemy optional dependency installed.</p>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also specify the name of the column as the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> index,
+and specify a subset of columns to be read.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+
+<span class="gp">In [14]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Col_1&#39;</span><span class="p">,</span> <span class="s1">&#39;Col_2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>And you can explicitly force columns to be parsed as dates:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>If needed you can explicitly specify a format string, or a dict of arguments
+to pass to <a class="reference internal" href="../../reference/api/pandas.to_datetime.html#pandas.to_datetime" title="pandas.to_datetime"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.to_datetime()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span>
+                  <span class="n">parse_dates</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+<p>You can check if a table exists using <code class="xref py py-func docutils literal notranslate"><span class="pre">has_table()</span></code></p>
+</div>
+<div class="section" id="schema-support">
+<h2>Schema support<a class="headerlink" href="#schema-support" title="Permalink to this headline">¶</a></h2>
+<p>Reading from and writing to different schema’s is supported through the <code class="docutils literal notranslate"><span class="pre">schema</span></code>
+keyword in the <a class="reference internal" href="../../reference/api/pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_table()</span></code></a> and <a class="reference internal" href="../../reference/api/pandas.DataFrame.to_sql.html#pandas.DataFrame.to_sql" title="pandas.DataFrame.to_sql"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_sql()</span></code></a>
+functions. Note however that this depends on the database flavor (sqlite does not
+have schema’s). For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="s1">&#39;other_schema&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql_table</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="s1">&#39;other_schema&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="querying">
+<h2>Querying<a class="headerlink" href="#querying" title="Permalink to this headline">¶</a></h2>
+<p>You can query using raw SQL in the <a class="reference internal" href="../../reference/api/pandas.read_sql_query.html#pandas.read_sql_query" title="pandas.read_sql_query"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_query()</span></code></a> function.
+In this case you must use the SQL variant appropriate for your database.
+When using SQLAlchemy, you can also pass SQLAlchemy Expression language constructs,
+which are database-agnostic.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM data&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Of course, you can specify a more “complex” query.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT id, Col_1, Col_2 FROM data WHERE id = 42;&quot;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../reference/api/pandas.read_sql_query.html#pandas.read_sql_query" title="pandas.read_sql_query"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_query()</span></code></a> function supports a <code class="docutils literal notranslate"><span class="pre">chunksize</span></code> argument.
+Specifying this will return an iterator through chunks of the query result:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
+
+<span class="gp">In [19]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data_chunks&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM data_chunks&quot;</span><span class="p">,</span>
+<span class="gp">   ....: </span>                               <span class="n">engine</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>You can also run a plain query without creating a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">execute()</span></code>. This is useful for queries that don’t return values,
+such as INSERT. This is functionally equivalent to calling <code class="docutils literal notranslate"><span class="pre">execute</span></code> on the
+SQLAlchemy engine or db connection object. Again, you must use the SQL syntax
+variant appropriate for your database.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.io</span> <span class="kn">import</span> <span class="n">sql</span>
+<span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table_name&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+<span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO table_name VALUES(?, ?, ?)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">12.2</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="engine-connection-examples">
+<h2>Engine connection examples<a class="headerlink" href="#engine-connection-examples" title="Permalink to this headline">¶</a></h2>
+<p>To connect with SQLAlchemy you use the <code class="xref py py-func docutils literal notranslate"><span class="pre">create_engine()</span></code> function to create an engine
+object from database URI. You only need to create the engine once per database you are
+connecting to.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;postgresql://scott:tiger@localhost:5432/mydatabase&#39;</span><span class="p">)</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;mysql+mysqldb://scott:tiger@localhost/foo&#39;</span><span class="p">)</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;oracle://scott:tiger@127.0.0.1:1521/sidname&#39;</span><span class="p">)</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;mssql+pyodbc://mydsn&#39;</span><span class="p">)</span>
+
+<span class="c1"># sqlite://&lt;nohostname&gt;/&lt;path&gt;</span>
+<span class="c1"># where &lt;path&gt; is relative:</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:///foo.db&#39;</span><span class="p">)</span>
+
+<span class="c1"># or absolute, starting with a slash:</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s1">&#39;sqlite:////absolute/path/to/foo.db&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more information see the examples the SQLAlchemy <a class="reference external" href="https://docs.sqlalchemy.org/en/latest/core/engines.html">documentation</a></p>
+</div>
+<div class="section" id="advanced-sqlalchemy-queries">
+<h2>Advanced SQLAlchemy queries<a class="headerlink" href="#advanced-sqlalchemy-queries" title="Permalink to this headline">¶</a></h2>
+<p>You can use SQLAlchemy constructs to describe your query.</p>
+<p>Use <code class="xref py py-func docutils literal notranslate"><span class="pre">sqlalchemy.text()</span></code> to specify query parameters in a backend-neutral way</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="kn">as</span> <span class="nn">sa</span>
+
+<span class="gp">In [22]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sa</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM data where Col_1=:col1&#39;</span><span class="p">),</span>
+<span class="gp">   ....: </span>            <span class="n">engine</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">})</span>
+<span class="gp">   ....: </span>
+</pre></div>
+</div>
+<p>If you have an SQLAlchemy description of your database you can express where conditions using SQLAlchemy expressions</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">metadata</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">MetaData</span><span class="p">()</span>
+
+<span class="gp">In [24]: </span><span class="n">data_table</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span>
+<span class="gp">   ....: </span>                      <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Integer</span><span class="p">),</span>
+<span class="gp">   ....: </span>                      <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">DateTime</span><span class="p">),</span>
+<span class="gp">   ....: </span>                      <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;Col_1&#39;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">String</span><span class="p">),</span>
+<span class="gp">   ....: </span>                      <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;Col_2&#39;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Float</span><span class="p">),</span>
+<span class="gp">   ....: </span>                      <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s1">&#39;Col_3&#39;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Boolean</span><span class="p">),</span>
+<span class="gp">   ....: </span>                      <span class="p">)</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [25]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">sa</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">data_table</span><span class="p">])</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data_table</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">Col_3</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">),</span> <span class="n">engine</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can combine SQLAlchemy expressions with parameters passed to <code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql()</span></code> using <code class="xref py py-func docutils literal notranslate"><span class="pre">sqlalchemy.bindparam()</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+
+<span class="gp">In [27]: </span><span class="n">expr</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">data_table</span><span class="p">])</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data_table</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">Date</span> <span class="o">&gt;</span> <span class="n">sa</span><span class="o">.</span><span class="n">bindparam</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">))</span>
+
+<span class="gp">In [28]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sqlite-fallback">
+<h2>Sqlite fallback<a class="headerlink" href="#sqlite-fallback" title="Permalink to this headline">¶</a></h2>
+<p>The use of sqlite is supported without using SQLAlchemy.
+This mode requires a Python database adapter which respect the <a class="reference external" href="https://www.python.org/dev/peps/pep-0249/">Python
+DB-API</a>.</p>
+<p>You can create connections like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="n">con</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;:memory:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And then issue the following queries:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM data&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
