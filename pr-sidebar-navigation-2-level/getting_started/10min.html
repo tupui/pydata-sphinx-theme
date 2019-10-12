@@ -1,0 +1,1016 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>10 Minutes to pandas &#8212; pandas 0.25.1 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link href="../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Essential Basic Functionality" href="basics.html" />
+    <link rel="prev" title="Package overview" href="overview.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../reference/index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+        
+          
+              <li class="">
+                  <a href="overview.html">Package overview</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="">10 Minutes to pandas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="basics.html">Essential Basic Functionality</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="dsintro.html">Intro to Data Structures</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="comparison/index.html">Comparison with other tools</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="tutorials.html">Tutorials</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#object-creation" class="nav-link">Object Creation</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#viewing-data" class="nav-link">Viewing Data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#selection" class="nav-link">Selection</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#getting" class="nav-link">Getting</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#selection-by-label" class="nav-link">Selection by Label</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#selection-by-position" class="nav-link">Selection by Position</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#boolean-indexing" class="nav-link">Boolean Indexing</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#setting" class="nav-link">Setting</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#missing-data" class="nav-link">Missing Data</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#operations" class="nav-link">Operations</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#stats" class="nav-link">Stats</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#apply" class="nav-link">Apply</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#histogramming" class="nav-link">Histogramming</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#string-methods" class="nav-link">String Methods</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#merge" class="nav-link">Merge</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#concat" class="nav-link">Concat</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#join" class="nav-link">Join</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#append" class="nav-link">Append</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#grouping" class="nav-link">Grouping</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#reshaping" class="nav-link">Reshaping</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#stack" class="nav-link">Stack</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#pivot-tables" class="nav-link">Pivot Tables</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#time-series" class="nav-link">Time Series</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#categoricals" class="nav-link">Categoricals</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#plotting" class="nav-link">Plotting</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#getting-data-in-out" class="nav-link">Getting Data In/Out</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#csv" class="nav-link">CSV</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#hdf5" class="nav-link">HDF5</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#excel" class="nav-link">Excel</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#gotchas" class="nav-link">Gotchas</a>
+        </li>
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="minutes-to-pandas">
+<span id="min"></span><h1>10 Minutes to pandas<a class="headerlink" href="#minutes-to-pandas" title="Permalink to this headline">¶</a></h1>
+<p>This is a short introduction to pandas, geared mainly for new users.
+You can see more complex recipes in the <a class="reference internal" href="../user_guide/cookbook.html#cookbook"><span class="std std-ref">Cookbook</span></a>.</p>
+<p>Customarily, we import as follows:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="gp">In [10]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+<div class="section" id="object-creation">
+<h2>Object Creation<a class="headerlink" href="#object-creation" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="dsintro.html#dsintro"><span class="std std-ref">Data Structure Intro section</span></a>.</p>
+<p>Creating a <code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code> by passing a list of values, letting pandas create
+a default integer index:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+
+<span class="gp">In [12]: </span><span class="n">s</span>
+</pre></div>
+</div>
+<p>Creating a <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> by passing a NumPy array, with a datetime index
+and labeled columns:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="gp">In [14]: </span><span class="n">dates</span>
+
+<span class="gp">In [15]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">))</span>
+
+<span class="gp">In [16]: </span><span class="n">df</span>
+</pre></div>
+</div>
+<p>Creating a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> by passing a dict of objects that can be converted to series-like.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mf">1.</span><span class="p">,</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130102&#39;</span><span class="p">),</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">),</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int32&#39;</span><span class="p">),</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;train&quot;</span><span class="p">]),</span>
+<span class="gp">   ....: </span>                    <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="s1">&#39;foo&#39;</span><span class="p">})</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [18]: </span><span class="n">df2</span>
+</pre></div>
+</div>
+<p>The columns of the resulting <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> have different
+<a class="reference internal" href="basics.html#basics-dtypes"><span class="std std-ref">dtypes</span></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">df2</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+<p>If you’re using IPython, tab completion for column names (as well as public
+attributes) is automatically enabled. Here’s a subset of the attributes that
+will be completed:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">df2</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span>  <span class="c1"># noqa: E225, E999</span>
+<span class="go">df2.A                  df2.bool</span>
+<span class="go">df2.abs                df2.boxplot</span>
+<span class="go">df2.add                df2.C</span>
+<span class="go">df2.add_prefix         df2.clip</span>
+<span class="go">df2.add_suffix         df2.clip_lower</span>
+<span class="go">df2.align              df2.clip_upper</span>
+<span class="go">df2.all                df2.columns</span>
+<span class="go">df2.any                df2.combine</span>
+<span class="go">df2.append             df2.combine_first</span>
+<span class="go">df2.apply              df2.compound</span>
+<span class="go">df2.applymap           df2.consolidate</span>
+<span class="go">df2.D</span>
+</pre></div>
+</div>
+<p>As you can see, the columns <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code>, and <code class="docutils literal notranslate"><span class="pre">D</span></code> are automatically
+tab completed. <code class="docutils literal notranslate"><span class="pre">E</span></code> is there as well; the rest of the attributes have been
+truncated for brevity.</p>
+</div>
+<div class="section" id="viewing-data">
+<h2>Viewing Data<a class="headerlink" href="#viewing-data" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="basics.html#basics"><span class="std std-ref">Basics section</span></a>.</p>
+<p>Here is how to view the top and bottom rows of the frame:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="gp">In [22]: </span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Display the index, columns:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+
+<span class="gp">In [24]: </span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a> gives a NumPy representation of the underlying data.
+Note that this can be an expensive operation when your <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> has
+columns with different data types, which comes down to a fundamental difference
+between pandas and NumPy: <strong>NumPy arrays have one dtype for the entire array,
+while pandas DataFrames have one dtype per column</strong>. When you call
+<a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a>, pandas will find the NumPy dtype that can hold <em>all</em>
+of the dtypes in the DataFrame. This may end up being <code class="docutils literal notranslate"><span class="pre">object</span></code>, which requires
+casting every value to a Python object.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">df</span></code>, our <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> of all floating-point values,
+<a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a> is fast and doesn’t require copying data.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">df2</span></code>, the <a class="reference internal" href="../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> with multiple dtypes,
+<a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a> is relatively expensive.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">df2</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" title="pandas.DataFrame.to_numpy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_numpy()</span></code></a> does <em>not</em> include the index or column
+labels in the output.</p>
+</div>
+<p><a class="reference internal" href="../reference/api/pandas.DataFrame.describe.html#pandas.DataFrame.describe" title="pandas.DataFrame.describe"><code class="xref py py-func docutils literal notranslate"><span class="pre">describe()</span></code></a> shows a quick statistic summary of your data:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Transposing your data:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">df</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+<p>Sorting by an axis:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Sorting by values:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selection">
+<h2>Selection<a class="headerlink" href="#selection" title="Permalink to this headline">¶</a></h2>
+<div class="alert alert-info">
+<p class="admonition-title">Note</p>
+<p>While standard Python / Numpy expressions for selecting and setting are
+intuitive and come in handy for interactive work, for production code, we
+recommend the optimized pandas data access methods, <code class="docutils literal notranslate"><span class="pre">.at</span></code>, <code class="docutils literal notranslate"><span class="pre">.iat</span></code>,
+<code class="docutils literal notranslate"><span class="pre">.loc</span></code> and <code class="docutils literal notranslate"><span class="pre">.iloc</span></code>.</p>
+</div>
+<p>See the indexing documentation <a class="reference internal" href="../user_guide/indexing.html#indexing"><span class="std std-ref">Indexing and Selecting Data</span></a> and <a class="reference internal" href="../user_guide/advanced.html#advanced"><span class="std std-ref">MultiIndex / Advanced Indexing</span></a>.</p>
+<div class="section" id="getting">
+<h3>Getting<a class="headerlink" href="#getting" title="Permalink to this headline">¶</a></h3>
+<p>Selecting a single column, which yields a <code class="docutils literal notranslate"><span class="pre">Series</span></code>,
+equivalent to <code class="docutils literal notranslate"><span class="pre">df.A</span></code>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Selecting via <code class="docutils literal notranslate"><span class="pre">[]</span></code>, which slices the rows.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [33]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;20130102&#39;</span><span class="p">:</span><span class="s1">&#39;20130104&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selection-by-label">
+<h3>Selection by Label<a class="headerlink" href="#selection-by-label" title="Permalink to this headline">¶</a></h3>
+<p>See more in <a class="reference internal" href="../user_guide/indexing.html#indexing-label"><span class="std std-ref">Selection by Label</span></a>.</p>
+<p>For getting a cross section using a label:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Selecting on a multi-axis by label:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Showing label slicing, both endpoints are <em>included</em>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;20130102&#39;</span><span class="p">:</span><span class="s1">&#39;20130104&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>Reduction in the dimensions of the returned object:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;20130102&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>For getting a scalar value:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For getting fast access to a scalar (equivalent to the prior method):</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selection-by-position">
+<h3>Selection by Position<a class="headerlink" href="#selection-by-position" title="Permalink to this headline">¶</a></h3>
+<p>See more in <a class="reference internal" href="../user_guide/indexing.html#indexing-integer"><span class="std std-ref">Selection by Position</span></a>.</p>
+<p>Select via the position of the passed integers:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>By integer slices, acting similar to numpy/python:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>By lists of integer position locations, similar to the numpy/python style:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>For slicing rows explicitly:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+<p>For slicing columns explicitly:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [44]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For getting a value explicitly:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For getting fast access to a scalar (equivalent to the prior method):</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="boolean-indexing">
+<h3>Boolean Indexing<a class="headerlink" href="#boolean-indexing" title="Permalink to this headline">¶</a></h3>
+<p>Using a single column’s values to select data.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Selecting values from a DataFrame where a boolean condition is met.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Using the <code class="xref py py-func docutils literal notranslate"><span class="pre">isin()</span></code> method for filtering:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="gp">In [50]: </span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span> <span class="s1">&#39;four&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">]</span>
+
+<span class="gp">In [51]: </span><span class="n">df2</span>
+
+<span class="gp">In [52]: </span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;four&#39;</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting">
+<h3>Setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h3>
+<p>Setting a new column automatically aligns the data
+by the indexes.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130102&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="gp">In [54]: </span><span class="n">s1</span>
+
+<span class="gp">In [55]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s1</span>
+</pre></div>
+</div>
+<p>Setting values by label:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Setting values by position:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Setting by assigning with a NumPy array:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The result of the prior setting operations.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">df</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">where</span></code> operation with setting.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="gp">In [61]: </span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">df2</span>
+
+<span class="gp">In [62]: </span><span class="n">df2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="missing-data">
+<h2>Missing Data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h2>
+<p>pandas primarily uses the value <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> to represent missing data. It is by
+default not included in computations. See the <a class="reference internal" href="../user_guide/missing_data.html#missing-data"><span class="std std-ref">Missing Data section</span></a>.</p>
+<p>Reindexing allows you to change/add/delete the index on a specified axis. This
+returns a copy of the data.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [63]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">])</span>
+
+<span class="gp">In [64]: </span><span class="n">df1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">dates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="gp">In [65]: </span><span class="n">df1</span>
+</pre></div>
+</div>
+<p>To drop any rows that have missing data.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">df1</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Filling missing data.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">df1</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To get the boolean mask where values are <code class="docutils literal notranslate"><span class="pre">nan</span></code>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [68]: </span><span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="operations">
+<h2>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="basics.html#basics-binop"><span class="std std-ref">Basic section on Binary Ops</span></a>.</p>
+<div class="section" id="stats">
+<h3>Stats<a class="headerlink" href="#stats" title="Permalink to this headline">¶</a></h3>
+<p>Operations in general <em>exclude</em> missing data.</p>
+<p>Performing a descriptive statistic:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [69]: </span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Same operation on the other axis:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Operating with objects that have different dimensionality and need alignment.
+In addition, pandas automatically broadcasts along the specified dimension.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [71]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="gp">In [72]: </span><span class="n">s</span>
+
+<span class="gp">In [73]: </span><span class="n">df</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="apply">
+<h3>Apply<a class="headerlink" href="#apply" title="Permalink to this headline">¶</a></h3>
+<p>Applying functions to the data:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [74]: </span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">)</span>
+
+<span class="gp">In [75]: </span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="histogramming">
+<h3>Histogramming<a class="headerlink" href="#histogramming" title="Permalink to this headline">¶</a></h3>
+<p>See more at <a class="reference internal" href="basics.html#basics-discretization"><span class="std std-ref">Histogramming and Discretization</span></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="gp">In [77]: </span><span class="n">s</span>
+
+<span class="gp">In [78]: </span><span class="n">s</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="string-methods">
+<h3>String Methods<a class="headerlink" href="#string-methods" title="Permalink to this headline">¶</a></h3>
+<p>Series is equipped with a set of string processing methods in the <cite>str</cite>
+attribute that make it easy to operate on each element of the array, as in the
+code snippet below. Note that pattern-matching in <cite>str</cite> generally uses <a class="reference external" href="https://docs.python.org/3/library/re.html">regular
+expressions</a> by default (and in
+some cases always uses them). See more at <a class="reference internal" href="../user_guide/text.html#text-string-methods"><span class="std std-ref">Vectorized String Methods</span></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [79]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;Aaba&#39;</span><span class="p">,</span> <span class="s1">&#39;Baca&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;CABA&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">])</span>
+
+<span class="gp">In [80]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="merge">
+<h2>Merge<a class="headerlink" href="#merge" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="concat">
+<h3>Concat<a class="headerlink" href="#concat" title="Permalink to this headline">¶</a></h3>
+<p>pandas provides various facilities for easily combining together Series and
+DataFrame objects with various kinds of set logic for the indexes
+and relational algebra functionality in the case of join / merge-type
+operations.</p>
+<p>See the <a class="reference internal" href="../user_guide/merging.html#merging"><span class="std std-ref">Merging section</span></a>.</p>
+<p>Concatenating pandas objects together with <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [81]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="gp">In [82]: </span><span class="n">df</span>
+
+<span class="go"># break it into pieces</span>
+<span class="gp">In [83]: </span><span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="mi">7</span><span class="p">:]]</span>
+
+<span class="gp">In [84]: </span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="join">
+<h3>Join<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
+<p>SQL style merges. See the <a class="reference internal" href="../user_guide/merging.html#merging-join"><span class="std std-ref">Database style joining</span></a> section.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span> <span class="s1">&#39;lval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+
+<span class="gp">In [86]: </span><span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span> <span class="s1">&#39;rval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+
+<span class="gp">In [87]: </span><span class="n">left</span>
+
+<span class="gp">In [88]: </span><span class="n">right</span>
+
+<span class="gp">In [89]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Another example that can be given is:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">],</span> <span class="s1">&#39;lval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+
+<span class="gp">In [91]: </span><span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">],</span> <span class="s1">&#39;rval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+
+<span class="gp">In [92]: </span><span class="n">left</span>
+
+<span class="gp">In [93]: </span><span class="n">right</span>
+
+<span class="gp">In [94]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="append">
+<h3>Append<a class="headerlink" href="#append" title="Permalink to this headline">¶</a></h3>
+<p>Append rows to a dataframe. See the <a class="reference internal" href="../user_guide/merging.html#merging-concatenation"><span class="std std-ref">Appending</span></a>
+section.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [95]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
+
+<span class="gp">In [96]: </span><span class="n">df</span>
+
+<span class="gp">In [97]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="gp">In [98]: </span><span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="grouping">
+<h2>Grouping<a class="headerlink" href="#grouping" title="Permalink to this headline">¶</a></h2>
+<p>By “group by” we are referring to a process involving one or more of the
+following steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Splitting</strong> the data into groups based on some criteria</p></li>
+<li><p><strong>Applying</strong> a function to each group independently</p></li>
+<li><p><strong>Combining</strong> the results into a data structure</p></li>
+</ul>
+</div></blockquote>
+<p>See the <a class="reference internal" href="../user_guide/groupby.html#groupby"><span class="std std-ref">Grouping section</span></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [99]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>                         <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                   <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span>
+<span class="gp">   ....: </span>                         <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">],</span>
+<span class="gp">   ....: </span>                   <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+<span class="gp">   ....: </span>                   <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)})</span>
+<span class="gp">   ....: </span>
+
+<span class="gp">In [100]: </span><span class="n">df</span>
+</pre></div>
+</div>
+<p>Grouping and then applying the <a class="reference internal" href="../reference/api/pandas.DataFrame.sum.html#pandas.DataFrame.sum" title="pandas.DataFrame.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sum()</span></code></a> function to the resulting
+groups.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [101]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Grouping by multiple columns forms a hierarchical index, and again we can
+apply the <code class="docutils literal notranslate"><span class="pre">sum</span></code> function.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [102]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reshaping">
+<h2>Reshaping<a class="headerlink" href="#reshaping" title="Permalink to this headline">¶</a></h2>
+<p>See the sections on <a class="reference internal" href="../user_guide/advanced.html#advanced-hierarchical"><span class="std std-ref">Hierarchical Indexing</span></a> and
+<a class="reference internal" href="../user_guide/reshaping.html#reshaping-stacking"><span class="std std-ref">Reshaping</span></a>.</p>
+<div class="section" id="stack">
+<h3>Stack<a class="headerlink" href="#stack" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [103]: </span><span class="n">tuples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[[</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span>
+<span class="gp">   .....: </span>                     <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="p">],</span>
+<span class="gp">   .....: </span>                    <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span>
+<span class="gp">   .....: </span>                     <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">]]))</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [104]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">])</span>
+
+<span class="gp">In [105]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
+
+<span class="gp">In [106]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="gp">In [107]: </span><span class="n">df2</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../reference/api/pandas.DataFrame.stack.html#pandas.DataFrame.stack" title="pandas.DataFrame.stack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stack()</span></code></a> method “compresses” a level in the DataFrame’s
+columns.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [108]: </span><span class="n">stacked</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+
+<span class="gp">In [109]: </span><span class="n">stacked</span>
+</pre></div>
+</div>
+<p>With a “stacked” DataFrame or Series (having a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> as the
+<code class="docutils literal notranslate"><span class="pre">index</span></code>), the inverse operation of <a class="reference internal" href="../reference/api/pandas.DataFrame.stack.html#pandas.DataFrame.stack" title="pandas.DataFrame.stack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stack()</span></code></a> is
+<a class="reference internal" href="../reference/api/pandas.DataFrame.unstack.html#pandas.DataFrame.unstack" title="pandas.DataFrame.unstack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unstack()</span></code></a>, which by default unstacks the <strong>last level</strong>:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+
+<span class="gp">In [111]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="gp">In [112]: </span><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pivot-tables">
+<h3>Pivot Tables<a class="headerlink" href="#pivot-tables" title="Permalink to this headline">¶</a></h3>
+<p>See the section on <a class="reference internal" href="../user_guide/reshaping.html#reshaping-pivot"><span class="std std-ref">Pivot Tables</span></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [113]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+<span class="gp">   .....: </span>                   <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span>
+<span class="gp">   .....: </span>                   <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+<span class="gp">   .....: </span>                   <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+<span class="gp">   .....: </span>                   <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">)})</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [114]: </span><span class="n">df</span>
+</pre></div>
+</div>
+<p>We can produce pivot tables from this data very easily:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [115]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="time-series">
+<h2>Time Series<a class="headerlink" href="#time-series" title="Permalink to this headline">¶</a></h2>
+<p>pandas has simple, powerful, and efficient functionality for performing
+resampling operations during frequency conversion (e.g., converting secondly
+data into 5-minutely data). This is extremely common in, but not limited to,
+financial applications. See the <a class="reference internal" href="../user_guide/timeseries.html#timeseries"><span class="std std-ref">Time Series section</span></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [116]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2012&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;S&#39;</span><span class="p">)</span>
+
+<span class="gp">In [117]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+
+<span class="gp">In [118]: </span><span class="n">ts</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;5Min&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Time zone representation:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [119]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;3/6/2012 00:00&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+
+<span class="gp">In [120]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">rng</span><span class="p">)</span>
+
+<span class="gp">In [121]: </span><span class="n">ts</span>
+
+<span class="gp">In [122]: </span><span class="n">ts_utc</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;UTC&#39;</span><span class="p">)</span>
+
+<span class="gp">In [123]: </span><span class="n">ts_utc</span>
+</pre></div>
+</div>
+<p>Converting to another time zone:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="n">ts_utc</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="s1">&#39;US/Eastern&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Converting between time span representations:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [125]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2012&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+
+<span class="gp">In [126]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+
+<span class="gp">In [127]: </span><span class="n">ts</span>
+
+<span class="gp">In [128]: </span><span class="n">ps</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">to_period</span><span class="p">()</span>
+
+<span class="gp">In [129]: </span><span class="n">ps</span>
+
+<span class="gp">In [130]: </span><span class="n">ps</span><span class="o">.</span><span class="n">to_timestamp</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Converting between period and timestamp enables some convenient arithmetic
+functions to be used. In the following example, we convert a quarterly
+frequency with year ending in November to 9am of the end of the month following
+the quarter end:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [131]: </span><span class="n">prng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">period_range</span><span class="p">(</span><span class="s1">&#39;1990Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;2000Q4&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;Q-NOV&#39;</span><span class="p">)</span>
+
+<span class="gp">In [132]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prng</span><span class="p">)),</span> <span class="n">prng</span><span class="p">)</span>
+
+<span class="gp">In [133]: </span><span class="n">ts</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">prng</span><span class="o">.</span><span class="n">asfreq</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">asfreq</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span>
+
+<span class="gp">In [134]: </span><span class="n">ts</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="categoricals">
+<h2>Categoricals<a class="headerlink" href="#categoricals" title="Permalink to this headline">¶</a></h2>
+<p>pandas can include categorical data in a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. For full docs, see the
+<a class="reference internal" href="../user_guide/categorical.html#categorical"><span class="std std-ref">categorical introduction</span></a> and the <span class="xref std std-ref">API documentation</span>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [135]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="gp">   .....: </span>                   <span class="s2">&quot;raw_grade&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">]})</span>
+<span class="gp">   .....: </span>
+</pre></div>
+</div>
+<p>Convert the raw grades to a categorical data type.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [136]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;grade&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;raw_grade&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+
+<span class="gp">In [137]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;grade&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Rename the categories to more meaningful names (assigning to
+<code class="docutils literal notranslate"><span class="pre">Series.cat.categories</span></code> is inplace!).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [138]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;grade&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;very good&quot;</span><span class="p">,</span> <span class="s2">&quot;good&quot;</span><span class="p">,</span> <span class="s2">&quot;very bad&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Reorder the categories and simultaneously add the missing categories (methods under <code class="docutils literal notranslate"><span class="pre">Series</span>
+<span class="pre">.cat</span></code> return a new <code class="docutils literal notranslate"><span class="pre">Series</span></code> by default).</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [139]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;grade&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;grade&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">([</span><span class="s2">&quot;very bad&quot;</span><span class="p">,</span> <span class="s2">&quot;bad&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
+<span class="gp">   .....: </span>                                              <span class="s2">&quot;good&quot;</span><span class="p">,</span> <span class="s2">&quot;very good&quot;</span><span class="p">])</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [140]: </span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;grade&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Sorting is per order in the categories, not lexical order.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [141]: </span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;grade&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Grouping by a categorical column also shows empty categories.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [142]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;grade&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="../user_guide/visualization.html#visualization"><span class="std std-ref">Plotting</span></a> docs.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [145]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+<span class="gp">   .....: </span>               <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [146]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [147]: </span><span class="n">ts</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/series_plot_basic.png" src="../_images/series_plot_basic.png" />
+<p>On a DataFrame, the <a class="reference internal" href="../reference/api/pandas.DataFrame.plot.html#pandas.DataFrame.plot" title="pandas.DataFrame.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> method is a convenience to plot all
+of the columns with labels:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [148]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+<span class="gp">   .....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
+<span class="gp">   .....: </span>
+
+<span class="gp">In [149]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="gp">In [150]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="gp">In [151]: </span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="gp">In [152]: </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/frame_plot_basic.png" src="../_images/frame_plot_basic.png" />
+</div>
+<div class="section" id="getting-data-in-out">
+<h2>Getting Data In/Out<a class="headerlink" href="#getting-data-in-out" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="csv">
+<h3>CSV<a class="headerlink" href="#csv" title="Permalink to this headline">¶</a></h3>
+<p><span class="xref std std-ref">Writing to a csv file.</span></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [153]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="xref std std-ref">Reading from a csv file.</span></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [154]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="hdf5">
+<h3>HDF5<a class="headerlink" href="#hdf5" title="Permalink to this headline">¶</a></h3>
+<p>Reading and writing to <span class="xref std std-ref">HDFStores</span>.</p>
+<p>Writing to a HDF5 Store.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [157]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s1">&#39;foo.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Reading from a HDF5 Store.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [158]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s1">&#39;foo.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="excel">
+<h3>Excel<a class="headerlink" href="#excel" title="Permalink to this headline">¶</a></h3>
+<p>Reading and writing to <span class="xref std std-ref">MS Excel</span>.</p>
+<p>Writing to an excel file.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [160]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;foo.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Reading from an excel file.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [161]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;foo.xlsx&#39;</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gotchas">
+<h2>Gotchas<a class="headerlink" href="#gotchas" title="Permalink to this headline">¶</a></h2>
+<p>If you are attempting to perform an operation you might see an exception like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I was true&quot;</span><span class="p">)</span>
+<span class="go">Traceback</span>
+<span class="go">    ...</span>
+<span class="go">ValueError: The truth value of an array is ambiguous. Use a.empty, a.any() or a.all().</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="basics.html#basics-compare"><span class="std std-ref">Comparisons</span></a> for an explanation and what to do.</p>
+<p>See <a class="reference internal" href="../user_guide/gotchas.html#gotchas"><span class="std std-ref">Gotchas</span></a> as well.</p>
+</div>
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
