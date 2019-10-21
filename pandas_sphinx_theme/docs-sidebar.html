@@ -1,13 +1,13 @@
 
 
-<form class="bd-search d-flex align-items-center">
-  <input type="search" class="form-control" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off" >
+<form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form>
 
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
 
   <div class="bd-toc-item active">
-  {% set nav = get_nav_object(maxdepth=2) %}
+  {% set nav = get_nav_object(maxdepth=3) %}
 
   <ul class="nav bd-sidenav">
       {% for main_nav_item in nav %}
@@ -15,11 +15,12 @@
         {% for nav_item in main_nav_item.children %}
           {% if nav_item.children %}
     
-              <li>{{ nav_item.title }}
+              <li class="{% if nav_item.active%}active{% endif %}">
+                  <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
                   <ul>
                   {% for nav_item in nav_item.children %}
-                      <li class="{% if nav_item.active%}active bd-sidenav-active{% endif %}">
-                          <a href="{{ nav_item.url }}"">{{ nav_item.title }}</a>
+                      <li class="{% if nav_item.active%}active{% endif %}">
+                          <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
                       </li>
                   {% endfor %}
                   </ul>
@@ -34,12 +35,6 @@
       {% endfor %}
     </ul>
 
-<!--
-{# Adding this because our list is not yet with two levels#}
-<div class="bd-toc-item active">
-  {{ toctree(includehidden=theme_sidebar_includehidden, collapse=theme_sidebar_collapse, mindepth=True) }}
-</div>
--->
 </nav>
 
 
