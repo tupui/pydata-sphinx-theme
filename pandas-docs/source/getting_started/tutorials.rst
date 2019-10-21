@@ -17,6 +17,8 @@ More complex recipes are in the :ref:`Cookbook<cookbook>`.
 
 A handy pandas `cheat sheet <http://pandas.pydata.org/Pandas_Cheat_Sheet.pdf>`_.
 
+.. _community_guides:
+
 Community Guides
 ================
 
