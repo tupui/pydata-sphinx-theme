@@ -6,24 +6,20 @@
 Getting started
 ===============
 
-------------
-Installation
-------------
+
+__Installation__
+
 
 - Quick install using Anaconda, see `Quick installation instructions <https://dev.pandas.io/install.html>`  
 - More advanced installation instructions, see :ref:`install`
 
 .. _gentle_intro:
 
----------------
-Intro to pandas
----------------
+__Intro to pandas__
 
 TODO
 
--------------------
-Community tutorials
--------------------
+__Community tutorials__
 
 The community produces a variety of tutorials with a lot of these available online. Some of the 
 available material is enlisted in the community contributed :ref:`tutorials`. 
@@ -37,6 +33,7 @@ available material is enlisted in the community contributed :ref:`tutorials`.
 
     overview
     10min
+    10_times_1_minute/index
     basics
     dsintro
     comparison/index
