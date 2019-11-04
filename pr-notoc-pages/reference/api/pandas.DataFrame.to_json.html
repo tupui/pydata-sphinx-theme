@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>pandas.DataFrame.to_json &#8212; pandas 0.25.3 documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link href="../../_static/css/custom.css" rel="stylesheet">
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pandas.DataFrame.to_latex" href="pandas.DataFrame.to_latex.html" />
+    <link rel="prev" title="pandas.DataFrame.to_html" href="pandas.DataFrame.to_html.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
+</a>
+
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div id="navbar-menu" class="collapse navbar-collapse">
+  <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="../../index.html">Home</a>
+    </li>
+    
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../getting_started/index.html">Getting started</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../user_guide/index.html">User Guide</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="../index.html">API Reference</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
+        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
+        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
+      </a>
+    </li>
+  </ul>
+</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+          <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+              
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="../io.html">Input/Output</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../general_functions.html">General functions</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="../frame.html">DataFrame</a>
+              </li>
+          
+        
+      
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+
+
+              
+          </div>
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+              
+            </div>
+
+          <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+              <div>
+                
+  <div class="section" id="pandas-dataframe-to-json">
+<h1>pandas.DataFrame.to_json<a class="headerlink" href="#pandas-dataframe-to-json" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="pandas.DataFrame.to_json">
+<code class="sig-prename descclassname">DataFrame.</code><code class="sig-name descname">to_json</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">path_or_buf=None</em>, <em class="sig-param">orient=None</em>, <em class="sig-param">date_format=None</em>, <em class="sig-param">double_precision=10</em>, <em class="sig-param">force_ascii=True</em>, <em class="sig-param">date_unit='ms'</em>, <em class="sig-param">default_handler=None</em>, <em class="sig-param">lines=False</em>, <em class="sig-param">compression='infer'</em>, <em class="sig-param">index=True</em><span class="sig-paren">)</span><a class="reference external" href="http://github.com/pandas-dev/pandas/blob/v0.25.3/pandas/core/generic.py#L2259-L2425"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pandas.DataFrame.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the object to a JSON string.</p>
+<p>Note NaN’s and None will be converted to null and datetime objects
+will be converted to UNIX timestamps.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>path_or_buf</strong><span class="classifier">string or file handle, optional</span></dt><dd><p>File path or object. If not specified, the result is returned as
+a string.</p>
+</dd>
+<dt><strong>orient</strong><span class="classifier">string</span></dt><dd><p>Indication of expected JSON string format.</p>
+<ul>
+<li><p>Series</p>
+<ul class="simple">
+<li><p>default is ‘index’</p></li>
+<li><p>allowed values are: {‘split’,’records’,’index’,’table’}</p></li>
+</ul>
+</li>
+<li><p>DataFrame</p>
+<ul class="simple">
+<li><p>default is ‘columns’</p></li>
+<li><p>allowed values are:
+{‘split’,’records’,’index’,’columns’,’values’,’table’}</p></li>
+</ul>
+</li>
+<li><p>The format of the JSON string</p>
+<ul>
+<li><p>‘split’ : dict like {‘index’ -&gt; [index],
+‘columns’ -&gt; [columns], ‘data’ -&gt; [values]}</p></li>
+<li><p>‘records’ : list like
+[{column -&gt; value}, … , {column -&gt; value}]</p></li>
+<li><p>‘index’ : dict like {index -&gt; {column -&gt; value}}</p></li>
+<li><p>‘columns’ : dict like {column -&gt; {index -&gt; value}}</p></li>
+<li><p>‘values’ : just the values array</p></li>
+<li><p>‘table’ : dict like {‘schema’: {schema}, ‘data’: {data}}
+describing the data, and the data component is
+like <code class="docutils literal notranslate"><span class="pre">orient='records'</span></code>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.20.0.</span></p>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</dd>
+<dt><strong>date_format</strong><span class="classifier">{None, ‘epoch’, ‘iso’}</span></dt><dd><p>Type of date conversion. ‘epoch’ = epoch milliseconds,
+‘iso’ = ISO8601. The default depends on the <cite>orient</cite>. For
+<code class="docutils literal notranslate"><span class="pre">orient='table'</span></code>, the default is ‘iso’. For all other orients,
+the default is ‘epoch’.</p>
+</dd>
+<dt><strong>double_precision</strong><span class="classifier">int, default 10</span></dt><dd><p>The number of decimal places to use when encoding
+floating point values.</p>
+</dd>
+<dt><strong>force_ascii</strong><span class="classifier">bool, default True</span></dt><dd><p>Force encoded string to be ASCII.</p>
+</dd>
+<dt><strong>date_unit</strong><span class="classifier">string, default ‘ms’ (milliseconds)</span></dt><dd><p>The time unit to encode to, governs timestamp and ISO8601
+precision.  One of ‘s’, ‘ms’, ‘us’, ‘ns’ for second, millisecond,
+microsecond, and nanosecond respectively.</p>
+</dd>
+<dt><strong>default_handler</strong><span class="classifier">callable, default None</span></dt><dd><p>Handler to call if object cannot otherwise be converted to a
+suitable format for JSON. Should receive a single argument which is
+the object to convert and return a serialisable object.</p>
+</dd>
+<dt><strong>lines</strong><span class="classifier">bool, default False</span></dt><dd><p>If ‘orient’ is ‘records’ write out line delimited json format. Will
+throw ValueError if incorrect ‘orient’ since others are not list
+like.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.19.0.</span></p>
+</div>
+</dd>
+<dt><strong>compression</strong><span class="classifier">{‘infer’, ‘gzip’, ‘bz2’, ‘zip’, ‘xz’, None}</span></dt><dd><p>A string representing the compression to use in the output file,
+only used when the first argument is a filename. By default, the
+compression is inferred from the filename.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.21.0.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">Changed in version 0.24.0: </span>‘infer’ option added and set to default</p>
+</div>
+</dd>
+<dt><strong>index</strong><span class="classifier">bool, default True</span></dt><dd><p>Whether to include the index values in the JSON string. Not
+including the index (<code class="docutils literal notranslate"><span class="pre">index=False</span></code>) is only supported when
+orient is ‘split’ or ‘table’.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.23.0.</span></p>
+</div>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None or str</dt><dd><p>If path_or_buf is None, returns the resulting json format as a
+string. Otherwise returns None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="alert alert-info">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="pandas.read_json.html#pandas.read_json" title="pandas.read_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_json</span></code></a></dt><dd></dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>                  <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;row 1&#39;</span><span class="p">,</span> <span class="s1">&#39;row 2&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;col 1&#39;</span><span class="p">,</span> <span class="s1">&#39;col 2&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;split&#39;</span><span class="p">)</span>
+<span class="go">&#39;{&quot;columns&quot;:[&quot;col 1&quot;,&quot;col 2&quot;],</span>
+<span class="go">  &quot;index&quot;:[&quot;row 1&quot;,&quot;row 2&quot;],</span>
+<span class="go">  &quot;data&quot;:[[&quot;a&quot;,&quot;b&quot;],[&quot;c&quot;,&quot;d&quot;]]}&#39;</span>
+</pre></div>
+</div>
+<p>Encoding/decoding a Dataframe using <code class="docutils literal notranslate"><span class="pre">'records'</span></code> formatted JSON.
+Note that index labels are not preserved with this encoding.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+<span class="go">&#39;[{&quot;col 1&quot;:&quot;a&quot;,&quot;col 2&quot;:&quot;b&quot;},{&quot;col 1&quot;:&quot;c&quot;,&quot;col 2&quot;:&quot;d&quot;}]&#39;</span>
+</pre></div>
+</div>
+<p>Encoding/decoding a Dataframe using <code class="docutils literal notranslate"><span class="pre">'index'</span></code> formatted JSON:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="go">&#39;{&quot;row 1&quot;:{&quot;col 1&quot;:&quot;a&quot;,&quot;col 2&quot;:&quot;b&quot;},&quot;row 2&quot;:{&quot;col 1&quot;:&quot;c&quot;,&quot;col 2&quot;:&quot;d&quot;}}&#39;</span>
+</pre></div>
+</div>
+<p>Encoding/decoding a Dataframe using <code class="docutils literal notranslate"><span class="pre">'columns'</span></code> formatted JSON:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+<span class="go">&#39;{&quot;col 1&quot;:{&quot;row 1&quot;:&quot;a&quot;,&quot;row 2&quot;:&quot;c&quot;},&quot;col 2&quot;:{&quot;row 1&quot;:&quot;b&quot;,&quot;row 2&quot;:&quot;d&quot;}}&#39;</span>
+</pre></div>
+</div>
+<p>Encoding/decoding a Dataframe using <code class="docutils literal notranslate"><span class="pre">'values'</span></code> formatted JSON:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;values&#39;</span><span class="p">)</span>
+<span class="go">&#39;[[&quot;a&quot;,&quot;b&quot;],[&quot;c&quot;,&quot;d&quot;]]&#39;</span>
+</pre></div>
+</div>
+<p>Encoding with Table Schema</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
+<span class="go">&#39;{&quot;schema&quot;: {&quot;fields&quot;: [{&quot;name&quot;: &quot;index&quot;, &quot;type&quot;: &quot;string&quot;},</span>
+<span class="go">                        {&quot;name&quot;: &quot;col 1&quot;, &quot;type&quot;: &quot;string&quot;},</span>
+<span class="go">                        {&quot;name&quot;: &quot;col 2&quot;, &quot;type&quot;: &quot;string&quot;}],</span>
+<span class="go">             &quot;primaryKey&quot;: &quot;index&quot;,</span>
+<span class="go">             &quot;pandas_version&quot;: &quot;0.20.0&quot;},</span>
+<span class="go">  &quot;data&quot;: [{&quot;index&quot;: &quot;row 1&quot;, &quot;col 1&quot;: &quot;a&quot;, &quot;col 2&quot;: &quot;b&quot;},</span>
+<span class="go">           {&quot;index&quot;: &quot;row 2&quot;, &quot;col 1&quot;: &quot;c&quot;, &quot;col 2&quot;: &quot;d&quot;}]}&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+              </div>
+          </main>
+
+      </div>
+    </div><script>
+    // TOC sidebar - add "active" class to parent list
+    // 
+    // Bootstrap's scrollspy adds the active class to the <a> link,
+    // but for the automatic collapsing we need this on the parent list item.
+    // 
+    // The event is triggered on "window" (and not the nav item as documented),
+    // see https://github.com/twbs/bootstrap/issues/20086
+    $(window).on("activate.bs.scrollspy", function(){
+    var navLinks = document.querySelectorAll('#bd-toc-nav a');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.remove('active');
+    }
+    var navLinks = document.querySelectorAll('#bd-toc-nav a.active');
+    for (var i = 0; i < navLinks.length; i++) {
+        var navLink = navLinks[i];
+        navLink.parentElement.classList.add('active');
+    }
+    });
+</script>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2014, the pandas development team.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    </div>
+  </body>
+</html>
