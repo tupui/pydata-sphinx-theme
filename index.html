@@ -91,7 +91,7 @@
           <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
             </div>
@@ -101,7 +101,7 @@
                 
   <span class="target" id="module-pandas"></span><div class="section" id="pandas-powerful-python-data-analysis-toolkit">
 <h1>pandas: powerful Python data analysis toolkit<a class="headerlink" href="#pandas-powerful-python-data-analysis-toolkit" title="Permalink to this headline">¶</a></h1>
-<p><strong>Date</strong>: Nov 18, 2019 <strong>Version</strong>: 0.25.3</p>
+<p><strong>Date</strong>: Nov 20, 2019 <strong>Version</strong>: 0.25.3</p>
 <p><strong>Download documentation</strong>: <a class="reference external" href="pandas.pdf">PDF Version</a> | <a class="reference external" href="pandas.zip">Zipped HTML</a></p>
 <p><strong>Useful links</strong>:
 <a class="reference external" href="https://pypi.org/project/pandas">Binary Installers</a> |
@@ -129,7 +129,7 @@ programming language.</p>
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="whatsnew/v0.25.0.html"><span class="doc">What’s New in 0.25.0 (April XX, 2019)</span></a></p></li>
-<li><p><a class="reference external" href="http://www.statsmodels.org/devel/install.html" title="(in statsmodels vv0.11.0dev0 (+565))"><span>Installing statsmodels</span></a></p></li>
+<li><p><a class="reference external" href="http://www.statsmodels.org/devel/install.html" title="(in statsmodels vv0.11.0dev0 (+583))"><span>Installing statsmodels</span></a></p></li>
 <li><p><a class="reference internal" href="getting_started/index.html"><span class="doc">Getting started</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="getting_started/overview.html"><span class="doc">Package overview</span></a></p></li>
@@ -198,15 +198,20 @@ programming language.</p>
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='right-next' id="next-link" href="getting_started/index.html" title="next page">Getting started</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -220,6 +225,32 @@ programming language.</p>
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">
