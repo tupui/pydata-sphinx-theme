@@ -1,10 +1,10 @@
-.. _tutorials:
+.. _comm_tutorials:
 
 {{ header }}
 
-*********
-Tutorials
-*********
+*******************
+Community Tutorials
+*******************
 
 This is a guide to many pandas tutorials, geared mainly for new users.
 
