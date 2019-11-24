@@ -49,7 +49,7 @@ consists of the following data columns:
 
 .. ipython:: python
 
-    titanic = pd.read_csv("../data/titanic.csv")
+    titanic = pd.read_csv("data/titanic.csv")
     titanic.head()
 
 .. raw:: html
@@ -64,9 +64,8 @@ How to calculate summary statistics?
 Aggregating statistics
 ~~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/06_aggregate.svg
+.. image:: ../../_static/schemas/06_aggregate.svg
+   :align: center
 
 .. raw:: html
 
@@ -88,9 +87,8 @@ Different statistics are available and can be applied to columns with
 numerical data. Operations in general exclude missing data and operate
 across rows by default.
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/06_reduction.svg
+.. image:: ../../_static/schemas/06_reduction.svg
+   :align: center
 
 .. raw:: html
 
@@ -142,9 +140,8 @@ Further details about descriptive statistics is provided in :ref:`basics.stats`.
 Aggregating statistics grouped by category
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/06_groupby.svg
+.. image:: ../../_static/schemas/06_groupby.svg
+   :align: center
 
 .. raw:: html
 
@@ -160,7 +157,7 @@ What is the average age for male versus female titanic passengers?
 As our interest is the average age for each gender, a subselection on
 these two columns is made first: ``titanic[["Sex", "Age"]]``. Next, the
 ``groupby`` method is applied on the ``Sex`` column to make a group per
-category. Next, the average age *for each gender* is calculated and
+category. The average age *for each gender* is calculated and
 returned.
 
 .. raw:: html
@@ -177,7 +174,7 @@ general, this fits in the more general ``split-apply-combine`` pattern:
 -  **Apply** a function to each group independently
 -  **Combine** the results into a data structure
 
-The apply and combine steps are typically done together in Pandas.
+The apply and combine steps are typically done together in pandas.
 
 In the previous example, we explicitly selected the 2 columns first. If
 not, the ``mean`` method is applied to each column containing numerical
@@ -196,9 +193,8 @@ on the grouped data as well:
 
     titanic.groupby("Sex")["Age"].mean()
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/06_groupby_select_detail.svg
+.. image:: ../../_static/schemas/06_groupby_select_detail.svg
+   :align: center
 
 .. note::
     The `Pclass` column contains numerical data but actually
@@ -241,9 +237,8 @@ More information on groupby and the split-apply-combine approach is provided in 
 Count number of records by category
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/06_valuecounts.svg
+.. image:: ../../_static/schemas/06_valuecounts.svg
+   :align: center
 
 .. raw:: html
 

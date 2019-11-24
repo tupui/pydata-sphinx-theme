@@ -10,7 +10,7 @@ Pandas is table oriented
     <ul class="task-bullet">
         <li>
 
-I want to start using Pandas
+I want to start using pandas
 
 .. ipython:: python
 
@@ -30,6 +30,7 @@ Pandas data table representation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: ../../_static/schemas/01_table_dataframe.svg
+   :align: center
 
 .. raw:: html
 
@@ -72,11 +73,13 @@ In spreadsheet software, the table representation of our data would look
 very similar:
 
 .. image:: ../../_static/schemas/01_table_spreadsheet.png
+   :align: center
 
 Each column in a ``DataFrame`` is a ``Series``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: ../../_static/schemas/01_table_series.svg
+   :align: center
 
 .. raw:: html
 
@@ -143,7 +146,7 @@ Or to the ``Series``:
     </ul>
 
 As illustrated by the ``max()`` method, you can *do* things with a
-``DataFrame`` or ``Series``. Pandas provides a lot of functionalities
+``DataFrame`` or ``Series``. Pandas provides a lot of functionalities,
 each of them a *method* you can apply to a ``DataFrame`` or ``Series``.
 As methods are functions, do not forget to use parentheses ``()``.
 
@@ -194,7 +197,7 @@ Check more options on ``describe`` in the user guide at :ref:`basics.describe`
     <div class="shadow gs-callout gs-callout-remember">            
         <h4>REMEMBER</h4>
 
--  Import the package, aka ``import Pandas as pd``
+-  Import the package, aka ``import pandas as pd``
 -  A table of data is stored as a pandas ``DataFrame``
 -  Each column in a ``DataFrame`` is a ``Series``
 -  You can do things by applying a method to a ``DataFrame`` or ``Series``

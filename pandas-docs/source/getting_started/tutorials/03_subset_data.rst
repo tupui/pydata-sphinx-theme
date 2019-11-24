@@ -49,7 +49,7 @@ consists of the following data columns:
 
 .. ipython:: python
 
-    titanic = pd.read_csv("../data/titanic.csv")
+    titanic = pd.read_csv("data/titanic.csv")
     titanic.head()
 
 .. raw:: html
@@ -64,9 +64,8 @@ How do I select a subset of data in a ``DataFrame``?
 How do I select specific columns from a ``DataFrame``?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/03_subset_columns.png
+.. image:: ../../_static/schemas/03_subset_columns.svg
+   :align: center
 
 .. raw:: html
 
@@ -102,7 +101,7 @@ And have a look at the ``shape`` of the output:
 
     titanic["Age"].shape
 
-``shape`` is an attribute (remember :ref:`10min_tut_02_read_write`, no parantheses for attributes) of a
+``shape`` is an attribute (remember :ref:`tutorial on reading and writing <10min_tut_02_read_write>`, do not use parantheses for attributes) of a
 pandas ``Series`` and ``DataFrame`` containing the number of rows and
 columns: *(nrows, ncolumns)*. A pandas Series is 1-dimensional and only
 the number of rows is returned.
@@ -129,11 +128,11 @@ selection brackets ``[]``.
 
 .. note::
     The inner square brackets define a
-    :ref:``Python list <python:tut-morelists>`` with column names, whereas
+    :ref:`Python list <python:tut-morelists>` with column names, whereas
     the outer brackets are used to select the data from a pandas
     ``DataFrame`` as seen in the previous example.
 
-The returned data type is a Pandas DataFrame:
+The returned data type is a pandas DataFrame:
 
 .. ipython:: python
 
@@ -143,12 +142,12 @@ The returned data type is a Pandas DataFrame:
 
     titanic[["Age", "Sex"]].shape
 
-The selection returned a ``DataFrame`` with 891 rows and 2 columns. A
+The selection returned a ``DataFrame`` with 891 rows and 2 columns. Remember, a
 ``DataFrame`` is 2-dimensional with both a row and column dimension.
 
 .. raw:: html
 
-    <div class="d-flex flex-row bg-light gs-torefguide">
+    <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
 For basic information on indexing, see :ref:`indexing.basics`
@@ -160,9 +159,8 @@ For basic information on indexing, see :ref:`indexing.basics`
 How do I filter specific rows from a ``DataFrame``?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/03_subset_rows.png
+.. image:: ../../_static/schemas/03_subset_rows.svg
+   :align: center
 
 .. raw:: html
 
@@ -203,7 +201,7 @@ will be selected.
 We now from before that the original titanic ``DataFrame`` consists of
 891 rows. Let’s have a look at the amount of rows which satisfy the
 condition by checking the ``shape`` attribute of the resulting
-``DataFrame`` above_35:
+``DataFrame`` ``above_35``:
 
 .. ipython:: python
 
@@ -250,7 +248,7 @@ operator:
 
 .. raw:: html
 
-    <div class="d-flex flex-row bg-light gs-torefguide">
+    <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
 Conditional (boolean) indexing, see :ref:`indexing.boolean`. Specific information on ``isin``, see :ref:`indexing.basics.indexing_isin`.
@@ -289,7 +287,7 @@ the same values. One way to verify is to check if the shape has changed:
 
 .. raw:: html
 
-    <div class="d-flex flex-row bg-light gs-torefguide">
+    <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
         
 For more dedicated functions on missing values, see :ref:`missing-data`
@@ -301,9 +299,8 @@ For more dedicated functions on missing values, see :ref:`missing-data`
 How do I select specific rows and columns from a ``DataFrame``?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/03_subset_columns_rows.png
+.. image:: ../../_static/schemas/03_subset_columns_rows.svg
+   :align: center
 
 .. raw:: html
 
@@ -332,7 +329,7 @@ want to select.
 When using the column names, row labels or a condition expression, use
 the ``loc`` operator in front of the selection brackets ``[]``. For both
 the part before and after the comma, you can use a single label, a list
-of labels, a slice of labels, a conditional expression or a colon. using
+of labels, a slice of labels, a conditional expression or a colon. Using
 a colon specificies you want to select all rows or columns.
 
 .. raw:: html
@@ -368,7 +365,7 @@ the name ``anonymous`` to the first 3 elements of the third column:
 
 .. raw:: html
 
-    <div class="d-flex flex-row bg-light gs-torefguide">
+    <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
 For more detailed description on selecting subsets of a data table, see :ref:`indexing.choice`
@@ -398,7 +395,7 @@ For more detailed description on selecting subsets of a data table, see :ref:`in
 
 .. raw:: html
 
-    <div class="d-flex flex-row bg-light gs-torefguide">
+    <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
 Further details about indexing is provided in :ref:`indexing`

@@ -6,7 +6,6 @@
 
     import pandas as pd
     import matplotlib.pyplot as plt
-    %matplotlib inline
 
 .. raw:: html
 
@@ -41,7 +40,7 @@ in respectively Paris, Antwerp and London.
 
 .. ipython:: python
 
-    air_quality = pd.read_csv("../data/air_quality_no2.csv", 
+    air_quality = pd.read_csv("data/air_quality_no2.csv", 
                               index_col=0, parse_dates=True)
     air_quality.head()
 
@@ -57,9 +56,8 @@ in respectively Paris, Antwerp and London.
 How to create plots in pandas?
 ------------------------------
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/04_plot_overview.svg
+.. image:: ../../_static/schemas/04_plot_overview.svg
+   :align: center
 
 .. raw:: html
 
@@ -70,9 +68,10 @@ I want a quick visual check of the data.
 
 .. ipython:: python
 
+    @savefig 04_airqual_quick.png
     air_quality.plot()
 
-With a DataFrame, Pandas creates by default one line plot for each of
+With a DataFrame, pandas creates by default one line plot for each of
 the columns with numeric data.
 
 .. raw:: html
@@ -85,14 +84,15 @@ the columns with numeric data.
     <ul class="task-bullet">
         <li>
 
-I’m want to plot a specific column of the data table.
+I want to plot only the columns of the data table with the data  from Paris.
 
 .. ipython:: python
 
+    @savefig 04_airqual_paris.png
     air_quality["station_paris"].plot()
 
-To plot a specific column, use the selection method of the `subset data
-tutorial <./3_subset_data.ipynb>`__ in combination with the ``plot``
+To plot a specific column, use the selection method of the 
+:ref:`subset data tutorial <10min_tut_03_subset>` in combination with the ``plot``
 method. Hence, the ``plot`` method works on both ``Series`` and
 ``DataFrame``.
 
@@ -106,10 +106,11 @@ method. Hence, the ``plot`` method works on both ``Series`` and
     <ul class="task-bullet">
         <li>
 
-I want to visually compare the :math:`N02` values measured in London and Paris.
+I want to visually compare the :math:`N0_2` values measured in London versus Paris.
 
 .. ipython:: python
 
+    @savefig 04_airqual_scatter.png
     air_quality.plot.scatter(x="station_london", 
                              y="station_paris", 
                              alpha=0.5)
@@ -138,6 +139,7 @@ method is applicable on the air quality example data:
 
 .. ipython:: python
 
+    @savefig 04_airqual_boxplot.png
     air_quality.plot.box()
 
 .. raw:: html
@@ -160,10 +162,11 @@ I want each of the columns in a separate subplot.
 
 .. ipython:: python
 
+    @savefig 04_airqual_area_subplot.png
     axs = air_quality.plot.area(figsize=(12, 4), subplots=True)
 
 Separate subplots for each of the data columns is supported by the ``subplots`` argument 
-of the plot functions. The builtin options available in each of the Pandas plot
+of the plot functions. The builtin options available in each of the pandas plot
 functions that are worthwhile to have a look.
 
 .. raw:: html
@@ -176,7 +179,7 @@ functions that are worthwhile to have a look.
     <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
-Some more formatting options of the Pandas plot functionalities are explained in :ref:`visualization.formatting`.
+Some more formatting options of the pandas plot functionalities are explained in :ref:`visualization.formatting`.
 
 .. raw:: html
 
@@ -191,9 +194,10 @@ I want to further customize, extend or save the resulting plot.
 
 .. ipython:: python
 
-    fig, axs = plt.subplots(figsize=(12, 4))
-    air_quality.plot.area(ax=axs)
-    axs.set_ylabel("NO$_2$ concentration")
+    fig, axs = plt.subplots(figsize=(12, 4));
+    air_quality.plot.area(ax=axs);
+    @savefig 04_airqual_customized.png
+    axs.set_ylabel("NO$_2$ concentration");
     fig.savefig("no2_concentrations.png")
 
 .. raw:: html

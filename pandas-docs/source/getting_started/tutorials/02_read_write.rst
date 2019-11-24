@@ -54,7 +54,8 @@ How do I read and write tabular data?
 =====================================
 
 .. image:: ../../_static/schemas/02_io_readwrite.svg
-
+   :align: center
+   
 .. raw:: html
 
     <ul class="task-bullet">
@@ -64,9 +65,9 @@ I want to analyse the titanic passenger data, available as a CSV file.
 
 .. ipython:: python
 
-    titanic = pd.read_csv("../data/titanic.csv")
+    titanic = pd.read_csv("data/titanic.csv")
 
-Pandas provides the ``read_csv`` function to read data stored as a csv
+pandas provides the ``read_csv`` function to read data stored as a csv
 file into a pandas ``DataFrame``. Pandas supports many different file
 formats or data sources out of the box (csv, excel, sql, json, parquet,
 …), each of them with the prefix ``read_*``.
@@ -109,8 +110,8 @@ the required number of rows (in this case 8) as argument.
     ``tail`` method. For example, ``titanic.tail(10)`` will return the last
     10 rows of the DataFrame.
 
-A check on how Pandas interpreted each of the column data types can be
-done by requesting the Pandas ``dtypes`` attribute:
+A check on how pandas interpreted each of the column data types can be
+done by requesting the pandas ``dtypes`` attribute:
 
 .. ipython:: python
 
@@ -140,7 +141,7 @@ My colleague requested the titanic data as a spreadsheet.
 
     titanic.to_excel('titanic.xlsx', sheet_name='passengers', index=False)
 
-Whereas ``read_*`` fucntions are used to read data to Pandas, the
+Whereas ``read_*`` functions are used to read data to pandas, the
 ``to_*`` methods are used to store data. The ``to_excel`` method stores
 the data as an excel file. In the example here, the ``sheet_name`` is
 named *passengers* instead of the default *Sheet1*. By setting
@@ -174,7 +175,7 @@ I’m interested in a technical summary of a ``DataFrame``
     titanic.info()
 
 
-The command provides a lot of technical information about the
+The method ``info`` provides a lot of technical information about the
 ``DataFrame``, so let’s explain the output in more detail:
 
 -  It is indeed a ``DataFrame``.
@@ -203,9 +204,9 @@ The command provides a lot of technical information about the
     <div class="shadow gs-callout gs-callout-remember">            
         <h4>REMEMBER</h4>
 
--  Getting data in to Pandas from many different file formats or data
+-  Getting data in to pandas from many different file formats or data
    sources is supported by ``read_*`` functions.
--  Exporting data out of Pandas is provided by different
+-  Exporting data out of pandas is provided by different
    ``to_*``\ methods.
 -  The ``head``/``tail``/``info`` methods and the ``dtypes`` attribute
    are convenient for a first check.
@@ -219,7 +220,7 @@ The command provides a lot of technical information about the
     <div class="d-flex flex-row bg-light gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
-For a complete overview of the input and output possibilites from and to Pandas, see :ref:`io`
+For a complete overview of the input and output possibilites from and to pandas, see :ref:`io`
 
 .. raw:: html
 

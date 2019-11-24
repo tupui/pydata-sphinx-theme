@@ -39,7 +39,7 @@ in respectively Paris, Antwerp and London.
 
 .. ipython:: python
 
-    air_quality = pd.read_csv("../data/air_quality_no2.csv", 
+    air_quality = pd.read_csv("data/air_quality_no2.csv", 
                               index_col=0, parse_dates=True)
     air_quality.head()
 
@@ -52,16 +52,15 @@ in respectively Paris, Antwerp and London.
 How to create new columns derived from existing columns?
 --------------------------------------------------------
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/05_newcolumn_1.svg
+.. image:: ../../_static/schemas/05_newcolumn_1.svg
+   :align: center
 
 .. raw:: html
 
     <ul class="task-bullet">
         <li>
 
-I want to express the :math:`NO_2` concentration of the station in London in mg/m\ :math:`^3` (conversion factor 1.882)
+I want to express the :math:`NO_2` concentration of the station in London in mg/m\ :math:`^3`
 
 (*If we assume temperature of 25 degrees Celsius and pressure of 1013
 hPa, the conversion factor is 1.882*)
@@ -84,9 +83,8 @@ at the left side of the assignment.
     means all values in the given column are multiplied by the value 1.882
     at once. You do not need to use a loop to iterate each of the rows!
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/05_newcolumn_2.svg
+.. image:: ../../_static/schemas/05_newcolumn_2.svg
+   :align: center
 
 .. raw:: html
 

@@ -40,7 +40,7 @@ Westminster* in respectively Paris, Antwerp and London.
 
 .. ipython:: python
 
-    air_quality_no2 = pd.read_csv("../data/air_quality_no2_long.csv", 
+    air_quality_no2 = pd.read_csv("data/air_quality_no2_long.csv", 
                                   parse_dates=True)
     air_quality_no2 = air_quality_no2[["date.utc", "location", "parameter", "value"]] # focus on a subset of columns
     air_quality_no2.head()
@@ -74,7 +74,7 @@ Westminster* in respectively Paris, Antwerp and London.
 
 .. ipython:: python
 
-    air_quality_pm25 = pd.read_csv("../data/air_quality_pm25_long.csv", 
+    air_quality_pm25 = pd.read_csv("data/air_quality_pm25_long.csv", 
                                    parse_dates=True)
     air_quality_pm25 = air_quality_pm25[["date.utc", "location", "parameter", "value"]] # focus on a subset of columns
     air_quality_pm25.head()
@@ -92,16 +92,15 @@ How to combine data from multiple tables?
 Concatenating objects
 ~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/08_concat_row.svg
+.. image:: ../../_static/schemas/08_concat_row.svg
+   :align: center
 
 .. raw:: html
 
     <ul class="task-bullet">
         <li>
 
-I want to combine the measurements of :math:`NO_2` and :math:`pm25`, two tables with a similar structure, in a single table
+I want to combine the measurements of :math:`NO_2` and :math:`pm_{25}`, two tables with a similar structure, in a single table
 
 .. ipython:: python
 
@@ -163,10 +162,10 @@ index. For example:
 .. note::
     The existence of multiple row/column indices at the same time
     has not been mentioned within these tutorials. *Hierarchical indexing*
-    or *MultiIndex* is an advanced and powerfull Pandas feature to analyze
+    or *MultiIndex* is an advanced and powerfull pandas feature to analyze
     higher dimensional data.
 
-    Multi-indexing is out of scope for this Pandas introduction. For the
+    Multi-indexing is out of scope for this pandas introduction. For the
     moment, remember that the function ``reset_index`` can be used to
     convert any level of an index to a column, e.g.
     ``air_quality.reset_index(level=0)``
@@ -199,9 +198,8 @@ intersection) of the indexes on the other axes is provided at
 Join tables using a common identifier
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/08_merge_left.svg
+.. image:: ../../_static/schemas/08_merge_left.svg
+   :align: center
 
 .. raw:: html
 
@@ -217,7 +215,7 @@ Add the station coordinates, provided by the stations metadata table, to the cor
 
 .. ipython:: python
 
-    stations_coord = pd.read_csv("../data/air_quality_stations.csv")
+    stations_coord = pd.read_csv("data/air_quality_stations.csv")
     stations_coord.head()
 
 .. note::
@@ -264,7 +262,7 @@ Add the parameter full description and name, provided by the parameters metadata
 
 .. ipython:: python
 
-    air_quality_parameters = pd.read_csv("../data/air_quality_parameters.csv")
+    air_quality_parameters = pd.read_csv("data/air_quality_parameters.csv")
     air_quality_parameters.head()
 
 .. ipython:: python
@@ -288,8 +286,9 @@ between the two tables.
 .. raw:: html
 
     <div class="d-flex flex-row gs-torefguide">
-        <span class="badge badge-info">To user guide</span> Pandas supports also inner, outer, and right joins.
+        <span class="badge badge-info">To user guide</span> 
 
+Pandas supports also innPandas supports also inner, outer, and right joins. 
 More information on join/merge of tables is provided in
 :ref:`merging.join`. Or have a look to the
 :ref:`comparison with SQL<compare_with_sql.join>`.

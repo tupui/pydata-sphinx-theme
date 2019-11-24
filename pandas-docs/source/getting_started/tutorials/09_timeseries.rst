@@ -6,7 +6,6 @@
 
     import pandas as pd
     import matplotlib.pyplot as plt
-    %matplotlib inline
 
 .. raw:: html
 
@@ -42,7 +41,7 @@ Westminster* in respectively Paris, Antwerp and London.
 
 .. ipython:: python
 
-    air_quality = pd.read_csv("../data/air_quality_no2_long.csv")
+    air_quality = pd.read_csv("data/air_quality_no2_long.csv")
     air_quality = air_quality.rename(columns={"date.utc": "datetime"})
     air_quality.head()
 
@@ -59,7 +58,7 @@ Westminster* in respectively Paris, Antwerp and London.
 How to handle time series data with ease?
 -----------------------------------------
 
-Using Pandas datetime properties
+Using pandas datetime properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -95,7 +94,7 @@ objects. In pandas we call these datetime objects similar to
 
     ::
 
-        pd.read_csv("../data/air_quality_no2_long.csv", parse_dates=["date.utc"])
+        pd.read_csv("../data/air_quality_no2_long.csv", parse_dates=["datetime"])
 
 Why are these ``Timestamp`` objects useful. Let’s illustrate the added
 value with some example cases.
@@ -123,7 +122,7 @@ from the standard Python library and defining a time duration.
     <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
-The main time related concepts of Pandas are explained in :ref:`timeseries.overview`.
+The main time related concepts of pandas are explained in :ref:`timeseries.overview`.
 
 .. raw:: html
 
@@ -134,8 +133,7 @@ The main time related concepts of Pandas are explained in :ref:`timeseries.overv
     <ul class="task-bullet">
         <li>    
 
-   I want to add a new column to the dataframe containing only the month
-   of the measurement
+I want to add a new column to the dataframe containing only the month of the measurement
 
 .. ipython:: python
 
@@ -143,7 +141,7 @@ The main time related concepts of Pandas are explained in :ref:`timeseries.overv
     air_quality.head()
 
 By using ``Timestamp`` objects for dates, a lot of time-related
-properties are provided by Pandas. For example the ``month``, but also
+properties are provided by pandas. For example the ``month``, but also
 ``year``, ``weekofyear``, ``quarter``,… All of these properties are
 accessible by the ``dt`` accessor.
 
@@ -182,7 +180,7 @@ Remember the split-apply-combine pattern provided by ``groupby`` from the
 Here, we want to calculate a given statistic (e.g. mean :math:`NO_2`)
 **for each weekday** and **for each measurement location**. To group on
 weekdays, we use the datetime property ``weekday`` (with Monday=0 and
-Sunday=6) of Pandas ``Timestamp``, which is also accessible by the
+Sunday=6) of pandas ``Timestamp``, which is also accessible by the
 ``dt`` accessor. The grouping on both locations and weekdays can be done
 to split the calculation of the mean on each of these combinations.
 
@@ -201,12 +199,14 @@ to split the calculation of the mean on each of these combinations.
     <ul class="task-bullet">
         <li>
 
-Plot the typical :math:`NO_2` pattern during the day of our time series of all statiosn together. In other words, what is the average value for each hour of the day?
+Plot the typical :math:`NO_2` pattern during the day of our time series of all stations together. In other words, what is the average value for each hour of the day?
 
 .. ipython:: python
 
-    air_quality.groupby(air_quality["datetime"].dt.hour)["value"].mean().plot(kind='bar', rot=0)
+    fig, axs = plt.subplots(figsize=(12, 4))
+    air_quality.groupby(air_quality["datetime"].dt.hour)["value"].mean().plot(kind='bar', rot=0, ax=axs)
     plt.xlabel("Hour of the day"); # custom label for the x-axis using matplotlib
+    @savefig 09_bar_chart.png
     plt.ylabel("$NO_2\ (µg/m^3)$");
 
 Similar to the previous case, we want to calculate a given statistic
@@ -221,7 +221,7 @@ split-apply-combine approach again.
 Datetime as index
 ~~~~~~~~~~~~~~~~~
 
-In the :ref:`notebook on reshaping <10min_tut_07_reshape>`,   
+In the :ref:`tutorial on reshaping <10min_tut_07_reshape>`,   
 ``pivot`` was introduced to reshape the data table with each of the
 measurements locations as a separate column:
 
@@ -256,6 +256,7 @@ Create a plot of the :math:`NO_2` values in the different stations from the 20th
 
 .. ipython:: python
 
+    @savefig 09_time_section.png
     no_2["2019-05-20" : "2019-05-21"].plot();
 
 By providing a **string that parses to a datetime**, a specific subset of the data can be selected on a ``DatetimeIndex``.
@@ -345,7 +346,7 @@ Make a plot of the daily median :math:`NO_2` value in each of the stations.
     <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span>
         
-More details on the power of time series ``resampling`` is provided in :ref:``timeseries.resampling``.
+More details on the power of time series ``resampling`` is provided in :ref:`timeseries.resampling`.
 
 .. raw:: html
 
@@ -358,7 +359,7 @@ More details on the power of time series ``resampling`` is provided in :ref:``ti
 
 -  Valid date strings can be converted to datetime objects using
    ``to_datetime`` function or as part of read functions.
--  Datetime objects in Pandas supports calculations, logical operations
+-  Datetime objects in pandas supports calculations, logical operations
    and convenient date-related properties using the ``dt`` accessor.
 -  A ``DatetimeIndex`` contains these date-related properties and
    supports convenient slicing.

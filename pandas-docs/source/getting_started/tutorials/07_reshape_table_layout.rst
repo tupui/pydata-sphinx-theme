@@ -49,7 +49,7 @@ consists of the following data columns:
 
 .. ipython:: python
 
-    titanic = pd.read_csv("../data/titanic.csv")
+    titanic = pd.read_csv("data/titanic.csv")
     titanic.head()
 
 .. raw:: html
@@ -101,7 +101,7 @@ measurement.
 
 .. ipython:: python
 
-    air_quality = pd.read_csv("../data/air_quality_long.csv", 
+    air_quality = pd.read_csv("data/air_quality_long.csv", 
                               index_col="date.utc", parse_dates=True)
     air_quality.head()
 
@@ -180,9 +180,8 @@ called ``no2_subset``
     no2_subset = no2.sort_index().groupby(["location"]).head(2) # use 2 measurements (head) for each location (groupby)
     no2_subset
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/07_pivot.svg
+.. image:: ../../_static/schemas/07_pivot.svg
+   :align: center
 
 .. raw:: html
 
@@ -203,8 +202,7 @@ for each index/column combination is required.
         </li>
     </ul>
 
-As pandas support plotting of multiple columns (see `plotting
-tutorial <./4_plotting.ipynb>`__) out of the box, the conversion from
+As pandas support plotting of multiple columns (see :ref:`plotting tutorial <10min_tut_04_plotting>`) out of the box, the conversion from
 *long* to *wide* table format enables the plotting of the different time
 series at the same time:
 
@@ -214,6 +212,7 @@ series at the same time:
 
 .. ipython:: python
 
+    @savefig 7_reshape_columns.png
     no2.pivot(columns="location", values="value").plot()
 
 .. note::
@@ -225,7 +224,7 @@ series at the same time:
     <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
         
-        For more information about ``pivot``, see :ref:`reshaping.reshaping`.
+For more information about ``pivot``, see :ref:`reshaping.reshaping`.
 
 .. raw:: html
 
@@ -234,9 +233,8 @@ series at the same time:
 Pivot table
 ~~~~~~~~~~~
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/07_pivot_table.svg
+.. image:: ../../_static/schemas/07_pivot_table.svg
+   :align: center
 
 .. raw:: html
 
@@ -283,8 +281,8 @@ For more information about ``pivot_table``, see :ref:`reshaping.pivot`.
    </div>
 
 .. note::
-    If you’re wondering, ``pivot_table`` is indeed directly linked
-    to ``groupby``. The same values can be calculated by grouping on both
+    If case you are wondering, ``pivot_table`` is indeed directly linked
+    to ``groupby``. The same result can be derived by grouping on both
     ``parameter`` and ``location``:
 
     ::
@@ -314,9 +312,8 @@ section:
     no2_pivoted = no2.pivot(columns="location", values="value").reset_index()
     no2_pivoted.head()
 
-|image0|
-
-.. |image0| image:: ../../_static/schemas/07_melt.svg
+.. image:: ../../_static/schemas/07_melt.svg
+   :align: center
 
 .. raw:: html
 

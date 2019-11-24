@@ -49,7 +49,7 @@ consists of the following data columns:
 
 .. ipython:: python
 
-    titanic = pd.read_csv("../data/titanic.csv")
+    titanic = pd.read_csv("data/titanic.csv")
     titanic.head()
 
 .. raw:: html
@@ -81,13 +81,13 @@ apply the ``lower`` method. As such, each of the strings is converted element wi
         </li>
     </ul>
 
-Similar to datetime objects in the `time series
-tutorial <9_timeseries.ipynb>`__ having a ``dt`` accessor, a number of
+Similar to datetime objects in the :ref:`time series tutorial <10min_tut_09_timeseries>` 
+having a ``dt`` accessor, a number of
 specialized string methods are available when using the ``str``
 accessor. These methods have in general matching names with the
 equivalent built-in string methods for single elements, but are applied
-element-wise (remember `element wise calculations from tutorial
-5 <5_add_columns.ipynb>`__?) on each of the values of the columns.
+element-wise (remember :ref:`element wise calculations <10min_tut_05_columns>`?) 
+on each of the values of the columns.
 
 .. raw:: html
 
@@ -145,15 +145,14 @@ Extract the passenger data about the Countess on board of the Titanic.
 
     titanic[titanic["Name"].str.contains("Countess")]
 
-(*Interested in her story?
-See*\ `Wikipedia <https://en.wikipedia.org/wiki/No%C3%ABl_Leslie,_Countess_of_Rothes>`__\ *!*)
+(*Interested in her story? See*\ `Wikipedia <https://en.wikipedia.org/wiki/No%C3%ABl_Leslie,_Countess_of_Rothes>`__\ *!*)
 
 The string method ``contains`` checks for each of the values in the
 column ``Name`` if the string contains the word ``Countess`` and returns
 for each of the values ``True`` (``Countess`` is part of the name) of
 ``False`` (``Countess`` is notpart of the name). This output can be used
 to subselect the data using conditional (boolean) indexing introduced in
-the `subsetting of data tutorial <subset_data.ipynb>`__. As there was
+the :ref:`subsetting of data tutorial <10min_tut_03_subset>`. As there was
 only 1 Countess on the Titanic, we get one row as a result.
 
 .. raw:: html
@@ -245,8 +244,8 @@ a ``dictionary`` to define the mapping ``{from : to}``.
 
     ::
 
-    titanic["Sex_short"] = titanic["Sex"].str.replace("female", "F")
-    titanic["Sex_short"] = titanic["Sex_short"].str.replace("male", "M")
+        titanic["Sex_short"] = titanic["Sex"].str.replace("female", "F")
+        titanic["Sex_short"] = titanic["Sex_short"].str.replace("male", "M")
 
     This would become cumbersome and easily lead to mistakes. Just think (or
     try out yourself) what would happen if those two statements are applied

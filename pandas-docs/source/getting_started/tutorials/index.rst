@@ -2,12 +2,12 @@
 
 .. _10times1minute:
 
-=============================
-10 times one minute to Pandas
-=============================
+=========================
+Getting started tutorials
+=========================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     01_table_oriented
     02_read_write
