@@ -43,7 +43,7 @@ def run(self):
     options = self.options
     self.shell.is_suppress = 'suppress' in options
     self.shell.is_doctest = 'doctest' in options
-    self.shell.is_verbatim = True  # 'verbatim' in options
+    self.shell.is_verbatim = 'verbatim' in options
     self.shell.is_okexcept = 'okexcept' in options
     self.shell.is_okwarning = 'okwarning' in options
 
@@ -393,6 +393,10 @@ html_logo = '_static/pandas.svg'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_css_files = [
+    'css/getting_started.css',
+]
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
