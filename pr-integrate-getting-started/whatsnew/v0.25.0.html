@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -29,8 +30,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
         <a class="nav-link" href="index.html">Release Notes</a>
     </li>
     
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
@@ -95,6 +101,8 @@
   
 
   <ul class="nav bd-sidenav">
+      
+      
       
       
       
@@ -304,7 +312,7 @@ is respected in indexing. (<a class="reference external" href="https://github.co
 <h2>Concatenating Sparse Values<a class="headerlink" href="#concatenating-sparse-values" title="Permalink to this headline">¶</a></h2>
 <p>When passed DataFrames whose values are sparse, <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-func docutils literal notranslate"><span class="pre">concat()</span></code></a> will now return a
 Series or DataFrame with sparse values, rather than a <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/25702">GH25702</a>).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseArray</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseArray</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])})</span>
 </pre></div>
 </div>
 <p><em>Previous Behavior:</em></p>
@@ -313,7 +321,8 @@ Series or DataFrame with sparse values, rather than a <code class="docutils lite
 </pre></div>
 </div>
 <p><em>New Behavior:</em></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="nb">type</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df</span><span class="p">]))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="nb">type</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df</span><span class="p">]))</span>
+<span class="gh">Out[2]: </span><span class="go">pandas.core.frame.DataFrame</span>
 </pre></div>
 </div>
 <p>This now matches the existing behavior of <a class="reference internal" href="../reference/api/pandas.concat.html#pandas.concat" title="pandas.concat"><code class="xref py py-class docutils literal notranslate"><span class="pre">concat</span></code></a> on <code class="docutils literal notranslate"><span class="pre">Series</span></code> with sparse values.

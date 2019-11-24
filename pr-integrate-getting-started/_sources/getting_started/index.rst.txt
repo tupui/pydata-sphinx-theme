@@ -33,8 +33,8 @@ available material is enlisted in the community contributed :ref:`tutorials`.
 
     overview
     10min
-    10_times_1_minute/index
+    tutorials/index
     basics
     dsintro
     comparison/index
-    tutorials
+    community_tutorials

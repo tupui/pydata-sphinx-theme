@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/getting_started.css" />
     <link href="../../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../../index.html">
-  <img src="../../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item ">
         <a class="nav-link" href="../../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -114,7 +120,7 @@
         
           
               <li class="">
-                  <a href="../10_times_1_minute/index.html">10 times one minute to Pandas</a>
+                  <a href="../tutorials/index.html">Getting started tutorials</a>
               </li>
           
         
@@ -158,10 +164,12 @@
         
           
               <li class="">
-                  <a href="../tutorials.html">Tutorials</a>
+                  <a href="../community_tutorials.html">Community Tutorials</a>
               </li>
           
         
+      
+      
       
       
       
@@ -459,24 +467,61 @@ name is a bit messy.</p>
 </pre></div>
 </div>
 <p>Selecting multiple columns by name in <code class="docutils literal notranslate"><span class="pre">pandas</span></code> is straightforward</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [1]: df = pd.DataFrame(np.random.randn(10, 3), columns=list('abc'))
 
-<span class="gp">In [10]: </span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]]</span>
+In [2]: df[['a', 'c']]
+Out[2]: 
+          a         c
+0  0.469112 -1.509059
+1 -1.135632 -0.173215
+2  0.119209 -0.861849
+3 -2.104569  1.071804
+4  0.721555 -1.039575
+5  0.271860  0.567020
+6  0.276232 -0.673690
+7  0.113648  0.524988
+8  0.404705 -1.715002
+9 -1.039268 -1.157892
 
-<span class="gp">In [11]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]]</span>
-</pre></div>
-</div>
+In [3]: df.loc[:, ['a', 'c']]
+Out[3]: 
+          a         c
+0  0.469112 -1.509059
+1 -1.135632 -0.173215
+2  0.119209 -0.861849
+3 -2.104569  1.071804
+4  0.721555 -1.039575
+5  0.271860  0.567020
+6  0.276232 -0.673690
+7  0.113648  0.524988
+8  0.404705 -1.715002
+9 -1.039268 -1.157892</pre>
 <p>Selecting multiple noncontiguous columns by integer location can be achieved
 with a combination of the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> indexer attribute and <code class="docutils literal notranslate"><span class="pre">numpy.r_</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">named</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcdefg&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">named</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcdefg&#39;</span><span class="p">)</span>
 
-<span class="gp">In [13]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="gp">In [5]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
 
-<span class="gp">In [14]: </span><span class="n">columns</span> <span class="o">=</span> <span class="n">named</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">named</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="gp">In [6]: </span><span class="n">columns</span> <span class="o">=</span> <span class="n">named</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">named</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-<span class="gp">In [15]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="gp">In [7]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
 
-<span class="gp">In [16]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">24</span><span class="p">:</span><span class="mi">30</span><span class="p">]]</span>
+<span class="gp">In [8]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">24</span><span class="p">:</span><span class="mi">30</span><span class="p">]]</span>
+<span class="gh">Out[8]: </span><span class="go"></span>
+<span class="go">           a         b         c  ...        27        28        29</span>
+<span class="go">0  -1.344312  0.844885  1.075770  ...  0.813850  0.132003 -0.827317</span>
+<span class="go">1  -0.076467 -1.187678  1.130127  ...  0.149748 -0.732339  0.687738</span>
+<span class="go">2   0.176444  0.403310 -0.154951  ... -0.493662  0.600178  0.274230</span>
+<span class="go">3   0.132885 -0.023688  2.410179  ...  0.109121  1.126203 -0.977349</span>
+<span class="go">4   1.474071 -0.064034 -1.282782  ... -0.858447  0.306996 -0.028665</span>
+<span class="go">..       ...       ...       ...  ...       ...       ...       ...</span>
+<span class="go">25  1.492125 -0.068190  0.681456  ...  0.428572  0.880609  0.487645</span>
+<span class="go">26  0.725238  0.624607 -0.141185  ...  1.008500  1.424017  0.717110</span>
+<span class="go">27  1.262419  1.950057  0.301038  ...  1.007824  2.826008  1.458383</span>
+<span class="go">28 -1.585746 -0.899734  0.921494  ...  0.577223 -1.088417  0.326687</span>
+<span class="go">29 -0.986248  0.169729 -1.158091  ... -2.013086 -1.602549  0.333109</span>
+
+<span class="go">[30 rows x 16 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -495,17 +540,28 @@ Using a data.frame called <code class="docutils literal notranslate"><span class
 </div>
 <p>The <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> method is similar to base R <code class="docutils literal notranslate"><span class="pre">aggregate</span></code>
 function.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-<span class="gp">   ....: </span>    <span class="p">{</span><span class="s1">&#39;v1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
-<span class="gp">   ....: </span>     <span class="s1">&#39;v2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span>
-<span class="gp">   ....: </span>     <span class="s1">&#39;by1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
-<span class="gp">   ....: </span>     <span class="s1">&#39;by2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;wet&quot;</span><span class="p">,</span> <span class="s2">&quot;dry&quot;</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">&quot;damp&quot;</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
-<span class="gp">   ....: </span>             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]})</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">   ...: </span>    <span class="p">{</span><span class="s1">&#39;v1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+<span class="gp">   ...: </span>     <span class="s1">&#39;v2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span>
+<span class="gp">   ...: </span>     <span class="s1">&#39;by1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">&quot;big&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="gp">   ...: </span>     <span class="s1">&#39;by2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;wet&quot;</span><span class="p">,</span> <span class="s2">&quot;dry&quot;</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s2">&quot;damp&quot;</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+<span class="gp">   ...: </span>             <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]})</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [18]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;by1&#39;</span><span class="p">,</span> <span class="s1">&#39;by2&#39;</span><span class="p">])</span>
+<span class="gp">In [10]: </span><span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;by1&#39;</span><span class="p">,</span> <span class="s1">&#39;by2&#39;</span><span class="p">])</span>
 
-<span class="gp">In [19]: </span><span class="n">g</span><span class="p">[[</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span> <span class="s1">&#39;v2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gp">In [11]: </span><span class="n">g</span><span class="p">[[</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span> <span class="s1">&#39;v2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[11]: </span><span class="go"></span>
+<span class="go">            v1    v2</span>
+<span class="go">by1  by2            </span>
+<span class="go">1    95    5.0  55.0</span>
+<span class="go">     99    5.0  55.0</span>
+<span class="go">2    95    7.0  77.0</span>
+<span class="go">     99    NaN   NaN</span>
+<span class="go">big  damp  3.0  33.0</span>
+<span class="go">blue dry   3.0  33.0</span>
+<span class="go">red  red   4.0  44.0</span>
+<span class="go">     wet   1.0  11.0</span>
 </pre></div>
 </div>
 <p>For more details and examples see <a class="reference internal" href="../../user_guide/groupby.html#groupby-split"><span class="std std-ref">the groupby documentation</span></a>.</p>
@@ -520,9 +576,16 @@ indicating if there is a match or not:</p>
 </pre></div>
 </div>
 <p>The <a class="reference internal" href="../../reference/api/pandas.DataFrame.isin.html#pandas.DataFrame.isin" title="pandas.DataFrame.isin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isin()</span></code></a> method is similar to R <code class="docutils literal notranslate"><span class="pre">%in%</span></code> operator:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-<span class="gp">In [21]: </span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">In [13]: </span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gh">Out[13]: </span><span class="go"></span>
+<span class="go">0    False</span>
+<span class="go">1    False</span>
+<span class="go">2     True</span>
+<span class="go">3    False</span>
+<span class="go">4     True</span>
+<span class="go">dtype: bool</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">match</span></code> function returns a vector of the positions of matches
@@ -549,17 +612,20 @@ since the subclass sizes are possibly irregular. Using a data.frame called
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas</span></code> we may use <a class="reference internal" href="../../reference/api/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot_table()</span></code></a> method to handle this:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="kn">import</span> <span class="nn">random</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="kn">import</span> <span class="nn">random</span>
 
-<span class="gp">In [23]: </span><span class="kn">import</span> <span class="nn">string</span>
+<span class="gp">In [15]: </span><span class="kn">import</span> <span class="nn">string</span>
 
-<span class="gp">In [24]: </span><span class="n">baseball</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="gp">In [16]: </span><span class="n">baseball</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
 <span class="gp">   ....: </span>    <span class="p">{</span><span class="s1">&#39;team&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;team </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span>
 <span class="gp">   ....: </span>     <span class="s1">&#39;player&#39;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">),</span> <span class="mi">25</span><span class="p">),</span>
 <span class="gp">   ....: </span>     <span class="s1">&#39;batting avg&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">.</span><span class="mi">200</span><span class="p">,</span> <span class="o">.</span><span class="mi">400</span><span class="p">,</span> <span class="mi">25</span><span class="p">)})</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [25]: </span><span class="n">baseball</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;batting avg&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;team&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<span class="gp">In [17]: </span><span class="n">baseball</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;batting avg&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;team&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<span class="gh">Out[17]: </span><span class="go"></span>
+<span class="go">team           team 1    team 2    team 3    team 4    team 5</span>
+<span class="go">batting avg  0.352134  0.295327  0.397191  0.394457  0.396194</span>
 </pre></div>
 </div>
 <p>For more details and examples see <a class="reference internal" href="../../user_guide/reshaping.html#reshaping-pivot"><span class="std std-ref">the reshaping documentation</span></a>.</p>
@@ -577,15 +643,40 @@ column’s values are less than another column’s values:</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas</span></code>, there are a few ways to perform subsetting. You can use
 <a class="reference internal" href="../../reference/api/pandas.DataFrame.query.html#pandas.DataFrame.query" title="pandas.DataFrame.query"><code class="xref py py-meth docutils literal notranslate"><span class="pre">query()</span></code></a> or pass an expression as if it were an
 index/slice as well as standard boolean indexing:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
+<pre class="literal-block">In [18]: df = pd.DataFrame({'a': np.random.randn(10), 'b': np.random.randn(10)})
 
-<span class="gp">In [27]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;a &lt;= b&#39;</span><span class="p">)</span>
+In [19]: df.query('a &lt;= b')
+Out[19]: 
+          a         b
+1  0.174950  0.552887
+2 -0.023167  0.148084
+3 -0.495291 -0.300218
+4 -0.860736  0.197378
+5 -1.134146  1.720780
+7 -0.290098  0.083515
+8  0.238636  0.946550
 
-<span class="gp">In [28]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">df</span><span class="o">.</span><span class="n">b</span><span class="p">]</span>
+In [20]: df[df.a &lt;= df.b]
+Out[20]: 
+          a         b
+1  0.174950  0.552887
+2 -0.023167  0.148084
+3 -0.495291 -0.300218
+4 -0.860736  0.197378
+5 -1.134146  1.720780
+7 -0.290098  0.083515
+8  0.238636  0.946550
 
-<span class="gp">In [29]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">df</span><span class="o">.</span><span class="n">b</span><span class="p">]</span>
-</pre></div>
-</div>
+In [21]: df.loc[df.a &lt;= df.b]
+Out[21]: 
+          a         b
+1  0.174950  0.552887
+2 -0.023167  0.148084
+3 -0.495291 -0.300218
+4 -0.860736  0.197378
+5 -1.134146  1.720780
+7 -0.290098  0.083515
+8  0.238636  0.946550</pre>
 <p>For more details and examples see <a class="reference internal" href="../../user_guide/indexing.html#indexing-query"><span class="std std-ref">the query documentation</span></a>.</p>
 </div>
 <div class="section" id="with">
@@ -599,13 +690,35 @@ index/slice as well as standard boolean indexing:</p>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas</span></code> the equivalent expression, using the
 <a class="reference internal" href="../../reference/api/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval()</span></code></a> method, would be:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
+<pre class="literal-block">In [22]: df = pd.DataFrame({'a': np.random.randn(10), 'b': np.random.randn(10)})
 
-<span class="gp">In [31]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;a + b&#39;</span><span class="p">)</span>
+In [23]: df.eval('a + b')
+Out[23]: 
+0   -0.091430
+1   -2.483890
+2   -0.252728
+3   -0.626444
+4   -0.261740
+5    2.149503
+6   -0.332214
+7    0.799331
+8   -2.377245
+9    2.104677
+dtype: float64
 
-<span class="gp">In [32]: </span><span class="n">df</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">b</span>  <span class="c1"># same as the previous expression</span>
-</pre></div>
-</div>
+In [24]: df.a + df.b  # same as the previous expression
+Out[24]: 
+0   -0.091430
+1   -2.483890
+2   -0.252728
+3   -0.626444
+4   -0.261740
+5    2.149503
+6   -0.332214
+7    0.799331
+8   -2.377245
+9    2.104677
+dtype: float64</pre>
 <p>In certain cases <a class="reference internal" href="../../reference/api/pandas.DataFrame.eval.html#pandas.DataFrame.eval" title="pandas.DataFrame.eval"><code class="xref py py-meth docutils literal notranslate"><span class="pre">eval()</span></code></a> will be much faster than
 evaluation in pure Python. For more details and examples see <a class="reference internal" href="../../user_guide/enhancingperf.html#enhancingperf-eval"><span class="std std-ref">the eval
 documentation</span></a>.</p>
@@ -659,16 +772,31 @@ summarize <code class="docutils literal notranslate"><span class="pre">x</span><
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas</span></code> the equivalent expression, using the
 <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> method, would be:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [33]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">168.</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">168.</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">7.</span><span class="p">,</span> <span class="mf">334.</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">20.7</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span> <span class="o">*</span> <span class="mi">30</span><span class="p">,</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;week&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">120</span><span class="p">)})</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [34]: </span><span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">])</span>
+<span class="gp">In [26]: </span><span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">])</span>
 
-<span class="gp">In [35]: </span><span class="n">grouped</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">])</span>
+<span class="gp">In [27]: </span><span class="n">grouped</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">])</span>
+<span class="gh">Out[27]: </span><span class="go"></span>
+<span class="go">                  mean        std</span>
+<span class="go">month week                       </span>
+<span class="go">5     1      63.653367  40.601965</span>
+<span class="go">      2      78.126605  53.342400</span>
+<span class="go">      3      92.091886  57.630110</span>
+<span class="go">6     1      81.747070  54.339218</span>
+<span class="go">      2      70.971205  54.687287</span>
+<span class="go">      3     100.968344  54.010081</span>
+<span class="go">7     1      61.576332  38.844274</span>
+<span class="go">      2      61.733510  48.209013</span>
+<span class="go">      3      71.688795  37.595638</span>
+<span class="go">8     1      62.741922  34.618153</span>
+<span class="go">      2      91.774627  49.790202</span>
+<span class="go">      3      73.936856  60.773900</span>
 </pre></div>
 </div>
 <p>For more details and examples see <a class="reference internal" href="../../user_guide/groupby.html#groupby-aggregate"><span class="std std-ref">the groupby documentation</span></a>.</p>
@@ -685,9 +813,24 @@ melt it into a data.frame:</p>
 </pre></div>
 </div>
 <p>In Python, since <code class="docutils literal notranslate"><span class="pre">a</span></code> is a list, you can simply use list comprehension.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">NAN</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">NAN</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
-<span class="gp">In [37]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">val</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">a</span><span class="p">)])</span>
+<span class="gp">In [29]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">val</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">a</span><span class="p">)])</span>
+<span class="gh">Out[29]: </span><span class="go"></span>
+<span class="go">    0  1  2     3</span>
+<span class="go">0   0  0  0   1.0</span>
+<span class="go">1   0  0  1   2.0</span>
+<span class="go">2   0  0  2   3.0</span>
+<span class="go">3   0  0  3   4.0</span>
+<span class="go">4   0  1  0   5.0</span>
+<span class="go">.. .. .. ..   ...</span>
+<span class="go">19  1  1  3  20.0</span>
+<span class="go">20  1  2  0  21.0</span>
+<span class="go">21  1  2  1  22.0</span>
+<span class="go">22  1  2  2  23.0</span>
+<span class="go">23  1  2  3   NaN</span>
+
+<span class="go">[24 rows x 4 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -701,9 +844,16 @@ into a data.frame:</p>
 </div>
 <p>In Python, this list would be a list of tuples, so
 <a class="reference internal" href="../../reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame()</span></code></a> method would convert it to a dataframe as required.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">NAN</span><span class="p">]))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="o">+</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">NAN</span><span class="p">]))</span>
 
-<span class="gp">In [39]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">In [31]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gh">Out[31]: </span><span class="go"></span>
+<span class="go">   0    1</span>
+<span class="go">0  0  1.0</span>
+<span class="go">1  1  2.0</span>
+<span class="go">2  2  3.0</span>
+<span class="go">3  3  4.0</span>
+<span class="go">4  4  NaN</span>
 </pre></div>
 </div>
 <p>For more details and examples see <a class="reference internal" href="../dsintro.html#dsintro"><span class="std std-ref">the Into to Data Structures
@@ -723,17 +873,28 @@ reshape the data.frame:</p>
 </pre></div>
 </div>
 <p>In Python, the <a class="reference internal" href="../../reference/api/pandas.melt.html#pandas.melt" title="pandas.melt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">melt()</span></code></a> method is the R equivalent:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">cheese</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;first&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;Mary&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;last&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;Bo&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span>
-<span class="gp">   ....: </span>                       <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">150</span><span class="p">]})</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [32]: cheese = pd.DataFrame({'first': ['John', 'Mary'],
+   ....:                        'last': ['Doe', 'Bo'],
+   ....:                        'height': [5.5, 6.0],
+   ....:                        'weight': [130, 150]})
+   ....: 
 
-<span class="gp">In [41]: </span><span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">cheese</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">])</span>
+In [33]: pd.melt(cheese, id_vars=['first', 'last'])
+Out[33]: 
+  first last variable  value
+0  John  Doe   height    5.5
+1  Mary   Bo   height    6.0
+2  John  Doe   weight  130.0
+3  Mary   Bo   weight  150.0
 
-<span class="gp">In [42]: </span><span class="n">cheese</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;last&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>  <span class="c1"># alternative way</span>
-</pre></div>
-</div>
+In [34]: cheese.set_index(['first', 'last']).stack()  # alternative way
+Out[34]: 
+first  last        
+John   Doe   height      5.5
+             weight    130.0
+Mary   Bo    height      6.0
+             weight    150.0
+dtype: float64</pre>
 <p>For more details and examples see <a class="reference internal" href="../../user_guide/reshaping.html#reshaping-melt"><span class="std std-ref">the reshaping documentation</span></a>.</p>
 </div>
 <div class="section" id="cast">
@@ -753,18 +914,27 @@ into a higher dimensional array:</p>
 </pre></div>
 </div>
 <p>In Python the best way is to make use of <a class="reference internal" href="../../reference/api/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot_table()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [43]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">168.</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">168.</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">7.</span><span class="p">,</span> <span class="mf">334.</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">20.7</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;month&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;week&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">})</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [44]: </span><span class="n">mdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">])</span>
+<span class="gp">In [36]: </span><span class="n">mdf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">])</span>
 
-<span class="gp">In [45]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">mdf</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">],</span>
+<span class="gp">In [37]: </span><span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">mdf</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span> <span class="s1">&#39;week&#39;</span><span class="p">],</span>
 <span class="gp">   ....: </span>               <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">],</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
 <span class="gp">   ....: </span>
+<span class="gh">Out[37]: </span><span class="go"></span>
+<span class="go">month                  5           6           7</span>
+<span class="go">variable week                                   </span>
+<span class="go">x        1     93.888747   98.762034   55.219673</span>
+<span class="go">         2     94.391427   38.112932   83.942781</span>
+<span class="go">y        1     94.306912  279.454811  227.840449</span>
+<span class="go">         2     87.392662  193.028166  173.899260</span>
+<span class="go">z        1     11.016009   10.079307   16.170549</span>
+<span class="go">         2      8.476111   17.638509   19.003494</span>
 </pre></div>
 </div>
 <p>Similarly for <code class="docutils literal notranslate"><span class="pre">dcast</span></code> which uses a data.frame called <code class="docutils literal notranslate"><span class="pre">df</span></code> in R to
@@ -783,7 +953,7 @@ aggregate information based on <code class="docutils literal notranslate"><span 
 </div>
 <p>Python can approach this in two different ways. Firstly, similar to above
 using <a class="reference internal" href="../../reference/api/pandas.pivot_table.html#pandas.pivot_table" title="pandas.pivot_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pivot_table()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [46]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [38]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
 <span class="gp">   ....: </span>    <span class="s1">&#39;Animal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Animal1&#39;</span><span class="p">,</span> <span class="s1">&#39;Animal2&#39;</span><span class="p">,</span> <span class="s1">&#39;Animal3&#39;</span><span class="p">,</span> <span class="s1">&#39;Animal2&#39;</span><span class="p">,</span> <span class="s1">&#39;Animal1&#39;</span><span class="p">,</span>
 <span class="gp">   ....: </span>               <span class="s1">&#39;Animal2&#39;</span><span class="p">,</span> <span class="s1">&#39;Animal3&#39;</span><span class="p">],</span>
 <span class="gp">   ....: </span>    <span class="s1">&#39;FeedType&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">],</span>
@@ -791,13 +961,27 @@ using <a class="reference internal" href="../../reference/api/pandas.pivot_table
 <span class="gp">   ....: </span><span class="p">})</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [47]: </span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Animal&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;FeedType&#39;</span><span class="p">,</span>
+<span class="gp">In [39]: </span><span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Animal&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;FeedType&#39;</span><span class="p">,</span>
 <span class="gp">   ....: </span>               <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
 <span class="gp">   ....: </span>
+<span class="gh">Out[39]: </span><span class="go"></span>
+<span class="go">FeedType     A     B</span>
+<span class="go">Animal              </span>
+<span class="go">Animal1   10.0   5.0</span>
+<span class="go">Animal2    2.0  13.0</span>
+<span class="go">Animal3    6.0   NaN</span>
 </pre></div>
 </div>
 <p>The second approach is to use the <a class="reference internal" href="../../reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" title="pandas.DataFrame.groupby"><code class="xref py py-meth docutils literal notranslate"><span class="pre">groupby()</span></code></a> method:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Animal&#39;</span><span class="p">,</span> <span class="s1">&#39;FeedType&#39;</span><span class="p">])[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Animal&#39;</span><span class="p">,</span> <span class="s1">&#39;FeedType&#39;</span><span class="p">])[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[40]: </span><span class="go"></span>
+<span class="go">Animal   FeedType</span>
+<span class="go">Animal1  A           10</span>
+<span class="go">         B            5</span>
+<span class="go">Animal2  A            2</span>
+<span class="go">         B           13</span>
+<span class="go">Animal3  A            6</span>
+<span class="go">Name: Amount, dtype: int64</span>
 </pre></div>
 </div>
 <p>For more details and examples see <a class="reference internal" href="../../user_guide/reshaping.html#reshaping-pivot"><span class="std std-ref">the reshaping documentation</span></a> or <a class="reference internal" href="../../user_guide/groupby.html#groupby-split"><span class="std std-ref">the groupby documentation</span></a>.</p>
@@ -810,11 +994,27 @@ using <a class="reference internal" href="../../reference/api/pandas.pivot_table
 </pre></div>
 </div>
 <p>In pandas this is accomplished with <code class="docutils literal notranslate"><span class="pre">pd.cut</span></code> and <code class="docutils literal notranslate"><span class="pre">astype(&quot;category&quot;)</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]),</span> <span class="mi">3</span><span class="p">)</span>
+<pre class="literal-block">In [41]: pd.cut(pd.Series([1, 2, 3, 4, 5, 6]), 3)
+Out[41]: 
+0    (0.995, 2.667]
+1    (0.995, 2.667]
+2    (2.667, 4.333]
+3    (2.667, 4.333]
+4      (4.333, 6.0]
+5      (4.333, 6.0]
+dtype: category
+Categories (3, interval[float64]): [(0.995, 2.667] &lt; (2.667, 4.333] &lt; (4.333, 6.0]]
 
-<span class="gp">In [50]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [42]: pd.Series([1, 2, 3, 2, 2, 3]).astype(&quot;category&quot;)
+Out[42]: 
+0    1
+1    2
+2    3
+3    2
+4    2
+5    3
+dtype: category
+Categories (3, int64): [1, 2, 3]</pre>
 <p>For more details and examples see <a class="reference internal" href="../../user_guide/categorical.html#categorical"><span class="std std-ref">categorical introduction</span></a> and the
 <span class="xref std std-ref">API documentation</span>. There is also a documentation regarding the
 <a class="reference internal" href="../../user_guide/categorical.html#categorical-rfactor"><span class="std std-ref">differences to R’s factor</span></a>.</p>

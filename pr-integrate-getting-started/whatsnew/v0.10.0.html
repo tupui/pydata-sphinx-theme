@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -196,21 +204,45 @@ there are now method for each binary operator enabling you to specify how you
 want to broadcast, we are phasing out this special case (Zen of Python:
 <em>Special cases aren’t special enough to break the rules</em>). Here’s what I’m
 talking about:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<pre class="literal-block">In [1]: import pandas as pd
 
-<span class="gp">In [10]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-<span class="gp">   ....: </span>                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">))</span>
-<span class="gp">   ....: </span>
+In [2]: df = pd.DataFrame(np.random.randn(6, 4),
+   ...:                   index=pd.date_range('1/1/2000', periods=6))
+   ...: 
 
-<span class="gp">In [11]: </span><span class="n">df</span>
+In [3]: df
+Out[3]: 
+                   0         1         2         3
+2000-01-01  0.469112 -0.282863 -1.509059 -1.135632
+2000-01-02  1.212112 -0.173215  0.119209 -1.044236
+2000-01-03 -0.861849 -2.104569 -0.494929  1.071804
+2000-01-04  0.721555 -0.706771 -1.039575  0.271860
+2000-01-05 -0.424972  0.567020  0.276232 -1.087401
+2000-01-06 -0.673690  0.113648 -1.478427  0.524988
 
-<span class="go"># deprecated now</span>
-<span class="gp">In [12]: </span><span class="n">df</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+# deprecated now
+In [4]: df - df[0]
+Out[4]: 
+            2000-01-01 00:00:00  2000-01-02 00:00:00  ...   2   3
+2000-01-01                  NaN                  NaN  ... NaN NaN
+2000-01-02                  NaN                  NaN  ... NaN NaN
+2000-01-03                  NaN                  NaN  ... NaN NaN
+2000-01-04                  NaN                  NaN  ... NaN NaN
+2000-01-05                  NaN                  NaN  ... NaN NaN
+2000-01-06                  NaN                  NaN  ... NaN NaN
 
-<span class="go"># Change your code to</span>
-<span class="gp">In [13]: </span><span class="n">df</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># align on axis 0 (rows)</span>
-</pre></div>
-</div>
+[6 rows x 10 columns]
+
+# Change your code to
+In [5]: df.sub(df[0], axis=0)  # align on axis 0 (rows)
+Out[5]: 
+              0         1         2         3
+2000-01-01  0.0 -0.751976 -1.978171 -1.604745
+2000-01-02  0.0 -1.385327 -1.092903 -2.256348
+2000-01-03  0.0 -1.242720  0.366920  1.933653
+2000-01-04  0.0 -1.428326 -1.761130 -0.449695
+2000-01-05  0.0  0.991993  0.701204 -0.662428
+2000-01-06  0.0  0.787338 -0.804737  1.198677</pre>
 <p>You will get a deprecation warning in the 0.10.x series, and the deprecated
 functionality will be removed in 0.11 or later.</p>
 <p><strong>Altered resample default behavior</strong></p>
@@ -329,32 +361,52 @@ integers <code class="docutils literal notranslate"><span class="pre">0</span></
 DataFrame constructor with no columns specified. The v0.9.0 behavior (names
 <code class="docutils literal notranslate"><span class="pre">X0</span></code>, <code class="docutils literal notranslate"><span class="pre">X1</span></code>, …) can be reproduced by specifying <code class="docutils literal notranslate"><span class="pre">prefix='X'</span></code>:</p></li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="kn">import</span> <span class="nn">io</span>
+<pre class="literal-block">In [6]: import io
 
-<span class="gp">In [15]: </span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a,b,c</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="gp">   ....: </span>        <span class="s1">&#39;1,Yes,2</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="gp">   ....: </span>        <span class="s1">&#39;3,No,4&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+In [7]: data = ('a,b,c\n'
+   ...:         '1,Yes,2\n'
+   ...:         '3,No,4')
+   ...: 
 
-<span class="gp">In [16]: </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+In [8]: print(data)
+a,b,c
+1,Yes,2
+3,No,4
 
-<span class="gp">In [17]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+In [9]: pd.read_csv(io.StringIO(data), header=None)
+Out[9]: 
+   0    1  2
+0  a    b  c
+1  1  Yes  2
+2  3   No  4
 
-<span class="gp">In [18]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [10]: pd.read_csv(io.StringIO(data), header=None, prefix='X')
+Out[10]: 
+  X0   X1 X2
+0  a    b  c
+1  1  Yes  2
+2  3   No  4</pre>
 <ul class="simple">
 <li><p>Values like <code class="docutils literal notranslate"><span class="pre">'Yes'</span></code> and <code class="docutils literal notranslate"><span class="pre">'No'</span></code> are not interpreted as boolean by default,
 though this can be controlled by new <code class="docutils literal notranslate"><span class="pre">true_values</span></code> and <code class="docutils literal notranslate"><span class="pre">false_values</span></code>
 arguments:</p></li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<pre class="literal-block">In [11]: print(data)
+a,b,c
+1,Yes,2
+3,No,4
 
-<span class="gp">In [20]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+In [12]: pd.read_csv(io.StringIO(data))
+Out[12]: 
+   a    b  c
+0  1  Yes  2
+1  3   No  4
 
-<span class="gp">In [21]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">true_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Yes&#39;</span><span class="p">],</span> <span class="n">false_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;No&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
+In [13]: pd.read_csv(io.StringIO(data), true_values=['Yes'], false_values=['No'])
+Out[13]: 
+   a      b  c
+0  1   True  2
+1  3  False  4</pre>
 <ul class="simple">
 <li><p>The file parsers will not recognize non-string values arising from a
 converter function as NA if passed in the <code class="docutils literal notranslate"><span class="pre">na_values</span></code> argument. It’s better
@@ -362,34 +414,72 @@ to do post-processing using the <code class="docutils literal notranslate"><span
 <li><p>Calling <code class="docutils literal notranslate"><span class="pre">fillna</span></code> on Series or DataFrame with no arguments is no longer
 valid code. You must either specify a fill value or an interpolation method:</p></li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<pre class="literal-block">In [14]: s = pd.Series([np.nan, 1., 2., np.nan, 4])
 
-<span class="gp">In [23]: </span><span class="n">s</span>
+In [15]: s
+Out[15]: 
+0    NaN
+1    1.0
+2    2.0
+3    NaN
+4    4.0
+dtype: float64
 
-<span class="gp">In [24]: </span><span class="n">s</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+In [16]: s.fillna(0)
+Out[16]: 
+0    0.0
+1    1.0
+2    2.0
+3    0.0
+4    4.0
+dtype: float64
 
-<span class="gp">In [25]: </span><span class="n">s</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;pad&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [17]: s.fillna(method='pad')
+Out[17]: 
+0    NaN
+1    1.0
+2    2.0
+3    2.0
+4    4.0
+dtype: float64</pre>
 <p>Convenience methods <code class="docutils literal notranslate"><span class="pre">ffill</span></code> and  <code class="docutils literal notranslate"><span class="pre">bfill</span></code> have been added:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">s</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<span class="gh">Out[18]: </span><span class="go"></span>
+<span class="go">0    NaN</span>
+<span class="go">1    1.0</span>
+<span class="go">2    2.0</span>
+<span class="go">3    2.0</span>
+<span class="go">4    4.0</span>
+<span class="go">dtype: float64</span>
 </pre></div>
 </div>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">Series.apply</span></code> will now operate on a returned value from the applied
 function, that is itself a series, and possibly upcast the result to a
 DataFrame</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;x^2&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [19]: def f(x):
+   ....:     return pd.Series([x, x**2], index=['x', 'x^2'])
+   ....: 
 
-<span class="gp">In [28]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+In [20]: s = pd.Series(np.random.rand(5))
 
-<span class="gp">In [29]: </span><span class="n">s</span>
+In [21]: s
+Out[21]: 
+0    0.340445
+1    0.984729
+2    0.919540
+3    0.037772
+4    0.861549
+dtype: float64
 
-<span class="gp">In [30]: </span><span class="n">s</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</pre></div>
-</div>
+In [22]: s.apply(f)
+Out[22]: 
+          x       x^2
+0  0.340445  0.115903
+1  0.984729  0.969691
+2  0.919540  0.845555
+3  0.037772  0.001427
+4  0.861549  0.742267</pre>
 </li>
 <li><p>New API functions for working with pandas options (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2097">GH2097</a>):</p>
 <ul class="simple">
@@ -401,7 +491,8 @@ arguments. print all registered options.</p></li>
 </ul>
 <p>Note: <code class="docutils literal notranslate"><span class="pre">set_printoptions</span></code>/ <code class="docutils literal notranslate"><span class="pre">reset_printoptions</span></code> are now deprecated (but
 functioning), the print options now live under “display.XYZ”. For example:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">pd</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s2">&quot;display.max_rows&quot;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">pd</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s2">&quot;display.max_rows&quot;</span><span class="p">)</span>
+<span class="gh">Out[23]: </span><span class="go">15</span>
 </pre></div>
 </div>
 </li>
@@ -415,16 +506,32 @@ functioning), the print options now live under “display.XYZ”. For example:</
 <h2>Wide DataFrame Printing<a class="headerlink" href="#wide-dataframe-printing" title="Permalink to this headline">¶</a></h2>
 <p>Instead of printing the summary information, pandas now splits the string
 representation across multiple rows by default:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">wide_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">wide_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
 
-<span class="gp">In [33]: </span><span class="n">wide_frame</span>
+<span class="gp">In [25]: </span><span class="n">wide_frame</span>
+<span class="gh">Out[25]: </span><span class="go"></span>
+<span class="go">         0         1         2   ...        13        14        15</span>
+<span class="go">0 -0.548702  1.467327 -1.015962  ...  1.669052  1.037882 -1.705775</span>
+<span class="go">1 -0.919854 -0.042379  1.247642  ...  1.956030  0.017587 -0.016692</span>
+<span class="go">2 -0.575247  0.254161 -1.143704  ...  1.211526  0.268520  0.024580</span>
+<span class="go">3 -1.577585  0.396823 -0.105381  ...  0.593616  0.884345  1.591431</span>
+<span class="go">4  0.141809  0.220390  0.435589  ... -0.392670  0.007207  1.928123</span>
+
+<span class="go">[5 rows x 16 columns]</span>
 </pre></div>
 </div>
 <p>The old behavior of printing out summary information can be achieved via the
 ‘expand_frame_repr’ print option:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;expand_frame_repr&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;expand_frame_repr&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 
-<span class="gp">In [35]: </span><span class="n">wide_frame</span>
+<span class="gp">In [27]: </span><span class="n">wide_frame</span>
+<span class="gh">Out[27]: </span><span class="go"></span>
+<span class="go">          0         1         2         3         4         5         6         7         8         9        10        11        12        13        14        15</span>
+<span class="go">0 -0.548702  1.467327 -1.015962 -0.483075  1.637550 -1.217659 -0.291519 -1.745505 -0.263952  0.991460 -0.919069  0.266046 -0.709661  1.669052  1.037882 -1.705775</span>
+<span class="go">1 -0.919854 -0.042379  1.247642 -0.009920  0.290213  0.495767  0.362949  1.548106 -1.131345 -0.089329  0.337863 -0.945867 -0.932132  1.956030  0.017587 -0.016692</span>
+<span class="go">2 -0.575247  0.254161 -1.143704  0.215897  1.193555 -0.077118 -0.408530 -0.862495  1.346061  1.511763  1.627081 -0.990582 -0.441652  1.211526  0.268520  0.024580</span>
+<span class="go">3 -1.577585  0.396823 -0.105381 -0.532532  1.453749  1.208843 -0.080952 -0.264610 -0.727965 -0.589346  0.339969 -0.693205 -0.339355  0.593616  0.884345  1.591431</span>
+<span class="go">4  0.141809  0.220390  0.435589  0.192451 -0.096701  0.803351  1.715071 -0.708758 -1.202872 -1.814470  1.018601 -0.595447  1.395433 -0.392670  0.007207  1.928123</span>
 </pre></div>
 </div>
 <p>The width of each line can be changed via ‘line_width’ (80 by default):</p>
@@ -437,89 +544,242 @@ representation across multiple rows by default:</p>
 <div class="section" id="updated-pytables-support">
 <h2>Updated PyTables Support<a class="headerlink" href="#updated-pytables-support" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="../user_guide/io.html#io-hdf5"><span class="std std-ref">Docs</span></a> for PyTables <code class="docutils literal notranslate"><span class="pre">Table</span></code> format &amp; several enhancements to the api. Here is a taste of what to expect.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">store</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span><span class="s1">&#39;store.h5&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [28]: store = pd.HDFStore('store.h5')
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-28-54ac839dc497&gt; in &lt;module&gt;
+----&gt; 1 store = pd.HDFStore('store.h5')
 
-<span class="gp">In [40]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-<span class="gp">   ....: </span>                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
-<span class="gp">   ....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+~/miniconda/lib/python3.7/site-packages/pandas/io/pytables.py in __init__(self, path, mode, complevel, complib, fletcher32, **kwargs)
+    482             raise ValueError(&quot;format is not a defined argument for HDFStore&quot;)
+    483 
+--&gt; 484         tables = import_optional_dependency(&quot;tables&quot;)
+    485 
+    486         if complib is not None and complib not in tables.filters.all_complibs:
 
-<span class="gp">In [41]: </span><span class="n">df</span>
+~/miniconda/lib/python3.7/site-packages/pandas/compat/_optional.py in import_optional_dependency(name, extra, raise_on_missing, on_version)
+     91     except ImportError:
+     92         if raise_on_missing:
+---&gt; 93             raise ImportError(message.format(name=name, extra=extra)) from None
+     94         else:
+     95             return None
 
-<span class="go"># appending data frames</span>
-<span class="gp">In [42]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+ImportError: Missing optional dependency 'tables'.  Use pip or conda to install tables.
 
-<span class="gp">In [43]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+In [29]: df = pd.DataFrame(np.random.randn(8, 3),
+   ....:                   index=pd.date_range('1/1/2000', periods=8),
+   ....:                   columns=['A', 'B', 'C'])
+   ....: 
 
-<span class="gp">In [44]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">df1</span><span class="p">)</span>
+In [30]: df
+Out[30]: 
+                   A         B         C
+2000-01-01 -0.055224  2.395985  1.552825
+2000-01-02  0.166599  0.047609 -0.136473
+2000-01-03 -0.561757 -1.623033  0.029399
+2000-01-04 -0.542108  0.282696 -0.087302
+2000-01-05 -1.575170  1.771208  0.816482
+2000-01-06  1.100230 -0.612665  1.586976
+2000-01-07  0.019234  0.264294  1.074803
+2000-01-08  0.173520  0.211027  1.357138
 
-<span class="gp">In [45]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">df2</span><span class="p">)</span>
+# appending data frames
+In [31]: df1 = df[0:4]
 
-<span class="gp">In [46]: </span><span class="n">store</span>
+In [32]: df2 = df[4:]
 
-<span class="go"># selecting the entire store</span>
-<span class="gp">In [47]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [48]: </span><span class="n">wp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Item1&#39;</span><span class="p">,</span> <span class="s1">&#39;Item2&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>              <span class="n">major_axis</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span>
-<span class="gp">   ....: </span>              <span class="n">minor_axis</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+In [33]: store.append('df', df1)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-33-5d2670dce5e2&gt; in &lt;module&gt;
+----&gt; 1 store.append('df', df1)
 
-<span class="gp">In [49]: </span><span class="n">wp</span>
+NameError: name 'store' is not defined
 
-<span class="go"># storing a panel</span>
-<span class="gp">In [50]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;wp&#39;</span><span class="p">,</span> <span class="n">wp</span><span class="p">)</span>
+In [34]: store.append('df', df2)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-34-d0e0be4a91a9&gt; in &lt;module&gt;
+----&gt; 1 store.append('df', df2)
 
-<span class="go"># selecting via A QUERY</span>
-<span class="gp">In [51]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;wp&#39;</span><span class="p">,</span> <span class="s2">&quot;major_axis&gt;20000102 and minor_axis=[&#39;A&#39;,&#39;B&#39;]&quot;</span><span class="p">)</span>
+NameError: name 'store' is not defined
 
-<span class="go"># removing data from tables</span>
-<span class="gp">In [52]: </span><span class="n">store</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;wp&#39;</span><span class="p">,</span> <span class="s2">&quot;major_axis&gt;20000103&quot;</span><span class="p">)</span>
+In [35]: store
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-35-1cc0c364c02d&gt; in &lt;module&gt;
+----&gt; 1 store
 
-<span class="gp">In [53]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;wp&#39;</span><span class="p">)</span>
+NameError: name 'store' is not defined
 
-<span class="go"># deleting a store</span>
-<span class="gp">In [54]: </span><span class="k">del</span> <span class="n">store</span><span class="p">[</span><span class="s1">&#39;df&#39;</span><span class="p">]</span>
+# selecting the entire store
+In [36]: store.select('df')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-36-217756ae0052&gt; in &lt;module&gt;
+----&gt; 1 store.select('df')
 
-<span class="gp">In [55]: </span><span class="n">store</span>
-</pre></div>
-</div>
+NameError: name 'store' is not defined</pre>
+<pre class="literal-block">In [37]: wp = pd.Panel(np.random.randn(2, 5, 4), items=['Item1', 'Item2'],
+   ....:               major_axis=pd.date_range('1/1/2000', periods=5),
+   ....:               minor_axis=['A', 'B', 'C', 'D'])
+   ....: 
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-37-a0e3b0a73fdf&gt; in &lt;module&gt;
+      1 wp = pd.Panel(np.random.randn(2, 5, 4), items=['Item1', 'Item2'],
+      2               major_axis=pd.date_range('1/1/2000', periods=5),
+----&gt; 3               minor_axis=['A', 'B', 'C', 'D'])
+
+TypeError: Panel() takes no arguments
+
+In [38]: wp
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-38-a50596aeb3e2&gt; in &lt;module&gt;
+----&gt; 1 wp
+
+NameError: name 'wp' is not defined
+
+# storing a panel
+In [39]: store.append('wp', wp)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-39-e9545dbaff7a&gt; in &lt;module&gt;
+----&gt; 1 store.append('wp', wp)
+
+NameError: name 'store' is not defined
+
+# selecting via A QUERY
+In [40]: store.select('wp', &quot;major_axis&gt;20000102 and minor_axis=['A','B']&quot;)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-40-9bb24c142736&gt; in &lt;module&gt;
+----&gt; 1 store.select('wp', &quot;major_axis&gt;20000102 and minor_axis=['A','B']&quot;)
+
+NameError: name 'store' is not defined
+
+# removing data from tables
+In [41]: store.remove('wp', &quot;major_axis&gt;20000103&quot;)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-41-259e44bc879c&gt; in &lt;module&gt;
+----&gt; 1 store.remove('wp', &quot;major_axis&gt;20000103&quot;)
+
+NameError: name 'store' is not defined
+
+In [42]: store.select('wp')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-42-53221ddff055&gt; in &lt;module&gt;
+----&gt; 1 store.select('wp')
+
+NameError: name 'store' is not defined
+
+# deleting a store
+In [43]: del store['df']
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-43-ebd3cc5c3ec8&gt; in &lt;module&gt;
+----&gt; 1 del store['df']
+
+NameError: name 'store' is not defined
+
+In [44]: store
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-44-1cc0c364c02d&gt; in &lt;module&gt;
+----&gt; 1 store
+
+NameError: name 'store' is not defined</pre>
 <p><strong>Enhancements</strong></p>
 <ul>
 <li><p>added ability to hierarchical keys</p>
 <blockquote>
-<div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">store</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;foo/bar/bah&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<div><pre class="literal-block">In [45]: store.put('foo/bar/bah', df)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-45-e34dc8f9055e&gt; in &lt;module&gt;
+----&gt; 1 store.put('foo/bar/bah', df)
 
-<span class="gp">In [57]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;food/orange&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+NameError: name 'store' is not defined
 
-<span class="gp">In [58]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;food/apple&#39;</span><span class="p">,</span>  <span class="n">df</span><span class="p">)</span>
+In [46]: store.append('food/orange', df)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-46-dcad8aaa721a&gt; in &lt;module&gt;
+----&gt; 1 store.append('food/orange', df)
 
-<span class="gp">In [59]: </span><span class="n">store</span>
+NameError: name 'store' is not defined
 
-<span class="go"># remove all nodes under this level</span>
-<span class="gp">In [60]: </span><span class="n">store</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;food&#39;</span><span class="p">)</span>
+In [47]: store.append('food/apple',  df)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-47-5777612e014f&gt; in &lt;module&gt;
+----&gt; 1 store.append('food/apple',  df)
 
-<span class="gp">In [61]: </span><span class="n">store</span>
-</pre></div>
-</div>
+NameError: name 'store' is not defined
+
+In [48]: store
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-48-1cc0c364c02d&gt; in &lt;module&gt;
+----&gt; 1 store
+
+NameError: name 'store' is not defined
+
+# remove all nodes under this level
+In [49]: store.remove('food')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-49-f156e07a9855&gt; in &lt;module&gt;
+----&gt; 1 store.remove('food')
+
+NameError: name 'store' is not defined
+
+In [50]: store
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-50-1cc0c364c02d&gt; in &lt;module&gt;
+----&gt; 1 store
+
+NameError: name 'store' is not defined</pre>
 </div></blockquote>
 </li>
 <li><p>added mixed-dtype support!</p>
 <blockquote>
-<div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;string&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;string&#39;</span>
+<div><pre class="literal-block">In [51]: df['string'] = 'string'
 
-<span class="gp">In [63]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;int&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+In [52]: df['int'] = 1
 
-<span class="gp">In [64]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+In [53]: store.append('df', df)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-53-f7cf45d94655&gt; in &lt;module&gt;
+----&gt; 1 store.append('df', df)
 
-<span class="gp">In [65]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">)</span>
+NameError: name 'store' is not defined
 
-<span class="gp">In [66]: </span><span class="n">df1</span>
+In [54]: df1 = store.select('df')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-54-dd73e69550a3&gt; in &lt;module&gt;
+----&gt; 1 df1 = store.select('df')
 
-<span class="gp">In [67]: </span><span class="n">df1</span><span class="o">.</span><span class="n">get_dtype_counts</span><span class="p">()</span>
-</pre></div>
-</div>
+NameError: name 'store' is not defined
+
+In [55]: df1
+Out[55]: 
+                   A         B         C
+2000-01-01 -0.055224  2.395985  1.552825
+2000-01-02  0.166599  0.047609 -0.136473
+2000-01-03 -0.561757 -1.623033  0.029399
+2000-01-04 -0.542108  0.282696 -0.087302
+
+In [56]: df1.get_dtype_counts()
+Out[56]: 
+float64    3
+dtype: int64</pre>
 </div></blockquote>
 </li>
 <li><p>performance improvements on table writing</p></li>

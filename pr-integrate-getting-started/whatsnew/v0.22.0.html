@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -196,36 +204,39 @@ time, we changed the sum and prod of an empty <code class="docutils literal notr
 </pre></div>
 </div>
 <p><em>pandas 0.22.0</em></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<pre class="literal-block">In [1]: pd.Series([]).sum()
+Out[1]: 0.0
 
-<span class="gp">In [11]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
+In [2]: pd.Series([np.nan]).sum()
+Out[2]: 0.0</pre>
 <p>The default behavior is the same as pandas 0.20.3 with bottleneck installed. It
 also matches the behavior of NumPy’s <code class="docutils literal notranslate"><span class="pre">np.nansum</span></code> on empty and all-<em>NA</em> arrays.</p>
 <p>To have the sum of an empty series return <code class="docutils literal notranslate"><span class="pre">NaN</span></code> (the default behavior of
 pandas 0.20.3 without bottleneck, or pandas 0.21.x), use the <code class="docutils literal notranslate"><span class="pre">min_count</span></code>
 keyword.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[3]: </span><span class="go">nan</span>
 </pre></div>
 </div>
 <p>Thanks to the <code class="docutils literal notranslate"><span class="pre">skipna</span></code> parameter, the <code class="docutils literal notranslate"><span class="pre">.sum</span></code> on an all-<em>NA</em>
 series is conceptually the same as the <code class="docutils literal notranslate"><span class="pre">.sum</span></code> of an empty one with
 <code class="docutils literal notranslate"><span class="pre">skipna=True</span></code> (the default).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># skipna=True by default</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># skipna=True by default</span>
+<span class="gh">Out[4]: </span><span class="go">nan</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">min_count</span></code> parameter refers to the minimum number of <em>non-null</em> values
 required for a non-NA sum or product.</p>
 <p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.prod()</span></code> has been updated to behave the same as <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.sum()</span></code>,
 returning <code class="docutils literal notranslate"><span class="pre">1</span></code> instead.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+<pre class="literal-block">In [5]: pd.Series([]).prod()
+Out[5]: 1.0
 
-<span class="gp">In [15]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">prod</span><span class="p">()</span>
+In [6]: pd.Series([np.nan]).prod()
+Out[6]: 1.0
 
-<span class="gp">In [16]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([])</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
+In [7]: pd.Series([]).prod(min_count=1)
+Out[7]: nan</pre>
 <p>These changes affect <a class="reference internal" href="../reference/api/pandas.DataFrame.sum.html#pandas.DataFrame.sum" title="pandas.DataFrame.sum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.sum()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.DataFrame.prod.html#pandas.DataFrame.prod" title="pandas.DataFrame.prod"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.prod()</span></code></a> as well.
 Finally, a few less obvious places in pandas are affected by this change.</p>
 </div>
@@ -245,14 +256,22 @@ instead of <code class="docutils literal notranslate"><span class="pre">NaN</spa
 </pre></div>
 </div>
 <p><em>pandas 0.22</em></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">grouper</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">grouper</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
 
-<span class="gp">In [18]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">grouper</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gp">In [9]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">grouper</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[9]: </span><span class="go"></span>
+<span class="go">a    3</span>
+<span class="go">b    0</span>
+<span class="go">Length: 2, dtype: int64</span>
 </pre></div>
 </div>
 <p>To restore the 0.21 behavior of returning <code class="docutils literal notranslate"><span class="pre">NaN</span></code> for unobserved groups,
 use <code class="docutils literal notranslate"><span class="pre">min_count&gt;=1</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">grouper</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">grouper</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">a    3.0</span>
+<span class="go">b    NaN</span>
+<span class="go">Length: 2, dtype: float64</span>
 </pre></div>
 </div>
 </div>
@@ -279,15 +298,23 @@ sum and <code class="docutils literal notranslate"><span class="pre">1</span></c
 </pre></div>
 </div>
 <p><em>pandas 0.22.0</em></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">],</span>
 <span class="gp">   ....: </span>              <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2017&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [21]: </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gp">In [12]: </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[12]: </span><span class="go"></span>
+<span class="go">2017-01-01    2.0</span>
+<span class="go">2017-01-03    0.0</span>
+<span class="go">Freq: 2D, Length: 2, dtype: float64</span>
 </pre></div>
 </div>
 <p>To restore the 0.21 behavior of returning <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, use <code class="docutils literal notranslate"><span class="pre">min_count&gt;=1</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[13]: </span><span class="go"></span>
+<span class="go">2017-01-01    2.0</span>
+<span class="go">2017-01-03    NaN</span>
+<span class="go">Freq: 2D, Length: 2, dtype: float64</span>
 </pre></div>
 </div>
 <p>In particular, upsampling and taking the sum or product is affected, as
@@ -305,13 +332,23 @@ entirely valid.</p>
 </pre></div>
 </div>
 <p><em>pandas 0.22.0</em></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2017-01-02&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2017-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2017-01-02&#39;</span><span class="p">])</span>
 
-<span class="gp">In [24]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;12H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gp">In [15]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;12H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[15]: </span><span class="go"></span>
+<span class="go">2017-01-01 00:00:00    1</span>
+<span class="go">2017-01-01 12:00:00    0</span>
+<span class="go">2017-01-02 00:00:00    2</span>
+<span class="go">Freq: 12H, Length: 3, dtype: int64</span>
 </pre></div>
 </div>
 <p>Once again, the <code class="docutils literal notranslate"><span class="pre">min_count</span></code> keyword is available to restore the 0.21 behavior.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;12H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;12H&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gh">Out[16]: </span><span class="go"></span>
+<span class="go">2017-01-01 00:00:00    1.0</span>
+<span class="go">2017-01-01 12:00:00    NaN</span>
+<span class="go">2017-01-02 00:00:00    2.0</span>
+<span class="go">Freq: 12H, Length: 3, dtype: float64</span>
 </pre></div>
 </div>
 </div>
@@ -333,9 +370,13 @@ returns <code class="docutils literal notranslate"><span class="pre">0</span></c
 </pre></div>
 </div>
 <p><em>pandas 0.22.0</em></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
 
-<span class="gp">In [27]: </span><span class="n">s</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gp">In [18]: </span><span class="n">s</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[18]: </span><span class="go"></span>
+<span class="go">0    0.0</span>
+<span class="go">1    0.0</span>
+<span class="go">Length: 2, dtype: float64</span>
 </pre></div>
 </div>
 <p>The default behavior of <code class="docutils literal notranslate"><span class="pre">min_periods=None</span></code>, implying that <code class="docutils literal notranslate"><span class="pre">min_periods</span></code>

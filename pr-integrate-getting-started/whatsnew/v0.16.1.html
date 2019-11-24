@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -346,36 +354,62 @@ The method accepts a specific number of rows or columns to return, or a fraction
 total number or rows or columns. It also has options for sampling with or without replacement,
 for passing in a column for weights for non-uniform sampling, and for setting seed values to
 facilitate replication. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2419">GH2419</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">example_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<pre class="literal-block">In [1]: example_series = pd.Series([0, 1, 2, 3, 4, 5])
 
-<span class="go"># When no arguments are passed, returns 1</span>
-<span class="gp">In [10]: </span><span class="n">example_series</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+# When no arguments are passed, returns 1
+In [2]: example_series.sample()
+Out[2]: 
+3    3
+Length: 1, dtype: int64
 
-<span class="go"># One may specify either a number of rows:</span>
-<span class="gp">In [11]: </span><span class="n">example_series</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+# One may specify either a number of rows:
+In [3]: example_series.sample(n=3)
+Out[3]: 
+2    2
+1    1
+0    0
+Length: 3, dtype: int64
 
-<span class="go"># Or a fraction of the rows:</span>
-<span class="gp">In [12]: </span><span class="n">example_series</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+# Or a fraction of the rows:
+In [4]: example_series.sample(frac=0.5)
+Out[4]: 
+1    1
+5    5
+3    3
+Length: 3, dtype: int64
 
-<span class="go"># weights are accepted.</span>
-<span class="gp">In [13]: </span><span class="n">example_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]</span>
+# weights are accepted.
+In [5]: example_weights = [0, 0, 0.2, 0.2, 0.2, 0.4]
 
-<span class="gp">In [14]: </span><span class="n">example_series</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">example_weights</span><span class="p">)</span>
+In [6]: example_series.sample(n=3, weights=example_weights)
+Out[6]: 
+2    2
+4    4
+3    3
+Length: 3, dtype: int64
 
-<span class="go"># weights will also be normalized if they do not sum to one,</span>
-<span class="go"># and missing values will be treated as zeros.</span>
-<span class="gp">In [15]: </span><span class="n">example_weights2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+# weights will also be normalized if they do not sum to one,
+# and missing values will be treated as zeros.
+In [7]: example_weights2 = [0.5, 0, 0, 0, None, np.nan]
 
-<span class="gp">In [16]: </span><span class="n">example_series</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">example_weights2</span><span class="p">)</span>
-</pre></div>
-</div>
+In [8]: example_series.sample(n=1, weights=example_weights2)
+Out[8]: 
+0    0
+Length: 1, dtype: int64</pre>
 <p>When applied to a DataFrame, one may pass the name of a column to specify sampling weights
 when sampling from rows.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
-<span class="gp">   ....: </span>                   <span class="s1">&#39;weight_column&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]})</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+<span class="gp">   ...: </span>                   <span class="s1">&#39;weight_column&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]})</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [18]: </span><span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;weight_column&#39;</span><span class="p">)</span>
+<span class="gp">In [10]: </span><span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;weight_column&#39;</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">   col1  weight_column</span>
+<span class="go">0     9            0.5</span>
+<span class="go">1     8            0.4</span>
+<span class="go">2     7            0.1</span>
+
+<span class="go">[3 rows x 2 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -386,25 +420,35 @@ enhancements make string operations easier and more consistent with standard pyt
 <ul>
 <li><p>Added <code class="docutils literal notranslate"><span class="pre">StringMethods</span></code> (<code class="docutils literal notranslate"><span class="pre">.str</span></code> accessor) to <code class="docutils literal notranslate"><span class="pre">Index</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9068">GH9068</a>)</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">.str</span></code> accessor is now available for both <code class="docutils literal notranslate"><span class="pre">Series</span></code> and <code class="docutils literal notranslate"><span class="pre">Index</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39; jack&#39;</span><span class="p">,</span> <span class="s1">&#39;jill &#39;</span><span class="p">,</span> <span class="s1">&#39; jesse &#39;</span><span class="p">,</span> <span class="s1">&#39;frank&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39; jack&#39;</span><span class="p">,</span> <span class="s1">&#39;jill &#39;</span><span class="p">,</span> <span class="s1">&#39; jesse &#39;</span><span class="p">,</span> <span class="s1">&#39;frank&#39;</span><span class="p">])</span>
 
-<span class="gp">In [20]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="gp">In [12]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="gh">Out[12]: </span><span class="go">Index([&#39;jack&#39;, &#39;jill&#39;, &#39;jesse&#39;, &#39;frank&#39;], dtype=&#39;object&#39;)</span>
 </pre></div>
 </div>
 <p>One special case for the <cite>.str</cite> accessor on <code class="docutils literal notranslate"><span class="pre">Index</span></code> is that if a string method returns <code class="docutils literal notranslate"><span class="pre">bool</span></code>, the <code class="docutils literal notranslate"><span class="pre">.str</span></code> accessor
 will return a <code class="docutils literal notranslate"><span class="pre">np.array</span></code> instead of a boolean <code class="docutils literal notranslate"><span class="pre">Index</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8875">GH8875</a>). This enables the following expression
 to work naturally:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;b1&#39;</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [13]: idx = pd.Index(['a1', 'a2', 'b1', 'b2'])
 
-<span class="gp">In [22]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+In [14]: s = pd.Series(range(4), index=idx)
 
-<span class="gp">In [23]: </span><span class="n">s</span>
+In [15]: s
+Out[15]: 
+a1    0
+a2    1
+b1    2
+b2    3
+Length: 4, dtype: int64
 
-<span class="gp">In [24]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+In [16]: idx.str.startswith('a')
+Out[16]: array([ True,  True, False, False])
 
-<span class="gp">In [25]: </span><span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)]</span>
-</pre></div>
-</div>
+In [17]: s[s.index.str.startswith('a')]
+Out[17]: 
+a1    0
+a2    1
+Length: 2, dtype: int64</pre>
 </li>
 <li><p>The following new methods are accessible via <code class="docutils literal notranslate"><span class="pre">.str</span></code> accessor to apply the function to each values. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9766">GH9766</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9773">GH9773</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10031">GH10031</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10045">GH10045</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10052">GH10052</a>)</p>
 <table class="table">
@@ -440,23 +484,39 @@ to work naturally:</p>
 </table>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">split</span></code> now takes <code class="docutils literal notranslate"><span class="pre">expand</span></code> keyword to specify whether to expand dimensionality. <code class="docutils literal notranslate"><span class="pre">return_type</span></code> is deprecated. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9847">GH9847</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a,b&#39;</span><span class="p">,</span> <span class="s1">&#39;a,c&#39;</span><span class="p">,</span> <span class="s1">&#39;b,c&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [18]: s = pd.Series(['a,b', 'a,c', 'b,c'])
 
-<span class="go"># return Series</span>
-<span class="gp">In [27]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+# return Series
+In [19]: s.str.split(',')
+Out[19]: 
+0    [a, b]
+1    [a, c]
+2    [b, c]
+Length: 3, dtype: object
 
-<span class="go"># return DataFrame</span>
-<span class="gp">In [28]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+# return DataFrame
+In [20]: s.str.split(',', expand=True)
+Out[20]: 
+   0  1
+0  a  b
+1  a  c
+2  b  c
 
-<span class="gp">In [29]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;a,b&#39;</span><span class="p">,</span> <span class="s1">&#39;a,c&#39;</span><span class="p">,</span> <span class="s1">&#39;b,c&#39;</span><span class="p">])</span>
+[3 rows x 2 columns]
 
-<span class="go"># return Index</span>
-<span class="gp">In [30]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+In [21]: idx = pd.Index(['a,b', 'a,c', 'b,c'])
 
-<span class="go"># return MultiIndex</span>
-<span class="gp">In [31]: </span><span class="n">idx</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
+# return Index
+In [22]: idx.str.split(',')
+Out[22]: Index([['a', 'b'], ['a', 'c'], ['b', 'c']], dtype='object')
+
+# return MultiIndex
+In [23]: idx.str.split(',', expand=True)
+Out[23]: 
+MultiIndex([('a', 'b'),
+            ('a', 'c'),
+            ('b', 'c')],
+           )</pre>
 </li>
 <li><p>Improved <code class="docutils literal notranslate"><span class="pre">extract</span></code> and <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code> methods for <code class="docutils literal notranslate"><span class="pre">Index.str</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9980">GH9980</a>)</p></li>
 </ul>
@@ -465,21 +525,29 @@ to work naturally:</p>
 <span id="whatsnew-0161-enhancements-other"></span><h3>Other Enhancements<a class="headerlink" href="#other-enhancements" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">BusinessHour</span></code> offset is now supported, which represents business hours starting from 09:00 - 17:00 on <code class="docutils literal notranslate"><span class="pre">BusinessDay</span></code> by default. See <a class="reference internal" href="../user_guide/timeseries.html#timeseries-businesshour"><span class="std std-ref">Here</span></a> for details. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/7905">GH7905</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-08-01 09:00&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">tseries</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BusinessHour</span><span class="p">()</span>
+<pre class="literal-block">In [24]: pd.Timestamp('2014-08-01 09:00') + pd.tseries.offsets.BusinessHour()
+Out[24]: Timestamp('2014-08-01 10:00:00')
 
-<span class="gp">In [33]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-08-01 07:00&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">tseries</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BusinessHour</span><span class="p">()</span>
+In [25]: pd.Timestamp('2014-08-01 07:00') + pd.tseries.offsets.BusinessHour()
+Out[25]: Timestamp('2014-08-01 10:00:00')
 
-<span class="gp">In [34]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-08-01 16:30&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">tseries</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">BusinessHour</span><span class="p">()</span>
-</pre></div>
-</div>
+In [26]: pd.Timestamp('2014-08-01 16:30') + pd.tseries.offsets.BusinessHour()
+Out[26]: Timestamp('2014-08-04 09:30:00')</pre>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.diff</span></code> now takes an <code class="docutils literal notranslate"><span class="pre">axis</span></code> parameter that determines the direction of differencing (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9727">GH9727</a>)</p></li>
 <li><p>Allow <code class="docutils literal notranslate"><span class="pre">clip</span></code>, <code class="docutils literal notranslate"><span class="pre">clip_lower</span></code>, and <code class="docutils literal notranslate"><span class="pre">clip_upper</span></code> to accept array-like arguments as thresholds (This is a regression from 0.11.0). These methods now have an <code class="docutils literal notranslate"><span class="pre">axis</span></code> parameter which determines how the Series or DataFrame will be aligned with the threshold(s). (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6966">GH6966</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.mask()</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.mask()</span></code> now support same keywords as <code class="docutils literal notranslate"><span class="pre">where</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8801">GH8801</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">drop</span></code> function can now accept <code class="docutils literal notranslate"><span class="pre">errors</span></code> keyword to suppress <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> raised when any of label does not exist in the target data. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6736">GH6736</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [27]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
 
-<span class="gp">In [36]: </span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="gp">In [28]: </span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="gh">Out[28]: </span><span class="go"></span>
+<span class="go">          B         C</span>
+<span class="go">0 -0.706771 -1.039575</span>
+<span class="go">1 -0.424972  0.567020</span>
+<span class="go">2 -1.087401 -0.673690</span>
+
+<span class="go">[3 rows x 2 columns]</span>
 </pre></div>
 </div>
 </li>
@@ -543,33 +611,75 @@ the order was arbitrary. (<a class="reference external" href="https://github.com
 </pre></div>
 </div>
 <p>New Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<pre class="literal-block">In [29]: pd.set_option('display.width', 80)
 
-<span class="gp">In [38]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+In [30]: pd.Index(range(4), name='foo')
+Out[30]: RangeIndex(start=0, stop=4, step=1, name='foo')
 
-<span class="gp">In [39]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+In [31]: pd.Index(range(30), name='foo')
+Out[31]: RangeIndex(start=0, stop=30, step=1, name='foo')
 
-<span class="gp">In [40]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">104</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+In [32]: pd.Index(range(104), name='foo')
+Out[32]: RangeIndex(start=0, stop=104, step=1, name='foo')
 
-<span class="gp">In [41]: </span><span class="n">pd</span><span class="o">.</span><span class="n">CategoricalIndex</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;bb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;dddd&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                    <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foobar&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+In [33]: pd.CategoricalIndex(['a', 'bb', 'ccc', 'dddd'],
+   ....:                     ordered=True, name='foobar')
+   ....: 
+Out[33]: CategoricalIndex(['a', 'bb', 'ccc', 'dddd'], categories=['a', 'bb', 'ccc', 'dddd'], ordered=True, name='foobar', dtype='category')
 
-<span class="gp">In [42]: </span><span class="n">pd</span><span class="o">.</span><span class="n">CategoricalIndex</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;bb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;dddd&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span>
-<span class="gp">   ....: </span>                    <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foobar&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+In [34]: pd.CategoricalIndex(['a', 'bb', 'ccc', 'dddd'] * 10,
+   ....:                     ordered=True, name='foobar')
+   ....: 
+Out[34]: 
+CategoricalIndex(['a', 'bb', 'ccc', 'dddd', 'a', 'bb', 'ccc', 'dddd', 'a',
+                  'bb', 'ccc', 'dddd', 'a', 'bb', 'ccc', 'dddd', 'a', 'bb',
+                  'ccc', 'dddd', 'a', 'bb', 'ccc', 'dddd', 'a', 'bb', 'ccc',
+                  'dddd', 'a', 'bb', 'ccc', 'dddd', 'a', 'bb', 'ccc', 'dddd',
+                  'a', 'bb', 'ccc', 'dddd'],
+                 categories=['a', 'bb', 'ccc', 'dddd'], ordered=True, name='foobar', dtype='category')
 
-<span class="gp">In [43]: </span><span class="n">pd</span><span class="o">.</span><span class="n">CategoricalIndex</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;bb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;dddd&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
-<span class="gp">   ....: </span>                    <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foobar&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+In [35]: pd.CategoricalIndex(['a', 'bb', 'ccc', 'dddd'] * 100,
+   ....:                     ordered=True, name='foobar')
+   ....: 
+Out[35]: 
+CategoricalIndex(['a', 'bb', 'ccc', 'dddd', 'a', 'bb', 'ccc', 'dddd', 'a',
+                  'bb',
+                  ...
+                  'ccc', 'dddd', 'a', 'bb', 'ccc', 'dddd', 'a', 'bb', 'ccc',
+                  'dddd'],
+                 categories=['a', 'bb', 'ccc', 'dddd'], ordered=True, name='foobar', dtype='category', length=400)
 
-<span class="gp">In [44]: </span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;US/Eastern&#39;</span><span class="p">)</span>
+In [36]: pd.date_range('20130101', periods=4, name='foo', tz='US/Eastern')
+Out[36]: 
+DatetimeIndex(['2013-01-01 00:00:00-05:00', '2013-01-02 00:00:00-05:00',
+               '2013-01-03 00:00:00-05:00', '2013-01-04 00:00:00-05:00'],
+              dtype='datetime64[ns, US/Eastern]', name='foo', freq='D')
 
-<span class="gp">In [45]: </span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+In [37]: pd.date_range('20130101', periods=25, freq='D')
+Out[37]: 
+DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
+               '2013-01-05', '2013-01-06', '2013-01-07', '2013-01-08',
+               '2013-01-09', '2013-01-10', '2013-01-11', '2013-01-12',
+               '2013-01-13', '2013-01-14', '2013-01-15', '2013-01-16',
+               '2013-01-17', '2013-01-18', '2013-01-19', '2013-01-20',
+               '2013-01-21', '2013-01-22', '2013-01-23', '2013-01-24',
+               '2013-01-25'],
+              dtype='datetime64[ns]', freq='D')
 
-<span class="gp">In [46]: </span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">104</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;US/Eastern&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [38]: pd.date_range('20130101', periods=104, name='foo', tz='US/Eastern')
+Out[38]: 
+DatetimeIndex(['2013-01-01 00:00:00-05:00', '2013-01-02 00:00:00-05:00',
+               '2013-01-03 00:00:00-05:00', '2013-01-04 00:00:00-05:00',
+               '2013-01-05 00:00:00-05:00', '2013-01-06 00:00:00-05:00',
+               '2013-01-07 00:00:00-05:00', '2013-01-08 00:00:00-05:00',
+               '2013-01-09 00:00:00-05:00', '2013-01-10 00:00:00-05:00',
+               ...
+               '2013-04-05 00:00:00-04:00', '2013-04-06 00:00:00-04:00',
+               '2013-04-07 00:00:00-04:00', '2013-04-08 00:00:00-04:00',
+               '2013-04-09 00:00:00-04:00', '2013-04-10 00:00:00-04:00',
+               '2013-04-11 00:00:00-04:00', '2013-04-12 00:00:00-04:00',
+               '2013-04-13 00:00:00-04:00', '2013-04-14 00:00:00-04:00'],
+              dtype='datetime64[ns, US/Eastern]', name='foo', length=104, freq='D')</pre>
 </div>
 <div class="section" id="performance-improvements">
 <span id="whatsnew-0161-performance"></span><h2>Performance Improvements<a class="headerlink" href="#performance-improvements" title="Permalink to this headline">¶</a></h2>

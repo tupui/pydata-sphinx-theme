@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -181,16 +189,23 @@ functions like <code class="docutils literal notranslate"><span class="pre">read
 attribute access:</p></li>
 </ul>
 </div></blockquote>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">import</span> <span class="nn">io</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">io</span>
 
-<span class="gp">In [10]: </span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;0,0,1</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="gp">   ....: </span>        <span class="s1">&#39;1,1,0</span><span class="se">\n</span><span class="s1">&#39;</span>
-<span class="gp">   ....: </span>        <span class="s1">&#39;0,1,0&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [2]: </span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;0,0,1</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="gp">   ...: </span>        <span class="s1">&#39;1,1,0</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="gp">   ...: </span>        <span class="s1">&#39;0,1,0&#39;</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [11]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="gp">In [3]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 
-<span class="gp">In [12]: </span><span class="n">df</span>
+<span class="gp">In [4]: </span><span class="n">df</span>
+<span class="gh">Out[4]: </span><span class="go"></span>
+<span class="go">   0  1  2</span>
+<span class="go">0  0  0  1</span>
+<span class="go">1  1  1  0</span>
+<span class="go">2  0  1  0</span>
+
+<span class="go">[3 rows x 3 columns]</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -200,13 +215,23 @@ improper usages like <code class="docutils literal notranslate"><span class="pre
 “by accident” (this was never intended) will lead to all NA Series in some
 cases. To be perfectly clear:</p></li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 
-<span class="gp">In [14]: </span><span class="n">s1</span>
+<span class="gp">In [6]: </span><span class="n">s1</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">0    1</span>
+<span class="go">1    2</span>
+<span class="go">2    3</span>
+<span class="go">Length: 3, dtype: int64</span>
 
-<span class="gp">In [15]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">])</span>
+<span class="gp">In [7]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">])</span>
 
-<span class="gp">In [16]: </span><span class="n">s2</span>
+<span class="gp">In [8]: </span><span class="n">s2</span>
+<span class="gh">Out[8]: </span><span class="go"></span>
+<span class="go">foo   NaN</span>
+<span class="go">bar   NaN</span>
+<span class="go">baz   NaN</span>
+<span class="go">Length: 3, dtype: float64</span>
 </pre></div>
 </div>
 <ul class="simple">

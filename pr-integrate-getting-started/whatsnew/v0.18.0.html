@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -345,11 +353,25 @@ and <a class="reference internal" href="#whatsnew-0180-enhancements-strcat"><spa
 <div class="section" id="window-functions-are-now-methods">
 <span id="whatsnew-0180-enhancements-moments"></span><h3>Window functions are now methods<a class="headerlink" href="#window-functions-are-now-methods" title="Permalink to this headline">¶</a></h3>
 <p>Window functions have been refactored to be methods on <code class="docutils literal notranslate"><span class="pre">Series/DataFrame</span></code> objects, rather than top-level functions, which are now deprecated. This allows these window-type functions, to have a similar API to that of <code class="docutils literal notranslate"><span class="pre">.groupby</span></code>. See the full documentation <a class="reference internal" href="../user_guide/computation.html#stats-moments"><span class="std std-ref">here</span></a> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11603">GH11603</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12373">GH12373</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
 
-<span class="gp">In [10]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
+<span class="gp">In [2]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
 
-<span class="gp">In [11]: </span><span class="n">df</span>
+<span class="gp">In [3]: </span><span class="n">df</span>
+<span class="gh">Out[3]: </span><span class="go"></span>
+<span class="go">   A         B</span>
+<span class="go">0  0  0.471435</span>
+<span class="go">1  1 -1.190976</span>
+<span class="go">2  2  1.432707</span>
+<span class="go">3  3 -0.312652</span>
+<span class="go">4  4 -0.720589</span>
+<span class="go">5  5  0.887163</span>
+<span class="go">6  6  0.859588</span>
+<span class="go">7  7 -0.636524</span>
+<span class="go">8  8  0.015696</span>
+<span class="go">9  9 -2.242685</span>
+
+<span class="go">[10 rows x 2 columns]</span>
 </pre></div>
 </div>
 <p>Previous Behavior:</p>
@@ -371,11 +393,12 @@ and <a class="reference internal" href="#whatsnew-0180-enhancements-strcat"><spa
 </pre></div>
 </div>
 <p>New Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>These show a descriptive repr</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">r</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">r</span>
+<span class="gh">Out[5]: </span><span class="go">Rolling [window=3,center=False,axis=0]</span>
 </pre></div>
 </div>
 <p>with tab-completion of available methods and properties.</p>
@@ -385,17 +408,58 @@ and <a class="reference internal" href="#whatsnew-0180-enhancements-strcat"><spa
 </pre></div>
 </div>
 <p>The methods operate on the <code class="docutils literal notranslate"><span class="pre">Rolling</span></code> object itself</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[6]: </span><span class="go"></span>
+<span class="go">     A         B</span>
+<span class="go">0  NaN       NaN</span>
+<span class="go">1  NaN       NaN</span>
+<span class="go">2  1.0  0.237722</span>
+<span class="go">3  2.0 -0.023640</span>
+<span class="go">4  3.0  0.133155</span>
+<span class="go">5  4.0 -0.048693</span>
+<span class="go">6  5.0  0.342054</span>
+<span class="go">7  6.0  0.370076</span>
+<span class="go">8  7.0  0.079587</span>
+<span class="go">9  8.0 -0.954504</span>
+
+<span class="go">[10 rows x 2 columns]</span>
 </pre></div>
 </div>
 <p>They provide getitem accessors</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[7]: </span><span class="go"></span>
+<span class="go">0    NaN</span>
+<span class="go">1    NaN</span>
+<span class="go">2    1.0</span>
+<span class="go">3    2.0</span>
+<span class="go">4    3.0</span>
+<span class="go">5    4.0</span>
+<span class="go">6    5.0</span>
+<span class="go">7    6.0</span>
+<span class="go">8    7.0</span>
+<span class="go">9    8.0</span>
+<span class="go">Name: A, Length: 10, dtype: float64</span>
 </pre></div>
 </div>
 <p>And multiple aggregations</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">r</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>       <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">]})</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">r</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">],</span>
+<span class="gp">   ...: </span>       <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">]})</span>
+<span class="gp">   ...: </span>
+<span class="gh">Out[8]: </span><span class="go"></span>
+<span class="go">     A              B          </span>
+<span class="go">  mean  std      mean       std</span>
+<span class="go">0  NaN  NaN       NaN       NaN</span>
+<span class="go">1  NaN  NaN       NaN       NaN</span>
+<span class="go">2  1.0  1.0  0.237722  1.327364</span>
+<span class="go">3  2.0  1.0 -0.023640  1.335505</span>
+<span class="go">4  3.0  1.0  0.133155  1.143778</span>
+<span class="go">5  4.0  1.0 -0.048693  0.835747</span>
+<span class="go">6  5.0  1.0  0.342054  0.920379</span>
+<span class="go">7  6.0  1.0  0.370076  0.871850</span>
+<span class="go">8  7.0  1.0  0.079587  0.750099</span>
+<span class="go">9  8.0  1.0 -0.954504  1.162285</span>
+
+<span class="go">[10 rows x 4 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -403,16 +467,33 @@ and <a class="reference internal" href="#whatsnew-0180-enhancements-strcat"><spa
 <span id="whatsnew-0180-enhancements-rename"></span><h3>Changes to rename<a class="headerlink" href="#changes-to-rename" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Series.rename</span></code> and <code class="docutils literal notranslate"><span class="pre">NDFrame.rename_axis</span></code> can now take a scalar or list-like
 argument for altering the Series or axis <em>name</em>, in addition to their old behaviors of altering labels. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9494">GH9494</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11965">GH11965</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="gp">In [18]: </span><span class="n">s</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;newname&#39;</span><span class="p">)</span>
+<span class="gp">In [10]: </span><span class="n">s</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;newname&#39;</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">0    1.150036</span>
+<span class="go">1    0.991946</span>
+<span class="go">2    0.953324</span>
+<span class="go">3   -2.021255</span>
+<span class="go">4   -0.334077</span>
+<span class="go">Name: newname, Length: 5, dtype: float64</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
-<span class="gp">In [20]: </span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">&quot;indexname&quot;</span><span class="p">)</span>
+<span class="gp">In [12]: </span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">&quot;indexname&quot;</span><span class="p">)</span>
 <span class="gp">   ....: </span>   <span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">&quot;columns_name&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">))</span>
 <span class="gp">   ....: </span>
+<span class="gh">Out[12]: </span><span class="go"></span>
+<span class="go">columns_name         0         1</span>
+<span class="go">indexname                       </span>
+<span class="go">0             0.002118  0.405453</span>
+<span class="go">1             0.289092  1.321158</span>
+<span class="go">2            -1.546906 -0.202646</span>
+<span class="go">3            -0.655969  0.193421</span>
+<span class="go">4             0.553439  1.318152</span>
+
+<span class="go">[5 rows x 2 columns]</span>
 </pre></div>
 </div>
 <p>The new functionality works well in method chains. Previously these methods only accepted functions or dicts mapping a <em>label</em> to a new label.
@@ -436,13 +517,13 @@ This continues to work as before for function or dict-like values.</p>
 </pre></div>
 </div>
 <p>New Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<pre class="literal-block">In [13]: s = pd.Series(range(1000))
 
-<span class="gp">In [22]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span>
+In [14]: s.index
+Out[14]: RangeIndex(start=0, stop=1000, step=1)
 
-<span class="gp">In [23]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">nbytes</span>
-</pre></div>
-</div>
+In [15]: s.index.nbytes
+Out[15]: 128</pre>
 </div>
 <div class="section" id="changes-to-str-extract">
 <span id="whatsnew-0180-enhancements-extract"></span><h3>Changes to str.extract<a class="headerlink" href="#changes-to-str-extract" title="Permalink to this headline">¶</a></h3>
@@ -470,24 +551,43 @@ string, and returns the contents of the capture groups
 </div>
 <p>Extracting a regular expression with one group returns a Series if
 <code class="docutils literal notranslate"><span class="pre">expand=False</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[ab](\d)&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[ab](\d)&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gh">Out[16]: </span><span class="go"></span>
+<span class="go">0      1</span>
+<span class="go">1      2</span>
+<span class="go">2    NaN</span>
+<span class="go">Length: 3, dtype: object</span>
 </pre></div>
 </div>
 <p>It returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with one column if <code class="docutils literal notranslate"><span class="pre">expand=True</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[ab](\d)&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;b2&#39;</span><span class="p">,</span> <span class="s1">&#39;c3&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[ab](\d)&#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gh">Out[17]: </span><span class="go"></span>
+<span class="go">     0</span>
+<span class="go">0    1</span>
+<span class="go">1    2</span>
+<span class="go">2  NaN</span>
+
+<span class="go">[3 rows x 1 columns]</span>
 </pre></div>
 </div>
 <p>Calling on an <code class="docutils literal notranslate"><span class="pre">Index</span></code> with a regex with exactly one capture group
 returns an <code class="docutils literal notranslate"><span class="pre">Index</span></code> if <code class="docutils literal notranslate"><span class="pre">expand=False</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;c3&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;A11&quot;</span><span class="p">,</span> <span class="s2">&quot;B22&quot;</span><span class="p">,</span> <span class="s2">&quot;C33&quot;</span><span class="p">])</span>
+<pre class="literal-block">In [18]: s = pd.Series([&quot;a1&quot;, &quot;b2&quot;, &quot;c3&quot;], [&quot;A11&quot;, &quot;B22&quot;, &quot;C33&quot;])
 
-<span class="gp">In [27]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span>
+In [19]: s.index
+Out[19]: Index(['A11', 'B22', 'C33'], dtype='object')
 
-<span class="gp">In [28]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[a-zA-Z])&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</pre></div>
-</div>
+In [20]: s.index.str.extract(&quot;(?P&lt;letter&gt;[a-zA-Z])&quot;, expand=False)
+Out[20]: Index(['A', 'B', 'C'], dtype='object', name='letter')</pre>
 <p>It returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> with one column if <code class="docutils literal notranslate"><span class="pre">expand=True</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[a-zA-Z])&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[a-zA-Z])&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gh">Out[21]: </span><span class="go"></span>
+<span class="go">  letter</span>
+<span class="go">0      A</span>
+<span class="go">1      B</span>
+<span class="go">2      C</span>
+
+<span class="go">[3 rows x 1 columns]</span>
 </pre></div>
 </div>
 <p>Calling on an <code class="docutils literal notranslate"><span class="pre">Index</span></code> with a regex with more than one capture group
@@ -497,7 +597,14 @@ raises <code class="docutils literal notranslate"><span class="pre">ValueError</
 </pre></div>
 </div>
 <p>It returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> if <code class="docutils literal notranslate"><span class="pre">expand=True</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[a-zA-Z])([0-9]+)&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [22]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;(?P&lt;letter&gt;[a-zA-Z])([0-9]+)&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gh">Out[22]: </span><span class="go"></span>
+<span class="go">  letter   1</span>
+<span class="go">0      A  11</span>
+<span class="go">1      B  22</span>
+<span class="go">2      C  33</span>
+
+<span class="go">[3 rows x 2 columns]</span>
 </pre></div>
 </div>
 <p>In summary, <code class="docutils literal notranslate"><span class="pre">extract(expand=True)</span></code> always returns a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>
@@ -509,15 +616,33 @@ group.</p>
 <p>The <a class="reference internal" href="../user_guide/text.html#text-extractall"><span class="std std-ref">.str.extractall</span></a> method was added
 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11386">GH11386</a>).  Unlike <code class="docutils literal notranslate"><span class="pre">extract</span></code>, which returns only the first
 match.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a1a2&quot;</span><span class="p">,</span> <span class="s2">&quot;b1&quot;</span><span class="p">,</span> <span class="s2">&quot;c1&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">])</span>
+<pre class="literal-block">In [23]: s = pd.Series([&quot;a1a2&quot;, &quot;b1&quot;, &quot;c1&quot;], [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;])
 
-<span class="gp">In [32]: </span><span class="n">s</span>
+In [24]: s
+Out[24]: 
+A    a1a2
+B      b1
+C      c1
+Length: 3, dtype: object
 
-<span class="gp">In [33]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-</pre></div>
-</div>
+In [25]: s.str.extract(r&quot;(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)&quot;, expand=False)
+Out[25]: 
+  letter digit
+A      a     1
+B      b     1
+C    NaN   NaN
+
+[3 rows x 2 columns]</pre>
 <p>The <code class="docutils literal notranslate"><span class="pre">extractall</span></code> method returns all matches.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;letter&gt;[ab])(?P&lt;digit&gt;\d)&quot;</span><span class="p">)</span>
+<span class="gh">Out[26]: </span><span class="go"></span>
+<span class="go">        letter digit</span>
+<span class="go">  match             </span>
+<span class="go">A 0          a     1</span>
+<span class="go">  1          a     2</span>
+<span class="go">B 0          b     1</span>
+
+<span class="go">[3 rows x 2 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -525,11 +650,11 @@ match.</p>
 <span id="whatsnew-0180-enhancements-strcat"></span><h3>Changes to str.cat<a class="headerlink" href="#changes-to-str-cat" title="Permalink to this headline">¶</a></h3>
 <p>The method <code class="docutils literal notranslate"><span class="pre">.str.cat()</span></code> concatenates the members of a <code class="docutils literal notranslate"><span class="pre">Series</span></code>. Before, if <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values were present in the Series, calling <code class="docutils literal notranslate"><span class="pre">.str.cat()</span></code> on it would return <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, unlike the rest of the <code class="docutils literal notranslate"><span class="pre">Series.str.*</span></code> API. This behavior has been amended to ignore <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values by default. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11435">GH11435</a>).</p>
 <p>A new, friendlier <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> is added to protect against the mistake of supplying the <code class="docutils literal notranslate"><span class="pre">sep</span></code> as an arg, rather than as a kwarg. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11334">GH11334</a>).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+<pre class="literal-block">In [27]: pd.Series(['a', 'b', np.nan, 'c']).str.cat(sep=' ')
+Out[27]: 'a b c'
 
-<span class="gp">In [36]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">na_rep</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [28]: pd.Series(['a', 'b', np.nan, 'c']).str.cat(sep=' ', na_rep='?')
+Out[28]: 'a b ? c'</pre>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
 <span class="go">ValueError: Did you mean to supply a `sep` keyword?</span>
 </pre></div>
@@ -539,47 +664,75 @@ match.</p>
 <span id="whatsnew-0180-enhancements-rounding"></span><h3>Datetimelike rounding<a class="headerlink" href="#datetimelike-rounding" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>, <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code>, <code class="docutils literal notranslate"><span class="pre">TimedeltaIndex</span></code>, <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> have gained the <code class="docutils literal notranslate"><span class="pre">.round()</span></code>, <code class="docutils literal notranslate"><span class="pre">.floor()</span></code> and <code class="docutils literal notranslate"><span class="pre">.ceil()</span></code> method for datetimelike rounding, flooring and ceiling. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4314">GH4314</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11963">GH11963</a>)</p>
 <p>Naive datetimes</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [37]: </span><span class="n">dr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101 09:12:56.1234&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<pre class="literal-block">In [29]: dr = pd.date_range('20130101 09:12:56.1234', periods=3)
 
-<span class="gp">In [38]: </span><span class="n">dr</span>
+In [30]: dr
+Out[30]: 
+DatetimeIndex(['2013-01-01 09:12:56.123400', '2013-01-02 09:12:56.123400',
+               '2013-01-03 09:12:56.123400'],
+              dtype='datetime64[ns]', freq='D')
 
-<span class="gp">In [39]: </span><span class="n">dr</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+In [31]: dr.round('s')
+Out[31]: 
+DatetimeIndex(['2013-01-01 09:12:56', '2013-01-02 09:12:56',
+               '2013-01-03 09:12:56'],
+              dtype='datetime64[ns]', freq=None)
 
-<span class="go"># Timestamp scalar</span>
-<span class="gp">In [40]: </span><span class="n">dr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+# Timestamp scalar
+In [32]: dr[0]
+Out[32]: Timestamp('2013-01-01 09:12:56.123400', freq='D')
 
-<span class="gp">In [41]: </span><span class="n">dr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;10s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [33]: dr[0].round('10s')
+Out[33]: Timestamp('2013-01-01 09:13:00')</pre>
 <p>Tz-aware are rounded, floored and ceiled in local times</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [42]: </span><span class="n">dr</span> <span class="o">=</span> <span class="n">dr</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s1">&#39;US/Eastern&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [34]: dr = dr.tz_localize('US/Eastern')
 
-<span class="gp">In [43]: </span><span class="n">dr</span>
+In [35]: dr
+Out[35]: 
+DatetimeIndex(['2013-01-01 09:12:56.123400-05:00',
+               '2013-01-02 09:12:56.123400-05:00',
+               '2013-01-03 09:12:56.123400-05:00'],
+              dtype='datetime64[ns, US/Eastern]', freq='D')
 
-<span class="gp">In [44]: </span><span class="n">dr</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [36]: dr.round('s')
+Out[36]: 
+DatetimeIndex(['2013-01-01 09:12:56-05:00', '2013-01-02 09:12:56-05:00',
+               '2013-01-03 09:12:56-05:00'],
+              dtype='datetime64[ns, US/Eastern]', freq=None)</pre>
 <p>Timedeltas</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">timedelta_range</span><span class="p">(</span><span class="s1">&#39;1 days 2 hr 13 min 45 us&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [37]: t = pd.timedelta_range('1 days 2 hr 13 min 45 us', periods=3, freq='d')
 
-<span class="gp">In [46]: </span><span class="n">t</span>
+In [38]: t
+Out[38]: 
+TimedeltaIndex(['1 days 02:13:00.000045', '2 days 02:13:00.000045',
+                '3 days 02:13:00.000045'],
+               dtype='timedelta64[ns]', freq='D')
 
-<span class="gp">In [47]: </span><span class="n">t</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;10min&#39;</span><span class="p">)</span>
+In [39]: t.round('10min')
+Out[39]: TimedeltaIndex(['1 days 02:10:00', '2 days 02:10:00', '3 days 02:10:00'], dtype='timedelta64[ns]', freq=None)
 
-<span class="go"># Timedelta scalar</span>
-<span class="gp">In [48]: </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+# Timedelta scalar
+In [40]: t[0]
+Out[40]: Timedelta('1 days 02:13:00.000045')
 
-<span class="gp">In [49]: </span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;2h&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [41]: t[0].round('2h')
+Out[41]: Timedelta('1 days 02:00:00')</pre>
 <p>In addition, <code class="docutils literal notranslate"><span class="pre">.round()</span></code>, <code class="docutils literal notranslate"><span class="pre">.floor()</span></code> and <code class="docutils literal notranslate"><span class="pre">.ceil()</span></code> will be available through the <code class="docutils literal notranslate"><span class="pre">.dt</span></code> accessor of <code class="docutils literal notranslate"><span class="pre">Series</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dr</span><span class="p">)</span>
+<pre class="literal-block">In [42]: s = pd.Series(dr)
 
-<span class="gp">In [51]: </span><span class="n">s</span>
+In [43]: s
+Out[43]: 
+0   2013-01-01 09:12:56.123400-05:00
+1   2013-01-02 09:12:56.123400-05:00
+2   2013-01-03 09:12:56.123400-05:00
+Length: 3, dtype: datetime64[ns, US/Eastern]
 
-<span class="gp">In [52]: </span><span class="n">s</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [44]: s.dt.round('D')
+Out[44]: 
+0   2013-01-01 00:00:00-05:00
+1   2013-01-02 00:00:00-05:00
+2   2013-01-03 00:00:00-05:00
+Length: 3, dtype: datetime64[ns, US/Eastern]</pre>
 </div>
 <div class="section" id="formatting-of-integers-in-floatindex">
 <h3>Formatting of Integers in FloatIndex<a class="headerlink" href="#formatting-of-integers-in-floatindex" title="Permalink to this headline">¶</a></h3>
@@ -605,15 +758,22 @@ This change not only affects the display to the console, but also the output of 
 </pre></div>
 </div>
 <p>New Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">))</span>
+<pre class="literal-block">In [45]: s = pd.Series([1, 2, 3], index=np.arange(3.))
 
-<span class="gp">In [54]: </span><span class="n">s</span>
+In [46]: s
+Out[46]: 
+0.0    1
+1.0    2
+2.0    3
+Length: 3, dtype: int64
 
-<span class="gp">In [55]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span>
+In [47]: s.index
+Out[47]: Float64Index([0.0, 1.0, 2.0], dtype='float64')
 
-<span class="gp">In [56]: </span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path_or_buf</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
-</pre></div>
-</div>
+In [48]: print(s.to_csv(path_or_buf=None, header=False))
+0.0,1
+1.0,2
+2.0,3</pre>
 </div>
 <div class="section" id="changes-to-dtype-assignment-behaviors">
 <h3>Changes to dtype assignment behaviors<a class="headerlink" href="#changes-to-dtype-assignment-behaviors" title="Permalink to this headline">¶</a></h3>
@@ -640,17 +800,25 @@ This change not only affects the display to the console, but also the output of 
 </pre></div>
 </div>
 <p>New Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [49]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
 <span class="gp">   ....: </span>                   <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint32&#39;</span><span class="p">)})</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [58]: </span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gp">In [50]: </span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[50]: </span><span class="go"></span>
+<span class="go">a     int64</span>
+<span class="go">b    uint32</span>
+<span class="go">Length: 2, dtype: object</span>
 
-<span class="gp">In [59]: </span><span class="n">ix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="gp">In [51]: </span><span class="n">ix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
 
-<span class="gp">In [60]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
+<span class="gp">In [52]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
 
-<span class="gp">In [61]: </span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gp">In [53]: </span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[53]: </span><span class="go"></span>
+<span class="go">a     int64</span>
+<span class="go">b    uint32</span>
+<span class="go">Length: 2, dtype: object</span>
 </pre></div>
 </div>
 <p>When a DataFrame’s integer slice is partially updated with a new slice of floats that could potentially be down-casted to integer without losing precision, the dtype of the slice will be set to float instead of integer.</p>
@@ -677,16 +845,30 @@ This change not only affects the display to the console, but also the output of 
 </pre></div>
 </div>
 <p>New Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
 <span class="gp">   ....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">),</span>
 <span class="gp">   ....: </span>                  <span class="n">index</span><span class="o">=</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">]])</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [63]: </span><span class="n">df</span>
+<span class="gp">In [55]: </span><span class="n">df</span>
+<span class="gh">Out[55]: </span><span class="go"></span>
+<span class="go">      a  b  c</span>
+<span class="go">4 8   1  2  3</span>
+<span class="go">  10  4  5  6</span>
+<span class="go">8 12  7  8  9</span>
 
-<span class="gp">In [64]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="go">[3 rows x 3 columns]</span>
 
-<span class="gp">In [65]: </span><span class="n">df</span>
+<span class="gp">In [56]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+
+<span class="gp">In [57]: </span><span class="n">df</span>
+<span class="gh">Out[57]: </span><span class="go"></span>
+<span class="go">      a  b    c</span>
+<span class="go">4 8   1  2  0.0</span>
+<span class="go">  10  4  5  1.0</span>
+<span class="go">8 12  7  8  9.0</span>
+
+<span class="go">[3 rows x 3 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -769,30 +951,32 @@ be passed to the constructor of <code class="docutils literal notranslate"><span
 arithmetic where applicable.  Operations defined for <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> or <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code>
 are now also defined for <code class="docutils literal notranslate"><span class="pre">NaT</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11564">GH11564</a>).</p>
 <p><code class="docutils literal notranslate"><span class="pre">NaT</span></code> now supports arithmetic operations with integers and floats.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">*</span> <span class="mi">1</span>
+<pre class="literal-block">In [58]: pd.NaT * 1
+Out[58]: NaT
 
-<span class="gp">In [67]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">*</span> <span class="mf">1.5</span>
+In [59]: pd.NaT * 1.5
+Out[59]: NaT
 
-<span class="gp">In [68]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">/</span> <span class="mi">2</span>
+In [60]: pd.NaT / 2
+Out[60]: NaT
 
-<span class="gp">In [69]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-</pre></div>
-</div>
+In [61]: pd.NaT * np.nan
+Out[61]: NaT</pre>
 <p><code class="docutils literal notranslate"><span class="pre">NaT</span></code> defines more arithmetic operations with <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> and <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">/</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
+<pre class="literal-block">In [62]: pd.NaT / pd.NaT
+Out[62]: nan
 
-<span class="gp">In [71]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
-</pre></div>
-</div>
+In [63]: pd.Timedelta('1s') / pd.NaT
+Out[63]: nan</pre>
 <p><code class="docutils literal notranslate"><span class="pre">NaT</span></code> may represent either a <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> null or a <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code> null.
 Given the ambiguity, it is treated as a <code class="docutils literal notranslate"><span class="pre">timedelta64[ns]</span></code>, which allows more operations
 to succeed.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [72]: </span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span>
+<pre class="literal-block">In [64]: pd.NaT + pd.NaT
+Out[64]: NaT
 
-<span class="go"># same as</span>
-<span class="gp">In [73]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+# same as
+In [65]: pd.Timedelta('1s') + pd.Timedelta('1s')
+Out[65]: Timedelta('0 days 00:00:02')</pre>
 <p>as opposed to</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;19900315&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;19900315&#39;</span><span class="p">)</span>
 <span class="go">TypeError: unsupported operand type(s) for +: &#39;Timestamp&#39; and &#39;Timestamp&#39;</span>
@@ -805,21 +989,33 @@ the <code class="docutils literal notranslate"><span class="pre">dtype</span></c
 <span class="go">           but the operator [__add__] was passed</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [74]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&lt;m8[ns]&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&lt;m8[ns]&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&lt;m8[ns]&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">NaT</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&lt;m8[ns]&#39;</span><span class="p">)</span>
+<span class="gh">Out[66]: </span><span class="go"></span>
+<span class="go">0   NaT</span>
+<span class="go">Length: 1, dtype: timedelta64[ns]</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> division by <code class="docutils literal notranslate"><span class="pre">floats</span></code> now works.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [67]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1s&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="gh">Out[67]: </span><span class="go">Timedelta(&#39;0 days 00:00:00.500000&#39;)</span>
 </pre></div>
 </div>
 <p>Subtraction by <code class="docutils literal notranslate"><span class="pre">Timedelta</span></code> in a <code class="docutils literal notranslate"><span class="pre">Series</span></code> by a <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> works (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11925">GH11925</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">timedelta_range</span><span class="p">(</span><span class="s1">&#39;1 day&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<pre class="literal-block">In [68]: ser = pd.Series(pd.timedelta_range('1 day', periods=3))
 
-<span class="gp">In [77]: </span><span class="n">ser</span>
+In [69]: ser
+Out[69]: 
+0   1 days
+1   2 days
+2   3 days
+Length: 3, dtype: timedelta64[ns]
 
-<span class="gp">In [78]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2012-01-01&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">ser</span>
-</pre></div>
-</div>
+In [70]: pd.Timestamp('2012-01-01') - ser
+Out[70]: 
+0   2011-12-31
+1   2011-12-30
+2   2011-12-29
+Length: 3, dtype: datetime64[ns]</pre>
 <p><code class="docutils literal notranslate"><span class="pre">NaT.isoformat()</span></code> now returns <code class="docutils literal notranslate"><span class="pre">'NaT'</span></code>. This change allows allows
 <code class="docutils literal notranslate"><span class="pre">pd.Timestamp</span></code> to rehydrate any timestamp like object from its isoformat
 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12300">GH12300</a>).</p>
@@ -886,15 +1082,23 @@ the <code class="docutils literal notranslate"><span class="pre">dtype</span></c
 </pre></div>
 </div>
 <p>New signature</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [79]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-<span class="gp">   ....: </span>                      <span class="n">na_option</span><span class="o">=</span><span class="s1">&#39;keep&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pct</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [71]: pd.Series([0,1]).rank(axis=0, method='average', numeric_only=None,
+   ....:                       na_option='keep', ascending=True, pct=False)
+   ....: 
+Out[71]: 
+0    1.0
+1    2.0
+Length: 2, dtype: float64
 
-<span class="gp">In [80]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="n">numeric_only</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-<span class="gp">   ....: </span>                         <span class="n">na_option</span><span class="o">=</span><span class="s1">&#39;keep&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pct</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">   ....: </span>
-</pre></div>
-</div>
+In [72]: pd.DataFrame([0,1]).rank(axis=0, method='average', numeric_only=None,
+   ....:                          na_option='keep', ascending=True, pct=False)
+   ....: 
+Out[72]: 
+     0
+0  1.0
+1  2.0
+
+[2 rows x 1 columns]</pre>
 </div>
 <div class="section" id="bug-in-quarterbegin-with-n-0">
 <h3>Bug in QuarterBegin with n=0<a class="headerlink" href="#bug-in-quarterbegin-with-n-0" title="Permalink to this headline">¶</a></h3>
@@ -903,15 +1107,16 @@ depending on the date when the <code class="docutils literal notranslate"><span 
 <p>The general semantics of anchored offsets for <code class="docutils literal notranslate"><span class="pre">n=0</span></code> is to not move the date
 when it is an anchor point (e.g., a quarter start date), and otherwise roll
 forward to the next anchor point.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [81]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-02-01&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [73]: d = pd.Timestamp('2014-02-01')
 
-<span class="gp">In [82]: </span><span class="n">d</span>
+In [74]: d
+Out[74]: Timestamp('2014-02-01 00:00:00')
 
-<span class="gp">In [83]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">QuarterBegin</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startingMonth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+In [75]: d + pd.offsets.QuarterBegin(n=0, startingMonth=2)
+Out[75]: Timestamp('2014-02-01 00:00:00')
 
-<span class="gp">In [84]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">QuarterBegin</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startingMonth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
+In [76]: d + pd.offsets.QuarterBegin(n=0, startingMonth=1)
+Out[76]: Timestamp('2014-04-01 00:00:00')</pre>
 <p>For the <code class="docutils literal notranslate"><span class="pre">QuarterBegin</span></code> offset in previous versions, the date would be rolled
 <em>backwards</em> if date was in the same month as the quarter start date.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-02-15&#39;</span><span class="p">)</span>
@@ -922,24 +1127,39 @@ forward to the next anchor point.</p>
 </div>
 <p>This behavior has been corrected in version 0.18.0, which is consistent with
 other anchored offsets like <code class="docutils literal notranslate"><span class="pre">MonthBegin</span></code> and <code class="docutils literal notranslate"><span class="pre">YearBegin</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-02-15&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2014-02-15&#39;</span><span class="p">)</span>
 
-<span class="gp">In [86]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">QuarterBegin</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startingMonth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">In [78]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">offsets</span><span class="o">.</span><span class="n">QuarterBegin</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startingMonth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gh">Out[78]: </span><span class="go">Timestamp(&#39;2014-05-01 00:00:00&#39;)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="resample-api">
 <span id="whatsnew-0180-breaking-resample"></span><h3>Resample API<a class="headerlink" href="#resample-api" title="Permalink to this headline">¶</a></h3>
 <p>Like the change in the window functions API <a class="reference internal" href="#whatsnew-0180-enhancements-moments"><span class="std std-ref">above</span></a>, <code class="docutils literal notranslate"><span class="pre">.resample(...)</span></code> is changing to have a more groupby-like API. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11732">GH11732</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12702">GH12702</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12202">GH12202</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12332">GH12332</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12334">GH12334</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12348">GH12348</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12448">GH12448</a>).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [87]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [79]: </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
 
-<span class="gp">In [88]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+<span class="gp">In [80]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
 <span class="gp">   ....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">),</span>
 <span class="gp">   ....: </span>                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2010-01-01 09:00:00&#39;</span><span class="p">,</span>
 <span class="gp">   ....: </span>                                      <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">))</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [89]: </span><span class="n">df</span>
+<span class="gp">In [81]: </span><span class="n">df</span>
+<span class="gh">Out[81]: </span><span class="go"></span>
+<span class="go">                            A         B         C         D</span>
+<span class="go">2010-01-01 09:00:00  0.191519  0.622109  0.437728  0.785359</span>
+<span class="go">2010-01-01 09:00:01  0.779976  0.272593  0.276464  0.801872</span>
+<span class="go">2010-01-01 09:00:02  0.958139  0.875933  0.357817  0.500995</span>
+<span class="go">2010-01-01 09:00:03  0.683463  0.712702  0.370251  0.561196</span>
+<span class="go">2010-01-01 09:00:04  0.503083  0.013768  0.772827  0.882641</span>
+<span class="go">2010-01-01 09:00:05  0.364886  0.615396  0.075381  0.368824</span>
+<span class="go">2010-01-01 09:00:06  0.933140  0.651378  0.397203  0.788730</span>
+<span class="go">2010-01-01 09:00:07  0.316836  0.568099  0.869127  0.436173</span>
+<span class="go">2010-01-01 09:00:08  0.802148  0.143767  0.704261  0.704581</span>
+<span class="go">2010-01-01 09:00:09  0.218792  0.924868  0.442141  0.909316</span>
+
+<span class="go">[10 rows x 4 columns]</span>
 </pre></div>
 </div>
 <p><strong>Previous API</strong>:</p>
@@ -969,31 +1189,78 @@ would default to <code class="docutils literal notranslate"><span class="pre">ho
 <p><strong>New API</strong>:</p>
 <p>Now, you can write <code class="docutils literal notranslate"><span class="pre">.resample(..)</span></code> as a 2-stage operation like <code class="docutils literal notranslate"><span class="pre">.groupby(...)</span></code>, which
 yields a <code class="docutils literal notranslate"><span class="pre">Resampler</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [90]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [82]: </span><span class="n">r</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span>
 
-<span class="gp">In [91]: </span><span class="n">r</span>
+<span class="gp">In [83]: </span><span class="n">r</span>
+<span class="gh">Out[83]: </span><span class="go">&lt;pandas.core.resample.DatetimeIndexResampler object at 0x7f4bc7046090&gt;</span>
 </pre></div>
 </div>
 <div class="section" id="downsampling">
 <h4>Downsampling<a class="headerlink" href="#downsampling" title="Permalink to this headline">¶</a></h4>
 <p>You can then use this object to perform operations.
 These are downsampling operations (going from a higher frequency to a lower one).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [92]: </span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [84]: </span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[84]: </span><span class="go"></span>
+<span class="go">                            A         B         C         D</span>
+<span class="go">2010-01-01 09:00:00  0.485748  0.447351  0.357096  0.793615</span>
+<span class="go">2010-01-01 09:00:02  0.820801  0.794317  0.364034  0.531096</span>
+<span class="go">2010-01-01 09:00:04  0.433985  0.314582  0.424104  0.625733</span>
+<span class="go">2010-01-01 09:00:06  0.624988  0.609738  0.633165  0.612452</span>
+<span class="go">2010-01-01 09:00:08  0.510470  0.534317  0.573201  0.806949</span>
+
+<span class="go">[5 rows x 4 columns]</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="n">r</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="n">r</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="gh">Out[85]: </span><span class="go"></span>
+<span class="go">                            A         B         C         D</span>
+<span class="go">2010-01-01 09:00:00  0.971495  0.894701  0.714192  1.587231</span>
+<span class="go">2010-01-01 09:00:02  1.641602  1.588635  0.728068  1.062191</span>
+<span class="go">2010-01-01 09:00:04  0.867969  0.629165  0.848208  1.251465</span>
+<span class="go">2010-01-01 09:00:06  1.249976  1.219477  1.266330  1.224904</span>
+<span class="go">2010-01-01 09:00:08  1.020940  1.068634  1.146402  1.613897</span>
+
+<span class="go">[5 rows x 4 columns]</span>
 </pre></div>
 </div>
 <p>Furthermore, resample now supports <code class="docutils literal notranslate"><span class="pre">getitem</span></code> operations to perform the resample on specific columns.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [94]: </span><span class="n">r</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [86]: </span><span class="n">r</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="gh">Out[86]: </span><span class="go"></span>
+<span class="go">                            A         C</span>
+<span class="go">2010-01-01 09:00:00  0.485748  0.357096</span>
+<span class="go">2010-01-01 09:00:02  0.820801  0.364034</span>
+<span class="go">2010-01-01 09:00:04  0.433985  0.424104</span>
+<span class="go">2010-01-01 09:00:06  0.624988  0.633165</span>
+<span class="go">2010-01-01 09:00:08  0.510470  0.573201</span>
+
+<span class="go">[5 rows x 2 columns]</span>
 </pre></div>
 </div>
 <p>and <code class="docutils literal notranslate"><span class="pre">.aggregate</span></code> type operations.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [95]: </span><span class="n">r</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;A&#39;</span> <span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span> <span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [87]: </span><span class="n">r</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;A&#39;</span> <span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span> <span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
+<span class="gh">Out[87]: </span><span class="go"></span>
+<span class="go">                            A         B</span>
+<span class="go">2010-01-01 09:00:00  0.485748  0.894701</span>
+<span class="go">2010-01-01 09:00:02  0.820801  1.588635</span>
+<span class="go">2010-01-01 09:00:04  0.433985  0.629165</span>
+<span class="go">2010-01-01 09:00:06  0.624988  1.219477</span>
+<span class="go">2010-01-01 09:00:08  0.510470  1.068634</span>
+
+<span class="go">[5 rows x 2 columns]</span>
 </pre></div>
 </div>
 <p>These accessors can of course, be combined</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="n">r</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;sum&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [88]: </span><span class="n">r</span><span class="p">[[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;sum&#39;</span><span class="p">])</span>
+<span class="gh">Out[88]: </span><span class="go"></span>
+<span class="go">                            A                   B          </span>
+<span class="go">                         mean       sum      mean       sum</span>
+<span class="go">2010-01-01 09:00:00  0.485748  0.971495  0.447351  0.894701</span>
+<span class="go">2010-01-01 09:00:02  0.820801  1.641602  0.794317  1.588635</span>
+<span class="go">2010-01-01 09:00:04  0.433985  0.867969  0.314582  0.629165</span>
+<span class="go">2010-01-01 09:00:06  0.624988  1.249976  0.609738  1.219477</span>
+<span class="go">2010-01-01 09:00:08  0.510470  1.020940  0.534317  1.068634</span>
+
+<span class="go">[5 rows x 4 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -1002,11 +1269,18 @@ These are downsampling operations (going from a higher frequency to a lower one)
 <p>Upsampling operations take you from a lower frequency to a higher frequency. These are now
 performed with the <code class="docutils literal notranslate"><span class="pre">Resampler</span></code> objects with <code class="xref py py-meth docutils literal notranslate"><span class="pre">backfill()</span></code>,
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">ffill()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">fillna()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">asfreq()</span></code> methods.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [97]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">),</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [89]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int64&#39;</span><span class="p">),</span>
 <span class="gp">   ....: </span>              <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2010-01-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;Q&#39;</span><span class="p">))</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [98]: </span><span class="n">s</span>
+<span class="gp">In [90]: </span><span class="n">s</span>
+<span class="gh">Out[90]: </span><span class="go"></span>
+<span class="go">2010-03-31    0</span>
+<span class="go">2010-06-30    1</span>
+<span class="go">2010-09-30    2</span>
+<span class="go">2010-12-31    3</span>
+<span class="go">2011-03-31    4</span>
+<span class="go">Freq: Q-DEC, Length: 5, dtype: int64</span>
 </pre></div>
 </div>
 <p>Previously</p>
@@ -1029,7 +1303,22 @@ performed with the <code class="docutils literal notranslate"><span class="pre">
 </pre></div>
 </div>
 <p>New API</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [99]: </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [91]: </span><span class="n">s</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<span class="gh">Out[91]: </span><span class="go"></span>
+<span class="go">2010-03-31    0</span>
+<span class="go">2010-04-30    0</span>
+<span class="go">2010-05-31    0</span>
+<span class="go">2010-06-30    1</span>
+<span class="go">2010-07-31    1</span>
+<span class="go">2010-08-31    1</span>
+<span class="go">2010-09-30    2</span>
+<span class="go">2010-10-31    2</span>
+<span class="go">2010-11-30    2</span>
+<span class="go">2010-12-31    3</span>
+<span class="go">2011-01-31    3</span>
+<span class="go">2011-02-28    3</span>
+<span class="go">2011-03-31    4</span>
+<span class="go">Freq: M, Length: 13, dtype: int64</span>
 </pre></div>
 </div>
 <div class="alert alert-info">
@@ -1075,13 +1364,28 @@ This code is intending to resample every 2s, take the <code class="docutils lite
 </pre></div>
 </div>
 <p>The new API will:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [100]: </span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [92]: </span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="gh">Out[92]: </span><span class="go"></span>
+<span class="go">                            A         B         C         D</span>
+<span class="go">2010-01-01 09:00:00  0.191519  0.272593  0.276464  0.785359</span>
+<span class="go">2010-01-01 09:00:02  0.683463  0.712702  0.357817  0.500995</span>
+<span class="go">2010-01-01 09:00:04  0.364886  0.013768  0.075381  0.368824</span>
+<span class="go">2010-01-01 09:00:06  0.316836  0.568099  0.397203  0.436173</span>
+<span class="go">2010-01-01 09:00:08  0.218792  0.143767  0.442141  0.704581</span>
+
+<span class="go">[5 rows x 4 columns]</span>
 </pre></div>
 </div>
 <p>The good news is the return dimensions will differ between the new API and the old API, so this should loudly raise
 an exception.</p>
 <p>To replicate the original operation</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [101]: </span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [93]: </span><span class="n">df</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;2s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="gh">Out[93]: </span><span class="go"></span>
+<span class="go">A    0.433985</span>
+<span class="go">B    0.314582</span>
+<span class="go">C    0.357096</span>
+<span class="go">D    0.531096</span>
+<span class="go">Length: 4, dtype: float64</span>
 </pre></div>
 </div>
 </div>
@@ -1091,9 +1395,18 @@ an exception.</p>
 <h3>Changes to eval<a class="headerlink" href="#changes-to-eval" title="Permalink to this headline">¶</a></h3>
 <p>In prior versions, new columns assignments in an <code class="docutils literal notranslate"><span class="pre">eval</span></code> expression resulted
 in an inplace change to the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9297">GH9297</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8664">GH8664</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/10486">GH10486</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [102]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [94]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)})</span>
 
-<span class="gp">In [103]: </span><span class="n">df</span>
+<span class="gp">In [95]: </span><span class="n">df</span>
+<span class="gh">Out[95]: </span><span class="go"></span>
+<span class="go">      a  b</span>
+<span class="go">0   0.0  0</span>
+<span class="go">1   2.5  1</span>
+<span class="go">2   5.0  2</span>
+<span class="go">3   7.5  3</span>
+<span class="go">4  10.0  4</span>
+
+<span class="go">[5 rows x 2 columns]</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;c = a + b&#39;</span><span class="p">)</span>
@@ -1112,17 +1425,51 @@ in an inplace change to the <code class="docutils literal notranslate"><span cla
 </div>
 <p>In version 0.18.0, a new <code class="docutils literal notranslate"><span class="pre">inplace</span></code> keyword was added to choose whether the
 assignment should be done inplace or return a copy.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [105]: </span><span class="n">df</span>
+<pre class="literal-block">In [96]: df
+Out[96]: 
+      a  b     c
+0   0.0  0   0.0
+1   2.5  1   3.5
+2   5.0  2   7.0
+3   7.5  3  10.5
+4  10.0  4  14.0
 
-<span class="gp">In [106]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;d = c - b&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+[5 rows x 3 columns]
 
-<span class="gp">In [107]: </span><span class="n">df</span>
+In [97]: df.eval('d = c - b', inplace=False)
+Out[97]: 
+      a  b     c     d
+0   0.0  0   0.0   0.0
+1   2.5  1   3.5   2.5
+2   5.0  2   7.0   5.0
+3   7.5  3  10.5   7.5
+4  10.0  4  14.0  10.0
 
-<span class="gp">In [108]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s1">&#39;d = c - b&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+[5 rows x 4 columns]
 
-<span class="gp">In [109]: </span><span class="n">df</span>
-</pre></div>
-</div>
+In [98]: df
+Out[98]: 
+      a  b     c
+0   0.0  0   0.0
+1   2.5  1   3.5
+2   5.0  2   7.0
+3   7.5  3  10.5
+4  10.0  4  14.0
+
+[5 rows x 3 columns]
+
+In [99]: df.eval('d = c - b', inplace=True)
+
+In [100]: df
+Out[100]: 
+      a  b     c     d
+0   0.0  0   0.0   0.0
+1   2.5  1   3.5   2.5
+2   5.0  2   7.0   5.0
+3   7.5  3  10.5   7.5
+4  10.0  4  14.0  10.0
+
+[5 rows x 4 columns]</pre>
 <div class="alert alert-warning">
 <p class="admonition-title">Warning</p>
 <p>For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">inplace</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code> if not specified.
@@ -1130,11 +1477,23 @@ This will change in a future version of pandas. If your code depends on an
 inplace assignment you should update to explicitly set <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code></p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">inplace</span></code> keyword parameter was also added the <code class="docutils literal notranslate"><span class="pre">query</span></code> method.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;a &gt; 5&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [101]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;a &gt; 5&#39;</span><span class="p">)</span>
+<span class="gh">Out[101]: </span><span class="go"></span>
+<span class="go">      a  b     c     d</span>
+<span class="go">3   7.5  3  10.5   7.5</span>
+<span class="go">4  10.0  4  14.0  10.0</span>
 
-<span class="gp">In [111]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;a &gt; 5&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">[2 rows x 4 columns]</span>
 
-<span class="gp">In [112]: </span><span class="n">df</span>
+<span class="gp">In [102]: </span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;a &gt; 5&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="gp">In [103]: </span><span class="n">df</span>
+<span class="gh">Out[103]: </span><span class="go"></span>
+<span class="go">      a  b     c     d</span>
+<span class="go">3   7.5  3  10.5   7.5</span>
+<span class="go">4  10.0  4  14.0  10.0</span>
+
+<span class="go">[2 rows x 4 columns]</span>
 </pre></div>
 </div>
 <div class="alert alert-warning">
@@ -1145,15 +1504,27 @@ is <code class="docutils literal notranslate"><span class="pre">False</span></co
 <p><code class="docutils literal notranslate"><span class="pre">eval</span></code> has also been updated to allow multi-line expressions for multiple
 assignments.  These expressions will be evaluated one at a time in order.  Only
 assignments are valid for multi-line expressions.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [113]: </span><span class="n">df</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [104]: </span><span class="n">df</span>
+<span class="gh">Out[104]: </span><span class="go"></span>
+<span class="go">      a  b     c     d</span>
+<span class="go">3   7.5  3  10.5   7.5</span>
+<span class="go">4  10.0  4  14.0  10.0</span>
 
-<span class="gp">In [114]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="go">[2 rows x 4 columns]</span>
+
+<span class="gp">In [105]: </span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="gp">   .....: </span><span class="s2">e = d + a</span>
 <span class="gp">   .....: </span><span class="s2">f = e - 22</span>
 <span class="gp">   .....: </span><span class="s2">g = f / 2.0&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 
-<span class="gp">In [115]: </span><span class="n">df</span>
+<span class="gp">In [106]: </span><span class="n">df</span>
+<span class="gh">Out[106]: </span><span class="go"></span>
+<span class="go">      a  b     c     d     e    f    g</span>
+<span class="go">3   7.5  3  10.5   7.5  15.0 -7.0 -3.5</span>
+<span class="go">4  10.0  4  14.0  10.0  20.0 -2.0 -1.0</span>
+
+<span class="go">[2 rows x 7 columns]</span>
 </pre></div>
 </div>
 </div>
@@ -1161,9 +1532,14 @@ assignments are valid for multi-line expressions.</p>
 <span id="whatsnew-0180-api"></span><h3>Other API Changes<a class="headerlink" href="#other-api-changes" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">DataFrame.between_time</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.between_time</span></code> now only parse a fixed set of time strings. Parsing of date strings is no longer supported and raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/11818">GH11818</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [116]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [107]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-01-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
 
-<span class="gp">In [117]: </span><span class="n">s</span><span class="o">.</span><span class="n">between_time</span><span class="p">(</span><span class="s2">&quot;7:00am&quot;</span><span class="p">,</span> <span class="s2">&quot;9:00am&quot;</span><span class="p">)</span>
+<span class="gp">In [108]: </span><span class="n">s</span><span class="o">.</span><span class="n">between_time</span><span class="p">(</span><span class="s2">&quot;7:00am&quot;</span><span class="p">,</span> <span class="s2">&quot;9:00am&quot;</span><span class="p">)</span>
+<span class="gh">Out[108]: </span><span class="go"></span>
+<span class="go">2015-01-01 07:00:00    7</span>
+<span class="go">2015-01-01 08:00:00    8</span>
+<span class="go">2015-01-01 09:00:00    9</span>
+<span class="go">Freq: H, Length: 3, dtype: int64</span>
 </pre></div>
 </div>
 <p>This will now raise.</p>
@@ -1230,13 +1606,23 @@ is better handled by matplotlib’s <a class="reference external" href="http://m
 <span id="whatsnew-0180-float-indexers"></span><h3>Removal of deprecated float indexers<a class="headerlink" href="#removal-of-deprecated-float-indexers" title="Permalink to this headline">¶</a></h3>
 <p>In <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4892">GH4892</a> indexing with floating point numbers on a non-<code class="docutils literal notranslate"><span class="pre">Float64Index</span></code> was deprecated (in version 0.14.0).
 In 0.18.0, this deprecation warning is removed and these will now raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12165">GH12165</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/12333">GH12333</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [118]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [109]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
 
-<span class="gp">In [119]: </span><span class="n">s</span>
+<span class="gp">In [110]: </span><span class="n">s</span>
+<span class="gh">Out[110]: </span><span class="go"></span>
+<span class="go">4    1</span>
+<span class="go">5    2</span>
+<span class="go">6    3</span>
+<span class="go">Length: 3, dtype: int64</span>
 
-<span class="gp">In [120]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
+<span class="gp">In [111]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
 
-<span class="gp">In [121]: </span><span class="n">s2</span>
+<span class="gp">In [112]: </span><span class="n">s2</span>
+<span class="gh">Out[112]: </span><span class="go"></span>
+<span class="go">a    1</span>
+<span class="go">b    2</span>
+<span class="go">c    3</span>
+<span class="go">Length: 3, dtype: int64</span>
 </pre></div>
 </div>
 <p>Previous Behavior:</p>
@@ -1274,23 +1660,33 @@ In 0.18.0, this deprecation warning is removed and these will now raise a <code 
 </pre></div>
 </div>
 <p>Other indexers will coerce to a like integer for both getting and setting. The <code class="docutils literal notranslate"><span class="pre">FutureWarning</span></code> has been dropped for <code class="docutils literal notranslate"><span class="pre">.loc</span></code>, <code class="docutils literal notranslate"><span class="pre">.ix</span></code> and <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [122]: </span><span class="n">s</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span>
+<pre class="literal-block">In [113]: s[5.0]
+Out[113]: 2
 
-<span class="gp">In [123]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span>
-</pre></div>
-</div>
+In [114]: s.loc[5.0]
+Out[114]: 2</pre>
 <p>and setting</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="n">s_copy</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [115]: </span><span class="n">s_copy</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="gp">In [125]: </span><span class="n">s_copy</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">In [116]: </span><span class="n">s_copy</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="gp">In [126]: </span><span class="n">s_copy</span>
+<span class="gp">In [117]: </span><span class="n">s_copy</span>
+<span class="gh">Out[117]: </span><span class="go"></span>
+<span class="go">4     1</span>
+<span class="go">5    10</span>
+<span class="go">6     3</span>
+<span class="go">Length: 3, dtype: int64</span>
 
-<span class="gp">In [127]: </span><span class="n">s_copy</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">In [118]: </span><span class="n">s_copy</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="gp">In [128]: </span><span class="n">s_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">In [119]: </span><span class="n">s_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="gp">In [129]: </span><span class="n">s_copy</span>
+<span class="gp">In [120]: </span><span class="n">s_copy</span>
+<span class="gh">Out[120]: </span><span class="go"></span>
+<span class="go">4     1</span>
+<span class="go">5    10</span>
+<span class="go">6     3</span>
+<span class="go">Length: 3, dtype: int64</span>
 </pre></div>
 </div>
 <p>Positional setting with <code class="docutils literal notranslate"><span class="pre">.ix</span></code> and a float indexer will ADD this value to the index, rather than previously setting the value by position.</p>
@@ -1305,21 +1701,31 @@ In 0.18.0, this deprecation warning is removed and these will now raise a <code 
 </pre></div>
 </div>
 <p>Slicing will also coerce integer-like floats to integers for a non-<code class="docutils literal notranslate"><span class="pre">Float64Index</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [130]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [121]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="gh">Out[121]: </span><span class="go"></span>
+<span class="go">5    2</span>
+<span class="go">6    3</span>
+<span class="go">Length: 2, dtype: int64</span>
 </pre></div>
 </div>
 <p>Note that for floats that are NOT coercible to ints, the label based bounds will be excluded</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [131]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [122]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mf">5.1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="gh">Out[122]: </span><span class="go"></span>
+<span class="go">6    3</span>
+<span class="go">Length: 1, dtype: int64</span>
 </pre></div>
 </div>
 <p>Float indexing on a <code class="docutils literal notranslate"><span class="pre">Float64Index</span></code> is unchanged.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [132]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">3.</span><span class="p">))</span>
+<pre class="literal-block">In [123]: s = pd.Series([1, 2, 3], index=np.arange(3.))
 
-<span class="gp">In [133]: </span><span class="n">s</span><span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+In [124]: s[1.0]
+Out[124]: 2
 
-<span class="gp">In [134]: </span><span class="n">s</span><span class="p">[</span><span class="mf">1.0</span><span class="p">:</span><span class="mf">2.5</span><span class="p">]</span>
-</pre></div>
-</div>
+In [125]: s[1.0:2.5]
+Out[125]: 
+1.0    2
+2.0    3
+Length: 2, dtype: int64</pre>
 </div>
 <div class="section" id="removal-of-prior-version-deprecations-changes">
 <span id="whatsnew-0180-prior-deprecations"></span><h3>Removal of prior version deprecations/changes<a class="headerlink" href="#removal-of-prior-version-deprecations-changes" title="Permalink to this headline">¶</a></h3>

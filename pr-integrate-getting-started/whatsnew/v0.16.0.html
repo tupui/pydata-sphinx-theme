@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -254,30 +262,56 @@ are the column names for the new fields, and the values are either a value
 to be inserted (for example, a <code class="docutils literal notranslate"><span class="pre">Series</span></code> or NumPy array), or a function
 of one argument to be called on the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>. The new values are inserted,
 and the entire DataFrame (with all original and new columns) is returned.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/iris.data&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [1]: iris = pd.read_csv('data/iris.data')
 
-<span class="gp">In [10]: </span><span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+In [2]: iris.head()
+Out[2]: 
+   SepalLength  SepalWidth  PetalLength  PetalWidth         Name
+0          5.1         3.5          1.4         0.2  Iris-setosa
+1          4.9         3.0          1.4         0.2  Iris-setosa
+2          4.7         3.2          1.3         0.2  Iris-setosa
+3          4.6         3.1          1.5         0.2  Iris-setosa
+4          5.0         3.6          1.4         0.2  Iris-setosa
 
-<span class="gp">In [11]: </span><span class="n">iris</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">sepal_ratio</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;SepalWidth&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;SepalLength&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
+[5 rows x 5 columns]
+
+In [3]: iris.assign(sepal_ratio=iris['SepalWidth'] / iris['SepalLength']).head()
+Out[3]: 
+   SepalLength  SepalWidth  PetalLength  PetalWidth         Name  sepal_ratio
+0          5.1         3.5          1.4         0.2  Iris-setosa     0.686275
+1          4.9         3.0          1.4         0.2  Iris-setosa     0.612245
+2          4.7         3.2          1.3         0.2  Iris-setosa     0.680851
+3          4.6         3.1          1.5         0.2  Iris-setosa     0.673913
+4          5.0         3.6          1.4         0.2  Iris-setosa     0.720000
+
+[5 rows x 6 columns]</pre>
 <p>Above was an example of inserting a precomputed value. We can also pass in
 a function to be evaluated.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">iris</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">sepal_ratio</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;SepalWidth&#39;</span><span class="p">]</span>
-<span class="gp">   ....: </span>                                   <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;SepalLength&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">iris</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">sepal_ratio</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;SepalWidth&#39;</span><span class="p">]</span>
+<span class="gp">   ...: </span>                                   <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;SepalLength&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="gp">   ...: </span>
+<span class="gh">Out[4]: </span><span class="go"></span>
+<span class="go">   SepalLength  SepalWidth  PetalLength  PetalWidth         Name  sepal_ratio</span>
+<span class="go">0          5.1         3.5          1.4         0.2  Iris-setosa     0.686275</span>
+<span class="go">1          4.9         3.0          1.4         0.2  Iris-setosa     0.612245</span>
+<span class="go">2          4.7         3.2          1.3         0.2  Iris-setosa     0.680851</span>
+<span class="go">3          4.6         3.1          1.5         0.2  Iris-setosa     0.673913</span>
+<span class="go">4          5.0         3.6          1.4         0.2  Iris-setosa     0.720000</span>
+
+<span class="go">[5 rows x 6 columns]</span>
 </pre></div>
 </div>
 <p>The power of <code class="docutils literal notranslate"><span class="pre">assign</span></code> comes when used in chains of operations. For example,
 we can limit the DataFrame to just those with a Sepal Length greater than 5,
 calculate the ratio, and plot</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/iris.data&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [5]: </span><span class="n">iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/iris.data&#39;</span><span class="p">)</span>
 
-<span class="gp">In [14]: </span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SepalLength &gt; 5&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>     <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">SepalRatio</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">SepalWidth</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">SepalLength</span><span class="p">,</span>
-<span class="gp">   ....: </span>             <span class="n">PetalRatio</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">PetalWidth</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">PetalLength</span><span class="p">)</span>
-<span class="gp">   ....: </span>     <span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;SepalRatio&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;PetalRatio&#39;</span><span class="p">))</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [6]: </span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SepalLength &gt; 5&#39;</span><span class="p">)</span>
+<span class="gp">   ...: </span>     <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">SepalRatio</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">SepalWidth</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">SepalLength</span><span class="p">,</span>
+<span class="gp">   ...: </span>             <span class="n">PetalRatio</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">PetalWidth</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">PetalLength</span><span class="p">)</span>
+<span class="gp">   ...: </span>     <span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;SepalRatio&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;PetalRatio&#39;</span><span class="p">))</span>
+<span class="gp">   ...: </span>
+<span class="gh">Out[6]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbd1781d0&gt;</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/whatsnew_assign.png"><img alt="../_images/whatsnew_assign.png" src="../_images/whatsnew_assign.png" style="width: 234.0px; height: 178.5px;" /></a>
@@ -286,55 +320,194 @@ calculate the ratio, and plot</p>
 <div class="section" id="interaction-with-scipy-sparse">
 <span id="whatsnew-0160-enhancements-sparse"></span><h3>Interaction with scipy.sparse<a class="headerlink" href="#interaction-with-scipy-sparse" title="Permalink to this headline">¶</a></h3>
 <p>Added <code class="xref py py-meth docutils literal notranslate"><span class="pre">SparseSeries.to_coo()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">SparseSeries.from_coo()</span></code> methods (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8048">GH8048</a>) for converting to and from <code class="docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code> instances (see <a class="reference internal" href="../user_guide/sparse.html#sparse-scipysparse"><span class="std std-ref">here</span></a>). For example, given a SparseSeries with MultiIndex we can convert to a <cite>scipy.sparse.coo_matrix</cite> by specifying the row and column labels as index levels:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<pre class="literal-block">In [7]: s = pd.Series([3.0, np.nan, 1.0, 3.0, np.nan, np.nan])
 
-<span class="gp">In [16]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-<span class="gp">   ....: </span>                                     <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>
-<span class="gp">   ....: </span>                                    <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+In [8]: s.index = pd.MultiIndex.from_tuples([(1, 2, 'a', 0),
+   ...:                                      (1, 2, 'a', 1),
+   ...:                                      (1, 1, 'b', 0),
+   ...:                                      (1, 1, 'b', 1),
+   ...:                                      (2, 1, 'b', 0),
+   ...:                                      (2, 1, 'b', 1)],
+   ...:                                     names=['A', 'B', 'C', 'D'])
+   ...: 
 
-<span class="gp">In [17]: </span><span class="n">s</span>
+In [9]: s
+Out[9]: 
+A  B  C  D
+1  2  a  0    3.0
+         1    NaN
+   1  b  0    1.0
+         1    3.0
+2  1  b  0    NaN
+         1    NaN
+Length: 6, dtype: float64
 
-<span class="go"># SparseSeries</span>
-<span class="gp">In [18]: </span><span class="n">ss</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
+# SparseSeries
+In [10]: ss = s.to_sparse()
 
-<span class="gp">In [19]: </span><span class="n">ss</span>
+In [11]: ss
+Out[11]: 
+A  B  C  D
+1  2  a  0    3.0
+         1    NaN
+   1  b  0    1.0
+         1    3.0
+2  1  b  0    NaN
+         1    NaN
+Length: 6, dtype: Sparse[float64, nan]
+BlockIndex
+Block locations: array([0, 2], dtype=int32)
+Block lengths: array([1, 2], dtype=int32)
 
-<span class="gp">In [20]: </span><span class="n">A</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">to_coo</span><span class="p">(</span><span class="n">row_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                             <span class="n">column_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                             <span class="n">sort_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+In [12]: A, rows, columns = ss.to_coo(row_levels=['A', 'B'],
+   ....:                              column_levels=['C', 'D'],
+   ....:                              sort_labels=False)
+   ....: 
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+&lt;ipython-input-12-d92c3ce0ff61&gt; in &lt;module&gt;
+      1 A, rows, columns = ss.to_coo(row_levels=['A', 'B'],
+      2                              column_levels=['C', 'D'],
+----&gt; 3                              sort_labels=False)
 
-<span class="gp">In [21]: </span><span class="n">A</span>
+~/miniconda/lib/python3.7/site-packages/pandas/core/sparse/series.py in to_coo(self, row_levels, column_levels, sort_labels)
+    638     def to_coo(self, row_levels=(0,), column_levels=(1,), sort_labels=False):
+    639         A, rows, columns = _sparse_series_to_coo(
+--&gt; 640             self, row_levels, column_levels, sort_labels=sort_labels
+    641         )
+    642         return A, rows, columns
 
-<span class="gp">In [22]: </span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+~/miniconda/lib/python3.7/site-packages/pandas/core/sparse/scipy_sparse.py in _sparse_series_to_coo(ss, row_levels, column_levels, sort_labels)
+     94     &quot;&quot;&quot;
+     95 
+---&gt; 96     import scipy.sparse
+     97 
+     98     if ss.index.nlevels &lt; 2:
 
-<span class="gp">In [23]: </span><span class="n">rows</span>
+ModuleNotFoundError: No module named 'scipy'
 
-<span class="gp">In [24]: </span><span class="n">columns</span>
-</pre></div>
-</div>
+In [13]: A
+Out[13]: 
+0   -1 days +23:54:55
+1     0 days 23:54:55
+2     1 days 23:54:55
+Length: 3, dtype: timedelta64[ns]
+
+In [14]: A.todense()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-14-a3fb4a959fae&gt; in &lt;module&gt;
+----&gt; 1 A.todense()
+
+~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py in __getattr__(self, name)
+   5177             if self._info_axis._can_hold_identifiers_and_holds_name(name):
+   5178                 return self[name]
+-&gt; 5179             return object.__getattribute__(self, name)
+   5180 
+   5181     def __setattr__(self, name, value):
+
+AttributeError: 'Series' object has no attribute 'todense'
+
+In [15]: rows
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-15-870319074abe&gt; in &lt;module&gt;
+----&gt; 1 rows
+
+NameError: name 'rows' is not defined
+
+In [16]: columns
+Out[16]: 
+MultiIndex([('a', 'foo'),
+            ('a', 'bar'),
+            ('b', 'foo'),
+            ('b', 'bah')],
+           names=['lvl0', 'lvl1'])</pre>
 <p>The from_coo method is a convenience method for creating a <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code>
 from a <code class="docutils literal notranslate"><span class="pre">scipy.sparse.coo_matrix</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<pre class="literal-block">In [17]: from scipy import sparse
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+&lt;ipython-input-17-cd6a00615037&gt; in &lt;module&gt;
+----&gt; 1 from scipy import sparse
 
-<span class="gp">In [26]: </span><span class="n">A</span> <span class="o">=</span> <span class="n">sparse</span><span class="o">.</span><span class="n">coo_matrix</span><span class="p">(([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])),</span>
-<span class="gp">   ....: </span>                      <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="gp">   ....: </span>
+ModuleNotFoundError: No module named 'scipy'
 
-<span class="gp">In [27]: </span><span class="n">A</span>
+In [18]: A = sparse.coo_matrix(([3.0, 1.0, 2.0], ([1, 0, 0], [0, 2, 3])),
+   ....:                       shape=(3, 4))
+   ....: 
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-18-22b6f5faecd2&gt; in &lt;module&gt;
+----&gt; 1 A = sparse.coo_matrix(([3.0, 1.0, 2.0], ([1, 0, 0], [0, 2, 3])),
+      2                       shape=(3, 4))
 
-<span class="gp">In [28]: </span><span class="n">A</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+NameError: name 'sparse' is not defined
 
-<span class="gp">In [29]: </span><span class="n">ss</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseSeries</span><span class="o">.</span><span class="n">from_coo</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+In [19]: A
+Out[19]: 
+0   -1 days +23:54:55
+1     0 days 23:54:55
+2     1 days 23:54:55
+Length: 3, dtype: timedelta64[ns]
 
-<span class="gp">In [30]: </span><span class="n">ss</span>
-</pre></div>
-</div>
+In [20]: A.todense()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-20-a3fb4a959fae&gt; in &lt;module&gt;
+----&gt; 1 A.todense()
+
+~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py in __getattr__(self, name)
+   5177             if self._info_axis._can_hold_identifiers_and_holds_name(name):
+   5178                 return self[name]
+-&gt; 5179             return object.__getattribute__(self, name)
+   5180 
+   5181     def __setattr__(self, name, value):
+
+AttributeError: 'Series' object has no attribute 'todense'
+
+In [21]: ss = pd.SparseSeries.from_coo(A)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+&lt;ipython-input-21-16a0085d03f4&gt; in &lt;module&gt;
+----&gt; 1 ss = pd.SparseSeries.from_coo(A)
+
+~/miniconda/lib/python3.7/site-packages/pandas/core/sparse/series.py in from_coo(cls, A, dense_index)
+    645     &#64;Appender(SparseAccessor.from_coo.__doc__)
+    646     def from_coo(cls, A, dense_index=False):
+--&gt; 647         return _coo_to_sparse_series(A, dense_index=dense_index)
+    648 
+    649 
+
+~/miniconda/lib/python3.7/site-packages/pandas/core/sparse/scipy_sparse.py in _coo_to_sparse_series(A, dense_index, sparse_series)
+    138 
+    139     try:
+--&gt; 140         s = Series(A.data, MultiIndex.from_arrays((A.row, A.col)))
+    141     except AttributeError:
+    142         raise TypeError(&quot;Expected coo_matrix. Got {} instead.&quot;.format(type(A).__name__))
+
+~/miniconda/lib/python3.7/site-packages/pandas/core/base.py in data(self)
+    753             stacklevel=2,
+    754         )
+--&gt; 755         return self.values.data
+    756 
+    757     &#64;property
+
+ValueError: cannot include dtype 'm' in a buffer
+
+In [22]: ss
+Out[22]: 
+A  B  C  D
+1  2  a  0    3.0
+         1    NaN
+   1  b  0    1.0
+         1    3.0
+2  1  b  0    NaN
+         1    NaN
+Length: 6, dtype: Sparse[float64, nan]
+BlockIndex
+Block locations: array([0, 2], dtype=int32)
+Block lengths: array([1, 2], dtype=int32)</pre>
 </div>
 <div class="section" id="string-methods-enhancements">
 <span id="whatsnew-0160-enhancements-string"></span><h3>String Methods Enhancements<a class="headerlink" href="#string-methods-enhancements" title="Permalink to this headline">¶</a></h3>
@@ -377,30 +550,51 @@ from a <code class="docutils literal notranslate"><span class="pre">scipy.sparse
 </tr>
 </tbody>
 </table>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;abcd&#39;</span><span class="p">,</span> <span class="s1">&#39;3456&#39;</span><span class="p">,</span> <span class="s1">&#39;EFGH&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [23]: s = pd.Series(['abcd', '3456', 'EFGH'])
 
-<span class="gp">In [32]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>
+In [24]: s.str.isalpha()
+Out[24]: 
+0     True
+1    False
+2     True
+Length: 3, dtype: bool
 
-<span class="gp">In [33]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;ab&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [25]: s.str.find('ab')
+Out[25]: 
+0    0
+1   -1
+2   -1
+Length: 3, dtype: int64</pre>
 </li>
 <li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.pad()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.center()</span></code> now accept <code class="docutils literal notranslate"><span class="pre">fillchar</span></code> option to specify filling character (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9352">GH9352</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="s1">&#39;300&#39;</span><span class="p">,</span> <span class="s1">&#39;25&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="s1">&#39;300&#39;</span><span class="p">,</span> <span class="s1">&#39;25&#39;</span><span class="p">])</span>
 
-<span class="gp">In [35]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">fillchar</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+<span class="gp">In [27]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">fillchar</span><span class="o">=</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+<span class="gh">Out[27]: </span><span class="go"></span>
+<span class="go">0    ___12</span>
+<span class="go">1    __300</span>
+<span class="go">2    ___25</span>
+<span class="go">Length: 3, dtype: object</span>
 </pre></div>
 </div>
 </li>
 <li><p>Added <code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.slice_replace()</span></code>, which previously raised <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8888">GH8888</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;ABCD&#39;</span><span class="p">,</span> <span class="s1">&#39;EFGH&#39;</span><span class="p">,</span> <span class="s1">&#39;IJK&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [28]: s = pd.Series(['ABCD', 'EFGH', 'IJK'])
 
-<span class="gp">In [37]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice_replace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">)</span>
+In [29]: s.str.slice_replace(1, 3, 'X')
+Out[29]: 
+0    AXD
+1    EXH
+2     IX
+Length: 3, dtype: object
 
-<span class="go"># replaced with empty char</span>
-<span class="gp">In [38]: </span><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice_replace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
+# replaced with empty char
+In [30]: s.str.slice_replace(0, 1)
+Out[30]: 
+0    BCD
+1    FGH
+2     JK
+Length: 3, dtype: object</pre>
 </li>
 </ul>
 </div>
@@ -408,9 +602,16 @@ from a <code class="docutils literal notranslate"><span class="pre">scipy.sparse
 <span id="whatsnew-0160-enhancements-other"></span><h3>Other enhancements<a class="headerlink" href="#other-enhancements" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Reindex now supports <code class="docutils literal notranslate"><span class="pre">method='nearest'</span></code> for frames or series with a monotonic increasing or decreasing index (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9258">GH9258</a>):</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [31]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)})</span>
 
-<span class="gp">In [40]: </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="gp">In [32]: </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="gh">Out[32]: </span><span class="go"></span>
+<span class="go">     x</span>
+<span class="go">0.2  0</span>
+<span class="go">1.8  2</span>
+<span class="go">3.5  4</span>
+
+<span class="go">[3 rows x 1 columns]</span>
 </pre></div>
 </div>
 <p>This method is also exposed by the lower level <code class="docutils literal notranslate"><span class="pre">Index.get_indexer</span></code> and <code class="docutils literal notranslate"><span class="pre">Index.get_loc</span></code> methods.</p>
@@ -463,37 +664,54 @@ sub-class of <code class="docutils literal notranslate"><span class="pre">dateti
 </pre></div>
 </div>
 <p>New Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">t</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="s1">&#39;1 day, 10:11:12.100123&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [33]: t = pd.Timedelta('1 day, 10:11:12.100123')
 
-<span class="gp">In [42]: </span><span class="n">t</span><span class="o">.</span><span class="n">days</span>
+In [34]: t.days
+Out[34]: 1
 
-<span class="gp">In [43]: </span><span class="n">t</span><span class="o">.</span><span class="n">seconds</span>
+In [35]: t.seconds
+Out[35]: 36672
 
-<span class="gp">In [44]: </span><span class="n">t</span><span class="o">.</span><span class="n">microseconds</span>
-</pre></div>
-</div>
+In [36]: t.microseconds
+Out[36]: 100123</pre>
 <p>Using <code class="docutils literal notranslate"><span class="pre">.components</span></code> allows the full component access</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">t</span><span class="o">.</span><span class="n">components</span>
+<pre class="literal-block">In [37]: t.components
+Out[37]: Components(days=1, hours=10, minutes=11, seconds=12, milliseconds=100, microseconds=123, nanoseconds=0)
 
-<span class="gp">In [46]: </span><span class="n">t</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">seconds</span>
-</pre></div>
-</div>
+In [38]: t.components.seconds
+Out[38]: 12</pre>
 </div>
 <div class="section" id="indexing-changes">
 <span id="whatsnew-0160-api-breaking-indexing"></span><h3>Indexing Changes<a class="headerlink" href="#indexing-changes" title="Permalink to this headline">¶</a></h3>
 <p>The behavior of a small sub-set of edge cases for using <code class="docutils literal notranslate"><span class="pre">.loc</span></code> have changed (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8613">GH8613</a>). Furthermore we have improved the content of the error messages that are raised:</p>
 <ul>
 <li><p>Slicing with <code class="docutils literal notranslate"><span class="pre">.loc</span></code> where the start and/or stop bound is not found in the index is now allowed; this previously would raise a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>. This makes the behavior the same as <code class="docutils literal notranslate"><span class="pre">.ix</span></code> in this case. This change is only for slicing, not when indexing with a single label.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [47]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
 <span class="gp">   ....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">),</span>
 <span class="gp">   ....: </span>                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [48]: </span><span class="n">df</span>
+<span class="gp">In [40]: </span><span class="n">df</span>
+<span class="gh">Out[40]: </span><span class="go"></span>
+<span class="go">                   A         B         C         D</span>
+<span class="go">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span>
+<span class="go">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span>
+<span class="go">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span>
+<span class="go">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span>
+<span class="go">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span>
 
-<span class="gp">In [49]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">[5 rows x 4 columns]</span>
 
-<span class="gp">In [50]: </span><span class="n">s</span>
+<span class="gp">In [41]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [42]: </span><span class="n">s</span>
+<span class="gh">Out[42]: </span><span class="go"></span>
+<span class="go">-2    0</span>
+<span class="go">-1    1</span>
+<span class="go"> 1    2</span>
+<span class="go"> 2    3</span>
+<span class="go"> 3    4</span>
+<span class="go">Length: 5, dtype: int64</span>
 </pre></div>
 </div>
 <p>Previous Behavior</p>
@@ -505,11 +723,24 @@ sub-class of <code class="docutils literal notranslate"><span class="pre">dateti
 </pre></div>
 </div>
 <p>New Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [51]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2013-01-02&#39;</span><span class="p">:</span><span class="s1">&#39;2013-01-10&#39;</span><span class="p">]</span>
+<pre class="literal-block">In [43]: df.loc['2013-01-02':'2013-01-10']
+Out[43]: 
+                   A         B         C         D
+2013-01-02  1.212112 -0.173215  0.119209 -1.044236
+2013-01-03 -0.861849 -2.104569 -0.494929  1.071804
+2013-01-04  0.721555 -0.706771 -1.039575  0.271860
+2013-01-05 -0.424972  0.567020  0.276232 -1.087401
 
-<span class="gp">In [52]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-</div>
+[4 rows x 4 columns]
+
+In [44]: s.loc[-10:3]
+Out[44]: 
+-2    0
+-1    1
+ 1    2
+ 2    3
+ 3    4
+Length: 5, dtype: int64</pre>
 </li>
 <li><p>Allow slicing with float-like values on an integer index for <code class="docutils literal notranslate"><span class="pre">.ix</span></code>. Previously this was only enabled for <code class="docutils literal notranslate"><span class="pre">.loc</span></code>:</p>
 <p>Previous Behavior</p>
@@ -571,26 +802,45 @@ sub-class of <code class="docutils literal notranslate"><span class="pre">dateti
 </pre></div>
 </div>
 <p>New Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [53]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [45]: s = pd.Series([0, 1, 2], dtype='category')
 
-<span class="gp">In [54]: </span><span class="n">s</span>
+In [46]: s
+Out[46]: 
+0    0
+1    1
+2    2
+Length: 3, dtype: category
+Categories (3, int64): [0, 1, 2]
 
-<span class="gp">In [55]: </span><span class="n">s</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">ordered</span>
+In [47]: s.cat.ordered
+Out[47]: False
 
-<span class="gp">In [56]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">as_ordered</span><span class="p">()</span>
+In [48]: s = s.cat.as_ordered()
 
-<span class="gp">In [57]: </span><span class="n">s</span>
+In [49]: s
+Out[49]: 
+0    0
+1    1
+2    2
+Length: 3, dtype: category
+Categories (3, int64): [0 &lt; 1 &lt; 2]
 
-<span class="gp">In [58]: </span><span class="n">s</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">ordered</span>
+In [50]: s.cat.ordered
+Out[50]: True
 
-<span class="go"># you can set in the constructor of the Categorical</span>
-<span class="gp">In [59]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+# you can set in the constructor of the Categorical
+In [51]: s = pd.Series(pd.Categorical([0, 1, 2], ordered=True))
 
-<span class="gp">In [60]: </span><span class="n">s</span>
+In [52]: s
+Out[52]: 
+0    0
+1    1
+2    2
+Length: 3, dtype: category
+Categories (3, int64): [0 &lt; 1 &lt; 2]
 
-<span class="gp">In [61]: </span><span class="n">s</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">ordered</span>
-</pre></div>
-</div>
+In [53]: s.cat.ordered
+Out[53]: True</pre>
 <p>For ease of creation of series of categorical data, we have added the ability to pass keywords when calling <code class="docutils literal notranslate"><span class="pre">.astype()</span></code>. These are passed directly to the constructor.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">54</span><span class="p">]:</span> <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
@@ -679,13 +929,19 @@ values are the result of the bitwise operation.</p>
 </pre></div>
 </div>
 <p>New Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">p</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<pre class="literal-block">In [54]: p = pd.Series([0, 1])
 
-<span class="gp">In [63]: </span><span class="n">p</span> <span class="o">/</span> <span class="mi">0</span>
+In [55]: p / 0
+Out[55]: 
+0    NaN
+1    inf
+Length: 2, dtype: float64
 
-<span class="gp">In [64]: </span><span class="n">p</span> <span class="o">//</span> <span class="mi">0</span>
-</pre></div>
-</div>
+In [56]: p // 0
+Out[56]: 
+0    NaN
+1    inf
+Length: 2, dtype: float64</pre>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Series.values_counts</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.describe</span></code> for categorical data will now put <code class="docutils literal notranslate"><span class="pre">NaN</span></code> entries at the end. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9443">GH9443</a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Series.describe</span></code> for categorical data will now give counts and frequencies of 0, not <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, for unused categories (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9443">GH9443</a>)</p></li>
@@ -696,7 +952,8 @@ values are the result of the bitwise operation.</p>
 </pre></div>
 </div>
 <p>Fixed behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [65]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s1">&#39;2000-01-31&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-02-28&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="s1">&#39;2000-02&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [57]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">([</span><span class="s1">&#39;2000-01-31&#39;</span><span class="p">,</span> <span class="s1">&#39;2000-02-28&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">asof</span><span class="p">(</span><span class="s1">&#39;2000-02&#39;</span><span class="p">)</span>
+<span class="gh">Out[57]: </span><span class="go">Timestamp(&#39;2000-02-28 00:00:00&#39;)</span>
 </pre></div>
 </div>
 <p>To reproduce the old behavior, simply add more precision to the label (e.g., use <code class="docutils literal notranslate"><span class="pre">2000-02-01</span></code> instead of <code class="docutils literal notranslate"><span class="pre">2000-02</span></code>).</p>
@@ -845,13 +1102,13 @@ SQLAlchemy type  (<a class="reference external" href="https://github.com/pandas-
 </li>
 <li><p>A Spurious <code class="docutils literal notranslate"><span class="pre">SettingWithCopy</span></code> Warning was generated when setting a new item in a frame in some cases (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8730">GH8730</a>)</p>
 <p>The following would previously report a <code class="docutils literal notranslate"><span class="pre">SettingWithCopy</span></code> Warning.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]),</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]),</span>
 <span class="gp">   ....: </span>                    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">])})</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [67]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">]]</span>
+<span class="gp">In [59]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">]]</span>
 
-<span class="gp">In [68]: </span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">]</span>
+<span class="gp">In [60]: </span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </li>

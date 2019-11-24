@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -190,20 +198,31 @@ a scatter plot matrix</p></li>
 <h2>NA Boolean Comparison API Change<a class="headerlink" href="#na-boolean-comparison-api-change" title="Permalink to this headline">¶</a></h2>
 <p>Reverted some changes to how NA values (represented typically as <code class="docutils literal notranslate"><span class="pre">NaN</span></code> or
 <code class="docutils literal notranslate"><span class="pre">None</span></code>) are handled in non-numeric Series:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;Steve&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s1">&#39;Joe&#39;</span><span class="p">])</span>
+<pre class="literal-block">In [1]: series = pd.Series(['Steve', np.nan, 'Joe'])
 
-<span class="gp">In [10]: </span><span class="n">series</span> <span class="o">==</span> <span class="s1">&#39;Steve&#39;</span>
+In [2]: series == 'Steve'
+Out[2]: 
+0     True
+1    False
+2    False
+Length: 3, dtype: bool
 
-<span class="gp">In [11]: </span><span class="n">series</span> <span class="o">!=</span> <span class="s1">&#39;Steve&#39;</span>
-</pre></div>
-</div>
+In [3]: series != 'Steve'
+Out[3]: 
+0    False
+1     True
+2     True
+Length: 3, dtype: bool</pre>
 <p>In comparisons, NA / NaN will always come through as <code class="docutils literal notranslate"><span class="pre">False</span></code> except with
 <code class="docutils literal notranslate"><span class="pre">!=</span></code> which is <code class="docutils literal notranslate"><span class="pre">True</span></code>. <em>Be very careful</em> with boolean arithmetic, especially
 negation, in the presence of NA data. You may wish to add an explicit NA
 filter into boolean array operations if you are worried about this:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">mask</span> <span class="o">=</span> <span class="n">series</span> <span class="o">==</span> <span class="s1">&#39;Steve&#39;</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">mask</span> <span class="o">=</span> <span class="n">series</span> <span class="o">==</span> <span class="s1">&#39;Steve&#39;</span>
 
-<span class="gp">In [13]: </span><span class="n">series</span><span class="p">[</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">series</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+<span class="gp">In [5]: </span><span class="n">series</span><span class="p">[</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="n">series</span><span class="o">.</span><span class="n">notnull</span><span class="p">()]</span>
+<span class="gh">Out[5]: </span><span class="go"></span>
+<span class="go">0    Steve</span>
+<span class="go">Length: 1, dtype: object</span>
 </pre></div>
 </div>
 <p>While propagating NA in comparisons may seem like the right behavior to some
@@ -217,22 +236,46 @@ some point in the future.</p>
 <h2>Other API Changes<a class="headerlink" href="#other-api-changes" title="Permalink to this headline">¶</a></h2>
 <p>When calling <code class="docutils literal notranslate"><span class="pre">apply</span></code> on a grouped Series, the return value will also be a
 Series, to be more consistent with the <code class="docutils literal notranslate"><span class="pre">groupby</span></code> behavior with DataFrame:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [14]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span>
-<span class="gp">   ....: </span>                         <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                   <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">,</span>
-<span class="gp">   ....: </span>                         <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">,</span> <span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;three&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                   <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)})</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [6]: df = pd.DataFrame({'A': ['foo', 'bar', 'foo', 'bar',
+   ...:                          'foo', 'bar', 'foo', 'foo'],
+   ...:                    'B': ['one', 'one', 'two', 'three',
+   ...:                          'two', 'two', 'one', 'three'],
+   ...:                    'C': np.random.randn(8), 'D': np.random.randn(8)})
+   ...: 
 
-<span class="gp">In [15]: </span><span class="n">df</span>
+In [7]: df
+Out[7]: 
+     A      B         C         D
+0  foo    one  0.469112 -0.861849
+1  bar    one -0.282863 -2.104569
+2  foo    two -1.509059 -0.494929
+3  bar  three -1.135632  1.071804
+4  foo    two  1.212112  0.721555
+5  bar    two -0.173215 -0.706771
+6  foo    one  0.119209 -1.039575
+7  foo  three -1.044236  0.271860
 
-<span class="gp">In [16]: </span><span class="n">grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span>
+[8 rows x 4 columns]
 
-<span class="gp">In [17]: </span><span class="n">grouped</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+In [8]: grouped = df.groupby('A')['C']
 
-<span class="gp">In [18]: </span><span class="n">grouped</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>    <span class="c1"># top 2 values</span>
-</pre></div>
-</div>
+In [9]: grouped.describe()
+Out[9]: 
+     count      mean       std  ...       50%       75%       max
+A                               ...                              
+bar    3.0 -0.530570  0.526860  ... -0.282863 -0.228039 -0.173215
+foo    5.0 -0.150572  1.113308  ...  0.119209  0.469112  1.212112
+
+[2 rows x 8 columns]
+
+In [10]: grouped.apply(lambda x: x.sort_values()[-2:])    # top 2 values
+Out[10]: 
+A     
+bar  1   -0.282863
+     5   -0.173215
+foo  0    0.469112
+     4    1.212112
+Name: C, Length: 4, dtype: float64</pre>
 </div>
 <div class="section" id="contributors">
 <span id="whatsnew-0-7-3-contributors"></span><h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h2>

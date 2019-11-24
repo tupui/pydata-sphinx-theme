@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -182,9 +190,21 @@ list of JSON objects) to DataFrame constructor (<a class="reference external" hr
 DataFrame via <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>, useful for transformation (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/342">GH342</a>)</p></li>
 <li><p>Handle differently-indexed output values in <code class="docutils literal notranslate"><span class="pre">DataFrame.apply</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/498">GH498</a>)</p></li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
-<span class="gp">In [10]: </span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="gp">In [2]: </span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="gh">Out[2]: </span><span class="go"></span>
+<span class="go">               0          1          2          3</span>
+<span class="go">count  10.000000  10.000000  10.000000  10.000000</span>
+<span class="go">mean    0.190912  -0.395125  -0.731920  -0.403130</span>
+<span class="go">std     0.730951   0.813266   1.112016   0.961912</span>
+<span class="go">min    -0.861849  -2.104569  -1.776904  -1.469388</span>
+<span class="go">25%    -0.411391  -0.698728  -1.501401  -1.076610</span>
+<span class="go">50%     0.380863  -0.228039  -1.191943  -1.004091</span>
+<span class="go">75%     0.658444   0.057974  -0.034326   0.461706</span>
+<span class="go">max     1.212112   0.577046   1.643563   1.071804</span>
+
+<span class="go">[8 rows x 4 columns]</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -242,17 +262,30 @@ minimum and maximum, respectively (<a class="reference external" href="https://g
 <p>One of the potentially riskiest API changes in 0.7.0, but also one of the most
 important, was a complete review of how <strong>integer indexes</strong> are handled with
 regard to label-based indexing. Here is an example:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<pre class="literal-block">In [3]: s = pd.Series(np.random.randn(10), index=range(0, 20, 2))
 
-<span class="gp">In [12]: </span><span class="n">s</span>
+In [4]: s
+Out[4]: 
+0    -1.294524
+2     0.413738
+4     0.276662
+6    -0.472035
+8    -0.013960
+10   -0.362543
+12   -0.006154
+14   -0.923061
+16    0.895717
+18    0.805244
+Length: 10, dtype: float64
 
-<span class="gp">In [13]: </span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+In [5]: s[0]
+Out[5]: -1.2945235902555294
 
-<span class="gp">In [14]: </span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+In [6]: s[2]
+Out[6]: 0.41373810535784006
 
-<span class="gp">In [15]: </span><span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
-</pre></div>
-</div>
+In [7]: s[4]
+Out[7]: 0.2766617129497566</pre>
 <p>This is all exactly identical to the behavior before. However, if you ask for a
 key <strong>not</strong> contained in the Series, in versions 0.6.1 and prior, Series would
 <em>fall back</em> on a location-based lookup. This now raises a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>:</p>
@@ -368,26 +401,59 @@ been added:</p>
 slice to a Series when getting and setting values via <code class="docutils literal notranslate"><span class="pre">[]</span></code> (i.e. the
 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">__setitem__</span></code> methods). The behavior will be the same as
 passing similar input to <code class="docutils literal notranslate"><span class="pre">ix</span></code> <strong>except in the case of integer indexing</strong>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;acegkm&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [8]: s = pd.Series(np.random.randn(6), index=list('acegkm'))
 
-<span class="gp">In [17]: </span><span class="n">s</span>
+In [9]: s
+Out[9]: 
+a   -1.206412
+c    2.565646
+e    1.431256
+g    1.340309
+k   -1.170299
+m   -0.226169
+Length: 6, dtype: float64
 
-<span class="gp">In [18]: </span><span class="n">s</span><span class="p">[[</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">]]</span>
+In [10]: s[['m', 'a', 'c', 'e']]
+Out[10]: 
+m   -0.226169
+a   -1.206412
+c    2.565646
+e    1.431256
+Length: 4, dtype: float64
 
-<span class="gp">In [19]: </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="s1">&#39;l&#39;</span><span class="p">]</span>
+In [11]: s['b':'l']
+Out[11]: 
+c    2.565646
+e    1.431256
+g    1.340309
+k   -1.170299
+Length: 4, dtype: float64
 
-<span class="gp">In [20]: </span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
+In [12]: s['c':'k']
+Out[12]: 
+c    2.565646
+e    1.431256
+g    1.340309
+k   -1.170299
+Length: 4, dtype: float64</pre>
 <p>In the case of integer indexes, the behavior will be exactly as before
 (shadowing <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>):</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<pre class="literal-block">In [13]: s = pd.Series(np.random.randn(6), index=range(0, 12, 2))
 
-<span class="gp">In [22]: </span><span class="n">s</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+In [14]: s[[4, 0, 2]]
+Out[14]: 
+4    0.132003
+0    0.410835
+2    0.813850
+Length: 3, dtype: float64
 
-<span class="gp">In [23]: </span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
+In [15]: s[1:5]
+Out[15]: 
+2    0.813850
+4    0.132003
+6   -0.827317
+8   -0.076467
+Length: 4, dtype: float64</pre>
 <p>If you wish to do indexing with sequences and slicing on an integer index with
 label semantics, use <code class="docutils literal notranslate"><span class="pre">ix</span></code>.</p>
 </div>

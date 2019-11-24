@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -312,26 +320,68 @@ for updating values in place</p></li>
 <div class="section" id="new-plotting-methods">
 <h2>New plotting methods<a class="headerlink" href="#new-plotting-methods" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Series.plot</span></code> now supports a <code class="docutils literal notranslate"><span class="pre">secondary_y</span></code> option:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<pre class="literal-block">In [1]: plt.figure()
+Out[1]: &lt;Figure size 640x480 with 0 Axes&gt;
 
-<span class="gp">In [13]: </span><span class="n">fx</span><span class="p">[</span><span class="s1">&#39;FR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+In [2]: fx['FR'].plot(style='g')
+Out[2]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbb86ac10&gt;
 
-<span class="gp">In [14]: </span><span class="n">fx</span><span class="p">[</span><span class="s1">&#39;IT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">secondary_y</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
+In [3]: fx['IT'].plot(style='k--', secondary_y=True)
+Out[3]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbb82a4d0&gt;</pre>
 <p>Vytautas Jancauskas, the 2012 GSOC participant, has added many new plot
 types. For example, <code class="docutils literal notranslate"><span class="pre">'kde'</span></code> is a new option:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
-<span class="gp">   ....: </span>                              <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)))</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [4]: s = pd.Series(np.concatenate((np.random.randn(1000),
+   ...:                               np.random.randn(1000) * 0.5 + 3)))
+   ...: 
 
-<span class="gp">In [16]: </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+In [5]: plt.figure()
+Out[5]: &lt;Figure size 640x480 with 0 Axes&gt;
 
-<span class="gp">In [17]: </span><span class="n">s</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+In [6]: s.hist(density=True, alpha=0.2)
+Out[6]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbb8e9190&gt;
 
-<span class="gp">In [18]: </span><span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;kde&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
+In [7]: s.plot(kind='kde')
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+&lt;ipython-input-7-7e9890bbc9b2&gt; in &lt;module&gt;
+----&gt; 1 s.plot(kind='kde')
+
+~/miniconda/lib/python3.7/site-packages/pandas/plotting/_core.py in __call__(self, *args, **kwargs)
+    792                     data.columns = label_name
+    793 
+--&gt; 794         return plot_backend.plot(data, kind=kind, **kwargs)
+    795 
+    796     def line(self, x=None, y=None, **kwargs):
+
+~/miniconda/lib/python3.7/site-packages/pandas/plotting/_matplotlib/__init__.py in plot(data, kind, **kwargs)
+     60             kwargs[&quot;ax&quot;] = getattr(ax, &quot;left_ax&quot;, ax)
+     61     plot_obj = PLOT_CLASSES[kind](data, **kwargs)
+---&gt; 62     plot_obj.generate()
+     63     plot_obj.draw()
+     64     return plot_obj.result
+
+~/miniconda/lib/python3.7/site-packages/pandas/plotting/_matplotlib/core.py in generate(self)
+    279         self._compute_plot_data()
+    280         self._setup_subplots()
+--&gt; 281         self._make_plot()
+    282         self._add_table()
+    283         self._make_legend()
+
+~/miniconda/lib/python3.7/site-packages/pandas/plotting/_matplotlib/hist.py in _make_plot(self)
+     81 
+     82             kwds = self._make_plot_keywords(kwds, y)
+---&gt; 83             artists = self._plot(ax, y, column_num=i, stacking_id=stacking_id, **kwds)
+     84             self._add_legend_handle(artists[0], label, index=i)
+     85 
+
+~/miniconda/lib/python3.7/site-packages/pandas/plotting/_matplotlib/hist.py in _plot(cls, ax, y, style, bw_method, ind, column_num, stacking_id, **kwds)
+    149         **kwds
+    150     ):
+--&gt; 151         from scipy.stats import gaussian_kde
+    152 
+    153         y = remove_na_arraylike(y)
+
+ModuleNotFoundError: No module named 'scipy'</pre>
 <p>See <a class="reference internal" href="../user_guide/visualization.html#visualization-other"><span class="std std-ref">the plotting page</span></a> for much more.</p>
 </div>
 <div class="section" id="other-api-changes">
@@ -350,21 +400,22 @@ replaced by <code class="docutils literal notranslate"><span class="pre">Datetim
 have code that converts <code class="docutils literal notranslate"><span class="pre">DateRange</span></code> or <code class="docutils literal notranslate"><span class="pre">Index</span></code> objects that used to contain
 <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span></code> values to plain NumPy arrays, you may have bugs lurking
 with code using scalar values because you are handing control over to NumPy:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="kn">import</span> <span class="nn">datetime</span>
+<pre class="literal-block">In [8]: import datetime
 
-<span class="gp">In [20]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+In [9]: rng = pd.date_range('1/1/2000', periods=10)
 
-<span class="gp">In [21]: </span><span class="n">rng</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+In [10]: rng[5]
+Out[10]: Timestamp('2000-01-06 00:00:00', freq='D')
 
-<span class="gp">In [22]: </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">rng</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+In [11]: isinstance(rng[5], datetime.datetime)
+Out[11]: True
 
-<span class="gp">In [23]: </span><span class="n">rng_asarray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+In [12]: rng_asarray = np.asarray(rng)
 
-<span class="gp">In [24]: </span><span class="n">scalar_val</span> <span class="o">=</span> <span class="n">rng_asarray</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+In [13]: scalar_val = rng_asarray[5]
 
-<span class="gp">In [25]: </span><span class="nb">type</span><span class="p">(</span><span class="n">scalar_val</span><span class="p">)</span>
-</pre></div>
-</div>
+In [14]: type(scalar_val)
+Out[14]: numpy.datetime64</pre>
 <p>pandas’s <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> object is a subclass of <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span></code> that has
 nanosecond support (the <code class="docutils literal notranslate"><span class="pre">nanosecond</span></code> field store the nanosecond value between
 0 and 999). It should substitute directly into any code that used
@@ -373,22 +424,37 @@ nanosecond support (the <code class="docutils literal notranslate"><span class="
 <p>If you have code that requires an array of <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span></code> objects, you
 have a couple of options. First, the <code class="docutils literal notranslate"><span class="pre">astype(object)</span></code> method of <code class="docutils literal notranslate"><span class="pre">DatetimeIndex</span></code>
 produces an array of <code class="docutils literal notranslate"><span class="pre">Timestamp</span></code> objects:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">stamp_array</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+<pre class="literal-block">In [15]: stamp_array = rng.astype(object)
 
-<span class="gp">In [27]: </span><span class="n">stamp_array</span>
+In [16]: stamp_array
+Out[16]: 
+Index([2000-01-01 00:00:00, 2000-01-02 00:00:00, 2000-01-03 00:00:00,
+       2000-01-04 00:00:00, 2000-01-05 00:00:00, 2000-01-06 00:00:00,
+       2000-01-07 00:00:00, 2000-01-08 00:00:00, 2000-01-09 00:00:00,
+       2000-01-10 00:00:00],
+      dtype='object')
 
-<span class="gp">In [28]: </span><span class="n">stamp_array</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
+In [17]: stamp_array[5]
+Out[17]: Timestamp('2000-01-06 00:00:00', freq='D')</pre>
 <p>To get an array of proper <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span></code> objects, use the
 <code class="docutils literal notranslate"><span class="pre">to_pydatetime</span></code> method:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">dt_array</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">()</span>
+<pre class="literal-block">In [18]: dt_array = rng.to_pydatetime()
 
-<span class="gp">In [30]: </span><span class="n">dt_array</span>
+In [19]: dt_array
+Out[19]: 
+array([datetime.datetime(2000, 1, 1, 0, 0),
+       datetime.datetime(2000, 1, 2, 0, 0),
+       datetime.datetime(2000, 1, 3, 0, 0),
+       datetime.datetime(2000, 1, 4, 0, 0),
+       datetime.datetime(2000, 1, 5, 0, 0),
+       datetime.datetime(2000, 1, 6, 0, 0),
+       datetime.datetime(2000, 1, 7, 0, 0),
+       datetime.datetime(2000, 1, 8, 0, 0),
+       datetime.datetime(2000, 1, 9, 0, 0),
+       datetime.datetime(2000, 1, 10, 0, 0)], dtype=object)
 
-<span class="gp">In [31]: </span><span class="n">dt_array</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
+In [20]: dt_array[5]
+Out[20]: datetime.datetime(2000, 1, 6, 0, 0)</pre>
 <p>matplotlib knows how to handle <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span></code> but not Timestamp
 objects. While I recommend that you plot time series using <code class="docutils literal notranslate"><span class="pre">TimeSeries.plot</span></code>,
 you can either use <code class="docutils literal notranslate"><span class="pre">to_pydatetime</span></code> or register a converter for the Timestamp
@@ -398,17 +464,28 @@ type. See <a class="reference external" href="http://matplotlib.org/api/units_ap
 <p>There are bugs in the user-facing API with the nanosecond datetime64 unit
 in NumPy 1.6. In particular, the string version of the array shows garbage
 values, and conversion to <code class="docutils literal notranslate"><span class="pre">dtype=object</span></code> is similarly broken.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<pre class="literal-block">In [21]: rng = pd.date_range('1/1/2000', periods=10)
 
-<span class="gp">In [33]: </span><span class="n">rng</span>
+In [22]: rng
+Out[22]: 
+DatetimeIndex(['2000-01-01', '2000-01-02', '2000-01-03', '2000-01-04',
+               '2000-01-05', '2000-01-06', '2000-01-07', '2000-01-08',
+               '2000-01-09', '2000-01-10'],
+              dtype='datetime64[ns]', freq='D')
 
-<span class="gp">In [34]: </span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span>
+In [23]: np.asarray(rng)
+Out[23]: 
+array(['2000-01-01T00:00:00.000000000', '2000-01-02T00:00:00.000000000',
+       '2000-01-03T00:00:00.000000000', '2000-01-04T00:00:00.000000000',
+       '2000-01-05T00:00:00.000000000', '2000-01-06T00:00:00.000000000',
+       '2000-01-07T00:00:00.000000000', '2000-01-08T00:00:00.000000000',
+       '2000-01-09T00:00:00.000000000', '2000-01-10T00:00:00.000000000'],
+      dtype='datetime64[ns]')
 
-<span class="gp">In [35]: </span><span class="n">converted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+In [24]: converted = np.asarray(rng, dtype=object)
 
-<span class="gp">In [36]: </span><span class="n">converted</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
+In [25]: converted[5]
+Out[25]: Timestamp('2000-01-06 00:00:00', freq='D')</pre>
 <p><strong>Trust me: don’t panic</strong>. If you are using NumPy 1.6 and restrict your
 interaction with <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> values to pandas’s API you will be just
 fine. There is nothing wrong with the data-type (a 64-bit integer

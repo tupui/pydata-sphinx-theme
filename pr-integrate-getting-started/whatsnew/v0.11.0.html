@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -227,63 +235,143 @@ explicit and use <code class="docutils literal notranslate"><span class="pre">.i
 <div class="section" id="dtypes">
 <h2>Dtypes<a class="headerlink" href="#dtypes" title="Permalink to this headline">¶</a></h2>
 <p>Numeric dtypes will propagate and can coexist in DataFrames. If a dtype is passed (either directly via the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> keyword, a passed <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>, or a passed <code class="docutils literal notranslate"><span class="pre">Series</span></code>, then it will be preserved in DataFrame operations. Furthermore, different numeric dtypes will <strong>NOT</strong> be combined. The following example will give you a taste.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [1]: df1 = pd.DataFrame(np.random.randn(8, 1), columns=['A'], dtype='float32')
 
-<span class="gp">In [10]: </span><span class="n">df1</span>
+In [2]: df1
+Out[2]: 
+          A
+0  0.469112
+1 -0.282863
+2 -1.509058
+3 -1.135632
+4  1.212112
+5 -0.173215
+6  0.119209
+7 -1.044236
 
-<span class="gp">In [11]: </span><span class="n">df1</span><span class="o">.</span><span class="n">dtypes</span>
+In [3]: df1.dtypes
+Out[3]: 
+A    float32
+dtype: object
 
-<span class="gp">In [12]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float16&#39;</span><span class="p">),</span>
-<span class="gp">   ....: </span>                    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)),</span>
-<span class="gp">   ....: </span>                    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)})</span>
-<span class="gp">   ....: </span>
+In [4]: df2 = pd.DataFrame({'A': pd.Series(np.random.randn(8), dtype='float16'),
+   ...:                     'B': pd.Series(np.random.randn(8)),
+   ...:                     'C': pd.Series(range(8), dtype='uint8')})
+   ...: 
 
-<span class="gp">In [13]: </span><span class="n">df2</span>
+In [5]: df2
+Out[5]: 
+          A         B  C
+0 -0.861816 -0.424972  0
+1 -2.105469  0.567020  1
+2 -0.494873  0.276232  2
+3  1.072266 -1.087401  3
+4  0.721680 -0.673690  4
+5 -0.706543  0.113648  5
+6 -1.040039 -1.478427  6
+7  0.271973  0.524988  7
 
-<span class="gp">In [14]: </span><span class="n">df2</span><span class="o">.</span><span class="n">dtypes</span>
+In [6]: df2.dtypes
+Out[6]: 
+A    float16
+B    float64
+C      uint8
+dtype: object
 
-<span class="go"># here you get some upcasting</span>
-<span class="gp">In [15]: </span><span class="n">df3</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">reindex_like</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">df2</span>
+# here you get some upcasting
+In [7]: df3 = df1.reindex_like(df2).fillna(value=0.0) + df2
 
-<span class="gp">In [16]: </span><span class="n">df3</span>
+In [8]: df3
+Out[8]: 
+          A         B    C
+0 -0.392704 -0.424972  0.0
+1 -2.388332  0.567020  1.0
+2 -2.003932  0.276232  2.0
+3 -0.063367 -1.087401  3.0
+4  1.933792 -0.673690  4.0
+5 -0.879758  0.113648  5.0
+6 -0.920830 -1.478427  6.0
+7 -0.772263  0.524988  7.0
 
-<span class="gp">In [17]: </span><span class="n">df3</span><span class="o">.</span><span class="n">dtypes</span>
-</pre></div>
-</div>
+In [9]: df3.dtypes
+Out[9]: 
+A    float32
+B    float64
+C    float64
+dtype: object</pre>
 </div>
 <div class="section" id="dtype-conversion">
 <h2>Dtype Conversion<a class="headerlink" href="#dtype-conversion" title="Permalink to this headline">¶</a></h2>
 <p>This is lower-common-denominator upcasting, meaning you get the dtype which can accommodate all of the types</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df3</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">df3</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span>
+<span class="gh">Out[10]: </span><span class="go">dtype(&#39;float64&#39;)</span>
 </pre></div>
 </div>
 <p>Conversion</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">df3</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">df3</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[11]: </span><span class="go"></span>
+<span class="go">A    float32</span>
+<span class="go">B    float32</span>
+<span class="go">C    float32</span>
+<span class="go">dtype: object</span>
 </pre></div>
 </div>
 <p>Mixed Conversion</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1.&#39;</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1.&#39;</span>
 
-<span class="gp">In [21]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+<span class="gp">In [13]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
 
-<span class="gp">In [22]: </span><span class="n">df3</span><span class="o">.</span><span class="n">convert_objects</span><span class="p">(</span><span class="n">convert_numeric</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gp">In [14]: </span><span class="n">df3</span><span class="o">.</span><span class="n">convert_objects</span><span class="p">(</span><span class="n">convert_numeric</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">14</span><span class="o">-</span><span class="n">c0b148ad135b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df3</span><span class="o">.</span><span class="n">convert_objects</span><span class="p">(</span><span class="n">convert_numeric</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span>
 
-<span class="go"># same, but specific dtype conversion</span>
-<span class="gp">In [23]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float16&#39;</span><span class="p">)</span>
+<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py</span> in <span class="ni">__getattr__</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5177</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info_axis</span><span class="o">.</span><span class="n">_can_hold_identifiers_and_holds_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5178</span>                 <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">5179</span>             <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5180</span> 
+<span class="g g-Whitespace">   </span><span class="mi">5181</span>     <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
-<span class="gp">In [24]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+<span class="ne">AttributeError</span>: &#39;DataFrame&#39; object has no attribute &#39;convert_objects&#39;
 
-<span class="gp">In [25]: </span><span class="n">df3</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="c1"># same, but specific dtype conversion</span>
+<span class="gp">In [15]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float16&#39;</span><span class="p">)</span>
+
+<span class="gp">In [16]: </span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+
+<span class="gp">In [17]: </span><span class="n">df3</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="gh">Out[17]: </span><span class="go"></span>
+<span class="go">A    float32</span>
+<span class="go">B    float64</span>
+<span class="go">C    float64</span>
+<span class="go">D    float16</span>
+<span class="go">E      int32</span>
+<span class="go">dtype: object</span>
 </pre></div>
 </div>
 <p>Forcing Date coercion (and setting <code class="docutils literal notranslate"><span class="pre">NaT</span></code> when not datelike)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="gp">In [27]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">In [19]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
 <span class="gp">   ....: </span>               <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20010104&#39;</span><span class="p">),</span> <span class="s1">&#39;20010105&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;O&#39;</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [28]: </span><span class="n">s</span><span class="o">.</span><span class="n">convert_objects</span><span class="p">(</span><span class="n">convert_dates</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="gp">In [20]: </span><span class="n">s</span><span class="o">.</span><span class="n">convert_objects</span><span class="p">(</span><span class="n">convert_dates</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">20</span><span class="o">-</span><span class="n">d11827bcdf31</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">s</span><span class="o">.</span><span class="n">convert_objects</span><span class="p">(</span><span class="n">convert_dates</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py</span> in <span class="ni">__getattr__</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5177</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info_axis</span><span class="o">.</span><span class="n">_can_hold_identifiers_and_holds_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5178</span>                 <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">5179</span>             <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5180</span> 
+<span class="g g-Whitespace">   </span><span class="mi">5181</span>     <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+<span class="ne">AttributeError</span>: &#39;Series&#39; object has no attribute &#39;convert_objects&#39;
 </pre></div>
 </div>
 </div>
@@ -294,46 +382,107 @@ explicit and use <code class="docutils literal notranslate"><span class="pre">.i
 <em>regardless of platform</em>. This is not an apparent change from earlier versions of pandas. If you specify
 dtypes, they <em>WILL</em> be respected, however (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2837">GH2837</a>)</p>
 <p>The following will all result in <code class="docutils literal notranslate"><span class="pre">int64</span></code> dtypes</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dtypes</span>
+<pre class="literal-block">In [21]: pd.DataFrame([1, 2], columns=['a']).dtypes
+Out[21]: 
+a    int64
+dtype: object
 
-<span class="gp">In [30]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span><span class="o">.</span><span class="n">dtypes</span>
+In [22]: pd.DataFrame({'a': [1, 2]}).dtypes
+Out[22]: 
+a    int64
+dtype: object
 
-<span class="gp">In [31]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">dtypes</span>
-</pre></div>
-</div>
+In [23]: pd.DataFrame({'a': 1}, index=range(2)).dtypes
+Out[23]: 
+a    int64
+dtype: object</pre>
 <p>Keep in mind that <code class="docutils literal notranslate"><span class="pre">DataFrame(np.array([1,2]))</span></code> <strong>WILL</strong> result in <code class="docutils literal notranslate"><span class="pre">int32</span></code> on 32-bit platforms!</p>
 <p><strong>Upcasting Gotchas</strong></p>
 <p>Performing indexing operations on integer type data can easily upcast the data.
 The dtype of the input data will be preserved in cases where <code class="docutils literal notranslate"><span class="pre">nans</span></code> are not introduced.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">dfi</span> <span class="o">=</span> <span class="n">df3</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [24]: dfi = df3.astype('int32')
 
-<span class="gp">In [33]: </span><span class="n">dfi</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfi</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int64&#39;</span><span class="p">)</span>
+In [25]: dfi['D'] = dfi['D'].astype('int64')
 
-<span class="gp">In [34]: </span><span class="n">dfi</span>
+In [26]: dfi
+Out[26]: 
+   A  B  C  D  E
+0  0  0  0  1  1
+1 -2  0  1  1  1
+2 -2  0  2  1  1
+3  0 -1  3  1  1
+4  1  0  4  1  1
+5  0  0  5  1  1
+6  0 -1  6  1  1
+7  0  0  7  1  1
 
-<span class="gp">In [35]: </span><span class="n">dfi</span><span class="o">.</span><span class="n">dtypes</span>
+In [27]: dfi.dtypes
+Out[27]: 
+A    int32
+B    int32
+C    int32
+D    int64
+E    int32
+dtype: object
 
-<span class="gp">In [36]: </span><span class="n">casted</span> <span class="o">=</span> <span class="n">dfi</span><span class="p">[</span><span class="n">dfi</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+In [28]: casted = dfi[dfi &gt; 0]
 
-<span class="gp">In [37]: </span><span class="n">casted</span>
+In [29]: casted
+Out[29]: 
+     A   B    C  D  E
+0  NaN NaN  NaN  1  1
+1  NaN NaN  1.0  1  1
+2  NaN NaN  2.0  1  1
+3  NaN NaN  3.0  1  1
+4  1.0 NaN  4.0  1  1
+5  NaN NaN  5.0  1  1
+6  NaN NaN  6.0  1  1
+7  NaN NaN  7.0  1  1
 
-<span class="gp">In [38]: </span><span class="n">casted</span><span class="o">.</span><span class="n">dtypes</span>
-</pre></div>
-</div>
+In [30]: casted.dtypes
+Out[30]: 
+A    float64
+B    float64
+C    float64
+D      int64
+E      int32
+dtype: object</pre>
 <p>While float dtypes are unchanged.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">df4</span> <span class="o">=</span> <span class="n">df3</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<pre class="literal-block">In [31]: df4 = df3.copy()
 
-<span class="gp">In [40]: </span><span class="n">df4</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df4</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+In [32]: df4['A'] = df4['A'].astype('float32')
 
-<span class="gp">In [41]: </span><span class="n">df4</span><span class="o">.</span><span class="n">dtypes</span>
+In [33]: df4.dtypes
+Out[33]: 
+A    float32
+B    float64
+C    float64
+D    float16
+E      int32
+dtype: object
 
-<span class="gp">In [42]: </span><span class="n">casted</span> <span class="o">=</span> <span class="n">df4</span><span class="p">[</span><span class="n">df4</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+In [34]: casted = df4[df4 &gt; 0]
 
-<span class="gp">In [43]: </span><span class="n">casted</span>
+In [35]: casted
+Out[35]: 
+          A         B    C    D  E
+0       NaN       NaN  NaN  1.0  1
+1       NaN  0.567020  1.0  1.0  1
+2       NaN  0.276232  2.0  1.0  1
+3       NaN       NaN  3.0  1.0  1
+4  1.933792       NaN  4.0  1.0  1
+5       NaN  0.113648  5.0  1.0  1
+6       NaN       NaN  6.0  1.0  1
+7       NaN  0.524988  7.0  1.0  1
 
-<span class="gp">In [44]: </span><span class="n">casted</span><span class="o">.</span><span class="n">dtypes</span>
-</pre></div>
-</div>
+In [36]: casted.dtypes
+Out[36]: 
+A    float32
+B    float64
+C    float64
+D    float16
+E      int32
+dtype: object</pre>
 </div>
 <div class="section" id="datetimes-conversion">
 <h2>Datetimes Conversion<a class="headerlink" href="#datetimes-conversion" title="Permalink to this headline">¶</a></h2>
@@ -341,41 +490,70 @@ The dtype of the input data will be preserved in cases where <code class="docuti
 in addition to the traditional <code class="docutils literal notranslate"><span class="pre">NaT</span></code>, or not-a-time. This allows convenient nan setting in a generic way.
 Furthermore <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> columns are created by default, when passed datetimelike objects (<em>this change was introduced in 0.10.1</em>)
 (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2809">GH2809</a>, <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2810">GH2810</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [45]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20010102&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span>
-<span class="gp">   ....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39; B&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [37]: df = pd.DataFrame(np.random.randn(6, 2), pd.date_range('20010102', periods=6),
+   ....:                   columns=['A', ' B'])
+   ....: 
 
-<span class="gp">In [46]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20010103&#39;</span><span class="p">)</span>
+In [38]: df['timestamp'] = pd.Timestamp('20010103')
 
-<span class="gp">In [47]: </span><span class="n">df</span>
+In [39]: df
+Out[39]: 
+                   A         B  timestamp
+2001-01-02  0.404705  0.577046 2001-01-03
+2001-01-03 -1.715002 -1.039268 2001-01-03
+2001-01-04 -0.370647 -1.157892 2001-01-03
+2001-01-05 -1.344312  0.844885 2001-01-03
+2001-01-06  1.075770 -0.109050 2001-01-03
+2001-01-07  1.643563 -1.469388 2001-01-03
 
-<span class="go"># datetime64[ns] out of the box</span>
-<span class="gp">In [48]: </span><span class="n">df</span><span class="o">.</span><span class="n">get_dtype_counts</span><span class="p">()</span>
+# datetime64[ns] out of the box
+In [40]: df.get_dtype_counts()
+Out[40]: 
+float64           2
+datetime64[ns]    1
+dtype: int64
 
-<span class="go"># use the traditional nan, which is mapped to NaT internally</span>
-<span class="gp">In [49]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+# use the traditional nan, which is mapped to NaT internally
+In [41]: df.loc[df.index[2:4], ['A', 'timestamp']] = np.nan
 
-<span class="gp">In [50]: </span><span class="n">df</span>
-</pre></div>
-</div>
+In [42]: df
+Out[42]: 
+                   A         B  timestamp
+2001-01-02  0.404705  0.577046 2001-01-03
+2001-01-03 -1.715002 -1.039268 2001-01-03
+2001-01-04       NaN -1.157892        NaT
+2001-01-05       NaN  0.844885        NaT
+2001-01-06  1.075770 -0.109050 2001-01-03
+2001-01-07  1.643563 -1.469388 2001-01-03</pre>
 <p>Astype conversion on <code class="docutils literal notranslate"><span class="pre">datetime64[ns]</span></code> to <code class="docutils literal notranslate"><span class="pre">object</span></code>, implicitly converts <code class="docutils literal notranslate"><span class="pre">NaT</span></code> to <code class="docutils literal notranslate"><span class="pre">np.nan</span></code></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [51]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+<pre class="literal-block">In [43]: s = pd.Series([datetime.datetime(2001, 1, 2, 0, 0) for i in range(3)])
 
-<span class="gp">In [52]: </span><span class="n">s</span><span class="o">.</span><span class="n">dtype</span>
+In [44]: s.dtype
+Out[44]: dtype('&lt;M8[ns]')
 
-<span class="gp">In [53]: </span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [45]: s[1] = np.nan
 
-<span class="gp">In [54]: </span><span class="n">s</span>
+In [46]: s
+Out[46]: 
+0   2001-01-02
+1          NaT
+2   2001-01-02
+dtype: datetime64[ns]
 
-<span class="gp">In [55]: </span><span class="n">s</span><span class="o">.</span><span class="n">dtype</span>
+In [47]: s.dtype
+Out[47]: dtype('&lt;M8[ns]')
 
-<span class="gp">In [56]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)</span>
+In [48]: s = s.astype('O')
 
-<span class="gp">In [57]: </span><span class="n">s</span>
+In [49]: s
+Out[49]: 
+0    2001-01-02 00:00:00
+1                    NaT
+2    2001-01-02 00:00:00
+dtype: object
 
-<span class="gp">In [58]: </span><span class="n">s</span><span class="o">.</span><span class="n">dtype</span>
-</pre></div>
-</div>
+In [50]: s.dtype
+Out[50]: dtype('O')</pre>
 </div>
 <div class="section" id="api-changes">
 <h2>API changes<a class="headerlink" href="#api-changes" title="Permalink to this headline">¶</a></h2>
@@ -405,13 +583,64 @@ types of <code class="docutils literal notranslate"><span class="pre">nan</span>
 <li><p><code class="docutils literal notranslate"><span class="pre">HDFStore</span></code></p>
 <ul>
 <li><p>support <code class="docutils literal notranslate"><span class="pre">read_hdf/to_hdf</span></code> API similar to <code class="docutils literal notranslate"><span class="pre">read_csv/to_csv</span></code></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [60]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">lrange</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="n">lrange</span><span class="p">(</span><span class="mi">5</span><span class="p">)})</span>
+<pre class="literal-block">In [51]: df = pd.DataFrame({'A': lrange(5), 'B': lrange(5)})
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-51-0ece6894fb02&gt; in &lt;module&gt;
+----&gt; 1 df = pd.DataFrame({'A': lrange(5), 'B': lrange(5)})
 
-<span class="gp">In [61]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s1">&#39;store.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+NameError: name 'lrange' is not defined
 
-<span class="gp">In [62]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s1">&#39;store.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;index &gt; 2&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
+In [52]: df.to_hdf('store.h5', 'table', append=True)
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-52-747676860ce2&gt; in &lt;module&gt;
+----&gt; 1 df.to_hdf('store.h5', 'table', append=True)
+
+~/miniconda/lib/python3.7/site-packages/pandas/core/generic.py in to_hdf(self, path_or_buf, key, **kwargs)
+   2528         from pandas.io import pytables
+   2529 
+-&gt; 2530         pytables.to_hdf(path_or_buf, key, self, **kwargs)
+   2531 
+   2532     def to_msgpack(self, path_or_buf=None, encoding=&quot;utf-8&quot;, **kwargs):
+
+~/miniconda/lib/python3.7/site-packages/pandas/io/pytables.py in to_hdf(path_or_buf, key, value, mode, complevel, complib, append, **kwargs)
+    274     if isinstance(path_or_buf, str):
+    275         with HDFStore(
+--&gt; 276             path_or_buf, mode=mode, complevel=complevel, complib=complib
+    277         ) as store:
+    278             f(store)
+
+~/miniconda/lib/python3.7/site-packages/pandas/io/pytables.py in __init__(self, path, mode, complevel, complib, fletcher32, **kwargs)
+    482             raise ValueError(&quot;format is not a defined argument for HDFStore&quot;)
+    483 
+--&gt; 484         tables = import_optional_dependency(&quot;tables&quot;)
+    485 
+    486         if complib is not None and complib not in tables.filters.all_complibs:
+
+~/miniconda/lib/python3.7/site-packages/pandas/compat/_optional.py in import_optional_dependency(name, extra, raise_on_missing, on_version)
+     91     except ImportError:
+     92         if raise_on_missing:
+---&gt; 93             raise ImportError(message.format(name=name, extra=extra)) from None
+     94         else:
+     95             return None
+
+ImportError: Missing optional dependency 'tables'.  Use pip or conda to install tables.
+
+In [53]: pd.read_hdf('store.h5', 'table', where=['index &gt; 2'])
+---------------------------------------------------------------------------
+FileNotFoundError                         Traceback (most recent call last)
+&lt;ipython-input-53-ead500c2f285&gt; in &lt;module&gt;
+----&gt; 1 pd.read_hdf('store.h5', 'table', where=['index &gt; 2'])
+
+~/miniconda/lib/python3.7/site-packages/pandas/io/pytables.py in read_hdf(path_or_buf, key, mode, **kwargs)
+    379         if not exists:
+    380             raise FileNotFoundError(
+--&gt; 381                 &quot;File {path} does not exist&quot;.format(path=path_or_buf)
+    382             )
+    383 
+
+FileNotFoundError: File store.h5 does not exist</pre>
 </li>
 <li><p>provide dotted attribute access to <code class="docutils literal notranslate"><span class="pre">get</span></code> from stores, e.g. <code class="docutils literal notranslate"><span class="pre">store.df</span> <span class="pre">==</span> <span class="pre">store['df']</span></code></p></li>
 <li><p>new keywords <code class="docutils literal notranslate"><span class="pre">iterator=boolean</span></code>, and <code class="docutils literal notranslate"><span class="pre">chunksize=number_in_a_chunk</span></code> are
@@ -420,31 +649,60 @@ provided to support iteration on <code class="docutils literal notranslate"><spa
 </li>
 <li><p>You can now select timestamps from an <em>unordered</em> timeseries similarly to an <em>ordered</em> timeseries (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2437">GH2437</a>)</p></li>
 <li><p>You can now select with a string from a DataFrame with a datelike index, in a similar way to a Series (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/3070">GH3070</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [65]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2001-10-1&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;2001-10-1&quot;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
 
-<span class="gp">In [66]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+<span class="gp">In [55]: </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
 
-<span class="gp">In [67]: </span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;2001&#39;</span><span class="p">]</span>
+<span class="gp">In [56]: </span><span class="n">ts</span><span class="p">[</span><span class="s1">&#39;2001&#39;</span><span class="p">]</span>
+<span class="gh">Out[56]: </span><span class="go"></span>
+<span class="go">2001-10-31    0.117967</span>
+<span class="go">2001-11-30    0.702184</span>
+<span class="go">2001-12-31    0.414034</span>
+<span class="go">Freq: M, dtype: float64</span>
 
-<span class="gp">In [68]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">ts</span><span class="p">})</span>
+<span class="gp">In [57]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">ts</span><span class="p">})</span>
 
-<span class="gp">In [69]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;2001&#39;</span><span class="p">]</span>
+<span class="gp">In [58]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;2001&#39;</span><span class="p">]</span>
+<span class="gh">Out[58]: </span><span class="go"></span>
+<span class="go">                   A</span>
+<span class="go">2001-10-31  0.117967</span>
+<span class="go">2001-11-30  0.702184</span>
+<span class="go">2001-12-31  0.414034</span>
 </pre></div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Squeeze</span></code> to possibly remove length 1 dimensions from an object.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [70]: </span><span class="n">p</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ItemA&#39;</span><span class="p">,</span> <span class="s1">&#39;ItemB&#39;</span><span class="p">,</span> <span class="s1">&#39;ItemC&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>             <span class="n">major_axis</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20010102&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
-<span class="gp">   ....: </span>             <span class="n">minor_axis</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [59]: p = pd.Panel(np.random.randn(3, 4, 4), items=['ItemA', 'ItemB', 'ItemC'],
+   ....:              major_axis=pd.date_range('20010102', periods=4),
+   ....:              minor_axis=['A', 'B', 'C', 'D'])
+   ....: 
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-59-55859a965570&gt; in &lt;module&gt;
+      1 p = pd.Panel(np.random.randn(3, 4, 4), items=['ItemA', 'ItemB', 'ItemC'],
+      2              major_axis=pd.date_range('20010102', periods=4),
+----&gt; 3              minor_axis=['A', 'B', 'C', 'D'])
 
-<span class="gp">In [71]: </span><span class="n">p</span>
+TypeError: Panel() takes no arguments
 
-<span class="gp">In [72]: </span><span class="n">p</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ItemA&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+In [60]: p
+Out[60]: Period('2011Q4', 'Q-MAR')
 
-<span class="gp">In [73]: </span><span class="n">p</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ItemA&#39;</span><span class="p">],</span> <span class="n">minor</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
-</pre></div>
-</div>
+In [61]: p.reindex(items=['ItemA']).squeeze()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-61-52067be48f69&gt; in &lt;module&gt;
+----&gt; 1 p.reindex(items=['ItemA']).squeeze()
+
+AttributeError: 'Period' object has no attribute 'reindex'
+
+In [62]: p.reindex(items=['ItemA'], minor=['B']).squeeze()
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+&lt;ipython-input-62-0eb5364c2e99&gt; in &lt;module&gt;
+----&gt; 1 p.reindex(items=['ItemA'], minor=['B']).squeeze()
+
+AttributeError: 'Period' object has no attribute 'reindex'</pre>
 </li>
 <li><p>In <code class="docutils literal notranslate"><span class="pre">pd.io.data.Options</span></code>,</p>
 <ul class="simple">

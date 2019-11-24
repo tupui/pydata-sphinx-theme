@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item ">
         <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item active">
+        <a class="nav-link" href="index.html">Development</a>
     </li>
     
   </ul>
@@ -132,6 +138,34 @@
         
       
       
+      
+      
+      
+        
+          
+              <li class="">
+                  <a href="contributing.html">Contributing to pandas</a>
+              </li>
+          
+        
+          
+              <li class="active">
+                  <a href="">Internals</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="extending.html">Extending Pandas</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="developer.html">Developer</a>
+              </li>
+          
+        
       
       
     </ul>
@@ -231,19 +265,28 @@ Index objects</p></li>
 <h3>MultiIndex<a class="headerlink" href="#multiindex" title="Permalink to this headline">¶</a></h3>
 <p>Internally, the <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> consists of a few things: the <strong>levels</strong>, the
 integer <strong>codes</strong> (until version 0.24 named <em>labels</em>), and the level <strong>names</strong>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_product</span><span class="p">([</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="s1">&#39;two&#39;</span><span class="p">]],</span>
-<span class="gp">   ...: </span>                                   <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">])</span>
-<span class="gp">   ...: </span>
+<pre class="literal-block">In [1]: index = pd.MultiIndex.from_product([range(3), ['one', 'two']],
+   ...:                                    names=['first', 'second'])
+   ...: 
 
-<span class="gp">In [10]: </span><span class="n">index</span>
+In [2]: index
+Out[2]: 
+MultiIndex([(0, 'one'),
+            (0, 'two'),
+            (1, 'one'),
+            (1, 'two'),
+            (2, 'one'),
+            (2, 'two')],
+           names=['first', 'second'])
 
-<span class="gp">In [11]: </span><span class="n">index</span><span class="o">.</span><span class="n">levels</span>
+In [3]: index.levels
+Out[3]: FrozenList([[0, 1, 2], ['one', 'two']])
 
-<span class="gp">In [12]: </span><span class="n">index</span><span class="o">.</span><span class="n">codes</span>
+In [4]: index.codes
+Out[4]: FrozenList([[0, 0, 1, 1, 2, 2], [0, 1, 0, 1, 0, 1]])
 
-<span class="gp">In [13]: </span><span class="n">index</span><span class="o">.</span><span class="n">names</span>
-</pre></div>
-</div>
+In [5]: index.names
+Out[5]: FrozenList(['first', 'second'])</pre>
 <p>You can probably guess that the codes determine which unique element is
 identified with that location at each layer of the index. It’s important to
 note that sortedness is determined <strong>solely</strong> from the integer codes and does

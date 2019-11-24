@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -212,18 +220,34 @@ their functions. Overall the code is much more readable.</p>
 <p>In the example above, the functions <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code>, and <code class="docutils literal notranslate"><span class="pre">h</span></code> each expected the DataFrame as the first positional argument.
 When the function you wish to apply takes its data anywhere other than the first argument, pass a tuple
 of <code class="docutils literal notranslate"><span class="pre">(function,</span> <span class="pre">keyword)</span></code> indicating where the DataFrame should flow. For example:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">as</span> <span class="nn">sm</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">5</span><span class="n">ad1e596ef83</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">as</span> <span class="nn">sm</span>
 
-<span class="gp">In [10]: </span><span class="n">bb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/baseball.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;statsmodels&#39;
+
+<span class="gp">In [2]: </span><span class="n">bb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/baseball.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
 
 <span class="go"># sm.ols takes (formula, data)</span>
-<span class="gp">In [11]: </span><span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;h &gt; 0&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>   <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">ln_h</span><span class="o">=</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
-<span class="gp">   ....: </span>   <span class="o">.</span><span class="n">pipe</span><span class="p">((</span><span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">),</span> <span class="s1">&#39;hr ~ ln_h + year + g + C(lg)&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>   <span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="gp">   ....: </span>   <span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-<span class="gp">   ....: </span> <span class="p">)</span>
-<span class="gp">   ....: </span>
+<span class="gp">In [3]: </span><span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;h &gt; 0&#39;</span><span class="p">)</span>
+<span class="gp">   ...: </span>   <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">ln_h</span><span class="o">=</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
+<span class="gp">   ...: </span>   <span class="o">.</span><span class="n">pipe</span><span class="p">((</span><span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">),</span> <span class="s1">&#39;hr ~ ln_h + year + g + C(lg)&#39;</span><span class="p">)</span>
+<span class="gp">   ...: </span>   <span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="gp">   ...: </span>   <span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="gp">   ...: </span> <span class="p">)</span>
+<span class="gp">   ...: </span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mf">8e817</span><span class="n">d68362b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="p">(</span><span class="n">bb</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;h &gt; 0&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>    <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">ln_h</span><span class="o">=</span><span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">h</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">3</span>    <span class="o">.</span><span class="n">pipe</span><span class="p">((</span><span class="n">sm</span><span class="o">.</span><span class="n">ols</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">),</span> <span class="s1">&#39;hr ~ ln_h + year + g + C(lg)&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>    <span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>    <span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;sm&#39; is not defined
 </pre></div>
 </div>
 <p>The pipe method is inspired by unix pipes, which stream text through

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -182,32 +190,75 @@ explicitly specified integer column instead of converting the column to float
 <strong>compatibility</strong> section in the main docs.</p>
 <p>You can designate (and index) certain columns that you want to be able to
 perform queries on a table, by passing a list to <code class="docutils literal notranslate"><span class="pre">data_columns</span></code></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">store</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">HDFStore</span><span class="p">(</span><span class="s1">&#39;store.h5&#39;</span><span class="p">)</span>
+<pre class="literal-block">In [1]: store = pd.HDFStore('store.h5')
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-1-54ac839dc497&gt; in &lt;module&gt;
+----&gt; 1 store = pd.HDFStore('store.h5')
 
-<span class="gp">In [12]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-<span class="gp">   ....: </span>                  <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
-<span class="gp">   ....: </span>                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+~/miniconda/lib/python3.7/site-packages/pandas/io/pytables.py in __init__(self, path, mode, complevel, complib, fletcher32, **kwargs)
+    482             raise ValueError(&quot;format is not a defined argument for HDFStore&quot;)
+    483 
+--&gt; 484         tables = import_optional_dependency(&quot;tables&quot;)
+    485 
+    486         if complib is not None and complib not in tables.filters.all_complibs:
 
-<span class="gp">In [13]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;string&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span>
+~/miniconda/lib/python3.7/site-packages/pandas/compat/_optional.py in import_optional_dependency(name, extra, raise_on_missing, on_version)
+     91     except ImportError:
+     92         if raise_on_missing:
+---&gt; 93             raise ImportError(message.format(name=name, extra=extra)) from None
+     94         else:
+     95             return None
 
-<span class="gp">In [14]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+ImportError: Missing optional dependency 'tables'.  Use pip or conda to install tables.
 
-<span class="gp">In [15]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span>
+In [2]: df = pd.DataFrame(np.random.randn(8, 3),
+   ...:                   index=pd.date_range('1/1/2000', periods=8),
+   ...:                   columns=['A', 'B', 'C'])
+   ...: 
 
-<span class="gp">In [16]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;string2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;cool&#39;</span>
+In [3]: df['string'] = 'foo'
 
-<span class="gp">In [17]: </span><span class="n">df</span>
+In [4]: df.loc[df.index[4:6], 'string'] = np.nan
 
-<span class="go"># on-disk operations</span>
-<span class="gp">In [18]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;string2&#39;</span><span class="p">])</span>
+In [5]: df.loc[df.index[7:9], 'string'] = 'bar'
 
-<span class="gp">In [19]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="s2">&quot;B&gt;0 and string==&#39;foo&#39;&quot;</span><span class="p">)</span>
+In [6]: df['string2'] = 'cool'
 
-<span class="go"># this is in-memory version of this type of selection</span>
-<span class="gp">In [20]: </span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">B</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">string</span> <span class="o">==</span> <span class="s1">&#39;foo&#39;</span><span class="p">)]</span>
-</pre></div>
-</div>
+In [7]: df
+Out[7]: 
+                   A         B         C string string2
+2000-01-01  0.469112 -0.282863 -1.509059    foo    cool
+2000-01-02 -1.135632  1.212112 -0.173215    foo    cool
+2000-01-03  0.119209 -1.044236 -0.861849    foo    cool
+2000-01-04 -2.104569 -0.494929  1.071804    foo    cool
+2000-01-05  0.721555 -0.706771 -1.039575    NaN    cool
+2000-01-06  0.271860 -0.424972  0.567020    NaN    cool
+2000-01-07  0.276232 -1.087401 -0.673690    foo    cool
+2000-01-08  0.113648 -1.478427  0.524988    bar    cool
+
+# on-disk operations
+In [8]: store.append('df', df, data_columns=['B', 'C', 'string', 'string2'])
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-8-16fa170e04de&gt; in &lt;module&gt;
+----&gt; 1 store.append('df', df, data_columns=['B', 'C', 'string', 'string2'])
+
+NameError: name 'store' is not defined
+
+In [9]: store.select('df', &quot;B&gt;0 and string=='foo'&quot;)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-9-724b9bb3f8a6&gt; in &lt;module&gt;
+----&gt; 1 store.select('df', &quot;B&gt;0 and string=='foo'&quot;)
+
+NameError: name 'store' is not defined
+
+# this is in-memory version of this type of selection
+In [10]: df[(df.B &gt; 0) &amp; (df.string == 'foo')]
+Out[10]: 
+                   A         B         C string string2
+2000-01-02 -1.135632  1.212112 -0.173215    foo    cool</pre>
 <p>Retrieving unique values in an indexable or data column.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># note that this is deprecated as of 0.14.0</span>
 <span class="c1"># can be replicated by: store.select_column(&#39;df&#39;,&#39;index&#39;).unique()</span>
@@ -216,25 +267,53 @@ perform queries on a table, by passing a list to <code class="docutils literal n
 </pre></div>
 </div>
 <p>You can now store <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> in data columns</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">df_mixed</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<pre class="literal-block">In [11]: df_mixed = df.copy()
 
-<span class="gp">In [22]: </span><span class="n">df_mixed</span><span class="p">[</span><span class="s1">&#39;datetime64&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20010102&#39;</span><span class="p">)</span>
+In [12]: df_mixed['datetime64'] = pd.Timestamp('20010102')
 
-<span class="gp">In [23]: </span><span class="n">df_mixed</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_mixed</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+In [13]: df_mixed.loc[df_mixed.index[3:4], ['A', 'B']] = np.nan
 
-<span class="gp">In [24]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;df_mixed&#39;</span><span class="p">,</span> <span class="n">df_mixed</span><span class="p">)</span>
+In [14]: store.append('df_mixed', df_mixed)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-14-939aa8aabfde&gt; in &lt;module&gt;
+----&gt; 1 store.append('df_mixed', df_mixed)
 
-<span class="gp">In [25]: </span><span class="n">df_mixed1</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df_mixed&#39;</span><span class="p">)</span>
+NameError: name 'store' is not defined
 
-<span class="gp">In [26]: </span><span class="n">df_mixed1</span>
+In [15]: df_mixed1 = store.select('df_mixed')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-15-8540a95eefa5&gt; in &lt;module&gt;
+----&gt; 1 df_mixed1 = store.select('df_mixed')
 
-<span class="gp">In [27]: </span><span class="n">df_mixed1</span><span class="o">.</span><span class="n">get_dtype_counts</span><span class="p">()</span>
-</pre></div>
-</div>
+NameError: name 'store' is not defined
+
+In [16]: df_mixed1
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-16-7c2d528034e6&gt; in &lt;module&gt;
+----&gt; 1 df_mixed1
+
+NameError: name 'df_mixed1' is not defined
+
+In [17]: df_mixed1.get_dtype_counts()
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-17-a92e264df819&gt; in &lt;module&gt;
+----&gt; 1 df_mixed1.get_dtype_counts()
+
+NameError: name 'df_mixed1' is not defined</pre>
 <p>You can pass <code class="docutils literal notranslate"><span class="pre">columns</span></code> keyword to select to filter a list of the return
 columns, this is equivalent to passing a
 <code class="docutils literal notranslate"><span class="pre">Term('columns',list_of_columns_to_filter)</span></code></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">18</span><span class="o">-</span><span class="mi">5</span><span class="n">a114e3901cd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">])</span>
+
+<span class="ne">NameError</span>: name &#39;store&#39; is not defined
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">HDFStore</span></code> now serializes MultiIndex dataframes when appending tables.</p>
@@ -293,31 +372,61 @@ columns, this is equivalent to passing a
 <p>Multi-table creation via <code class="docutils literal notranslate"><span class="pre">append_to_multiple</span></code> and selection via
 <code class="docutils literal notranslate"><span class="pre">select_as_multiple</span></code> can create/select from multiple tables and return a
 combined result, by using <code class="docutils literal notranslate"><span class="pre">where</span></code> on a selector table.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">df_mt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
-<span class="gp">   ....: </span>                     <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2000&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">8</span><span class="p">),</span>
-<span class="gp">   ....: </span>                     <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [19]: df_mt = pd.DataFrame(np.random.randn(8, 6),
+   ....:                      index=pd.date_range('1/1/2000', periods=8),
+   ....:                      columns=['A', 'B', 'C', 'D', 'E', 'F'])
+   ....: 
 
-<span class="gp">In [30]: </span><span class="n">df_mt</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span>
+In [20]: df_mt['foo'] = 'bar'
 
-<span class="go"># you can also create the tables individually</span>
-<span class="gp">In [31]: </span><span class="n">store</span><span class="o">.</span><span class="n">append_to_multiple</span><span class="p">({</span><span class="s1">&#39;df1_mt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="s1">&#39;df2_mt&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">},</span>
-<span class="gp">   ....: </span>                         <span class="n">df_mt</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="s1">&#39;df1_mt&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+# you can also create the tables individually
+In [21]: store.append_to_multiple({'df1_mt': ['A', 'B'], 'df2_mt': None},
+   ....:                          df_mt, selector='df1_mt')
+   ....: 
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-21-0f2ea287af29&gt; in &lt;module&gt;
+----&gt; 1 store.append_to_multiple({'df1_mt': ['A', 'B'], 'df2_mt': None},
+      2                          df_mt, selector='df1_mt')
 
-<span class="gp">In [32]: </span><span class="n">store</span>
+NameError: name 'store' is not defined
 
-<span class="go"># indiviual tables were created</span>
-<span class="gp">In [33]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df1_mt&#39;</span><span class="p">)</span>
+In [22]: store
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-22-1cc0c364c02d&gt; in &lt;module&gt;
+----&gt; 1 store
 
-<span class="gp">In [34]: </span><span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df2_mt&#39;</span><span class="p">)</span>
+NameError: name 'store' is not defined
 
-<span class="go"># as a multiple</span>
-<span class="gp">In [35]: </span><span class="n">store</span><span class="o">.</span><span class="n">select_as_multiple</span><span class="p">([</span><span class="s1">&#39;df1_mt&#39;</span><span class="p">,</span> <span class="s1">&#39;df2_mt&#39;</span><span class="p">],</span> <span class="n">where</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&gt;0&#39;</span><span class="p">,</span> <span class="s1">&#39;B&gt;0&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                         <span class="n">selector</span><span class="o">=</span><span class="s1">&#39;df1_mt&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
-</pre></div>
-</div>
+# indiviual tables were created
+In [23]: store.select('df1_mt')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-23-cd604a6b0b71&gt; in &lt;module&gt;
+----&gt; 1 store.select('df1_mt')
+
+NameError: name 'store' is not defined
+
+In [24]: store.select('df2_mt')
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-24-a3ed0f55544c&gt; in &lt;module&gt;
+----&gt; 1 store.select('df2_mt')
+
+NameError: name 'store' is not defined
+
+# as a multiple
+In [25]: store.select_as_multiple(['df1_mt', 'df2_mt'], where=['A&gt;0', 'B&gt;0'],
+   ....:                          selector='df1_mt')
+   ....: 
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-25-e97f27782b41&gt; in &lt;module&gt;
+----&gt; 1 store.select_as_multiple(['df1_mt', 'df2_mt'], where=['A&gt;0', 'B&gt;0'],
+      2                          selector='df1_mt')
+
+NameError: name 'store' is not defined</pre>
 <p><strong>Enhancements</strong></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">HDFStore</span></code> now can read native PyTables table format tables</p></li>

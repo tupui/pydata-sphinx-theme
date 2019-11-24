@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item ">
         <a class="nav-link" href="../whatsnew/index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -224,6 +230,8 @@
       
       
       
+      
+      
     </ul>
 
 </nav>
@@ -309,19 +317,32 @@ the <a class="reference internal" href="../reference/api/pandas.DataFrame.info.h
 method.</p>
 <p>For example, the memory usage of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> below is shown
 when calling <a class="reference internal" href="../reference/api/pandas.DataFrame.info.html#pandas.DataFrame.info" title="pandas.DataFrame.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">dtypes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">,</span> <span class="s1">&#39;timedelta64[ns]&#39;</span><span class="p">,</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">dtypes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;int64&#39;</span><span class="p">,</span> <span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">,</span> <span class="s1">&#39;timedelta64[ns]&#39;</span><span class="p">,</span>
 <span class="gp">   ...: </span>          <span class="s1">&#39;complex128&#39;</span><span class="p">,</span> <span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="s1">&#39;bool&#39;</span><span class="p">]</span>
 <span class="gp">   ...: </span>
 
-<span class="gp">In [10]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="gp">In [2]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">5000</span>
 
-<span class="gp">In [11]: </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">dtypes</span><span class="p">}</span>
+<span class="gp">In [3]: </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">dtypes</span><span class="p">}</span>
 
-<span class="gp">In [12]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">In [4]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-<span class="gp">In [13]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;categorical&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="gp">In [5]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;categorical&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;object&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
 
-<span class="gp">In [14]: </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="gp">In [6]: </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+<span class="go">RangeIndex: 5000 entries, 0 to 4999</span>
+<span class="go">Data columns (total 8 columns):</span>
+<span class="go">int64              5000 non-null int64</span>
+<span class="go">float64            5000 non-null float64</span>
+<span class="go">datetime64[ns]     5000 non-null datetime64[ns]</span>
+<span class="go">timedelta64[ns]    5000 non-null timedelta64[ns]</span>
+<span class="go">complex128         5000 non-null complex128</span>
+<span class="go">object             5000 non-null object</span>
+<span class="go">bool               5000 non-null bool</span>
+<span class="go">categorical        5000 non-null category</span>
+<span class="go">dtypes: bool(1), category(1), complex128(1), datetime64[ns](1), float64(1), int64(1), object(1), timedelta64[ns](1)</span>
+<span class="go">memory usage: 289.1+ KB</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">+</span></code> symbol indicates that the true memory usage could be higher, because
@@ -330,7 +351,20 @@ pandas does not count the memory used by values in columns with
 <p>Passing <code class="docutils literal notranslate"><span class="pre">memory_usage='deep'</span></code> will enable a more accurate memory usage report,
 accounting for the full usage of the contained objects. This is optional
 as it can be expensive to do this deeper introspection.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">memory_usage</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;</span>
+<span class="go">RangeIndex: 5000 entries, 0 to 4999</span>
+<span class="go">Data columns (total 8 columns):</span>
+<span class="go">int64              5000 non-null int64</span>
+<span class="go">float64            5000 non-null float64</span>
+<span class="go">datetime64[ns]     5000 non-null datetime64[ns]</span>
+<span class="go">timedelta64[ns]    5000 non-null timedelta64[ns]</span>
+<span class="go">complex128         5000 non-null complex128</span>
+<span class="go">object             5000 non-null object</span>
+<span class="go">bool               5000 non-null bool</span>
+<span class="go">categorical        5000 non-null category</span>
+<span class="go">dtypes: bool(1), category(1), complex128(1), datetime64[ns](1), float64(1), int64(1), object(1), timedelta64[ns](1)</span>
+<span class="go">memory usage: 425.6 KB</span>
 </pre></div>
 </div>
 <p>By default the display option is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> but can be explicitly
@@ -340,16 +374,36 @@ overridden by passing the <code class="docutils literal notranslate"><span class
 represented by column names and memory usage of each column shown in bytes. For
 the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> above, the memory usage of each column and the total memory
 usage can be found with the <code class="docutils literal notranslate"><span class="pre">memory_usage</span></code> method:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [16]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span>
+<pre class="literal-block">In [8]: df.memory_usage()
+Out[8]: 
+Index                128
+int64              40000
+float64            40000
+datetime64[ns]     40000
+timedelta64[ns]    40000
+complex128         80000
+object             40000
+bool                5000
+categorical        10920
+dtype: int64
 
-<span class="go"># total memory usage of dataframe</span>
-<span class="gp">In [17]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
+# total memory usage of dataframe
+In [9]: df.memory_usage().sum()
+Out[9]: 296048</pre>
 <p>By default the memory usage of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>’s index is shown in the
 returned <code class="docutils literal notranslate"><span class="pre">Series</span></code>, the memory usage of the index can be suppressed by passing
 the <code class="docutils literal notranslate"><span class="pre">index=False</span></code> argument:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">int64              40000</span>
+<span class="go">float64            40000</span>
+<span class="go">datetime64[ns]     40000</span>
+<span class="go">timedelta64[ns]    40000</span>
+<span class="go">complex128         80000</span>
+<span class="go">object             40000</span>
+<span class="go">bool                5000</span>
+<span class="go">categorical        10920</span>
+<span class="go">dtype: int64</span>
 </pre></div>
 </div>
 <p>The memory usage displayed by the <a class="reference internal" href="../reference/api/pandas.DataFrame.info.html#pandas.DataFrame.info" title="pandas.DataFrame.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> method utilizes the
@@ -393,15 +447,17 @@ Alternatively, you might want to compare if the pandas object is <code class="do
 </div>
 <p>To evaluate single-element pandas objects in a boolean context, use the method
 <a class="reference internal" href="../reference/api/pandas.DataFrame.bool.html#pandas.DataFrame.bool" title="pandas.DataFrame.bool"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bool()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+<pre class="literal-block">In [11]: pd.Series([True]).bool()
+Out[11]: True
 
-<span class="gp">In [20]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+In [12]: pd.Series([False]).bool()
+Out[12]: False
 
-<span class="gp">In [21]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="bp">True</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+In [13]: pd.DataFrame([[True]]).bool()
+Out[13]: True
 
-<span class="gp">In [22]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="bp">False</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
-</pre></div>
-</div>
+In [14]: pd.DataFrame([[False]]).bool()
+Out[14]: False</pre>
 <div class="section" id="bitwise-boolean">
 <h3>Bitwise boolean<a class="headerlink" href="#bitwise-boolean" title="Permalink to this headline">¶</a></h3>
 <p>Bitwise boolean operators like <code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">!=</span></code> return a boolean <code class="docutils literal notranslate"><span class="pre">Series</span></code>,
@@ -422,21 +478,27 @@ which is almost always what you want anyways.</p>
 <h3>Using the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator<a class="headerlink" href="#using-the-in-operator" title="Permalink to this headline">¶</a></h3>
 <p>Using the Python <code class="docutils literal notranslate"><span class="pre">in</span></code> operator on a <code class="docutils literal notranslate"><span class="pre">Series</span></code> tests for membership in the
 index, not membership among the values.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [23]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [15]: s = pd.Series(range(5), index=list('abcde'))
 
-<span class="gp">In [24]: </span><span class="mi">2</span> <span class="ow">in</span> <span class="n">s</span>
+In [16]: 2 in s
+Out[16]: False
 
-<span class="gp">In [25]: </span><span class="s1">&#39;b&#39;</span> <span class="ow">in</span> <span class="n">s</span>
-</pre></div>
-</div>
+In [17]: 'b' in s
+Out[17]: True</pre>
 <p>If this behavior is surprising, keep in mind that using <code class="docutils literal notranslate"><span class="pre">in</span></code> on a Python
 dictionary tests keys, not values, and <code class="docutils literal notranslate"><span class="pre">Series</span></code> are dict-like.
 To test for membership in the values, use the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">isin()</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span>
+<pre class="literal-block">In [18]: s.isin([2])
+Out[18]: 
+a    False
+b    False
+c     True
+d    False
+e    False
+dtype: bool
 
-<span class="gp">In [27]: </span><span class="n">s</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
-</pre></div>
-</div>
+In [19]: s.isin([2]).any()
+Out[19]: True</pre>
 <p>For <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code>, likewise, <code class="docutils literal notranslate"><span class="pre">in</span></code> applies to the column axis,
 testing for membership in the list of column names.</p>
 </div>
@@ -467,19 +529,33 @@ not ignored.</p>
 <p>In the absence of high performance <code class="docutils literal notranslate"><span class="pre">NA</span></code> support being built into NumPy from
 the ground up, the primary casualty is the ability to represent NAs in integer
 arrays. For example:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">))</span>
+<pre class="literal-block">In [20]: s = pd.Series([1, 2, 3, 4, 5], index=list('abcde'))
 
-<span class="gp">In [29]: </span><span class="n">s</span>
+In [21]: s
+Out[21]: 
+a    1
+b    2
+c    3
+d    4
+e    5
+dtype: int64
 
-<span class="gp">In [30]: </span><span class="n">s</span><span class="o">.</span><span class="n">dtype</span>
+In [22]: s.dtype
+Out[22]: dtype('int64')
 
-<span class="gp">In [31]: </span><span class="n">s2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">])</span>
+In [23]: s2 = s.reindex(['a', 'b', 'c', 'f', 'u'])
 
-<span class="gp">In [32]: </span><span class="n">s2</span>
+In [24]: s2
+Out[24]: 
+a    1.0
+b    2.0
+c    3.0
+f    NaN
+u    NaN
+dtype: float64
 
-<span class="gp">In [33]: </span><span class="n">s2</span><span class="o">.</span><span class="n">dtype</span>
-</pre></div>
-</div>
+In [25]: s2.dtype
+Out[25]: dtype('float64')</pre>
 <p>This trade-off is made largely for memory and performance reasons, and also so
 that the resulting <code class="docutils literal notranslate"><span class="pre">Series</span></code> continues to be “numeric”.</p>
 <p>If you need to represent integers with possibly missing values, use one of
@@ -490,21 +566,35 @@ the nullable-integer extension dtypes provided by pandas</p>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int32Dtype</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Int64Dtype</span></code></p></li>
 </ul>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="n">s_int</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">),</span>
-<span class="gp">   ....: </span>                  <span class="n">dtype</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Int64Dtype</span><span class="p">())</span>
-<span class="gp">   ....: </span>
+<pre class="literal-block">In [26]: s_int = pd.Series([1, 2, 3, 4, 5], index=list('abcde'),
+   ....:                   dtype=pd.Int64Dtype())
+   ....: 
 
-<span class="gp">In [35]: </span><span class="n">s_int</span>
+In [27]: s_int
+Out[27]: 
+a    1
+b    2
+c    3
+d    4
+e    5
+dtype: Int64
 
-<span class="gp">In [36]: </span><span class="n">s_int</span><span class="o">.</span><span class="n">dtype</span>
+In [28]: s_int.dtype
+Out[28]: Int64Dtype()
 
-<span class="gp">In [37]: </span><span class="n">s2_int</span> <span class="o">=</span> <span class="n">s_int</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">])</span>
+In [29]: s2_int = s_int.reindex(['a', 'b', 'c', 'f', 'u'])
 
-<span class="gp">In [38]: </span><span class="n">s2_int</span>
+In [30]: s2_int
+Out[30]: 
+a      1
+b      2
+c      3
+f    NaN
+u    NaN
+dtype: Int64
 
-<span class="gp">In [39]: </span><span class="n">s2_int</span><span class="o">.</span><span class="n">dtype</span>
-</pre></div>
-</div>
+In [31]: s2_int.dtype
+Out[31]: Int64Dtype()</pre>
 <p>See <a class="reference internal" href="integer_na.html#integer-na"><span class="std std-ref">Nullable Integer Data Type</span></a> for more.</p>
 </div>
 <div class="section" id="na-type-promotions">
@@ -625,11 +715,11 @@ symptom of this issue is an error like::</p>
 with this issue you should convert the underlying NumPy array to the native
 system byte order <em>before</em> passing it to <code class="docutils literal notranslate"><span class="pre">Series</span></code> or <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>
 constructors using something similar to the following:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [40]: </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="s1">&#39;&gt;i4&#39;</span><span class="p">)</span>  <span class="c1"># big endian</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="s1">&#39;&gt;i4&#39;</span><span class="p">)</span>  <span class="c1"># big endian</span>
 
-<span class="gp">In [41]: </span><span class="n">newx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">byteswap</span><span class="p">()</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">()</span>  <span class="c1"># force native byteorder</span>
+<span class="gp">In [33]: </span><span class="n">newx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">byteswap</span><span class="p">()</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">()</span>  <span class="c1"># force native byteorder</span>
 
-<span class="gp">In [42]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">newx</span><span class="p">)</span>
+<span class="gp">In [34]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">newx</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="https://docs.scipy.org/doc/numpy/user/basics.byteswapping.html">the NumPy documentation on byte order</a> for more

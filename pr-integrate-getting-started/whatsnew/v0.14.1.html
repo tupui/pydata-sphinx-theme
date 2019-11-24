@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -209,12 +217,12 @@ BusinessYearBegin, LastWeekOfMonth, FY5253Quarter, LastWeekOfMonth, Easter):</p>
 </div>
 <p>Starting from 0.14.1 all offsets preserve time by default. The old
 behaviour can be obtained with <code class="docutils literal notranslate"><span class="pre">normalize=True</span></code></p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># new behaviour</span>
-<span class="gp">In [11]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">offsets</span><span class="o">.</span><span class="n">MonthEnd</span><span class="p">()</span>
+<pre class="literal-block"># new behaviour
+In [1]: d + offsets.MonthEnd()
+Out[1]: Timestamp('2014-01-31 09:00:00')
 
-<span class="gp">In [12]: </span><span class="n">d</span> <span class="o">+</span> <span class="n">offsets</span><span class="o">.</span><span class="n">MonthEnd</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-</div>
+In [2]: d + offsets.MonthEnd(normalize=True)
+Out[2]: Timestamp('2014-01-31 00:00:00')</pre>
 <p>Note that for the other offsets the default behaviour did not change.</p>
 </li>
 <li><p>Add back <code class="docutils literal notranslate"><span class="pre">#N/A</span> <span class="pre">N/A</span></code> as a default NA value in text parsing, (regression from 0.12) (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/5521">GH5521</a>)</p></li>
@@ -256,11 +264,12 @@ pages (<a class="reference external" href="https://github.com/pandas-dev/pandas/
 that <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> does.  (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/6809">GH6809</a>)</p></li>
 <li><p>Support for dateutil timezones, which can now be used in the same way as
 pytz timezones across pandas. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/4688">GH4688</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;3/6/2012 00:00&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span>
-<span class="gp">   ....: </span>                    <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;dateutil/Europe/London&#39;</span><span class="p">)</span>
-<span class="gp">   ....: </span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;3/6/2012 00:00&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span>
+<span class="gp">   ...: </span>                    <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;dateutil/Europe/London&#39;</span><span class="p">)</span>
+<span class="gp">   ...: </span>
 
-<span class="gp">In [14]: </span><span class="n">rng</span><span class="o">.</span><span class="n">tz</span>
+<span class="gp">In [4]: </span><span class="n">rng</span><span class="o">.</span><span class="n">tz</span>
+<span class="gh">Out[4]: </span><span class="go">tzfile(&#39;/usr/share/zoneinfo/Europe/London&#39;)</span>
 </pre></div>
 </div>
 <p>See <a class="reference internal" href="../user_guide/timeseries.html#timeseries-timezone"><span class="std std-ref">the docs</span></a>.</p>

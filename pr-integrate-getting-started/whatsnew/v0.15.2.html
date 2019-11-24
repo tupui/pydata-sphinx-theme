@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/getting_started.css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
@@ -31,8 +32,9 @@
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+
 <a class="navbar-brand" href="../index.html">
-  <img src="../_static/img/pandas_logo.svg" alt="Pandas">
+  <img src="../_static/pandas.svg" class="logo" alt="logo">
 </a>
 
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +66,10 @@
     
     <li class="nav-item active">
         <a class="nav-link" href="index.html">Release Notes</a>
+    </li>
+    
+    <li class="nav-item ">
+        <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
   </ul>
@@ -108,6 +114,8 @@
       
       
         
+      
+      
       
       
     </ul>
@@ -169,29 +177,59 @@ We recommend that all users upgrade to this version.</p>
 <ul>
 <li><p>Indexing in <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> beyond lex-sort depth is now supported, though
 a lexically sorted index will have a better performance. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/2646">GH2646</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;jim&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-<span class="gp">   ...: </span>                   <span class="s1">&#39;joe&#39;</span><span class="p">:[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">],</span>
-<span class="gp">   ...: </span>                   <span class="s1">&#39;jolie&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;jim&#39;</span><span class="p">,</span> <span class="s1">&#39;joe&#39;</span><span class="p">])</span>
-<span class="gp">   ...: </span>
+<pre class="literal-block">In [1]: df = pd.DataFrame({'jim':[0, 0, 1, 1],
+   ...:                    'joe':['x', 'x', 'z', 'y'],
+   ...:                    'jolie':np.random.rand(4)}).set_index(['jim', 'joe'])
+   ...: 
 
-<span class="gp">In [10]: </span><span class="n">df</span>
+In [2]: df
+Out[2]: 
+            jolie
+jim joe          
+0   x    0.126970
+    x    0.966718
+1   z    0.260476
+    y    0.897237
 
-<span class="gp">In [11]: </span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">lexsort_depth</span>
+[4 rows x 1 columns]
 
-<span class="go"># in prior versions this would raise a KeyError</span>
-<span class="go"># will now show a PerformanceWarning</span>
-<span class="gp">In [12]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">)]</span>
+In [3]: df.index.lexsort_depth
+Out[3]: 1
 
-<span class="go"># lexically sorting</span>
-<span class="gp">In [13]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+# in prior versions this would raise a KeyError
+# will now show a PerformanceWarning
+In [4]: df.loc[(1, 'z')]
+Out[4]: 
+            jolie
+jim joe          
+1   z    0.260476
 
-<span class="gp">In [14]: </span><span class="n">df2</span>
+[1 rows x 1 columns]
 
-<span class="gp">In [15]: </span><span class="n">df2</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">lexsort_depth</span>
+# lexically sorting
+In [5]: df2 = df.sort_index()
 
-<span class="gp">In [16]: </span><span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">)]</span>
-</pre></div>
-</div>
+In [6]: df2
+Out[6]: 
+            jolie
+jim joe          
+0   x    0.126970
+    x    0.966718
+1   y    0.897237
+    z    0.260476
+
+[4 rows x 1 columns]
+
+In [7]: df2.index.lexsort_depth
+Out[7]: 2
+
+In [8]: df2.loc[(1,'z')]
+Out[8]: 
+            jolie
+jim joe          
+1   z    0.260476
+
+[1 rows x 1 columns]</pre>
 </li>
 <li><p>Bug in unique of Series with <code class="docutils literal notranslate"><span class="pre">category</span></code> dtype, which returned all categories regardless
 whether they were “used” or not (see <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8559">GH8559</a> for the discussion).
@@ -208,25 +246,35 @@ Previous behaviour was to return all categories:</p>
 </pre></div>
 </div>
 <p>Now, only the categories that do effectively occur in the array are returned:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [17]: </span><span class="n">cat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [9]: </span><span class="n">cat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
 
-<span class="gp">In [18]: </span><span class="n">cat</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="gp">In [10]: </span><span class="n">cat</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="gh">Out[10]: </span><span class="go"></span>
+<span class="go">[a, b]</span>
+<span class="go">Categories (2, object): [a, b]</span>
 </pre></div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Series.all</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.any</span></code> now support the <code class="docutils literal notranslate"><span class="pre">level</span></code> and <code class="docutils literal notranslate"><span class="pre">skipna</span></code> parameters. <code class="docutils literal notranslate"><span class="pre">Series.all</span></code>, <code class="docutils literal notranslate"><span class="pre">Series.any</span></code>, <code class="docutils literal notranslate"><span class="pre">Index.all</span></code>, and <code class="docutils literal notranslate"><span class="pre">Index.any</span></code> no longer support the <code class="docutils literal notranslate"><span class="pre">out</span></code> and <code class="docutils literal notranslate"><span class="pre">keepdims</span></code> parameters, which existed for compatibility with ndarray. Various index types no longer support the <code class="docutils literal notranslate"><span class="pre">all</span></code> and <code class="docutils literal notranslate"><span class="pre">any</span></code> aggregation functions and will now raise <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8302">GH8302</a>).</p></li>
 <li><p>Allow equality comparisons of Series with a categorical dtype and object dtype; previously these would raise <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8938">GH8938</a>)</p></li>
 <li><p>Bug in <code class="docutils literal notranslate"><span class="pre">NDFrame</span></code>: conflicting attribute/column names now behave consistently between getting and setting. Previously, when both a column and attribute named <code class="docutils literal notranslate"><span class="pre">y</span></code> existed, <code class="docutils literal notranslate"><span class="pre">data.y</span></code> would return the attribute, while <code class="docutils literal notranslate"><span class="pre">data.y</span> <span class="pre">=</span> <span class="pre">z</span></code> would update the column (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8994">GH8994</a>)</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]})</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [11]: </span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]})</span>
 
-<span class="gp">In [20]: </span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">In [12]: </span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="gp">In [21]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="gp">In [13]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 
-<span class="gp">In [22]: </span><span class="n">data</span>
+<span class="gp">In [14]: </span><span class="n">data</span>
+<span class="gh">Out[14]: </span><span class="go"></span>
+<span class="go">   x  y</span>
+<span class="go">0  1  2</span>
+<span class="go">1  2  4</span>
+<span class="go">2  3  6</span>
+
+<span class="go">[3 rows x 2 columns]</span>
 
 <span class="go"># this assignment was inconsistent</span>
-<span class="gp">In [23]: </span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">In [15]: </span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
 </div>
 <p>Old behavior:</p>
@@ -238,11 +286,11 @@ Previous behaviour was to return all categories:</p>
 </pre></div>
 </div>
 <p>New behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">data</span><span class="o">.</span><span class="n">y</span>
+<pre class="literal-block">In [16]: data.y
+Out[16]: 5
 
-<span class="gp">In [25]: </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-</pre></div>
-</div>
+In [17]: data['y'].values
+Out[17]: array([2, 4, 6])</pre>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Timestamp('now')</span></code> is now equivalent to <code class="docutils literal notranslate"><span class="pre">Timestamp.now()</span></code> in that it returns the local time rather than UTC. Also, <code class="docutils literal notranslate"><span class="pre">Timestamp('today')</span></code> is now equivalent to <code class="docutils literal notranslate"><span class="pre">Timestamp.today()</span></code> and both have <code class="docutils literal notranslate"><span class="pre">tz</span></code> as a possible argument. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/9000">GH9000</a>)</p></li>
 <li><p>Fix negative step support for label-based slices (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8753">GH8753</a>)</p>
@@ -261,9 +309,14 @@ Previous behaviour was to return all categories:</p>
 </pre></div>
 </div>
 <p>New behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [26]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">])</span>
 
-<span class="gp">In [27]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">In [19]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="gh">Out[19]: </span><span class="go"></span>
+<span class="go">c    2</span>
+<span class="go">b    1</span>
+<span class="go">a    0</span>
+<span class="go">Length: 3, dtype: int64</span>
 </pre></div>
 </div>
 </li>
@@ -290,18 +343,30 @@ default <code class="docutils literal notranslate"><span class="pre">Text</span>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Series.all</span></code> and <code class="docutils literal notranslate"><span class="pre">Series.any</span></code> now support the <code class="docutils literal notranslate"><span class="pre">level</span></code> and <code class="docutils literal notranslate"><span class="pre">skipna</span></code> parameters (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8302">GH8302</a>):</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [28]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [20]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 
-<span class="gp">In [29]: </span><span class="n">s</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [21]: </span><span class="n">s</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gh">Out[21]: </span><span class="go"></span>
+<span class="go">0     True</span>
+<span class="go">1    False</span>
+<span class="go">Length: 2, dtype: bool</span>
 </pre></div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Panel</span></code> now supports the <code class="docutils literal notranslate"><span class="pre">all</span></code> and <code class="docutils literal notranslate"><span class="pre">any</span></code> aggregation functions. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8302">GH8302</a>):</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [30]: </span><span class="n">p</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Panel</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">)</span>
+<pre class="literal-block">In [22]: p = pd.Panel(np.random.rand(2, 5, 4) &gt; 0.1)
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-22-d2d3546d8bae&gt; in &lt;module&gt;
+----&gt; 1 p = pd.Panel(np.random.rand(2, 5, 4) &gt; 0.1)
 
-<span class="gp">In [31]: </span><span class="n">p</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</pre></div>
-</div>
+TypeError: Panel() takes no arguments
+
+In [23]: p.all()
+Out[23]: 
+first      True
+second    False
+Length: 2, dtype: bool</pre>
 </li>
 <li><p>Added support for <code class="docutils literal notranslate"><span class="pre">utcfromtimestamp()</span></code>, <code class="docutils literal notranslate"><span class="pre">fromtimestamp()</span></code>, and <code class="docutils literal notranslate"><span class="pre">combine()</span></code> on <cite>Timestamp</cite> class (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/5351">GH5351</a>).</p></li>
 <li><p>Added Google Analytics (<cite>pandas.io.ga</cite>) basic documentation (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/8835">GH8835</a>). See <a class="reference external" href="http://pandas.pydata.org/pandas-docs/version/0.15.2/remote_data.html#remote-data-ga">here</a>.</p></li>
