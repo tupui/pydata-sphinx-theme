@@ -239,7 +239,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -879,7 +879,7 @@ getting a column from a DataFrame, you can do:</p>
 </div>
 <p>This is mainly syntactic sugar for the alternative and much more verbose:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">])</span>
-<span class="gh">Out[56]: </span><span class="go">&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f4bc72e2d50&gt;</span>
+<span class="gh">Out[56]: </span><span class="go">&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7fd41af52410&gt;</span>
 </pre></div>
 </div>
 <p>Additionally this method avoids recomputing the internal grouping information
@@ -1330,7 +1330,7 @@ dtype: float64</pre>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [96]: </span><span class="n">compare</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Original&#39;</span><span class="p">:</span> <span class="n">ts</span><span class="p">,</span> <span class="s1">&#39;Transformed&#39;</span><span class="p">:</span> <span class="n">transformed</span><span class="p">})</span>
 
 <span class="gp">In [97]: </span><span class="n">compare</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="gh">Out[97]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bca57ba10&gt;</span>
+<span class="gh">Out[97]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd41c1a2250&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/groupby_transform_plot.png" src="../_images/groupby_transform_plot.png" />
@@ -2530,15 +2530,21 @@ dtype: float64</pre>
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="computation.html" title="previous page">Computational tools</a>
+    <a class='right-next' id="next-link" href="timeseries.html" title="next page">Time Series / Date functionality</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -2552,6 +2558,32 @@ dtype: float64</pre>
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

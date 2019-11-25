@@ -125,7 +125,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -546,9 +546,9 @@ Out[12]:
 In [13]: df.rename(id, axis='index')
 Out[13]: 
                 A  B
-94406852838144  1  4
-94406852838176  2  5
-94406852838208  3  6
+94130838217472  1  4
+94130838217504  2  5
+94130838217536  3  6
 
 [3 rows x 2 columns]</pre>
 <p>And <code class="docutils literal notranslate"><span class="pre">reindex</span></code>:</p>
@@ -573,9 +573,9 @@ Out[15]:
 <pre class="literal-block">In [16]: df.rename(index=id, columns=str.lower)
 Out[16]: 
                 a  b
-94406852838144  1  4
-94406852838176  2  5
-94406852838208  3  6
+94130838217472  1  4
+94130838217504  2  5
+94130838217536  3  6
 
 [3 rows x 2 columns]
 
@@ -1592,15 +1592,21 @@ so an approximation is used instead (<a class="reference external" href="https:/
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="v0.21.1.html" title="previous page">v0.21.1 (December 12, 2017)</a>
+    <a class='right-next' id="next-link" href="v0.20.3.html" title="next page">v0.20.3 (July 7, 2017)</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -1614,6 +1620,32 @@ so an approximation is used instead (<a class="reference external" href="https:/
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

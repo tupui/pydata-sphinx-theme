@@ -43,7 +43,7 @@ consists of the following data columns:
 .. raw:: html
 
                         </p>
-                    <a href="https://github.com/stijnvanhoey/pandas-getting-started-tutorials/blob/master/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
+                    <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
                 </div>
             </div>
 
@@ -58,8 +58,8 @@ consists of the following data columns:
     </ul>
     </div>
 
-How to manipulate data columns with textual data?
--------------------------------------------------
+How to manipulate textual data?
+-------------------------------
 
 .. raw:: html
 

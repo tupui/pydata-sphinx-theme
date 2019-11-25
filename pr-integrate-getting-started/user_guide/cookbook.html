@@ -239,7 +239,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -1793,7 +1793,7 @@ Out[150]:
 <span class="gp">   .....: </span>
 
 <span class="gp">In [188]: </span><span class="n">df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s1">&#39;quartiles&#39;</span><span class="p">)</span>
-<span class="gh">Out[188]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bc88313d0&gt;</span>
+<span class="gh">Out[188]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd41dc9ca10&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/quartile_boxplot.png" src="../_images/quartile_boxplot.png" />
@@ -1866,8 +1866,8 @@ In [199]: %timeit pd.to_datetime(df.year * 10000 + df.month * 100 + df.day, form
    .....: ds.head()
    .....: %timeit pd.to_datetime(ds)
    .....: 
-8.76 ms +- 152 us per loop (mean +- std. dev. of 7 runs, 100 loops each)
-1.98 ms +- 8.32 us per loop (mean +- std. dev. of 7 runs, 1000 loops each)</pre>
+7.3 ms +- 195 us per loop (mean +- std. dev. of 7 runs, 100 loops each)
+1.98 ms +- 8.76 us per loop (mean +- std. dev. of 7 runs, 1000 loops each)</pre>
 </div>
 <div class="section" id="skip-row-between-header-and-data">
 <h4>Skip row between header and data<a class="headerlink" href="#skip-row-between-header-and-data" title="Permalink to this headline">¶</a></h4>
@@ -2306,15 +2306,21 @@ of the data values:</p>
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="gotchas.html" title="previous page">Frequently Asked Questions (FAQ)</a>
+    <a class='right-next' id="next-link" href="../reference/index.html" title="next page">API Reference</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -2328,6 +2334,32 @@ of the data values:</p>
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

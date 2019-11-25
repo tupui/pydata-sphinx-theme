@@ -125,7 +125,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -311,7 +311,7 @@ calculate the ratio, and plot</p>
 <span class="gp">   ...: </span>             <span class="n">PetalRatio</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">PetalWidth</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">PetalLength</span><span class="p">)</span>
 <span class="gp">   ...: </span>     <span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;SepalRatio&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;PetalRatio&#39;</span><span class="p">))</span>
 <span class="gp">   ...: </span>
-<span class="gh">Out[6]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbd1781d0&gt;</span>
+<span class="gh">Out[6]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd4112616d0&gt;</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/whatsnew_assign.png"><img alt="../_images/whatsnew_assign.png" src="../_images/whatsnew_assign.png" style="width: 234.0px; height: 178.5px;" /></a>
@@ -1121,15 +1121,21 @@ SQLAlchemy type  (<a class="reference external" href="https://github.com/pandas-
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="v0.16.1.html" title="previous page">v0.16.1 (May 11, 2015)</a>
+    <a class='right-next' id="next-link" href="v0.15.2.html" title="next page">v0.15.2 (December 12, 2014)</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -1143,6 +1149,32 @@ SQLAlchemy type  (<a class="reference external" href="https://github.com/pandas-
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

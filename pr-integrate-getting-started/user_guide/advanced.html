@@ -239,7 +239,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -1311,50 +1311,50 @@ In [96]: s = pd.Series(np.random.randn(8), index=pd.MultiIndex.from_tuples(tuple
 
 In [97]: s
 Out[97]: 
-bar  one    0.206053
-qux  two   -0.251905
+baz  one    0.206053
+qux  one   -0.251905
 bar  two   -2.213588
-qux  one    1.063327
-baz  two    1.266143
-foo  two    0.299368
-baz  one   -0.863838
-foo  one    0.408204
+foo  one    1.063327
+     two    1.266143
+baz  two    0.299368
+qux  two   -0.863838
+bar  one    0.408204
 dtype: float64
 
 In [98]: s.sort_index()
 Out[98]: 
-bar  one    0.206053
+bar  one    0.408204
      two   -2.213588
-baz  one   -0.863838
-     two    1.266143
-foo  one    0.408204
+baz  one    0.206053
      two    0.299368
-qux  one    1.063327
-     two   -0.251905
+foo  one    1.063327
+     two    1.266143
+qux  one   -0.251905
+     two   -0.863838
 dtype: float64
 
 In [99]: s.sort_index(level=0)
 Out[99]: 
-bar  one    0.206053
+bar  one    0.408204
      two   -2.213588
-baz  one   -0.863838
-     two    1.266143
-foo  one    0.408204
+baz  one    0.206053
      two    0.299368
-qux  one    1.063327
-     two   -0.251905
+foo  one    1.063327
+     two    1.266143
+qux  one   -0.251905
+     two   -0.863838
 dtype: float64
 
 In [100]: s.sort_index(level=1)
 Out[100]: 
-bar  one    0.206053
-baz  one   -0.863838
-foo  one    0.408204
-qux  one    1.063327
+bar  one    0.408204
+baz  one    0.206053
+foo  one    1.063327
+qux  one   -0.251905
 bar  two   -2.213588
-baz  two    1.266143
-foo  two    0.299368
-qux  two   -0.251905
+baz  two    0.299368
+foo  two    1.266143
+qux  two   -0.863838
 dtype: float64</pre>
 <p id="advanced-sortlevel-byname">You may also pass a level name to <code class="docutils literal notranslate"><span class="pre">sort_index</span></code> if the <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> levels
 are named.</p>
@@ -1363,27 +1363,27 @@ are named.</p>
 In [102]: s.sort_index(level='L1')
 Out[102]: 
 L1   L2 
-bar  one    0.206053
+bar  one    0.408204
      two   -2.213588
-baz  one   -0.863838
-     two    1.266143
-foo  one    0.408204
+baz  one    0.206053
      two    0.299368
-qux  one    1.063327
-     two   -0.251905
+foo  one    1.063327
+     two    1.266143
+qux  one   -0.251905
+     two   -0.863838
 dtype: float64
 
 In [103]: s.sort_index(level='L2')
 Out[103]: 
 L1   L2 
-bar  one    0.206053
-baz  one   -0.863838
-foo  one    0.408204
-qux  one    1.063327
+bar  one    0.408204
+baz  one    0.206053
+foo  one    1.063327
+qux  one   -0.251905
 bar  two   -2.213588
-baz  two    1.266143
-foo  two    0.299368
-qux  two   -0.251905
+baz  two    0.299368
+foo  two    1.266143
+qux  two   -0.863838
 dtype: float64</pre>
 <p>On higher dimensional objects, you can sort any of the other axes by level if
 they have a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>:</p>
@@ -1552,8 +1552,8 @@ faster than fancy indexing.</p>
 <span class="gp">In [135]: </span><span class="o">%</span><span class="k">timeit</span> arr[indexer]
 <span class="gp">   .....: </span><span class="o">%</span><span class="k">timeit</span> arr.take(indexer, axis=0)
 <span class="gp">   .....: </span>
-<span class="go">160 us +- 654 ns per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
-<span class="go">49.8 us +- 725 ns per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
+<span class="go">164 us +- 3.68 us per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
+<span class="go">50.4 us +- 774 ns per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
 </pre></div>
 </div>
 </div>
@@ -2241,15 +2241,21 @@ detailed discussion.</p>
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="indexing.html" title="previous page">Indexing and Selecting Data</a>
+    <a class='right-next' id="next-link" href="merging.html" title="next page">Merge, join, and concatenate</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -2263,6 +2269,32 @@ detailed discussion.</p>
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

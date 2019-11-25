@@ -143,7 +143,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -261,7 +261,7 @@ adjust verbosity instead</a>.</p>
 <div class="alert alert-info">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference external" href="https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.read_gbq" title="(in pandas-gbq v0.11.0+4.ge0a038d)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas_gbq.read_gbq</span></code></a></dt><dd><p>This function in the pandas-gbq library.</p>
+<dt><a class="reference external" href="https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.read_gbq" title="(in pandas-gbq v0.11.0+6.g0ebf60a)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas_gbq.read_gbq</span></code></a></dt><dd><p>This function in the pandas-gbq library.</p>
 </dd>
 <dt><a class="reference internal" href="pandas.DataFrame.to_gbq.html#pandas.DataFrame.to_gbq" title="pandas.DataFrame.to_gbq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataFrame.to_gbq</span></code></a></dt><dd><p>Write a DataFrame to Google BigQuery.</p>
 </dd>
@@ -273,15 +273,21 @@ adjust verbosity instead</a>.</p>
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="pandas.read_sas.html" title="previous page">pandas.read_sas</a>
+    <a class='right-next' id="next-link" href="pandas.read_stata.html" title="next page">pandas.read_stata</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -295,6 +301,32 @@ adjust verbosity instead</a>.</p>
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

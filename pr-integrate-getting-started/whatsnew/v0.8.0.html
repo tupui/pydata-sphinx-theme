@@ -125,7 +125,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -324,10 +324,10 @@ for updating values in place</p></li>
 Out[1]: &lt;Figure size 640x480 with 0 Axes&gt;
 
 In [2]: fx['FR'].plot(style='g')
-Out[2]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbb86ac10&gt;
+Out[2]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd40f3d3990&gt;
 
 In [3]: fx['IT'].plot(style='k--', secondary_y=True)
-Out[3]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbb82a4d0&gt;</pre>
+Out[3]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd40f38f390&gt;</pre>
 <p>Vytautas Jancauskas, the 2012 GSOC participant, has added many new plot
 types. For example, <code class="docutils literal notranslate"><span class="pre">'kde'</span></code> is a new option:</p>
 <pre class="literal-block">In [4]: s = pd.Series(np.concatenate((np.random.randn(1000),
@@ -338,7 +338,7 @@ In [5]: plt.figure()
 Out[5]: &lt;Figure size 640x480 with 0 Axes&gt;
 
 In [6]: s.hist(density=True, alpha=0.2)
-Out[6]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4bbb8e9190&gt;
+Out[6]: &lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd41d1ebc90&gt;
 
 In [7]: s.plot(kind='kde')
 ---------------------------------------------------------------------------
@@ -507,15 +507,21 @@ inspect <code class="docutils literal notranslate"><span class="pre">index.is_un
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="v0.8.1.html" title="previous page">v0.8.1 (July 22, 2012)</a>
+    <a class='right-next' id="next-link" href="v0.7.3.html" title="next page">v.0.7.3 (April 12, 2012)</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -529,6 +535,32 @@ inspect <code class="docutils literal notranslate"><span class="pre">index.is_un
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

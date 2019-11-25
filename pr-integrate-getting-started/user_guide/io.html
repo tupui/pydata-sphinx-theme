@@ -239,7 +239,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -3365,7 +3365,7 @@ value will be an iterable object of type <code class="docutils literal notransla
 <pre class="literal-block">In [187]: reader = pd.read_csv('tmp.sv', sep='|', chunksize=4)
 
 In [188]: reader
-Out[188]: &lt;pandas.io.parsers.TextFileReader at 0x7f4bc866cb90&gt;
+Out[188]: &lt;pandas.io.parsers.TextFileReader at 0x7fd416fe0390&gt;
 
 In [189]: for chunk in reader:
    .....:     print(chunk)
@@ -3950,11 +3950,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [248]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats)
-<span class="go">11.9 ms +- 119 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">11.3 ms +- 108 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [249]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats, numpy=True)
-<span class="go">8.56 ms +- 108 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">8.24 ms +- 141 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <p>The speedup is less noticeable for smaller datasets:</p>
@@ -3962,11 +3962,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [251]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats)
-<span class="go">7.79 ms +- 128 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">7.61 ms +- 38 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [252]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats, numpy=True)
-<span class="go">6.84 ms +- 120 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">6.58 ms +- 147 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="alert alert-warning">
@@ -4069,7 +4069,7 @@ NameError                                 Traceback (most recent call last)
 NameError: name 'StringIO' is not defined
 
 In [263]: reader
-Out[263]: &lt;pandas.io.parsers.TextFileReader at 0x7f4bc3461590&gt;
+Out[263]: &lt;pandas.io.parsers.TextFileReader at 0x7fd416fdb290&gt;
 
 In [264]: for chunk in reader:
    .....:     print(chunk)
@@ -9467,15 +9467,21 @@ ignored.</p>
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">User Guide</a>
+    <a class='right-next' id="next-link" href="../reference/api/pandas.read_sql_table.html" title="next page">pandas.read_sql_table</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -9489,6 +9495,32 @@ ignored.</p>
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">

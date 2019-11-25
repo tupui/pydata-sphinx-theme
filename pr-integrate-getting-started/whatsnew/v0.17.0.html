@@ -125,7 +125,7 @@
 
               
           </div>
-          
+
           <div class="d-none d-xl-block col-xl-2 bd-toc">
               
 
@@ -1124,10 +1124,10 @@ Out[65]: DatetimeIndex(['2012-04-01', '2014-01-01'], dtype='datetime64[ns]', fre
 <pre class="literal-block">In [66]: import pandas.tseries.offsets as offsets
 
 In [67]: pd.Timestamp.now()
-Out[67]: Timestamp('2019-11-24 23:00:26.350576')
+Out[67]: Timestamp('2019-11-25 22:18:56.371432')
 
 In [68]: pd.Timestamp.now() + offsets.DateOffset(years=1)
-Out[68]: Timestamp('2020-11-24 23:00:26.351971')</pre>
+Out[68]: Timestamp('2020-11-25 22:18:56.372534')</pre>
 </div>
 </div>
 </div>
@@ -1712,15 +1712,21 @@ key (<a class="reference external" href="https://github.com/pandas-dev/pandas/is
 
 
               </div>
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="v0.17.1.html" title="previous page">v0.17.1 (November 21, 2015)</a>
+    <a class='right-next' id="next-link" href="v0.16.2.html" title="next page">v0.16.2 (June 12, 2015)</a>
+
+              </div>
           </main>
 
       </div>
     </div><script>
     // TOC sidebar - add "active" class to parent list
-    // 
+    //
     // Bootstrap's scrollspy adds the active class to the <a> link,
     // but for the automatic collapsing we need this on the parent list item.
-    // 
+    //
     // The event is triggered on "window" (and not the nav item as documented),
     // see https://github.com/twbs/bootstrap/issues/20086
     $(window).on("activate.bs.scrollspy", function(){
@@ -1734,6 +1740,32 @@ key (<a class="reference external" href="https://github.com/pandas-dev/pandas/is
         var navLink = navLinks[i];
         navLink.parentElement.classList.add('active');
     }
+    });
+
+    /**
+     * Use left and right arrow keys to navigate forward and backwards.
+    */
+    const LEFT_ARROW_KEYCODE = 37
+    const RIGHT_ARROW_KEYCODE = 39
+
+    const getPrevUrl = () => document.getElementById('prev-link').href
+    const getNextUrl = () => document.getElementById('next-link').href
+    const initPageNav = (event) => {
+        const keycode = event.which
+
+        if (keycode === LEFT_ARROW_KEYCODE) {
+            window.location.href = getPrevUrl();
+        } else if (keycode === RIGHT_ARROW_KEYCODE) {
+            window.location.href = getNextUrl();
+        }
+    };
+
+    var keyboardListener = false;
+    $( document ).ready(() => {
+        if (keyboardListener === false) {
+            document.addEventListener('keydown', initPageNav)
+            keyboardListener = true;
+        }
     });
 </script>
     <div class="footer" role="contentinfo">
