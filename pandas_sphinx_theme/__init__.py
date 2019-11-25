@@ -6,12 +6,16 @@ Adapted for the pandas documentation.
 import os
 
 import sphinx.builders.html
+from sphinx.addnodes import pending_xref
+
+
+from docutils import nodes, utils
+from docutils.parsers.rst import Directive, directives
 
 from .bootstrap_html_translator import BootstrapHTML5Translator
 import docutils
 
 __version__ = "0.0.1.dev0"
-
 
 # -----------------------------------------------------------------------------
 # Sphinx monkeypatch for adding toctree objects into context
@@ -89,8 +93,75 @@ def get_html_theme_path():
     theme_path = os.path.abspath(os.path.dirname(__file__))
     return [theme_path]
 
+# -----------------------------------------------------------------------------
+
+from sphinx.addnodes import pending_xref
+from docutils import nodes
+from docutils.nodes import pending
+from docutils.parsers.rst import roles
+from sphinx.roles import XRefRole, AnyXRefRole
+#from docutils.parsers.rst.directives.references import TargetNotes
+
+class ButtonRole(XRefRole):
+    pass
+
+class ButtonLink(Directive):
+    """
+    Directive to declare a link as a button
+    """
+
+    # required_arguments, optional_arguments = 0,0
+    # final_argument_whitespace = True
+    has_content = True
+    option_spec = {'class'   : directives.unchanged,
+                   'target'  : directives.unchanged_required,
+                   }
+    def run(self):
+        #self.assert_has_content()
+        node = pending_xref("")
+        node["reftarget"] = self.options.get('target', [])
+        node["reftype"] = "ref"
+        node["refdomain"] = "std"
+        node["refexplicit"] = False
+        node += nodes.inline("", self.content[0])
+        print(self.content)
+        #node['target'] = self.options.get('target', None)
+        node['classes'] = ["btn", self.options.get('class', "btn-primary")] #
+        #self.state.nested_parse(self.content, self.content_offset, node)
+        #self.add_name(node)
+        return [node]
+
+
+class button(nodes.Inline, nodes.Element): pass
+class Button(Directive):
+    """
+    Directive to declare a button
+    """
+
+    required_arguments, optional_arguments = 0,0
+    final_argument_whitespace = True
+    has_content = True
+    option_spec = {'class'   : directives.class_option,
+                   'target'  : directives.unchanged_required }
+    def run(self):
+        self.assert_has_content()
+        node = button()
+        node['target'] = pending() #self.options.get('target', None)
+        node['classes'] = self.options.get('class', [])
+        self.state.nested_parse(self.content, self.content_offset, node)
+        self.add_name(node)
+        return [node]
+
 
 def setup(app):
     theme_path = get_html_theme_path()[0]
     app.add_html_theme("pandas_sphinx_theme", theme_path)
     app.set_translator("html", BootstrapHTML5Translator)
+    app.add_directive('buttonlink', ButtonLink)
+    #app.add_role("buttonrole", ButtonRole)
+    roles.register_local_role("buttonrole", ButtonRole(lowercase=True, innernodeclass=nodes.inline, warn_dangling=True))
+
+
+
+
+
