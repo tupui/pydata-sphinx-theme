@@ -43,7 +43,7 @@ consists of the following data columns:
 .. raw:: html
 
                         </p>
-                    <a href="https://github.com/stijnvanhoey/pandas-getting-started-tutorials/blob/master/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
+                    <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
                 </div>
             </div>
         </li>
@@ -146,6 +146,12 @@ Whereas ``read_*`` functions are used to read data to pandas, the
 the data as an excel file. In the example here, the ``sheet_name`` is
 named *passengers* instead of the default *Sheet1*. By setting
 ``index=False`` the row index labels are not saved in the spreadsheet.
+
+.. ipython:: python
+   :suppress:
+
+   import os
+   os.remove('titanic.xlsx')
 
 .. raw:: html
 

@@ -43,7 +43,7 @@ consists of the following data columns:
 .. raw:: html
 
                         </p>
-                    <a href="https://github.com/stijnvanhoey/pandas-getting-started-tutorials/blob/master/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
+                    <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@ micrometers, made available by
 `openaq <https://openaq.org>`__ and using the
 `py-openaq <http://dhhagan.github.io/py-openaq/index.html>`__ package.
 The ``air_quality_long.csv`` data set provides :math:`NO_2` and
-:math:`pm25` values for the measurement stations *FR04014*, *BETR801*
+:math:`PM_{25}` values for the measurement stations *FR04014*, *BETR801*
 and *London Westminster* in respectively Paris, Antwerp and London.
 
 The air-quality data set has the following columns:
@@ -95,7 +95,7 @@ measurement.
 .. raw:: html
 
                     </p>
-                <a href="https://github.com/stijnvanhoey/pandas-getting-started-tutorials/blob/master/data/air_quality_long.csv" class="btn btn-dark btn-sm">To raw data</a>
+                <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/air_quality_long.csv" class="btn btn-dark btn-sm">To raw data</a>
             </div>
         </div>
 
@@ -294,8 +294,7 @@ For more information about ``pivot_table``, see :ref:`reshaping.pivot`.
     <div class="d-flex flex-row gs-torefguide">
         <span class="badge badge-info">To user guide</span> 
 
-Have a look at ``groupby`` in combination with ``unstack`` at
-`:ref:``TODO LABEL`` <https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html#combining-with-stats-and-groupby>`__
+Have a look at ``groupby`` in combination with ``unstack`` at :ref:`reshaping.combine_with_groupby`.
 
 .. raw:: html
 

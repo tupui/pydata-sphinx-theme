@@ -43,7 +43,7 @@ consists of the following data columns:
 .. raw:: html
 
                         </p>
-                    <a href="https://github.com/stijnvanhoey/pandas-getting-started-tutorials/blob/master/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
+                    <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/titanic.csv" class="btn btn-dark btn-sm">To raw data</a>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@ consists of the following data columns:
     </ul>
     </div>
 
-How do I select a subset of data in a ``DataFrame``?
+How do I select a subset of a ``DataFrame``?
 ====================================================
 
 How do I select specific columns from a ``DataFrame``?
