@@ -469,9 +469,9 @@ variable (e.g. to use suitable statistical methods or plot types).</p></li>
 discrete bins. See the <a class="reference internal" href="reshaping.html#reshaping-tile-cut"><span class="std std-ref">example on tiling</span></a> in the docs.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [6]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">)})</span>
 
-<span class="gp">In [7]: </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;{0} - {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="gp">In [7]: </span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> - </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
 
-<span class="gp">In [8]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">right</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="gp">In [8]: </span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">right</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
 
 <span class="gp">In [9]: </span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="gh">Out[9]: </span><span class="go"></span>
@@ -490,7 +490,7 @@ discrete bins. See the <a class="reference internal" href="reshaping.html#reshap
 </div>
 <p>By passing a <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Categorical</span></code> object to a <code class="docutils literal notranslate"><span class="pre">Series</span></code> or assigning it to a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">raw_cat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                         <span class="n">ordered</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">   ....: </span>                         <span class="n">ordered</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [11]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">raw_cat</span><span class="p">)</span>
@@ -608,7 +608,7 @@ of <code class="xref py py-class docutils literal notranslate"><span class="pre"
 <span class="gp">In [27]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">])</span>
 
 <span class="gp">In [28]: </span><span class="n">cat_type</span> <span class="o">=</span> <span class="n">CategoricalDtype</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                            <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">   ....: </span>                            <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [29]: </span><span class="n">s_cat</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">cat_type</span><span class="p">)</span>
@@ -923,7 +923,7 @@ under <code class="docutils literal notranslate"><span class="pre">Series.cat</s
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [75]: </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">   ....: </span>    <span class="n">s</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="gp">   ....: </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;ValueError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="gp">   ....: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ValueError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="gp">   ....: </span>
 <span class="go">ValueError: Categorical categories must be unique</span>
 </pre></div>
@@ -932,7 +932,7 @@ under <code class="docutils literal notranslate"><span class="pre">Series.cat</s
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">   ....: </span>    <span class="n">s</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
 <span class="gp">   ....: </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;ValueError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="gp">   ....: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ValueError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="gp">   ....: </span>
 <span class="go">ValueError: Categorial categories cannot be null</span>
 </pre></div>
@@ -1160,7 +1160,7 @@ of an array is even) do not work and raise a <code class="docutils literal notra
 The ordering of the categorical is determined by the <code class="docutils literal notranslate"><span class="pre">categories</span></code> of that column.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [109]: </span><span class="n">dfs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;bbeebbaa&#39;</span><span class="p">),</span>
 <span class="gp">   .....: </span>                                        <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span>
-<span class="gp">   .....: </span>                                        <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+<span class="gp">   .....: </span>                                        <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
 <span class="gp">   .....: </span>                    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
 <span class="gp">   .....: </span>
 
@@ -1291,7 +1291,7 @@ dtype: bool</pre>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [124]: </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="n">cat</span> <span class="o">&gt;</span> <span class="n">cat_base2</span>
 <span class="gp">   .....: </span><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="gp">   .....: </span>
 <span class="go">TypeError: Categoricals can only be compared if &#39;categories&#39; are the same. Categories are different lengths</span>
 </pre></div>
@@ -1312,9 +1312,9 @@ If you want to compare values, use 'np.asarray(cat) &lt;op&gt; other'.
 In [127]: np.asarray(cat) &gt; base
 Out[127]: array([False, False, False])</pre>
 <p>When you compare two unordered categoricals with the same categories, the order is not considered:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [128]: </span><span class="n">c1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [128]: </span><span class="n">c1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="gp">In [129]: </span><span class="n">c2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">In [129]: </span><span class="n">c2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="gp">In [130]: </span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span>
 <span class="gh">Out[130]: </span><span class="go">array([ True,  True])</span>
@@ -1663,7 +1663,7 @@ dtype: object</pre>
 <span class="gp">In [190]: </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">df_different</span><span class="p">])</span>
 <span class="gp">   .....: </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;ValueError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ValueError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="gp">   .....: </span>
 </pre></div>
 </div>
@@ -1694,7 +1694,7 @@ the categories being combined.</p>
 <p>By default, the resulting categories will be ordered as
 they appear in the data. If you want the categories to
 be lexsorted, use <code class="docutils literal notranslate"><span class="pre">sort_categories=True</span></code> argument.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [195]: </span><span class="n">union_categoricals</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">sort_categories</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [195]: </span><span class="n">union_categoricals</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">sort_categories</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[195]: </span><span class="go"></span>
 <span class="go">[b, c, a, b]</span>
 <span class="go">Categories (3, object): [a, b, c]</span>
@@ -1703,9 +1703,9 @@ be lexsorted, use <code class="docutils literal notranslate"><span class="pre">s
 <p><code class="docutils literal notranslate"><span class="pre">union_categoricals</span></code> also works with the “easy” case of combining two
 categoricals of the same categories and order information
 (e.g. what you could also <code class="docutils literal notranslate"><span class="pre">append</span></code> for).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [196]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [196]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="gp">In [197]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [197]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [198]: </span><span class="n">union_categoricals</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
 <span class="gh">Out[198]: </span><span class="go"></span>
@@ -1714,8 +1714,8 @@ categoricals of the same categories and order information
 </pre></div>
 </div>
 <p>The below raises <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> because the categories are ordered and not identical.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">In [2]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">In [2]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">In [3]: </span><span class="n">union_categoricals</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
 <span class="gh">Out[3]:</span>
 <span class="go">TypeError: to union ordered Categoricals, all categories must be the same</span>
@@ -1726,11 +1726,11 @@ categoricals of the same categories and order information
 </div>
 <p>Ordered categoricals with different categories or orderings can be combined by
 using the <code class="docutils literal notranslate"><span class="pre">ignore_ordered=True</span></code> argument.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [199]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [199]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="gp">In [200]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [200]: </span><span class="n">b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="gp">In [201]: </span><span class="n">union_categoricals</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">ignore_order</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [201]: </span><span class="n">union_categoricals</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">],</span> <span class="n">ignore_order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[201]: </span><span class="go"></span>
 <span class="go">[a, b, c, c, b, a]</span>
 <span class="go">Categories (3, object): [a, b, c]</span>
@@ -2047,7 +2047,7 @@ object and not as a low-level NumPy array dtype. This leads to some problems.</p
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [248]: </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
 <span class="gp">   .....: </span><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="gp">   .....: </span>
 <span class="go">TypeError: data type &quot;category&quot; not understood</span>
 
@@ -2056,7 +2056,7 @@ object and not as a low-level NumPy array dtype. This leads to some problems.</p
 <span class="gp">In [250]: </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
 <span class="gp">   .....: </span><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="gp">   .....: </span>
 <span class="go">TypeError: data type not understood</span>
 </pre></div>
@@ -2080,7 +2080,7 @@ are not numeric data (even in the case that <code class="docutils literal notran
 <span class="gp">In [256]: </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">   .....: </span>    <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="gp">   .....: </span><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TypeError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 <span class="gp">   .....: </span>
 <span class="go">TypeError: Categorical cannot perform the operation sum</span>
 </pre></div>
@@ -2178,7 +2178,7 @@ change the original <code class="docutils literal notranslate"><span class="pre"
 <p>Use <code class="docutils literal notranslate"><span class="pre">copy=True</span></code> to prevent such a behaviour or simply don’t reuse <code class="docutils literal notranslate"><span class="pre">Categoricals</span></code>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [274]: </span><span class="n">cat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
 
-<span class="gp">In [275]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [275]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">cat</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [276]: </span><span class="n">cat</span>
 <span class="gh">Out[276]: </span><span class="go"></span>

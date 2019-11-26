@@ -270,9 +270,9 @@ various SQL operations would be performed using pandas.</p>
 <p>If you’re new to pandas, you might want to first read through <a class="reference internal" href="../10min.html#min"><span class="std std-ref">10 Minutes to pandas</span></a>
 to familiarize yourself with the library.</p>
 <p>As is customary, we import pandas and NumPy as follows:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="gp">In [2]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">In [2]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 <p>Most of the examples will utilize the <code class="docutils literal notranslate"><span class="pre">tips</span></code> dataset found within pandas tests.  We’ll read
@@ -599,7 +599,7 @@ columns to join on (column names or indices).</p>
 column with another DataFrame’s index.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">indexed_df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
 
-<span class="gp">In [26]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">indexed_df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [26]: </span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">indexed_df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[26]: </span><span class="go"></span>
 <span class="go">  key   value_x   value_y</span>
 <span class="go">1   B -0.282863  1.212112</span>
@@ -782,7 +782,7 @@ joined columns find a match. As of writing, FULL JOINs are not supported in all 
 <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">day</span><span class="p">,</span> <span class="n">rn</span><span class="p">;</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">rn</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;total_bill&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [35]: </span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">rn</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;total_bill&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">   ....: </span>                    <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">])</span>
 <span class="gp">   ....: </span>                    <span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">   ....: </span>     <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;rn &lt; 3&#39;</span><span class="p">)</span>
@@ -802,7 +802,7 @@ joined columns find a match. As of writing, FULL JOINs are not supported in all 
 </div>
 <p>the same using <cite>rank(method=’first’)</cite> function</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">rnk</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">])[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">]</span>
-<span class="gp">   ....: </span>                     <span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+<span class="gp">   ....: </span>                     <span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 <span class="gp">   ....: </span>     <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;rnk &lt; 3&#39;</span><span class="p">)</span>
 <span class="gp">   ....: </span>     <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;rnk&#39;</span><span class="p">]))</span>
 <span class="gp">   ....: </span>

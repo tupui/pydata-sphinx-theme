@@ -563,7 +563,7 @@ foo   one    -0.954208  1.462696 -1.743161 -0.826591 -0.345352  1.314232
 <p>We’ve “sparsified” the higher levels of the indexes to make the console output a
 bit easier on the eyes. Note that how the index is displayed can be controlled using the
 <code class="docutils literal notranslate"><span class="pre">multi_sparse</span></code> option in <code class="docutils literal notranslate"><span class="pre">pandas.set_options()</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.multi_sparse&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.multi_sparse&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
 <span class="gp">   ....: </span>    <span class="n">df</span>
 <span class="gp">   ....: </span>
 </pre></div>
@@ -898,7 +898,7 @@ as indexing <em>both</em> axes, rather than into say the <code class="docutils l
 </pre></div>
 </div>
 <p>Basic MultiIndex slicing using slices, lists, and labels.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">]),</span> <span class="p">:]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [54]: </span><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">]),</span> <span class="p">:]</span>
 <span class="gh">Out[54]: </span><span class="go"></span>
 <span class="go">lvl0           a         b     </span>
 <span class="go">lvl1         bar  foo  bah  foo</span>
@@ -1089,7 +1089,7 @@ baz   -1.206412  0.132003  1.024180
 foo    1.431256 -0.076467  0.875906
 qux   -1.170299  1.130127  0.974466</pre>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># using the slicers</span>
-<span class="gp">In [70]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">),</span> <span class="p">:]</span>
+<span class="gp">In [70]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">),</span> <span class="p">:]</span>
 <span class="gh">Out[70]: </span><span class="go"></span>
 <span class="go">                     A         B         C</span>
 <span class="go">first second                              </span>
@@ -1112,7 +1112,7 @@ providing the axis argument.</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># using the slicers</span>
-<span class="gp">In [73]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">)]</span>
+<span class="gp">In [73]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">)]</span>
 <span class="gh">Out[73]: </span><span class="go"></span>
 <span class="go">first        bar       baz       foo       qux</span>
 <span class="go">second       one       one       one       one</span>
@@ -1142,7 +1142,7 @@ providing the axis argument.</p>
 </div>
 <p>You can pass <code class="docutils literal notranslate"><span class="pre">drop_level=False</span></code> to <code class="docutils literal notranslate"><span class="pre">xs</span></code> to retain
 the level that was selected.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [76]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gh">Out[76]: </span><span class="go"></span>
 <span class="go">first        bar       baz       foo       qux</span>
 <span class="go">second       one       one       one       one</span>
@@ -1152,7 +1152,7 @@ the level that was selected.</p>
 </pre></div>
 </div>
 <p>Compare the above with the result using <code class="docutils literal notranslate"><span class="pre">drop_level=True</span></code> (the default value).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[77]: </span><span class="go"></span>
 <span class="go">first       bar       baz       foo       qux</span>
 <span class="go">A      0.895717 -1.206412  1.431256 -1.170299</span>
@@ -1311,50 +1311,50 @@ In [96]: s = pd.Series(np.random.randn(8), index=pd.MultiIndex.from_tuples(tuple
 
 In [97]: s
 Out[97]: 
-baz  one    0.206053
+baz  two    0.206053
 qux  one   -0.251905
-bar  two   -2.213588
-foo  one    1.063327
-     two    1.266143
-baz  two    0.299368
-qux  two   -0.863838
-bar  one    0.408204
+foo  two   -2.213588
+baz  one    1.063327
+foo  one    1.266143
+bar  one    0.299368
+     two   -0.863838
+qux  two    0.408204
 dtype: float64
 
 In [98]: s.sort_index()
 Out[98]: 
-bar  one    0.408204
-     two   -2.213588
-baz  one    0.206053
-     two    0.299368
-foo  one    1.063327
-     two    1.266143
-qux  one   -0.251905
+bar  one    0.299368
      two   -0.863838
+baz  one    1.063327
+     two    0.206053
+foo  one    1.266143
+     two   -2.213588
+qux  one   -0.251905
+     two    0.408204
 dtype: float64
 
 In [99]: s.sort_index(level=0)
 Out[99]: 
-bar  one    0.408204
-     two   -2.213588
-baz  one    0.206053
-     two    0.299368
-foo  one    1.063327
-     two    1.266143
-qux  one   -0.251905
+bar  one    0.299368
      two   -0.863838
+baz  one    1.063327
+     two    0.206053
+foo  one    1.266143
+     two   -2.213588
+qux  one   -0.251905
+     two    0.408204
 dtype: float64
 
 In [100]: s.sort_index(level=1)
 Out[100]: 
-bar  one    0.408204
-baz  one    0.206053
-foo  one    1.063327
+bar  one    0.299368
+baz  one    1.063327
+foo  one    1.266143
 qux  one   -0.251905
-bar  two   -2.213588
-baz  two    0.299368
-foo  two    1.266143
-qux  two   -0.863838
+bar  two   -0.863838
+baz  two    0.206053
+foo  two   -2.213588
+qux  two    0.408204
 dtype: float64</pre>
 <p id="advanced-sortlevel-byname">You may also pass a level name to <code class="docutils literal notranslate"><span class="pre">sort_index</span></code> if the <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> levels
 are named.</p>
@@ -1363,27 +1363,27 @@ are named.</p>
 In [102]: s.sort_index(level='L1')
 Out[102]: 
 L1   L2 
-bar  one    0.408204
-     two   -2.213588
-baz  one    0.206053
-     two    0.299368
-foo  one    1.063327
-     two    1.266143
-qux  one   -0.251905
+bar  one    0.299368
      two   -0.863838
+baz  one    1.063327
+     two    0.206053
+foo  one    1.266143
+     two   -2.213588
+qux  one   -0.251905
+     two    0.408204
 dtype: float64
 
 In [103]: s.sort_index(level='L2')
 Out[103]: 
 L1   L2 
-bar  one    0.408204
-baz  one    0.206053
-foo  one    1.063327
+bar  one    0.299368
+baz  one    1.063327
+foo  one    1.266143
 qux  one   -0.251905
-bar  two   -2.213588
-baz  two    0.299368
-foo  two    1.266143
-qux  two   -0.863838
+bar  two   -0.863838
+baz  two    0.206053
+foo  two   -2.213588
+qux  two    0.408204
 dtype: float64</pre>
 <p>On higher dimensional objects, you can sort any of the other axes by level if
 they have a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code>:</p>
@@ -1552,8 +1552,8 @@ faster than fancy indexing.</p>
 <span class="gp">In [135]: </span><span class="o">%</span><span class="k">timeit</span> arr[indexer]
 <span class="gp">   .....: </span><span class="o">%</span><span class="k">timeit</span> arr.take(indexer, axis=0)
 <span class="gp">   .....: </span>
-<span class="go">164 us +- 3.68 us per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
-<span class="go">50.4 us +- 774 ns per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
+<span class="go">160 us +- 2.46 us per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
+<span class="go">51.1 us +- 1.92 us per loop (mean +- std. dev. of 7 runs, 10000 loops each)</span>
 </pre></div>
 </div>
 </div>

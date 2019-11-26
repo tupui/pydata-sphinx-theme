@@ -242,7 +242,7 @@
           <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
               <div>
                 
-  <div class="highlight-ipython notranslate" id="min-tut-07-reshape"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+  <div class="highlight-ipython notranslate" id="min-tut-07-reshape"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 <div class="card gs-data">
@@ -331,7 +331,7 @@ format</a>.</p>
         <a href="https://github.com/pandas-dev/pandas/tree/master/doc/data/air_quality_long.csv" class="btn btn-dark btn-sm">To raw data</a>
     </div>
 </div><div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">air_quality</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/air_quality_long.csv&quot;</span><span class="p">,</span>
-<span class="gp">   ...: </span>                          <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;date.utc&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">   ...: </span>                          <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;date.utc&quot;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">   ...: </span>
 
 <span class="gp">In [5]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -368,7 +368,7 @@ format</a>.</p>
     </li>
 </ul><ul class="task-bullet">
     <li><p>I want to sort the titanic data according to the cabin class and age in descending order.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [7]: </span><span class="n">titanic</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pclass&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 <span class="gh">Out[7]: </span><span class="go"></span>
 <span class="go">     PassengerId  Survived  Pclass  ...    Fare Cabin  Embarked</span>
 <span class="go">851          852         0       3  ...  7.7750   NaN         S</span>
@@ -441,7 +441,7 @@ series at the same time:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [13]: </span><span class="n">no2</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="gh">Out[13]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fd41e507490&gt;</span>
+<span class="gh">Out[13]: </span><span class="go">&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fc5a53eeb90&gt;</span>
 </pre></div>
 </div>
 <img alt="../../_images/7_reshape_columns.png" src="../../_images/7_reshape_columns.png" />
@@ -479,7 +479,7 @@ interested in summary columns for each variable separately as well, put
 the <code class="docutils literal notranslate"><span class="pre">margin</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [15]: </span><span class="n">air_quality</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;location&quot;</span><span class="p">,</span>
 <span class="gp">   ....: </span>                        <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;parameter&quot;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span>
-<span class="gp">   ....: </span>                        <span class="n">margins</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">   ....: </span>                        <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 <span class="gh">Out[15]: </span><span class="go"></span>
 <span class="go">parameter                 no2       pm25        All</span>

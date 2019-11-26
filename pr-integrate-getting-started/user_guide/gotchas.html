@@ -393,7 +393,7 @@ Out[9]: 296048</pre>
 <p>By default the memory usage of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>’s index is shown in the
 returned <code class="docutils literal notranslate"><span class="pre">Series</span></code>, the memory usage of the index can be suppressed by passing
 the <code class="docutils literal notranslate"><span class="pre">index=False</span></code> argument:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [10]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gh">Out[10]: </span><span class="go"></span>
 <span class="go">int64              40000</span>
 <span class="go">float64            40000</span>
@@ -418,14 +418,14 @@ representation; i.e. 1KB = 1024 bytes).</p>
 something to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>. This happens in an <code class="docutils literal notranslate"><span class="pre">if</span></code>-statement or when using the
 boolean operations: <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, and <code class="docutils literal notranslate"><span class="pre">not</span></code>. It is not clear what the result
 of the following code should be:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]):</span>
 <span class="gp">... </span>    <span class="k">pass</span>
 </pre></div>
 </div>
 <p>Should it be <code class="docutils literal notranslate"><span class="pre">True</span></code> because it’s not zero-length, or <code class="docutils literal notranslate"><span class="pre">False</span></code> because there
 are <code class="docutils literal notranslate"><span class="pre">False</span></code> values? It is unclear, so instead, pandas raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I was true&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I was true&quot;</span><span class="p">)</span>
 <span class="go">Traceback</span>
 <span class="go">    ...</span>
 <span class="go">ValueError: The truth value of an array is ambiguous. Use a.empty, a.any() or a.all().</span>
@@ -434,14 +434,14 @@ are <code class="docutils literal notranslate"><span class="pre">False</span></c
 <p>You need to explicitly choose what you want to do with the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, e.g.
 use <a class="reference internal" href="../reference/api/pandas.DataFrame.any.html#pandas.DataFrame.any" title="pandas.DataFrame.any"><code class="xref py py-meth docutils literal notranslate"><span class="pre">any()</span></code></a>, <a class="reference internal" href="../reference/api/pandas.DataFrame.all.html#pandas.DataFrame.all" title="pandas.DataFrame.all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">all()</span></code></a> or <a class="reference internal" href="../reference/api/pandas.DataFrame.empty.html#pandas.DataFrame.empty" title="pandas.DataFrame.empty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">empty()</span></code></a>.
 Alternatively, you might want to compare if the pandas object is <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I was not None&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I was not None&quot;</span><span class="p">)</span>
 <span class="go">I was not None</span>
 </pre></div>
 </div>
 <p>Below is how to check if any of the values are <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I am any&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I am any&quot;</span><span class="p">)</span>
 <span class="go">I am any</span>
 </pre></div>
 </div>

@@ -1688,7 +1688,7 @@ control on the categories and order, create a
 that column’s <code class="docutils literal notranslate"><span class="pre">dtype</span></code>.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [34]: </span><span class="kn">from</span> <span class="nn">pandas.api.types</span> <span class="kn">import</span> <span class="n">CategoricalDtype</span>
 
-<span class="gp">In [35]: </span><span class="n">dtype</span> <span class="o">=</span> <span class="n">CategoricalDtype</span><span class="p">([</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [35]: </span><span class="n">dtype</span> <span class="o">=</span> <span class="n">CategoricalDtype</span><span class="p">([</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [36]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">})</span><span class="o">.</span><span class="n">dtypes</span>
 <span class="gt">---------------------------------------------------------------------------</span>
@@ -1979,7 +1979,7 @@ which modifies a series of duplicate columns ‘X’, …, ‘X’ to become
 ‘X’, ‘X.1’, …, ‘X.N’.  If <code class="docutils literal notranslate"><span class="pre">mangle_dupe_cols=False</span></code>, duplicate data can
 arise:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;a,b,a</span><span class="se">\n</span><span class="s1">0,1,2</span><span class="se">\n</span><span class="s1">3,4,5&#39;</span>
-<span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">mangle_dupe_cols</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">mangle_dupe_cols</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gh">Out[3]:</span>
 <span class="go">   a  b  a</span>
 <span class="go">0  2  1  2</span>
@@ -1989,7 +1989,7 @@ arise:</p>
 <p>To prevent users from encountering this problem with duplicate data, a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>
 exception is raised if <code class="docutils literal notranslate"><span class="pre">mangle_dupe_cols</span> <span class="pre">!=</span> <span class="pre">True</span></code>:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [2]: </span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;a,b,a</span><span class="se">\n</span><span class="s1">0,1,2</span><span class="se">\n</span><span class="s1">3,4,5&#39;</span>
-<span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">mangle_dupe_cols</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">mangle_dupe_cols</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">...</span>
 <span class="go">ValueError: Setting mangle_dupe_cols=False is not supported yet</span>
 </pre></div>
@@ -2089,11 +2089,11 @@ NameError: name 'StringIO' is not defined</pre>
 <span class="gp">   ....: </span>        <span class="s1">&#39;4,5,6&#39;</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
-<span class="gp">In [64]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">skip_blank_lines</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">In [64]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">skip_blank_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">64</span><span class="o">-</span><span class="mi">261387</span><span class="n">fe229d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">skip_blank_lines</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">skip_blank_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;StringIO&#39; is not defined
 </pre></div>
@@ -2167,7 +2167,7 @@ NameError: name 'StringIO' is not defined</pre>
 <div class="section" id="comments">
 <span id="io-comments"></span><h4>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h4>
 <p>Sometimes comments or meta data may be included in a file:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [72]: </span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [72]: </span><span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="go">ID,level,category</span>
 <span class="go">Patient1,123000,x # really unpleasant</span>
 <span class="go">Patient2,23000,y # wouldn&#39;t take his medicine</span>
@@ -2394,7 +2394,7 @@ used to specify a combination of columns to parse the dates and/or times from.</
 columns will be prepended to the output (so as to not affect the existing column
 order) and the new column names will be the concatenation of the component
 column names:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [97]: </span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [97]: </span><span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="go">KORD,19990127, 19:00:00, 18:56:00, 0.8100</span>
 <span class="go">KORD,19990127, 20:00:00, 19:56:00, 0.0100</span>
 <span class="go">KORD,19990127, 21:00:00, 20:56:00, -0.5900</span>
@@ -2402,7 +2402,7 @@ column names:</p>
 <span class="go">KORD,19990127, 22:00:00, 21:56:00, -0.5900</span>
 <span class="go">KORD,19990127, 23:00:00, 22:56:00, -0.5900</span>
 
-<span class="gp">In [98]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="gp">In [98]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
 
 <span class="gp">In [99]: </span><span class="n">df</span>
 <span class="gh">Out[99]: </span><span class="go"></span>
@@ -2417,8 +2417,8 @@ column names:</p>
 </div>
 <p>By default the parser removes the component date columns, but you can choose
 to retain them via the <code class="docutils literal notranslate"><span class="pre">keep_date_col</span></code> keyword:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [100]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span>
-<span class="gp">   .....: </span>                 <span class="n">keep_date_col</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [100]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span>
+<span class="gp">   .....: </span>                 <span class="n">keep_date_col</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 
 <span class="gp">In [101]: </span><span class="n">df</span>
@@ -2442,7 +2442,7 @@ single column.</p>
 <p>You can also use a dict to specify custom name columns:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [102]: </span><span class="n">date_spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nominal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;actual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]}</span>
 
-<span class="gp">In [103]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="n">date_spec</span><span class="p">)</span>
+<span class="gp">In [103]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="n">date_spec</span><span class="p">)</span>
 
 <span class="gp">In [104]: </span><span class="n">df</span>
 <span class="gh">Out[104]: </span><span class="go"></span>
@@ -2461,7 +2461,7 @@ specification is based off of this new set of columns rather than the original
 data columns:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [105]: </span><span class="n">date_spec</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;nominal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;actual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]}</span>
 
-<span class="gp">In [106]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="n">date_spec</span><span class="p">,</span>
+<span class="gp">In [106]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="n">date_spec</span><span class="p">,</span>
 <span class="gp">   .....: </span>                 <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># index is the nominal column</span>
 <span class="gp">   .....: </span>
 
@@ -2504,7 +2504,7 @@ specify <cite>index_col</cite> as a column label rather then as an index on the 
 <h4>Date Parsing Functions<a class="headerlink" href="#date-parsing-functions" title="Permalink to this headline">¶</a></h4>
 <p>Finally, the parser allows you to specify a custom <code class="docutils literal notranslate"><span class="pre">date_parser</span></code> function to
 take full advantage of the flexibility of the date parsing API:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [108]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="n">date_spec</span><span class="p">,</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [108]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="n">date_spec</span><span class="p">,</span>
 <span class="gp">   .....: </span>                 <span class="n">date_parser</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">date_converters</span><span class="o">.</span><span class="n">parse_date_time</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 
@@ -2701,8 +2701,8 @@ representing December 30th, 2011 at 00:00:00):</p>
 <code class="docutils literal notranslate"><span class="pre">dayfirst=True</span></code>, it will guess “01/12/2011” to be December 1st. With
 <code class="docutils literal notranslate"><span class="pre">dayfirst=False</span></code> (default) it will guess “01/12/2011” to be January 12th.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Try to infer the format for the index column</span>
-<span class="gp">In [115]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-<span class="gp">   .....: </span>                 <span class="n">infer_datetime_format</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [115]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">   .....: </span>                 <span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 
 <span class="gp">In [116]: </span><span class="n">df</span>
@@ -2844,11 +2844,11 @@ effectively <code class="docutils literal notranslate"><span class="pre">[5.0,</
 <p>In the example above <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">5.0</span></code> will be recognized as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, in
 addition to the defaults. A string will first be interpreted as a numerical
 <code class="docutils literal notranslate"><span class="pre">5</span></code>, then as a <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path_to_file.csv&#39;</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path_to_file.csv&#39;</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Above, only an empty field will be recognized as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path_to_file.csv&#39;</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path_to_file.csv&#39;</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NA&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Above, both <code class="docutils literal notranslate"><span class="pre">NA</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code> as strings are <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
@@ -2938,7 +2938,7 @@ too many fields will raise an error by default:</p>
 </pre></div>
 </div>
 <p>You can elect to skip bad lines:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">error_bad_lines</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">error_bad_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">Skipping line 3: expected 3 fields, saw 4</span>
 
 <span class="gh">Out[29]:</span>
@@ -2965,7 +2965,7 @@ data that appear in some lines but not others:</p>
 By default it uses the Excel dialect but you can specify either the dialect name
 or a <a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.Dialect" title="(in Python v3.8)"><code class="docutils literal notranslate"><span class="pre">csv.Dialect</span></code></a> instance.</p>
 <p>Suppose you had data with unenclosed quotes:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [143]: </span><span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [143]: </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="go">label1,label2,label3</span>
 <span class="go">index1,&quot;a,c,e</span>
 <span class="go">index2,b,d,f</span>
@@ -3061,7 +3061,7 @@ Can be used to specify the filler character of the fields
 if it is not spaces (e.g., ‘~’).</p></li>
 </ul>
 <p>Consider a typical fixed-width data file:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [156]: </span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [156]: </span><span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="go">id8141    360.242940   149.910199   11950.7</span>
 <span class="go">id1594    444.953632   166.985655   11788.4</span>
 <span class="go">id1849    364.136849   183.628767   11806.2</span>
@@ -3074,7 +3074,7 @@ column specifications to the <cite>read_fwf</cite> function along with the file 
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Column specifications are a list of half-intervals</span>
 <span class="gp">In [157]: </span><span class="n">colspecs</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">33</span><span class="p">),</span> <span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">43</span><span class="p">)]</span>
 
-<span class="gp">In [158]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">,</span> <span class="n">colspecs</span><span class="o">=</span><span class="n">colspecs</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">In [158]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">,</span> <span class="n">colspecs</span><span class="o">=</span><span class="n">colspecs</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="gp">In [159]: </span><span class="n">df</span>
 <span class="gh">Out[159]: </span><span class="go"></span>
@@ -3093,7 +3093,7 @@ column widths for contiguous columns:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># Widths are a list of integers</span>
 <span class="gp">In [160]: </span><span class="n">widths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 
-<span class="gp">In [161]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="n">widths</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="gp">In [161]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">,</span> <span class="n">widths</span><span class="o">=</span><span class="n">widths</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="gp">In [162]: </span><span class="n">df</span>
 <span class="gh">Out[162]: </span><span class="go"></span>
@@ -3111,7 +3111,7 @@ so it’s ok to have extra separation between the columns in the file.</p>
 first 100 rows of the file. It can do it only in cases when the columns are
 aligned and correctly separated by the provided <code class="docutils literal notranslate"><span class="pre">delimiter</span></code> (default delimiter
 is whitespace).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [163]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [163]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="s1">&#39;bar.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="gp">In [164]: </span><span class="n">df</span>
 <span class="gh">Out[164]: </span><span class="go"></span>
@@ -3150,7 +3150,7 @@ dtype: object</pre>
 <h4>Files with an “implicit” index column<a class="headerlink" href="#files-with-an-implicit-index-column" title="Permalink to this headline">¶</a></h4>
 <p>Consider a file with one less entry in the header than the number of data
 column:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [167]: </span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [167]: </span><span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="go">A,B,C</span>
 <span class="go">20090101,a,1,2</span>
 <span class="go">20090102,b,3,4</span>
@@ -3169,7 +3169,7 @@ as the index of the <code class="docutils literal notranslate"><span class="pre"
 </div>
 <p>Note that the dates weren’t automatically parsed. In that case you would need
 to do as before:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [169]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [169]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;foo.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [170]: </span><span class="n">df</span><span class="o">.</span><span class="n">index</span>
 <span class="gh">Out[170]: </span><span class="go">DatetimeIndex([&#39;2009-01-01&#39;, &#39;2009-01-02&#39;, &#39;2009-01-03&#39;], dtype=&#39;datetime64[ns]&#39;, freq=None)</span>
@@ -3179,7 +3179,7 @@ to do as before:</p>
 <div class="section" id="reading-an-index-with-a-multiindex">
 <h4>Reading an index with a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code><a class="headerlink" href="#reading-an-index-with-a-multiindex" title="Permalink to this headline">¶</a></h4>
 <p id="io-csv-multiindex">Suppose you have data indexed by two columns:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [171]: </span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/mindex_ex.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [171]: </span><span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/mindex_ex.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="go">year,indiv,zit,xit</span>
 <span class="go">1977,&quot;A&quot;,1.2,.6</span>
 <span class="go">1977,&quot;B&quot;,1.5,.5</span>
@@ -3329,7 +3329,7 @@ See the <a class="reference internal" href="cookbook.html#cookbook-csv-multiple-
 <span id="io-chunking"></span><h3>Iterating through files chunk by chunk<a class="headerlink" href="#iterating-through-files-chunk-by-chunk" title="Permalink to this headline">¶</a></h3>
 <p>Suppose you wish to iterate through a (potentially very large) file lazily
 rather than reading the entire file into memory, such as the following:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [184]: </span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.sv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [184]: </span><span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;tmp.sv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="go">|0|1|2|3</span>
 <span class="go">0|0.4691122999071863|-0.2828633443286633|-1.5090585031735124|-1.1356323710171934</span>
 <span class="go">1|1.2121120250208506|-0.17321464905330858|0.11920871129693428|-1.0442359662799567</span>
@@ -3365,7 +3365,7 @@ value will be an iterable object of type <code class="docutils literal notransla
 <pre class="literal-block">In [187]: reader = pd.read_csv('tmp.sv', sep='|', chunksize=4)
 
 In [188]: reader
-Out[188]: &lt;pandas.io.parsers.TextFileReader at 0x7fd416fe0390&gt;
+Out[188]: &lt;pandas.io.parsers.TextFileReader at 0x7fc59dde5d50&gt;
 
 In [189]: for chunk in reader:
    .....:     print(chunk)
@@ -3384,7 +3384,7 @@ In [189]: for chunk in reader:
 8           8  1.075770 -0.10905  1.643563 -1.469388
 9           9  0.357021 -0.67460 -1.776904 -0.968914</pre>
 <p>Specifying <code class="docutils literal notranslate"><span class="pre">iterator=True</span></code> will also return the <code class="docutils literal notranslate"><span class="pre">TextFileReader</span></code> object:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [190]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.sv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [190]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tmp.sv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [191]: </span><span class="n">reader</span><span class="o">.</span><span class="n">get_chunk</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="gh">Out[191]: </span><span class="go"></span>
@@ -3631,7 +3631,7 @@ label ordering use the <cite>split</cite> option as it uses ordered containers.<
 
 <span class="gp">In [208]: </span><span class="n">dfd</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">)</span>
 
-<span class="gp">In [209]: </span><span class="n">dfd</span> <span class="o">=</span> <span class="n">dfd</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">In [209]: </span><span class="n">dfd</span> <span class="o">=</span> <span class="n">dfd</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="gp">In [210]: </span><span class="n">json</span> <span class="o">=</span> <span class="n">dfd</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">date_format</span><span class="o">=</span><span class="s1">&#39;iso&#39;</span><span class="p">)</span>
 
@@ -3660,14 +3660,14 @@ label ordering use the <cite>split</cite> option as it uses ordered containers.<
 
 <span class="gp">In [218]: </span><span class="n">dfj2</span><span class="p">[</span><span class="s1">&#39;ints&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
-<span class="gp">In [219]: </span><span class="n">dfj2</span><span class="p">[</span><span class="s1">&#39;bools&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="gp">In [219]: </span><span class="n">dfj2</span><span class="p">[</span><span class="s1">&#39;bools&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="gp">In [220]: </span><span class="n">dfj2</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="gp">In [221]: </span><span class="n">dfj2</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">)</span>
 
 <span class="gp">In [222]: </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="gp">   .....: </span>
 <span class="go">{&quot;A&quot;:{&quot;1356998400000&quot;:-1.2945235903,&quot;1357084800000&quot;:0.2766617129,&quot;1357171200000&quot;:-0.0139597524,&quot;1357257600000&quot;:-0.0061535699,&quot;1357344000000&quot;:0.8957173022},&quot;B&quot;:{&quot;1356998400000&quot;:0.4137381054,&quot;1357084800000&quot;:-0.472034511,&quot;1357171200000&quot;:-0.3625429925,&quot;1357257600000&quot;:-0.923060654,&quot;1357344000000&quot;:0.8052440254},&quot;date&quot;:{&quot;1356998400000&quot;:1356998400000,&quot;1357084800000&quot;:1356998400000,&quot;1357171200000&quot;:1356998400000,&quot;1357257600000&quot;:1356998400000,&quot;1357344000000&quot;:1356998400000},&quot;ints&quot;:{&quot;1356998400000&quot;:0,&quot;1357084800000&quot;:1,&quot;1357171200000&quot;:2,&quot;1357257600000&quot;:3,&quot;1357344000000&quot;:4},&quot;bools&quot;:{&quot;1356998400000&quot;:true,&quot;1357084800000&quot;:true,&quot;1357171200000&quot;:true,&quot;1357257600000&quot;:true,&quot;1357344000000&quot;:true}}</span>
 </pre></div>
@@ -3950,11 +3950,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [248]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats)
-<span class="go">11.3 ms +- 108 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">11.4 ms +- 265 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [249]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats, numpy=True)
-<span class="go">8.24 ms +- 141 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">8.48 ms +- 236 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <p>The speedup is less noticeable for smaller datasets:</p>
@@ -3962,11 +3962,11 @@ data:</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [251]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats)
-<span class="go">7.61 ms +- 38 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">7.8 ms +- 275 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [252]: </span><span class="o">%</span><span class="k">timeit</span> pd.read_json(jsonfloats, numpy=True)
-<span class="go">6.58 ms +- 147 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
+<span class="go">6.67 ms +- 222 us per loop (mean +- std. dev. of 7 runs, 100 loops each)</span>
 </pre></div>
 </div>
 <div class="alert alert-warning">
@@ -4069,7 +4069,7 @@ NameError                                 Traceback (most recent call last)
 NameError: name 'StringIO' is not defined
 
 In [263]: reader
-Out[263]: &lt;pandas.io.parsers.TextFileReader at 0x7fd416fdb290&gt;
+Out[263]: &lt;pandas.io.parsers.TextFileReader at 0x7fc59dd7a550&gt;
 
 In [264]: for chunk in reader:
    .....:     print(chunk)
@@ -4322,7 +4322,7 @@ indicate missing values and the subsequent read cannot distinguish the intent.</
 
 <span class="gp">In [290]: </span><span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
 
-<span class="gp">In [291]: </span><span class="k">print</span><span class="p">(</span><span class="n">new_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">In [291]: </span><span class="nb">print</span><span class="p">(</span><span class="n">new_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="go">None</span>
 </pre></div>
 </div>
@@ -4505,7 +4505,7 @@ as well):</p>
 <p>Specify an HTML attribute:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dfs1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;table&#39;</span><span class="p">})</span>
 <span class="n">dfs2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;sortable&#39;</span><span class="p">})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">dfs1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dfs2</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># Should be True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">dfs1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dfs2</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># Should be True</span>
 </pre></div>
 </div>
 <p>Specify values that should be converted to NaN:</p>
@@ -4516,7 +4516,7 @@ as well):</p>
 <p><span class="versionmodified added">New in version 0.19.</span></p>
 </div>
 <p>Specify whether to keep the default set of NaN values:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dfs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dfs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="versionadded">
@@ -4540,7 +4540,7 @@ columns to strings.</p>
 </div>
 <p>Read in pandas <code class="docutils literal notranslate"><span class="pre">to_html</span></code> output (with some loss of floating point precision):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;{0:.40g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{0:.40g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
 <span class="n">dfin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -4625,7 +4625,7 @@ In [302]: print(df.to_html())  # raw html
     </tr>
   </tbody>
 </table><p>The <code class="docutils literal notranslate"><span class="pre">columns</span></code> argument will limit the columns shown:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [303]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [303]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 <span class="go">&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;</span>
 <span class="go">  &lt;thead&gt;</span>
 <span class="go">    &lt;tr style=&quot;text-align: right;&quot;&gt;</span>
@@ -4666,7 +4666,7 @@ In [302]: print(df.to_html())  # raw html
   </tbody>
 </table><p><code class="docutils literal notranslate"><span class="pre">float_format</span></code> takes a Python callable to control the precision of floating
 point values:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [304]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;{0:.10f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [304]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{0:.10f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">))</span>
 <span class="go">&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;</span>
 <span class="go">  &lt;thead&gt;</span>
 <span class="go">    &lt;tr style=&quot;text-align: right;&quot;&gt;</span>
@@ -4713,7 +4713,7 @@ point values:</p>
   </tbody>
 </table><p><code class="docutils literal notranslate"><span class="pre">bold_rows</span></code> will make the row labels bold by default, but you can turn that
 off:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [305]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">bold_rows</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [305]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">bold_rows</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 <span class="go">&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;</span>
 <span class="go">  &lt;thead&gt;</span>
 <span class="go">    &lt;tr style=&quot;text-align: right;&quot;&gt;</span>
@@ -4760,7 +4760,7 @@ off:</p>
 </table><p>The <code class="docutils literal notranslate"><span class="pre">classes</span></code> argument provides the ability to give the resulting HTML
 table CSS classes. Note that these classes are <em>appended</em> to the existing
 <code class="docutils literal notranslate"><span class="pre">'dataframe'</span></code> class.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [306]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;awesome_table_class&#39;</span><span class="p">,</span> <span class="s1">&#39;even_more_awesome_class&#39;</span><span class="p">]))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [306]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;awesome_table_class&#39;</span><span class="p">,</span> <span class="s1">&#39;even_more_awesome_class&#39;</span><span class="p">]))</span>
 <span class="go">&lt;table border=&quot;1&quot; class=&quot;dataframe awesome_table_class even_more_awesome_class&quot;&gt;</span>
 <span class="go">  &lt;thead&gt;</span>
 <span class="go">    &lt;tr style=&quot;text-align: right;&quot;&gt;</span>
@@ -4794,7 +4794,7 @@ that contain URLs.</p>
 <span class="gp">   .....: </span>    <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;https://www.python.org/&#39;</span><span class="p">,</span> <span class="s1">&#39;http://pandas.pydata.org&#39;</span><span class="p">]})</span>
 <span class="gp">   .....: </span>
 
-<span class="gp">In [308]: </span><span class="k">print</span><span class="p">(</span><span class="n">url_df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">render_links</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="gp">In [308]: </span><span class="nb">print</span><span class="p">(</span><span class="n">url_df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">render_links</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="go">&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;</span>
 <span class="go">  &lt;thead&gt;</span>
 <span class="go">    &lt;tr style=&quot;text-align: right;&quot;&gt;</span>
@@ -4846,7 +4846,7 @@ that contain URLs.</p>
 </pre></div>
 </div>
 <p>Escaped:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [310]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [310]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
 <span class="go">&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;</span>
 <span class="go">  &lt;thead&gt;</span>
 <span class="go">    &lt;tr style=&quot;text-align: right;&quot;&gt;</span>
@@ -4901,7 +4901,7 @@ that contain URLs.</p>
     </tr>
   </tbody>
 </table><p>Not escaped:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [311]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [311]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 <span class="go">&lt;table border=&quot;1&quot; class=&quot;dataframe&quot;&gt;</span>
 <span class="go">  &lt;thead&gt;</span>
 <span class="go">    &lt;tr style=&quot;text-align: right;&quot;&gt;</span>
@@ -5067,7 +5067,7 @@ different parameters:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="c1"># For when Sheet1&#39;s format differs from Sheet2</span>
 <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">xls</span><span class="p">:</span>
-    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
     <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sheet2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> <span class="s1">&#39;Sheet2&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -5077,14 +5077,14 @@ of sheet names can simply be passed to <code class="docutils literal notranslate
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># using the ExcelFile class</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelFile</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">xls</span><span class="p">:</span>
-    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
-    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sheet2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> <span class="s1">&#39;Sheet2&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sheet2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xls</span><span class="p">,</span> <span class="s1">&#39;Sheet2&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
 
 <span class="c1"># equivalent using the read_excel function</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="s1">&#39;Sheet2&#39;</span><span class="p">],</span>
-                     <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
+                     <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -5108,12 +5108,12 @@ convention, beginning at 0.</p></li>
 <li><p>Pass a <code class="docutils literal notranslate"><span class="pre">None</span></code> to return a dictionary of all available sheets.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Returns a DataFrame</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Using the sheet index:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Returns a DataFrame</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Using all default values:</p>
@@ -5123,7 +5123,7 @@ convention, beginning at 0.</p></li>
 </div>
 <p>Using None to get all sheets:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Returns a dictionary of DataFrames</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Using a list to get multiple sheets:</p>
@@ -5506,7 +5506,7 @@ written. For example:</p>
 The <code class="docutils literal notranslate"><span class="pre">index_label</span></code> will be placed in the second
 row instead of the first. You can place it in the first row by setting the
 <code class="docutils literal notranslate"><span class="pre">merge_cells</span></code> option in <code class="docutils literal notranslate"><span class="pre">to_excel()</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">merge_cells</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">,</span> <span class="n">index_label</span><span class="o">=</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">merge_cells</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In order to write separate <code class="docutils literal notranslate"><span class="pre">DataFrames</span></code> to separate sheets in a single Excel file,
@@ -5920,8 +5920,8 @@ as an EXPERIMENTAL LIBRARY, the storage format may not be stable until a future 
 </pre></div>
 </div>
 <p>You can pass <code class="docutils literal notranslate"><span class="pre">iterator=True</span></code> to iterate over the unpacked results:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [352]: </span><span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_msgpack</span><span class="p">(</span><span class="s1">&#39;foo.msg&#39;</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [352]: </span><span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_msgpack</span><span class="p">(</span><span class="s1">&#39;foo.msg&#39;</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 <span class="go">          A         B</span>
 <span class="go">0  0.170801  0.895366</span>
@@ -5940,7 +5940,7 @@ as an EXPERIMENTAL LIBRARY, the storage format may not be stable until a future 
 </pre></div>
 </div>
 <p>You can pass <code class="docutils literal notranslate"><span class="pre">append=True</span></code> to the writer to append to an existing pack:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [353]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_msgpack</span><span class="p">(</span><span class="s1">&#39;foo.msg&#39;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [353]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_msgpack</span><span class="p">(</span><span class="s1">&#39;foo.msg&#39;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [354]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_msgpack</span><span class="p">(</span><span class="s1">&#39;foo.msg&#39;</span><span class="p">)</span>
 <span class="gh">Out[354]: </span><span class="go"></span>
@@ -6523,18 +6523,18 @@ will yield a tuple for each group key along with the relative keys of its conten
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [399]: </span><span class="k">for</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">subgroups</span><span class="p">,</span> <span class="n">subkeys</span><span class="p">)</span> <span class="ow">in</span> <span class="n">store</span><span class="o">.</span><span class="n">walk</span><span class="p">():</span>
 <span class="gp">   .....: </span>    <span class="k">for</span> <span class="n">subgroup</span> <span class="ow">in</span> <span class="n">subgroups</span><span class="p">:</span>
-<span class="gp">   .....: </span>        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;GROUP: {}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">subgroup</span><span class="p">))</span>
+<span class="gp">   .....: </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GROUP: </span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">subgroup</span><span class="p">))</span>
 <span class="gp">   .....: </span>    <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="n">subkeys</span><span class="p">:</span>
 <span class="gp">   .....: </span>        <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">path</span><span class="p">,</span> <span class="n">subkey</span><span class="p">])</span>
-<span class="gp">   .....: </span>        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;KEY: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-<span class="gp">   .....: </span>        <span class="k">print</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+<span class="gp">   .....: </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;KEY: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+<span class="gp">   .....: </span>        <span class="nb">print</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 <span class="gp">   .....: </span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">399</span><span class="o">-</span><span class="mi">2</span><span class="n">d918dbe0f51</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">for</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">subgroups</span><span class="p">,</span> <span class="n">subkeys</span><span class="p">)</span> <span class="ow">in</span> <span class="n">store</span><span class="o">.</span><span class="n">walk</span><span class="p">():</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">for</span> <span class="n">subgroup</span> <span class="ow">in</span> <span class="n">subgroups</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="k">print</span><span class="p">(</span><span class="s1">&#39;GROUP: {}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">subgroup</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GROUP: </span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">subgroup</span><span class="p">))</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">for</span> <span class="n">subkey</span> <span class="ow">in</span> <span class="n">subkeys</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">path</span><span class="p">,</span> <span class="n">subkey</span><span class="p">])</span>
 
@@ -6772,11 +6772,11 @@ variable.</p>
 <span class="gp">   .....: </span>                   <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;20130101&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
 <span class="gp">   .....: </span>
 
-<span class="gp">In [415]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;dfq&#39;</span><span class="p">,</span> <span class="n">dfq</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [415]: </span><span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;dfq&#39;</span><span class="p">,</span> <span class="n">dfq</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">415</span><span class="o">-</span><span class="mi">82</span><span class="n">c5e5a63f3a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;dfq&#39;</span><span class="p">,</span> <span class="n">dfq</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;dfq&#39;</span><span class="p">,</span> <span class="n">dfq</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">data_columns</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;store&#39; is not defined
 </pre></div>
@@ -7084,13 +7084,13 @@ create a new table!).</p>
 to <code class="docutils literal notranslate"><span class="pre">select</span></code> and <code class="docutils literal notranslate"><span class="pre">select_as_multiple</span></code> to return an iterator on the results.
 The default is 50,000 rows returned in a chunk.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [451]: </span><span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">451</span><span class="o">-</span><span class="mf">4e0</span><span class="n">e7b0a8a32</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">store</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;store&#39; is not defined
 </pre></div>
@@ -7100,7 +7100,7 @@ The default is 50,000 rows returned in a chunk.</p>
 <p>You can also use the iterator with <code class="docutils literal notranslate"><span class="pre">read_hdf</span></code> which will open, then
 automatically close the store when finished iterating.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s1">&#39;store.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8413,11 +8413,11 @@ be written to the file.</p>
 the file, because that column doesn’t exist in the target table.</p>
 <p>If you want to omit a dataframe’s indexes when writing, pass <code class="docutils literal notranslate"><span class="pre">index=False</span></code> to
 <a class="reference internal" href="../reference/api/pandas.DataFrame.to_parquet.html#pandas.DataFrame.to_parquet" title="pandas.DataFrame.to_parquet"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_parquet()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [524]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">&#39;test.parquet&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [524]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">&#39;test.parquet&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">524</span><span class="o">-</span><span class="mf">92139e5</span><span class="n">cd2c3</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">&#39;test.parquet&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">&#39;test.parquet&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">to_parquet</span><span class="nt">(self, fname, engine, compression, index, partition_cols, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">2235</span>             <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
@@ -8459,13 +8459,13 @@ underlying engine’s default behavior.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [525]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
 
 <span class="gp">In [526]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;pyarrow&#39;</span><span class="p">,</span>
-<span class="gp">   .....: </span>              <span class="n">partition_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="gp">   .....: </span>              <span class="n">partition_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">526</span><span class="o">-</span><span class="n">a65c39059f84</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;pyarrow&#39;</span><span class="p">,</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>               <span class="n">partition_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>               <span class="n">partition_cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/core/frame.py</span> in <span class="ni">to_parquet</span><span class="nt">(self, fname, engine, compression, index, partition_cols, **kwargs)</span>
 <span class="g g-Whitespace">   </span><span class="mi">2235</span>             <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span>
@@ -8770,7 +8770,7 @@ specific backend dialect features.</p></li>
 <p>Example of a callable using PostgreSQL <a class="reference external" href="https://www.postgresql.org/docs/current/static/sql-copy.html">COPY clause</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alternative to_sql() *method* for DBs that support COPY FROM</span>
 <span class="kn">import</span> <span class="nn">csv</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
 <span class="k">def</span> <span class="nf">psql_insert_copy</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">data_iter</span><span class="p">):</span>
     <span class="c1"># gets a DBAPI connection that can provide a cursor</span>
@@ -8888,25 +8888,25 @@ which are database-agnostic.</p>
 Specifying this will return an iterator through chunks of the query result:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [540]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">))</span>
 
-<span class="gp">In [541]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data_chunks&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">In [541]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data_chunks&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">541</span><span class="o">-</span><span class="n">c1a842c1a9cc</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data_chunks&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s1">&#39;data_chunks&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;engine&#39; is not defined
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [542]: </span><span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM data_chunks&quot;</span><span class="p">,</span>
 <span class="gp">   .....: </span>                               <span class="n">engine</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">542</span><span class="o">-</span><span class="mi">2</span><span class="n">dee3444bb39</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM data_chunks&quot;</span><span class="p">,</span>
 <span class="ne">----&gt; </span><span class="mi">2</span>                                <span class="n">engine</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;engine&#39; is not defined
 </pre></div>
@@ -8919,7 +8919,7 @@ variant appropriate for your database.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.io</span> <span class="kn">import</span> <span class="n">sql</span>
 <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table_name&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 <span class="n">sql</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;INSERT INTO table_name VALUES(?, ?, ?)&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">12.2</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">12.2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
@@ -9161,7 +9161,7 @@ object can be used as an iterator.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [554]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;stata.dta&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="gp">In [555]: </span><span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
-<span class="gp">   .....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="gp">   .....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="gp">   .....: </span>
 <span class="go">(3, 3)</span>
 <span class="go">(3, 3)</span>
@@ -9172,7 +9172,7 @@ object can be used as an iterator.</p>
 <p>For more fine-grained control, use <code class="docutils literal notranslate"><span class="pre">iterator=True</span></code> and specify
 <code class="docutils literal notranslate"><span class="pre">chunksize</span></code> with each call to
 <code class="xref py py-func docutils literal notranslate"><span class="pre">read()</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [556]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;stata.dta&#39;</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [556]: </span><span class="n">reader</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;stata.dta&#39;</span><span class="p">,</span> <span class="n">iterator</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [557]: </span><span class="n">chunk1</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
@@ -9342,7 +9342,7 @@ ignored.</p>
 
 
 <span class="k">def</span> <span class="nf">test_hdf_table_write</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s1">&#39;test_table.hdf&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s1">&#39;test_table.hdf&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">test_hdf_table_read</span><span class="p">():</span>
@@ -9351,7 +9351,7 @@ ignored.</p>
 
 <span class="k">def</span> <span class="nf">test_hdf_table_write_compress</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="n">df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s1">&#39;test_table_compress.hdf&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
-              <span class="n">complib</span><span class="o">=</span><span class="s1">&#39;blosc&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
+              <span class="n">complib</span><span class="o">=</span><span class="s1">&#39;blosc&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">test_hdf_table_read_compress</span><span class="p">():</span>

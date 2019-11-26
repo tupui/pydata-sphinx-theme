@@ -680,7 +680,7 @@ additional compression methods: <code class="docutils literal notranslate"><span
 Previously, only <code class="docutils literal notranslate"><span class="pre">gzip</span></code> compression was supported. By default, compression of
 URLs and paths are now inferred using their file extensions. Additionally,
 support for bz2 compression in the python 2 C-engine improved (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/14874">GH14874</a>).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/{repo}/raw/{branch}/{path}&#39;</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [21]: </span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https://github.com/</span><span class="si">{repo}</span><span class="s1">/raw/</span><span class="si">{branch}</span><span class="s1">/</span><span class="si">{path}</span><span class="s1">&#39;</span>
 <span class="gp">   ....: </span>       <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">repo</span><span class="o">=</span><span class="s1">&#39;pandas-dev/pandas&#39;</span><span class="p">,</span>
 <span class="gp">   ....: </span>               <span class="n">branch</span><span class="o">=</span><span class="s1">&#39;master&#39;</span><span class="p">,</span>
 <span class="gp">   ....: </span>               <span class="n">path</span><span class="o">=</span><span class="s1">&#39;pandas/tests/io/parser/data/salaries.csv.bz2&#39;</span><span class="p">))</span>
@@ -796,7 +796,7 @@ Notably, a new numerical index, <code class="docutils literal notranslate"><span
 <span class="gp">   ....: </span>    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
 <span class="gp">   ....: </span>    <span class="s1">&#39;chromosomes&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">chromosomes</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
 <span class="gp">   ....: </span>                                  <span class="n">categories</span><span class="o">=</span><span class="n">chromosomes</span><span class="p">,</span>
-<span class="gp">   ....: </span>                                  <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)})</span>
+<span class="gp">   ....: </span>                                  <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)})</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [40]: </span><span class="n">df</span>
@@ -818,13 +818,13 @@ Notably, a new numerical index, <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <p><strong>Previous Behavior</strong>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">chromosomes</span> <span class="o">!=</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;chromosomes&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">chromosomes</span> <span class="o">!=</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;chromosomes&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span>: items in new_categories are not the same as in old categories
 </pre></div>
 </div>
 <p><strong>New Behavior</strong>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">chromosomes</span> <span class="o">!=</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;chromosomes&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [41]: </span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">chromosomes</span> <span class="o">!=</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;chromosomes&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="gh">Out[41]: </span><span class="go"></span>
 <span class="go">               A    B    C</span>
 <span class="go">chromosomes               </span>
@@ -1017,14 +1017,14 @@ Out[51]:
 <span class="g g-Whitespace">    </span><span class="mi">219</span> 
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/io/formats/excel.py</span> in <span class="ni">write</span><span class="nt">(self, writer, sheet_name, startrow, startcol, freeze_panes, engine)</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span>             <span class="n">need_save</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span>             <span class="n">need_save</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="g g-Whitespace">    </span><span class="mi">729</span>         <span class="k">else</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">730</span>             <span class="n">writer</span> <span class="o">=</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="n">_stringify_path</span><span class="p">(</span><span class="n">writer</span><span class="p">),</span> <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">731</span>             <span class="n">need_save</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">731</span>             <span class="n">need_save</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="g g-Whitespace">    </span><span class="mi">732</span> 
 
 <span class="nn">~/miniconda/lib/python3.7/site-packages/pandas/io/excel/_openpyxl.py</span> in <span class="ni">__init__</span><span class="nt">(self, path, engine, mode, **engine_kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">engine_kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">engine_kwargs</span><span class="p">):</span>
 <span class="g g-Whitespace">     </span><span class="mi">18</span>         <span class="c1"># Use the openpyxl module as the Excel writer.</span>
 <span class="ne">---&gt; </span><span class="mi">19</span>         <span class="kn">from</span> <span class="nn">openpyxl.workbook</span> <span class="kn">import</span> <span class="n">Workbook</span>
 <span class="g g-Whitespace">     </span><span class="mi">20</span> 
@@ -1484,26 +1484,26 @@ currently released version of <code class="docutils literal notranslate"><span c
 <p>Previous Behavior:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">])</span>
 
-<span class="gp">In [9]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [9]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[9]: </span><span class="go">180</span>
 
 <span class="gp">In [10]: </span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
 <span class="gh">Out[10]: </span><span class="go">0</span>
 
-<span class="gp">In [11]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [11]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[11]: </span><span class="go">180</span>
 </pre></div>
 </div>
 <p>New Behavior:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [8]: </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">])</span>
 
-<span class="gp">In [9]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [9]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[9]: </span><span class="go">180</span>
 
 <span class="gp">In [10]: </span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
 <span class="gh">Out[10]: </span><span class="go">0</span>
 
-<span class="gp">In [11]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [11]: </span><span class="n">index</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[11]: </span><span class="go">260</span>
 </pre></div>
 </div>
@@ -1582,10 +1582,10 @@ doesn’t behave as desired.</p>
   <span class="n">aa</span>      <span class="mi">4</span>
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">is_lexsorted</span><span class="p">()</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="bp">True</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">14</span><span class="p">]:</span> <span class="kc">True</span>
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">is_monotonic</span>
-<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="bp">False</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">15</span><span class="p">]:</span> <span class="kc">False</span>
 </pre></div>
 </div>
 <p>New Behavior:</p>
@@ -2161,7 +2161,7 @@ will be removed from the <code class="docutils literal notranslate"><span class=
 <p><code class="docutils literal notranslate"><span class="pre">Panel</span></code> is deprecated and will be removed in a future version. The recommended way to represent 3-D data are
 with a <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> on a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> via the <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_frame()</span></code> or with the <a class="reference external" href="http://xarray.pydata.org/en/stable/">xarray package</a>. Pandas
 provides a <code class="xref py py-meth docutils literal notranslate"><span class="pre">to_xarray()</span></code> method to automate this conversion (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/13563">GH13563</a>).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [133]: </span><span class="kn">import</span> <span class="nn">pandas.util.testing</span> <span class="kn">as</span> <span class="nn">tm</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [133]: </span><span class="kn">import</span> <span class="nn">pandas.util.testing</span> <span class="k">as</span> <span class="nn">tm</span>
 
 <span class="gp">In [134]: </span><span class="n">p</span> <span class="o">=</span> <span class="n">tm</span><span class="o">.</span><span class="n">makePanel</span><span class="p">()</span>
 
