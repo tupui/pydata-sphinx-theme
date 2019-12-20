@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>MultiIndex / Advanced Indexing &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -479,7 +481,7 @@ of the index is up to you:</p>
 <p>We’ve “sparsified” the higher levels of the indexes to make the console output a
 bit easier on the eyes. Note that how the index is displayed can be controlled using the
 <code class="docutils literal notranslate"><span class="pre">multi_sparse</span></code> option in <code class="docutils literal notranslate"><span class="pre">pandas.set_options()</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.multi_sparse&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">):</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s1">&#39;display.multi_sparse&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
 <span class="gp">   ....: </span>    <span class="n">df</span>
 <span class="gp">   ....: </span>
 </pre></div>
@@ -675,7 +677,7 @@ as indexing <em>both</em> axes, rather than into say the <code class="docutils l
 </pre></div>
 </div>
 <p>Basic MultiIndex slicing using slices, lists, and labels.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">]),</span> <span class="p">:]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [62]: </span><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">]),</span> <span class="p">:]</span>
 </pre></div>
 </div>
 <p>You can use <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.IndexSlice</span></code> to facilitate a more natural syntax
@@ -687,7 +689,7 @@ using <code class="docutils literal notranslate"><span class="pre">:</span></cod
 </div>
 <p>It is possible to perform quite complicated selections using this method on multiple
 axes at the same time.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [65]: </span><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="s1">&#39;foo&#39;</span><span class="p">)]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [65]: </span><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;A1&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;foo&#39;</span><span class="p">)]</span>
 
 <span class="gp">In [66]: </span><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">[</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">]],</span> <span class="n">idx</span><span class="p">[:,</span> <span class="s1">&#39;foo&#39;</span><span class="p">]]</span>
 </pre></div>
@@ -730,7 +732,7 @@ selecting data at a particular level of a <code class="docutils literal notransl
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># using the slicers</span>
-<span class="gp">In [78]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">),</span> <span class="p">:]</span>
+<span class="gp">In [78]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">),</span> <span class="p">:]</span>
 </pre></div>
 </div>
 <p>You can also select on the columns with <code class="docutils literal notranslate"><span class="pre">xs</span></code>, by
@@ -741,7 +743,7 @@ providing the axis argument.</p>
 </pre></div>
 </div>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="go"># using the slicers</span>
-<span class="gp">In [81]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">)]</span>
+<span class="gp">In [81]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span> <span class="s1">&#39;one&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">xs</span></code> also allows selection with multiple keys.</p>
@@ -754,11 +756,11 @@ providing the axis argument.</p>
 </div>
 <p>You can pass <code class="docutils literal notranslate"><span class="pre">drop_level=False</span></code> to <code class="docutils literal notranslate"><span class="pre">xs</span></code> to retain
 the level that was selected.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [84]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [84]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Compare the above with the result using <code class="docutils literal notranslate"><span class="pre">drop_level=True</span></code> (the default value).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [85]: </span><span class="n">df</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s1">&#39;one&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">drop_level</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -859,7 +861,7 @@ they need to be sorted. As with any index, you can use <a class="reference inter
 </div>
 <p id="advanced-sortlevel-byname">You may also pass a level name to <code class="docutils literal notranslate"><span class="pre">sort_index</span></code> if the <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> levels
 are named.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">set_names</span><span class="p">([</span><span class="s1">&#39;L1&#39;</span><span class="p">,</span> <span class="s1">&#39;L2&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [110]: </span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">set_names</span><span class="p">([</span><span class="s1">&#39;L1&#39;</span><span class="p">,</span> <span class="s1">&#39;L2&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [111]: </span><span class="n">s</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;L1&#39;</span><span class="p">)</span>
 
@@ -955,13 +957,13 @@ row or column positions.</p>
 intended to work on boolean indices and may return unexpected results.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [135]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-<span class="gp">In [136]: </span><span class="n">arr</span><span class="o">.</span><span class="n">take</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+<span class="gp">In [136]: </span><span class="n">arr</span><span class="o">.</span><span class="n">take</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
 
 <span class="gp">In [137]: </span><span class="n">arr</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 
 <span class="gp">In [138]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 
-<span class="gp">In [139]: </span><span class="n">ser</span><span class="o">.</span><span class="n">take</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+<span class="gp">In [139]: </span><span class="n">ser</span><span class="o">.</span><span class="n">take</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
 
 <span class="gp">In [140]: </span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
 </pre></div>
@@ -1384,7 +1386,7 @@ in the way that standard Python integer slicing works.</p>
 <span class="gp">In [227]: </span><span class="n">res</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [228]: </span><span class="n">series2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [228]: </span><span class="n">series2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">])</span>
 
 <span class="gp">In [229]: </span><span class="n">series2</span><span class="o">.</span><span class="n">dtype</span>
 
@@ -1406,12 +1408,14 @@ detailed discussion.</p>
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="indexing.html" title="previous page">Indexing and Selecting Data</a>
     <a class='right-next' id="next-link" href="merging.html" title="next page">Merge, join, and concatenate</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -1464,7 +1468,7 @@ detailed discussion.</p>
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

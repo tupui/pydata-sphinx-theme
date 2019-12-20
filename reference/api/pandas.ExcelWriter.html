@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>pandas.ExcelWriter &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link href="../../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -192,25 +194,25 @@ argument.</p>
 and dicts to strings before writing.</p>
 <p class="rubric">Examples</p>
 <p>Default usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To write to separate sheets in a single file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">df1</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">df2</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet2&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can set the date format or datetime format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">,</span>
 <span class="go">                      date_format=&#39;YYYY-MM-DD&#39;,</span>
 <span class="go">                      datetime_format=&#39;YYYY-MM-DD HH:MM:SS&#39;) as writer:</span>
 <span class="gp">... </span>    <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can also append to an existing Excel file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;path_to_file.xlsx&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet3&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -244,12 +246,14 @@ and dicts to strings before writing.</p>
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="pandas.ExcelFile.parse.html" title="previous page">pandas.ExcelFile.parse</a>
     <a class='right-next' id="next-link" href="pandas.read_json.html" title="next page">pandas.read_json</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -302,7 +306,7 @@ and dicts to strings before writing.</p>
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

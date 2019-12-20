@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>Sparse data structures &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -402,7 +404,7 @@ dtype, <code class="docutils literal notranslate"><span class="pre">fill_value</
 
 <span class="gp">In [34]: </span><span class="n">s</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span>
 
-<span class="gp">In [35]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+<span class="gp">In [35]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
 
 <span class="gp">In [36]: </span><span class="n">s</span>
 
@@ -480,7 +482,7 @@ the correct dense result.</p>
 <span class="gp">In [54]: </span><span class="n">sdf</span>
 </pre></div>
 </div>
-<p>All sparse formats are supported, but matrices that are not in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.3.2)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">COOrdinate</span></code></a> format will be converted, copying data as needed.
+<p>All sparse formats are supported, but matrices that are not in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse" title="(in SciPy v1.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">COOrdinate</span></code></a> format will be converted, copying data as needed.
 To convert a <code class="docutils literal notranslate"><span class="pre">SparseDataFrame</span></code> back to sparse SciPy matrix in COO format, you can use the <a class="reference internal" href="../reference/api/pandas.SparseDataFrame.to_coo.html#pandas.SparseDataFrame.to_coo" title="pandas.SparseDataFrame.to_coo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SparseDataFrame.to_coo()</span></code></a> method:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [55]: </span><span class="n">sdf</span><span class="o">.</span><span class="n">to_coo</span><span class="p">()</span>
 </pre></div>
@@ -512,7 +514,7 @@ To convert a <code class="docutils literal notranslate"><span class="pre">Sparse
 <p>In the example below, we transform the <code class="docutils literal notranslate"><span class="pre">SparseSeries</span></code> to a sparse representation of a 2-d array by specifying that the first and second <code class="docutils literal notranslate"><span class="pre">MultiIndex</span></code> levels define labels for the rows and the third and fourth levels define labels for the columns. We also specify that the column and row labels should be sorted in the final sparse representation.</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">A</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">to_coo</span><span class="p">(</span><span class="n">row_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
 <span class="gp">   ....: </span>                             <span class="n">column_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                             <span class="n">sort_labels</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">   ....: </span>                             <span class="n">sort_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [62]: </span><span class="n">A</span>
@@ -527,7 +529,7 @@ To convert a <code class="docutils literal notranslate"><span class="pre">Sparse
 <p>Specifying different row and column labels (and not sorting them) yields a different sparse matrix:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [66]: </span><span class="n">A</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">to_coo</span><span class="p">(</span><span class="n">row_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
 <span class="gp">   ....: </span>                             <span class="n">column_levels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">],</span>
-<span class="gp">   ....: </span>                             <span class="n">sort_labels</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">   ....: </span>                             <span class="n">sort_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [67]: </span><span class="n">A</span>
@@ -561,7 +563,7 @@ only the non-null entries.</p>
 <p>Specifying <code class="docutils literal notranslate"><span class="pre">dense_index=True</span></code> will result in an index that is the Cartesian product of the
 row and columns coordinates of the matrix. Note that this will consume a significant amount of memory
 (relative to <code class="docutils literal notranslate"><span class="pre">dense_index=False</span></code>) if the sparse matrix is large (and sparse) enough.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">ss_dense</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseSeries</span><span class="o">.</span><span class="n">from_coo</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dense_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [77]: </span><span class="n">ss_dense</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">SparseSeries</span><span class="o">.</span><span class="n">from_coo</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dense_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [78]: </span><span class="n">ss_dense</span>
 </pre></div>
@@ -572,12 +574,14 @@ row and columns coordinates of the matrix. Note that this will consume a signifi
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="enhancingperf.html" title="previous page">Enhancing Performance</a>
     <a class='right-next' id="next-link" href="gotchas.html" title="next page">Frequently Asked Questions (FAQ)</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -630,7 +634,7 @@ row and columns coordinates of the matrix. Note that this will consume a signifi
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

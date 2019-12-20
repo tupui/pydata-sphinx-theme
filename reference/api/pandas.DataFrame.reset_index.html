@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>pandas.DataFrame.reset_index &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link href="../../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -205,7 +207,7 @@ levels are named. If None then the index name is repeated.</p>
 </dl>
 </div>
 <p class="rubric">Examples</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="mf">389.0</span><span class="p">),</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="mf">389.0</span><span class="p">),</span>
 <span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">),</span>
 <span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="mf">80.5</span><span class="p">),</span>
 <span class="gp">... </span>                   <span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)],</span>
@@ -221,7 +223,7 @@ levels are named. If None then the index name is repeated.</p>
 </div>
 <p>When we reset the index, the old index is added as a column, and a
 new sequential index is used:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="go">    index   class  max_speed</span>
 <span class="go">0  falcon    bird      389.0</span>
 <span class="go">1  parrot    bird       24.0</span>
@@ -231,7 +233,7 @@ new sequential index is used:</p>
 </div>
 <p>We can use the <cite>drop</cite> parameter to avoid the old index being added as
 a column:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">    class  max_speed</span>
 <span class="go">0    bird      389.0</span>
 <span class="go">1    bird       24.0</span>
@@ -240,7 +242,7 @@ a column:</p>
 </pre></div>
 </div>
 <p>You can also use <cite>reset_index</cite> with <cite>MultiIndex</cite>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="s1">&#39;falcon&#39;</span><span class="p">),</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="s1">&#39;falcon&#39;</span><span class="p">),</span>
 <span class="gp">... </span>                                   <span class="p">(</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span> <span class="s1">&#39;parrot&#39;</span><span class="p">),</span>
 <span class="gp">... </span>                                   <span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="s1">&#39;lion&#39;</span><span class="p">),</span>
 <span class="gp">... </span>                                   <span class="p">(</span><span class="s1">&#39;mammal&#39;</span><span class="p">,</span> <span class="s1">&#39;monkey&#39;</span><span class="p">)],</span>
@@ -264,7 +266,7 @@ a column:</p>
 </pre></div>
 </div>
 <p>If the index has multiple levels, we can reset a subset of them:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">)</span>
 <span class="go">         class  speed species</span>
 <span class="go">                  max    type</span>
 <span class="go">name</span>
@@ -276,7 +278,7 @@ a column:</p>
 </div>
 <p>If we are not dropping the index, by default, it is placed in the top
 level. We can place it in another level:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">col_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">col_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="go">                speed species</span>
 <span class="go">         class    max    type</span>
 <span class="go">name</span>
@@ -288,7 +290,7 @@ level. We can place it in another level:</p>
 </div>
 <p>When the index is inserted under another level, we can specify under
 which one with the parameter <cite>col_fill</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">col_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_fill</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">col_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_fill</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
 <span class="go">              species  speed species</span>
 <span class="go">                class    max    type</span>
 <span class="go">name</span>
@@ -299,7 +301,7 @@ which one with the parameter <cite>col_fill</cite>:</p>
 </pre></div>
 </div>
 <p>If we specify a nonexistent level for <cite>col_fill</cite>, it is created:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">col_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_fill</span><span class="o">=</span><span class="s1">&#39;genus&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="n">col_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_fill</span><span class="o">=</span><span class="s1">&#39;genus&#39;</span><span class="p">)</span>
 <span class="go">                genus  speed species</span>
 <span class="go">                class    max    type</span>
 <span class="go">name</span>
@@ -315,12 +317,14 @@ which one with the parameter <cite>col_fill</cite>:</p>
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="pandas.DataFrame.resample.html" title="previous page">pandas.DataFrame.resample</a>
     <a class='right-next' id="next-link" href="pandas.DataFrame.rfloordiv.html" title="next page">pandas.DataFrame.rfloordiv</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -373,7 +377,7 @@ which one with the parameter <cite>col_fill</cite>:</p>
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

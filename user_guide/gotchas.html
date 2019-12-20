@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>Frequently Asked Questions (FAQ) &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -356,7 +358,7 @@ usage can be found with the <code class="docutils literal notranslate"><span cla
 <p>By default the memory usage of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>’s index is shown in the
 returned <code class="docutils literal notranslate"><span class="pre">Series</span></code>, the memory usage of the index can be suppressed by passing
 the <code class="docutils literal notranslate"><span class="pre">index=False</span></code> argument:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [18]: </span><span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The memory usage displayed by the <a class="reference internal" href="../reference/api/pandas.DataFrame.info.html#pandas.DataFrame.info" title="pandas.DataFrame.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a> method utilizes the
@@ -371,14 +373,14 @@ representation; i.e. 1KB = 1024 bytes).</p>
 something to a <code class="docutils literal notranslate"><span class="pre">bool</span></code>. This happens in an <code class="docutils literal notranslate"><span class="pre">if</span></code>-statement or when using the
 boolean operations: <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, and <code class="docutils literal notranslate"><span class="pre">not</span></code>. It is not clear what the result
 of the following code should be:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]):</span>
 <span class="gp">... </span>    <span class="k">pass</span>
 </pre></div>
 </div>
 <p>Should it be <code class="docutils literal notranslate"><span class="pre">True</span></code> because it’s not zero-length, or <code class="docutils literal notranslate"><span class="pre">False</span></code> because there
 are <code class="docutils literal notranslate"><span class="pre">False</span></code> values? It is unclear, so instead, pandas raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">]):</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I was true&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I was true&quot;</span><span class="p">)</span>
 <span class="go">Traceback</span>
 <span class="go">    ...</span>
 <span class="go">ValueError: The truth value of an array is ambiguous. Use a.empty, a.any() or a.all().</span>
@@ -387,26 +389,26 @@ are <code class="docutils literal notranslate"><span class="pre">False</span></c
 <p>You need to explicitly choose what you want to do with the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, e.g.
 use <a class="reference internal" href="../reference/api/pandas.DataFrame.any.html#pandas.DataFrame.any" title="pandas.DataFrame.any"><code class="xref py py-meth docutils literal notranslate"><span class="pre">any()</span></code></a>, <a class="reference internal" href="../reference/api/pandas.DataFrame.all.html#pandas.DataFrame.all" title="pandas.DataFrame.all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">all()</span></code></a> or <a class="reference internal" href="../reference/api/pandas.DataFrame.empty.html#pandas.DataFrame.empty" title="pandas.DataFrame.empty"><code class="xref py py-meth docutils literal notranslate"><span class="pre">empty()</span></code></a>.
 Alternatively, you might want to compare if the pandas object is <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I was not None&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I was not None&quot;</span><span class="p">)</span>
 <span class="go">I was not None</span>
 </pre></div>
 </div>
 <p>Below is how to check if any of the values are <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;I am any&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I am any&quot;</span><span class="p">)</span>
 <span class="go">I am any</span>
 </pre></div>
 </div>
 <p>To evaluate single-element pandas objects in a boolean context, use the method
 <a class="reference internal" href="../reference/api/pandas.DataFrame.bool.html#pandas.DataFrame.bool" title="pandas.DataFrame.bool"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bool()</span></code></a>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
 
-<span class="gp">In [20]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">False</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+<span class="gp">In [20]: </span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">False</span><span class="p">])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
 
-<span class="gp">In [21]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="bp">True</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+<span class="gp">In [21]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="kc">True</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
 
-<span class="gp">In [22]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="bp">False</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+<span class="gp">In [22]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="kc">False</span><span class="p">]])</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
 </pre></div>
 </div>
 <div class="section" id="bitwise-boolean">
@@ -646,12 +648,14 @@ details.</p>
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="sparse.html" title="previous page">Sparse data structures</a>
     <a class='right-next' id="next-link" href="cookbook.html" title="next page">Cookbook</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -704,7 +708,7 @@ details.</p>
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

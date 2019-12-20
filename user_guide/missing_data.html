@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>Working with missing data &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -381,7 +383,7 @@ Series and DataFrame objects:</p>
 <p class="admonition-title">Warning</p>
 <p>One has to be mindful that in Python (and NumPy), the <code class="docutils literal notranslate"><span class="pre">nan's</span></code> don’t compare equal, but <code class="docutils literal notranslate"><span class="pre">None's</span></code> <strong>do</strong>.
 Note that pandas/NumPy uses the fact that <code class="docutils literal notranslate"><span class="pre">np.nan</span> <span class="pre">!=</span> <span class="pre">np.nan</span></code>, and treats <code class="docutils literal notranslate"><span class="pre">None</span></code> like <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="bp">None</span> <span class="o">==</span> <span class="bp">None</span>                                                 <span class="c1"># noqa: E711</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [19]: </span><span class="kc">None</span> <span class="o">==</span> <span class="kc">None</span>                                                 <span class="c1"># noqa: E711</span>
 
 <span class="gp">In [20]: </span><span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 </pre></div>
@@ -431,7 +433,7 @@ actual missing value used will be chosen based on the dtype.</p>
 the missing value type chosen:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [29]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 
-<span class="gp">In [30]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">In [30]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="gp">In [31]: </span><span class="n">s</span>
 </pre></div>
@@ -440,7 +442,7 @@ the missing value type chosen:</p>
 <p>For object containers, pandas will use the value given:</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [32]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 
-<span class="gp">In [33]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">In [33]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="gp">In [34]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 
@@ -475,7 +477,7 @@ account for missing data. For example:</p>
 
 <span class="gp">In [45]: </span><span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
 
-<span class="gp">In [46]: </span><span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">In [46]: </span><span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -809,7 +811,7 @@ if this is unclear.</p>
 </div>
 <p>Now do it with a regular expression that removes surrounding whitespace
 (regex -&gt; regex):</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [132]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s*\.\s*&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [132]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s*\.\s*&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Replace a few different values (list -&gt; list):</p>
@@ -817,7 +819,7 @@ if this is unclear.</p>
 </pre></div>
 </div>
 <p>list of regex -&gt; list of regex:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [134]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;\.&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;(a)&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\1</span><span class="s1">stuff&#39;</span><span class="p">],</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [134]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;\.&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;(a)&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\1</span><span class="s1">stuff&#39;</span><span class="p">],</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Only search in column <code class="docutils literal notranslate"><span class="pre">'b'</span></code> (dict -&gt; dict):</p>
@@ -826,11 +828,11 @@ if this is unclear.</p>
 </div>
 <p>Same as the previous example, but use a regular expression for
 searching instead (dict of regex -&gt; dict):</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [136]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\s*\.\s*&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">},</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [136]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\s*\.\s*&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">},</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can pass nested dictionaries of regular expressions that use <code class="docutils literal notranslate"><span class="pre">regex=True</span></code>:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [137]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="p">}},</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [137]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="p">}},</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, you can pass the nested dictionary like so:</p>
@@ -839,12 +841,12 @@ searching instead (dict of regex -&gt; dict):</p>
 </div>
 <p>You can also use the group of a regular expression match when replacing (dict
 of regex -&gt; dict of regex), this works for lists as well.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [139]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\s*(\.)\s*&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\1ty&#39;</span><span class="p">},</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [139]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\s*(\.)\s*&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="sa">r</span><span class="s1">&#39;\1ty&#39;</span><span class="p">},</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You can pass a list of regular expressions, of which those that match
 will be replaced with a scalar (list of regex -&gt; regex).</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [140]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;\s*\.\s*&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;a|b&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [140]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="sa">r</span><span class="s1">&#39;\s*\.\s*&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;a|b&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>All of the regular expression examples can also be passed with the
@@ -881,7 +883,7 @@ a compiled regular expression is valid as well.</p>
 </pre></div>
 </div>
 <p>You can also operate on the DataFrame in place:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [148]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [148]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="alert alert-warning">
@@ -889,15 +891,15 @@ a compiled regular expression is valid as well.</p>
 <p>When replacing multiple <code class="docutils literal notranslate"><span class="pre">bool</span></code> or <code class="docutils literal notranslate"><span class="pre">datetime64</span></code> objects, the first
 argument to <code class="docutils literal notranslate"><span class="pre">replace</span></code> (<code class="docutils literal notranslate"><span class="pre">to_replace</span></code>) must match the type of the value
 being replaced. For example,</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;a string&#39;</span><span class="p">:</span> <span class="s1">&#39;new value&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">:</span> <span class="bp">False</span><span class="p">})</span>  <span class="c1"># raises</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;a string&#39;</span><span class="p">:</span> <span class="s1">&#39;new value&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>  <span class="c1"># raises</span>
 <span class="go">TypeError: Cannot compare types &#39;ndarray(dtype=bool)&#39; and &#39;str&#39;</span>
 </pre></div>
 </div>
 <p>will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> because one of the <code class="docutils literal notranslate"><span class="pre">dict</span></code> keys is not of the
 correct type for replacement.</p>
 <p>However, when replacing a <em>single</em> object such as,</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [149]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [149]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
 
 <span class="gp">In [150]: </span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;a string&#39;</span><span class="p">,</span> <span class="s1">&#39;another string&#39;</span><span class="p">)</span>
 </pre></div>
@@ -962,9 +964,9 @@ contains NAs, an exception will be generated:</p>
 </pre></div>
 </div>
 <p>However, these can be filled in using <a class="reference internal" href="../reference/api/pandas.DataFrame.fillna.html#pandas.DataFrame.fillna" title="pandas.DataFrame.fillna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fillna()</span></code></a> and it will work fine:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [159]: </span><span class="n">reindexed</span><span class="p">[</span><span class="n">crit</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="bp">False</span><span class="p">)]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [159]: </span><span class="n">reindexed</span><span class="p">[</span><span class="n">crit</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">)]</span>
 
-<span class="gp">In [160]: </span><span class="n">reindexed</span><span class="p">[</span><span class="n">crit</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="bp">True</span><span class="p">)]</span>
+<span class="gp">In [160]: </span><span class="n">reindexed</span><span class="p">[</span><span class="n">crit</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">True</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>Pandas provides a nullable integer dtype, but you must explicitly request it
@@ -982,12 +984,14 @@ the <code class="docutils literal notranslate"><span class="pre">dtype=&quot;Int
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="text.html" title="previous page">Working with Text Data</a>
     <a class='right-next' id="next-link" href="categorical.html" title="next page">Categorical Data</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -1040,7 +1044,7 @@ the <code class="docutils literal notranslate"><span class="pre">dtype=&quot;Int
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>What’s New in 0.23.1 (June 12, 2018) &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -185,26 +187,26 @@ This was inconsistent with Python, NumPy, and <code class="xref py py-class docu
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 0.22.0... Silently coerce the datetime.date</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2017&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="mi">0</span>     <span class="bp">True</span>
-<span class="mi">1</span>    <span class="bp">False</span>
+<span class="mi">0</span>     <span class="kc">True</span>
+<span class="mi">1</span>    <span class="kc">False</span>
 <span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
 
 <span class="c1"># 0.23.0... Do not coerce the datetime.date</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2017&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="mi">0</span>    <span class="bp">False</span>
-<span class="mi">1</span>    <span class="bp">False</span>
+<span class="mi">0</span>    <span class="kc">False</span>
+<span class="mi">1</span>    <span class="kc">False</span>
 <span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
 
 <span class="c1"># 0.23.1... Coerce the datetime.date with a warning</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2017&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span> <span class="ne">FutureWarning</span><span class="p">:</span> <span class="n">Comparing</span> <span class="n">Series</span> <span class="n">of</span> <span class="n">datetimes</span> <span class="k">with</span> <span class="s1">&#39;datetime.date&#39;</span><span class="o">.</span>  <span class="n">Currently</span><span class="p">,</span> <span class="n">the</span>
 <span class="s1">&#39;datetime.date&#39;</span> <span class="ow">is</span> <span class="n">coerced</span> <span class="n">to</span> <span class="n">a</span> <span class="n">datetime</span><span class="o">.</span> <span class="n">In</span> <span class="n">the</span> <span class="n">future</span> <span class="n">pandas</span> <span class="n">will</span>
-<span class="ow">not</span> <span class="nb">coerce</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">values</span> <span class="ow">not</span> <span class="n">compare</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="s1">&#39;datetime.date&#39;</span><span class="o">.</span>
+<span class="ow">not</span> <span class="n">coerce</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">values</span> <span class="ow">not</span> <span class="n">compare</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="s1">&#39;datetime.date&#39;</span><span class="o">.</span>
 <span class="n">To</span> <span class="n">retain</span> <span class="n">the</span> <span class="n">current</span> <span class="n">behavior</span><span class="p">,</span> <span class="n">convert</span> <span class="n">the</span> <span class="s1">&#39;datetime.date&#39;</span> <span class="n">to</span> <span class="n">a</span>
 <span class="n">datetime</span> <span class="k">with</span> <span class="s1">&#39;pd.Timestamp&#39;</span><span class="o">.</span>
   <span class="c1">#!/bin/python3</span>
-<span class="mi">0</span>     <span class="bp">True</span>
-<span class="mi">1</span>    <span class="bp">False</span>
+<span class="mi">0</span>     <span class="kc">True</span>
+<span class="mi">1</span>    <span class="kc">False</span>
 <span class="n">dtype</span><span class="p">:</span> <span class="nb">bool</span>
 </pre></div>
 </div>
@@ -292,12 +294,14 @@ values for the pivot’s <code class="docutils literal notranslate"><span class=
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="v0.23.2.html" title="previous page">What’s New in 0.23.2 (July 5, 2018)</a>
     <a class='right-next' id="next-link" href="v0.23.0.html" title="next page">What’s new in 0.23.0 (May 15, 2018)</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -350,7 +354,7 @@ values for the pivot’s <code class="docutils literal notranslate"><span class=
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>v0.21.0 (October 27, 2017) &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -536,7 +538,7 @@ when converting string data to a <code class="docutils literal notranslate"><spa
 
 <span class="gp">In [28]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">])</span>  <span class="c1"># strings</span>
 
-<span class="gp">In [29]: </span><span class="n">dtype</span> <span class="o">=</span> <span class="n">CategoricalDtype</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [29]: </span><span class="n">dtype</span> <span class="o">=</span> <span class="n">CategoricalDtype</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [30]: </span><span class="n">s</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span>
 </pre></div>
@@ -577,7 +579,7 @@ do a groupwise calculation of <em>prices</em> (i.e. revenue/quantity) per store 
 We could do this in a multi-step operation, but expressing it in terms of piping can make the
 code more readable.</p>
 <p>First we set the data:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [36]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="gp">In [37]: </span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
 
@@ -857,12 +859,12 @@ you would get a label based selection, potentially duplicating result labels, ra
 (where <code class="docutils literal notranslate"><span class="pre">True</span></code> selects elements), this was inconsistent how a boolean numpy array indexed. The new behavior is to
 act like a boolean numpy array indexer. (<a class="reference external" href="https://github.com/pandas-dev/pandas/issues/17738">GH17738</a>)</p>
 <p>Previous Behavior:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">])</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [56]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
 
 <span class="gp">In [57]: </span><span class="n">s</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [59]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])]</span>
 <span class="gh">Out[59]:</span>
 <span class="go">True     2</span>
 <span class="go">False    1</span>
@@ -872,7 +874,7 @@ act like a boolean numpy array indexer. (<a class="reference external" href="htt
 </pre></div>
 </div>
 <p>Current Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [58]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])]</span>
 </pre></div>
 </div>
 <p>Furthermore, previously if you had an index that was non-numeric (e.g. strings), then a boolean Index would raise a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>.
@@ -883,12 +885,12 @@ This will now be treated as a boolean indexer.</p>
 <span class="gp">In [60]: </span><span class="n">s</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [39]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])]</span>
 <span class="go">KeyError: &quot;None of [Index([True, False, True], dtype=&#39;object&#39;)] are in the [index]&quot;</span>
 </pre></div>
 </div>
 <p>Current Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="bp">True</span><span class="p">])]</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [61]: </span><span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])]</span>
 </pre></div>
 </div>
 </div>
@@ -963,7 +965,7 @@ inplace operations are specified, but there is no item assignment in the express
 </pre></div>
 </div>
 <p>Previously, if you attempted the following expression, you would get a not very helpful error message:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;a = 1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [3]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;a = 1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">...</span>
 <span class="go">IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`)</span>
 <span class="go">and integer or boolean arrays are valid indices</span>
@@ -971,19 +973,19 @@ inplace operations are specified, but there is no item assignment in the express
 </div>
 <p>This is a very long way of saying numpy arrays don’t support string-item indexing. With this
 change, the error message is now this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;a = 1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;a = 1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="o">...</span>
 <span class="ne">ValueError</span><span class="p">:</span> <span class="n">Cannot</span> <span class="n">assign</span> <span class="n">expression</span> <span class="n">output</span> <span class="n">to</span> <span class="n">target</span>
 </pre></div>
 </div>
 <p>It also used to be possible to evaluate expressions inplace, even if there was no item assignment:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[4]: </span><span class="go">3</span>
 </pre></div>
 </div>
 <p>However, this input does not make much sense because the output is not being assigned to
 the target. Now, a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> will be raised when such an input is passed in:</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [4]: </span><span class="n">pd</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&quot;1 + 2&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">arr</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">...</span>
 <span class="go">ValueError: Cannot operate inplace if there is no assignment</span>
 </pre></div>
@@ -995,7 +997,7 @@ the target. Now, a <code class="docutils literal notranslate"><span class="pre">
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [72]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">s</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span>
@@ -1006,7 +1008,7 @@ the target. Now, a <code class="docutils literal notranslate"><span class="pre">
 </pre></div>
 </div>
 <p>New Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [73]: </span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="gp">In [74]: </span><span class="n">s</span>
 </pre></div>
@@ -1020,8 +1022,8 @@ non-datetime-like item being assigned (<a class="reference external" href="https
 
 <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">s</span>
 <span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
-<span class="mi">0</span>   <span class="mi">2011</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">01</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mf">00.000000000</span>
-<span class="mi">1</span>   <span class="mi">1970</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mo">01</span> <span class="mo">00</span><span class="p">:</span><span class="mo">00</span><span class="p">:</span><span class="mf">00.000000001</span>
+<span class="mi">0</span>   <span class="mi">2011</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000000000</span>
+<span class="mi">1</span>   <span class="mi">1970</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000000001</span>
 <span class="n">dtype</span><span class="p">:</span> <span class="n">datetime64</span><span class="p">[</span><span class="n">ns</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1060,7 +1062,7 @@ length 2+ levels, so a <code class="xref py py-class docutils literal notranslat
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [79]: </span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;20130101 00:00:00&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [12]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gh">Out[12]:</span>
 <span class="go">0   2013-01-01</span>
 <span class="go">1   2013-01-01</span>
@@ -1069,7 +1071,7 @@ length 2+ levels, so a <code class="xref py py-class docutils literal notranslat
 </pre></div>
 </div>
 <p>New Behavior</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [80]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [80]: </span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Additionally, DataFrames with datetime columns that were parsed by <a class="reference internal" href="../reference/api/pandas.read_sql_table.html#pandas.read_sql_table" title="pandas.read_sql_table"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_table()</span></code></a> and <a class="reference internal" href="../reference/api/pandas.read_sql_query.html#pandas.read_sql_query" title="pandas.read_sql_query"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_sql_query()</span></code></a> will also be localized to UTC only if the original SQL columns were timezone aware datetime columns.</p>
@@ -1401,12 +1403,14 @@ so an approximation is used instead (<a class="reference external" href="https:/
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="v0.21.1.html" title="previous page">v0.21.1 (December 12, 2017)</a>
     <a class='right-next' id="next-link" href="v0.20.3.html" title="next page">v0.20.3 (July 7, 2017)</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -1459,7 +1463,7 @@ so an approximation is used instead (<a class="reference external" href="https:/
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

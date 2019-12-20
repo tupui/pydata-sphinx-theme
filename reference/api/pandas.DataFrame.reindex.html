@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>pandas.DataFrame.reindex &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link href="../../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -238,7 +240,7 @@ index’s type.</p>
 <p>We <em>highly</em> recommend using keyword arguments to clarify your
 intent.</p>
 <p>Create a dataframe with some fictional data.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;Safari&#39;</span><span class="p">,</span> <span class="s1">&#39;IE10&#39;</span><span class="p">,</span> <span class="s1">&#39;Konqueror&#39;</span><span class="p">]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;Safari&#39;</span><span class="p">,</span> <span class="s1">&#39;IE10&#39;</span><span class="p">,</span> <span class="s1">&#39;Konqueror&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
 <span class="gp">... </span>     <span class="s1">&#39;http_status&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">404</span><span class="p">,</span><span class="mi">404</span><span class="p">,</span><span class="mi">301</span><span class="p">],</span>
 <span class="gp">... </span>     <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]},</span>
@@ -255,7 +257,7 @@ intent.</p>
 <p>Create a new index and reindex the dataframe. By default
 values in the new index that do not have corresponding
 records in the dataframe are assigned <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_index</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Safari&#39;</span><span class="p">,</span> <span class="s1">&#39;Iceweasel&#39;</span><span class="p">,</span> <span class="s1">&#39;Comodo Dragon&#39;</span><span class="p">,</span> <span class="s1">&#39;IE10&#39;</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_index</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Safari&#39;</span><span class="p">,</span> <span class="s1">&#39;Iceweasel&#39;</span><span class="p">,</span> <span class="s1">&#39;Comodo Dragon&#39;</span><span class="p">,</span> <span class="s1">&#39;IE10&#39;</span><span class="p">,</span>
 <span class="gp">... </span>            <span class="s1">&#39;Chrome&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">)</span>
 <span class="go">               http_status  response_time</span>
@@ -270,7 +272,7 @@ records in the dataframe are assigned <code class="docutils literal notranslate"
 the keyword <code class="docutils literal notranslate"><span class="pre">fill_value</span></code>. Because the index is not monotonically
 increasing or decreasing, we cannot use arguments to the keyword
 <code class="docutils literal notranslate"><span class="pre">method</span></code> to fill the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="go">               http_status  response_time</span>
 <span class="go">Safari                 404           0.07</span>
 <span class="go">Iceweasel                0           0.00</span>
@@ -279,7 +281,7 @@ increasing or decreasing, we cannot use arguments to the keyword
 <span class="go">Chrome                 200           0.02</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;missing&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;missing&#39;</span><span class="p">)</span>
 <span class="go">              http_status response_time</span>
 <span class="go">Safari                404          0.07</span>
 <span class="go">Iceweasel         missing       missing</span>
@@ -289,7 +291,7 @@ increasing or decreasing, we cannot use arguments to the keyword
 </pre></div>
 </div>
 <p>We can also reindex the columns.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;http_status&#39;</span><span class="p">,</span> <span class="s1">&#39;user_agent&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;http_status&#39;</span><span class="p">,</span> <span class="s1">&#39;user_agent&#39;</span><span class="p">])</span>
 <span class="go">           http_status  user_agent</span>
 <span class="go">Firefox            200         NaN</span>
 <span class="go">Chrome             200         NaN</span>
@@ -299,7 +301,7 @@ increasing or decreasing, we cannot use arguments to the keyword
 </pre></div>
 </div>
 <p>Or we can use “axis-style” keyword arguments</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;http_status&#39;</span><span class="p">,</span> <span class="s1">&#39;user_agent&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;http_status&#39;</span><span class="p">,</span> <span class="s1">&#39;user_agent&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
 <span class="go">           http_status  user_agent</span>
 <span class="go">Firefox            200         NaN</span>
 <span class="go">Chrome             200         NaN</span>
@@ -312,7 +314,7 @@ increasing or decreasing, we cannot use arguments to the keyword
 <code class="docutils literal notranslate"><span class="pre">reindex</span></code>, we will create a dataframe with a
 monotonically increasing index (for example, a sequence
 of dates).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2010&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1/1/2010&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;prices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">88</span><span class="p">]},</span>
 <span class="gp">... </span>                   <span class="n">index</span><span class="o">=</span><span class="n">date_index</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span>
@@ -327,7 +329,7 @@ of dates).</p>
 </div>
 <p>Suppose we decide to expand the dataframe to cover a wider
 date range.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_index2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/29/2009&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_index2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;12/29/2009&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">date_index2</span><span class="p">)</span>
 <span class="go">            prices</span>
 <span class="go">2009-12-29     NaN</span>
@@ -348,7 +350,7 @@ If desired, we can fill in the missing values using one of several
 options.</p>
 <p>For example, to back-propagate the last valid value to fill the <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
 values, pass <code class="docutils literal notranslate"><span class="pre">bfill</span></code> as an argument to the <code class="docutils literal notranslate"><span class="pre">method</span></code> keyword.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">date_index2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">date_index2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
 <span class="go">            prices</span>
 <span class="go">2009-12-29   100.0</span>
 <span class="go">2009-12-30   100.0</span>
@@ -375,12 +377,14 @@ in the original dataframe, use the <code class="docutils literal notranslate"><s
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="pandas.DataFrame.rdiv.html" title="previous page">pandas.DataFrame.rdiv</a>
     <a class='right-next' id="next-link" href="pandas.DataFrame.reindex_like.html" title="next page">pandas.DataFrame.reindex_like</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -433,7 +437,7 @@ in the original dataframe, use the <code class="docutils literal notranslate"><s
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

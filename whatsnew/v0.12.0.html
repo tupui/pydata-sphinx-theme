@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <title>v0.12.0 (July 24, 2013) &#8212; pandas 0.25.3 documentation</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link rel="stylesheet" href="../_static/sphinx-bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link href="../_static/css/custom.css" rel="stylesheet">
@@ -71,18 +72,19 @@
         <a class="nav-link" href="../development/index.html">Development</a>
     </li>
     
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href=""><i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
   </ul>
   <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="https://github.com/pandas-dev/pandas" target="_blank" rel="noopener">
-        <span><i class="fab fa-github-alt" style="color:#333;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="https://twitter.com/pandas_dev" target="_blank" rel="noopener">
-        <span><i class="fab fa-twitter" style="color:#55acee;font-size:1rem;line-height:1.25"></i></span>
-      </a>
-    </li>
+    
+    
   </ul>
 </div>
     </nav>
@@ -230,7 +232,7 @@ with (<a class="reference external" href="https://github.com/pandas-dev/pandas/i
 <span class="gp">   ....: </span>
 
 <span class="go"># squeezing the result frame to a series (because we have unique groups)</span>
-<span class="gp">In [16]: </span><span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;val1&quot;</span><span class="p">,</span> <span class="n">squeeze</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+<span class="gp">In [16]: </span><span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;val1&quot;</span><span class="p">,</span> <span class="n">squeeze</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 
 <span class="go"># no squeezing (the default, and behavior in 0.10.1)</span>
 <span class="gp">In [17]: </span><span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;val1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
@@ -283,12 +285,12 @@ to be inserted if <code class="docutils literal notranslate"><span class="pre">T
 The original API is deprecated and will be removed in a future version</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas.io.parsers</span> <span class="kn">import</span> <span class="n">ExcelFile</span>
 <span class="n">xls</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">)</span>
-<span class="n">xls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
+<span class="n">xls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>With</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;path_to_file.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </li>
@@ -339,13 +341,13 @@ It works with a <em>single</em> parser backend: BeautifulSoup4 + html5lib <a cla
 <p>You can use <code class="docutils literal notranslate"><span class="pre">pd.read_html()</span></code> to read the output from <code class="docutils literal notranslate"><span class="pre">DataFrame.to_html()</span></code> like so</p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [24]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)})</span>
 
-<span class="gp">In [25]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">In [25]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
 <span class="gp">In [26]: </span><span class="n">html</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
 
 <span class="gp">In [27]: </span><span class="n">alist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="gp">In [28]: </span><span class="k">print</span><span class="p">(</span><span class="n">df</span> <span class="o">==</span> <span class="n">alist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">In [28]: </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span> <span class="o">==</span> <span class="n">alist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">alist</span></code> here is a Python <code class="docutils literal notranslate"><span class="pre">list</span></code> so <code class="docutils literal notranslate"><span class="pre">pd.read_html()</span></code> and
@@ -389,7 +391,7 @@ be <em>lost</em>.</p>
 
 <span class="gp">In [31]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;mi.csv&#39;</span><span class="p">)</span>
 
-<span class="gp">In [32]: </span><span class="k">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mi.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="gp">In [32]: </span><span class="nb">print</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;mi.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
 <span class="gp">In [33]: </span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;mi.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
@@ -402,10 +404,10 @@ be <em>lost</em>.</p>
 store when iteration is finished. This is only for <em>tables</em></p>
 <div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [25]: </span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;store_iterator.h5&#39;</span>
 
-<span class="gp">In [26]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">In [26]: </span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="gp">In [27]: </span><span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;df&#39;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="gp">   ....:</span>
 <span class="go">          0         1</span>
 <span class="go">0  0.713216 -0.778461</span>
@@ -489,7 +491,7 @@ with only a couple members.</p>
 <p>Alternatively, instead of dropping the offending groups, we can return a
 like-indexed objects where the groups that do not pass the filter are
 filled with NaNs.</p>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="n">dff</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [50]: </span><span class="n">dff</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </li>
@@ -530,11 +532,11 @@ therefore requires Numpy 1.7.0 or newer.</p>
 
 <span class="gp">In [56]: </span><span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 
-<span class="gp">In [57]: </span><span class="k">print</span><span class="p">(</span><span class="n">dt</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">bday_egypt</span><span class="p">)</span>
+<span class="gp">In [57]: </span><span class="nb">print</span><span class="p">(</span><span class="n">dt</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">bday_egypt</span><span class="p">)</span>
 
 <span class="gp">In [58]: </span><span class="n">dts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">bday_egypt</span><span class="p">)</span>
 
-<span class="gp">In [59]: </span><span class="k">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dts</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="n">dts</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s1">&#39;Mon Tue Wed Thu Fri Sat Sun&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())))</span>
+<span class="gp">In [59]: </span><span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dts</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="n">dts</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s1">&#39;Mon Tue Wed Thu Fri Sat Sun&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())))</span>
 </pre></div>
 </div>
 </li>
@@ -562,7 +564,7 @@ original <code class="docutils literal notranslate"><span class="pre">Series</sp
 <span class="gp">In [61]: </span><span class="n">ds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">strs</span><span class="p">)</span>
 
 <span class="gp">In [62]: </span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">str</span><span class="p">:</span>
-<span class="gp">   ....: </span>    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="gp">   ....: </span>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="gp">   ....: </span>
 
 <span class="gp">In [63]: </span><span class="n">s</span>
@@ -660,12 +662,14 @@ on GitHub for a complete list.</p>
 
 
               </div>
+              
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="v0.13.0.html" title="previous page">v0.13.0 (January 3, 2014)</a>
     <a class='right-next' id="next-link" href="v0.11.0.html" title="next page">v0.11.0 (April 22, 2013)</a>
 
               </div>
+              
           </main>
 
       </div>
@@ -718,7 +722,7 @@ on GitHub for a complete list.</p>
 </script>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2008-2014, the pandas development team.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>
